@@ -1,3 +1,4 @@
+use std::fmt::Display;
 use std::marker::PhantomData;
 use std::ops::{Add, AddAssign, Div, DivAssign, Mul, MulAssign, Neg, Sub, SubAssign};
 use std::str::FromStr;
@@ -66,6 +67,12 @@ impl<M: Modulus> FromStr for ModInt<M> {
     type Err = <i128 as FromStr>::Err;
     fn from_str(s: &str) -> Result<Self, Self::Err> {
         s.parse::<i128>().map(|v| Self::from(v))
+    }
+}
+
+impl<M: Modulus> Display for ModInt<M> {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        f.write_str(&self.val().to_string())
     }
 }
 
