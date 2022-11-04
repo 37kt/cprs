@@ -1,4 +1,2 @@
-#[cfg(test)]
-mod tests {
-    use super::*;
-}
+#[macro_use]
+pub mod chminmax;
