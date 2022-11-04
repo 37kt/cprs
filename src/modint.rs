@@ -1,5 +1,6 @@
 use std::marker::PhantomData;
 use std::ops::{Add, AddAssign, Div, DivAssign, Mul, MulAssign, Neg, Sub, SubAssign};
+use std::str::FromStr;
 
 pub trait Modulus: Copy + Clone {
     fn modulus() -> u32;
@@ -58,6 +59,13 @@ impl<M: Modulus> ModInt<M> {
     pub fn inv(&self) -> Self {
         assert_ne!(self.v, 0, "divide by zero");
         self.pow((Self::modulus() - 2) as usize)
+    }
+}
+
+impl<M: Modulus> FromStr for ModInt<M> {
+    type Err = <i128 as FromStr>::Err;
+    fn from_str(s: &str) -> Result<Self, Self::Err> {
+        s.parse::<i128>().map(|v| Self::from(v))
     }
 }
 
