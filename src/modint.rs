@@ -3,14 +3,14 @@ use std::marker::PhantomData;
 use std::ops::{Add, AddAssign, Div, DivAssign, Mul, MulAssign, Neg, Sub, SubAssign};
 use std::str::FromStr;
 
-pub trait Modulus: Copy + Clone {
+pub trait Modulus: Copy + Clone + PartialEq {
     fn modulus() -> u32;
 }
 
-#[derive(Copy, Clone, Debug)]
+#[derive(Copy, Clone, PartialEq, Debug)]
 pub struct Mod1000000007;
 
-#[derive(Copy, Clone, Debug)]
+#[derive(Copy, Clone, PartialEq, Debug)]
 pub struct Mod998244353;
 
 impl Modulus for Mod1000000007 {
@@ -285,7 +285,7 @@ mod tests {
     }
 
     #[test]
-    fn opeartor_primitive_test() {
+    fn operator_primitive_test() {
         let mut x = ModInt998244353::new(5);
         x += 2_i128;
         assert_eq!(x.v, 7);

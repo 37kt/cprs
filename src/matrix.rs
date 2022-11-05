@@ -3,8 +3,7 @@ use std::ops::{
 };
 
 pub trait Field:
-    Sized
-    + Copy
+    Copy
     + PartialEq
     + Add<Output = Self>
     + AddAssign
@@ -17,6 +16,16 @@ pub trait Field:
     + num_traits::One
 {
 }
+
+impl Field for i8 {}
+impl Field for i16 {}
+impl Field for i32 {}
+impl Field for i64 {}
+impl Field for i128 {}
+impl Field for isize {}
+impl Field for f32 {}
+impl Field for f64 {}
+impl<M: crate::modint::Modulus> Field for crate::modint::ModInt<M> {}
 
 #[derive(Debug, Clone, PartialEq, Hash)]
 pub struct Matrix<T> {
