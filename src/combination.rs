@@ -13,7 +13,7 @@ impl<M: Modulus> Combination<M> {
             fact[i] = fact[i - 1] * i;
         }
         fact_inv[n] = fact[n].inv();
-        for i in 1..=n {
+        for i in (1..=n).rev() {
             fact_inv[i - 1] = fact_inv[i] * i;
         }
         Self { fact, fact_inv }
