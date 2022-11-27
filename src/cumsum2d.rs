@@ -15,7 +15,7 @@ impl<T: Clone + Copy + Zero + Add<Output = T> + Sub<Output = T> + Neg<Output = T
 {
     pub fn new(h: usize, w: usize) -> Self {
         Self {
-            v: vec![vec![T::zero(); w + 1]; h + 1],
+            v: vec![vec![T::zero(); w]; h],
         }
     }
 
