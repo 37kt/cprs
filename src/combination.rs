@@ -1,37 +1,54 @@
+use std::cell::RefCell;
+
 use super::modint::{ModInt, Modulus};
 
 pub struct Combination<M: Modulus> {
-    fact: Vec<ModInt<M>>,
-    fact_inv: Vec<ModInt<M>>,
+    inv: RefCell<Vec<ModInt<M>>>,
+    fact: RefCell<Vec<ModInt<M>>>,
+    fact_inv: RefCell<Vec<ModInt<M>>>,
 }
 
 impl<M: Modulus> Combination<M> {
-    pub fn new(n: usize) -> Self {
-        let mut fact: Vec<ModInt<M>> = vec![1.into(); n + 1];
-        let mut fact_inv: Vec<ModInt<M>> = vec![1.into(); n + 1];
-        for i in 1..=n {
-            fact[i] = fact[i - 1] * i;
+    pub fn new() -> Self {
+        Self {
+            inv: RefCell::new(vec![1.into(), 1.into()]),
+            fact: RefCell::new(vec![1.into()]),
+            fact_inv: RefCell::new(vec![1.into()]),
         }
-        fact_inv[n] = fact[n].inv();
-        for i in (1..=n).rev() {
-            fact_inv[i - 1] = fact_inv[i] * i;
+    }
+
+    pub fn inv(&self, n: usize) -> ModInt<M> {
+        assert!(n > 0);
+        let m = M::modulus() as usize;
+        let mut inv = self.inv.borrow_mut();
+        for i in inv.len()..=n {
+            let x = (inv[m % i] * (m - m / i)).into();
+            inv.push(x);
         }
-        Self { fact, fact_inv }
+        inv[n]
     }
 
     pub fn fact(&self, n: usize) -> ModInt<M> {
-        assert!(n < self.fact.len());
-        self.fact[n]
+        let mut fact = self.fact.borrow_mut();
+        for i in fact.len()..=n {
+            let x = fact[i - 1] * i;
+            fact.push(x);
+        }
+        fact[n]
     }
 
     pub fn fact_inv(&self, n: usize) -> ModInt<M> {
-        assert!(n < self.fact_inv.len());
-        self.fact_inv[n]
+        let mut fact_inv = self.fact_inv.borrow_mut();
+        for i in fact_inv.len()..=n {
+            let x = fact_inv[i - 1] * self.inv(i);
+            fact_inv.push(x);
+        }
+        fact_inv[n]
     }
 
     pub fn npk(&self, n: usize, k: usize) -> ModInt<M> {
         if n >= k {
-            self.fact[n] * self.fact_inv[n - k]
+            self.fact(n) * self.fact_inv(n - k)
         } else {
             0.into()
         }
@@ -39,7 +56,7 @@ impl<M: Modulus> Combination<M> {
 
     pub fn nck(&self, n: usize, k: usize) -> ModInt<M> {
         if n >= k {
-            self.fact[n] * self.fact_inv[k] * self.fact_inv[n - k]
+            self.fact(n) * self.fact_inv(k) * self.fact_inv(n - k)
         } else {
             0.into()
         }
