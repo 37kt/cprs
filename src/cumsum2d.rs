@@ -29,12 +29,13 @@ impl<T: Clone + Copy + Zero + Add<Output = T> + Sub<Output = T> + Neg<Output = T
         }
     }
 
-    pub fn range_add(&mut self, bi: usize, bj: usize, ei: usize, ej: usize, x: T) {
-        self.add(bi, bj, x);
-        self.add(ei, bj, -x);
-        self.add(bi, ej, -x);
-        self.add(ei, ej, x);
-    }
+    // これバグってる
+    // pub fn range_add(&mut self, bi: usize, bj: usize, ei: usize, ej: usize, x: T) {
+    //     self.add(bi, bj, x);
+    //     self.add(ei, bj, -x);
+    //     self.add(bi, ej, -x);
+    //     self.add(ei, ej, x);
+    // }
 
     pub fn build(&self) -> CumSum2d<T> {
         let h = self.v.len();
