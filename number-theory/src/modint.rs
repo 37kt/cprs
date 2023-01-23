@@ -1,4 +1,3 @@
-use std::fmt::Display;
 use std::marker::PhantomData;
 use std::ops::{Add, AddAssign, Div, DivAssign, Mul, MulAssign, Neg, Sub, SubAssign};
 use std::str::FromStr;
@@ -25,7 +24,7 @@ impl Modulus for Mod998244353 {
     }
 }
 
-#[derive(Copy, Clone, PartialEq, Eq, Hash, Debug)]
+#[derive(Copy, Clone, PartialEq, Eq, Hash)]
 pub struct ModInt<M: Modulus> {
     v: u32,
     _marker: PhantomData<fn() -> M>,
@@ -52,8 +51,17 @@ impl<M: Modulus> ModInt<M> {
         self.v
     }
 
-    pub fn pow(&self, exp: usize) -> Self {
-        num_traits::pow(*self, exp)
+    pub fn pow(&self, mut exp: usize) -> Self {
+        let mut r = 1.into();
+        let mut a = *self;
+        while exp > 0 {
+            if exp & 1 == 1 {
+                r *= a;
+            }
+            a *= a;
+            exp >>= 1;
+        }
+        r
     }
 
     // modulus が素数であることを前提にしている
@@ -70,7 +78,13 @@ impl<M: Modulus> FromStr for ModInt<M> {
     }
 }
 
-impl<M: Modulus> Display for ModInt<M> {
+impl<M: Modulus> std::fmt::Display for ModInt<M> {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        f.write_str(&self.val().to_string())
+    }
+}
+
+impl<M: Modulus> std::fmt::Debug for ModInt<M> {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         f.write_str(&self.val().to_string())
     }
@@ -132,34 +146,6 @@ impl_from_large_signed!(i64 i128 isize);
 impl<M: Modulus> std::default::Default for ModInt<M> {
     fn default() -> Self {
         Self::new(0)
-    }
-}
-
-impl<M: Modulus> num_traits::Zero for ModInt<M> {
-    fn is_zero(&self) -> bool {
-        self.v == 0
-    }
-
-    fn set_zero(&mut self) {
-        self.v = 0
-    }
-
-    fn zero() -> Self {
-        Self::new(0)
-    }
-}
-
-impl<M: Modulus> num_traits::One for ModInt<M> {
-    fn is_one(&self) -> bool {
-        self.v == 1
-    }
-
-    fn set_one(&mut self) {
-        self.v = 1
-    }
-
-    fn one() -> Self {
-        Self::new(1)
     }
 }
 
