@@ -124,11 +124,7 @@ impl LiChaoTree {
     }
 
     // 直線ax+bを追加
-    pub fn add_line(&mut self, mut a: i64, mut b: i64) {
-        if self.max_query {
-            a *= -1;
-            b *= -1;
-        }
+    pub fn add_line(&mut self, a: i64, b: i64) {
         self.add_segment(a, b, self.min_x, self.max_x);
     }
 
