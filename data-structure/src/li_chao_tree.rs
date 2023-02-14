@@ -61,7 +61,7 @@ impl Node {
                 std::mem::swap(self.f.as_mut().unwrap(), &mut f);
             }
             let m = mid(l, r);
-            if self.f.unwrap().eval(r) <= f.eval(r) {
+            if self.f.unwrap().eval(r - 1) <= f.eval(r - 1) {
                 return;
             } else if self.f.unwrap().eval(m) < f.eval(m) {
                 if self.r.is_none() {
