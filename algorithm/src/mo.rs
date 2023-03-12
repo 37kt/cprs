@@ -36,7 +36,7 @@ pub trait Mo {
         let mut ord = (0..q).collect::<Vec<_>>();
         ord.sort_by_key(|&i| {
             let (l, r) = qs[i];
-            (l / w, r)
+            (l / w, if (l / w) & 1 == 0 { r } else { !r })
         });
         let mut l = 0;
         let mut r = 0;
