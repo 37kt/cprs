@@ -12,3 +12,4 @@ number-theory = { path = "number-theory" }
 data-structure = { path = "data-structure" }
 tree = { path = "tree" }
 algorithm = { path = "algorithm" }
+polynomial = { path = "polynomial" }
