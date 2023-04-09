@@ -9,10 +9,10 @@ pub trait ValueOn {
     fn value_on_edge() -> bool;
 }
 
-pub struct Vartex;
-pub struct Edge;
+pub enum ValueOnVartex {}
+pub enum ValueOnEdge {}
 
-impl ValueOn for Vartex {
+impl ValueOn for ValueOnVartex {
     fn value_on_vartex() -> bool {
         true
     }
@@ -21,7 +21,7 @@ impl ValueOn for Vartex {
     }
 }
 
-impl ValueOn for Edge {
+impl ValueOn for ValueOnEdge {
     fn value_on_vartex() -> bool {
         false
     }
@@ -55,11 +55,11 @@ impl<M: Monoid, V: ValueOn> TreeQuery<M, V> {
         let (up, down) = self.hld.path(u, v, V::value_on_edge());
         let mut res = M::identity();
         for &(l, r) in &up {
-            let t = self.seg_up.prod(self.n - r, self.n - l);
+            let t = self.seg_up.prod(self.n - r..self.n - l);
             res = M::binary_operation(&res, &t);
         }
         for &(l, r) in &down {
-            let t = self.seg_down.prod(l, r);
+            let t = self.seg_down.prod(l..r);
             res = M::binary_operation(&res, &t);
         }
         res
@@ -67,11 +67,11 @@ impl<M: Monoid, V: ValueOn> TreeQuery<M, V> {
 
     pub fn prod_subtree(&self, v: usize) -> M::S {
         let (l, r) = self.hld.subtree(v, V::value_on_edge());
-        self.seg_down.prod(l, r)
+        self.seg_down.prod(l..r)
     }
 }
 
-impl<M: Monoid> TreeQuery<M, Vartex> {
+impl<M: Monoid> TreeQuery<M, ValueOnVartex> {
     pub fn build_with_values(g: &Vec<Vec<usize>>, values: &[M::S]) -> Self {
         assert_eq!(g.len(), values.len());
         let n = g.len();
@@ -105,7 +105,7 @@ impl<M: Monoid> TreeQuery<M, Vartex> {
     }
 }
 
-impl<M: Monoid> TreeQuery<M, Edge> {
+impl<M: Monoid> TreeQuery<M, ValueOnEdge> {
     pub fn build_with_values(g: &Vec<Vec<(usize, M::S)>>) -> Self {
         let n = g.len();
         let mut h = vec![vec![]; n];
