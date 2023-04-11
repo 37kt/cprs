@@ -3,5 +3,6 @@ members = [
     "crates/algorithm/*",
     "crates/data-structure/*",
     "crates/macros/*",
+    "crates/math/*",
     "crates/polynomial/*"
 ]
