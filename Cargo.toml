@@ -1,15 +1,7 @@
-[package]
-name = "cprs"
-version = "0.1.0"
-edition = "2018"
-license = "CC0-1.0"
-
-# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
-
-[dependencies]
-macros = { path = "macros" }
-number-theory = { path = "number-theory" }
-data-structure = { path = "data-structure" }
-tree = { path = "tree" }
-algorithm = { path = "algorithm" }
-polynomial = { path = "polynomial" }
+[workspace]
+members = [
+    "crates/algorithm/*",
+    "crates/data-structure/*",
+    "crates/macros/*",
+    "crates/polynomial/*"
+]
