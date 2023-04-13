@@ -1,7 +1,7 @@
 use std::ops::{Bound, RangeBounds};
 
 type T = i64;
-const INF: T = T::MAX / 2;
+const INF: T = std::i64::MAX / 2;
 
 #[derive(Clone)]
 pub struct SegtreeBeats {
