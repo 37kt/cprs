@@ -1,6 +1,7 @@
 [workspace]
 members = [
     "crates/algorithm/*",
+    "crates/convolution/*",
     "crates/data-structure/*",
     "crates/macros/*",
     "crates/math/*",
