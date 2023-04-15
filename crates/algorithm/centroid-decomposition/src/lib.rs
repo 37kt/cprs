@@ -1,14 +1,19 @@
+use graph::Graph;
+
 /// 重心分解をする
 /// 入力: 木
 /// 戻り値: 重心分解後の木?についての (親, 行きがけ順)
-pub fn build(g: &[Vec<usize>]) -> (Vec<usize>, Vec<usize>) {
-    let mut cd = CentroidDecomposition::new(g);
-    cd.build(0);
+pub fn build<V, E>(g: &Graph<V, E>) -> (Vec<usize>, Vec<usize>)
+where
+    V: Copy,
+    E: Copy,
+{
+    let mut cd = CentroidDecomposition::new(g.size());
+    cd.build(0, g);
     (cd.par, cd.ord)
 }
 
 struct CentroidDecomposition {
-    g: Vec<Vec<usize>>,
     sz: Vec<usize>,
     par: Vec<usize>,
     used: Vec<bool>,
@@ -16,10 +21,8 @@ struct CentroidDecomposition {
 }
 
 impl CentroidDecomposition {
-    fn new(g: &[Vec<usize>]) -> Self {
-        let n = g.len();
+    fn new(n: usize) -> Self {
         Self {
-            g: g.to_vec(),
             sz: vec![1; n],
             par: vec![!0; n],
             used: vec![false; n],
@@ -27,14 +30,18 @@ impl CentroidDecomposition {
         }
     }
 
-    fn build(&mut self, v: usize) -> usize {
-        let sz = self.dfs_size(v, !0);
-        let c = self.search_centroid(v, !0, sz / 2);
+    fn build<V, E>(&mut self, v: usize, g: &Graph<V, E>) -> usize
+    where
+        V: Copy,
+        E: Copy,
+    {
+        let sz = self.dfs_size(v, !0, g);
+        let c = self.search_centroid(v, !0, sz / 2, g);
         self.used[c] = true;
         self.ord.push(v);
-        for &u in &self.g[c].clone() {
+        for &(u, _) in g.out_edges(v) {
             if !self.used[u] {
-                let d = self.build(u);
+                let d = self.build(u, g);
                 self.par[d] = c;
             }
         }
@@ -42,24 +49,32 @@ impl CentroidDecomposition {
         c
     }
 
-    fn dfs_size(&mut self, v: usize, p: usize) -> usize {
+    fn dfs_size<V, E>(&mut self, v: usize, p: usize, g: &Graph<V, E>) -> usize
+    where
+        V: Copy,
+        E: Copy,
+    {
         self.sz[v] = 1;
-        for &u in &self.g[v].clone() {
+        for &(u, _) in g.out_edges(v) {
             if u == p || self.used[u] {
                 continue;
             }
-            self.sz[v] += self.dfs_size(u, v);
+            self.sz[v] += self.dfs_size(u, v, g);
         }
         self.sz[v]
     }
 
-    fn search_centroid(&mut self, v: usize, p: usize, mid: usize) -> usize {
-        for &u in &self.g[v] {
+    fn search_centroid<V, E>(&mut self, v: usize, p: usize, mid: usize, g: &Graph<V, E>) -> usize
+    where
+        V: Copy,
+        E: Copy,
+    {
+        for &(u, _) in g.out_edges(v) {
             if u == p || self.used[u] {
                 continue;
             }
             if self.sz[u] > mid {
-                return self.search_centroid(u, v, mid);
+                return self.search_centroid(u, v, mid, g);
             }
         }
         v

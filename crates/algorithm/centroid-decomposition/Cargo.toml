@@ -11,3 +11,4 @@ name = "centroid_decomposition"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
+graph = { package = "graph", path = "../../graph/graph" }

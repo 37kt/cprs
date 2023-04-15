@@ -1,3 +1,4 @@
+use graph::Graph;
 use std::mem::swap;
 
 pub struct HeavyLightDecomposition {
@@ -12,8 +13,12 @@ pub struct HeavyLightDecomposition {
 }
 
 impl HeavyLightDecomposition {
-    pub fn new(g: &Vec<Vec<usize>>) -> Self {
-        let n = g.len();
+    pub fn new<V, E>(g: &Graph<V, E>) -> Self
+    where
+        V: Copy,
+        E: Copy,
+    {
+        let n = g.size();
         let mut hld = HeavyLightDecomposition {
             t_in: vec![0; n],
             t_out: vec![0; n],
@@ -29,6 +34,54 @@ impl HeavyLightDecomposition {
         hld
     }
 
+    fn dfs_sz<V, E>(&mut self, g: &Graph<V, E>, v: usize)
+    where
+        V: Copy,
+        E: Copy,
+    {
+        self.size[v] = 1;
+        for &(u, _) in g.out_edges(v) {
+            if u == self.par[v] {
+                continue;
+            }
+            self.par[u] = v;
+            self.depth[u] = self.depth[v] + 1;
+            self.dfs_sz(g, u);
+            self.size[v] += self.size[u];
+            if self.heavy[v] == !0 || self.size[u] > self.size[self.heavy[v]] {
+                self.heavy[v] = u;
+            }
+        }
+    }
+
+    fn dfs_hld<V, E>(&mut self, g: &Graph<V, E>, v: usize, t: &mut usize)
+    where
+        V: Copy,
+        E: Copy,
+    {
+        self.t_in[v] = *t;
+        self.ord.push(v);
+        *t += 1;
+        if self.heavy[v] != !0 {
+            let u = self.heavy[v];
+            self.head[u] = self.head[v];
+            self.dfs_hld(g, u, t);
+        }
+        for &(u, _) in g.out_edges(v) {
+            if u == self.par[v] {
+                continue;
+            }
+            if u == self.heavy[v] {
+                continue;
+            }
+            self.head[u] = u;
+            self.dfs_hld(g, u, t);
+        }
+        self.t_out[v] = *t;
+    }
+}
+
+impl HeavyLightDecomposition {
     // 頂点vのk個親
     pub fn la(&self, mut v: usize, mut k: usize) -> usize {
         if self.depth[v] < k {
@@ -128,43 +181,5 @@ impl HeavyLightDecomposition {
     pub fn subtree(&self, v: usize, edge: bool) -> (usize, usize) {
         let e = if edge { 1 } else { 0 };
         (self.t_in[v] + e, self.t_out[v])
-    }
-
-    fn dfs_sz(&mut self, g: &Vec<Vec<usize>>, v: usize) {
-        self.size[v] = 1;
-        for &u in &g[v] {
-            if u == self.par[v] {
-                continue;
-            }
-            self.par[u] = v;
-            self.depth[u] = self.depth[v] + 1;
-            self.dfs_sz(g, u);
-            self.size[v] += self.size[u];
-            if self.heavy[v] == !0 || self.size[u] > self.size[self.heavy[v]] {
-                self.heavy[v] = u;
-            }
-        }
-    }
-
-    fn dfs_hld(&mut self, g: &Vec<Vec<usize>>, v: usize, t: &mut usize) {
-        self.t_in[v] = *t;
-        self.ord.push(v);
-        *t += 1;
-        if self.heavy[v] != !0 {
-            let u = self.heavy[v];
-            self.head[u] = self.head[v];
-            self.dfs_hld(g, u, t);
-        }
-        for &u in &g[v] {
-            if u == self.par[v] {
-                continue;
-            }
-            if u == self.heavy[v] {
-                continue;
-            }
-            self.head[u] = u;
-            self.dfs_hld(g, u, t);
-        }
-        self.t_out[v] = *t;
     }
 }

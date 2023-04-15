@@ -1,14 +1,13 @@
 [package]
-name = "heavy-light-decomposition"
+name = "graph"
 version = "0.1.0"
 edition = "2018"
 license = "CC0-1.0"
 publish = false
 
 [lib]
-name = "heavy_light_decomposition"
+name = "graph"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-graph = { package = "graph", path = "../../graph/graph" }

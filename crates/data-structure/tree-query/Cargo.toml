@@ -13,3 +13,4 @@ name = "tree_query"
 [dependencies]
 ac-library-rs = { git = "https://github.com/rust-lang-ja/ac-library-rs" }
 heavy-light-decomposition = { package = "heavy-light-decomposition", path = "../heavy-light-decomposition" }
+graph = { package = "graph", path = "../../graph/graph" }
