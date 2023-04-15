@@ -63,6 +63,23 @@ impl HeavyLightDecomposition {
         self.depth[u] + self.depth[v] - self.depth[l] * 2
     }
 
+    // 頂点uから頂点vにkだけ進んだときの頂点
+    pub fn jump(&self, u: usize, v: usize, k: usize) -> usize {
+        if k == 0 {
+            return u;
+        }
+        let l = self.lca(u, v);
+        let d_lu = self.depth[u] - self.depth[l];
+        let d_lv = self.depth[v] - self.depth[l];
+        if k > d_lu + d_lv {
+            !0
+        } else if k <= d_lu {
+            self.la(u, k)
+        } else {
+            self.la(v, d_lu + d_lv - k)
+        }
+    }
+
     // 頂点vのHLD上の場所
     pub fn vertex(&self, v: usize) -> usize {
         self.t_in[v]
