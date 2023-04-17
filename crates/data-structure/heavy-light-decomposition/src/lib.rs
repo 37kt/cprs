@@ -83,7 +83,7 @@ impl HeavyLightDecomposition {
 
 impl HeavyLightDecomposition {
     // 頂点vのk個親
-    pub fn la(&self, mut v: usize, mut k: usize) -> usize {
+    pub fn kth_ancestor(&self, mut v: usize, mut k: usize) -> usize {
         if self.depth[v] < k {
             return !0;
         }
@@ -127,9 +127,9 @@ impl HeavyLightDecomposition {
         if k > d_lu + d_lv {
             !0
         } else if k <= d_lu {
-            self.la(u, k)
+            self.kth_ancestor(u, k)
         } else {
-            self.la(v, d_lu + d_lv - k)
+            self.kth_ancestor(v, d_lu + d_lv - k)
         }
     }
 
