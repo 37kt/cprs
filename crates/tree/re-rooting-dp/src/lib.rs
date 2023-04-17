@@ -41,52 +41,63 @@ where
                 }
             }
         }
+
         let mut dpl = vec![identity.clone(); n];
+        let mut dph = vec![identity.clone(); n];
+        let mut dp = vec![identity.clone(); n];
         for &v in ord.iter().rev() {
+            let m = g.out_edges(v).len();
+            let mut xl = vec![identity.clone(); m + 1];
+            let mut xr = vec![identity.clone(); m + 1];
+            for i in 0..m {
+                let u = g.out_edges(v)[i].0;
+                if u == par[v] {
+                    xl[i + 1] = xl[i].clone();
+                } else {
+                    xl[i + 1] = merge(&xl[i], &dph[u]);
+                }
+            }
+            for i in (0..m).rev() {
+                let u = g.out_edges(v)[i].0;
+                if u == par[v] {
+                    xr[i] = xr[i + 1].clone();
+                } else {
+                    xr[i] = merge(&dph[u], &xr[i + 1]);
+                }
+            }
+            for i in 0..m {
+                let u = g.out_edges(v)[i].0;
+                if u != par[v] {
+                    dph[u] = merge(&xl[i], &xr[i + 1]);
+                }
+            }
+            dp[v] = xr[0].clone();
+            dpl[v] = add_vertex(&dp[v], g.vertex(v));
+            for &(u, w) in g.out_edges(v) {
+                if u == par[v] {
+                    dph[v] = add_edge(&dpl[v], w);
+                }
+            }
+        }
+        dp[0] = add_vertex(&dp[0], g.vertex(0));
+        for &(u, _) in g.out_edges(0) {
+            dph[u] = add_vertex(&dph[u], g.vertex(0));
+        }
+        for &v in &ord {
             for &(u, w) in g.out_edges(v) {
                 if u == par[v] {
                     continue;
                 }
-                dpl[v] = merge(&dpl[v], &add_edge(&dpl[u], w));
-            }
-            dpl[v] = add_vertex(&dpl[v], g.vertex(v));
-        }
-        let mut dph = vec![identity.clone(); n];
-        let mut dp = vec![identity.clone(); n];
-        for &v in &ord {
-            let p = par[v];
-            let m = g.out_edges(v).len();
-            let mut dpsl = vec![identity.clone(); m + 1];
-            let mut dpsr = vec![identity.clone(); m + 1];
-            for i in 0..m {
-                let (u, w) = g.out_edges(v)[i];
-                if u == p {
-                    dpsl[i + 1] = dpsl[i].clone();
-                } else {
-                    dpsl[i + 1] = merge(&dpsl[i], &add_edge(&dpl[u], w));
-                }
-            }
-            for i in (0..m).rev() {
-                let (u, w) = g.out_edges(v)[i];
-                if u == p {
-                    dpsr[i] = dpsr[i + 1].clone();
-                } else {
-                    dpsr[i] = merge(&dpsr[i + 1], &add_edge(&dpl[u], w));
-                }
-            }
-            dp[v] = add_vertex(&merge(&dpsl[m], &dph[v]), g.vertex(v));
-            for i in 0..m {
-                let (u, _) = g.out_edges(v)[i];
-                if u == p {
-                    continue;
-                }
-                for &(vv, w) in g.out_edges(u) {
-                    if vv != v {
+                let mut x = add_edge(&dph[u], w);
+                for &(vv, _) in g.out_edges(u) {
+                    if vv == v {
                         continue;
                     }
-                    let t = merge(&merge(&dpsl[i], &dpsr[i + 1]), &dph[v]);
-                    dph[u] = add_edge(&add_vertex(&t, g.vertex(v)), w);
+                    dph[vv] = merge(&dph[vv], &x);
+                    dph[vv] = add_vertex(&dph[vv], g.vertex(u));
                 }
+                x = merge(&dp[u], &x);
+                dp[u] = add_vertex(&x, g.vertex(u));
             }
         }
         Self { dp, par, dpl, dph }
