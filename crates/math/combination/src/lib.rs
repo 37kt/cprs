@@ -1,70 +1,76 @@
+use std::cell::RefCell;
+
 use ac_library::modint::ModIntBase;
 
 pub struct Combination<M: ModIntBase> {
-    inv: Vec<M>,
-    fact: Vec<M>,
-    fact_inv: Vec<M>,
+    inv: RefCell<Vec<M>>,
+    fact: RefCell<Vec<M>>,
+    fact_inv: RefCell<Vec<M>>,
 }
 
 impl<M: ModIntBase> Combination<M> {
     pub fn new() -> Self {
         Self {
-            inv: vec![M::new(0), M::new(1)],
-            fact: vec![M::new(1); 2],
-            fact_inv: vec![M::new(1); 2],
+            inv: RefCell::new(vec![M::new(0), M::new(1)]),
+            fact: RefCell::new(vec![M::new(1); 2]),
+            fact_inv: RefCell::new(vec![M::new(1); 2]),
         }
     }
 
-    fn expand(&mut self, n: usize) {
-        let m = self.fact.len();
-        if n < m {
-            return;
+    fn expand(&self, n: usize) {
+        let mut inv = self.inv.borrow_mut();
+        let mut fact = self.fact.borrow_mut();
+        let mut fact_inv = self.fact_inv.borrow_mut();
+        let m = inv.len();
+        let mut nn = m;
+        while nn <= n {
+            nn *= 2;
         }
-        self.inv.resize(n + 1, M::default());
-        self.fact.resize(n + 1, M::default());
-        self.fact_inv.resize(n + 1, M::default());
+        inv.resize(nn, M::default());
+        fact.resize(nn, M::default());
+        fact_inv.resize(nn, M::default());
         let p = M::modulus() as usize;
-        for i in m..=n {
-            self.inv[i] = -self.inv[p % i] * M::new((p / i) as u32);
-            self.fact[i] = self.fact[i - 1] * M::new(i);
-            self.fact_inv[i] = self.fact_inv[i - 1] * self.inv[i];
+        for i in m..nn {
+            inv[i] = -inv[p % i] * M::new((p / i) as u32);
+            fact[i] = fact[i - 1] * M::new(i);
+            fact_inv[i] = fact_inv[i - 1] * inv[i];
         }
     }
 
-    pub fn inv(&mut self, n: usize) -> M {
+    pub fn inv(&self, n: usize) -> M {
         self.expand(n);
-        self.inv[n]
+        self.inv.borrow()[n]
     }
 
-    pub fn fact(&mut self, n: usize) -> M {
+    pub fn fact(&self, n: usize) -> M {
         self.expand(n);
-        self.fact[n]
+        self.fact.borrow()[n]
     }
 
-    pub fn fact_inv(&mut self, n: usize) -> M {
+    pub fn fact_inv(&self, n: usize) -> M {
         self.expand(n);
-        self.fact_inv[n]
+        self.fact_inv.borrow()[n]
     }
 
-    pub fn nck(&mut self, n: usize, k: usize) -> M {
+    pub fn nck(&self, n: usize, k: usize) -> M {
         if n < k {
             M::new(0)
         } else {
             self.expand(n);
-            self.fact[n] * self.fact_inv[k] * self.fact_inv[n - k]
+            self.fact.borrow()[n] * self.fact_inv.borrow()[k] * self.fact_inv.borrow()[n - k]
         }
     }
 
-    pub fn npk(&mut self, n: usize, k: usize) -> M {
+    pub fn npk(&self, n: usize, k: usize) -> M {
         if n < k {
             M::new(0)
         } else {
             self.expand(n);
-            self.fact[n] * self.fact_inv[n - k]
+            self.fact.borrow()[n] * self.fact_inv.borrow()[n - k]
         }
     }
 
-    pub fn nhk(&mut self, n: usize, k: usize) -> M {
+    pub fn nhk(&self, n: usize, k: usize) -> M {
         if n == 0 && k == 0 {
             M::new(1)
         } else {
@@ -72,9 +78,9 @@ impl<M: ModIntBase> Combination<M> {
         }
     }
 
-    pub fn catalan(&mut self, n: usize) -> M {
+    pub fn catalan(&self, n: usize) -> M {
         self.expand(n * 2);
-        self.fact[n * 2] * self.fact_inv[n + 1] * self.fact_inv[n]
+        self.fact.borrow()[n * 2] * self.fact_inv.borrow()[n + 1] * self.fact_inv.borrow()[n]
     }
 }
 
@@ -85,7 +91,7 @@ mod tests {
 
     #[test]
     fn catalan() {
-        let mut comb = Combination::<Mint>::new();
+        let comb = Combination::<Mint>::new();
         let mut a = vec![];
         for n in 0..8 {
             a.push(comb.catalan(n).val());
