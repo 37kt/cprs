@@ -1,5 +1,6 @@
 [workspace]
 members = [
+    "crates/algebraic/*",
     "crates/algorithm/*",
     "crates/convolution/*",
     "crates/data-structure/*",

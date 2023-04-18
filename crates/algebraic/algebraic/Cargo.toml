@@ -1,14 +1,13 @@
 [package]
-name = "disjoint-sparse-table"
+name = "algebraic"
 version = "0.1.0"
 edition = "2018"
 license = "CC0-1.0"
 publish = false
 
 [lib]
-name = "disjoint_sparse_table"
+name = "algebraic"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-algebraic = { package = "algebraic", path = "../../algebraic/algebraic" }

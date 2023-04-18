@@ -1,12 +1,9 @@
-pub trait Monoid {
-    type S: Clone;
-    fn e() -> Self::S;
-    fn op(a: &Self::S, b: &Self::S) -> Self::S;
-}
+use algebraic::Monoid;
 
 pub struct DisjointSparseTable<M>
 where
     M: Monoid,
+    M::S: Clone,
 {
     t: Vec<Vec<M::S>>,
 }
@@ -14,6 +11,7 @@ where
 impl<M> DisjointSparseTable<M>
 where
     M: Monoid,
+    M::S: Clone,
 {
     pub fn new(a: &[M::S]) -> Self {
         let n = a.len() + 2;
