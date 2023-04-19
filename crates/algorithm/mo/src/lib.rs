@@ -32,7 +32,7 @@ pub trait Mo {
     fn solve(&mut self, qs: &[(usize, usize)]) -> Vec<Self::Output> {
         let n = qs.iter().map(|&(_, r)| r).max().unwrap();
         let q = qs.len();
-        let w = n / n.min((q as f64).sqrt().round() as usize);
+        let w = n / n.max(1).min((q.max(1) as f64).sqrt().round() as usize);
         let mut ord = (0..q).collect::<Vec<_>>();
         ord.sort_by_key(|&i| {
             let (l, r) = qs[i];
