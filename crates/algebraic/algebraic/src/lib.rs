@@ -5,11 +5,11 @@ pub trait Monoid {
 }
 
 pub trait ActMonoid {
-    type M: Monoid;
     type F;
-    fn id() -> Self::F;
-    fn comp(a: &Self::F, b: &Self::F) -> Self::F;
-    fn act(f: &Self::F, x: &<Self::M as Monoid>::S) -> <Self::M as Monoid>::S;
+    type X;
+    fn e() -> Self::F;
+    fn op(a: &Self::F, b: &Self::F) -> Self::F;
+    fn act(f: &Self::F, x: &Self::X) -> Self::X;
 }
 
 // pub trait Group: Monoid {
@@ -58,24 +58,18 @@ mod tests {
     use super::*;
     #[test]
     fn test() {
-        enum Min {}
-        impl Monoid for Min {
-            type S = i64;
-            fn e() -> Self::S {
-                1 << 60
-            }
-            fn op(a: &Self::S, b: &Self::S) -> Self::S {
-                *a.min(b)
-            }
-        }
-        enum Add {}
-        impl Monoid for Add {
-            type S = i64;
-            fn e() -> Self::S {
+        enum A {}
+        impl ActMonoid for A {
+            type F = i64;
+            type X = i64;
+            fn e() -> Self::F {
                 0
             }
-            fn op(a: &Self::S, b: &Self::S) -> Self::S {
+            fn op(a: &Self::F, b: &Self::F) -> Self::F {
                 a + b
+            }
+            fn act(f: &Self::F, x: &Self::X) -> Self::X {
+                f + x
             }
         }
         // enum MinAdd {}
