@@ -1,13 +1,16 @@
-use std::ops::{
-    Add, AddAssign, Deref, DerefMut, Div, DivAssign, Mul, MulAssign, Neg, Rem, RemAssign, Shl,
-    ShlAssign, Shr, ShrAssign, Sub, SubAssign,
+use std::{
+    fmt::Debug,
+    ops::{
+        Add, AddAssign, Deref, DerefMut, Div, DivAssign, Mul, MulAssign, Neg, Rem, RemAssign, Shl,
+        ShlAssign, Shr, ShrAssign, Sub, SubAssign,
+    },
 };
 
 use ac_library::{convolution, ModInt998244353 as M};
 
 const P: usize = 998_244_353;
 
-pub fn sqrt(a: M) -> Option<M> {
+fn sqrt(a: M) -> Option<M> {
     if a.val() <= 1 {
         return Some(a);
     } else if a.pow(499122176).val() == 998244352 {
@@ -27,6 +30,22 @@ pub fn sqrt(a: M) -> Option<M> {
 
 #[derive(Clone)]
 pub struct FPS(pub Vec<M>);
+
+#[macro_export]
+macro_rules! fps {
+    ($($x:expr), *) => (
+        FPS(vec![$(ac_library::ModInt998244353::from($x)), *])
+    );
+    ($x:expr; $n:expr) => (
+        FPS(vec![ac_library::ModInt998244353::from($x); $n])
+    );
+}
+
+impl Debug for FPS {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        self.0.fmt(f)
+    }
+}
 
 impl FPS {
     pub fn pre(&self, d: usize) -> FPS {
@@ -52,35 +71,35 @@ impl FPS {
     pub fn diff(&self) -> FPS {
         let n = self.len();
         if n == 0 {
-            FPS::default()
+            fps![]
         } else {
-            let mut r = vec![M::new(0); n - 1];
+            let mut r = fps![0; n - 1];
             for i in 1..n {
                 r[i - 1] = self[i] * i;
             }
-            FPS(r)
+            r
         }
     }
 
     pub fn integral(&self) -> FPS {
         let n = self.len();
         let mut inv = vec![M::new(1); n + 1];
-        let mut r = vec![M::new(0); n + 1];
+        let mut r = fps![0; n + 1];
         for i in 1..=n {
             if i >= 2 {
                 inv[i] = (inv[P % i] * (P - P / i)).into();
             }
             r[i] = self[i - 1] * inv[i];
         }
-        FPS(r)
+        r
     }
 
     pub fn inv(&self, d: usize) -> FPS {
-        let mut g = FPS(vec![self[0].inv()]);
+        let mut g = fps![self[0].inv()];
         let mut k = 1;
         while k < d {
             k *= 2;
-            g = &(&(&(-&self.pre(k)) * &g) + &FPS(vec![M::new(2)])) * &g;
+            g = &(&(&(-&self.pre(k)) * &g) + &fps![2]) * &g;
             g.resize(k, M::new(0));
         }
         g.truncate(d);
@@ -94,11 +113,11 @@ impl FPS {
     }
 
     pub fn exp(&self, d: usize) -> FPS {
-        let mut g = FPS(vec![M::new(1)]);
+        let mut g = fps![1];
         let mut k = 1;
         while k < d {
             k *= 2;
-            g = &(&(&self.pre(k) - &g.log(k)) + &FPS(vec![M::new(1)])) * &g;
+            g = &(&(&self.pre(k) - &g.log(k)) + &fps![1]) * &g;
             g.resize(k, M::new(0));
         }
         g.truncate(d);
@@ -107,7 +126,7 @@ impl FPS {
 
     pub fn pow(&self, k: usize, d: usize) -> FPS {
         if k == 0 {
-            let mut r = FPS(vec![M::new(0); d]);
+            let mut r = fps![0; d];
             if d > 0 {
                 r[0] = M::new(1);
             }
@@ -115,7 +134,7 @@ impl FPS {
         }
         for i in 0..d {
             if i * k > d {
-                return FPS(vec![M::new(0); d]);
+                return fps![0; d];
             }
             if self[i].val() == 0 {
                 continue;
@@ -129,13 +148,13 @@ impl FPS {
             }
             return r;
         }
-        FPS(vec![M::new(0); d])
+        fps![0; d]
     }
 
     pub fn sqrt(&self, d: usize) -> Option<FPS> {
         let n = self.len();
         if n == 0 {
-            return Some(FPS(vec![M::new(0); d]));
+            return Some(fps![0; d]);
         }
         if self[0].val() == 0 {
             for i in 1..n {
@@ -157,10 +176,10 @@ impl FPS {
                     }
                 }
             }
-            return Some(FPS(vec![M::new(0); d]));
+            return Some(fps![0; d]);
         }
         if let Some(sqr) = sqrt(self[0]) {
-            let mut g = FPS(vec![sqr]);
+            let mut g = fps![sqr];
             let inv2 = M::new(2).inv();
             let mut k = 1;
             while k < d {
@@ -181,7 +200,7 @@ impl FPS {
         let n = f.len();
         let m = g.len();
         if n < m {
-            return (FPS::default(), f);
+            return (fps![], f);
         }
         let mut q = f.clone();
         q.reverse();
@@ -198,7 +217,7 @@ impl FPS {
 
 impl Default for FPS {
     fn default() -> Self {
-        Self(vec![])
+        fps![]
     }
 }
 
@@ -338,7 +357,7 @@ impl Rem<&FPS> for &FPS {
 impl Shl<usize> for &FPS {
     type Output = FPS;
     fn shl(self, rhs: usize) -> FPS {
-        let mut r = FPS(vec![M::new(0); rhs]);
+        let mut r = fps![0; rhs];
         r.append(&mut self.clone());
         r
     }
@@ -366,3 +385,10 @@ impl ShrAssign<usize> for FPS {
         *self = &*self >> rhs;
     }
 }
+
+// #[cfg(test)]
+// mod tests {
+//     use super::*;
+//     #[test]
+//     fn test() {}
+// }
