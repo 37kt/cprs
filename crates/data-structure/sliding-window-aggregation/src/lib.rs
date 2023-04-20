@@ -1,6 +1,6 @@
 use algebraic::Monoid;
 
-pub struct Swag<M>
+pub struct SlidingWindowAggregation<M>
 where
     M: Monoid,
     M::S: Clone,
@@ -11,7 +11,7 @@ where
     bs: Vec<M::S>,
 }
 
-impl<M> Swag<M>
+impl<M> SlidingWindowAggregation<M>
 where
     M: Monoid,
     M::S: Clone,
