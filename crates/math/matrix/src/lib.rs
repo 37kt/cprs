@@ -78,6 +78,20 @@ impl<E: Element> Matrix<E> {
     }
 }
 
+impl<E> From<Vec<Vec<E::S>>> for Matrix<E>
+where
+    E: Element,
+{
+    fn from(v: Vec<Vec<E::S>>) -> Self {
+        assert!(v.iter().all(|x| x.len() == v[0].len()));
+        Self {
+            h: v.len(),
+            w: v[0].len(),
+            v: v.into_iter().flatten().collect(),
+        }
+    }
+}
+
 impl<E> Debug for Matrix<E>
 where
     E: Element,
