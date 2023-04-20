@@ -37,7 +37,6 @@ where
         tt = act(&f, &tt);
         st.insert(tt.clone());
     }
-
     let g = fpow(m);
     let mut failed = false;
     for i in 0..=m {
