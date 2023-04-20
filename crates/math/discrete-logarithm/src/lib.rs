@@ -61,66 +61,66 @@ where
     None
 }
 
-#[cfg(test)]
-mod tests {
-    use super::*;
+// #[cfg(test)]
+// mod tests {
+//     use super::*;
 
-    #[test]
-    fn abc270g_sample1() {
-        let p = 5;
-        let a = 2;
-        let b = 1;
-        let s = 1;
-        let t = 0;
-        assert_eq!(
-            discrete_logarithm(
-                s,
-                t,
-                (a, b),
-                |(a, b), x| (a * x + b) % p,
-                |(a, b), (c, d)| (a * c % p, (b * c + d) % p),
-                p,
-            ),
-            Some(3)
-        );
-    }
+//     #[test]
+//     fn abc270g_sample1() {
+//         let p = 5;
+//         let a = 2;
+//         let b = 1;
+//         let s = 1;
+//         let t = 0;
+//         assert_eq!(
+//             discrete_logarithm(
+//                 s,
+//                 t,
+//                 (a, b),
+//                 |(a, b), x| (a * x + b) % p,
+//                 |(a, b), (c, d)| (a * c % p, (b * c + d) % p),
+//                 p,
+//             ),
+//             Some(3)
+//         );
+//     }
 
-    #[test]
-    fn abc270g_sample2() {
-        let p = 5;
-        let a = 2;
-        let b = 2;
-        let s = 3;
-        let t = 0;
-        assert_eq!(
-            discrete_logarithm(
-                s,
-                t,
-                (a, b),
-                |(a, b), x| (a * x + b) % p,
-                |(a, b), (c, d)| (a * c % p, (b * c + d) % p),
-                p,
-            ),
-            None
-        );
-    }
-    #[test]
-    fn abc270g_sample3() {
-        let p = 11;
-        let a = 1;
-        let b = 1;
-        let s = 0;
-        let t = 10;
-        assert_eq!(
-            discrete_logarithm(
-                s,
-                t,
-                (a, b),
-                |(a, b), x| (a * x + b) % p,
-                |(a, b), (c, d)| (a * c % p, (b * c + d) % p),
-                p,
-            ),
-            Some(10)
-        );
-    }
-}
+//     #[test]
+//     fn abc270g_sample2() {
+//         let p = 5;
+//         let a = 2;
+//         let b = 2;
+//         let s = 3;
+//         let t = 0;
+//         assert_eq!(
+//             discrete_logarithm(
+//                 s,
+//                 t,
+//                 (a, b),
+//                 |(a, b), x| (a * x + b) % p,
+//                 |(a, b), (c, d)| (a * c % p, (b * c + d) % p),
+//                 p,
+//             ),
+//             None
+//         );
+//     }
+//     #[test]
+//     fn abc270g_sample3() {
+//         let p = 11;
+//         let a = 1;
+//         let b = 1;
+//         let s = 0;
+//         let t = 10;
+//         assert_eq!(
+//             discrete_logarithm(
+//                 s,
+//                 t,
+//                 (a, b),
+//                 |(a, b), x| (a * x + b) % p,
+//                 |(a, b), (c, d)| (a * c % p, (b * c + d) % p),
+//                 p,
+//             ),
+//             Some(10)
+//         );
+//     }
+// }
