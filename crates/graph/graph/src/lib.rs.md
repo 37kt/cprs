@@ -11,7 +11,7 @@ data:
   - icon: ':warning:'
     path: crates/tree/centroid-decomposition/src/lib.rs
     title: crates/tree/centroid-decomposition/src/lib.rs
-  - icon: ':warning:'
+  - icon: ':heavy_check_mark:'
     path: crates/tree/re-rooting-dp/src/lib.rs
     title: crates/tree/re-rooting-dp/src/lib.rs
   _extendedVerifiedWith:
@@ -30,6 +30,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/vertex_set_path_composite/src/main.rs
     title: verify/vertex_set_path_composite/src/main.rs
+  - icon: ':heavy_check_mark:'
+    path: verify/yuki1333/src/main.rs
+    title: verify/yuki1333/src/main.rs
   _isVerificationFailed: false
   _pathExtension: rs
   _verificationStatusIcon: ':heavy_check_mark:'
@@ -73,6 +76,7 @@ data:
   - verify/lca/src/main.rs
   - verify/jump_on_tree/src/main.rs
   - verify/vertex_add_path_sum/src/main.rs
+  - verify/yuki1333/src/main.rs
 documentation_of: crates/graph/graph/src/lib.rs
 layout: document
 redirect_from:

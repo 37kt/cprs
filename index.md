@@ -113,7 +113,7 @@ data:
       title: crates/tree/centroid-decomposition/src/lib.rs
   - name: crates/tree/re-rooting-dp/src
     pages:
-    - icon: ':warning:'
+    - icon: ':heavy_check_mark:'
       path: crates/tree/re-rooting-dp/src/lib.rs
       title: crates/tree/re-rooting-dp/src/lib.rs
   verificationCategories:
@@ -242,6 +242,11 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/vertex_set_path_composite/src/main.rs
       title: verify/vertex_set_path_composite/src/main.rs
+  - name: verify/yuki1333/src
+    pages:
+    - icon: ':heavy_check_mark:'
+      path: verify/yuki1333/src/main.rs
+      title: verify/yuki1333/src/main.rs
   - name: verify/yuki1737/src
     pages:
     - icon: ':heavy_check_mark:'
