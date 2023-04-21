@@ -160,5 +160,26 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/examples/aplusb.rs
       title: verify/examples/aplusb.rs
+    - icon: ':heavy_check_mark:'
+      path: verify/examples/deque_operate_all_composite.rs
+      title: verify/examples/deque_operate_all_composite.rs
+    - icon: ':heavy_check_mark:'
+      path: verify/examples/queue_operate_all_composite.rs
+      title: verify/examples/queue_operate_all_composite.rs
+    - icon: ':heavy_check_mark:'
+      path: verify/examples/range_chmin_chmax_add_range_sum.rs
+      title: verify/examples/range_chmin_chmax_add_range_sum.rs
+    - icon: ':heavy_check_mark:'
+      path: verify/examples/staticrmq.rs
+      title: verify/examples/staticrmq.rs
+    - icon: ':heavy_check_mark:'
+      path: verify/examples/vertex_add_path_sum.rs
+      title: verify/examples/vertex_add_path_sum.rs
+    - icon: ':heavy_check_mark:'
+      path: verify/examples/vertex_add_subtree_sum.rs
+      title: verify/examples/vertex_add_subtree_sum.rs
+    - icon: ':heavy_check_mark:'
+      path: verify/examples/vertex_set_path_composite.rs
+      title: verify/examples/vertex_set_path_composite.rs
 layout: toppage
 ---

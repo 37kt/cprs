@@ -1,0 +1,49 @@
+---
+data:
+  _extendedDependsOn: []
+  _extendedRequiredBy: []
+  _extendedVerifiedWith: []
+  _isVerificationFailed: false
+  _pathExtension: rs
+  _verificationStatusIcon: ':heavy_check_mark:'
+  attributes:
+    PROBLEM: https://judge.yosupo.jp/problem/vertex_set_path_composite
+    links:
+    - https://judge.yosupo.jp/problem/vertex_set_path_composite
+  bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.11.3/x64/lib/python3.11/site-packages/onlinejudge_verify/documentation/build.py\"\
+    , line 71, in _render_source_code_stat\n    bundled_code = language.bundle(stat.path,\
+    \ basedir=basedir, options={'include_paths': [basedir]}).decode()\n          \
+    \         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\
+    \  File \"/opt/hostedtoolcache/Python/3.11.3/x64/lib/python3.11/site-packages/onlinejudge_verify/languages/rust.py\"\
+    , line 288, in bundle\n    raise NotImplementedError\nNotImplementedError\n"
+  code: "// verification-helper: PROBLEM https://judge.yosupo.jp/problem/vertex_set_path_composite\n\
+    \nuse ac_library::{ModInt998244353 as Mint, Monoid};\nuse graph::Graph;\nuse proconio::input;\n\
+    use tree_query::TreeQueryVertex;\n\nenum M {}\nimpl Monoid for M {\n    type S\
+    \ = (Mint, Mint);\n    fn identity() -> Self::S {\n        (1.into(), 0.into())\n\
+    \    }\n    fn binary_operation(&(a, b): &Self::S, &(c, d): &Self::S) -> Self::S\
+    \ {\n        (a * c, b * c + d)\n    }\n}\n\n#[proconio::fastout]\nfn main() {\n\
+    \    input! {\n        n: usize,\n        q: usize,\n        a: [(Mint, Mint);\
+    \ n],\n    }\n    let mut g = Graph::from(a);\n    for _ in 0..n - 1 {\n     \
+    \   input! {\n            u: usize,\n            v: usize,\n        }\n      \
+    \  g.add_undirected_edge(u, v, ());\n    }\n    let mut tq = TreeQueryVertex::<M>::build(&g);\n\
+    \    for _ in 0..q {\n        input! {\n            ty: usize,\n        }\n  \
+    \      if ty == 0 {\n            input! {\n                p: usize,\n       \
+    \         c: Mint,\n                d: Mint,\n            }\n            tq.set(p,\
+    \ (c, d));\n        } else {\n            input! {\n                u: usize,\n\
+    \                v: usize,\n                x: Mint,\n            }\n        \
+    \    let (a, b) = tq.prod_path(u, v);\n            println!(\"{}\", a * x + b);\n\
+    \        }\n    }\n}\n"
+  dependsOn: []
+  isVerificationFile: true
+  path: verify/examples/vertex_set_path_composite.rs
+  requiredBy: []
+  timestamp: '1970-01-01 00:00:00+00:00'
+  verificationStatus: TEST_ACCEPTED
+  verifiedWith: []
+documentation_of: verify/examples/vertex_set_path_composite.rs
+layout: document
+redirect_from:
+- /verify/verify/examples/vertex_set_path_composite.rs
+- /verify/verify/examples/vertex_set_path_composite.rs.html
+title: verify/examples/vertex_set_path_composite.rs
+---
