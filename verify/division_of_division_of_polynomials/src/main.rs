@@ -1,4 +1,4 @@
-// verification-helper: PROBLEM https://judge.yosupo.jp/problem/division_of_formal_power_series
+// verification-helper: PROBLEM https://judge.yosupo.jp/problem/division_of_division_of_polynomials
 
 use ac_library::ModInt998244353 as Mint;
 use formal_power_series::FPS;
