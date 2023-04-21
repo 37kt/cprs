@@ -35,15 +35,15 @@ data:
     \        }\n    }\n}\n"
   dependsOn: []
   isVerificationFile: true
-  path: verify/examples/vertex_set_path_composite.rs
+  path: verify/vertex_set_path_composite/src/main.rs
   requiredBy: []
   timestamp: '1970-01-01 00:00:00+00:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
-documentation_of: verify/examples/vertex_set_path_composite.rs
+documentation_of: verify/vertex_set_path_composite/src/main.rs
 layout: document
 redirect_from:
-- /verify/verify/examples/vertex_set_path_composite.rs
-- /verify/verify/examples/vertex_set_path_composite.rs.html
-title: verify/examples/vertex_set_path_composite.rs
+- /verify/verify/vertex_set_path_composite/src/main.rs
+- /verify/verify/vertex_set_path_composite/src/main.rs.html
+title: verify/vertex_set_path_composite/src/main.rs
 ---

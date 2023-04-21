@@ -126,13 +126,12 @@ data:
     \        if self.len() <= rhs {\n            FPS::default()\n        } else {\n\
     \            FPS(self[rhs..].to_vec())\n        }\n    }\n}\n\nimpl ShrAssign<usize>\
     \ for FPS {\n    fn shr_assign(&mut self, rhs: usize) {\n        *self = &*self\
-    \ >> rhs;\n    }\n}\n\n// #[cfg(test)]\n// mod tests {\n//     use super::*;\n\
-    //     #[test]\n//     fn test() {}\n// }\n"
+    \ >> rhs;\n    }\n}\n"
   dependsOn: []
   isVerificationFile: false
   path: crates/polynomial/formal-power-series/src/lib.rs
   requiredBy: []
-  timestamp: '2023-04-20 11:49:57+09:00'
+  timestamp: '2023-04-21 11:20:46+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: crates/polynomial/formal-power-series/src/lib.rs

@@ -33,33 +33,12 @@ data:
     \                   return if res >= lim { None } else { Some(res) };\n      \
     \          }\n                s = act(&f, &s);\n            }\n            if\
     \ failed {\n                return None;\n            }\n            failed =\
-    \ true;\n        }\n        s = s1;\n    }\n\n    None\n}\n\n// #[cfg(test)]\n\
-    // mod tests {\n//     use super::*;\n\n//     #[test]\n//     fn abc270g_sample1()\
-    \ {\n//         let p = 5;\n//         let a = 2;\n//         let b = 1;\n// \
-    \        let s = 1;\n//         let t = 0;\n//         assert_eq!(\n//       \
-    \      discrete_logarithm(\n//                 s,\n//                 t,\n// \
-    \                (a, b),\n//                 |(a, b), x| (a * x + b) % p,\n//\
-    \                 |(a, b), (c, d)| (a * c % p, (b * c + d) % p),\n//         \
-    \        p,\n//             ),\n//             Some(3)\n//         );\n//    \
-    \ }\n\n//     #[test]\n//     fn abc270g_sample2() {\n//         let p = 5;\n\
-    //         let a = 2;\n//         let b = 2;\n//         let s = 3;\n//      \
-    \   let t = 0;\n//         assert_eq!(\n//             discrete_logarithm(\n//\
-    \                 s,\n//                 t,\n//                 (a, b),\n//  \
-    \               |(a, b), x| (a * x + b) % p,\n//                 |(a, b), (c,\
-    \ d)| (a * c % p, (b * c + d) % p),\n//                 p,\n//             ),\n\
-    //             None\n//         );\n//     }\n//     #[test]\n//     fn abc270g_sample3()\
-    \ {\n//         let p = 11;\n//         let a = 1;\n//         let b = 1;\n//\
-    \         let s = 0;\n//         let t = 10;\n//         assert_eq!(\n//     \
-    \        discrete_logarithm(\n//                 s,\n//                 t,\n//\
-    \                 (a, b),\n//                 |(a, b), x| (a * x + b) % p,\n//\
-    \                 |(a, b), (c, d)| (a * c % p, (b * c + d) % p),\n//         \
-    \        p,\n//             ),\n//             Some(10)\n//         );\n//   \
-    \  }\n// }\n"
+    \ true;\n        }\n        s = s1;\n    }\n\n    None\n}\n"
   dependsOn: []
   isVerificationFile: false
   path: crates/math/discrete-logarithm/src/lib.rs
   requiredBy: []
-  timestamp: '2023-04-21 08:08:46+09:00'
+  timestamp: '2023-04-21 11:20:46+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: crates/math/discrete-logarithm/src/lib.rs

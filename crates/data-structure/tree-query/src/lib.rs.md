@@ -70,7 +70,7 @@ data:
   isVerificationFile: false
   path: crates/data-structure/tree-query/src/lib.rs
   requiredBy: []
-  timestamp: '2023-04-17 16:05:03+09:00'
+  timestamp: '2023-04-21 11:20:46+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: crates/data-structure/tree-query/src/lib.rs

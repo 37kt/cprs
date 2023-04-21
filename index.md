@@ -149,37 +149,46 @@ data:
     - icon: ':warning:'
       path: target/release/build/typenum-ca61ca987a614a35/out/tests.rs
       title: target/release/build/typenum-ca61ca987a614a35/out/tests.rs
-  - name: verify/src
-    pages:
-    - icon: ':warning:'
-      path: verify/src/main.rs
-      title: verify/src/main.rs
   verificationCategories:
-  - name: verify/examples
+  - name: verify/aplusb/src
     pages:
     - icon: ':heavy_check_mark:'
-      path: verify/examples/aplusb.rs
-      title: verify/examples/aplusb.rs
+      path: verify/aplusb/src/main.rs
+      title: verify/aplusb/src/main.rs
+  - name: verify/deque_operate_all_composite/src
+    pages:
     - icon: ':heavy_check_mark:'
-      path: verify/examples/deque_operate_all_composite.rs
-      title: verify/examples/deque_operate_all_composite.rs
+      path: verify/deque_operate_all_composite/src/main.rs
+      title: verify/deque_operate_all_composite/src/main.rs
+  - name: verify/queue_operate_all_composite/src
+    pages:
     - icon: ':heavy_check_mark:'
-      path: verify/examples/queue_operate_all_composite.rs
-      title: verify/examples/queue_operate_all_composite.rs
+      path: verify/queue_operate_all_composite/src/main.rs
+      title: verify/queue_operate_all_composite/src/main.rs
+  - name: verify/range_chmin_chmax_add_range_sum/src
+    pages:
     - icon: ':heavy_check_mark:'
-      path: verify/examples/range_chmin_chmax_add_range_sum.rs
-      title: verify/examples/range_chmin_chmax_add_range_sum.rs
+      path: verify/range_chmin_chmax_add_range_sum/src/main.rs
+      title: verify/range_chmin_chmax_add_range_sum/src/main.rs
+  - name: verify/staticrmq/src
+    pages:
     - icon: ':heavy_check_mark:'
-      path: verify/examples/staticrmq.rs
-      title: verify/examples/staticrmq.rs
+      path: verify/staticrmq/src/main.rs
+      title: verify/staticrmq/src/main.rs
+  - name: verify/vertex_add_path_sum/src
+    pages:
     - icon: ':heavy_check_mark:'
-      path: verify/examples/vertex_add_path_sum.rs
-      title: verify/examples/vertex_add_path_sum.rs
+      path: verify/vertex_add_path_sum/src/main.rs
+      title: verify/vertex_add_path_sum/src/main.rs
+  - name: verify/vertex_add_subtree_sum/src
+    pages:
     - icon: ':heavy_check_mark:'
-      path: verify/examples/vertex_add_subtree_sum.rs
-      title: verify/examples/vertex_add_subtree_sum.rs
+      path: verify/vertex_add_subtree_sum/src/main.rs
+      title: verify/vertex_add_subtree_sum/src/main.rs
+  - name: verify/vertex_set_path_composite/src
+    pages:
     - icon: ':heavy_check_mark:'
-      path: verify/examples/vertex_set_path_composite.rs
-      title: verify/examples/vertex_set_path_composite.rs
+      path: verify/vertex_set_path_composite/src/main.rs
+      title: verify/vertex_set_path_composite/src/main.rs
 layout: toppage
 ---

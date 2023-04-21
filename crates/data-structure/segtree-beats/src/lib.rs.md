@@ -156,13 +156,12 @@ data:
     \ l + 1,\n            Bound::Unbounded => 0,\n        };\n        let r = match\
     \ range.end_bound() {\n            Bound::Included(&r) => r + 1,\n           \
     \ Bound::Excluded(&r) => r,\n            Bound::Unbounded => self.n,\n       \
-    \ };\n        (l, r)\n    }\n}\n\n#[cfg(test)]\nmod tests {\n    #[test]\n   \
-    \ fn test() {}\n}\n"
+    \ };\n        (l, r)\n    }\n}\n"
   dependsOn: []
   isVerificationFile: false
   path: crates/data-structure/segtree-beats/src/lib.rs
   requiredBy: []
-  timestamp: '2023-04-13 17:43:22+09:00'
+  timestamp: '2023-04-21 11:20:46+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: crates/data-structure/segtree-beats/src/lib.rs

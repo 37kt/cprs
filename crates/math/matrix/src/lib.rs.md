@@ -66,19 +66,12 @@ data:
     \        for i in 0..self.h {\n            for k in 0..self.w {\n            \
     \    for j in 0..rhs.w {\n                    res[i][j] = E::add(res[i][j], E::mul(self[i][k],\
     \ rhs[k][j]));\n                }\n            }\n        }\n        res\n   \
-    \ }\n}\n\n#[cfg(test)]\nmod tests {\n    use super::*;\n    #[test]\n    fn test()\
-    \ {\n        #[derive(Clone)]\n        enum E {}\n        impl Element for E {\n\
-    \            type S = i64;\n            fn zero() -> Self::S {\n             \
-    \   0\n            }\n            fn one() -> Self::S {\n                1\n \
-    \           }\n            fn add(a: Self::S, b: Self::S) -> Self::S {\n     \
-    \           a + b\n            }\n            fn mul(a: Self::S, b: Self::S) ->\
-    \ Self::S {\n                a * b\n            }\n        }\n        let a =\
-    \ Matrix::<E>::e(5);\n        eprintln!(\"{:?}\", &a);\n    }\n}\n"
+    \ }\n}\n"
   dependsOn: []
   isVerificationFile: false
   path: crates/math/matrix/src/lib.rs
   requiredBy: []
-  timestamp: '2023-04-20 11:16:45+09:00'
+  timestamp: '2023-04-21 11:20:46+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: crates/math/matrix/src/lib.rs

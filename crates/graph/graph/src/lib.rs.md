@@ -41,9 +41,7 @@ data:
     \ w: E) {\n        self.add_edge(u, v, w);\n        self.add_edge(v, u, w);\n\
     \    }\n\n    pub fn vertex(&self, v: usize) -> V {\n        self.vs[v]\n    }\n\
     \n    pub fn out_edges(&self, v: usize) -> &Vec<(usize, E)> {\n        &self.es[v]\n\
-    \    }\n}\n\n#[cfg(test)]\nmod tests {\n    use super::*;\n    #[test]\n    fn\
-    \ test() {\n        let mut g = Graph::<i64, i64>::new(100);\n        g.add_undirected_edge(0,\
-    \ 1, 100);\n    }\n}\n"
+    \    }\n}\n"
   dependsOn: []
   isVerificationFile: false
   path: crates/graph/graph/src/lib.rs
@@ -52,7 +50,7 @@ data:
   - crates/tree/re-rooting-dp/src/lib.rs
   - crates/data-structure/heavy-light-decomposition/src/lib.rs
   - crates/data-structure/tree-query/src/lib.rs
-  timestamp: '2023-04-16 02:58:04+09:00'
+  timestamp: '2023-04-21 11:20:46+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: crates/graph/graph/src/lib.rs

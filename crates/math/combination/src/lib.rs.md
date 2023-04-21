@@ -42,17 +42,12 @@ data:
     \ && k == 0 {\n            M::new(1)\n        } else {\n            self.nck(n\
     \ + k - 1, k)\n        }\n    }\n\n    pub fn catalan(&self, n: usize) -> M {\n\
     \        self.expand(n * 2);\n        self.fact.borrow()[n * 2] * self.fact_inv.borrow()[n\
-    \ + 1] * self.fact_inv.borrow()[n]\n    }\n}\n\n// #[cfg(test)]\n// mod tests\
-    \ {\n//     use super::*;\n//     use ac_library::ModInt998244353 as Mint;\n\n\
-    //     #[test]\n//     fn catalan() {\n//         let comb = Combination::<Mint>::new();\n\
-    //         let mut a = vec![];\n//         for n in 0..8 {\n//             a.push(comb.catalan(n).val());\n\
-    //         }\n//         assert_eq!(&a, &[1, 1, 2, 5, 14, 42, 132, 429]);\n//\
-    \     }\n// }\n"
+    \ + 1] * self.fact_inv.borrow()[n]\n    }\n}\n"
   dependsOn: []
   isVerificationFile: false
   path: crates/math/combination/src/lib.rs
   requiredBy: []
-  timestamp: '2023-04-21 09:32:11+09:00'
+  timestamp: '2023-04-21 11:20:46+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: crates/math/combination/src/lib.rs

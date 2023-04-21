@@ -66,7 +66,7 @@ data:
   isVerificationFile: false
   path: crates/tree/re-rooting-dp/src/lib.rs
   requiredBy: []
-  timestamp: '2023-04-17 15:25:34+09:00'
+  timestamp: '2023-04-21 11:20:46+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: crates/tree/re-rooting-dp/src/lib.rs

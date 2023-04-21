@@ -30,15 +30,15 @@ data:
     {}\", s);\n        }\n    }\n}\n"
   dependsOn: []
   isVerificationFile: true
-  path: verify/examples/range_chmin_chmax_add_range_sum.rs
+  path: verify/range_chmin_chmax_add_range_sum/src/main.rs
   requiredBy: []
   timestamp: '1970-01-01 00:00:00+00:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
-documentation_of: verify/examples/range_chmin_chmax_add_range_sum.rs
+documentation_of: verify/range_chmin_chmax_add_range_sum/src/main.rs
 layout: document
 redirect_from:
-- /verify/verify/examples/range_chmin_chmax_add_range_sum.rs
-- /verify/verify/examples/range_chmin_chmax_add_range_sum.rs.html
-title: verify/examples/range_chmin_chmax_add_range_sum.rs
+- /verify/verify/range_chmin_chmax_add_range_sum/src/main.rs
+- /verify/verify/range_chmin_chmax_add_range_sum/src/main.rs.html
+title: verify/range_chmin_chmax_add_range_sum/src/main.rs
 ---

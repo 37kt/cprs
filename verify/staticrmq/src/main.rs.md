@@ -25,15 +25,15 @@ data:
     \ usize,\n        }\n        println!(\"{}\", spt.prod(l, r));\n    }\n}\n"
   dependsOn: []
   isVerificationFile: true
-  path: verify/examples/staticrmq.rs
+  path: verify/staticrmq/src/main.rs
   requiredBy: []
   timestamp: '1970-01-01 00:00:00+00:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
-documentation_of: verify/examples/staticrmq.rs
+documentation_of: verify/staticrmq/src/main.rs
 layout: document
 redirect_from:
-- /verify/verify/examples/staticrmq.rs
-- /verify/verify/examples/staticrmq.rs.html
-title: verify/examples/staticrmq.rs
+- /verify/verify/staticrmq/src/main.rs
+- /verify/verify/staticrmq/src/main.rs.html
+title: verify/staticrmq/src/main.rs
 ---

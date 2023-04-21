@@ -32,20 +32,14 @@ data:
     \ $f_ty, $e, $op);\n        impl ActMonoid for $ident\n        where\n       \
     \     $ident: Monoid,\n        {\n            type X = $x_ty;\n            fn\
     \ act(f: &$f_ty, x: &$x_ty) -> $x_ty {\n                $act(f, x)\n         \
-    \   }\n        }\n    };\n}\n\n// #[cfg(test)]\n// mod tests {\n//     use super::*;\n\
-    //     #[test]\n//     fn test() {\n//         monoid!(Add, i64, 0, |x, y| x +\
-    \ y);\n//         act_monoid! {\n//             Affine,\n//             (i64,\
-    \ i64),\n//             i64,\n//             (1, 0),\n//             |&(a, b),\
-    \ &(c, d)| (a * c, b * c + d),\n//             |&(a, b), &x| a * x + b\n//   \
-    \      };\n\n//         let f = (30, 5);\n//         let x = 2;\n//         eprintln!(\"\
-    {}\", Affine::act(&f, &x));\n//     }\n// }\n"
+    \   }\n        }\n    };\n}\n"
   dependsOn: []
   isVerificationFile: false
   path: crates/algebraic/algebraic/src/lib.rs
   requiredBy:
   - crates/data-structure/disjoint-sparse-table/src/lib.rs
   - crates/data-structure/sliding-window-aggregation/src/lib.rs
-  timestamp: '2023-04-21 09:17:29+09:00'
+  timestamp: '2023-04-21 11:20:46+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: crates/algebraic/algebraic/src/lib.rs

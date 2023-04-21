@@ -52,16 +52,12 @@ data:
     \        Bound::Included(&l) => l,\n        Bound::Excluded(&l) => l + 1,\n  \
     \      Bound::Unbounded => 0,\n    };\n    let r = match range.end_bound() {\n\
     \        Bound::Included(&r) => r + 1,\n        Bound::Excluded(&r) => r,\n  \
-    \      Bound::Unbounded => n,\n    };\n    (l, r)\n}\n\n#[cfg(test)]\nmod tests\
-    \ {\n    use super::*;\n    #[test]\n    fn test() {\n        let a = vec![vec![1,\
-    \ 2, 3], vec![4, 5, 6], vec![7, 8, 9]];\n        let mut s: CumulativeSum2D<_>\
-    \ = a.into();\n        s.build();\n        eprintln!(\"{:?}\", s.inner());\n \
-    \       eprintln!(\"{}\", s.sum(1..3, 1..3));\n    }\n}\n"
+    \      Bound::Unbounded => n,\n    };\n    (l, r)\n}\n"
   dependsOn: []
   isVerificationFile: false
   path: crates/data-structure/cumulative-sum-2d/src/lib.rs
   requiredBy: []
-  timestamp: '2023-04-20 11:04:43+09:00'
+  timestamp: '2023-04-21 11:20:46+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: crates/data-structure/cumulative-sum-2d/src/lib.rs

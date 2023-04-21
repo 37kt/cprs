@@ -46,17 +46,12 @@ data:
     \ mut t = res[i];\n                for _ in 0..k {\n                    t *= p;\n\
     \                    res.push(t);\n                }\n            }\n        }\n\
     \        res.sort();\n        res\n    }\n\n    pub fn primes(&self) -> Vec<usize>\
-    \ {\n        self.primes.clone()\n    }\n}\n\n#[cfg(test)]\nmod tests {\n    use\
-    \ super::*;\n\n    #[test]\n    fn test() {\n        let prime = PrimeSieve::new(1000);\n\
-    \        assert_eq!(&prime.factorize(100), &[(2, 2), (5, 2)]);\n        assert_eq!(&prime.factorize(1),\
-    \ &[]);\n        assert_eq!(&prime.divisors(12), &[1, 2, 3, 4, 6, 12]);\n    \
-    \    assert_eq!(&prime.divisors(100), &[1, 2, 4, 5, 10, 20, 25, 50, 100]);\n \
-    \   }\n}\n"
+    \ {\n        self.primes.clone()\n    }\n}\n"
   dependsOn: []
   isVerificationFile: false
   path: crates/math/prime-sieve/src/lib.rs
   requiredBy: []
-  timestamp: '2023-04-14 18:43:59+09:00'
+  timestamp: '2023-04-21 11:20:46+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: crates/math/prime-sieve/src/lib.rs
