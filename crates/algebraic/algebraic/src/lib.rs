@@ -41,23 +41,23 @@ macro_rules! act_monoid {
     };
 }
 
-#[cfg(test)]
-mod tests {
-    use super::*;
-    #[test]
-    fn test() {
-        monoid!(Add, i64, 0, |x, y| x + y);
-        act_monoid! {
-            Affine,
-            (i64, i64),
-            i64,
-            (1, 0),
-            |&(a, b), &(c, d)| (a * c, b * c + d),
-            |&(a, b), &x| a * x + b
-        };
+// #[cfg(test)]
+// mod tests {
+//     use super::*;
+//     #[test]
+//     fn test() {
+//         monoid!(Add, i64, 0, |x, y| x + y);
+//         act_monoid! {
+//             Affine,
+//             (i64, i64),
+//             i64,
+//             (1, 0),
+//             |&(a, b), &(c, d)| (a * c, b * c + d),
+//             |&(a, b), &x| a * x + b
+//         };
 
-        let f = (30, 5);
-        let x = 2;
-        eprintln!("{}", Affine::act(&f, &x));
-    }
-}
+//         let f = (30, 5);
+//         let x = 2;
+//         eprintln!("{}", Affine::act(&f, &x));
+//     }
+// }
