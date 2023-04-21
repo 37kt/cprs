@@ -21,7 +21,7 @@ data:
   isVerificationFile: false
   path: verify/src/main.rs
   requiredBy: []
-  timestamp: '2023-04-20 13:37:11+09:00'
+  timestamp: '1970-01-01 00:00:00+00:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: verify/src/main.rs
