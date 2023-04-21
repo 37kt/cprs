@@ -8,6 +8,6 @@ edition = "2018"
 [dependencies]
 proconio = { version = "=0.3.6", features = ["derive"] }
 ac-library-rs = { git = "https://github.com/rust-lang-ja/ac-library-rs" }
-algebraic = { package = "algebraic", path = "../../crates/algebraic/algebraic" }
+algebraic = { path = "../../crates/algebraic/algebraic" }
 and-convolution = { path = "../../crates/convolution/and-convolution" }
 itertools = "=0.9.0"
