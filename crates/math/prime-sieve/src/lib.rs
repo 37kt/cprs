@@ -5,6 +5,7 @@ pub struct PrimeSieve {
 
 impl PrimeSieve {
     pub fn new(n: usize) -> Self {
+        let n = n.max(2);
         let mut div = (0..=n).collect::<Vec<_>>();
         div[1] = 0;
         for i in 2..=n {
@@ -19,7 +20,7 @@ impl PrimeSieve {
             }
         }
         let mut primes = vec![];
-        for i in 0..=n {
+        for i in 2..=n {
             if div[i] == i {
                 primes.push(i);
             }
@@ -29,7 +30,7 @@ impl PrimeSieve {
 
     pub fn is_prime(&self, x: usize) -> bool {
         let n = self.primes.len() - 1;
-        assert!(n * n <= x);
+        assert!(x <= n * n);
         if x <= n {
             self.div[x] == x
         } else {
@@ -47,8 +48,8 @@ impl PrimeSieve {
 
     pub fn factorize(&self, x: usize) -> Vec<(usize, usize)> {
         let mut res = Vec::<(usize, usize)>::new();
-        let n = self.primes.len() - 1;
-        assert!(n * n <= x);
+        let n = self.div.len() - 1;
+        assert!(x <= n * n);
         if x <= n {
             let mut y = x;
             while y > 1 {

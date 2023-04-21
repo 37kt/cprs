@@ -1,5 +1,5 @@
 [package]
-name = "abc293_g"
+name = "static_range_sum"
 version = "0.1.0"
 edition = "2018"
 
