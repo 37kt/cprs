@@ -3,9 +3,9 @@ data:
   _extendedDependsOn: []
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':x:'
-    path: verify/division_of_division_of_polynomials/src/main.rs
-    title: verify/division_of_division_of_polynomials/src/main.rs
+  - icon: ':heavy_check_mark:'
+    path: verify/division_of_polynomials/src/main.rs
+    title: verify/division_of_polynomials/src/main.rs
   - icon: ':heavy_check_mark:'
     path: verify/exp_of_formal_power_series/src/main.rs
     title: verify/exp_of_formal_power_series/src/main.rs
@@ -21,9 +21,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/sqrt_of_formal_power_series/src/main.rs
     title: verify/sqrt_of_formal_power_series/src/main.rs
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: rs
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.11.3/x64/lib/python3.11/site-packages/onlinejudge_verify/documentation/build.py\"\
@@ -150,10 +150,10 @@ data:
   path: crates/polynomial/formal-power-series/src/lib.rs
   requiredBy: []
   timestamp: '2023-04-21 11:20:46+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/exp_of_formal_power_series/src/main.rs
-  - verify/division_of_division_of_polynomials/src/main.rs
+  - verify/division_of_polynomials/src/main.rs
   - verify/pow_of_formal_power_series/src/main.rs
   - verify/sqrt_of_formal_power_series/src/main.rs
   - verify/inv_of_formal_power_series/src/main.rs

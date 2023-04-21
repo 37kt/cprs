@@ -103,7 +103,7 @@ data:
       title: crates/math/prime-sieve/src/lib.rs
   - name: crates/polynomial/formal-power-series/src
     pages:
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: crates/polynomial/formal-power-series/src/lib.rs
       title: crates/polynomial/formal-power-series/src/lib.rs
   - name: crates/tree/centroid-decomposition/src
@@ -142,11 +142,11 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/discrete_logarithm_mod/src/main.rs
       title: verify/discrete_logarithm_mod/src/main.rs
-  - name: verify/division_of_division_of_polynomials/src
+  - name: verify/division_of_polynomials/src
     pages:
-    - icon: ':x:'
-      path: verify/division_of_division_of_polynomials/src/main.rs
-      title: verify/division_of_division_of_polynomials/src/main.rs
+    - icon: ':heavy_check_mark:'
+      path: verify/division_of_polynomials/src/main.rs
+      title: verify/division_of_polynomials/src/main.rs
   - name: verify/exp_of_formal_power_series/src
     pages:
     - icon: ':heavy_check_mark:'
