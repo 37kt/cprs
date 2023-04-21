@@ -64,13 +64,3 @@ where
         &self.es[v]
     }
 }
-
-#[cfg(test)]
-mod tests {
-    use super::*;
-    #[test]
-    fn test() {
-        let mut g = Graph::<i64, i64>::new(100);
-        g.add_undirected_edge(0, 1, 100);
-    }
-}

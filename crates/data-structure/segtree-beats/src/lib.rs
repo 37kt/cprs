@@ -393,9 +393,3 @@ impl SegtreeBeats {
         (l, r)
     }
 }
-
-#[cfg(test)]
-mod tests {
-    #[test]
-    fn test() {}
-}

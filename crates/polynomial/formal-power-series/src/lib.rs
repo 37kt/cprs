@@ -385,10 +385,3 @@ impl ShrAssign<usize> for FPS {
         *self = &*self >> rhs;
     }
 }
-
-// #[cfg(test)]
-// mod tests {
-//     use super::*;
-//     #[test]
-//     fn test() {}
-// }

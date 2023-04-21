@@ -109,16 +109,3 @@ where
     };
     (l, r)
 }
-
-#[cfg(test)]
-mod tests {
-    use super::*;
-    #[test]
-    fn test() {
-        let a = vec![vec![1, 2, 3], vec![4, 5, 6], vec![7, 8, 9]];
-        let mut s: CumulativeSum2D<_> = a.into();
-        s.build();
-        eprintln!("{:?}", s.inner());
-        eprintln!("{}", s.sum(1..3, 1..3));
-    }
-}

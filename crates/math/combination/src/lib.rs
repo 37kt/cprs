@@ -83,19 +83,3 @@ impl<M: ModIntBase> Combination<M> {
         self.fact.borrow()[n * 2] * self.fact_inv.borrow()[n + 1] * self.fact_inv.borrow()[n]
     }
 }
-
-// #[cfg(test)]
-// mod tests {
-//     use super::*;
-//     use ac_library::ModInt998244353 as Mint;
-
-//     #[test]
-//     fn catalan() {
-//         let comb = Combination::<Mint>::new();
-//         let mut a = vec![];
-//         for n in 0..8 {
-//             a.push(comb.catalan(n).val());
-//         }
-//         assert_eq!(&a, &[1, 1, 2, 5, 14, 42, 132, 429]);
-//     }
-// }

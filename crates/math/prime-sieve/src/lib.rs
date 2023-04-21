@@ -96,17 +96,3 @@ impl PrimeSieve {
         self.primes.clone()
     }
 }
-
-#[cfg(test)]
-mod tests {
-    use super::*;
-
-    #[test]
-    fn test() {
-        let prime = PrimeSieve::new(1000);
-        assert_eq!(&prime.factorize(100), &[(2, 2), (5, 2)]);
-        assert_eq!(&prime.factorize(1), &[]);
-        assert_eq!(&prime.divisors(12), &[1, 2, 3, 4, 6, 12]);
-        assert_eq!(&prime.divisors(100), &[1, 2, 4, 5, 10, 20, 25, 50, 100]);
-    }
-}

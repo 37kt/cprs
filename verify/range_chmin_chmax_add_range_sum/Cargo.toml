@@ -1,0 +1,74 @@
+[package]
+name = "range_chmin_chmax_add_range_sum"
+version = "0.1.0"
+edition = "2018"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+num = "=0.2.1"
+num-bigint = "=0.2.6"
+num-complex = "=0.2.4"
+num-integer = "=0.1.42"
+num-iter = "=0.1.40"
+num-rational = "=0.2.4"
+num-traits = "=0.2.11"
+num-derive = "=0.3.0"
+ndarray = "=0.13.0"
+nalgebra = "=0.20.0"
+alga = "=0.9.3"
+libm = "=0.2.1"
+rand = { version = "=0.7.3", features = ["small_rng"] }
+getrandom = "=0.1.14"
+rand_chacha = "=0.2.2"
+rand_core = "=0.5.1"
+rand_hc = "=0.2.0"
+rand_pcg = "=0.2.1"
+rand_distr = "=0.2.2"
+petgraph = "=0.5.0"
+indexmap = "=1.3.2"
+regex = "=1.3.6"
+lazy_static = "=1.4.0"
+ordered-float = "=1.0.2"
+ascii = "=1.0.0"
+permutohedron = "=0.2.4"
+superslice = "=1.0.0"
+itertools = "=0.9.0"
+itertools-num = "=0.1.3"
+maplit = "=1.0.2"
+either = "=1.5.3"
+im-rc = "=14.3.0"
+fixedbitset = "=0.2.0"
+bitset-fixed = "=0.1.0"
+proconio = { version = "=0.3.6", features = ["derive"] }
+text_io = "=0.1.8"
+whiteread = "=0.5.0"
+rustc-hash = "=1.1.0"
+smallvec = "=1.2.0"
+once_cell = "=1.9.0"
+thread_local = "=1.1.4"
+ac-library-rs = { git = "https://github.com/rust-lang-ja/ac-library-rs" }
+
+algebraic = { package = "algebraic", path = "../../crates/algebraic/algebraic" }
+mo = { package = "mo", path = "../../crates/algorithm/mo" }
+and-convolution = { package = "and-convolution", path = "../../crates/convolution/and-convolution" }
+gcd-convolution = { package = "gcd-convolution", path = "../../crates/convolution/gcd-convolution" }
+lcm-convolution = { package = "lcm-convolution", path = "../../crates/convolution/lcm-convolution" }
+or-convolution = { package = "or-convolution", path = "../../crates/convolution/or-convolution" }
+xor-convolution = { package = "xor-convolution", path = "../../crates/convolution/xor-convolution" }
+cumulative-sum-2d = { package = "cumulative-sum-2d", path = "../../crates/data-structure/cumulative-sum-2d" }
+disjoint-sparse-table = { package = "disjoint-sparse-table", path = "../../crates/data-structure/disjoint-sparse-table" }
+heavy-light-decomposition = { package = "heavy-light-decomposition", path = "../../crates/data-structure/heavy-light-decomposition" }
+li-chao-tree-dynamic = { package = "li-chao-tree-dynamic", path = "../../crates/data-structure/li-chao-tree-dynamic" }
+segtree-beats = { package = "segtree-beats", path = "../../crates/data-structure/segtree-beats" }
+sliding-window-aggregation = { package = "sliding-window-aggregation", path = "../../crates/data-structure/sliding-window-aggregation" }
+tree-query = { package = "tree-query", path = "../../crates/data-structure/tree-query" }
+graph = { package = "graph", path = "../../crates/graph/graph" }
+chminmax = { package = "chminmax", path = "../../crates/macros/chminmax" }
+discrete-logarithm = { package = "discrete-logarithm", path = "../../crates/math/discrete-logarithm" }
+combination = { package = "combination", path = "../../crates/math/combination" }
+matrix = { package = "matrix", path = "../../crates/math/matrix" }
+prime-sieve = { package = "prime-sieve", path = "../../crates/math/prime-sieve" }
+formal-power-series = { package = "formal-power-series", path = "../../crates/polynomial/formal-power-series" }
+centroid-decomposition = { package = "centroid-decomposition", path = "../../crates/tree/centroid-decomposition" }
+re-rooting-dp = { package = "re-rooting-dp", path = "../../crates/tree/re-rooting-dp" }

@@ -175,30 +175,3 @@ impl<E: Element> Mul<Self> for &Matrix<E> {
         res
     }
 }
-
-#[cfg(test)]
-mod tests {
-    use super::*;
-    #[test]
-    fn test() {
-        #[derive(Clone)]
-        enum E {}
-        impl Element for E {
-            type S = i64;
-            fn zero() -> Self::S {
-                0
-            }
-            fn one() -> Self::S {
-                1
-            }
-            fn add(a: Self::S, b: Self::S) -> Self::S {
-                a + b
-            }
-            fn mul(a: Self::S, b: Self::S) -> Self::S {
-                a * b
-            }
-        }
-        let a = Matrix::<E>::e(5);
-        eprintln!("{:?}", &a);
-    }
-}
