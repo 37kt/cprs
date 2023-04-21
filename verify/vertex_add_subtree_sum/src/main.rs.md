@@ -1,6 +1,12 @@
 ---
 data:
-  _extendedDependsOn: []
+  _extendedDependsOn:
+  - icon: ':heavy_check_mark:'
+    path: crates/data-structure/tree-query/src/lib.rs
+    title: crates/data-structure/tree-query/src/lib.rs
+  - icon: ':heavy_check_mark:'
+    path: crates/graph/graph/src/lib.rs
+    title: crates/graph/graph/src/lib.rs
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
@@ -31,11 +37,13 @@ data:
     \           input! {\n                v: usize,\n            }\n            let\
     \ t = tq.prod_subtree(v);\n            println!(\"{}\", t);\n        }\n    }\n\
     }\n"
-  dependsOn: []
+  dependsOn:
+  - crates/data-structure/tree-query/src/lib.rs
+  - crates/graph/graph/src/lib.rs
   isVerificationFile: true
   path: verify/vertex_add_subtree_sum/src/main.rs
   requiredBy: []
-  timestamp: '1970-01-01 00:00:00+00:00'
+  timestamp: '2023-04-21 11:20:46+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/vertex_add_subtree_sum/src/main.rs

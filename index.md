@@ -3,7 +3,7 @@ data:
   libraryCategories:
   - name: crates/algebraic/algebraic/src
     pages:
-    - icon: ':warning:'
+    - icon: ':heavy_check_mark:'
       path: crates/algebraic/algebraic/src/lib.rs
       title: crates/algebraic/algebraic/src/lib.rs
   - name: crates/algorithm/mo/src
@@ -43,7 +43,7 @@ data:
       title: crates/data-structure/cumulative-sum-2d/src/lib.rs
   - name: crates/data-structure/disjoint-sparse-table/src
     pages:
-    - icon: ':warning:'
+    - icon: ':heavy_check_mark:'
       path: crates/data-structure/disjoint-sparse-table/src/lib.rs
       title: crates/data-structure/disjoint-sparse-table/src/lib.rs
   - name: crates/data-structure/heavy-light-decomposition/src
@@ -58,22 +58,22 @@ data:
       title: crates/data-structure/li-chao-tree-dynamic/src/lib.rs
   - name: crates/data-structure/segtree-beats/src
     pages:
-    - icon: ':warning:'
+    - icon: ':heavy_check_mark:'
       path: crates/data-structure/segtree-beats/src/lib.rs
       title: crates/data-structure/segtree-beats/src/lib.rs
   - name: crates/data-structure/sliding-window-aggregation/src
     pages:
-    - icon: ':warning:'
+    - icon: ':heavy_check_mark:'
       path: crates/data-structure/sliding-window-aggregation/src/lib.rs
       title: crates/data-structure/sliding-window-aggregation/src/lib.rs
   - name: crates/data-structure/tree-query/src
     pages:
-    - icon: ':warning:'
+    - icon: ':heavy_check_mark:'
       path: crates/data-structure/tree-query/src/lib.rs
       title: crates/data-structure/tree-query/src/lib.rs
   - name: crates/graph/graph/src
     pages:
-    - icon: ':warning:'
+    - icon: ':heavy_check_mark:'
       path: crates/graph/graph/src/lib.rs
       title: crates/graph/graph/src/lib.rs
   - name: crates/macros/chminmax/src
@@ -116,39 +116,6 @@ data:
     - icon: ':warning:'
       path: crates/tree/re-rooting-dp/src/lib.rs
       title: crates/tree/re-rooting-dp/src/lib.rs
-  - name: target/debug/build/typenum-0d2e2c985f32377f/out
-    pages:
-    - icon: ':warning:'
-      path: target/debug/build/typenum-0d2e2c985f32377f/out/consts.rs
-      title: target/debug/build/typenum-0d2e2c985f32377f/out/consts.rs
-    - icon: ':warning:'
-      path: target/debug/build/typenum-0d2e2c985f32377f/out/op.rs
-      title: target/debug/build/typenum-0d2e2c985f32377f/out/op.rs
-    - icon: ':warning:'
-      path: target/debug/build/typenum-0d2e2c985f32377f/out/tests.rs
-      title: target/debug/build/typenum-0d2e2c985f32377f/out/tests.rs
-  - name: target/debug/build/typenum-19d42fc9a441b8b0/out
-    pages:
-    - icon: ':warning:'
-      path: target/debug/build/typenum-19d42fc9a441b8b0/out/consts.rs
-      title: target/debug/build/typenum-19d42fc9a441b8b0/out/consts.rs
-    - icon: ':warning:'
-      path: target/debug/build/typenum-19d42fc9a441b8b0/out/op.rs
-      title: target/debug/build/typenum-19d42fc9a441b8b0/out/op.rs
-    - icon: ':warning:'
-      path: target/debug/build/typenum-19d42fc9a441b8b0/out/tests.rs
-      title: target/debug/build/typenum-19d42fc9a441b8b0/out/tests.rs
-  - name: target/release/build/typenum-ca61ca987a614a35/out
-    pages:
-    - icon: ':warning:'
-      path: target/release/build/typenum-ca61ca987a614a35/out/consts.rs
-      title: target/release/build/typenum-ca61ca987a614a35/out/consts.rs
-    - icon: ':warning:'
-      path: target/release/build/typenum-ca61ca987a614a35/out/op.rs
-      title: target/release/build/typenum-ca61ca987a614a35/out/op.rs
-    - icon: ':warning:'
-      path: target/release/build/typenum-ca61ca987a614a35/out/tests.rs
-      title: target/release/build/typenum-ca61ca987a614a35/out/tests.rs
   verificationCategories:
   - name: verify/aplusb/src
     pages:

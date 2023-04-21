@@ -2,16 +2,25 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy:
-  - icon: ':warning:'
+  - icon: ':heavy_check_mark:'
     path: crates/data-structure/disjoint-sparse-table/src/lib.rs
     title: crates/data-structure/disjoint-sparse-table/src/lib.rs
-  - icon: ':warning:'
+  - icon: ':heavy_check_mark:'
     path: crates/data-structure/sliding-window-aggregation/src/lib.rs
     title: crates/data-structure/sliding-window-aggregation/src/lib.rs
-  _extendedVerifiedWith: []
+  _extendedVerifiedWith:
+  - icon: ':heavy_check_mark:'
+    path: verify/deque_operate_all_composite/src/main.rs
+    title: verify/deque_operate_all_composite/src/main.rs
+  - icon: ':heavy_check_mark:'
+    path: verify/queue_operate_all_composite/src/main.rs
+    title: verify/queue_operate_all_composite/src/main.rs
+  - icon: ':heavy_check_mark:'
+    path: verify/staticrmq/src/main.rs
+    title: verify/staticrmq/src/main.rs
   _isVerificationFailed: false
   _pathExtension: rs
-  _verificationStatusIcon: ':warning:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.11.3/x64/lib/python3.11/site-packages/onlinejudge_verify/documentation/build.py\"\
@@ -40,8 +49,11 @@ data:
   - crates/data-structure/disjoint-sparse-table/src/lib.rs
   - crates/data-structure/sliding-window-aggregation/src/lib.rs
   timestamp: '2023-04-21 11:20:46+09:00'
-  verificationStatus: LIBRARY_NO_TESTS
-  verifiedWith: []
+  verificationStatus: LIBRARY_ALL_AC
+  verifiedWith:
+  - verify/deque_operate_all_composite/src/main.rs
+  - verify/queue_operate_all_composite/src/main.rs
+  - verify/staticrmq/src/main.rs
 documentation_of: crates/algebraic/algebraic/src/lib.rs
 layout: document
 redirect_from:
