@@ -4,8 +4,8 @@ data:
   _extendedRequiredBy: []
   _extendedVerifiedWith:
   - icon: ':x:'
-    path: verify/division_of_formal_power_series/src/main.rs
-    title: verify/division_of_formal_power_series/src/main.rs
+    path: verify/division_of_division_of_polynomials/src/main.rs
+    title: verify/division_of_division_of_polynomials/src/main.rs
   - icon: ':heavy_check_mark:'
     path: verify/exp_of_formal_power_series/src/main.rs
     title: verify/exp_of_formal_power_series/src/main.rs
@@ -152,8 +152,8 @@ data:
   timestamp: '2023-04-21 11:20:46+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
-  - verify/division_of_formal_power_series/src/main.rs
   - verify/exp_of_formal_power_series/src/main.rs
+  - verify/division_of_division_of_polynomials/src/main.rs
   - verify/pow_of_formal_power_series/src/main.rs
   - verify/sqrt_of_formal_power_series/src/main.rs
   - verify/inv_of_formal_power_series/src/main.rs
