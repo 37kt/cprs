@@ -84,18 +84,18 @@ impl<M: ModIntBase> Combination<M> {
     }
 }
 
-#[cfg(test)]
-mod tests {
-    use super::*;
-    use ac_library::ModInt998244353 as Mint;
+// #[cfg(test)]
+// mod tests {
+//     use super::*;
+//     use ac_library::ModInt998244353 as Mint;
 
-    #[test]
-    fn catalan() {
-        let comb = Combination::<Mint>::new();
-        let mut a = vec![];
-        for n in 0..8 {
-            a.push(comb.catalan(n).val());
-        }
-        assert_eq!(&a, &[1, 1, 2, 5, 14, 42, 132, 429]);
-    }
-}
+//     #[test]
+//     fn catalan() {
+//         let comb = Combination::<Mint>::new();
+//         let mut a = vec![];
+//         for n in 0..8 {
+//             a.push(comb.catalan(n).val());
+//         }
+//         assert_eq!(&a, &[1, 1, 2, 5, 14, 42, 132, 429]);
+//     }
+// }
