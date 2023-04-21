@@ -2,10 +2,13 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy: []
-  _extendedVerifiedWith: []
+  _extendedVerifiedWith:
+  - icon: ':heavy_check_mark:'
+    path: verify/yuki1737/src/main.rs
+    title: verify/yuki1737/src/main.rs
   _isVerificationFailed: false
   _pathExtension: rs
-  _verificationStatusIcon: ':warning:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.11.3/x64/lib/python3.11/site-packages/onlinejudge_verify/documentation/build.py\"\
@@ -15,29 +18,29 @@ data:
     \  File \"/opt/hostedtoolcache/Python/3.11.3/x64/lib/python3.11/site-packages/onlinejudge_verify/languages/rust.py\"\
     , line 288, in bundle\n    raise NotImplementedError\nNotImplementedError\n"
   code: "pub struct PrimeSieve {\n    primes: Vec<usize>,\n    div: Vec<usize>,\n\
-    }\n\nimpl PrimeSieve {\n    pub fn new(n: usize) -> Self {\n        let mut div\
-    \ = (0..=n).collect::<Vec<_>>();\n        div[1] = 0;\n        for i in 2..=n\
-    \ {\n            if div[i] != i {\n                continue;\n            }\n\
-    \            for j in (i * 2..=n).step_by(i) {\n                if div[j] != j\
-    \ {\n                    continue;\n                }\n                div[j]\
-    \ = i;\n            }\n        }\n        let mut primes = vec![];\n        for\
-    \ i in 0..=n {\n            if div[i] == i {\n                primes.push(i);\n\
+    }\n\nimpl PrimeSieve {\n    pub fn new(n: usize) -> Self {\n        let n = n.max(2);\n\
+    \        let mut div = (0..=n).collect::<Vec<_>>();\n        div[1] = 0;\n   \
+    \     for i in 2..=n {\n            if div[i] != i {\n                continue;\n\
+    \            }\n            for j in (i * 2..=n).step_by(i) {\n              \
+    \  if div[j] != j {\n                    continue;\n                }\n      \
+    \          div[j] = i;\n            }\n        }\n        let mut primes = vec![];\n\
+    \        for i in 2..=n {\n            if div[i] == i {\n                primes.push(i);\n\
     \            }\n        }\n        Self { primes, div }\n    }\n\n    pub fn is_prime(&self,\
-    \ x: usize) -> bool {\n        let n = self.primes.len() - 1;\n        assert!(n\
-    \ * n <= x);\n        if x <= n {\n            self.div[x] == x\n        } else\
+    \ x: usize) -> bool {\n        let n = self.primes.len() - 1;\n        assert!(x\
+    \ <= n * n);\n        if x <= n {\n            self.div[x] == x\n        } else\
     \ {\n            for &p in &self.primes {\n                if p * p > x {\n  \
     \                  break;\n                }\n                if x % p == 0 {\n\
     \                    return false;\n                }\n            }\n       \
     \     true\n        }\n    }\n\n    pub fn factorize(&self, x: usize) -> Vec<(usize,\
     \ usize)> {\n        let mut res = Vec::<(usize, usize)>::new();\n        let\
-    \ n = self.primes.len() - 1;\n        assert!(n * n <= x);\n        if x <= n\
-    \ {\n            let mut y = x;\n            while y > 1 {\n                if\
-    \ res.len() == 0 || res.last().unwrap().0 != self.div[y] {\n                 \
-    \   res.push((self.div[y], 1));\n                } else {\n                  \
-    \  res.last_mut().unwrap().1 += 1;\n                }\n                y /= self.div[y];\n\
-    \            }\n        } else {\n            let mut y = x;\n            for\
-    \ &p in &self.primes {\n                if y % p == 0 {\n                    res.push((p,\
-    \ 0));\n                    while y % p == 0 {\n                        res.last_mut().unwrap().1\
+    \ n = self.div.len() - 1;\n        assert!(x <= n * n);\n        if x <= n {\n\
+    \            let mut y = x;\n            while y > 1 {\n                if res.len()\
+    \ == 0 || res.last().unwrap().0 != self.div[y] {\n                    res.push((self.div[y],\
+    \ 1));\n                } else {\n                    res.last_mut().unwrap().1\
+    \ += 1;\n                }\n                y /= self.div[y];\n            }\n\
+    \        } else {\n            let mut y = x;\n            for &p in &self.primes\
+    \ {\n                if y % p == 0 {\n                    res.push((p, 0));\n\
+    \                    while y % p == 0 {\n                        res.last_mut().unwrap().1\
     \ += 1;\n                        y /= p;\n                    }\n            \
     \    }\n            }\n            if y > 1 {\n                res.push((y, 1));\n\
     \            }\n        }\n        res\n    }\n\n    pub fn divisors(&self, x:\
@@ -51,9 +54,10 @@ data:
   isVerificationFile: false
   path: crates/math/prime-sieve/src/lib.rs
   requiredBy: []
-  timestamp: '2023-04-21 11:20:46+09:00'
-  verificationStatus: LIBRARY_NO_TESTS
-  verifiedWith: []
+  timestamp: '2023-04-21 15:23:30+09:00'
+  verificationStatus: LIBRARY_ALL_AC
+  verifiedWith:
+  - verify/yuki1737/src/main.rs
 documentation_of: crates/math/prime-sieve/src/lib.rs
 layout: document
 redirect_from:

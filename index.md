@@ -8,7 +8,7 @@ data:
       title: crates/algebraic/algebraic/src/lib.rs
   - name: crates/algorithm/mo/src
     pages:
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: crates/algorithm/mo/src/lib.rs
       title: crates/algorithm/mo/src/lib.rs
   - name: crates/convolution/and-convolution/src
@@ -98,7 +98,7 @@ data:
       title: crates/math/matrix/src/lib.rs
   - name: crates/math/prime-sieve/src
     pages:
-    - icon: ':warning:'
+    - icon: ':heavy_check_mark:'
       path: crates/math/prime-sieve/src/lib.rs
       title: crates/math/prime-sieve/src/lib.rs
   - name: crates/polynomial/formal-power-series/src
@@ -117,11 +117,6 @@ data:
       path: crates/tree/re-rooting-dp/src/lib.rs
       title: crates/tree/re-rooting-dp/src/lib.rs
   verificationCategories:
-  - name: verify/abc293_g/src
-    pages:
-    - icon: ':x:'
-      path: verify/abc293_g/src/main.rs
-      title: verify/abc293_g/src/main.rs
   - name: verify/aplusb/src
     pages:
     - icon: ':heavy_check_mark:'
@@ -222,6 +217,11 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/sqrt_of_formal_power_series/src/main.rs
       title: verify/sqrt_of_formal_power_series/src/main.rs
+  - name: verify/static_range_sum/src
+    pages:
+    - icon: ':heavy_check_mark:'
+      path: verify/static_range_sum/src/main.rs
+      title: verify/static_range_sum/src/main.rs
   - name: verify/staticrmq/src
     pages:
     - icon: ':heavy_check_mark:'
@@ -242,5 +242,10 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/vertex_set_path_composite/src/main.rs
       title: verify/vertex_set_path_composite/src/main.rs
+  - name: verify/yuki1737/src
+    pages:
+    - icon: ':heavy_check_mark:'
+      path: verify/yuki1737/src/main.rs
+      title: verify/yuki1737/src/main.rs
 layout: toppage
 ---
