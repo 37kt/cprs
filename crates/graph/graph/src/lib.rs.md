@@ -2,7 +2,7 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy:
-  - icon: ':warning:'
+  - icon: ':heavy_check_mark:'
     path: crates/data-structure/heavy-light-decomposition/src/lib.rs
     title: crates/data-structure/heavy-light-decomposition/src/lib.rs
   - icon: ':heavy_check_mark:'
@@ -15,6 +15,12 @@ data:
     path: crates/tree/re-rooting-dp/src/lib.rs
     title: crates/tree/re-rooting-dp/src/lib.rs
   _extendedVerifiedWith:
+  - icon: ':heavy_check_mark:'
+    path: verify/jump_on_tree/src/main.rs
+    title: verify/jump_on_tree/src/main.rs
+  - icon: ':heavy_check_mark:'
+    path: verify/lca/src/main.rs
+    title: verify/lca/src/main.rs
   - icon: ':heavy_check_mark:'
     path: verify/vertex_add_path_sum/src/main.rs
     title: verify/vertex_add_path_sum/src/main.rs
@@ -64,6 +70,8 @@ data:
   verifiedWith:
   - verify/vertex_set_path_composite/src/main.rs
   - verify/vertex_add_subtree_sum/src/main.rs
+  - verify/lca/src/main.rs
+  - verify/jump_on_tree/src/main.rs
   - verify/vertex_add_path_sum/src/main.rs
 documentation_of: crates/graph/graph/src/lib.rs
 layout: document
