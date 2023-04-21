@@ -8,7 +8,7 @@ data:
       title: crates/algebraic/algebraic/src/lib.rs
   - name: crates/algorithm/mo/src
     pages:
-    - icon: ':warning:'
+    - icon: ':x:'
       path: crates/algorithm/mo/src/lib.rs
       title: crates/algorithm/mo/src/lib.rs
   - name: crates/convolution/and-convolution/src
@@ -117,6 +117,11 @@ data:
       path: crates/tree/re-rooting-dp/src/lib.rs
       title: crates/tree/re-rooting-dp/src/lib.rs
   verificationCategories:
+  - name: verify/abc293_g/src
+    pages:
+    - icon: ':x:'
+      path: verify/abc293_g/src/main.rs
+      title: verify/abc293_g/src/main.rs
   - name: verify/aplusb/src
     pages:
     - icon: ':heavy_check_mark:'
