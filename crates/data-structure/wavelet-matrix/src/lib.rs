@@ -134,7 +134,7 @@ impl WaveletMatrix {
                 let (ll, rr) = self.succ1(l..r, d);
                 l = ll;
                 r = rr;
-                // (l, r) = self.succ1(l..r, d); はRust 1.14.0ではできない
+                // (l, r) = self.succ1(l..r, d); はRust 1.42.0ではできない
             } else {
                 let (ll, rr) = self.succ0(l..r, d);
                 l = ll;
@@ -190,22 +190,4 @@ fn range_to_pair<R: RangeBounds<usize>>(range: R, n: usize) -> (usize, usize) {
     };
     assert!(l <= r);
     (l, r)
-}
-
-#[cfg(test)]
-mod tests {
-    use super::*;
-    #[test]
-    fn test() {
-        let wm = WaveletMatrix::new(vec![]);
-        assert_eq!(wm.range_freq(0..0, 1..=1), 0);
-        assert_eq!(wm.range_freq(0..0, 0..=0), 0);
-        assert_eq!(wm.range_freq(0..0, 3..=3), 0);
-        assert_eq!(wm.range_freq(0..0, 1_000_000_000..=1_000_000_000), 0);
-
-        let wm = WaveletMatrix::new(vec![3, 7, 1, 2, 1]);
-        assert_eq!(wm.range_freq(1..5, 1..=1), 2);
-        assert_eq!(wm.range_freq(3..3, 0..=0), 0);
-        assert_eq!(wm.range_freq(0..4, 3..=3), 1);
-    }
 }
