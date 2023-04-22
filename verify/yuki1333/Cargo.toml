@@ -10,3 +10,4 @@ proconio = { version = "=0.3.6", features = ["derive"] }
 graph = { path = "../../crates/graph/graph" }
 re-rooting-dp = { path = "../../crates/tree/re-rooting-dp" }
 ac-library-rs = { git = "https://github.com/rust-lang-ja/ac-library-rs" }
+algebraic = { path = "../../crates/algebraic/algebraic" }

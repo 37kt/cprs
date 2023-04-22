@@ -1,3 +1,4 @@
+use algebraic::{Act, Monoid};
 use graph::Graph;
 
 pub struct ReRootingDP<S>
@@ -10,23 +11,18 @@ where
     dph: Vec<S>,
 }
 
-impl<S> ReRootingDP<S>
+impl<T> ReRootingDP<T>
 where
-    S: Clone,
+    T: Clone,
 {
-    pub fn build<V, E, Merge, AddVertex, AddEdge>(
-        g: &Graph<V, E>,
-        identity: S,
-        merge: Merge,
-        add_vertex: AddVertex,
-        add_edge: AddEdge,
-    ) -> Self
+    pub fn build<M, V, E>(g: &Graph<V::S, E::S>) -> Self
     where
-        V: Copy,
-        E: Copy,
-        Merge: Fn(&S, &S) -> S,
-        AddVertex: Fn(&S, V) -> S,
-        AddEdge: Fn(&S, E) -> S,
+        M: Monoid<S = T>,
+        M::S: Clone,
+        V: Act<X = M::S>,
+        V::S: Copy,
+        E: Act<X = M::S>,
+        E::S: Copy,
     {
         let n = g.size();
         let mut ord = vec![];
@@ -42,74 +38,75 @@ where
             }
         }
 
-        let mut dpl = vec![identity.clone(); n];
-        let mut dph = vec![identity.clone(); n];
-        let mut dp = vec![identity.clone(); n];
+        let mut dpl = vec![M::e(); n];
+        let mut dph = vec![M::e(); n];
+        let mut dp = vec![M::e(); n];
         for &v in ord.iter().rev() {
             let m = g.out_edges(v).len();
-            let mut xl = vec![identity.clone(); m + 1];
-            let mut xr = vec![identity.clone(); m + 1];
+            let mut xl = vec![M::e(); m + 1];
+            let mut xr = vec![M::e(); m + 1];
             for i in 0..m {
                 let u = g.out_edges(v)[i].0;
                 if u == par[v] {
                     xl[i + 1] = xl[i].clone();
                 } else {
-                    xl[i + 1] = merge(&xl[i], &dph[u]);
+                    xl[i + 1] = M::op(&xl[i], &dph[u]);
                 }
             }
             for i in (0..m).rev() {
-                let u = g.out_edges(v)[i].0;
+                let (u, _) = g.out_edges(v)[i];
                 if u == par[v] {
                     xr[i] = xr[i + 1].clone();
                 } else {
-                    xr[i] = merge(&dph[u], &xr[i + 1]);
+                    xr[i] = M::op(&dph[u], &xr[i + 1]);
                 }
             }
             for i in 0..m {
-                let u = g.out_edges(v)[i].0;
+                let (u, _) = g.out_edges(v)[i];
                 if u != par[v] {
-                    dph[u] = merge(&xl[i], &xr[i + 1]);
+                    dph[u] = M::op(&xl[i], &xr[i + 1]);
                 }
             }
             dp[v] = xr[0].clone();
-            dpl[v] = add_vertex(&dp[v], g.vertex(v));
+            dpl[v] = V::act(&g.vertex(v), &dp[v]);
             for &(u, w) in g.out_edges(v) {
                 if u == par[v] {
-                    dph[v] = add_edge(&dpl[v], w);
+                    dph[v] = E::act(&w, &dpl[v]);
                 }
             }
         }
-        dp[0] = add_vertex(&dp[0], g.vertex(0));
+        dp[0] = V::act(&g.vertex(0), &dp[0]);
         for &(u, _) in g.out_edges(0) {
-            dph[u] = add_vertex(&dph[u], g.vertex(0));
+            dph[u] = V::act(&g.vertex(0), &dph[u]);
         }
         for &v in &ord {
             for &(u, w) in g.out_edges(v) {
                 if u == par[v] {
                     continue;
                 }
-                let mut x = add_edge(&dph[u], w);
+                let mut x = E::act(&w, &dph[u]);
                 for &(vv, _) in g.out_edges(u) {
                     if vv == v {
                         continue;
                     }
-                    dph[vv] = merge(&dph[vv], &x);
-                    dph[vv] = add_vertex(&dph[vv], g.vertex(u));
+                    dph[vv] = M::op(&dph[vv], &x);
+                    dph[vv] = V::act(&g.vertex(u), &dph[vv]);
                 }
-                x = merge(&dp[u], &x);
-                dp[u] = add_vertex(&x, g.vertex(u));
+                x = M::op(&dp[u], &x);
+                dp[u] = V::act(&g.vertex(u), &x);
             }
         }
-        Self { dp, par, dpl, dph }
+        Self { par, dp, dpl, dph }
     }
 
-    pub fn prod(&self, v: usize) -> S {
+    pub fn prod(&self, v: usize) -> T {
         self.dp[v].clone()
     }
 
-    pub fn prod_subtree(&self, v: usize, p: usize) -> S {
-        assert_ne!(p, !0);
-        if self.par[v] == p {
+    pub fn prod_subtree(&self, v: usize, p: usize) -> T {
+        if p == !0 {
+            self.dp[v].clone()
+        } else if self.par[v] == p {
             self.dpl[v].clone()
         } else {
             self.dph[p].clone()

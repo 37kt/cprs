@@ -1,16 +1,15 @@
 // verification-helper: PROBLEM https://judge.yosupo.jp/problem/deque_operate_all_composite
 
 use ac_library::ModInt998244353 as Mint;
-use algebraic::{monoid, Monoid};
+use algebraic::{algebra, monoid};
 use proconio::input;
 use sliding_window_aggregation::SlidingWindowAggregation;
 
-monoid! {
-    M,
-    (Mint, Mint),
-    (1.into(), 0.into()),
-    |&(a, b), &(c, d)| (a * c, b * c + d)
-}
+algebra!(M, (Mint, Mint));
+monoid!(M, (1.into(), 0.into()), |&(a, b), &(c, d)| (
+    a * c,
+    b * c + d
+));
 
 #[proconio::fastout]
 fn main() {

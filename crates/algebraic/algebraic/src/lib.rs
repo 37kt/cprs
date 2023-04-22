@@ -1,41 +1,49 @@
-pub trait Monoid {
+pub trait Algebra {
     type S;
-    fn e() -> Self::S;
-    fn op(x: &Self::S, y: &Self::S) -> Self::S;
 }
 
-pub trait ActMonoid: Monoid {
+pub trait Act: Algebra {
     type X;
     fn act(f: &Self::S, x: &Self::X) -> Self::X;
 }
 
+pub trait Monoid: Algebra {
+    fn e() -> Self::S;
+    fn op(x: &Self::S, y: &Self::S) -> Self::S;
+}
+
 #[macro_export]
-macro_rules! monoid {
-    ( $ident:ident, $ty:ty, $e:expr, $op:expr ) => {
+macro_rules! algebra {
+    ( $ident:ident, $ty:ty ) => {
+        #[derive(Clone)]
         enum $ident {}
-        impl Monoid for $ident {
+        impl $crate::Algebra for $ident {
             type S = $ty;
-            fn e() -> $ty {
-                $e
-            }
-            fn op(x: &$ty, y: &$ty) -> $ty {
-                $op(x, y)
+        }
+    };
+}
+
+#[macro_export]
+macro_rules! act {
+    ( $ident:ident, $tar:ty, $act:expr ) => {
+        impl $crate::Act for $ident {
+            type X = $tar;
+            fn act(f: &Self::S, x: &Self::X) -> Self::X {
+                $act(f, x)
             }
         }
     };
 }
 
 #[macro_export]
-macro_rules! act_monoid {
-    ( $ident:ident, $f_ty:ty, $x_ty:ty, $e:expr, $op:expr, $act:expr ) => {
-        monoid!($ident, $f_ty, $e, $op);
-        impl ActMonoid for $ident
-        where
-            $ident: Monoid,
-        {
-            type X = $x_ty;
-            fn act(f: &$f_ty, x: &$x_ty) -> $x_ty {
-                $act(f, x)
+macro_rules! monoid {
+    ( $ident:ident, $e:expr, $op:expr ) => {
+        impl $crate::Monoid for $ident {
+            fn e() -> Self::S {
+                $e
+            }
+            fn op(x: &Self::S, y: &Self::S) -> Self::S {
+                $op(x, y)
             }
         }
     };

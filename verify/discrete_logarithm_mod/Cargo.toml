@@ -9,3 +9,4 @@ edition = "2018"
 proconio = { version = "=0.3.6", features = ["derive"] }
 ac-library-rs = { git = "https://github.com/rust-lang-ja/ac-library-rs" }
 discrete-logarithm = { path = "../../crates/math/discrete-logarithm" }
+algebraic = { path = "../../crates/algebraic/algebraic" }

@@ -1,19 +1,12 @@
+use algebraic::{Act, Monoid};
 use std::collections::HashSet;
 
 /// f^n s = t となる最初の n (n < lim) が存在するなら返す
-pub fn discrete_logarithm<S, F, Act, Composition>(
-    mut s: S,
-    t: S,
-    f: F,
-    act: Act,
-    composition: Composition,
-    lim: usize,
-) -> Option<usize>
+pub fn discrete_logarithm<F>(mut s: F::X, t: F::X, f: F::S, lim: usize) -> Option<usize>
 where
-    S: Clone + std::hash::Hash + Eq,
-    F: Clone,
-    Act: Fn(&F, &S) -> S,
-    Composition: Fn(&F, &F) -> F,
+    F: Act + Monoid,
+    F::S: Clone,
+    F::X: Clone + std::hash::Hash + Eq,
 {
     let fpow = |mut n: usize| {
         assert!(n > 0);
@@ -22,9 +15,9 @@ where
         let mut res = f.clone();
         while n > 0 {
             if n & 1 == 1 {
-                res = composition(&res, &p);
+                res = F::op(&res, &p);
             }
-            p = composition(&p, &p);
+            p = F::op(&p, &p);
             n >>= 1;
         }
         res
@@ -34,20 +27,20 @@ where
     let mut st = HashSet::new();
     let mut tt = t.clone();
     for _ in 0..m {
-        tt = act(&f, &tt);
+        tt = F::act(&f, &tt);
         st.insert(tt.clone());
     }
     let g = fpow(m);
     let mut failed = false;
     for i in 0..=m {
-        let s1 = act(&g, &s);
+        let s1 = F::act(&g, &s);
         if st.contains(&s1) {
             for j in 0..m {
                 if s == t {
                     let res = i * m + j;
                     return if res >= lim { None } else { Some(res) };
                 }
-                s = act(&f, &s);
+                s = F::act(&f, &s);
             }
             if failed {
                 return None;
