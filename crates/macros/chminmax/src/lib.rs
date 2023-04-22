@@ -7,7 +7,7 @@ macro_rules! min {
         std::cmp::min($a, $b)
     }};
     ($a:expr, $($rest:expr),+ $(,)*) => {{
-        std::cmp::min($a, chminmax::min!($($rest),+))
+        std::cmp::min($a, $crate::min!($($rest),+))
     }};
 }
 
@@ -20,14 +20,14 @@ macro_rules! max {
         std::cmp::max($a, $b)
     }};
     ($a:expr, $($rest:expr),+ $(,)*) => {{
-        std::cmp::max($a, chminmax::max!($($rest),+))
+        std::cmp::max($a, $crate::max!($($rest),+))
     }};
 }
 
 #[macro_export]
 macro_rules! chmin {
     ($base:expr, $($cmps:expr),+ $(,)*) => {{
-        let cmp_min = chminmax::min!($($cmps),+);
+        let cmp_min = $crate::min!($($cmps),+);
         if $base > cmp_min {
             $base = cmp_min;
             true
@@ -40,7 +40,7 @@ macro_rules! chmin {
 #[macro_export]
 macro_rules! chmax {
     ($base:expr, $($cmps:expr),+ $(,)*) => {{
-        let cmp_max = chminmax::max!($($cmps),+);
+        let cmp_max = $crate::max!($($cmps),+);
         if $base < cmp_max {
             $base = cmp_max;
             true

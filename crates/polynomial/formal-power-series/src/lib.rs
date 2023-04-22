@@ -29,15 +29,16 @@ fn sqrt(a: M) -> Option<M> {
 }
 
 #[derive(Clone)]
+#[repr(transparent)]
 pub struct FPS(pub Vec<M>);
 
 #[macro_export]
 macro_rules! fps {
     ($($x:expr), *) => (
-        FPS(vec![$(ac_library::ModInt998244353::from($x)), *])
+        $crate::FPS(vec![$(ac_library::ModInt998244353::from($x)), *])
     );
     ($x:expr; $n:expr) => (
-        FPS(vec![ac_library::ModInt998244353::from($x); $n])
+        $crate::FPS(vec![ac_library::ModInt998244353::from($x); $n])
     );
 }
 
