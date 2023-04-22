@@ -30,7 +30,7 @@ data:
   isVerificationFile: true
   path: verify/log_of_formal_power_series/src/main.rs
   requiredBy: []
-  timestamp: '2023-04-21 13:06:23+09:00'
+  timestamp: '2023-04-22 14:06:50+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/log_of_formal_power_series/src/main.rs

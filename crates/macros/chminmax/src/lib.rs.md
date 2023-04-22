@@ -17,22 +17,22 @@ data:
   code: "#[macro_export]\nmacro_rules! min {\n    ($a:expr $(,)*) => {{\n        $a\n\
     \    }};\n    ($a:expr, $b:expr $(,)*) => {{\n        std::cmp::min($a, $b)\n\
     \    }};\n    ($a:expr, $($rest:expr),+ $(,)*) => {{\n        std::cmp::min($a,\
-    \ chminmax::min!($($rest),+))\n    }};\n}\n\n#[macro_export]\nmacro_rules! max\
-    \ {\n    ($a:expr $(,)*) => {{\n        $a\n    }};\n    ($a:expr, $b:expr $(,)*)\
+    \ $crate::min!($($rest),+))\n    }};\n}\n\n#[macro_export]\nmacro_rules! max {\n\
+    \    ($a:expr $(,)*) => {{\n        $a\n    }};\n    ($a:expr, $b:expr $(,)*)\
     \ => {{\n        std::cmp::max($a, $b)\n    }};\n    ($a:expr, $($rest:expr),+\
-    \ $(,)*) => {{\n        std::cmp::max($a, chminmax::max!($($rest),+))\n    }};\n\
+    \ $(,)*) => {{\n        std::cmp::max($a, $crate::max!($($rest),+))\n    }};\n\
     }\n\n#[macro_export]\nmacro_rules! chmin {\n    ($base:expr, $($cmps:expr),+ $(,)*)\
-    \ => {{\n        let cmp_min = chminmax::min!($($cmps),+);\n        if $base >\
-    \ cmp_min {\n            $base = cmp_min;\n            true\n        } else {\n\
-    \            false\n        }\n    }};\n}\n\n#[macro_export]\nmacro_rules! chmax\
-    \ {\n    ($base:expr, $($cmps:expr),+ $(,)*) => {{\n        let cmp_max = chminmax::max!($($cmps),+);\n\
+    \ => {{\n        let cmp_min = $crate::min!($($cmps),+);\n        if $base > cmp_min\
+    \ {\n            $base = cmp_min;\n            true\n        } else {\n      \
+    \      false\n        }\n    }};\n}\n\n#[macro_export]\nmacro_rules! chmax {\n\
+    \    ($base:expr, $($cmps:expr),+ $(,)*) => {{\n        let cmp_max = $crate::max!($($cmps),+);\n\
     \        if $base < cmp_max {\n            $base = cmp_max;\n            true\n\
     \        } else {\n            false\n        }\n    }};\n}\n"
   dependsOn: []
   isVerificationFile: false
   path: crates/macros/chminmax/src/lib.rs
   requiredBy: []
-  timestamp: '2023-04-11 16:20:50+09:00'
+  timestamp: '2023-04-22 14:06:50+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: crates/macros/chminmax/src/lib.rs

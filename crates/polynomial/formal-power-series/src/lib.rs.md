@@ -41,9 +41,9 @@ data:
     \   let d = M::new(15311432);\n    let mut m = 0;\n    for i in 0..23 {\n    \
     \    if c.pow(1 << 22 - i).val() == 998244352 {\n            c *= d.pow(1 << i);\n\
     \            m += 1 << i;\n        }\n    }\n    Some(a.pow(60) * d.pow(m >> 1))\n\
-    }\n\n#[derive(Clone)]\npub struct FPS(pub Vec<M>);\n\n#[macro_export]\nmacro_rules!\
-    \ fps {\n    ($($x:expr), *) => (\n        FPS(vec![$(ac_library::ModInt998244353::from($x)),\
-    \ *])\n    );\n    ($x:expr; $n:expr) => (\n        FPS(vec![ac_library::ModInt998244353::from($x);\
+    }\n\n#[derive(Clone)]\n#[repr(transparent)]\npub struct FPS(pub Vec<M>);\n\n#[macro_export]\n\
+    macro_rules! fps {\n    ($($x:expr), *) => (\n        $crate::FPS(vec![$(ac_library::ModInt998244353::from($x)),\
+    \ *])\n    );\n    ($x:expr; $n:expr) => (\n        $crate::FPS(vec![ac_library::ModInt998244353::from($x);\
     \ $n])\n    );\n}\n\nimpl Debug for FPS {\n    fn fmt(&self, f: &mut std::fmt::Formatter<'_>)\
     \ -> std::fmt::Result {\n        self.0.fmt(f)\n    }\n}\n\nimpl FPS {\n    pub\
     \ fn pre(&self, d: usize) -> FPS {\n        Self(self[0..self.len().min(d)].to_vec())\n\
@@ -149,7 +149,7 @@ data:
   isVerificationFile: false
   path: crates/polynomial/formal-power-series/src/lib.rs
   requiredBy: []
-  timestamp: '2023-04-21 11:20:46+09:00'
+  timestamp: '2023-04-22 14:06:50+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/exp_of_formal_power_series/src/main.rs
