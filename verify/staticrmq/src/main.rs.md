@@ -23,10 +23,10 @@ data:
     \  File \"/opt/hostedtoolcache/Python/3.11.3/x64/lib/python3.11/site-packages/onlinejudge_verify/languages/rust.py\"\
     , line 288, in bundle\n    raise NotImplementedError\nNotImplementedError\n"
   code: "// verification-helper: PROBLEM https://judge.yosupo.jp/problem/staticrmq\n\
-    \nuse algebraic::{monoid, Monoid};\nuse disjoint_sparse_table::DisjointSparseTable;\n\
-    use proconio::input;\n\nmonoid!(M, i64, 1 << 60, |x: &i64, y: &i64| *x.min(y));\n\
-    \n#[proconio::fastout]\nfn main() {\n    input! {\n        n: usize,\n       \
-    \ q: usize,\n        a: [i64; n],\n    }\n    let spt = DisjointSparseTable::<M>::new(&a);\n\
+    \nuse algebraic::{algebra, monoid};\nuse disjoint_sparse_table::DisjointSparseTable;\n\
+    use proconio::input;\n\nalgebra!(M, i64);\nmonoid!(M, 1 << 60, |x: &i64, y: &i64|\
+    \ *x.min(y));\n\n#[proconio::fastout]\nfn main() {\n    input! {\n        n: usize,\n\
+    \        q: usize,\n        a: [i64; n],\n    }\n    let spt = DisjointSparseTable::<M>::new(&a);\n\
     \    for _ in 0..q {\n        input! {\n            l: usize,\n            r:\
     \ usize,\n        }\n        println!(\"{}\", spt.prod(l, r));\n    }\n}\n"
   dependsOn:
@@ -35,7 +35,7 @@ data:
   isVerificationFile: true
   path: verify/staticrmq/src/main.rs
   requiredBy: []
-  timestamp: '2023-04-21 11:20:46+09:00'
+  timestamp: '2023-04-22 13:47:58+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/staticrmq/src/main.rs

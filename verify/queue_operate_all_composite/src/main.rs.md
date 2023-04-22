@@ -23,11 +23,11 @@ data:
     \  File \"/opt/hostedtoolcache/Python/3.11.3/x64/lib/python3.11/site-packages/onlinejudge_verify/languages/rust.py\"\
     , line 288, in bundle\n    raise NotImplementedError\nNotImplementedError\n"
   code: "// verification-helper: PROBLEM https://judge.yosupo.jp/problem/queue_operate_all_composite\n\
-    \nuse ac_library::ModInt998244353 as Mint;\nuse algebraic::{monoid, Monoid};\n\
+    \nuse ac_library::ModInt998244353 as Mint;\nuse algebraic::{algebra, monoid};\n\
     use proconio::input;\nuse sliding_window_aggregation::SlidingWindowAggregation;\n\
-    \nmonoid! {\n    M,\n    (Mint, Mint),\n    (1.into(), 0.into()),\n    |&(a, b),\
-    \ &(c, d)| (a * c, b * c + d)\n}\n\n#[proconio::fastout]\nfn main() {\n    input!\
-    \ {\n        q: usize,\n    }\n    let mut swag = SlidingWindowAggregation::<M>::new();\n\
+    \nalgebra!(M, (Mint, Mint));\nmonoid!(M, (1.into(), 0.into()), |&(a, b), &(c,\
+    \ d)| (\n    a * c,\n    b * c + d\n));\n\n#[proconio::fastout]\nfn main() {\n\
+    \    input! {\n        q: usize,\n    }\n    let mut swag = SlidingWindowAggregation::<M>::new();\n\
     \    for _ in 0..q {\n        input! {\n            t: usize,\n        }\n   \
     \     if t == 0 {\n            input! {\n                f: (Mint, Mint),\n  \
     \          }\n            swag.push_back(f);\n        } else if t == 1 {\n   \
@@ -40,7 +40,7 @@ data:
   isVerificationFile: true
   path: verify/queue_operate_all_composite/src/main.rs
   requiredBy: []
-  timestamp: '2023-04-21 11:20:46+09:00'
+  timestamp: '2023-04-22 13:47:58+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/queue_operate_all_composite/src/main.rs

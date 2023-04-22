@@ -62,7 +62,7 @@ data:
   isVerificationFile: false
   path: crates/data-structure/sliding-window-aggregation/src/lib.rs
   requiredBy: []
-  timestamp: '2023-04-21 11:20:46+09:00'
+  timestamp: '2023-04-22 13:47:58+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/deque_operate_all_composite/src/main.rs
