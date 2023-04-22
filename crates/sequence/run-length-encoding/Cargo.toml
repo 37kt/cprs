@@ -1,0 +1,13 @@
+[package]
+name = "run-length-encoding"
+version = "0.1.0"
+edition = "2018"
+license = "CC0-1.0"
+publish = false
+
+[lib]
+name = "run_length_encoding"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
