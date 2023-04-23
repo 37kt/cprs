@@ -71,6 +71,11 @@ data:
     - icon: ':heavy_check_mark:'
       path: crates/data-structure/tree-query/src/lib.rs
       title: crates/data-structure/tree-query/src/lib.rs
+  - name: crates/data-structure/union-find/src
+    pages:
+    - icon: ':heavy_check_mark:'
+      path: crates/data-structure/union-find/src/lib.rs
+      title: crates/data-structure/union-find/src/lib.rs
   - name: crates/data-structure/wavelet-matrix/src
     pages:
     - icon: ':heavy_check_mark:'
@@ -252,6 +257,11 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/staticrmq/src/main.rs
       title: verify/staticrmq/src/main.rs
+  - name: verify/unionfind/src
+    pages:
+    - icon: ':heavy_check_mark:'
+      path: verify/unionfind/src/main.rs
+      title: verify/unionfind/src/main.rs
   - name: verify/vertex_add_path_sum/src
     pages:
     - icon: ':heavy_check_mark:'
