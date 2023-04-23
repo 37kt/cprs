@@ -71,6 +71,11 @@ data:
     - icon: ':heavy_check_mark:'
       path: crates/data-structure/tree-query/src/lib.rs
       title: crates/data-structure/tree-query/src/lib.rs
+  - name: crates/data-structure/wavelet-matrix/src
+    pages:
+    - icon: ':heavy_check_mark:'
+      path: crates/data-structure/wavelet-matrix/src/lib.rs
+      title: crates/data-structure/wavelet-matrix/src/lib.rs
   - name: crates/graph/graph/src
     pages:
     - icon: ':heavy_check_mark:'
@@ -207,6 +212,11 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/range_chmin_chmax_add_range_sum/src/main.rs
       title: verify/range_chmin_chmax_add_range_sum/src/main.rs
+  - name: verify/range_kth_smallest/src
+    pages:
+    - icon: ':heavy_check_mark:'
+      path: verify/range_kth_smallest/src/main.rs
+      title: verify/range_kth_smallest/src/main.rs
   - name: verify/segment_add_get_min/src
     pages:
     - icon: ':heavy_check_mark:'
@@ -217,6 +227,11 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/sqrt_of_formal_power_series/src/main.rs
       title: verify/sqrt_of_formal_power_series/src/main.rs
+  - name: verify/static_range_frequency/src
+    pages:
+    - icon: ':heavy_check_mark:'
+      path: verify/static_range_frequency/src/main.rs
+      title: verify/static_range_frequency/src/main.rs
   - name: verify/static_range_sum/src
     pages:
     - icon: ':heavy_check_mark:'
