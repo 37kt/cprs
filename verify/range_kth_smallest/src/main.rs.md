@@ -30,7 +30,7 @@ data:
   isVerificationFile: true
   path: verify/range_kth_smallest/src/main.rs
   requiredBy: []
-  timestamp: '2023-04-22 21:34:17+09:00'
+  timestamp: '2023-04-22 21:59:33+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/range_kth_smallest/src/main.rs

@@ -73,7 +73,7 @@ data:
     \ {\n            if upper >> d & 1 == 1 {\n                res += self.mat[d].rank0(r)\
     \ - self.mat[d].rank0(l);\n                let (ll, rr) = self.succ1(l..r, d);\n\
     \                l = ll;\n                r = rr;\n                // (l, r) =\
-    \ self.succ1(l..r, d); \u306FRust 1.14.0\u3067\u306F\u3067\u304D\u306A\u3044\n\
+    \ self.succ1(l..r, d); \u306FRust 1.42.0\u3067\u306F\u3067\u304D\u306A\u3044\n\
     \            } else {\n                let (ll, rr) = self.succ0(l..r, d);\n \
     \               l = ll;\n                r = rr;\n            }\n        }\n \
     \       res\n    }\n}\n\nimpl BitVector {\n    fn new(n: usize) -> Self {\n  \
@@ -91,19 +91,12 @@ data:
     \        Bound::Excluded(&l) => (l + 1).min(n),\n        Bound::Included(&l) =>\
     \ l.min(n),\n    };\n    let r = match range.end_bound() {\n        Bound::Unbounded\
     \ => n,\n        Bound::Excluded(&r) => r.min(n),\n        Bound::Included(&r)\
-    \ => (r + 1).min(n),\n    };\n    assert!(l <= r);\n    (l, r)\n}\n\n#[cfg(test)]\n\
-    mod tests {\n    use super::*;\n    #[test]\n    fn test() {\n        let wm =\
-    \ WaveletMatrix::new(vec![]);\n        assert_eq!(wm.range_freq(0..0, 1..=1),\
-    \ 0);\n        assert_eq!(wm.range_freq(0..0, 0..=0), 0);\n        assert_eq!(wm.range_freq(0..0,\
-    \ 3..=3), 0);\n        assert_eq!(wm.range_freq(0..0, 1_000_000_000..=1_000_000_000),\
-    \ 0);\n\n        let wm = WaveletMatrix::new(vec![3, 7, 1, 2, 1]);\n        assert_eq!(wm.range_freq(1..5,\
-    \ 1..=1), 2);\n        assert_eq!(wm.range_freq(3..3, 0..=0), 0);\n        assert_eq!(wm.range_freq(0..4,\
-    \ 3..=3), 1);\n    }\n}\n"
+    \ => (r + 1).min(n),\n    };\n    assert!(l <= r);\n    (l, r)\n}\n"
   dependsOn: []
   isVerificationFile: false
   path: crates/data-structure/wavelet-matrix/src/lib.rs
   requiredBy: []
-  timestamp: '2023-04-22 21:34:17+09:00'
+  timestamp: '2023-04-22 21:59:33+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/static_range_frequency/src/main.rs
