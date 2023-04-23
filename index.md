@@ -111,6 +111,16 @@ data:
     - icon: ':heavy_check_mark:'
       path: crates/polynomial/formal-power-series/src/lib.rs
       title: crates/polynomial/formal-power-series/src/lib.rs
+  - name: crates/sequence/mex/src
+    pages:
+    - icon: ':warning:'
+      path: crates/sequence/mex/src/lib.rs
+      title: crates/sequence/mex/src/lib.rs
+  - name: crates/sequence/run-length-encoding/src
+    pages:
+    - icon: ':warning:'
+      path: crates/sequence/run-length-encoding/src/lib.rs
+      title: crates/sequence/run-length-encoding/src/lib.rs
   - name: crates/tree/centroid-decomposition/src
     pages:
     - icon: ':warning:'
