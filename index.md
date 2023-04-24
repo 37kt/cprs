@@ -116,6 +116,11 @@ data:
     - icon: ':heavy_check_mark:'
       path: crates/math/prime-sieve/src/lib.rs
       title: crates/math/prime-sieve/src/lib.rs
+  - name: crates/math/two-satisfiability/src
+    pages:
+    - icon: ':x:'
+      path: crates/math/two-satisfiability/src/lib.rs
+      title: crates/math/two-satisfiability/src/lib.rs
   - name: crates/polynomial/formal-power-series/src
     pages:
     - icon: ':heavy_check_mark:'
@@ -272,6 +277,11 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/staticrmq/src/main.rs
       title: verify/staticrmq/src/main.rs
+  - name: verify/two_sat/src
+    pages:
+    - icon: ':x:'
+      path: verify/two_sat/src/main.rs
+      title: verify/two_sat/src/main.rs
   - name: verify/unionfind/src
     pages:
     - icon: ':heavy_check_mark:'

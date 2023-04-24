@@ -4,7 +4,10 @@ data:
   - icon: ':heavy_check_mark:'
     path: crates/graph/graph/src/lib.rs
     title: crates/graph/graph/src/lib.rs
-  _extendedRequiredBy: []
+  _extendedRequiredBy:
+  - icon: ':x:'
+    path: crates/math/two-satisfiability/src/lib.rs
+    title: crates/math/two-satisfiability/src/lib.rs
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: verify/scc/src/main.rs
@@ -53,7 +56,8 @@ data:
   - crates/graph/graph/src/lib.rs
   isVerificationFile: false
   path: crates/graph/strongly-connected-components/src/lib.rs
-  requiredBy: []
+  requiredBy:
+  - crates/math/two-satisfiability/src/lib.rs
   timestamp: '2023-04-24 12:50:05+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:

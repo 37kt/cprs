@@ -11,6 +11,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: crates/graph/strongly-connected-components/src/lib.rs
     title: crates/graph/strongly-connected-components/src/lib.rs
+  - icon: ':x:'
+    path: crates/math/two-satisfiability/src/lib.rs
+    title: crates/math/two-satisfiability/src/lib.rs
   - icon: ':warning:'
     path: crates/tree/centroid-decomposition/src/lib.rs
     title: crates/tree/centroid-decomposition/src/lib.rs
@@ -73,6 +76,7 @@ data:
   - crates/graph/strongly-connected-components/src/lib.rs
   - crates/tree/centroid-decomposition/src/lib.rs
   - crates/tree/re-rooting-dp/src/lib.rs
+  - crates/math/two-satisfiability/src/lib.rs
   - crates/data-structure/heavy-light-decomposition/src/lib.rs
   - crates/data-structure/tree-query/src/lib.rs
   timestamp: '2023-04-24 12:50:05+09:00'
