@@ -9,12 +9,12 @@ data:
     title: crates/graph/strongly-connected-components/src/lib.rs
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/two_sat/src/main.rs
     title: verify/two_sat/src/main.rs
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: rs
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.11.3/x64/lib/python3.11/site-packages/onlinejudge_verify/documentation/build.py\"\
@@ -38,7 +38,7 @@ data:
     \ &x in scc.vertex(i) {\n                comp[x] = i;\n            }\n       \
     \ }\n        let mut res = vec![false; self.n];\n        for i in 0..self.n {\n\
     \            if comp[i] == comp[i + self.n] {\n                return None;\n\
-    \            }\n            res[i] = comp[i] < comp[i + self.n];\n        }\n\
+    \            }\n            res[i] = comp[i] > comp[i + self.n];\n        }\n\
     \        Some(res)\n    }\n\n    fn id(&self, x: usize) -> usize {\n        assert!(x\
     \ < self.n || !x < self.n);\n        if x < self.n {\n            x\n        }\
     \ else {\n            !x + self.n\n        }\n    }\n}\n"
@@ -48,8 +48,8 @@ data:
   isVerificationFile: false
   path: crates/math/two-satisfiability/src/lib.rs
   requiredBy: []
-  timestamp: '2023-04-24 14:04:49+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  timestamp: '2023-04-24 14:15:56+09:00'
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/two_sat/src/main.rs
 documentation_of: crates/math/two-satisfiability/src/lib.rs
