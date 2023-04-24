@@ -44,7 +44,7 @@ impl TwoSatisfiability {
             if comp[i] == comp[i + self.n] {
                 return None;
             }
-            res[i] = comp[i] < comp[i + self.n];
+            res[i] = comp[i] > comp[i + self.n];
         }
         Some(res)
     }
