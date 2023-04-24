@@ -1,29 +1,29 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: crates/graph/graph/src/lib.rs
     title: crates/graph/graph/src/lib.rs
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: crates/graph/strongly-connected-components/src/lib.rs
     title: crates/graph/strongly-connected-components/src/lib.rs
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: rs
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
-    PROBLEM: https://judge.yosupo.jp/problem/jump_on_tree
+    PROBLEM: https://judge.yosupo.jp/problem/scc
     links:
-    - https://judge.yosupo.jp/problem/jump_on_tree
+    - https://judge.yosupo.jp/problem/scc
   bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.11.3/x64/lib/python3.11/site-packages/onlinejudge_verify/documentation/build.py\"\
     , line 71, in _render_source_code_stat\n    bundled_code = language.bundle(stat.path,\
     \ basedir=basedir, options={'include_paths': [basedir]}).decode()\n          \
     \         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\
     \  File \"/opt/hostedtoolcache/Python/3.11.3/x64/lib/python3.11/site-packages/onlinejudge_verify/languages/rust.py\"\
     , line 288, in bundle\n    raise NotImplementedError\nNotImplementedError\n"
-  code: "// verification-helper: PROBLEM https://judge.yosupo.jp/problem/jump_on_tree\n\
-    \nuse graph::Graph;\nuse itertools::Itertools;\nuse proconio::input;\nuse strongly_connected_components::strongly_connected_components;\n\
+  code: "// verification-helper: PROBLEM https://judge.yosupo.jp/problem/scc\n\nuse\
+    \ graph::Graph;\nuse itertools::Itertools;\nuse proconio::input;\nuse strongly_connected_components::strongly_connected_components;\n\
     \n#[proconio::fastout]\nfn main() {\n    input! {\n        n: usize,\n       \
     \ m: usize,\n    }\n    let mut g = Graph::<(), ()>::new(n);\n    for _ in 0..m\
     \ {\n        input! {\n            a: usize,\n            b: usize,\n        }\n\
@@ -37,8 +37,8 @@ data:
   isVerificationFile: true
   path: verify/scc/src/main.rs
   requiredBy: []
-  timestamp: '2023-04-24 12:50:05+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2023-04-24 13:06:41+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/scc/src/main.rs
 layout: document

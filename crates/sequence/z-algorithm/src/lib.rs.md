@@ -4,8 +4,8 @@ data:
   _extendedRequiredBy: []
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
-    path: verify/z-algorithm/src/main.rs
-    title: verify/z-algorithm/src/main.rs
+    path: verify/zalgorithm/src/main.rs
+    title: verify/zalgorithm/src/main.rs
   _isVerificationFailed: false
   _pathExtension: rs
   _verificationStatusIcon: ':heavy_check_mark:'
@@ -31,7 +31,7 @@ data:
   timestamp: '2023-04-24 11:14:51+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/z-algorithm/src/main.rs
+  - verify/zalgorithm/src/main.rs
 documentation_of: crates/sequence/z-algorithm/src/lib.rs
 layout: document
 redirect_from:

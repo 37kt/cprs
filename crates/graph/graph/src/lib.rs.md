@@ -8,7 +8,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: crates/data-structure/tree-query/src/lib.rs
     title: crates/data-structure/tree-query/src/lib.rs
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: crates/graph/strongly-connected-components/src/lib.rs
     title: crates/graph/strongly-connected-components/src/lib.rs
   - icon: ':warning:'
@@ -24,7 +24,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/lca/src/main.rs
     title: verify/lca/src/main.rs
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/scc/src/main.rs
     title: verify/scc/src/main.rs
   - icon: ':heavy_check_mark:'
@@ -39,9 +39,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/yuki1333/src/main.rs
     title: verify/yuki1333/src/main.rs
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: rs
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.11.3/x64/lib/python3.11/site-packages/onlinejudge_verify/documentation/build.py\"\
@@ -76,7 +76,7 @@ data:
   - crates/data-structure/heavy-light-decomposition/src/lib.rs
   - crates/data-structure/tree-query/src/lib.rs
   timestamp: '2023-04-24 12:50:05+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/vertex_set_path_composite/src/main.rs
   - verify/vertex_add_subtree_sum/src/main.rs

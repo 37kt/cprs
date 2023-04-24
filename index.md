@@ -83,12 +83,12 @@ data:
       title: crates/data-structure/wavelet-matrix/src/lib.rs
   - name: crates/graph/graph/src
     pages:
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: crates/graph/graph/src/lib.rs
       title: crates/graph/graph/src/lib.rs
   - name: crates/graph/strongly-connected-components/src
     pages:
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: crates/graph/strongly-connected-components/src/lib.rs
       title: crates/graph/strongly-connected-components/src/lib.rs
   - name: crates/macros/chminmax/src
@@ -244,7 +244,7 @@ data:
       title: verify/range_kth_smallest/src/main.rs
   - name: verify/scc/src
     pages:
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verify/scc/src/main.rs
       title: verify/scc/src/main.rs
   - name: verify/segment_add_get_min/src
@@ -302,10 +302,10 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/yuki1737/src/main.rs
       title: verify/yuki1737/src/main.rs
-  - name: verify/z-algorithm/src
+  - name: verify/zalgorithm/src
     pages:
     - icon: ':heavy_check_mark:'
-      path: verify/z-algorithm/src/main.rs
-      title: verify/z-algorithm/src/main.rs
+      path: verify/zalgorithm/src/main.rs
+      title: verify/zalgorithm/src/main.rs
 layout: toppage
 ---

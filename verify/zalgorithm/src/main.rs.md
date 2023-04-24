@@ -26,15 +26,15 @@ data:
   dependsOn:
   - crates/sequence/z-algorithm/src/lib.rs
   isVerificationFile: true
-  path: verify/z-algorithm/src/main.rs
+  path: verify/zalgorithm/src/main.rs
   requiredBy: []
-  timestamp: '2023-04-24 11:14:51+09:00'
+  timestamp: '2023-04-24 13:06:41+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
-documentation_of: verify/z-algorithm/src/main.rs
+documentation_of: verify/zalgorithm/src/main.rs
 layout: document
 redirect_from:
-- /verify/verify/z-algorithm/src/main.rs
-- /verify/verify/z-algorithm/src/main.rs.html
-title: verify/z-algorithm/src/main.rs
+- /verify/verify/zalgorithm/src/main.rs
+- /verify/verify/zalgorithm/src/main.rs.html
+title: verify/zalgorithm/src/main.rs
 ---
