@@ -15,8 +15,8 @@ pub struct HeavyLightDecomposition {
 impl HeavyLightDecomposition {
     pub fn new<V, E>(g: &Graph<V, E>) -> Self
     where
-        V: Copy,
-        E: Copy,
+        V: Clone,
+        E: Clone,
     {
         let n = g.size();
         let mut hld = HeavyLightDecomposition {
@@ -36,8 +36,8 @@ impl HeavyLightDecomposition {
 
     fn dfs_sz<V, E>(&mut self, g: &Graph<V, E>, v: usize)
     where
-        V: Copy,
-        E: Copy,
+        V: Clone,
+        E: Clone,
     {
         self.size[v] = 1;
         for &(u, _) in g.out_edges(v) {
@@ -56,8 +56,8 @@ impl HeavyLightDecomposition {
 
     fn dfs_hld<V, E>(&mut self, g: &Graph<V, E>, v: usize, t: &mut usize)
     where
-        V: Copy,
-        E: Copy,
+        V: Clone,
+        E: Clone,
     {
         self.t_in[v] = *t;
         self.ord.push(v);

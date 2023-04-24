@@ -20,9 +20,9 @@ where
         M: Monoid<S = T>,
         M::S: Clone,
         V: Act<X = M::S>,
-        V::S: Copy,
+        V::S: Clone,
         E: Act<X = M::S>,
-        E::S: Copy,
+        E::S: Clone,
     {
         let n = g.size();
         let mut ord = vec![];
@@ -69,8 +69,8 @@ where
             }
             dp[v] = xr[0].clone();
             dpl[v] = V::act(&g.vertex(v), &dp[v]);
-            for &(u, w) in g.out_edges(v) {
-                if u == par[v] {
+            for (u, w) in g.out_edges(v) {
+                if *u == par[v] {
                     dph[v] = E::act(&w, &dpl[v]);
                 }
             }
@@ -80,20 +80,20 @@ where
             dph[u] = V::act(&g.vertex(0), &dph[u]);
         }
         for &v in &ord {
-            for &(u, w) in g.out_edges(v) {
-                if u == par[v] {
+            for (u, w) in g.out_edges(v) {
+                if *u == par[v] {
                     continue;
                 }
-                let mut x = E::act(&w, &dph[u]);
-                for &(vv, _) in g.out_edges(u) {
+                let mut x = E::act(&w, &dph[*u]);
+                for &(vv, _) in g.out_edges(*u) {
                     if vv == v {
                         continue;
                     }
                     dph[vv] = M::op(&dph[vv], &x);
-                    dph[vv] = V::act(&g.vertex(u), &dph[vv]);
+                    dph[vv] = V::act(&g.vertex(*u), &dph[vv]);
                 }
-                x = M::op(&dp[u], &x);
-                dp[u] = V::act(&g.vertex(u), &x);
+                x = M::op(&dp[*u], &x);
+                dp[*u] = V::act(&g.vertex(*u), &x);
             }
         }
         Self { par, dp, dpl, dph }

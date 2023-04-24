@@ -33,7 +33,11 @@ impl QueryType for Edge {
     }
 }
 
-pub struct TreeQuery<M: Monoid, Q: QueryType> {
+pub struct TreeQuery<M, Q>
+where
+    M: Monoid,
+    Q: QueryType,
+{
     n: usize,
     hld: HeavyLightDecomposition,
     seg_up: Segtree<M>,
@@ -68,19 +72,19 @@ where
 
 impl<V, M> TreeQuery<M, Vertex>
 where
-    V: Copy,
+    V: Clone,
     M: Monoid<S = V>,
 {
     pub fn build<E>(g: &Graph<V, E>) -> Self
     where
-        E: Copy,
+        E: Clone,
     {
         let n = g.size();
         let hld = HeavyLightDecomposition::new(g);
         let mut a = vec![M::identity(); n];
         for v in 0..n {
             let k = hld.vertex(v);
-            a[k] = g.vertex(v);
+            a[k] = g.vertex(v).clone();
         }
         let seg_down = Segtree::from(a.clone());
         a.reverse();
@@ -96,7 +100,7 @@ where
 
     pub fn set(&mut self, v: usize, x: M::S) {
         let k = self.hld.vertex(v);
-        self.seg_up.set(self.n - 1 - k, x);
+        self.seg_up.set(self.n - 1 - k, x.clone());
         self.seg_down.set(k, x);
     }
 
@@ -108,20 +112,20 @@ where
 
 impl<E, M> TreeQuery<M, Edge>
 where
-    E: Copy,
+    E: Clone,
     M: Monoid<S = E>,
 {
     pub fn build<V>(g: &Graph<V, E>) -> Self
     where
-        V: Copy,
+        V: Clone,
     {
         let n = g.size();
         let hld = HeavyLightDecomposition::new(g);
         let mut a = vec![M::identity(); n];
         for v in 0..n {
-            for &(u, w) in g.out_edges(v) {
-                let k = hld.edge(u, v);
-                a[k] = w;
+            for (u, w) in g.out_edges(v) {
+                let k = hld.edge(*u, v);
+                a[k] = w.clone();
             }
         }
         let seg_down = Segtree::from(a.clone());
@@ -138,7 +142,7 @@ where
 
     pub fn set(&mut self, u: usize, v: usize, x: M::S) {
         let k = self.hld.edge(u, v);
-        self.seg_up.set(self.n - 1 - k, x);
+        self.seg_up.set(self.n - 1 - k, x.clone());
         self.seg_down.set(k, x);
     }
 

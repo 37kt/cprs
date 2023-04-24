@@ -1,8 +1,8 @@
 #[derive(Clone)]
 pub struct Graph<V, E>
 where
-    V: Copy,
-    E: Copy,
+    V: Clone,
+    E: Clone,
 {
     vs: Vec<V>,
     es: Vec<Vec<(usize, E)>>,
@@ -10,8 +10,8 @@ where
 
 impl<V, E> Graph<V, E>
 where
-    V: Copy + Default,
-    E: Copy,
+    V: Clone + Default,
+    E: Clone,
 {
     pub fn new(n: usize) -> Self {
         Self {
@@ -23,8 +23,8 @@ where
 
 impl<V, E> From<Vec<V>> for Graph<V, E>
 where
-    V: Copy,
-    E: Copy,
+    V: Clone,
+    E: Clone,
 {
     fn from(vs: Vec<V>) -> Self {
         Self {
@@ -36,8 +36,8 @@ where
 
 impl<V, E> Graph<V, E>
 where
-    V: Copy,
-    E: Copy,
+    V: Clone,
+    E: Clone,
 {
     pub fn size(&self) -> usize {
         self.vs.len()
@@ -52,12 +52,12 @@ where
     }
 
     pub fn add_undirected_edge(&mut self, u: usize, v: usize, w: E) {
-        self.add_edge(u, v, w);
+        self.add_edge(u, v, w.clone());
         self.add_edge(v, u, w);
     }
 
-    pub fn vertex(&self, v: usize) -> V {
-        self.vs[v]
+    pub fn vertex(&self, v: usize) -> &V {
+        &self.vs[v]
     }
 
     pub fn out_edges(&self, v: usize) -> &Vec<(usize, E)> {
