@@ -4,7 +4,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: crates/data-structure/tree-query/src/lib.rs
     title: crates/data-structure/tree-query/src/lib.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: crates/graph/graph/src/lib.rs
     title: crates/graph/graph/src/lib.rs
   _extendedRequiredBy: []
@@ -45,7 +45,7 @@ data:
   isVerificationFile: true
   path: verify/vertex_set_path_composite/src/main.rs
   requiredBy: []
-  timestamp: '2023-04-21 11:20:46+09:00'
+  timestamp: '2023-04-24 12:50:05+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/vertex_set_path_composite/src/main.rs

@@ -4,7 +4,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: crates/data-structure/heavy-light-decomposition/src/lib.rs
     title: crates/data-structure/heavy-light-decomposition/src/lib.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: crates/graph/graph/src/lib.rs
     title: crates/graph/graph/src/lib.rs
   _extendedRequiredBy: []
@@ -36,7 +36,7 @@ data:
   isVerificationFile: true
   path: verify/lca/src/main.rs
   requiredBy: []
-  timestamp: '2023-04-21 13:06:23+09:00'
+  timestamp: '2023-04-24 12:50:05+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/lca/src/main.rs

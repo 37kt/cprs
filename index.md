@@ -83,9 +83,14 @@ data:
       title: crates/data-structure/wavelet-matrix/src/lib.rs
   - name: crates/graph/graph/src
     pages:
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: crates/graph/graph/src/lib.rs
       title: crates/graph/graph/src/lib.rs
+  - name: crates/graph/strongly-connected-components/src
+    pages:
+    - icon: ':x:'
+      path: crates/graph/strongly-connected-components/src/lib.rs
+      title: crates/graph/strongly-connected-components/src/lib.rs
   - name: crates/macros/chminmax/src
     pages:
     - icon: ':warning:'
@@ -237,6 +242,11 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/range_kth_smallest/src/main.rs
       title: verify/range_kth_smallest/src/main.rs
+  - name: verify/scc/src
+    pages:
+    - icon: ':x:'
+      path: verify/scc/src/main.rs
+      title: verify/scc/src/main.rs
   - name: verify/segment_add_get_min/src
     pages:
     - icon: ':heavy_check_mark:'

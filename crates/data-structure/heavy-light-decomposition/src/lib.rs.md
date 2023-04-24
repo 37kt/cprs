@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: crates/graph/graph/src/lib.rs
     title: crates/graph/graph/src/lib.rs
   _extendedRequiredBy:
@@ -30,23 +30,23 @@ data:
     \ {\n    t_in: Vec<usize>,\n    t_out: Vec<usize>,\n    ord: Vec<usize>,\n   \
     \ size: Vec<usize>,\n    heavy: Vec<usize>,\n    head: Vec<usize>,\n    par: Vec<usize>,\n\
     \    depth: Vec<usize>,\n}\n\nimpl HeavyLightDecomposition {\n    pub fn new<V,\
-    \ E>(g: &Graph<V, E>) -> Self\n    where\n        V: Copy,\n        E: Copy,\n\
+    \ E>(g: &Graph<V, E>) -> Self\n    where\n        V: Clone,\n        E: Clone,\n\
     \    {\n        let n = g.size();\n        let mut hld = HeavyLightDecomposition\
     \ {\n            t_in: vec![0; n],\n            t_out: vec![0; n],\n         \
     \   ord: vec![],\n            size: vec![0; n],\n            heavy: vec![!0; n],\n\
     \            head: vec![0; n],\n            par: vec![!0; n],\n            depth:\
     \ vec![0; n],\n        };\n        hld.dfs_sz(g, 0);\n        hld.dfs_hld(g, 0,\
     \ &mut 0);\n        hld\n    }\n\n    fn dfs_sz<V, E>(&mut self, g: &Graph<V,\
-    \ E>, v: usize)\n    where\n        V: Copy,\n        E: Copy,\n    {\n      \
-    \  self.size[v] = 1;\n        for &(u, _) in g.out_edges(v) {\n            if\
+    \ E>, v: usize)\n    where\n        V: Clone,\n        E: Clone,\n    {\n    \
+    \    self.size[v] = 1;\n        for &(u, _) in g.out_edges(v) {\n            if\
     \ u == self.par[v] {\n                continue;\n            }\n            self.par[u]\
     \ = v;\n            self.depth[u] = self.depth[v] + 1;\n            self.dfs_sz(g,\
     \ u);\n            self.size[v] += self.size[u];\n            if self.heavy[v]\
     \ == !0 || self.size[u] > self.size[self.heavy[v]] {\n                self.heavy[v]\
     \ = u;\n            }\n        }\n    }\n\n    fn dfs_hld<V, E>(&mut self, g:\
-    \ &Graph<V, E>, v: usize, t: &mut usize)\n    where\n        V: Copy,\n      \
-    \  E: Copy,\n    {\n        self.t_in[v] = *t;\n        self.ord.push(v);\n  \
-    \      *t += 1;\n        if self.heavy[v] != !0 {\n            let u = self.heavy[v];\n\
+    \ &Graph<V, E>, v: usize, t: &mut usize)\n    where\n        V: Clone,\n     \
+    \   E: Clone,\n    {\n        self.t_in[v] = *t;\n        self.ord.push(v);\n\
+    \        *t += 1;\n        if self.heavy[v] != !0 {\n            let u = self.heavy[v];\n\
     \            self.head[u] = self.head[v];\n            self.dfs_hld(g, u, t);\n\
     \        }\n        for &(u, _) in g.out_edges(v) {\n            if u == self.par[v]\
     \ {\n                continue;\n            }\n            if u == self.heavy[v]\
@@ -103,7 +103,7 @@ data:
   path: crates/data-structure/heavy-light-decomposition/src/lib.rs
   requiredBy:
   - crates/data-structure/tree-query/src/lib.rs
-  timestamp: '2023-04-21 11:20:46+09:00'
+  timestamp: '2023-04-24 12:50:05+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/lca/src/main.rs

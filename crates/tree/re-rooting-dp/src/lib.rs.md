@@ -4,7 +4,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: crates/algebraic/algebraic/src/lib.rs
     title: crates/algebraic/algebraic/src/lib.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: crates/graph/graph/src/lib.rs
     title: crates/graph/graph/src/lib.rs
   _extendedRequiredBy: []
@@ -27,8 +27,8 @@ data:
     where\n    S: Clone,\n{\n    par: Vec<usize>,\n    dp: Vec<S>,\n    dpl: Vec<S>,\n\
     \    dph: Vec<S>,\n}\n\nimpl<T> ReRootingDP<T>\nwhere\n    T: Clone,\n{\n    pub\
     \ fn build<M, V, E>(g: &Graph<V::S, E::S>) -> Self\n    where\n        M: Monoid<S\
-    \ = T>,\n        M::S: Clone,\n        V: Act<X = M::S>,\n        V::S: Copy,\n\
-    \        E: Act<X = M::S>,\n        E::S: Copy,\n    {\n        let n = g.size();\n\
+    \ = T>,\n        M::S: Clone,\n        V: Act<X = M::S>,\n        V::S: Clone,\n\
+    \        E: Act<X = M::S>,\n        E::S: Clone,\n    {\n        let n = g.size();\n\
     \        let mut ord = vec![];\n        let mut par = vec![!0; n];\n        let\
     \ mut st = vec![0];\n        while let Some(v) = st.pop() {\n            ord.push(v);\n\
     \            for &(u, _) in g.out_edges(v) {\n                if u != 0 && par[u]\
@@ -47,18 +47,18 @@ data:
     \          }\n            for i in 0..m {\n                let (u, _) = g.out_edges(v)[i];\n\
     \                if u != par[v] {\n                    dph[u] = M::op(&xl[i],\
     \ &xr[i + 1]);\n                }\n            }\n            dp[v] = xr[0].clone();\n\
-    \            dpl[v] = V::act(&g.vertex(v), &dp[v]);\n            for &(u, w) in\
-    \ g.out_edges(v) {\n                if u == par[v] {\n                    dph[v]\
+    \            dpl[v] = V::act(&g.vertex(v), &dp[v]);\n            for (u, w) in\
+    \ g.out_edges(v) {\n                if *u == par[v] {\n                    dph[v]\
     \ = E::act(&w, &dpl[v]);\n                }\n            }\n        }\n      \
     \  dp[0] = V::act(&g.vertex(0), &dp[0]);\n        for &(u, _) in g.out_edges(0)\
     \ {\n            dph[u] = V::act(&g.vertex(0), &dph[u]);\n        }\n        for\
-    \ &v in &ord {\n            for &(u, w) in g.out_edges(v) {\n                if\
-    \ u == par[v] {\n                    continue;\n                }\n          \
-    \      let mut x = E::act(&w, &dph[u]);\n                for &(vv, _) in g.out_edges(u)\
+    \ &v in &ord {\n            for (u, w) in g.out_edges(v) {\n                if\
+    \ *u == par[v] {\n                    continue;\n                }\n         \
+    \       let mut x = E::act(&w, &dph[*u]);\n                for &(vv, _) in g.out_edges(*u)\
     \ {\n                    if vv == v {\n                        continue;\n   \
     \                 }\n                    dph[vv] = M::op(&dph[vv], &x);\n    \
-    \                dph[vv] = V::act(&g.vertex(u), &dph[vv]);\n                }\n\
-    \                x = M::op(&dp[u], &x);\n                dp[u] = V::act(&g.vertex(u),\
+    \                dph[vv] = V::act(&g.vertex(*u), &dph[vv]);\n                }\n\
+    \                x = M::op(&dp[*u], &x);\n                dp[*u] = V::act(&g.vertex(*u),\
     \ &x);\n            }\n        }\n        Self { par, dp, dpl, dph }\n    }\n\n\
     \    pub fn prod(&self, v: usize) -> T {\n        self.dp[v].clone()\n    }\n\n\
     \    pub fn prod_subtree(&self, v: usize, p: usize) -> T {\n        if p == !0\
@@ -71,7 +71,7 @@ data:
   isVerificationFile: false
   path: crates/tree/re-rooting-dp/src/lib.rs
   requiredBy: []
-  timestamp: '2023-04-22 13:47:58+09:00'
+  timestamp: '2023-04-24 12:50:05+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/yuki1333/src/main.rs

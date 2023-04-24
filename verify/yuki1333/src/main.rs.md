@@ -4,7 +4,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: crates/algebraic/algebraic/src/lib.rs
     title: crates/algebraic/algebraic/src/lib.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: crates/graph/graph/src/lib.rs
     title: crates/graph/graph/src/lib.rs
   - icon: ':heavy_check_mark:'
@@ -46,7 +46,7 @@ data:
   isVerificationFile: true
   path: verify/yuki1333/src/main.rs
   requiredBy: []
-  timestamp: '2023-04-22 13:47:58+09:00'
+  timestamp: '2023-04-24 12:50:05+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/yuki1333/src/main.rs
