@@ -126,6 +126,11 @@ data:
     - icon: ':warning:'
       path: crates/sequence/run-length-encoding/src/lib.rs
       title: crates/sequence/run-length-encoding/src/lib.rs
+  - name: crates/sequence/z-algorithm/src
+    pages:
+    - icon: ':heavy_check_mark:'
+      path: crates/sequence/z-algorithm/src/lib.rs
+      title: crates/sequence/z-algorithm/src/lib.rs
   - name: crates/tree/centroid-decomposition/src
     pages:
     - icon: ':warning:'
@@ -287,5 +292,10 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/yuki1737/src/main.rs
       title: verify/yuki1737/src/main.rs
+  - name: verify/z-algorithm/src
+    pages:
+    - icon: ':heavy_check_mark:'
+      path: verify/z-algorithm/src/main.rs
+      title: verify/z-algorithm/src/main.rs
 layout: toppage
 ---
