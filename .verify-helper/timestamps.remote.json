@@ -24,6 +24,7 @@
 "verify/static_range_frequency/src/main.rs": "2023-04-22 21:59:33 +0900",
 "verify/static_range_sum/src/main.rs": "2023-04-21 15:23:30 +0900",
 "verify/staticrmq/src/main.rs": "2023-04-22 13:47:58 +0900",
+"verify/two_sat/src/main.rs": "2023-04-24 14:15:56 +0900",
 "verify/unionfind/src/main.rs": "2023-04-23 00:43:19 +0900",
 "verify/vertex_add_path_sum/src/main.rs": "2023-04-24 12:50:05 +0900",
 "verify/vertex_add_subtree_sum/src/main.rs": "2023-04-24 12:50:05 +0900",
