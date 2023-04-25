@@ -3,7 +3,6 @@ use std::ops::{Bound, RangeBounds};
 use algebraic::Monoid;
 
 #[derive(Clone)]
-
 pub struct SegmentTree<M>
 where
     M: Monoid,
