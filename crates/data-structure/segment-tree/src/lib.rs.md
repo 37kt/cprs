@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: crates/algebraic/algebraic/src/lib.rs
     title: crates/algebraic/algebraic/src/lib.rs
   _extendedRequiredBy: []
@@ -21,7 +21,7 @@ data:
     \  File \"/opt/hostedtoolcache/Python/3.11.3/x64/lib/python3.11/site-packages/onlinejudge_verify/languages/rust.py\"\
     , line 288, in bundle\n    raise NotImplementedError\nNotImplementedError\n"
   code: "use std::ops::{Bound, RangeBounds};\n\nuse algebraic::Monoid;\n\n#[derive(Clone)]\n\
-    \npub struct SegmentTree<M>\nwhere\n    M: Monoid,\n    M::S: Clone,\n{\n    n:\
+    pub struct SegmentTree<M>\nwhere\n    M: Monoid,\n    M::S: Clone,\n{\n    n:\
     \ usize,\n    v: Vec<M::S>,\n}\n\nimpl<M> SegmentTree<M>\nwhere\n    M: Monoid,\n\
     \    M::S: Clone,\n{\n    pub fn new(n: usize) -> Self {\n        Self {\n   \
     \         n,\n            v: vec![M::e(); n * 2],\n        }\n    }\n\n    pub\
@@ -51,7 +51,7 @@ data:
   isVerificationFile: false
   path: crates/data-structure/segment-tree/src/lib.rs
   requiredBy: []
-  timestamp: '2023-04-25 16:47:04+09:00'
+  timestamp: '2023-04-25 18:17:30+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/point_add_range_sum/src/main.rs

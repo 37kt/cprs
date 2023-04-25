@@ -3,7 +3,7 @@ data:
   libraryCategories:
   - name: crates/algebraic/algebraic/src
     pages:
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: crates/algebraic/algebraic/src/lib.rs
       title: crates/algebraic/algebraic/src/lib.rs
   - name: crates/algorithm/mo/src
@@ -56,6 +56,11 @@ data:
     - icon: ':heavy_check_mark:'
       path: crates/data-structure/heavy-light-decomposition/src/lib.rs
       title: crates/data-structure/heavy-light-decomposition/src/lib.rs
+  - name: crates/data-structure/lazy-segment-tree/src
+    pages:
+    - icon: ':x:'
+      path: crates/data-structure/lazy-segment-tree/src/lib.rs
+      title: crates/data-structure/lazy-segment-tree/src/lib.rs
   - name: crates/data-structure/li-chao-tree-dynamic/src
     pages:
     - icon: ':heavy_check_mark:'
@@ -252,6 +257,11 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/queue_operate_all_composite/src/main.rs
       title: verify/queue_operate_all_composite/src/main.rs
+  - name: verify/range_affine_range_sum/src
+    pages:
+    - icon: ':x:'
+      path: verify/range_affine_range_sum/src/main.rs
+      title: verify/range_affine_range_sum/src/main.rs
   - name: verify/range_chmin_chmax_add_range_sum/src
     pages:
     - icon: ':heavy_check_mark:'

@@ -8,6 +8,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: crates/data-structure/fenwick-tree/src/lib.rs
     title: crates/data-structure/fenwick-tree/src/lib.rs
+  - icon: ':x:'
+    path: crates/data-structure/lazy-segment-tree/src/lib.rs
+    title: crates/data-structure/lazy-segment-tree/src/lib.rs
   - icon: ':heavy_check_mark:'
     path: crates/data-structure/segment-tree/src/lib.rs
     title: crates/data-structure/segment-tree/src/lib.rs
@@ -33,6 +36,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/queue_operate_all_composite/src/main.rs
     title: verify/queue_operate_all_composite/src/main.rs
+  - icon: ':x:'
+    path: verify/range_affine_range_sum/src/main.rs
+    title: verify/range_affine_range_sum/src/main.rs
   - icon: ':heavy_check_mark:'
     path: verify/static_range_inversions_query/src/main.rs
     title: verify/static_range_inversions_query/src/main.rs
@@ -42,9 +48,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/yuki1333/src/main.rs
     title: verify/yuki1333/src/main.rs
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: rs
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.11.3/x64/lib/python3.11/site-packages/onlinejudge_verify/documentation/build.py\"\
@@ -81,17 +87,19 @@ data:
   requiredBy:
   - crates/tree/re-rooting-dp/src/lib.rs
   - crates/math/discrete-logarithm/src/lib.rs
+  - crates/data-structure/lazy-segment-tree/src/lib.rs
   - crates/data-structure/segment-tree/src/lib.rs
   - crates/data-structure/disjoint-sparse-table/src/lib.rs
   - crates/data-structure/fenwick-tree/src/lib.rs
   - crates/data-structure/sliding-window-aggregation/src/lib.rs
   timestamp: '2023-04-25 15:51:20+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - verify/static_range_inversions_query/src/main.rs
   - verify/deque_operate_all_composite/src/main.rs
   - verify/queue_operate_all_composite/src/main.rs
   - verify/staticrmq/src/main.rs
+  - verify/range_affine_range_sum/src/main.rs
   - verify/discrete_logarithm_mod/src/main.rs
   - verify/point_add_range_sum/src/main.rs
   - verify/yuki1333/src/main.rs
