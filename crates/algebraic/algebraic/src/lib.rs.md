@@ -9,6 +9,9 @@ data:
     path: crates/data-structure/fenwick-tree/src/lib.rs
     title: crates/data-structure/fenwick-tree/src/lib.rs
   - icon: ':heavy_check_mark:'
+    path: crates/data-structure/segment-tree/src/lib.rs
+    title: crates/data-structure/segment-tree/src/lib.rs
+  - icon: ':heavy_check_mark:'
     path: crates/data-structure/sliding-window-aggregation/src/lib.rs
     title: crates/data-structure/sliding-window-aggregation/src/lib.rs
   - icon: ':heavy_check_mark:'
@@ -24,6 +27,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/discrete_logarithm_mod/src/main.rs
     title: verify/discrete_logarithm_mod/src/main.rs
+  - icon: ':heavy_check_mark:'
+    path: verify/point_add_range_sum/src/main.rs
+    title: verify/point_add_range_sum/src/main.rs
   - icon: ':heavy_check_mark:'
     path: verify/queue_operate_all_composite/src/main.rs
     title: verify/queue_operate_all_composite/src/main.rs
@@ -75,6 +81,7 @@ data:
   requiredBy:
   - crates/tree/re-rooting-dp/src/lib.rs
   - crates/math/discrete-logarithm/src/lib.rs
+  - crates/data-structure/segment-tree/src/lib.rs
   - crates/data-structure/disjoint-sparse-table/src/lib.rs
   - crates/data-structure/fenwick-tree/src/lib.rs
   - crates/data-structure/sliding-window-aggregation/src/lib.rs
@@ -86,6 +93,7 @@ data:
   - verify/queue_operate_all_composite/src/main.rs
   - verify/staticrmq/src/main.rs
   - verify/discrete_logarithm_mod/src/main.rs
+  - verify/point_add_range_sum/src/main.rs
   - verify/yuki1333/src/main.rs
 documentation_of: crates/algebraic/algebraic/src/lib.rs
 layout: document

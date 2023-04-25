@@ -61,6 +61,11 @@ data:
     - icon: ':heavy_check_mark:'
       path: crates/data-structure/li-chao-tree-dynamic/src/lib.rs
       title: crates/data-structure/li-chao-tree-dynamic/src/lib.rs
+  - name: crates/data-structure/segment-tree/src
+    pages:
+    - icon: ':heavy_check_mark:'
+      path: crates/data-structure/segment-tree/src/lib.rs
+      title: crates/data-structure/segment-tree/src/lib.rs
   - name: crates/data-structure/segtree-beats/src
     pages:
     - icon: ':heavy_check_mark:'
@@ -232,6 +237,11 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/matrix_product/src/main.rs
       title: verify/matrix_product/src/main.rs
+  - name: verify/point_add_range_sum/src
+    pages:
+    - icon: ':heavy_check_mark:'
+      path: verify/point_add_range_sum/src/main.rs
+      title: verify/point_add_range_sum/src/main.rs
   - name: verify/pow_of_formal_power_series/src
     pages:
     - icon: ':heavy_check_mark:'
