@@ -43,9 +43,10 @@ where
         self.built = true;
     }
 
-    pub fn sum<R>(&self, i: R, j: R) -> T
+    pub fn sum<RI, RJ>(&self, i: RI, j: RJ) -> T
     where
-        R: RangeBounds<usize>,
+        RI: RangeBounds<usize>,
+        RJ: RangeBounds<usize>,
     {
         assert!(self.built);
         let (bi, ei) = range_to_pair(i, self.v.len() - 1);
@@ -60,9 +61,10 @@ impl<T> CumulativeSum2D<T>
 where
     T: Clone + Default + Add<T, Output = T> + Sub<T, Output = T> + Neg<Output = T>,
 {
-    pub fn imos_add<R>(&mut self, i: R, j: R, x: T)
+    pub fn imos_add<RI, RJ>(&mut self, i: RI, j: RJ, x: T)
     where
-        R: RangeBounds<usize>,
+        RI: RangeBounds<usize>,
+        RJ: RangeBounds<usize>,
     {
         assert!(!self.built);
         let (bi, ei) = range_to_pair(i, self.v.len() - 1);

@@ -1,0 +1,14 @@
+[package]
+name = "static_range_inversions_query"
+version = "0.1.0"
+edition = "2018"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+proconio = { version = "=0.3.6", features = ["derive"] }
+mo = { path = "../../crates/algorithm/mo" }
+fenwick-tree = { path = "../../crates/data-structure/fenwick-tree" }
+itertools = "=0.9.0"
+algebraic = { package = "algebraic", path = "../../crates/algebraic/algebraic" }
+superslice = "=1.0.0"
