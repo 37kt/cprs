@@ -1,20 +1,12 @@
 // verification-helper: PROBLEM https://judge.yosupo.jp/problem/vertex_add_path_sum
 
-use ac_library::Monoid;
+use algebraic::{algebra, monoid};
 use graph::Graph;
 use proconio::input;
 use tree_query::TreeQueryVertex;
 
-enum M {}
-impl Monoid for M {
-    type S = i64;
-    fn identity() -> Self::S {
-        0
-    }
-    fn binary_operation(a: &Self::S, b: &Self::S) -> Self::S {
-        a + b
-    }
-}
+algebra!(M, i64);
+monoid!(M, 0, |x, y| x + y);
 
 #[proconio::fastout]
 fn main() {

@@ -1,20 +1,16 @@
 // verification-helper: PROBLEM https://judge.yosupo.jp/problem/vertex_set_path_composite
 
-use ac_library::{ModInt998244353 as Mint, Monoid};
+use ac_library::ModInt998244353 as Mint;
+use algebraic::{algebra, monoid};
 use graph::Graph;
 use proconio::input;
 use tree_query::TreeQueryVertex;
 
-enum M {}
-impl Monoid for M {
-    type S = (Mint, Mint);
-    fn identity() -> Self::S {
-        (1.into(), 0.into())
-    }
-    fn binary_operation(&(a, b): &Self::S, &(c, d): &Self::S) -> Self::S {
-        (a * c, b * c + d)
-    }
-}
+algebra!(M, (Mint, Mint));
+monoid!(M, (1.into(), 0.into()), |&(a, b), &(c, d)| (
+    a * c,
+    b * c + d
+));
 
 #[proconio::fastout]
 fn main() {

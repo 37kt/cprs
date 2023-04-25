@@ -33,7 +33,7 @@ where
         }
     }
 
-    pub fn get(&mut self, k: usize) -> M::S {
+    pub fn get(&self, k: usize) -> M::S {
         assert!(k < self.n);
         self.v[k + self.n].clone()
     }

@@ -1,8 +1,9 @@
 use std::marker::PhantomData;
 
-use ac_library::{Monoid, Segtree};
+use algebraic::Monoid;
 use graph::Graph;
 use heavy_light_decomposition::HeavyLightDecomposition;
+use segment_tree::SegmentTree;
 
 pub type TreeQueryVertex<M> = TreeQuery<M, Vertex>;
 pub type TreeQueryEdge<M> = TreeQuery<M, Edge>;
@@ -36,30 +37,32 @@ impl QueryType for Edge {
 pub struct TreeQuery<M, Q>
 where
     M: Monoid,
+    M::S: Clone,
     Q: QueryType,
 {
     n: usize,
     hld: HeavyLightDecomposition,
-    seg_up: Segtree<M>,
-    seg_down: Segtree<M>,
+    seg_up: SegmentTree<M>,
+    seg_down: SegmentTree<M>,
     _marker: PhantomData<fn() -> Q>,
 }
 
 impl<M, Q> TreeQuery<M, Q>
 where
     M: Monoid,
+    M::S: Clone,
     Q: QueryType,
 {
     pub fn prod_path(&self, u: usize, v: usize) -> M::S {
         let (up, down) = self.hld.path(u, v, Q::edge());
-        let mut res = M::identity();
+        let mut res = M::e();
         for &(l, r) in &up {
             let t = self.seg_up.prod(self.n - r..self.n - l);
-            res = M::binary_operation(&res, &t);
+            res = M::op(&res, &t);
         }
         for &(l, r) in &down {
             let t = self.seg_down.prod(l..r);
-            res = M::binary_operation(&res, &t);
+            res = M::op(&res, &t);
         }
         res
     }
@@ -81,14 +84,14 @@ where
     {
         let n = g.size();
         let hld = HeavyLightDecomposition::new(g);
-        let mut a = vec![M::identity(); n];
+        let mut a = vec![M::e(); n];
         for v in 0..n {
             let k = hld.vertex(v);
             a[k] = g.vertex(v).clone();
         }
-        let seg_down = Segtree::from(a.clone());
+        let seg_down = SegmentTree::from(a.clone());
         a.reverse();
-        let seg_up = Segtree::from(a);
+        let seg_up = SegmentTree::from(a);
         Self {
             n,
             hld,
@@ -121,16 +124,16 @@ where
     {
         let n = g.size();
         let hld = HeavyLightDecomposition::new(g);
-        let mut a = vec![M::identity(); n];
+        let mut a = vec![M::e(); n];
         for v in 0..n {
             for (u, w) in g.out_edges(v) {
                 let k = hld.edge(*u, v);
                 a[k] = w.clone();
             }
         }
-        let seg_down = Segtree::from(a.clone());
+        let seg_down = SegmentTree::from(a.clone());
         a.reverse();
-        let seg_up = Segtree::from(a);
+        let seg_up = SegmentTree::from(a);
         Self {
             n,
             hld,

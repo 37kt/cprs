@@ -14,7 +14,7 @@ monoid!(M, (0.into(), 0.into()), |&(s1, c1), &(s2, c2)| (
 algebra!(F, (Mint, Mint));
 monoid!(F, (1.into(), 0.into()), |&(a, b), &(c, d)| (
     a * c,
-    b * c + d
+    a * d + b
 ));
 act!(F, (Mint, Mint), |&(a, b), &(s, c)| (a * s + b * c, c));
 
