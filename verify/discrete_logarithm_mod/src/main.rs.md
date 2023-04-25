@@ -38,7 +38,7 @@ data:
   isVerificationFile: true
   path: verify/discrete_logarithm_mod/src/main.rs
   requiredBy: []
-  timestamp: '2023-04-22 13:47:58+09:00'
+  timestamp: '2023-04-25 15:51:20+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/discrete_logarithm_mod/src/main.rs

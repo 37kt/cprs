@@ -41,7 +41,7 @@ data:
   isVerificationFile: false
   path: crates/data-structure/disjoint-sparse-table/src/lib.rs
   requiredBy: []
-  timestamp: '2023-04-22 13:47:58+09:00'
+  timestamp: '2023-04-25 15:51:20+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/staticrmq/src/main.rs

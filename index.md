@@ -46,6 +46,11 @@ data:
     - icon: ':heavy_check_mark:'
       path: crates/data-structure/disjoint-sparse-table/src/lib.rs
       title: crates/data-structure/disjoint-sparse-table/src/lib.rs
+  - name: crates/data-structure/fenwick-tree/src
+    pages:
+    - icon: ':heavy_check_mark:'
+      path: crates/data-structure/fenwick-tree/src/lib.rs
+      title: crates/data-structure/fenwick-tree/src/lib.rs
   - name: crates/data-structure/heavy-light-decomposition/src
     pages:
     - icon: ':heavy_check_mark:'
@@ -267,6 +272,11 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/static_range_frequency/src/main.rs
       title: verify/static_range_frequency/src/main.rs
+  - name: verify/static_range_inversions_query/src
+    pages:
+    - icon: ':heavy_check_mark:'
+      path: verify/static_range_inversions_query/src/main.rs
+      title: verify/static_range_inversions_query/src/main.rs
   - name: verify/static_range_sum/src
     pages:
     - icon: ':heavy_check_mark:'

@@ -43,7 +43,7 @@ data:
   isVerificationFile: true
   path: verify/deque_operate_all_composite/src/main.rs
   requiredBy: []
-  timestamp: '2023-04-22 13:47:58+09:00'
+  timestamp: '2023-04-25 15:51:20+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/deque_operate_all_composite/src/main.rs

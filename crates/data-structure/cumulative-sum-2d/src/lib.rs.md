@@ -28,15 +28,16 @@ data:
     \   for j in 1..self.v[i].len() {\n                self.v[i][j] =\n          \
     \          self.v[i][j].clone() + self.v[i][j - 1].clone() + self.v[i - 1][j].clone()\n\
     \                        - self.v[i - 1][j - 1].clone();\n            }\n    \
-    \    }\n        self.built = true;\n    }\n\n    pub fn sum<R>(&self, i: R, j:\
-    \ R) -> T\n    where\n        R: RangeBounds<usize>,\n    {\n        assert!(self.built);\n\
-    \        let (bi, ei) = range_to_pair(i, self.v.len() - 1);\n        let (bj,\
-    \ ej) = range_to_pair(j, self.v[0].len() - 1);\n        self.v[ei][ej].clone()\
-    \ + self.v[bi][bj].clone()\n            - self.v[ei][bj].clone()\n           \
-    \ - self.v[bi][ej].clone()\n    }\n}\n\nimpl<T> CumulativeSum2D<T>\nwhere\n  \
-    \  T: Clone + Default + Add<T, Output = T> + Sub<T, Output = T> + Neg<Output =\
-    \ T>,\n{\n    pub fn imos_add<R>(&mut self, i: R, j: R, x: T)\n    where\n   \
-    \     R: RangeBounds<usize>,\n    {\n        assert!(!self.built);\n        let\
+    \    }\n        self.built = true;\n    }\n\n    pub fn sum<RI, RJ>(&self, i:\
+    \ RI, j: RJ) -> T\n    where\n        RI: RangeBounds<usize>,\n        RJ: RangeBounds<usize>,\n\
+    \    {\n        assert!(self.built);\n        let (bi, ei) = range_to_pair(i,\
+    \ self.v.len() - 1);\n        let (bj, ej) = range_to_pair(j, self.v[0].len()\
+    \ - 1);\n        self.v[ei][ej].clone() + self.v[bi][bj].clone()\n           \
+    \ - self.v[ei][bj].clone()\n            - self.v[bi][ej].clone()\n    }\n}\n\n\
+    impl<T> CumulativeSum2D<T>\nwhere\n    T: Clone + Default + Add<T, Output = T>\
+    \ + Sub<T, Output = T> + Neg<Output = T>,\n{\n    pub fn imos_add<RI, RJ>(&mut\
+    \ self, i: RI, j: RJ, x: T)\n    where\n        RI: RangeBounds<usize>,\n    \
+    \    RJ: RangeBounds<usize>,\n    {\n        assert!(!self.built);\n        let\
     \ (bi, ei) = range_to_pair(i, self.v.len() - 1);\n        let (bj, ej) = range_to_pair(j,\
     \ self.v[0].len() - 1);\n        self.add(bi, bj, x.clone());\n        self.add(bi,\
     \ ej, -x.clone());\n        self.add(ei, bj, -x.clone());\n        self.add(ei,\
@@ -57,7 +58,7 @@ data:
   isVerificationFile: false
   path: crates/data-structure/cumulative-sum-2d/src/lib.rs
   requiredBy: []
-  timestamp: '2023-04-21 11:20:46+09:00'
+  timestamp: '2023-04-25 15:51:20+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: crates/data-structure/cumulative-sum-2d/src/lib.rs

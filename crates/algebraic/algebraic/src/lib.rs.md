@@ -6,6 +6,9 @@ data:
     path: crates/data-structure/disjoint-sparse-table/src/lib.rs
     title: crates/data-structure/disjoint-sparse-table/src/lib.rs
   - icon: ':heavy_check_mark:'
+    path: crates/data-structure/fenwick-tree/src/lib.rs
+    title: crates/data-structure/fenwick-tree/src/lib.rs
+  - icon: ':heavy_check_mark:'
     path: crates/data-structure/sliding-window-aggregation/src/lib.rs
     title: crates/data-structure/sliding-window-aggregation/src/lib.rs
   - icon: ':heavy_check_mark:'
@@ -24,6 +27,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/queue_operate_all_composite/src/main.rs
     title: verify/queue_operate_all_composite/src/main.rs
+  - icon: ':heavy_check_mark:'
+    path: verify/static_range_inversions_query/src/main.rs
+    title: verify/static_range_inversions_query/src/main.rs
   - icon: ':heavy_check_mark:'
     path: verify/staticrmq/src/main.rs
     title: verify/staticrmq/src/main.rs
@@ -44,17 +50,25 @@ data:
   code: "pub trait Algebra {\n    type S;\n}\n\npub trait Act: Algebra {\n    type\
     \ X;\n    fn act(f: &Self::S, x: &Self::X) -> Self::X;\n}\n\npub trait Monoid:\
     \ Algebra {\n    fn e() -> Self::S;\n    fn op(x: &Self::S, y: &Self::S) -> Self::S;\n\
-    }\n\n#[macro_export]\nmacro_rules! algebra {\n    ( $ident:ident, $ty:ty ) =>\
-    \ {\n        #[derive(Clone)]\n        enum $ident {}\n        impl $crate::Algebra\
-    \ for $ident {\n            type S = $ty;\n        }\n    };\n}\n\n#[macro_export]\n\
-    macro_rules! act {\n    ( $ident:ident, $tar:ty, $act:expr ) => {\n        impl\
-    \ $crate::Act for $ident {\n            type X = $tar;\n            fn act(f:\
+    }\n\npub trait Group: Monoid {\n    fn inv(x: &Self::S) -> Self::S;\n}\n\n#[macro_export]\n\
+    macro_rules! algebra {\n    ($ident:ident, $ty:ty) => {\n        #[derive(Clone)]\n\
+    \        enum $ident {}\n        impl $crate::Algebra for $ident {\n         \
+    \   type S = $ty;\n        }\n    };\n}\n\n#[macro_export]\nmacro_rules! act {\n\
+    \    ($ident:ident, $tar:ty, $act:expr) => {\n        impl $crate::Act for $ident\
+    \ {\n            type X = $tar;\n            #[inline]\n            fn act(f:\
     \ &Self::S, x: &Self::X) -> Self::X {\n                $act(f, x)\n          \
-    \  }\n        }\n    };\n}\n\n#[macro_export]\nmacro_rules! monoid {\n    ( $ident:ident,\
-    \ $e:expr, $op:expr ) => {\n        impl $crate::Monoid for $ident {\n       \
-    \     fn e() -> Self::S {\n                $e\n            }\n            fn op(x:\
-    \ &Self::S, y: &Self::S) -> Self::S {\n                $op(x, y)\n           \
-    \ }\n        }\n    };\n}\n"
+    \  }\n        }\n    };\n}\n\n#[macro_export]\nmacro_rules! monoid {\n    ($ident:ident,\
+    \ $e:expr, $op:expr) => {\n        impl $crate::Monoid for $ident {\n        \
+    \    #[inline]\n            fn e() -> Self::S {\n                $e\n        \
+    \    }\n            #[inline]\n            fn op(x: &Self::S, y: &Self::S) ->\
+    \ Self::S {\n                $op(x, y)\n            }\n        }\n    };\n}\n\n\
+    #[macro_export]\nmacro_rules! group {\n    ($ident:ident, $e:expr, $op:expr, $inv:expr)\
+    \ => {\n        impl $crate::Monoid for $ident {\n            #[inline]\n    \
+    \        fn e() -> Self::S {\n                $e\n            }\n            #[inline]\n\
+    \            fn op(x: &Self::S, y: &Self::S) -> Self::S {\n                $op(x,\
+    \ y)\n            }\n        }\n        impl $crate::Group for $ident {\n    \
+    \        #[inline]\n            fn inv(x: &Self::S) -> Self::S {\n           \
+    \     $inv(x)\n            }\n        }\n    };\n}\n"
   dependsOn: []
   isVerificationFile: false
   path: crates/algebraic/algebraic/src/lib.rs
@@ -62,10 +76,12 @@ data:
   - crates/tree/re-rooting-dp/src/lib.rs
   - crates/math/discrete-logarithm/src/lib.rs
   - crates/data-structure/disjoint-sparse-table/src/lib.rs
+  - crates/data-structure/fenwick-tree/src/lib.rs
   - crates/data-structure/sliding-window-aggregation/src/lib.rs
-  timestamp: '2023-04-22 13:47:58+09:00'
+  timestamp: '2023-04-25 15:51:20+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
+  - verify/static_range_inversions_query/src/main.rs
   - verify/deque_operate_all_composite/src/main.rs
   - verify/queue_operate_all_composite/src/main.rs
   - verify/staticrmq/src/main.rs
