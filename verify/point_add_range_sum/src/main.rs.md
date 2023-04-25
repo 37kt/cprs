@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: crates/algebraic/algebraic/src/lib.rs
     title: crates/algebraic/algebraic/src/lib.rs
   - icon: ':heavy_check_mark:'
@@ -39,7 +39,7 @@ data:
   isVerificationFile: true
   path: verify/point_add_range_sum/src/main.rs
   requiredBy: []
-  timestamp: '2023-04-25 18:17:30+09:00'
+  timestamp: '2023-04-25 18:38:46+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/point_add_range_sum/src/main.rs

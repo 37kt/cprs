@@ -1,14 +1,26 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: crates/algebraic/algebraic/src/lib.rs
     title: crates/algebraic/algebraic/src/lib.rs
-  _extendedRequiredBy: []
+  _extendedRequiredBy:
+  - icon: ':heavy_check_mark:'
+    path: crates/data-structure/tree-query/src/lib.rs
+    title: crates/data-structure/tree-query/src/lib.rs
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: verify/point_add_range_sum/src/main.rs
     title: verify/point_add_range_sum/src/main.rs
+  - icon: ':heavy_check_mark:'
+    path: verify/vertex_add_path_sum/src/main.rs
+    title: verify/vertex_add_path_sum/src/main.rs
+  - icon: ':heavy_check_mark:'
+    path: verify/vertex_add_subtree_sum/src/main.rs
+    title: verify/vertex_add_subtree_sum/src/main.rs
+  - icon: ':heavy_check_mark:'
+    path: verify/vertex_set_path_composite/src/main.rs
+    title: verify/vertex_set_path_composite/src/main.rs
   _isVerificationFailed: false
   _pathExtension: rs
   _verificationStatusIcon: ':heavy_check_mark:'
@@ -27,8 +39,8 @@ data:
     \         n,\n            v: vec![M::e(); n * 2],\n        }\n    }\n\n    pub\
     \ fn set(&mut self, mut k: usize, x: M::S) {\n        k += self.n;\n        self.v[k]\
     \ = x;\n        while k > 1 {\n            k >>= 1;\n            self.v[k] = M::op(&self.v[k\
-    \ * 2], &self.v[k * 2 + 1]);\n        }\n    }\n\n    pub fn get(&mut self, k:\
-    \ usize) -> M::S {\n        assert!(k < self.n);\n        self.v[k + self.n].clone()\n\
+    \ * 2], &self.v[k * 2 + 1]);\n        }\n    }\n\n    pub fn get(&self, k: usize)\
+    \ -> M::S {\n        assert!(k < self.n);\n        self.v[k + self.n].clone()\n\
     \    }\n\n    pub fn prod<R>(&self, range: R) -> M::S\n    where\n        R: RangeBounds<usize>,\n\
     \    {\n        let mut l = match range.start_bound() {\n            Bound::Excluded(&l)\
     \ => l + 1,\n            Bound::Included(&l) => l,\n            Bound::Unbounded\
@@ -50,10 +62,14 @@ data:
   - crates/algebraic/algebraic/src/lib.rs
   isVerificationFile: false
   path: crates/data-structure/segment-tree/src/lib.rs
-  requiredBy: []
-  timestamp: '2023-04-25 18:17:30+09:00'
+  requiredBy:
+  - crates/data-structure/tree-query/src/lib.rs
+  timestamp: '2023-04-25 18:38:46+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
+  - verify/vertex_set_path_composite/src/main.rs
+  - verify/vertex_add_subtree_sum/src/main.rs
+  - verify/vertex_add_path_sum/src/main.rs
   - verify/point_add_range_sum/src/main.rs
 documentation_of: crates/data-structure/segment-tree/src/lib.rs
 layout: document

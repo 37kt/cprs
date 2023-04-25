@@ -2,6 +2,12 @@
 data:
   _extendedDependsOn:
   - icon: ':heavy_check_mark:'
+    path: crates/algebraic/algebraic/src/lib.rs
+    title: crates/algebraic/algebraic/src/lib.rs
+  - icon: ':heavy_check_mark:'
+    path: crates/data-structure/segment-tree/src/lib.rs
+    title: crates/data-structure/segment-tree/src/lib.rs
+  - icon: ':heavy_check_mark:'
     path: crates/data-structure/tree-query/src/lib.rs
     title: crates/data-structure/tree-query/src/lib.rs
   - icon: ':heavy_check_mark:'
@@ -23,27 +29,27 @@ data:
     \  File \"/opt/hostedtoolcache/Python/3.11.3/x64/lib/python3.11/site-packages/onlinejudge_verify/languages/rust.py\"\
     , line 288, in bundle\n    raise NotImplementedError\nNotImplementedError\n"
   code: "// verification-helper: PROBLEM https://judge.yosupo.jp/problem/vertex_add_subtree_sum\n\
-    \nuse ac_library::Monoid;\nuse graph::Graph;\nuse proconio::input;\nuse tree_query::TreeQueryVertex;\n\
-    \nenum M {}\nimpl Monoid for M {\n    type S = i64;\n    fn identity() -> Self::S\
-    \ {\n        0\n    }\n    fn binary_operation(a: &Self::S, b: &Self::S) -> Self::S\
-    \ {\n        a + b\n    }\n}\n\n#[proconio::fastout]\nfn main() {\n    input!\
-    \ {\n        n: usize,\n        q: usize,\n        a: [i64; n],\n    }\n    let\
-    \ mut g = Graph::from(a);\n    for v in 1..n {\n        input! {\n           \
-    \ p: usize,\n        }\n        g.add_undirected_edge(p, v, ());\n    }\n    let\
-    \ mut tq = TreeQueryVertex::<M>::build(&g);\n    for _ in 0..q {\n        input!\
-    \ {\n            ty: usize,\n        }\n        if ty == 0 {\n            input!\
-    \ {\n                p: usize,\n                x: i64\n            }\n      \
-    \      let t = tq.get(p);\n            tq.set(p, t + x);\n        } else {\n \
-    \           input! {\n                v: usize,\n            }\n            let\
-    \ t = tq.prod_subtree(v);\n            println!(\"{}\", t);\n        }\n    }\n\
-    }\n"
+    \nuse algebraic::{algebra, monoid};\nuse graph::Graph;\nuse proconio::input;\n\
+    use tree_query::TreeQueryVertex;\n\nalgebra!(M, i64);\nmonoid!(M, 0, |x, y| x\
+    \ + y);\n\n#[proconio::fastout]\nfn main() {\n    input! {\n        n: usize,\n\
+    \        q: usize,\n        a: [i64; n],\n    }\n    let mut g = Graph::from(a);\n\
+    \    for v in 1..n {\n        input! {\n            p: usize,\n        }\n   \
+    \     g.add_undirected_edge(p, v, ());\n    }\n    let mut tq = TreeQueryVertex::<M>::build(&g);\n\
+    \    for _ in 0..q {\n        input! {\n            ty: usize,\n        }\n  \
+    \      if ty == 0 {\n            input! {\n                p: usize,\n       \
+    \         x: i64\n            }\n            let t = tq.get(p);\n            tq.set(p,\
+    \ t + x);\n        } else {\n            input! {\n                v: usize,\n\
+    \            }\n            let t = tq.prod_subtree(v);\n            println!(\"\
+    {}\", t);\n        }\n    }\n}\n"
   dependsOn:
+  - crates/algebraic/algebraic/src/lib.rs
+  - crates/data-structure/segment-tree/src/lib.rs
   - crates/data-structure/tree-query/src/lib.rs
   - crates/graph/graph/src/lib.rs
   isVerificationFile: true
   path: verify/vertex_add_subtree_sum/src/main.rs
   requiredBy: []
-  timestamp: '2023-04-24 12:50:05+09:00'
+  timestamp: '2023-04-25 18:38:46+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/vertex_add_subtree_sum/src/main.rs

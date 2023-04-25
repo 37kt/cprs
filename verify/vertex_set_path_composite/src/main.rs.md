@@ -2,6 +2,12 @@
 data:
   _extendedDependsOn:
   - icon: ':heavy_check_mark:'
+    path: crates/algebraic/algebraic/src/lib.rs
+    title: crates/algebraic/algebraic/src/lib.rs
+  - icon: ':heavy_check_mark:'
+    path: crates/data-structure/segment-tree/src/lib.rs
+    title: crates/data-structure/segment-tree/src/lib.rs
+  - icon: ':heavy_check_mark:'
     path: crates/data-structure/tree-query/src/lib.rs
     title: crates/data-structure/tree-query/src/lib.rs
   - icon: ':heavy_check_mark:'
@@ -23,29 +29,30 @@ data:
     \  File \"/opt/hostedtoolcache/Python/3.11.3/x64/lib/python3.11/site-packages/onlinejudge_verify/languages/rust.py\"\
     , line 288, in bundle\n    raise NotImplementedError\nNotImplementedError\n"
   code: "// verification-helper: PROBLEM https://judge.yosupo.jp/problem/vertex_set_path_composite\n\
-    \nuse ac_library::{ModInt998244353 as Mint, Monoid};\nuse graph::Graph;\nuse proconio::input;\n\
-    use tree_query::TreeQueryVertex;\n\nenum M {}\nimpl Monoid for M {\n    type S\
-    \ = (Mint, Mint);\n    fn identity() -> Self::S {\n        (1.into(), 0.into())\n\
-    \    }\n    fn binary_operation(&(a, b): &Self::S, &(c, d): &Self::S) -> Self::S\
-    \ {\n        (a * c, b * c + d)\n    }\n}\n\n#[proconio::fastout]\nfn main() {\n\
-    \    input! {\n        n: usize,\n        q: usize,\n        a: [(Mint, Mint);\
-    \ n],\n    }\n    let mut g = Graph::from(a);\n    for _ in 0..n - 1 {\n     \
-    \   input! {\n            u: usize,\n            v: usize,\n        }\n      \
-    \  g.add_undirected_edge(u, v, ());\n    }\n    let mut tq = TreeQueryVertex::<M>::build(&g);\n\
-    \    for _ in 0..q {\n        input! {\n            ty: usize,\n        }\n  \
-    \      if ty == 0 {\n            input! {\n                p: usize,\n       \
-    \         c: Mint,\n                d: Mint,\n            }\n            tq.set(p,\
-    \ (c, d));\n        } else {\n            input! {\n                u: usize,\n\
-    \                v: usize,\n                x: Mint,\n            }\n        \
-    \    let (a, b) = tq.prod_path(u, v);\n            println!(\"{}\", a * x + b);\n\
-    \        }\n    }\n}\n"
+    \nuse ac_library::ModInt998244353 as Mint;\nuse algebraic::{algebra, monoid};\n\
+    use graph::Graph;\nuse proconio::input;\nuse tree_query::TreeQueryVertex;\n\n\
+    algebra!(M, (Mint, Mint));\nmonoid!(M, (1.into(), 0.into()), |&(a, b), &(c, d)|\
+    \ (\n    a * c,\n    b * c + d\n));\n\n#[proconio::fastout]\nfn main() {\n   \
+    \ input! {\n        n: usize,\n        q: usize,\n        a: [(Mint, Mint); n],\n\
+    \    }\n    let mut g = Graph::from(a);\n    for _ in 0..n - 1 {\n        input!\
+    \ {\n            u: usize,\n            v: usize,\n        }\n        g.add_undirected_edge(u,\
+    \ v, ());\n    }\n    let mut tq = TreeQueryVertex::<M>::build(&g);\n    for _\
+    \ in 0..q {\n        input! {\n            ty: usize,\n        }\n        if ty\
+    \ == 0 {\n            input! {\n                p: usize,\n                c:\
+    \ Mint,\n                d: Mint,\n            }\n            tq.set(p, (c, d));\n\
+    \        } else {\n            input! {\n                u: usize,\n         \
+    \       v: usize,\n                x: Mint,\n            }\n            let (a,\
+    \ b) = tq.prod_path(u, v);\n            println!(\"{}\", a * x + b);\n       \
+    \ }\n    }\n}\n"
   dependsOn:
+  - crates/algebraic/algebraic/src/lib.rs
+  - crates/data-structure/segment-tree/src/lib.rs
   - crates/data-structure/tree-query/src/lib.rs
   - crates/graph/graph/src/lib.rs
   isVerificationFile: true
   path: verify/vertex_set_path_composite/src/main.rs
   requiredBy: []
-  timestamp: '2023-04-24 12:50:05+09:00'
+  timestamp: '2023-04-25 18:38:46+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/vertex_set_path_composite/src/main.rs

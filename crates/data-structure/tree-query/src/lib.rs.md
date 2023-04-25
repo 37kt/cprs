@@ -2,8 +2,14 @@
 data:
   _extendedDependsOn:
   - icon: ':heavy_check_mark:'
+    path: crates/algebraic/algebraic/src/lib.rs
+    title: crates/algebraic/algebraic/src/lib.rs
+  - icon: ':heavy_check_mark:'
     path: crates/data-structure/heavy-light-decomposition/src/lib.rs
     title: crates/data-structure/heavy-light-decomposition/src/lib.rs
+  - icon: ':heavy_check_mark:'
+    path: crates/data-structure/segment-tree/src/lib.rs
+    title: crates/data-structure/segment-tree/src/lib.rs
   - icon: ':heavy_check_mark:'
     path: crates/graph/graph/src/lib.rs
     title: crates/graph/graph/src/lib.rs
@@ -29,58 +35,60 @@ data:
     \         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\
     \  File \"/opt/hostedtoolcache/Python/3.11.3/x64/lib/python3.11/site-packages/onlinejudge_verify/languages/rust.py\"\
     , line 288, in bundle\n    raise NotImplementedError\nNotImplementedError\n"
-  code: "use std::marker::PhantomData;\n\nuse ac_library::{Monoid, Segtree};\nuse\
-    \ graph::Graph;\nuse heavy_light_decomposition::HeavyLightDecomposition;\n\npub\
-    \ type TreeQueryVertex<M> = TreeQuery<M, Vertex>;\npub type TreeQueryEdge<M> =\
-    \ TreeQuery<M, Edge>;\n\npub trait QueryType {\n    fn vertex() -> bool;\n   \
-    \ fn edge() -> bool;\n}\n\npub enum Vertex {}\npub enum Edge {}\n\nimpl QueryType\
+  code: "use std::marker::PhantomData;\n\nuse algebraic::Monoid;\nuse graph::Graph;\n\
+    use heavy_light_decomposition::HeavyLightDecomposition;\nuse segment_tree::SegmentTree;\n\
+    \npub type TreeQueryVertex<M> = TreeQuery<M, Vertex>;\npub type TreeQueryEdge<M>\
+    \ = TreeQuery<M, Edge>;\n\npub trait QueryType {\n    fn vertex() -> bool;\n \
+    \   fn edge() -> bool;\n}\n\npub enum Vertex {}\npub enum Edge {}\n\nimpl QueryType\
     \ for Vertex {\n    fn vertex() -> bool {\n        true\n    }\n    fn edge()\
     \ -> bool {\n        false\n    }\n}\n\nimpl QueryType for Edge {\n    fn vertex()\
     \ -> bool {\n        false\n    }\n    fn edge() -> bool {\n        true\n   \
-    \ }\n}\n\npub struct TreeQuery<M, Q>\nwhere\n    M: Monoid,\n    Q: QueryType,\n\
-    {\n    n: usize,\n    hld: HeavyLightDecomposition,\n    seg_up: Segtree<M>,\n\
-    \    seg_down: Segtree<M>,\n    _marker: PhantomData<fn() -> Q>,\n}\n\nimpl<M,\
-    \ Q> TreeQuery<M, Q>\nwhere\n    M: Monoid,\n    Q: QueryType,\n{\n    pub fn\
-    \ prod_path(&self, u: usize, v: usize) -> M::S {\n        let (up, down) = self.hld.path(u,\
-    \ v, Q::edge());\n        let mut res = M::identity();\n        for &(l, r) in\
-    \ &up {\n            let t = self.seg_up.prod(self.n - r..self.n - l);\n     \
-    \       res = M::binary_operation(&res, &t);\n        }\n        for &(l, r) in\
-    \ &down {\n            let t = self.seg_down.prod(l..r);\n            res = M::binary_operation(&res,\
-    \ &t);\n        }\n        res\n    }\n\n    pub fn prod_subtree(&self, v: usize)\
-    \ -> M::S {\n        let (l, r) = self.hld.subtree(v, Q::edge());\n        self.seg_down.prod(l..r)\n\
-    \    }\n}\n\nimpl<V, M> TreeQuery<M, Vertex>\nwhere\n    V: Clone,\n    M: Monoid<S\
-    \ = V>,\n{\n    pub fn build<E>(g: &Graph<V, E>) -> Self\n    where\n        E:\
-    \ Clone,\n    {\n        let n = g.size();\n        let hld = HeavyLightDecomposition::new(g);\n\
-    \        let mut a = vec![M::identity(); n];\n        for v in 0..n {\n      \
-    \      let k = hld.vertex(v);\n            a[k] = g.vertex(v).clone();\n     \
-    \   }\n        let seg_down = Segtree::from(a.clone());\n        a.reverse();\n\
-    \        let seg_up = Segtree::from(a);\n        Self {\n            n,\n    \
-    \        hld,\n            seg_up,\n            seg_down,\n            _marker:\
-    \ PhantomData::default(),\n        }\n    }\n\n    pub fn set(&mut self, v: usize,\
-    \ x: M::S) {\n        let k = self.hld.vertex(v);\n        self.seg_up.set(self.n\
-    \ - 1 - k, x.clone());\n        self.seg_down.set(k, x);\n    }\n\n    pub fn\
-    \ get(&self, v: usize) -> M::S {\n        let k = self.hld.vertex(v);\n      \
-    \  self.seg_down.get(k)\n    }\n}\n\nimpl<E, M> TreeQuery<M, Edge>\nwhere\n  \
-    \  E: Clone,\n    M: Monoid<S = E>,\n{\n    pub fn build<V>(g: &Graph<V, E>) ->\
-    \ Self\n    where\n        V: Clone,\n    {\n        let n = g.size();\n     \
-    \   let hld = HeavyLightDecomposition::new(g);\n        let mut a = vec![M::identity();\
+    \ }\n}\n\npub struct TreeQuery<M, Q>\nwhere\n    M: Monoid,\n    M::S: Clone,\n\
+    \    Q: QueryType,\n{\n    n: usize,\n    hld: HeavyLightDecomposition,\n    seg_up:\
+    \ SegmentTree<M>,\n    seg_down: SegmentTree<M>,\n    _marker: PhantomData<fn()\
+    \ -> Q>,\n}\n\nimpl<M, Q> TreeQuery<M, Q>\nwhere\n    M: Monoid,\n    M::S: Clone,\n\
+    \    Q: QueryType,\n{\n    pub fn prod_path(&self, u: usize, v: usize) -> M::S\
+    \ {\n        let (up, down) = self.hld.path(u, v, Q::edge());\n        let mut\
+    \ res = M::e();\n        for &(l, r) in &up {\n            let t = self.seg_up.prod(self.n\
+    \ - r..self.n - l);\n            res = M::op(&res, &t);\n        }\n        for\
+    \ &(l, r) in &down {\n            let t = self.seg_down.prod(l..r);\n        \
+    \    res = M::op(&res, &t);\n        }\n        res\n    }\n\n    pub fn prod_subtree(&self,\
+    \ v: usize) -> M::S {\n        let (l, r) = self.hld.subtree(v, Q::edge());\n\
+    \        self.seg_down.prod(l..r)\n    }\n}\n\nimpl<V, M> TreeQuery<M, Vertex>\n\
+    where\n    V: Clone,\n    M: Monoid<S = V>,\n{\n    pub fn build<E>(g: &Graph<V,\
+    \ E>) -> Self\n    where\n        E: Clone,\n    {\n        let n = g.size();\n\
+    \        let hld = HeavyLightDecomposition::new(g);\n        let mut a = vec![M::e();\
+    \ n];\n        for v in 0..n {\n            let k = hld.vertex(v);\n         \
+    \   a[k] = g.vertex(v).clone();\n        }\n        let seg_down = SegmentTree::from(a.clone());\n\
+    \        a.reverse();\n        let seg_up = SegmentTree::from(a);\n        Self\
+    \ {\n            n,\n            hld,\n            seg_up,\n            seg_down,\n\
+    \            _marker: PhantomData::default(),\n        }\n    }\n\n    pub fn\
+    \ set(&mut self, v: usize, x: M::S) {\n        let k = self.hld.vertex(v);\n \
+    \       self.seg_up.set(self.n - 1 - k, x.clone());\n        self.seg_down.set(k,\
+    \ x);\n    }\n\n    pub fn get(&self, v: usize) -> M::S {\n        let k = self.hld.vertex(v);\n\
+    \        self.seg_down.get(k)\n    }\n}\n\nimpl<E, M> TreeQuery<M, Edge>\nwhere\n\
+    \    E: Clone,\n    M: Monoid<S = E>,\n{\n    pub fn build<V>(g: &Graph<V, E>)\
+    \ -> Self\n    where\n        V: Clone,\n    {\n        let n = g.size();\n  \
+    \      let hld = HeavyLightDecomposition::new(g);\n        let mut a = vec![M::e();\
     \ n];\n        for v in 0..n {\n            for (u, w) in g.out_edges(v) {\n \
     \               let k = hld.edge(*u, v);\n                a[k] = w.clone();\n\
-    \            }\n        }\n        let seg_down = Segtree::from(a.clone());\n\
-    \        a.reverse();\n        let seg_up = Segtree::from(a);\n        Self {\n\
-    \            n,\n            hld,\n            seg_up,\n            seg_down,\n\
+    \            }\n        }\n        let seg_down = SegmentTree::from(a.clone());\n\
+    \        a.reverse();\n        let seg_up = SegmentTree::from(a);\n        Self\
+    \ {\n            n,\n            hld,\n            seg_up,\n            seg_down,\n\
     \            _marker: PhantomData::default(),\n        }\n    }\n\n    pub fn\
     \ set(&mut self, u: usize, v: usize, x: M::S) {\n        let k = self.hld.edge(u,\
     \ v);\n        self.seg_up.set(self.n - 1 - k, x.clone());\n        self.seg_down.set(k,\
     \ x);\n    }\n\n    pub fn get(&self, u: usize, v: usize) -> M::S {\n        let\
     \ k = self.hld.edge(u, v);\n        self.seg_down.get(k)\n    }\n}\n"
   dependsOn:
+  - crates/algebraic/algebraic/src/lib.rs
   - crates/data-structure/heavy-light-decomposition/src/lib.rs
+  - crates/data-structure/segment-tree/src/lib.rs
   - crates/graph/graph/src/lib.rs
   isVerificationFile: false
   path: crates/data-structure/tree-query/src/lib.rs
   requiredBy: []
-  timestamp: '2023-04-24 12:50:05+09:00'
+  timestamp: '2023-04-25 18:38:46+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/vertex_set_path_composite/src/main.rs
