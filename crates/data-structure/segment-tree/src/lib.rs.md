@@ -53,18 +53,45 @@ data:
     \                l += 1;\n            }\n            if r & 1 != 0 {\n       \
     \         r -= 1;\n                sr = M::op(&self.v[r], &sr);\n            }\n\
     \            l >>= 1;\n            r >>= 1;\n        }\n        M::op(&sl, &sr)\n\
-    \    }\n}\n\nimpl<M> From<Vec<M::S>> for SegmentTree<M>\nwhere\n    M: Monoid,\n\
-    \    M::S: Clone,\n{\n    fn from(mut a: Vec<M::S>) -> Self {\n        let n =\
-    \ a.len();\n        let mut v = vec![M::e(); n];\n        v.append(&mut a);\n\
-    \        for i in (1..n).rev() {\n            v[i] = M::op(&v[i * 2], &v[i * 2\
-    \ + 1]);\n        }\n        Self { n, v }\n    }\n}\n"
+    \    }\n\n    pub fn max_right<P>(&self, mut l: usize, pred: P) -> usize\n   \
+    \ where\n        P: Fn(&M::S) -> bool,\n    {\n        assert!(l <= self.n);\n\
+    \        assert!(pred(&M::e()));\n        if pred(&self.prod(l..)) {\n       \
+    \     return self.n;\n        }\n        l += self.n;\n        let mut s = M::e();\n\
+    \        loop {\n            while l & 1 == 0 && self.is_good_node(l >> 1) {\n\
+    \                l >>= 1;\n            }\n            if !pred(&M::op(&s, &self.v[l]))\
+    \ {\n                while l < self.n {\n                    l <<= 1;\n      \
+    \              let t = M::op(&s, &self.v[l]);\n                    if pred(&t)\
+    \ {\n                        s = t;\n                        l += 1;\n       \
+    \             }\n                }\n                return l - self.n;\n     \
+    \       }\n            s = M::op(&s, &self.v[l]);\n            l += 1;\n     \
+    \   }\n    }\n\n    pub fn min_left<P>(&self, mut r: usize, pred: P) -> usize\n\
+    \    where\n        P: Fn(&M::S) -> bool,\n    {\n        assert!(r <= self.n);\n\
+    \        assert!(pred(&M::e()));\n        if pred(&self.prod(..r)) {\n       \
+    \     return 0;\n        }\n        r += self.n;\n        let mut s = M::e();\n\
+    \        loop {\n            r -= 1;\n            while !self.is_good_node(r)\
+    \ {\n                r = r * 2 + 1;\n            }\n            while r & 1 !=\
+    \ 0 && self.is_good_node(r >> 1) {\n                r >>= 1;\n            }\n\
+    \            if !pred(&M::op(&self.v[r], &s)) {\n                while r < self.n\
+    \ {\n                    r = r * 2 + 1;\n                    let t = M::op(&self.v[r],\
+    \ &s);\n                    if pred(&t) {\n                        s = t;\n  \
+    \                      r -= 1;\n                    }\n                }\n   \
+    \             return r + 1 - self.n;\n            }\n            s = M::op(&self.v[r],\
+    \ &s);\n        }\n    }\n\n    #[inline]\n    fn is_good_node(&self, k: usize)\
+    \ -> bool {\n        if k >= self.n {\n            true\n        } else {\n  \
+    \          let d = k.leading_zeros() - self.n.leading_zeros();\n            self.n\
+    \ >> d != k || self.n >> d << d == self.n\n        }\n    }\n}\n\nimpl<M> From<Vec<M::S>>\
+    \ for SegmentTree<M>\nwhere\n    M: Monoid,\n    M::S: Clone,\n{\n    fn from(mut\
+    \ a: Vec<M::S>) -> Self {\n        let n = a.len();\n        let mut v = vec![M::e();\
+    \ n];\n        v.append(&mut a);\n        for i in (1..n).rev() {\n          \
+    \  v[i] = M::op(&v[i * 2], &v[i * 2 + 1]);\n        }\n        Self { n, v }\n\
+    \    }\n}\n"
   dependsOn:
   - crates/algebraic/algebraic/src/lib.rs
   isVerificationFile: false
   path: crates/data-structure/segment-tree/src/lib.rs
   requiredBy:
   - crates/data-structure/tree-query/src/lib.rs
-  timestamp: '2023-04-25 18:38:46+09:00'
+  timestamp: '2023-04-26 12:26:24+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/vertex_set_path_composite/src/main.rs

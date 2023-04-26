@@ -52,7 +52,7 @@ data:
   isVerificationFile: true
   path: verify/vertex_set_path_composite/src/main.rs
   requiredBy: []
-  timestamp: '2023-04-25 18:38:46+09:00'
+  timestamp: '2023-04-26 12:26:24+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/vertex_set_path_composite/src/main.rs

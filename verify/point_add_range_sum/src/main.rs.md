@@ -39,7 +39,7 @@ data:
   isVerificationFile: true
   path: verify/point_add_range_sum/src/main.rs
   requiredBy: []
-  timestamp: '2023-04-25 18:38:46+09:00'
+  timestamp: '2023-04-26 12:26:24+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/point_add_range_sum/src/main.rs
