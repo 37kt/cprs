@@ -89,10 +89,10 @@ where
         r += self.n;
         let h = 63 - self.n.leading_zeros() as usize;
         for i in (1..=h).rev() {
-            if (l >> i) << i != l {
+            if l >> i << i != l {
                 self.push(l >> i);
             }
-            if (r >> i) << i != r {
+            if r >> i << i != r {
                 self.push(r >> i);
             }
         }
@@ -149,10 +149,10 @@ where
         r += self.n;
         let h = 63 - self.n.leading_zeros() as usize;
         for i in (1..=h).rev() {
-            if (l >> i) << i != l {
+            if l >> i << i != l {
                 self.push(l >> i);
             }
-            if (r >> i) << i != r {
+            if r >> i << i != r {
                 self.push(r - 1 >> i);
             }
         }
@@ -175,12 +175,89 @@ where
         r = r2;
 
         for i in 1..=h {
-            if (l >> i) << i != l {
+            if l >> i << i != l {
                 self.update(l >> i);
             }
-            if (r >> i) << i != r {
+            if r >> i << i != r {
                 self.update(r - 1 >> i);
             }
+        }
+    }
+
+    /// ！未検証！
+    pub fn max_right<P>(&mut self, mut l: usize, pred: P) -> usize
+    where
+        P: Fn(&M::S) -> bool,
+    {
+        assert!(l <= self.n);
+        assert!(pred(&M::e()));
+        if pred(&self.prod(l..)) {
+            return self.n;
+        }
+        l += self.n;
+        let h = 63 - l.leading_zeros() as usize;
+        for i in (1..=h).rev() {
+            self.push(l >> i);
+        }
+        let mut s = M::e();
+        loop {
+            while l & 1 == 0 && self.is_good_node(l >> 1) {
+                l >>= 1;
+            }
+            if !pred(&M::op(&s, &self.v[l])) {
+                while l < self.n {
+                    self.push(l);
+                    l <<= 1;
+                    let t = M::op(&s, &self.v[l]);
+                    if pred(&t) {
+                        s = t;
+                        l += 1;
+                    }
+                }
+                return l - self.n;
+            }
+            s = M::op(&s, &self.v[l]);
+            l += 1;
+        }
+    }
+
+    /// ！未検証！
+    pub fn min_left<P>(&mut self, mut r: usize, pred: P) -> usize
+    where
+        P: Fn(&M::S) -> bool,
+    {
+        assert!(r <= self.n);
+        assert!(pred(&M::e()));
+        if pred(&self.prod(..r)) {
+            return 0;
+        }
+        r += self.n;
+        let h = 63 - (r - 1).leading_zeros() as usize;
+        for i in (1..=h).rev() {
+            self.push(r - 1 >> i);
+        }
+        let mut s = M::e();
+        loop {
+            r -= 1;
+            while !self.is_good_node(r) {
+                r = r * 2 + 1;
+            }
+            while r & 1 != 0 && self.is_good_node(r >> 1) {
+                r >>= 1;
+            }
+            if !pred(&M::op(&self.v[r], &s)) {
+                while r < self.n {
+                    self.push(r);
+                    r = r * 2 + 1;
+                    let t = M::op(&self.v[r], &s);
+                    if pred(&t) {
+                        s = t;
+                        r -= 1;
+                    }
+                }
+                return r + 1 - self.n;
+            }
+            s = M::op(&self.v[r], &s);
         }
     }
 
@@ -199,5 +276,15 @@ where
         self.all_apply(k * 2, self.lz[k].clone());
         self.all_apply(k * 2 + 1, self.lz[k].clone());
         self.lz[k] = F::e();
+    }
+
+    #[inline]
+    fn is_good_node(&self, k: usize) -> bool {
+        if k >= self.n {
+            true
+        } else {
+            let d = k.leading_zeros() - self.n.leading_zeros();
+            self.n >> d != k || self.n >> d << d == self.n
+        }
     }
 }

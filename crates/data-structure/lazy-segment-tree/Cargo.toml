@@ -12,3 +12,6 @@ name = "lazy_segment_tree"
 
 [dependencies]
 algebraic = { path = "../../algebraic/algebraic" }
+
+[dev-dependencies]
+rand = { version = "=0.7.3", features = ["small_rng"] }
