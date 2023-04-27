@@ -4,7 +4,10 @@ data:
   - icon: ':heavy_check_mark:'
     path: crates/algebraic/algebraic/src/lib.rs
     title: crates/algebraic/algebraic/src/lib.rs
-  _extendedRequiredBy: []
+  _extendedRequiredBy:
+  - icon: ':heavy_check_mark:'
+    path: crates/string/suffix-array/src/lib.rs
+    title: crates/string/suffix-array/src/lib.rs
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: verify/staticrmq/src/main.rs
@@ -40,7 +43,8 @@ data:
   - crates/algebraic/algebraic/src/lib.rs
   isVerificationFile: false
   path: crates/data-structure/disjoint-sparse-table/src/lib.rs
-  requiredBy: []
+  requiredBy:
+  - crates/string/suffix-array/src/lib.rs
   timestamp: '2023-04-25 15:51:20+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:

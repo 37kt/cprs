@@ -151,11 +151,16 @@ data:
     - icon: ':warning:'
       path: crates/sequence/run-length-encoding/src/lib.rs
       title: crates/sequence/run-length-encoding/src/lib.rs
-  - name: crates/sequence/z-algorithm/src
+  - name: crates/string/suffix-array/src
     pages:
     - icon: ':heavy_check_mark:'
-      path: crates/sequence/z-algorithm/src/lib.rs
-      title: crates/sequence/z-algorithm/src/lib.rs
+      path: crates/string/suffix-array/src/lib.rs
+      title: crates/string/suffix-array/src/lib.rs
+  - name: crates/string/z-algorithm/src
+    pages:
+    - icon: ':heavy_check_mark:'
+      path: crates/string/z-algorithm/src/lib.rs
+      title: crates/string/z-algorithm/src/lib.rs
   - name: crates/tree/centroid-decomposition/src
     pages:
     - icon: ':warning:'
@@ -242,6 +247,11 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/matrix_product/src/main.rs
       title: verify/matrix_product/src/main.rs
+  - name: verify/number_of_substrings/src
+    pages:
+    - icon: ':heavy_check_mark:'
+      path: verify/number_of_substrings/src/main.rs
+      title: verify/number_of_substrings/src/main.rs
   - name: verify/point_add_range_sum/src
     pages:
     - icon: ':heavy_check_mark:'
@@ -307,6 +317,11 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/staticrmq/src/main.rs
       title: verify/staticrmq/src/main.rs
+  - name: verify/suffixarray/src
+    pages:
+    - icon: ':heavy_check_mark:'
+      path: verify/suffixarray/src/main.rs
+      title: verify/suffixarray/src/main.rs
   - name: verify/two_sat/src
     pages:
     - icon: ':heavy_check_mark:'
