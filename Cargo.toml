@@ -9,6 +9,7 @@ members = [
     "crates/math/*",
     "crates/polynomial/*",
     "crates/sequence/*",
+    "crates/string/*",
     "crates/tree/*",
     "verify/*",
 ]
