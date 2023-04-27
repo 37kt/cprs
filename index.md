@@ -121,6 +121,11 @@ data:
     - icon: ':heavy_check_mark:'
       path: crates/math/discrete-logarithm/src/lib.rs
       title: crates/math/discrete-logarithm/src/lib.rs
+  - name: crates/math/floor-sum/src
+    pages:
+    - icon: ':heavy_check_mark:'
+      path: crates/math/floor-sum/src/lib.rs
+      title: crates/math/floor-sum/src/lib.rs
   - name: crates/math/matrix/src
     pages:
     - icon: ':heavy_check_mark:'
@@ -322,6 +327,11 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/suffixarray/src/main.rs
       title: verify/suffixarray/src/main.rs
+  - name: verify/sum_of_floor_of_linear/src
+    pages:
+    - icon: ':heavy_check_mark:'
+      path: verify/sum_of_floor_of_linear/src/main.rs
+      title: verify/sum_of_floor_of_linear/src/main.rs
   - name: verify/two_sat/src
     pages:
     - icon: ':heavy_check_mark:'
