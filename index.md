@@ -101,6 +101,16 @@ data:
     - icon: ':heavy_check_mark:'
       path: crates/graph/graph/src/lib.rs
       title: crates/graph/graph/src/lib.rs
+  - name: crates/graph/max-flow/src
+    pages:
+    - icon: ':warning:'
+      path: crates/graph/max-flow/src/lib.rs
+      title: crates/graph/max-flow/src/lib.rs
+  - name: crates/graph/max-flow-lower-bound/src
+    pages:
+    - icon: ':warning:'
+      path: crates/graph/max-flow-lower-bound/src/lib.rs
+      title: crates/graph/max-flow-lower-bound/src/lib.rs
   - name: crates/graph/strongly-connected-components/src
     pages:
     - icon: ':heavy_check_mark:'
