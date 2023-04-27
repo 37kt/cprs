@@ -1,8 +1,8 @@
-pub fn z_algorithm<T>(a: &[T]) -> Vec<usize>
+pub fn z_algorithm<T>(s: &[T]) -> Vec<usize>
 where
-    T: Ord,
+    T: Eq,
 {
-    let n = a.len();
+    let n = s.len();
     if n == 0 {
         return vec![];
     }
@@ -14,7 +14,7 @@ where
         } else {
             z[i - j].min(j + z[j] - i)
         };
-        while i + k < n && a[k] == a[i + k] {
+        while i + k < n && s[k] == s[i + k] {
             k += 1;
         }
         z[i] = k;
