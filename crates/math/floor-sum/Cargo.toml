@@ -1,14 +1,13 @@
 [package]
-name = "lazy-segment-tree"
+name = "floor-sum"
 version = "0.1.0"
 edition = "2018"
 license = "CC0-1.0"
 publish = false
 
 [lib]
-name = "lazy_segment_tree"
+name = "floor_sum"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-algebraic = { path = "../../algebraic/algebraic" }
