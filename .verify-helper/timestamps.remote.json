@@ -1,6 +1,6 @@
 {
 "verify/aplusb/src/main.rs": "2023-04-21 11:20:46 +0900",
-"verify/assignment/src/main.rs": "2023-04-28 13:20:21 +0900",
+"verify/assignment/src/main.rs": "2023-04-28 14:34:12 +0900",
 "verify/bitwise_and_convolution/src/main.rs": "2023-04-21 13:06:23 +0900",
 "verify/bitwise_xor_convolution/src/main.rs": "2023-04-21 13:06:23 +0900",
 "verify/deque_operate_all_composite/src/main.rs": "2023-04-25 15:51:20 +0900",
@@ -15,7 +15,7 @@
 "verify/line_add_get_min/src/main.rs": "2023-04-21 13:06:23 +0900",
 "verify/log_of_formal_power_series/src/main.rs": "2023-04-22 14:06:50 +0900",
 "verify/matrix_product/src/main.rs": "2023-04-21 13:06:23 +0900",
-"verify/min_cost_b_flow/src/main.rs": "2023-04-28 13:20:21 +0900",
+"verify/min_cost_b_flow/src/main.rs": "2023-04-28 14:34:12 +0900",
 "verify/number_of_substrings/src/main.rs": "2023-04-27 14:07:11 +0900",
 "verify/point_add_range_sum/src/main.rs": "2023-04-26 12:26:24 +0900",
 "verify/pow_of_formal_power_series/src/main.rs": "2023-04-22 14:06:50 +0900",
