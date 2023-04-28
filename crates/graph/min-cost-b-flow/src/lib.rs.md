@@ -22,28 +22,26 @@ data:
     \  File \"/opt/hostedtoolcache/Python/3.11.3/x64/lib/python3.11/site-packages/onlinejudge_verify/languages/rust.py\"\
     , line 288, in bundle\n    raise NotImplementedError\nNotImplementedError\n"
   code: "// reference: https://misawa.github.io/others/flow/lets_use_capacity_scaling.html\n\
-    \nuse std::{cmp::Reverse, collections::BinaryHeap};\n\npub type FlowType = i64;\n\
-    pub type CostType = i64;\nconst UNREACHABLE: CostType = std::i64::MAX;\nconst\
-    \ SCALING_FACTOR: FlowType = 2;\n\n#[derive(Debug, Clone, Copy)]\npub struct Edge\
-    \ {\n    pub from: usize,\n    pub to: usize,\n    pub lower: FlowType,\n    pub\
-    \ upper: FlowType,\n    pub cost: CostType,\n    pub gain: CostType,\n    pub\
-    \ flow: FlowType,\n}\n\npub struct MinCostBFlow {\n    n: usize,\n    edges: Vec<Edge_>,\n\
-    \    head: Vec<usize>,\n    next: Vec<usize>,\n    b: Vec<FlowType>,\n    farthest:\
-    \ CostType,\n    potential: Vec<CostType>,\n    dist: Vec<CostType>,\n    parent:\
-    \ Vec<usize>,\n    pq: BinaryHeap<Reverse<(CostType, usize)>>,\n    excess_vs:\
-    \ Vec<usize>,\n    deficit_vs: Vec<usize>,\n}\n\nimpl MinCostBFlow {\n    pub\
-    \ fn new() -> Self {\n        Self {\n            n: 0,\n            edges: vec![],\n\
-    \            head: vec![],\n            next: vec![],\n            b: vec![],\n\
-    \            farthest: 0,\n            potential: vec![],\n            dist: vec![],\n\
-    \            parent: vec![],\n            pq: Default::default(),\n          \
-    \  excess_vs: vec![],\n            deficit_vs: vec![],\n        }\n    }\n\n \
-    \   pub fn add_vertex(&mut self) -> usize {\n        self.n += 1;\n        self.head.push(!0);\n\
-    \        self.b.push(0);\n        self.n - 1\n    }\n\n    pub fn add_vertices(&mut\
+    \nuse std::{cmp::Reverse, collections::BinaryHeap};\n\nconst UNREACHABLE: i64\
+    \ = std::i64::MAX;\nconst SCALING_FACTOR: i64 = 2;\n\n#[derive(Debug, Clone, Copy)]\n\
+    pub struct Edge {\n    pub from: usize,\n    pub to: usize,\n    pub lower: i64,\n\
+    \    pub upper: i64,\n    pub cost: i64,\n    pub gain: i64,\n    pub flow: i64,\n\
+    }\n\npub struct MinCostBFlow {\n    n: usize,\n    edges: Vec<Edge_>,\n    head:\
+    \ Vec<usize>,\n    next: Vec<usize>,\n    b: Vec<i64>,\n    farthest: i64,\n \
+    \   potential: Vec<i64>,\n    dist: Vec<i64>,\n    parent: Vec<usize>,\n    pq:\
+    \ BinaryHeap<Reverse<(i64, usize)>>,\n    excess_vs: Vec<usize>,\n    deficit_vs:\
+    \ Vec<usize>,\n}\n\nimpl MinCostBFlow {\n    pub fn new() -> Self {\n        Self\
+    \ {\n            n: 0,\n            edges: vec![],\n            head: vec![],\n\
+    \            next: vec![],\n            b: vec![],\n            farthest: 0,\n\
+    \            potential: vec![],\n            dist: vec![],\n            parent:\
+    \ vec![],\n            pq: Default::default(),\n            excess_vs: vec![],\n\
+    \            deficit_vs: vec![],\n        }\n    }\n\n    pub fn add_vertex(&mut\
+    \ self) -> usize {\n        self.n += 1;\n        self.head.push(!0);\n      \
+    \  self.b.push(0);\n        self.n - 1\n    }\n\n    pub fn add_vertices(&mut\
     \ self, size: usize) -> Vec<usize> {\n        self.n += size;\n        self.head.append(&mut\
     \ vec![!0; size]);\n        self.b.append(&mut vec![0; size]);\n        (self.n\
-    \ - size..self.n).collect()\n    }\n\n    pub fn add_edge(\n        &mut self,\n\
-    \        from: usize,\n        to: usize,\n        lower: FlowType,\n        upper:\
-    \ FlowType,\n        cost: CostType,\n    ) -> usize {\n        assert!(lower\
+    \ - size..self.n).collect()\n    }\n\n    pub fn add_edge(&mut self, from: usize,\
+    \ to: usize, lower: i64, upper: i64, cost: i64) -> usize {\n        assert!(lower\
     \ <= upper);\n        assert!(from < self.n);\n        assert!(to < self.n);\n\
     \        let m = self.edges.len();\n        self.next.push(self.head[from]);\n\
     \        self.head[from] = m;\n        self.next.push(self.head[to]);\n      \
@@ -51,17 +49,17 @@ data:
     \            cap: upper,\n            cost,\n            flow: 0,\n        });\n\
     \        self.edges.push(Edge_ {\n            to: from,\n            cap: -lower,\n\
     \            cost: -cost,\n            flow: 0,\n        });\n        m / 2\n\
-    \    }\n\n    pub fn add_supply(&mut self, v: usize, amount: FlowType) {\n   \
-    \     self.b[v] += amount;\n    }\n\n    pub fn add_demand(&mut self, v: usize,\
-    \ amount: FlowType) {\n        self.b[v] -= amount;\n    }\n\n    pub fn get_edge(&self,\
-    \ e: usize) -> Edge {\n        assert!(e <= self.edges.len() / 2);\n        let\
-    \ e = e * 2;\n        Edge {\n            from: self.from(e),\n            to:\
-    \ self.to(e),\n            lower: self.lower(e),\n            upper: self.upper(e),\n\
-    \            cost: self.cost(e),\n            gain: self.gain(e),\n          \
-    \  flow: self.flow(e),\n        }\n    }\n\n    pub fn get_edges(&self) -> Vec<Edge>\
+    \    }\n\n    pub fn add_supply(&mut self, v: usize, amount: i64) {\n        self.b[v]\
+    \ += amount;\n    }\n\n    pub fn add_demand(&mut self, v: usize, amount: i64)\
+    \ {\n        self.b[v] -= amount;\n    }\n\n    pub fn get_edge(&self, e: usize)\
+    \ -> Edge {\n        assert!(e <= self.edges.len() / 2);\n        let e = e *\
+    \ 2;\n        Edge {\n            from: self.from(e),\n            to: self.to(e),\n\
+    \            lower: self.lower(e),\n            upper: self.upper(e),\n      \
+    \      cost: self.cost(e),\n            gain: self.gain(e),\n            flow:\
+    \ self.flow(e),\n        }\n    }\n\n    pub fn get_edges(&self) -> Vec<Edge>\
     \ {\n        (0..self.edges.len() / 2)\n            .map(|e| self.get_edge(e))\n\
-    \            .collect()\n    }\n\n    pub fn min_cost_b_flow(&mut self) -> Result<CostType,\
-    \ CostType> {\n        self.potential.resize(self.n, 0);\n        for u in 0..self.n\
+    \            .collect()\n    }\n\n    pub fn min_cost_b_flow(&mut self) -> Result<i64,\
+    \ i64> {\n        self.potential.resize(self.n, 0);\n        for u in 0..self.n\
     \ {\n            let mut e = self.head[u];\n            while e != !0 {\n    \
     \            let rcap = self.residual_cap(e);\n                if rcap < 0 {\n\
     \                    self.push(e, rcap);\n                    self.b[u] -= rcap;\n\
@@ -77,10 +75,9 @@ data:
     \ { flow, cost, .. } in &self.edges {\n            value += flow * cost;\n   \
     \     }\n        value /= 2;\n\n        if self.excess_vs.is_empty() && self.deficit_vs.is_empty()\
     \ {\n            Ok(value)\n        } else {\n            Err(value)\n       \
-    \ }\n    }\n\n    pub fn min_cost_flow(\n        &mut self,\n        s: usize,\n\
-    \        t: usize,\n    ) -> Result<(CostType, FlowType), (CostType, FlowType)>\
-    \ {\n        assert!(s != t);\n        let mut inf_flow = self.b[s].abs();\n \
-    \       let mut e = self.head[s];\n        while e != !0 {\n            inf_flow\
+    \ }\n    }\n\n    pub fn min_cost_flow(&mut self, s: usize, t: usize) -> Result<(i64,\
+    \ i64), (i64, i64)> {\n        assert!(s != t);\n        let mut inf_flow = self.b[s].abs();\n\
+    \        let mut e = self.head[s];\n        while e != !0 {\n            inf_flow\
     \ += 0.max(self.edges[e].cap);\n            e = self.next[e];\n        }\n\n \
     \       self.add_edge(t, s, 0, inf_flow, 0);\n        if let Err(circulation_value)\
     \ = self.min_cost_b_flow() {\n            self.head[s] = self.next[s];\n     \
@@ -89,39 +86,39 @@ data:
     \    }\n\n        let mut inf_flow = self.b[s].abs();\n        let mut e = self.head[s];\n\
     \        while e != !0 {\n            inf_flow += self.residual_cap(e);\n    \
     \        e = self.next[e];\n        }\n        self.b[s] += inf_flow;\n      \
-    \  self.b[t] -= inf_flow;\n        let mf_value = self.min_cost_b_flow();\n  \
-    \      self.b[s] -= inf_flow;\n        self.b[t] += inf_flow;\n\n        self.head[s]\
-    \ = self.next[s];\n        self.head[t] = self.next[t];\n        self.edges.pop();\n\
-    \        self.edges.pop();\n\n        mf_value.map(|v| (v, self.b[t])).map_err(|v|\
-    \ (v, self.b[t]))\n    }\n\n    pub fn get_result_value_i128(&mut self) -> i128\
-    \ {\n        let mut value = 0;\n        for e in &self.edges {\n            value\
-    \ += e.flow as i128 * e.cost as i128;\n        }\n        value / 2\n    }\n\n\
-    \    pub fn get_potential(&mut self) -> Vec<CostType> {\n        self.potential.fill(0);\n\
+    \  self.b[t] -= inf_flow;\n        let mf_value = match self.min_cost_b_flow()\
+    \ {\n            Ok(v) => v,\n            Err(v) => v,\n        };\n        self.b[s]\
+    \ -= inf_flow;\n        self.b[t] += inf_flow;\n\n        self.head[s] = self.next[s];\n\
+    \        self.head[t] = self.next[t];\n        self.edges.pop();\n        self.edges.pop();\n\
+    \        Ok((mf_value, self.b[t]))\n    }\n\n    pub fn get_result_value_i128(&mut\
+    \ self) -> i128 {\n        let mut value = 0;\n        for e in &self.edges {\n\
+    \            value += e.flow as i128 * e.cost as i128;\n        }\n        value\
+    \ / 2\n    }\n\n    pub fn get_potential(&mut self) -> Vec<i64> {\n        self.potential.fill(0);\n\
     \        for _ in 0..self.n {\n            for e in 0..self.edges.len() {\n  \
     \              if self.residual_cap(e) > 0 {\n                    let to = self.to(e);\n\
     \                    self.potential[to] =\n                        self.potential[to].min(self.potential[self.from(e)]\
     \ + self.cost(e));\n                }\n            }\n        }\n        self.potential.clone()\n\
     \    }\n\n    fn from(&self, e: usize) -> usize {\n        self.edges[e ^ 1].to\n\
     \    }\n\n    fn to(&self, e: usize) -> usize {\n        self.edges[e].to\n  \
-    \  }\n\n    fn flow(&self, e: usize) -> FlowType {\n        self.edges[e].flow\n\
-    \    }\n\n    fn lower(&self, e: usize) -> FlowType {\n        -self.edges[e ^\
-    \ 1].cap\n    }\n\n    fn upper(&self, e: usize) -> FlowType {\n        self.edges[e].cap\n\
-    \    }\n\n    fn cost(&self, e: usize) -> CostType {\n        self.edges[e].cost\n\
-    \    }\n\n    fn gain(&self, e: usize) -> CostType {\n        -self.edges[e].cost\n\
-    \    }\n\n    fn push(&mut self, e: usize, amount: FlowType) {\n        self.edges[e].flow\
+    \  }\n\n    fn flow(&self, e: usize) -> i64 {\n        self.edges[e].flow\n  \
+    \  }\n\n    fn lower(&self, e: usize) -> i64 {\n        -self.edges[e ^ 1].cap\n\
+    \    }\n\n    fn upper(&self, e: usize) -> i64 {\n        self.edges[e].cap\n\
+    \    }\n\n    fn cost(&self, e: usize) -> i64 {\n        self.edges[e].cost\n\
+    \    }\n\n    fn gain(&self, e: usize) -> i64 {\n        -self.edges[e].cost\n\
+    \    }\n\n    fn push(&mut self, e: usize, amount: i64) {\n        self.edges[e].flow\
     \ += amount;\n        self.edges[e ^ 1].flow -= amount;\n    }\n\n    fn residual_cost(&self,\
-    \ e: usize) -> CostType {\n        self.cost(e) + self.potential[self.from(e)]\
-    \ - self.potential[self.to(e)]\n    }\n\n    fn residual_cap(&self, e: usize)\
-    \ -> CostType {\n        self.edges[e].cap - self.edges[e].flow\n    }\n\n   \
-    \ fn dual(&mut self, delta: FlowType) -> bool {\n        self.dist = vec![UNREACHABLE;\
-    \ self.n];\n        self.parent = vec![!0; self.n];\n        // self.excess_vs.retain(|v|\
-    \ self.b[*v] >= delta);\n        for i in (0..self.excess_vs.len()).rev() {\n\
-    \            if self.b[self.excess_vs[i]] < delta {\n                self.excess_vs.swap_remove(i);\n\
-    \            }\n        }\n        // self.deficit_vs.retain(|v| self.b[*v] <=\
-    \ -delta);\n        for i in (0..self.deficit_vs.len()).rev() {\n            if\
-    \ self.b[self.deficit_vs[i]] > -delta {\n                self.deficit_vs.swap_remove(i);\n\
-    \            }\n        }\n        for &v in &self.excess_vs {\n            self.dist[v]\
-    \ = 0;\n            self.pq.push(Reverse((0, v)));\n        }\n        self.farthest\
+    \ e: usize) -> i64 {\n        self.cost(e) + self.potential[self.from(e)] - self.potential[self.to(e)]\n\
+    \    }\n\n    fn residual_cap(&self, e: usize) -> i64 {\n        self.edges[e].cap\
+    \ - self.edges[e].flow\n    }\n\n    fn dual(&mut self, delta: i64) -> bool {\n\
+    \        self.dist = vec![UNREACHABLE; self.n];\n        self.parent = vec![!0;\
+    \ self.n];\n        // self.excess_vs.retain(|v| self.b[*v] >= delta);\n     \
+    \   for i in (0..self.excess_vs.len()).rev() {\n            if self.b[self.excess_vs[i]]\
+    \ < delta {\n                self.excess_vs.swap_remove(i);\n            }\n \
+    \       }\n        // self.deficit_vs.retain(|v| self.b[*v] <= -delta);\n    \
+    \    for i in (0..self.deficit_vs.len()).rev() {\n            if self.b[self.deficit_vs[i]]\
+    \ > -delta {\n                self.deficit_vs.swap_remove(i);\n            }\n\
+    \        }\n        for &v in &self.excess_vs {\n            self.dist[v] = 0;\n\
+    \            self.pq.push(Reverse((0, v)));\n        }\n        self.farthest\
     \ = 0;\n        let mut deficit_count = 0;\n        while let Some(Reverse((d,\
     \ u))) = self.pq.pop() {\n            if self.dist[u] < d {\n                continue;\n\
     \            }\n            self.farthest = d;\n            if self.b[u] <= -delta\
@@ -136,34 +133,33 @@ data:
     \              e = self.next[e];\n            }\n        }\n        self.pq.clear();\n\
     \        for v in 0..self.n {\n            self.potential[v] += self.dist[v].min(self.farthest);\n\
     \        }\n        deficit_count > 0\n    }\n\n    fn primal(&mut self, delta:\
-    \ FlowType) {\n        for i in 0..self.deficit_vs.len() {\n            let t\
-    \ = self.deficit_vs[i];\n            if self.dist[t] > self.farthest {\n     \
-    \           continue;\n            }\n            let mut f = -self.b[t];\n  \
-    \          let mut v = t;\n            while self.parent[v] != !0 && f >= delta\
-    \ {\n                f = f.min(self.residual_cap(self.parent[v]));\n         \
-    \       v = self.from(self.parent[v]);\n            }\n            f = f.min(self.b[v]);\n\
-    \            if f < delta {\n                continue;\n            }\n      \
-    \      v = t;\n            while self.parent[v] != !0 {\n                self.push(self.parent[v],\
-    \ f);\n                let u = self.from(self.parent[v]);\n                self.parent[v]\
-    \ = !0;\n                v = u;\n            }\n            self.b[t] += f;\n\
-    \            self.b[v] -= f;\n        }\n    }\n\n    fn saturate_negative(&mut\
-    \ self, delta: FlowType) {\n        self.excess_vs.clear();\n        self.deficit_vs.clear();\n\
-    \        for u in 0..self.n {\n            let mut e = self.head[u];\n       \
-    \     while e != !0 {\n                let rcap = self.residual_cap(e);\n    \
-    \            let rcost = self.residual_cost(e);\n                if rcost < 0\
-    \ && rcap >= delta {\n                    self.push(e, rcap);\n              \
-    \      self.b[u] -= rcap;\n                    let v = self.to(e);\n         \
-    \           self.b[v] += rcap;\n                }\n                e = self.next[e];\n\
-    \            }\n        }\n        for v in 0..self.n {\n            if self.b[v]\
-    \ > 0 {\n                self.excess_vs.push(v);\n            } else if self.b[v]\
-    \ < 0 {\n                self.deficit_vs.push(v);\n            }\n        }\n\
-    \    }\n}\n\nstruct Edge_ {\n    to: usize,\n    cap: FlowType,\n    cost: CostType,\n\
-    \    flow: FlowType,\n}\n"
+    \ i64) {\n        for i in 0..self.deficit_vs.len() {\n            let t = self.deficit_vs[i];\n\
+    \            if self.dist[t] > self.farthest {\n                continue;\n  \
+    \          }\n            let mut f = -self.b[t];\n            let mut v = t;\n\
+    \            while self.parent[v] != !0 && f >= delta {\n                f = f.min(self.residual_cap(self.parent[v]));\n\
+    \                v = self.from(self.parent[v]);\n            }\n            f\
+    \ = f.min(self.b[v]);\n            if f < delta {\n                continue;\n\
+    \            }\n            v = t;\n            while self.parent[v] != !0 {\n\
+    \                self.push(self.parent[v], f);\n                let u = self.from(self.parent[v]);\n\
+    \                self.parent[v] = !0;\n                v = u;\n            }\n\
+    \            self.b[t] += f;\n            self.b[v] -= f;\n        }\n    }\n\n\
+    \    fn saturate_negative(&mut self, delta: i64) {\n        self.excess_vs.clear();\n\
+    \        self.deficit_vs.clear();\n        for u in 0..self.n {\n            let\
+    \ mut e = self.head[u];\n            while e != !0 {\n                let rcap\
+    \ = self.residual_cap(e);\n                let rcost = self.residual_cost(e);\n\
+    \                if rcost < 0 && rcap >= delta {\n                    self.push(e,\
+    \ rcap);\n                    self.b[u] -= rcap;\n                    let v =\
+    \ self.to(e);\n                    self.b[v] += rcap;\n                }\n   \
+    \             e = self.next[e];\n            }\n        }\n        for v in 0..self.n\
+    \ {\n            if self.b[v] > 0 {\n                self.excess_vs.push(v);\n\
+    \            } else if self.b[v] < 0 {\n                self.deficit_vs.push(v);\n\
+    \            }\n        }\n    }\n}\n\nstruct Edge_ {\n    to: usize,\n    cap:\
+    \ i64,\n    cost: i64,\n    flow: i64,\n}\n"
   dependsOn: []
   isVerificationFile: false
   path: crates/graph/min-cost-b-flow/src/lib.rs
   requiredBy: []
-  timestamp: '2023-04-28 14:34:12+09:00'
+  timestamp: '2023-04-29 08:49:56+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/assignment/src/main.rs
