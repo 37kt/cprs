@@ -200,7 +200,10 @@ impl MinCostBFlow {
         }
         self.b[s] += inf_flow;
         self.b[t] -= inf_flow;
-        let mf_value = self.min_cost_b_flow();
+        let mf_value = match self.min_cost_b_flow() {
+            Ok(v) => v,
+            Err(v) => v,
+        };
         self.b[s] -= inf_flow;
         self.b[t] += inf_flow;
 
@@ -208,8 +211,7 @@ impl MinCostBFlow {
         self.head[t] = self.next[t];
         self.edges.pop();
         self.edges.pop();
-
-        mf_value.map(|v| (v, self.b[t])).map_err(|v| (v, self.b[t]))
+        Ok((mf_value, self.b[t]))
     }
 
     pub fn get_result_value_i128(&mut self) -> i128 {
