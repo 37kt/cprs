@@ -78,22 +78,20 @@ data:
     \     }\n        value /= 2;\n\n        if self.excess_vs.is_empty() && self.deficit_vs.is_empty()\
     \ {\n            Ok(value)\n        } else {\n            Err(value)\n       \
     \ }\n    }\n\n    pub fn min_cost_flow(\n        &mut self,\n        s: usize,\n\
-    \        t: usize,\n        flow_limit: FlowType,\n    ) -> Result<(CostType,\
-    \ FlowType), (CostType, FlowType)> {\n        assert!(s != t);\n        let mut\
-    \ inf_flow = self.b[s].abs();\n        let mut e = self.head[s];\n        while\
-    \ e != !0 {\n            inf_flow += 0.max(self.edges[e].cap);\n            e\
-    \ = self.next[e];\n        }\n\n        self.add_edge(t, s, 0, inf_flow, 0);\n\
-    \        if let Err(circulation_value) = self.min_cost_b_flow() {\n          \
-    \  let m = self.edges.len();\n            self.head[m - 1] = self.next[m - 1];\n\
-    \            self.head[m - 2] = self.next[m - 2];\n            self.edges.pop();\n\
-    \            self.edges.pop();\n            return Err((circulation_value, 0));\n\
-    \        }\n\n        let mut inf_flow = self.b[s].abs();\n        let mut e =\
-    \ self.head[s];\n        while e != !0 {\n            inf_flow += self.residual_cap(e);\n\
-    \            e = self.next[e];\n        }\n        inf_flow = inf_flow.min(flow_limit);\n\
-    \        self.b[s] += inf_flow;\n        self.b[t] -= inf_flow;\n        let mf_value\
-    \ = self.min_cost_b_flow();\n        self.b[s] -= inf_flow;\n        self.b[t]\
-    \ += inf_flow;\n\n        let m = self.edges.len();\n        self.head[m - 1]\
-    \ = self.next[m - 1];\n        self.head[m - 2] = self.next[m - 2];\n        self.edges.pop();\n\
+    \        t: usize,\n    ) -> Result<(CostType, FlowType), (CostType, FlowType)>\
+    \ {\n        assert!(s != t);\n        let mut inf_flow = self.b[s].abs();\n \
+    \       let mut e = self.head[s];\n        while e != !0 {\n            inf_flow\
+    \ += 0.max(self.edges[e].cap);\n            e = self.next[e];\n        }\n\n \
+    \       self.add_edge(t, s, 0, inf_flow, 0);\n        if let Err(circulation_value)\
+    \ = self.min_cost_b_flow() {\n            self.head[s] = self.next[s];\n     \
+    \       self.head[t] = self.next[t];\n            self.edges.pop();\n        \
+    \    self.edges.pop();\n            return Err((circulation_value, 0));\n    \
+    \    }\n\n        let mut inf_flow = self.b[s].abs();\n        let mut e = self.head[s];\n\
+    \        while e != !0 {\n            inf_flow += self.residual_cap(e);\n    \
+    \        e = self.next[e];\n        }\n        self.b[s] += inf_flow;\n      \
+    \  self.b[t] -= inf_flow;\n        let mf_value = self.min_cost_b_flow();\n  \
+    \      self.b[s] -= inf_flow;\n        self.b[t] += inf_flow;\n\n        self.head[s]\
+    \ = self.next[s];\n        self.head[t] = self.next[t];\n        self.edges.pop();\n\
     \        self.edges.pop();\n\n        mf_value.map(|v| (v, self.b[t])).map_err(|v|\
     \ (v, self.b[t]))\n    }\n\n    pub fn get_result_value_i128(&mut self) -> i128\
     \ {\n        let mut value = 0;\n        for e in &self.edges {\n            value\
@@ -165,7 +163,7 @@ data:
   isVerificationFile: false
   path: crates/graph/min-cost-b-flow/src/lib.rs
   requiredBy: []
-  timestamp: '2023-04-28 13:20:21+09:00'
+  timestamp: '2023-04-28 14:34:12+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/assignment/src/main.rs

@@ -40,7 +40,7 @@ data:
   isVerificationFile: true
   path: verify/min_cost_b_flow/src/main.rs
   requiredBy: []
-  timestamp: '2023-04-28 13:20:21+09:00'
+  timestamp: '2023-04-28 14:34:12+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/min_cost_b_flow/src/main.rs
