@@ -2,20 +2,18 @@
 
 use std::{cmp::Reverse, collections::BinaryHeap};
 
-pub type FlowType = i64;
-pub type CostType = i64;
-const UNREACHABLE: CostType = std::i64::MAX;
-const SCALING_FACTOR: FlowType = 2;
+const UNREACHABLE: i64 = std::i64::MAX;
+const SCALING_FACTOR: i64 = 2;
 
 #[derive(Debug, Clone, Copy)]
 pub struct Edge {
     pub from: usize,
     pub to: usize,
-    pub lower: FlowType,
-    pub upper: FlowType,
-    pub cost: CostType,
-    pub gain: CostType,
-    pub flow: FlowType,
+    pub lower: i64,
+    pub upper: i64,
+    pub cost: i64,
+    pub gain: i64,
+    pub flow: i64,
 }
 
 pub struct MinCostBFlow {
@@ -23,12 +21,12 @@ pub struct MinCostBFlow {
     edges: Vec<Edge_>,
     head: Vec<usize>,
     next: Vec<usize>,
-    b: Vec<FlowType>,
-    farthest: CostType,
-    potential: Vec<CostType>,
-    dist: Vec<CostType>,
+    b: Vec<i64>,
+    farthest: i64,
+    potential: Vec<i64>,
+    dist: Vec<i64>,
     parent: Vec<usize>,
-    pq: BinaryHeap<Reverse<(CostType, usize)>>,
+    pq: BinaryHeap<Reverse<(i64, usize)>>,
     excess_vs: Vec<usize>,
     deficit_vs: Vec<usize>,
 }
@@ -65,14 +63,7 @@ impl MinCostBFlow {
         (self.n - size..self.n).collect()
     }
 
-    pub fn add_edge(
-        &mut self,
-        from: usize,
-        to: usize,
-        lower: FlowType,
-        upper: FlowType,
-        cost: CostType,
-    ) -> usize {
+    pub fn add_edge(&mut self, from: usize, to: usize, lower: i64, upper: i64, cost: i64) -> usize {
         assert!(lower <= upper);
         assert!(from < self.n);
         assert!(to < self.n);
@@ -96,11 +87,11 @@ impl MinCostBFlow {
         m / 2
     }
 
-    pub fn add_supply(&mut self, v: usize, amount: FlowType) {
+    pub fn add_supply(&mut self, v: usize, amount: i64) {
         self.b[v] += amount;
     }
 
-    pub fn add_demand(&mut self, v: usize, amount: FlowType) {
+    pub fn add_demand(&mut self, v: usize, amount: i64) {
         self.b[v] -= amount;
     }
 
@@ -124,7 +115,7 @@ impl MinCostBFlow {
             .collect()
     }
 
-    pub fn min_cost_b_flow(&mut self) -> Result<CostType, CostType> {
+    pub fn min_cost_b_flow(&mut self) -> Result<i64, i64> {
         self.potential.resize(self.n, 0);
         for u in 0..self.n {
             let mut e = self.head[u];
@@ -170,11 +161,7 @@ impl MinCostBFlow {
         }
     }
 
-    pub fn min_cost_flow(
-        &mut self,
-        s: usize,
-        t: usize,
-    ) -> Result<(CostType, FlowType), (CostType, FlowType)> {
+    pub fn min_cost_flow(&mut self, s: usize, t: usize) -> Result<(i64, i64), (i64, i64)> {
         assert!(s != t);
         let mut inf_flow = self.b[s].abs();
         let mut e = self.head[s];
@@ -222,7 +209,7 @@ impl MinCostBFlow {
         value / 2
     }
 
-    pub fn get_potential(&mut self) -> Vec<CostType> {
+    pub fn get_potential(&mut self) -> Vec<i64> {
         self.potential.fill(0);
         for _ in 0..self.n {
             for e in 0..self.edges.len() {
@@ -244,40 +231,40 @@ impl MinCostBFlow {
         self.edges[e].to
     }
 
-    fn flow(&self, e: usize) -> FlowType {
+    fn flow(&self, e: usize) -> i64 {
         self.edges[e].flow
     }
 
-    fn lower(&self, e: usize) -> FlowType {
+    fn lower(&self, e: usize) -> i64 {
         -self.edges[e ^ 1].cap
     }
 
-    fn upper(&self, e: usize) -> FlowType {
+    fn upper(&self, e: usize) -> i64 {
         self.edges[e].cap
     }
 
-    fn cost(&self, e: usize) -> CostType {
+    fn cost(&self, e: usize) -> i64 {
         self.edges[e].cost
     }
 
-    fn gain(&self, e: usize) -> CostType {
+    fn gain(&self, e: usize) -> i64 {
         -self.edges[e].cost
     }
 
-    fn push(&mut self, e: usize, amount: FlowType) {
+    fn push(&mut self, e: usize, amount: i64) {
         self.edges[e].flow += amount;
         self.edges[e ^ 1].flow -= amount;
     }
 
-    fn residual_cost(&self, e: usize) -> CostType {
+    fn residual_cost(&self, e: usize) -> i64 {
         self.cost(e) + self.potential[self.from(e)] - self.potential[self.to(e)]
     }
 
-    fn residual_cap(&self, e: usize) -> CostType {
+    fn residual_cap(&self, e: usize) -> i64 {
         self.edges[e].cap - self.edges[e].flow
     }
 
-    fn dual(&mut self, delta: FlowType) -> bool {
+    fn dual(&mut self, delta: i64) -> bool {
         self.dist = vec![UNREACHABLE; self.n];
         self.parent = vec![!0; self.n];
         // self.excess_vs.retain(|v| self.b[*v] >= delta);
@@ -330,7 +317,7 @@ impl MinCostBFlow {
         deficit_count > 0
     }
 
-    fn primal(&mut self, delta: FlowType) {
+    fn primal(&mut self, delta: i64) {
         for i in 0..self.deficit_vs.len() {
             let t = self.deficit_vs[i];
             if self.dist[t] > self.farthest {
@@ -358,7 +345,7 @@ impl MinCostBFlow {
         }
     }
 
-    fn saturate_negative(&mut self, delta: FlowType) {
+    fn saturate_negative(&mut self, delta: i64) {
         self.excess_vs.clear();
         self.deficit_vs.clear();
         for u in 0..self.n {
@@ -387,7 +374,7 @@ impl MinCostBFlow {
 
 struct Edge_ {
     to: usize,
-    cap: FlowType,
-    cost: CostType,
-    flow: FlowType,
+    cap: i64,
+    cost: i64,
+    flow: i64,
 }
