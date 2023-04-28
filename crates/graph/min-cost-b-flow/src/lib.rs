@@ -174,7 +174,6 @@ impl MinCostBFlow {
         &mut self,
         s: usize,
         t: usize,
-        flow_limit: FlowType,
     ) -> Result<(CostType, FlowType), (CostType, FlowType)> {
         assert!(s != t);
         let mut inf_flow = self.b[s].abs();
@@ -186,9 +185,8 @@ impl MinCostBFlow {
 
         self.add_edge(t, s, 0, inf_flow, 0);
         if let Err(circulation_value) = self.min_cost_b_flow() {
-            let m = self.edges.len();
-            self.head[m - 1] = self.next[m - 1];
-            self.head[m - 2] = self.next[m - 2];
+            self.head[s] = self.next[s];
+            self.head[t] = self.next[t];
             self.edges.pop();
             self.edges.pop();
             return Err((circulation_value, 0));
@@ -200,16 +198,14 @@ impl MinCostBFlow {
             inf_flow += self.residual_cap(e);
             e = self.next[e];
         }
-        inf_flow = inf_flow.min(flow_limit);
         self.b[s] += inf_flow;
         self.b[t] -= inf_flow;
         let mf_value = self.min_cost_b_flow();
         self.b[s] -= inf_flow;
         self.b[t] += inf_flow;
 
-        let m = self.edges.len();
-        self.head[m - 1] = self.next[m - 1];
-        self.head[m - 2] = self.next[m - 2];
+        self.head[s] = self.next[s];
+        self.head[t] = self.next[t];
         self.edges.pop();
         self.edges.pop();
 
