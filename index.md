@@ -111,6 +111,11 @@ data:
     - icon: ':warning:'
       path: crates/graph/max-flow-lower-bound/src/lib.rs
       title: crates/graph/max-flow-lower-bound/src/lib.rs
+  - name: crates/graph/min-cost-b-flow/src
+    pages:
+    - icon: ':heavy_check_mark:'
+      path: crates/graph/min-cost-b-flow/src/lib.rs
+      title: crates/graph/min-cost-b-flow/src/lib.rs
   - name: crates/graph/strongly-connected-components/src
     pages:
     - icon: ':heavy_check_mark:'
@@ -192,6 +197,11 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/aplusb/src/main.rs
       title: verify/aplusb/src/main.rs
+  - name: verify/assignment/src
+    pages:
+    - icon: ':heavy_check_mark:'
+      path: verify/assignment/src/main.rs
+      title: verify/assignment/src/main.rs
   - name: verify/bitwise_and_convolution/src
     pages:
     - icon: ':heavy_check_mark:'
@@ -262,6 +272,11 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/matrix_product/src/main.rs
       title: verify/matrix_product/src/main.rs
+  - name: verify/min_cost_b_flow/src
+    pages:
+    - icon: ':heavy_check_mark:'
+      path: verify/min_cost_b_flow/src/main.rs
+      title: verify/min_cost_b_flow/src/main.rs
   - name: verify/number_of_substrings/src
     pages:
     - icon: ':heavy_check_mark:'
