@@ -210,7 +210,7 @@ impl MinCostBFlow {
     }
 
     pub fn get_potential(&mut self) -> Vec<i64> {
-        self.potential.fill(0);
+        self.potential = vec![0; self.n];
         for _ in 0..self.n {
             for e in 0..self.edges.len() {
                 if self.residual_cap(e) > 0 {
