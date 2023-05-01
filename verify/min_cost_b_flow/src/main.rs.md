@@ -1,9 +1,6 @@
 ---
 data:
-  _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
-    path: crates/graph/min-cost-b-flow/src/lib.rs
-    title: crates/graph/min-cost-b-flow/src/lib.rs
+  _extendedDependsOn: []
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
@@ -35,12 +32,11 @@ data:
     \   }\n        if f.len() > 0 {\n            println!(\"{}\", f.iter().join(\"\
     \\n\"));\n        }\n    } else {\n        println!(\"infeasible\");\n    }\n\
     }\n"
-  dependsOn:
-  - crates/graph/min-cost-b-flow/src/lib.rs
+  dependsOn: []
   isVerificationFile: true
   path: verify/min_cost_b_flow/src/main.rs
   requiredBy: []
-  timestamp: '2023-04-29 08:49:56+09:00'
+  timestamp: '1970-01-01 00:00:00+00:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/min_cost_b_flow/src/main.rs

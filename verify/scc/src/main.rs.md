@@ -1,17 +1,11 @@
 ---
 data:
-  _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
-    path: crates/graph/graph/src/lib.rs
-    title: crates/graph/graph/src/lib.rs
-  - icon: ':heavy_check_mark:'
-    path: crates/graph/strongly-connected-components/src/lib.rs
-    title: crates/graph/strongly-connected-components/src/lib.rs
+  _extendedDependsOn: []
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: rs
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     PROBLEM: https://judge.yosupo.jp/problem/scc
     links:
@@ -31,14 +25,12 @@ data:
     \    println!(\"{}\", h.size());\n    for i in 0..h.size() {\n        let vs =\
     \ h.vertex(i);\n        println!(\"{} {}\", vs.len(), vs.iter().join(\" \"));\n\
     \    }\n}\n"
-  dependsOn:
-  - crates/graph/graph/src/lib.rs
-  - crates/graph/strongly-connected-components/src/lib.rs
+  dependsOn: []
   isVerificationFile: true
   path: verify/scc/src/main.rs
   requiredBy: []
-  timestamp: '2023-04-24 13:06:41+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '1970-01-01 00:00:00+00:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: verify/scc/src/main.rs
 layout: document

@@ -2,28 +2,10 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy: []
-  _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
-    path: verify/division_of_polynomials/src/main.rs
-    title: verify/division_of_polynomials/src/main.rs
-  - icon: ':heavy_check_mark:'
-    path: verify/exp_of_formal_power_series/src/main.rs
-    title: verify/exp_of_formal_power_series/src/main.rs
-  - icon: ':heavy_check_mark:'
-    path: verify/inv_of_formal_power_series/src/main.rs
-    title: verify/inv_of_formal_power_series/src/main.rs
-  - icon: ':heavy_check_mark:'
-    path: verify/log_of_formal_power_series/src/main.rs
-    title: verify/log_of_formal_power_series/src/main.rs
-  - icon: ':heavy_check_mark:'
-    path: verify/pow_of_formal_power_series/src/main.rs
-    title: verify/pow_of_formal_power_series/src/main.rs
-  - icon: ':heavy_check_mark:'
-    path: verify/sqrt_of_formal_power_series/src/main.rs
-    title: verify/sqrt_of_formal_power_series/src/main.rs
+  _extendedVerifiedWith: []
   _isVerificationFailed: false
   _pathExtension: rs
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':warning:'
   attributes:
     links: []
   bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.11.3/x64/lib/python3.11/site-packages/onlinejudge_verify/documentation/build.py\"\
@@ -149,15 +131,9 @@ data:
   isVerificationFile: false
   path: crates/polynomial/formal-power-series/src/lib.rs
   requiredBy: []
-  timestamp: '2023-04-22 14:06:50+09:00'
-  verificationStatus: LIBRARY_ALL_AC
-  verifiedWith:
-  - verify/log_of_formal_power_series/src/main.rs
-  - verify/sqrt_of_formal_power_series/src/main.rs
-  - verify/division_of_polynomials/src/main.rs
-  - verify/pow_of_formal_power_series/src/main.rs
-  - verify/exp_of_formal_power_series/src/main.rs
-  - verify/inv_of_formal_power_series/src/main.rs
+  timestamp: '1970-01-01 00:00:00+00:00'
+  verificationStatus: LIBRARY_NO_TESTS
+  verifiedWith: []
 documentation_of: crates/polynomial/formal-power-series/src/lib.rs
 layout: document
 redirect_from:

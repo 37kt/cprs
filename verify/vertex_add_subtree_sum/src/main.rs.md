@@ -1,23 +1,11 @@
 ---
 data:
-  _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
-    path: crates/algebraic/algebraic/src/lib.rs
-    title: crates/algebraic/algebraic/src/lib.rs
-  - icon: ':heavy_check_mark:'
-    path: crates/data-structure/segment-tree/src/lib.rs
-    title: crates/data-structure/segment-tree/src/lib.rs
-  - icon: ':heavy_check_mark:'
-    path: crates/data-structure/tree-query/src/lib.rs
-    title: crates/data-structure/tree-query/src/lib.rs
-  - icon: ':heavy_check_mark:'
-    path: crates/graph/graph/src/lib.rs
-    title: crates/graph/graph/src/lib.rs
+  _extendedDependsOn: []
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: rs
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     PROBLEM: https://judge.yosupo.jp/problem/vertex_add_subtree_sum
     links:
@@ -41,16 +29,12 @@ data:
     \ t + x);\n        } else {\n            input! {\n                v: usize,\n\
     \            }\n            let t = tq.prod_subtree(v);\n            println!(\"\
     {}\", t);\n        }\n    }\n}\n"
-  dependsOn:
-  - crates/algebraic/algebraic/src/lib.rs
-  - crates/data-structure/segment-tree/src/lib.rs
-  - crates/data-structure/tree-query/src/lib.rs
-  - crates/graph/graph/src/lib.rs
+  dependsOn: []
   isVerificationFile: true
   path: verify/vertex_add_subtree_sum/src/main.rs
   requiredBy: []
-  timestamp: '2023-04-26 12:26:24+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '1970-01-01 00:00:00+00:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: verify/vertex_add_subtree_sum/src/main.rs
 layout: document

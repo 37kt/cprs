@@ -1,9 +1,6 @@
 ---
 data:
-  _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
-    path: crates/graph/graph/src/lib.rs
-    title: crates/graph/graph/src/lib.rs
+  _extendedDependsOn: []
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
@@ -44,12 +41,11 @@ data:
     \ {\n                continue;\n            }\n            if self.sz[u] > mid\
     \ {\n                return self.search_centroid(u, v, mid, g);\n            }\n\
     \        }\n        v\n    }\n}\n"
-  dependsOn:
-  - crates/graph/graph/src/lib.rs
+  dependsOn: []
   isVerificationFile: false
   path: crates/tree/centroid-decomposition/src/lib.rs
   requiredBy: []
-  timestamp: '2023-04-24 12:50:05+09:00'
+  timestamp: '1970-01-01 00:00:00+00:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: crates/tree/centroid-decomposition/src/lib.rs

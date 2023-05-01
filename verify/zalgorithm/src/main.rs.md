@@ -1,14 +1,11 @@
 ---
 data:
-  _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
-    path: crates/string/z-algorithm/src/lib.rs
-    title: crates/string/z-algorithm/src/lib.rs
+  _extendedDependsOn: []
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: rs
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     PROBLEM: https://judge.yosupo.jp/problem/zalgorithm
     links:
@@ -23,13 +20,12 @@ data:
     \nuse itertools::Itertools;\nuse proconio::{input, marker::Bytes};\nuse z_algorithm::z_algorithm;\n\
     \n#[proconio::fastout]\nfn main() {\n    input! {\n        s: Bytes,\n    }\n\
     \    let z = z_algorithm(&s);\n    println!(\"{}\", z.iter().join(\" \"));\n}\n"
-  dependsOn:
-  - crates/string/z-algorithm/src/lib.rs
+  dependsOn: []
   isVerificationFile: true
   path: verify/zalgorithm/src/main.rs
   requiredBy: []
-  timestamp: '2023-04-27 14:07:11+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '1970-01-01 00:00:00+00:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: verify/zalgorithm/src/main.rs
 layout: document

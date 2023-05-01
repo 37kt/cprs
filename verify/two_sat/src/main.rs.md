@@ -1,14 +1,11 @@
 ---
 data:
-  _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
-    path: crates/math/two-satisfiability/src/lib.rs
-    title: crates/math/two-satisfiability/src/lib.rs
+  _extendedDependsOn: []
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: rs
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     PROBLEM: https://judge.yosupo.jp/problem/two_sat
     links:
@@ -31,13 +28,12 @@ data:
     \    if !res[i] {\n                print!(\"-\");\n            }\n           \
     \ print!(\"{} \", i + 1);\n        }\n        println!(\"0\");\n    } else {\n\
     \        println!(\"s UNSATISFIABLE\");\n    }\n}\n"
-  dependsOn:
-  - crates/math/two-satisfiability/src/lib.rs
+  dependsOn: []
   isVerificationFile: true
   path: verify/two_sat/src/main.rs
   requiredBy: []
-  timestamp: '2023-04-24 14:15:56+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '1970-01-01 00:00:00+00:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: verify/two_sat/src/main.rs
 layout: document

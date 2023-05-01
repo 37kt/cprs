@@ -1,9 +1,6 @@
 ---
 data:
-  _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
-    path: crates/polynomial/formal-power-series/src/lib.rs
-    title: crates/polynomial/formal-power-series/src/lib.rs
+  _extendedDependsOn: []
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
@@ -25,12 +22,11 @@ data:
     \ {\n    input! {\n        n: usize,\n        a: [Mint; n],\n    }\n    let f\
     \ = FPS(a);\n    let g = f.inv(n);\n    println!(\"{}\", g.iter().join(\" \"));\n\
     }\n"
-  dependsOn:
-  - crates/polynomial/formal-power-series/src/lib.rs
+  dependsOn: []
   isVerificationFile: true
   path: verify/inv_of_formal_power_series/src/main.rs
   requiredBy: []
-  timestamp: '2023-04-22 14:06:50+09:00'
+  timestamp: '1970-01-01 00:00:00+00:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/inv_of_formal_power_series/src/main.rs

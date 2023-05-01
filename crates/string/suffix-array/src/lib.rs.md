@@ -1,23 +1,11 @@
 ---
 data:
-  _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
-    path: crates/algebraic/algebraic/src/lib.rs
-    title: crates/algebraic/algebraic/src/lib.rs
-  - icon: ':heavy_check_mark:'
-    path: crates/data-structure/disjoint-sparse-table/src/lib.rs
-    title: crates/data-structure/disjoint-sparse-table/src/lib.rs
+  _extendedDependsOn: []
   _extendedRequiredBy: []
-  _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
-    path: verify/number_of_substrings/src/main.rs
-    title: verify/number_of_substrings/src/main.rs
-  - icon: ':heavy_check_mark:'
-    path: verify/suffixarray/src/main.rs
-    title: verify/suffixarray/src/main.rs
+  _extendedVerifiedWith: []
   _isVerificationFailed: false
   _pathExtension: rs
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':warning:'
   attributes:
     links: []
   bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.11.3/x64/lib/python3.11/site-packages/onlinejudge_verify/documentation/build.py\"\
@@ -134,17 +122,13 @@ data:
     \ + h < n && i + h < n {\n            if s[j + h] != s[i + h] {\n            \
     \    break;\n            }\n            h += 1;\n        }\n        lcp[rank[i]\
     \ - 1] = h;\n    }\n    lcp\n}\n"
-  dependsOn:
-  - crates/algebraic/algebraic/src/lib.rs
-  - crates/data-structure/disjoint-sparse-table/src/lib.rs
+  dependsOn: []
   isVerificationFile: false
   path: crates/string/suffix-array/src/lib.rs
   requiredBy: []
-  timestamp: '2023-04-27 14:07:11+09:00'
-  verificationStatus: LIBRARY_ALL_AC
-  verifiedWith:
-  - verify/suffixarray/src/main.rs
-  - verify/number_of_substrings/src/main.rs
+  timestamp: '1970-01-01 00:00:00+00:00'
+  verificationStatus: LIBRARY_NO_TESTS
+  verifiedWith: []
 documentation_of: crates/string/suffix-array/src/lib.rs
 layout: document
 redirect_from:

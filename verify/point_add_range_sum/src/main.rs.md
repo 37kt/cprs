@@ -1,12 +1,6 @@
 ---
 data:
-  _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
-    path: crates/algebraic/algebraic/src/lib.rs
-    title: crates/algebraic/algebraic/src/lib.rs
-  - icon: ':heavy_check_mark:'
-    path: crates/data-structure/segment-tree/src/lib.rs
-    title: crates/data-structure/segment-tree/src/lib.rs
+  _extendedDependsOn: []
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
@@ -33,13 +27,11 @@ data:
     \        } else {\n            input! {\n                l: usize,\n         \
     \       r: usize,\n            }\n            println!(\"{}\", seg.prod(l..r));\n\
     \        }\n    }\n}\n"
-  dependsOn:
-  - crates/algebraic/algebraic/src/lib.rs
-  - crates/data-structure/segment-tree/src/lib.rs
+  dependsOn: []
   isVerificationFile: true
   path: verify/point_add_range_sum/src/main.rs
   requiredBy: []
-  timestamp: '2023-04-26 12:26:24+09:00'
+  timestamp: '1970-01-01 00:00:00+00:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/point_add_range_sum/src/main.rs

@@ -1,14 +1,11 @@
 ---
 data:
-  _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
-    path: crates/data-structure/segtree-beats/src/lib.rs
-    title: crates/data-structure/segtree-beats/src/lib.rs
+  _extendedDependsOn: []
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: rs
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     PROBLEM: https://judge.yosupo.jp/problem/range_chmin_chmax_add_range_sum
     links:
@@ -31,13 +28,12 @@ data:
     \ {\n                b: i64,\n            }\n            seg.add(l..r, b);\n \
     \       } else {\n            let s = seg.sum(l..r);\n            println!(\"\
     {}\", s);\n        }\n    }\n}\n"
-  dependsOn:
-  - crates/data-structure/segtree-beats/src/lib.rs
+  dependsOn: []
   isVerificationFile: true
   path: verify/range_chmin_chmax_add_range_sum/src/main.rs
   requiredBy: []
-  timestamp: '2023-04-21 11:20:46+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '1970-01-01 00:00:00+00:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: verify/range_chmin_chmax_add_range_sum/src/main.rs
 layout: document

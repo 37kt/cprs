@@ -1,12 +1,6 @@
 ---
 data:
-  _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
-    path: crates/data-structure/heavy-light-decomposition/src/lib.rs
-    title: crates/data-structure/heavy-light-decomposition/src/lib.rs
-  - icon: ':heavy_check_mark:'
-    path: crates/graph/graph/src/lib.rs
-    title: crates/graph/graph/src/lib.rs
+  _extendedDependsOn: []
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
@@ -32,13 +26,11 @@ data:
     \ {\n            s: usize,\n            t: usize,\n            i: usize,\n   \
     \     }\n        let v = hld.jump(s, t, i);\n        println!(\"{}\", v as i64);\n\
     \    }\n}\n"
-  dependsOn:
-  - crates/data-structure/heavy-light-decomposition/src/lib.rs
-  - crates/graph/graph/src/lib.rs
+  dependsOn: []
   isVerificationFile: true
   path: verify/jump_on_tree/src/main.rs
   requiredBy: []
-  timestamp: '2023-04-24 12:50:05+09:00'
+  timestamp: '1970-01-01 00:00:00+00:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/jump_on_tree/src/main.rs

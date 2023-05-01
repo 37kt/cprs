@@ -1,9 +1,6 @@
 ---
 data:
-  _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
-    path: crates/graph/min-cost-b-flow/src/lib.rs
-    title: crates/graph/min-cost-b-flow/src/lib.rs
+  _extendedDependsOn: []
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
@@ -32,12 +29,11 @@ data:
     \ mut res = vec![];\n    for i in 0..n {\n        for j in 0..n {\n          \
     \  if mcf.get_edge(es[i][j]).flow > 0 {\n                res.push(j);\n      \
     \      }\n        }\n    }\n    println!(\"{}\", res.iter().join(\" \"));\n}\n"
-  dependsOn:
-  - crates/graph/min-cost-b-flow/src/lib.rs
+  dependsOn: []
   isVerificationFile: true
   path: verify/assignment/src/main.rs
   requiredBy: []
-  timestamp: '2023-04-29 08:49:56+09:00'
+  timestamp: '1970-01-01 00:00:00+00:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/assignment/src/main.rs

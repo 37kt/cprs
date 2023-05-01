@@ -1,14 +1,11 @@
 ---
 data:
-  _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
-    path: crates/string/suffix-array/src/lib.rs
-    title: crates/string/suffix-array/src/lib.rs
+  _extendedDependsOn: []
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: rs
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     PROBLEM: https://judge.yosupo.jp/problem/suffixarray
     links:
@@ -24,13 +21,12 @@ data:
     \n#[proconio::fastout]\nfn main() {\n    input! {\n        s: Bytes,\n    }\n\
     \    let sa = SuffixArray::build(&s);\n    println!(\"{}\", sa.suffix_array().iter().join(\"\
     \ \"));\n}\n"
-  dependsOn:
-  - crates/string/suffix-array/src/lib.rs
+  dependsOn: []
   isVerificationFile: true
   path: verify/suffixarray/src/main.rs
   requiredBy: []
-  timestamp: '2023-04-27 14:07:11+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '1970-01-01 00:00:00+00:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: verify/suffixarray/src/main.rs
 layout: document

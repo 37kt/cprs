@@ -1,14 +1,11 @@
 ---
 data:
-  _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
-    path: crates/math/floor-sum/src/lib.rs
-    title: crates/math/floor-sum/src/lib.rs
+  _extendedDependsOn: []
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: rs
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     PROBLEM: https://judge.yosupo.jp/problem/sum_of_floor_of_linear
     links:
@@ -25,13 +22,12 @@ data:
     \    input! {\n            n: u64,\n            m: u64,\n            a: i64,\n\
     \            b: i64,\n        }\n        println!(\"{}\", floor_sum(n, m, a, b));\n\
     \    }\n}\n"
-  dependsOn:
-  - crates/math/floor-sum/src/lib.rs
+  dependsOn: []
   isVerificationFile: true
   path: verify/sum_of_floor_of_linear/src/main.rs
   requiredBy: []
-  timestamp: '2023-04-27 15:09:25+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '1970-01-01 00:00:00+00:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: verify/sum_of_floor_of_linear/src/main.rs
 layout: document

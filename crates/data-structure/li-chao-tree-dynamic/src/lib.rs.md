@@ -2,16 +2,10 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy: []
-  _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
-    path: verify/line_add_get_min/src/main.rs
-    title: verify/line_add_get_min/src/main.rs
-  - icon: ':heavy_check_mark:'
-    path: verify/segment_add_get_min/src/main.rs
-    title: verify/segment_add_get_min/src/main.rs
+  _extendedVerifiedWith: []
   _isVerificationFailed: false
   _pathExtension: rs
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':warning:'
   attributes:
     links: []
   bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.11.3/x64/lib/python3.11/site-packages/onlinejudge_verify/documentation/build.py\"\
@@ -80,11 +74,9 @@ data:
   isVerificationFile: false
   path: crates/data-structure/li-chao-tree-dynamic/src/lib.rs
   requiredBy: []
-  timestamp: '2023-04-11 16:20:50+09:00'
-  verificationStatus: LIBRARY_ALL_AC
-  verifiedWith:
-  - verify/line_add_get_min/src/main.rs
-  - verify/segment_add_get_min/src/main.rs
+  timestamp: '1970-01-01 00:00:00+00:00'
+  verificationStatus: LIBRARY_NO_TESTS
+  verifiedWith: []
 documentation_of: crates/data-structure/li-chao-tree-dynamic/src/lib.rs
 layout: document
 redirect_from:

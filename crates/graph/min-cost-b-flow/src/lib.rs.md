@@ -2,16 +2,10 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy: []
-  _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
-    path: verify/assignment/src/main.rs
-    title: verify/assignment/src/main.rs
-  - icon: ':heavy_check_mark:'
-    path: verify/min_cost_b_flow/src/main.rs
-    title: verify/min_cost_b_flow/src/main.rs
+  _extendedVerifiedWith: []
   _isVerificationFailed: false
   _pathExtension: rs
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':warning:'
   attributes:
     links:
     - https://misawa.github.io/others/flow/lets_use_capacity_scaling.html
@@ -93,11 +87,12 @@ data:
     \        Ok((mf_value, self.b[t]))\n    }\n\n    pub fn get_result_value_i128(&mut\
     \ self) -> i128 {\n        let mut value = 0;\n        for e in &self.edges {\n\
     \            value += e.flow as i128 * e.cost as i128;\n        }\n        value\
-    \ / 2\n    }\n\n    pub fn get_potential(&mut self) -> Vec<i64> {\n        self.potential.fill(0);\n\
-    \        for _ in 0..self.n {\n            for e in 0..self.edges.len() {\n  \
-    \              if self.residual_cap(e) > 0 {\n                    let to = self.to(e);\n\
-    \                    self.potential[to] =\n                        self.potential[to].min(self.potential[self.from(e)]\
-    \ + self.cost(e));\n                }\n            }\n        }\n        self.potential.clone()\n\
+    \ / 2\n    }\n\n    pub fn get_potential(&mut self) -> Vec<i64> {\n        self.potential\
+    \ = vec![0; self.n];\n        for _ in 0..self.n {\n            for e in 0..self.edges.len()\
+    \ {\n                if self.residual_cap(e) > 0 {\n                    let to\
+    \ = self.to(e);\n                    self.potential[to] =\n                  \
+    \      self.potential[to].min(self.potential[self.from(e)] + self.cost(e));\n\
+    \                }\n            }\n        }\n        self.potential.clone()\n\
     \    }\n\n    fn from(&self, e: usize) -> usize {\n        self.edges[e ^ 1].to\n\
     \    }\n\n    fn to(&self, e: usize) -> usize {\n        self.edges[e].to\n  \
     \  }\n\n    fn flow(&self, e: usize) -> i64 {\n        self.edges[e].flow\n  \
@@ -159,11 +154,9 @@ data:
   isVerificationFile: false
   path: crates/graph/min-cost-b-flow/src/lib.rs
   requiredBy: []
-  timestamp: '2023-04-29 08:49:56+09:00'
-  verificationStatus: LIBRARY_ALL_AC
-  verifiedWith:
-  - verify/assignment/src/main.rs
-  - verify/min_cost_b_flow/src/main.rs
+  timestamp: '1970-01-01 00:00:00+00:00'
+  verificationStatus: LIBRARY_NO_TESTS
+  verifiedWith: []
 documentation_of: crates/graph/min-cost-b-flow/src/lib.rs
 layout: document
 redirect_from:

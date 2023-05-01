@@ -1,14 +1,11 @@
 ---
 data:
-  _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
-    path: crates/data-structure/wavelet-matrix/src/lib.rs
-    title: crates/data-structure/wavelet-matrix/src/lib.rs
+  _extendedDependsOn: []
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: rs
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     PROBLEM: https://judge.yosupo.jp/problem/range_kth_smallest
     links:
@@ -25,13 +22,12 @@ data:
     \ n],\n    }\n    let wm = WaveletMatrix::new(a);\n    for _ in 0..q {\n     \
     \   input! {\n            l: usize,\n            r: usize,\n            k: usize,\n\
     \        }\n        println!(\"{}\", wm.kth_smallest(l..r, k));\n    }\n}\n"
-  dependsOn:
-  - crates/data-structure/wavelet-matrix/src/lib.rs
+  dependsOn: []
   isVerificationFile: true
   path: verify/range_kth_smallest/src/main.rs
   requiredBy: []
-  timestamp: '2023-04-22 21:59:33+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '1970-01-01 00:00:00+00:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: verify/range_kth_smallest/src/main.rs
 layout: document

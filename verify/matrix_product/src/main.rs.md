@@ -1,9 +1,6 @@
 ---
 data:
-  _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
-    path: crates/math/matrix/src/lib.rs
-    title: crates/math/matrix/src/lib.rs
+  _extendedDependsOn: []
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
@@ -30,12 +27,11 @@ data:
     \   a: [[Mint; m]; n],\n        b: [[Mint; k]; m],\n    }\n    let a = Matrix::<E>::from(a);\n\
     \    let b = Matrix::<E>::from(b);\n    let c = &a * &b;\n    for i in 0..n {\n\
     \        println!(\"{}\", c[i].iter().join(\" \"));\n    }\n}\n"
-  dependsOn:
-  - crates/math/matrix/src/lib.rs
+  dependsOn: []
   isVerificationFile: true
   path: verify/matrix_product/src/main.rs
   requiredBy: []
-  timestamp: '2023-04-21 13:06:23+09:00'
+  timestamp: '1970-01-01 00:00:00+00:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/matrix_product/src/main.rs

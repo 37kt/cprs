@@ -1,14 +1,11 @@
 ---
 data:
-  _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
-    path: crates/data-structure/wavelet-matrix/src/lib.rs
-    title: crates/data-structure/wavelet-matrix/src/lib.rs
+  _extendedDependsOn: []
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: rs
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     PROBLEM: https://judge.yosupo.jp/problem/static_range_frequency
     links:
@@ -25,13 +22,12 @@ data:
     \ n],\n    }\n    let wm = WaveletMatrix::new(a);\n    for _ in 0..q {\n     \
     \   input! {\n            l: usize,\n            r: usize,\n            x: usize,\n\
     \        }\n        println!(\"{}\", wm.range_freq(l..r, x..=x));\n    }\n}\n"
-  dependsOn:
-  - crates/data-structure/wavelet-matrix/src/lib.rs
+  dependsOn: []
   isVerificationFile: true
   path: verify/static_range_frequency/src/main.rs
   requiredBy: []
-  timestamp: '2023-04-22 21:59:33+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '1970-01-01 00:00:00+00:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: verify/static_range_frequency/src/main.rs
 layout: document

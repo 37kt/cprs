@@ -1,17 +1,11 @@
 ---
 data:
-  _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
-    path: crates/algebraic/algebraic/src/lib.rs
-    title: crates/algebraic/algebraic/src/lib.rs
-  - icon: ':heavy_check_mark:'
-    path: crates/data-structure/disjoint-sparse-table/src/lib.rs
-    title: crates/data-structure/disjoint-sparse-table/src/lib.rs
+  _extendedDependsOn: []
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: rs
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     PROBLEM: https://judge.yosupo.jp/problem/staticrmq
     links:
@@ -29,14 +23,12 @@ data:
     \        q: usize,\n        a: [i64; n],\n    }\n    let spt = DisjointSparseTable::<M>::new(&a);\n\
     \    for _ in 0..q {\n        input! {\n            l: usize,\n            r:\
     \ usize,\n        }\n        println!(\"{}\", spt.prod(l, r));\n    }\n}\n"
-  dependsOn:
-  - crates/algebraic/algebraic/src/lib.rs
-  - crates/data-structure/disjoint-sparse-table/src/lib.rs
+  dependsOn: []
   isVerificationFile: true
   path: verify/staticrmq/src/main.rs
   requiredBy: []
-  timestamp: '2023-04-25 15:51:20+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '1970-01-01 00:00:00+00:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: verify/staticrmq/src/main.rs
 layout: document

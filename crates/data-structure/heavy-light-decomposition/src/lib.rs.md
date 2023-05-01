@@ -1,23 +1,11 @@
 ---
 data:
-  _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
-    path: crates/graph/graph/src/lib.rs
-    title: crates/graph/graph/src/lib.rs
-  _extendedRequiredBy:
-  - icon: ':heavy_check_mark:'
-    path: crates/data-structure/tree-query/src/lib.rs
-    title: crates/data-structure/tree-query/src/lib.rs
-  _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
-    path: verify/jump_on_tree/src/main.rs
-    title: verify/jump_on_tree/src/main.rs
-  - icon: ':heavy_check_mark:'
-    path: verify/lca/src/main.rs
-    title: verify/lca/src/main.rs
+  _extendedDependsOn: []
+  _extendedRequiredBy: []
+  _extendedVerifiedWith: []
   _isVerificationFailed: false
   _pathExtension: rs
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':warning:'
   attributes:
     links: []
   bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.11.3/x64/lib/python3.11/site-packages/onlinejudge_verify/documentation/build.py\"\
@@ -97,17 +85,13 @@ data:
     \u3059\u308B\u90E8\u5206\u6728\u306EHLD\u4E0A\u306E\u7BC4\u56F2\n    pub fn subtree(&self,\
     \ v: usize, edge: bool) -> (usize, usize) {\n        let e = if edge { 1 } else\
     \ { 0 };\n        (self.t_in[v] + e, self.t_out[v])\n    }\n}\n"
-  dependsOn:
-  - crates/graph/graph/src/lib.rs
+  dependsOn: []
   isVerificationFile: false
   path: crates/data-structure/heavy-light-decomposition/src/lib.rs
-  requiredBy:
-  - crates/data-structure/tree-query/src/lib.rs
-  timestamp: '2023-04-24 12:50:05+09:00'
-  verificationStatus: LIBRARY_ALL_AC
-  verifiedWith:
-  - verify/jump_on_tree/src/main.rs
-  - verify/lca/src/main.rs
+  requiredBy: []
+  timestamp: '1970-01-01 00:00:00+00:00'
+  verificationStatus: LIBRARY_NO_TESTS
+  verifiedWith: []
 documentation_of: crates/data-structure/heavy-light-decomposition/src/lib.rs
 layout: document
 redirect_from:

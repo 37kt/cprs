@@ -2,13 +2,10 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy: []
-  _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
-    path: verify/sum_of_floor_of_linear/src/main.rs
-    title: verify/sum_of_floor_of_linear/src/main.rs
+  _extendedVerifiedWith: []
   _isVerificationFailed: false
   _pathExtension: rs
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':warning:'
   attributes:
     links: []
   bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.11.3/x64/lib/python3.11/site-packages/onlinejudge_verify/documentation/build.py\"\
@@ -35,10 +32,9 @@ data:
   isVerificationFile: false
   path: crates/math/floor-sum/src/lib.rs
   requiredBy: []
-  timestamp: '2023-04-27 15:09:25+09:00'
-  verificationStatus: LIBRARY_ALL_AC
-  verifiedWith:
-  - verify/sum_of_floor_of_linear/src/main.rs
+  timestamp: '1970-01-01 00:00:00+00:00'
+  verificationStatus: LIBRARY_NO_TESTS
+  verifiedWith: []
 documentation_of: crates/math/floor-sum/src/lib.rs
 layout: document
 redirect_from:

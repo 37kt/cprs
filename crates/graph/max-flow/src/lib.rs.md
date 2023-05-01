@@ -1,10 +1,7 @@
 ---
 data:
   _extendedDependsOn: []
-  _extendedRequiredBy:
-  - icon: ':warning:'
-    path: crates/graph/max-flow-lower-bound/src/lib.rs
-    title: crates/graph/max-flow-lower-bound/src/lib.rs
+  _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
   _pathExtension: rs
@@ -78,9 +75,8 @@ data:
   dependsOn: []
   isVerificationFile: false
   path: crates/graph/max-flow/src/lib.rs
-  requiredBy:
-  - crates/graph/max-flow-lower-bound/src/lib.rs
-  timestamp: '2023-04-27 21:13:38+09:00'
+  requiredBy: []
+  timestamp: '1970-01-01 00:00:00+00:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: crates/graph/max-flow/src/lib.rs

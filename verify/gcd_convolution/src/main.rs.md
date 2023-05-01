@@ -1,9 +1,6 @@
 ---
 data:
-  _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
-    path: crates/convolution/gcd-convolution/src/lib.rs
-    title: crates/convolution/gcd-convolution/src/lib.rs
+  _extendedDependsOn: []
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
@@ -26,12 +23,11 @@ data:
     \ [Mint; n],\n    }\n    a.insert(0, 0.into());\n    b.insert(0, 0.into());\n\
     \    let c = gcd_convolution(a, b);\n    println!(\"{}\", c[1..].iter().join(\"\
     \ \"));\n}\n"
-  dependsOn:
-  - crates/convolution/gcd-convolution/src/lib.rs
+  dependsOn: []
   isVerificationFile: true
   path: verify/gcd_convolution/src/main.rs
   requiredBy: []
-  timestamp: '2023-04-21 13:06:23+09:00'
+  timestamp: '1970-01-01 00:00:00+00:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/gcd_convolution/src/main.rs
