@@ -293,7 +293,9 @@ impl<const P: u32> SparseFormalPowerSeries<P> {
     pub fn log(self, d: usize) -> FormalPowerSeries<P> {
         assert!(self[0].0 == 0 && self[0].1.val() == 1);
         let f = self.differential();
-        (self.inv(d) * f).pre(d - 1).integral()
+        let mut res = (self.inv(d) * f).pre(d - 1).integral();
+        res.resize(d, 0.into());
+        res
     }
 
     pub fn exp(&self, d: usize) -> FormalPowerSeries<P> {
