@@ -1,3 +1,4 @@
+use convolution_naive::convolution_naive;
 use convolution_ntt_friendly::convolution_ntt_friendly;
 use modint::{ModInt, StaticModInt};
 
@@ -9,6 +10,9 @@ type Fp2 = StaticModInt<M2>;
 type Fp3 = StaticModInt<M3>;
 
 pub fn convolution_arbitrary_mod<T: ModInt>(a: &[T], b: &[T]) -> Vec<T> {
+    if a.len().min(b.len()) < 60 {
+        return convolution_naive(a, b);
+    }
     let a1 = a.iter().map(|&x| Fp1::new(x.val())).collect::<Vec<_>>();
     let a2 = a.iter().map(|&x| Fp2::new(x.val())).collect::<Vec<_>>();
     let a3 = a.iter().map(|&x| Fp3::new(x.val())).collect::<Vec<_>>();

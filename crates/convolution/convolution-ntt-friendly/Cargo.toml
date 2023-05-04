@@ -12,3 +12,4 @@ name = "convolution_ntt_friendly"
 
 [dependencies]
 modint = { path = "../../number-theory/modint" }
+convolution-naive = { path = "../../convolution/convolution-naive" }

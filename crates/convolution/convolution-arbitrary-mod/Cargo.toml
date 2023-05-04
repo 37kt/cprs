@@ -13,3 +13,4 @@ name = "convolution_arbitrary_mod"
 [dependencies]
 modint = { path = "../../number-theory/modint" }
 convolution-ntt-friendly = { path = "../../convolution/convolution-ntt-friendly" }
+convolution-naive = { path = "../../convolution/convolution-naive" }

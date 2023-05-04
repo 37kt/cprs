@@ -1,6 +1,6 @@
-// verification-helper: PROBLEM https://judge.yosupo.jp/problem/exp_of_formal_power_series
+// verification-helper: PROBLEM https://judge.yosupo.jp/problem/exp_of_formal_power_series_sparse
 
-use formal_power_series::FormalPowerSeries;
+use formal_power_series::SparseFormalPowerSeries;
 use itertools::Itertools;
 use modint::ModInt998244353;
 use proconio::input;
@@ -11,9 +11,10 @@ type Mint = ModInt998244353;
 fn main() {
     input! {
         n: usize,
-        a: [Mint; n],
+        k: usize,
+        ia: [(usize, Mint); k],
     }
-    let a = FormalPowerSeries(a);
+    let a = SparseFormalPowerSeries(ia);
     let b = a.exp(n);
     println!("{}", b.iter().join(" "));
 }
