@@ -94,28 +94,28 @@ impl<const P: u32> FormalPowerSeries<P> {
             let mut res = fps![0; d];
             res[0] = self[0].inv();
             for k in 0.. {
+                let k = 1 << k;
                 if k >= d {
                     break;
                 }
-                let k = 1 << k;
                 let mut f = Self(self.iter().take(k * 2).map(|&x| x).collect());
                 f.resize(k * 2, 0.into());
                 let mut g = Self(res.iter().take(k).map(|&x| x).collect());
                 g.resize(k * 2, 0.into());
-                ntt(&mut f.0);
-                ntt(&mut g.0);
+                ntt(&mut f);
+                ntt(&mut g);
                 for (a, b) in f.iter_mut().zip(g.iter()) {
                     *a *= b;
                 }
-                ntt_inv(&mut f.0);
+                ntt_inv(&mut f);
                 for a in f.iter_mut().take(k) {
                     *a = 0.into();
                 }
-                ntt(&mut f.0);
+                ntt(&mut f);
                 for (a, b) in f.iter_mut().zip(g.iter()) {
                     *a *= b;
                 }
-                ntt_inv(&mut f.0);
+                ntt_inv(&mut f);
                 for (a, b) in res.iter_mut().zip(f.iter()).skip(k) {
                     *a = -b;
                 }
