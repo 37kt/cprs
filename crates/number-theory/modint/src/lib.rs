@@ -237,6 +237,51 @@ const fn ntt_info(
     (g, rank2, root, iroot, rate2, irate2, rate3, irate3)
 }
 
+// reference: https://rsk0315.hatenablog.com/entry/2023/04/29/043512
+fn rat_convert(x: u64, m: u64, d: u64) -> Option<(u64, u64)> {
+    let n = m / (2 * d);
+    if x < n && 1 < d {
+        return Some((x, 1));
+    }
+
+    let mut l = (0, 1);
+    let mut r = (1, 0);
+    loop {
+        let num = l.0 + r.0;
+        let den = l.1 + r.1;
+
+        let (i, q) = match (num * m).cmp(&(den * x)) {
+            std::cmp::Ordering::Less => {
+                // num/den < x/m
+                // k = max {k: m (l.0 * k * r.0) < x (l.1 + k * r.1)}
+                // k = max {k: k (m r.0 - x r.1) < x l.1 - m l.0}
+                let k = (x * l.1 - m * l.0 - 1) / (m * r.0 - x * r.1);
+                l.0 += k * r.0;
+                l.1 += k * r.1;
+                l
+            }
+            std::cmp::Ordering::Equal => return None,
+            std::cmp::Ordering::Greater => {
+                // num/den > x/m
+                // k = max {k: m (k l.0 + r.0) > x (k l.1 + r.1)}
+                // k = max {k: m r.0 - x r.1 > k (x l.1 - m l.0)}
+                let k = (m * r.0 - x * r.1 - 1) / (x * l.1 - m * l.0);
+                r.0 += k * l.0;
+                r.1 += k * l.1;
+                r
+            }
+        };
+
+        if q * x < i * m {
+            continue;
+        }
+        let p = q * x - i * m;
+        if p < n && q < d {
+            return Some((p, q));
+        }
+    }
+}
+
 impl<const P: u32> ModInt for StaticModInt<P> {
     #[inline(always)]
     fn modulus() -> u32 {
@@ -506,25 +551,38 @@ impl FromStr for DynamicModInt {
 
 impl<const P: u32> fmt::Display for StaticModInt<P> {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
-        fmt::Display::fmt(&self.0, f)
+        write!(f, "{}", self.0)
     }
 }
 
 impl fmt::Display for DynamicModInt {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
-        fmt::Display::fmt(&self.0, f)
+        write!(f, "{}", self.0)
     }
 }
 
 impl<const P: u32> fmt::Debug for StaticModInt<P> {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
-        fmt::Debug::fmt(&self.0, f)
+        if let Some((num, den)) = rat_convert(self.0 as u64, P as u64, 1025) {
+            write!(f, "{}", num)?;
+            if den != 1 {
+                write!(f, "/{}", den)?;
+            }
+        } else if let Some((num, den)) = rat_convert((P - self.0) as u64, P as u64, 1025) {
+            write!(f, "-{}", num)?;
+            if den != 1 {
+                write!(f, "/{}", den)?;
+            }
+        } else {
+            write!(f, "{}", self.0)?;
+        }
+        Ok(())
     }
 }
 
 impl fmt::Debug for DynamicModInt {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
-        fmt::Debug::fmt(&self.0, f)
+        write!(f, "{}", self.0)
     }
 }
 
