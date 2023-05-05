@@ -1,0 +1,16 @@
+[package]
+name = "bostan-mori"
+version = "0.1.0"
+edition = "2021"
+license = "CC0-1.0"
+publish = false
+
+[lib]
+name = "bostan_mori"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+modint = { path = "../../number-theory/modint" }
+convolution-ntt-friendly = { path = "../../convolution/convolution-ntt-friendly" }
+formal-power-series = { path = "../../polynomial/formal-power-series" }
