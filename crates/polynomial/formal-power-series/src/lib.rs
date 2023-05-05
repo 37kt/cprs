@@ -249,6 +249,41 @@ impl<const P: u32> FormalPowerSeries<P> {
         }
         fps![0; d]
     }
+
+    pub fn sqrt(&self, d: usize) -> Option<FormalPowerSeries<P>> {
+        if self.len() == 0 {
+            return Some(fps![0; d]);
+        }
+        if self[0].val() == 0 {
+            if let Some(i) = self.iter().position(|&x| x.val() != 0) {
+                if i & 1 != 0 {
+                    return None;
+                } else if d <= i / 2 {
+                    return Some(fps![0; d]);
+                }
+                let mut res = (self >> i).sqrt(d - i / 2)?;
+                res <<= i / 2;
+                if res.len() < d {
+                    res.resize(d, 0.into());
+                }
+                return Some(res);
+            }
+            return Some(fps![0; d]);
+        }
+
+        let r = self[0].sqrt()?;
+        assert_eq!(r * r, self[0]);
+        let mut res = fps![r];
+        let inv2 = StaticModInt::new(2).inv();
+        for i in 0.. {
+            let i = 1 << i;
+            if i >= d {
+                break;
+            }
+            res = (&res + self.clone().pre(i << 1) * res.inv(i << 1)) * inv2;
+        }
+        Some(res.pre(d))
+    }
 }
 
 impl<const P: u32> SparseFormalPowerSeries<P> {
