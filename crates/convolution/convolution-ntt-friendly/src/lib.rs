@@ -139,6 +139,19 @@ pub fn ntt_inv<const P: u32>(a: &mut [StaticModInt<P>]) {
     }
 }
 
+pub fn ntt_doubling<const P: u32>(a: &mut Vec<StaticModInt<P>>) {
+    let n = a.len();
+    a.append(&mut a.clone());
+    ntt_inv(&mut a[n..]);
+    let mut r = StaticModInt::new(1);
+    let zeta = StaticModInt::new(<() as NttInfo<P>>::G).pow((P - 1) as usize / (n << 1));
+    for i in n..n * 2 {
+        a[i] *= r;
+        r *= zeta;
+    }
+    ntt(&mut a[n..]);
+}
+
 pub fn convolution_ntt_friendly<const P: u32>(
     mut a: Vec<StaticModInt<P>>,
     mut b: Vec<StaticModInt<P>>,

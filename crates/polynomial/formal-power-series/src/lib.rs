@@ -435,7 +435,7 @@ impl<const P: u32> SparseFormalPowerSeries<P> {
                 .skip(1)
                 .filter_map(|&(j, v)| (j - p <= i).then(|| (j - p, v)))
                 .map(|(j, v)| v * g[lz + i - j] * (k * j - (i - j)))
-                .product::<StaticModInt<P>>()
+                .sum::<StaticModInt<P>>()
                 * inv[i]
                 * inv_f0;
         }
