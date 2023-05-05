@@ -330,6 +330,48 @@ impl<const P: u32> SparseFormalPowerSeries<P> {
         }
         res
     }
+
+    pub fn pow(&self, k: usize, d: usize) -> FormalPowerSeries<P> {
+        let offset = self.iter().position(|&(_, v)| v.val() != 0);
+        let mut res = fps![0; d];
+        if offset.is_none() {
+            if k == 0 {
+                res[0] += 1;
+            }
+            return res;
+        }
+        let offset = offset.unwrap();
+        if self[offset].0 > 0 {
+            let deg = self[offset].0;
+            if k > (d - 1) / deg {
+                return res;
+            }
+            let g = Self(
+                self.iter()
+                    .filter_map(|&(i, v)| (i >= deg).then(|| (i - deg, v)))
+                    .collect(),
+            );
+            let t = g.pow(k, d - k * deg);
+            for i in 0..d - k * deg {
+                res[k * deg + i] = t[i];
+            }
+            return res;
+        }
+        let mut inv = vec![StaticModInt::<P>::new(1); d + 1];
+        let m = P as usize;
+        for i in 2..=d {
+            inv[i] = -inv[m % i] * (m / i);
+        }
+        res[0] = self[0].1.pow(k);
+        let c = self[0].1.inv();
+        for i in 1..d {
+            for &(j, v) in self.iter().skip(1).filter(|&&(j, _)| i >= j) {
+                res[i] = res[i] + v * res[i - j] * (StaticModInt::<P>::new(k) * j - (i - j));
+            }
+            res[i] *= inv[i] * c;
+        }
+        res
+    }
 }
 
 impl<const P: u32> Deref for FormalPowerSeries<P> {
