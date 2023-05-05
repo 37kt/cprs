@@ -1,6 +1,9 @@
 ---
 data:
-  _extendedDependsOn: []
+  _extendedDependsOn:
+  - icon: ':warning:'
+    path: crates/graph/max-flow/src/lib.rs
+    title: crates/graph/max-flow/src/lib.rs
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
@@ -34,11 +37,12 @@ data:
     \        let d = self.mf.max_flow(s, t);\n        if a + c == self.sum_lower &&\
     \ a + b == self.sum_lower {\n            Some(b + d)\n        } else {\n     \
     \       None\n        }\n    }\n}\n"
-  dependsOn: []
+  dependsOn:
+  - crates/graph/max-flow/src/lib.rs
   isVerificationFile: false
   path: crates/graph/max-flow-lower-bound/src/lib.rs
   requiredBy: []
-  timestamp: '1970-01-01 00:00:00+00:00'
+  timestamp: '2023-04-27 21:13:38+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: crates/graph/max-flow-lower-bound/src/lib.rs

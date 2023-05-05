@@ -1,11 +1,17 @@
 ---
 data:
-  _extendedDependsOn: []
+  _extendedDependsOn:
+  - icon: ':heavy_check_mark:'
+    path: crates/algebraic/algebraic/src/lib.rs
+    title: crates/algebraic/algebraic/src/lib.rs
+  - icon: ':heavy_check_mark:'
+    path: crates/data-structure/sliding-window-aggregation/src/lib.rs
+    title: crates/data-structure/sliding-window-aggregation/src/lib.rs
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: rs
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     PROBLEM: https://judge.yosupo.jp/problem/queue_operate_all_composite
     links:
@@ -28,12 +34,14 @@ data:
     \         swag.pop_front();\n        } else {\n            input! {\n        \
     \        x: Mint,\n            }\n            let (a, b) = swag.prod();\n    \
     \        println!(\"{}\", a * x + b);\n        }\n    }\n}\n"
-  dependsOn: []
+  dependsOn:
+  - crates/algebraic/algebraic/src/lib.rs
+  - crates/data-structure/sliding-window-aggregation/src/lib.rs
   isVerificationFile: true
   path: verify/queue_operate_all_composite/src/main.rs
   requiredBy: []
-  timestamp: '1970-01-01 00:00:00+00:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2023-04-25 15:51:20+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/queue_operate_all_composite/src/main.rs
 layout: document

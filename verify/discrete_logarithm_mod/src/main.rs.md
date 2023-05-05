@@ -1,6 +1,12 @@
 ---
 data:
-  _extendedDependsOn: []
+  _extendedDependsOn:
+  - icon: ':heavy_check_mark:'
+    path: crates/algebraic/algebraic/src/lib.rs
+    title: crates/algebraic/algebraic/src/lib.rs
+  - icon: ':heavy_check_mark:'
+    path: crates/math/discrete-logarithm/src/lib.rs
+    title: crates/math/discrete-logarithm/src/lib.rs
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
@@ -26,11 +32,13 @@ data:
     \ = ModInt::new(y);\n        if let Some(k) = discrete_logarithm::<M>(ModInt::new(1),\
     \ y, x, m as usize) {\n            println!(\"{}\", k);\n        } else {\n  \
     \          println!(\"-1\");\n        }\n    }\n}\n"
-  dependsOn: []
+  dependsOn:
+  - crates/algebraic/algebraic/src/lib.rs
+  - crates/math/discrete-logarithm/src/lib.rs
   isVerificationFile: true
   path: verify/discrete_logarithm_mod/src/main.rs
   requiredBy: []
-  timestamp: '1970-01-01 00:00:00+00:00'
+  timestamp: '2023-04-25 15:51:20+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/discrete_logarithm_mod/src/main.rs

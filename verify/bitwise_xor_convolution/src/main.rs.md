@@ -1,6 +1,9 @@
 ---
 data:
-  _extendedDependsOn: []
+  _extendedDependsOn:
+  - icon: ':heavy_check_mark:'
+    path: crates/convolution/xor-convolution/src/lib.rs
+    title: crates/convolution/xor-convolution/src/lib.rs
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
@@ -22,11 +25,12 @@ data:
     \   input! {\n        n: usize,\n        a: [Mint; 1 << n],\n        b: [Mint;\
     \ 1 << n],\n    }\n    let c = xor_convolution(a, b);\n    println!(\"{}\", c.iter().join(\"\
     \ \"));\n}\n"
-  dependsOn: []
+  dependsOn:
+  - crates/convolution/xor-convolution/src/lib.rs
   isVerificationFile: true
   path: verify/bitwise_xor_convolution/src/main.rs
   requiredBy: []
-  timestamp: '1970-01-01 00:00:00+00:00'
+  timestamp: '2023-04-21 13:06:23+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/bitwise_xor_convolution/src/main.rs

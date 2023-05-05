@@ -1,11 +1,14 @@
 ---
 data:
-  _extendedDependsOn: []
+  _extendedDependsOn:
+  - icon: ':heavy_check_mark:'
+    path: crates/algorithm/mo/src/lib.rs
+    title: crates/algorithm/mo/src/lib.rs
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: rs
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     PROBLEM: https://judge.yosupo.jp/problem/static_range_sum
     links:
@@ -26,12 +29,13 @@ data:
     \ usize,\n        a: [i64; n],\n        lr: [(usize, usize); q],\n    }\n    let\
     \ mut solver = Solver { a, sum: 0 };\n    println!(\"{}\", solver.solve(&lr).iter().join(\"\
     \\n\"));\n}\n"
-  dependsOn: []
+  dependsOn:
+  - crates/algorithm/mo/src/lib.rs
   isVerificationFile: true
   path: verify/static_range_sum/src/main.rs
   requiredBy: []
-  timestamp: '1970-01-01 00:00:00+00:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2023-04-21 15:23:30+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/static_range_sum/src/main.rs
 layout: document

@@ -1,11 +1,20 @@
 ---
 data:
-  _extendedDependsOn: []
+  _extendedDependsOn:
+  - icon: ':heavy_check_mark:'
+    path: crates/algebraic/algebraic/src/lib.rs
+    title: crates/algebraic/algebraic/src/lib.rs
+  - icon: ':heavy_check_mark:'
+    path: crates/algorithm/mo/src/lib.rs
+    title: crates/algorithm/mo/src/lib.rs
+  - icon: ':heavy_check_mark:'
+    path: crates/data-structure/fenwick-tree/src/lib.rs
+    title: crates/data-structure/fenwick-tree/src/lib.rs
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: rs
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     PROBLEM: https://judge.yosupo.jp/problem/static_range_inversions_query
     links:
@@ -35,12 +44,15 @@ data:
     \    }\n    let mut solver = Solver {\n        a: b,\n        tr: FenwickTree::new(z.len()),\n\
     \        res: 0,\n    };\n    let res = solver.solve(&lr);\n    println!(\"{}\"\
     , res.iter().join(\"\\n\"));\n}\n"
-  dependsOn: []
+  dependsOn:
+  - crates/algebraic/algebraic/src/lib.rs
+  - crates/algorithm/mo/src/lib.rs
+  - crates/data-structure/fenwick-tree/src/lib.rs
   isVerificationFile: true
   path: verify/static_range_inversions_query/src/main.rs
   requiredBy: []
-  timestamp: '1970-01-01 00:00:00+00:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2023-04-25 15:51:20+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/static_range_inversions_query/src/main.rs
 layout: document

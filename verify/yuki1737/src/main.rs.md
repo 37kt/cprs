@@ -1,11 +1,14 @@
 ---
 data:
-  _extendedDependsOn: []
+  _extendedDependsOn:
+  - icon: ':heavy_check_mark:'
+    path: crates/math/prime-sieve/src/lib.rs
+    title: crates/math/prime-sieve/src/lib.rs
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: rs
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     PROBLEM: https://yukicoder.me/problems/no/1737
     links:
@@ -21,12 +24,13 @@ data:
     \ main() {\n    input! {\n        n: usize,\n    }\n    let pr = PrimeSieve::new(n);\n\
     \    let mut res = 0;\n    for (x, k) in pr.factorize(n) {\n        res += x *\
     \ k;\n    }\n    println!(\"{}\", res);\n}\n"
-  dependsOn: []
+  dependsOn:
+  - crates/math/prime-sieve/src/lib.rs
   isVerificationFile: true
   path: verify/yuki1737/src/main.rs
   requiredBy: []
-  timestamp: '1970-01-01 00:00:00+00:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2023-04-21 15:23:30+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/yuki1737/src/main.rs
 layout: document

@@ -1,11 +1,50 @@
 ---
 data:
   _extendedDependsOn: []
-  _extendedRequiredBy: []
-  _extendedVerifiedWith: []
+  _extendedRequiredBy:
+  - icon: ':heavy_check_mark:'
+    path: crates/data-structure/heavy-light-decomposition/src/lib.rs
+    title: crates/data-structure/heavy-light-decomposition/src/lib.rs
+  - icon: ':heavy_check_mark:'
+    path: crates/data-structure/tree-query/src/lib.rs
+    title: crates/data-structure/tree-query/src/lib.rs
+  - icon: ':heavy_check_mark:'
+    path: crates/graph/strongly-connected-components/src/lib.rs
+    title: crates/graph/strongly-connected-components/src/lib.rs
+  - icon: ':heavy_check_mark:'
+    path: crates/math/two-satisfiability/src/lib.rs
+    title: crates/math/two-satisfiability/src/lib.rs
+  - icon: ':warning:'
+    path: crates/tree/centroid-decomposition/src/lib.rs
+    title: crates/tree/centroid-decomposition/src/lib.rs
+  - icon: ':heavy_check_mark:'
+    path: crates/tree/re-rooting-dp/src/lib.rs
+    title: crates/tree/re-rooting-dp/src/lib.rs
+  _extendedVerifiedWith:
+  - icon: ':heavy_check_mark:'
+    path: verify/jump_on_tree/src/main.rs
+    title: verify/jump_on_tree/src/main.rs
+  - icon: ':heavy_check_mark:'
+    path: verify/lca/src/main.rs
+    title: verify/lca/src/main.rs
+  - icon: ':heavy_check_mark:'
+    path: verify/scc/src/main.rs
+    title: verify/scc/src/main.rs
+  - icon: ':heavy_check_mark:'
+    path: verify/vertex_add_path_sum/src/main.rs
+    title: verify/vertex_add_path_sum/src/main.rs
+  - icon: ':heavy_check_mark:'
+    path: verify/vertex_add_subtree_sum/src/main.rs
+    title: verify/vertex_add_subtree_sum/src/main.rs
+  - icon: ':heavy_check_mark:'
+    path: verify/vertex_set_path_composite/src/main.rs
+    title: verify/vertex_set_path_composite/src/main.rs
+  - icon: ':heavy_check_mark:'
+    path: verify/yuki1333/src/main.rs
+    title: verify/yuki1333/src/main.rs
   _isVerificationFailed: false
   _pathExtension: rs
-  _verificationStatusIcon: ':warning:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.11.3/x64/lib/python3.11/site-packages/onlinejudge_verify/documentation/build.py\"\
@@ -33,10 +72,23 @@ data:
   dependsOn: []
   isVerificationFile: false
   path: crates/graph/graph/src/lib.rs
-  requiredBy: []
-  timestamp: '1970-01-01 00:00:00+00:00'
-  verificationStatus: LIBRARY_NO_TESTS
-  verifiedWith: []
+  requiredBy:
+  - crates/graph/strongly-connected-components/src/lib.rs
+  - crates/data-structure/tree-query/src/lib.rs
+  - crates/data-structure/heavy-light-decomposition/src/lib.rs
+  - crates/tree/re-rooting-dp/src/lib.rs
+  - crates/tree/centroid-decomposition/src/lib.rs
+  - crates/math/two-satisfiability/src/lib.rs
+  timestamp: '2023-04-24 12:50:05+09:00'
+  verificationStatus: LIBRARY_ALL_AC
+  verifiedWith:
+  - verify/scc/src/main.rs
+  - verify/vertex_add_path_sum/src/main.rs
+  - verify/jump_on_tree/src/main.rs
+  - verify/yuki1333/src/main.rs
+  - verify/vertex_add_subtree_sum/src/main.rs
+  - verify/vertex_set_path_composite/src/main.rs
+  - verify/lca/src/main.rs
 documentation_of: crates/graph/graph/src/lib.rs
 layout: document
 redirect_from:

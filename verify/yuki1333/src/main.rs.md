@@ -1,11 +1,20 @@
 ---
 data:
-  _extendedDependsOn: []
+  _extendedDependsOn:
+  - icon: ':heavy_check_mark:'
+    path: crates/algebraic/algebraic/src/lib.rs
+    title: crates/algebraic/algebraic/src/lib.rs
+  - icon: ':heavy_check_mark:'
+    path: crates/graph/graph/src/lib.rs
+    title: crates/graph/graph/src/lib.rs
+  - icon: ':heavy_check_mark:'
+    path: crates/tree/re-rooting-dp/src/lib.rs
+    title: crates/tree/re-rooting-dp/src/lib.rs
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: rs
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     PROBLEM: https://yukicoder.me/problems/no/1333
     links:
@@ -30,12 +39,15 @@ data:
     \    let dp = ReRootingDP::build::<DP, V, E>(&g);\n    let mut res = M::new(0);\n\
     \    for i in 0..n {\n        res += dp.prod(i).1;\n    }\n    res /= 2;\n   \
     \ println!(\"{}\", res);\n}\n"
-  dependsOn: []
+  dependsOn:
+  - crates/algebraic/algebraic/src/lib.rs
+  - crates/graph/graph/src/lib.rs
+  - crates/tree/re-rooting-dp/src/lib.rs
   isVerificationFile: true
   path: verify/yuki1333/src/main.rs
   requiredBy: []
-  timestamp: '1970-01-01 00:00:00+00:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2023-04-25 15:51:20+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/yuki1333/src/main.rs
 layout: document

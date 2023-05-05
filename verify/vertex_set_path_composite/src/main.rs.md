@@ -1,11 +1,23 @@
 ---
 data:
-  _extendedDependsOn: []
+  _extendedDependsOn:
+  - icon: ':heavy_check_mark:'
+    path: crates/algebraic/algebraic/src/lib.rs
+    title: crates/algebraic/algebraic/src/lib.rs
+  - icon: ':heavy_check_mark:'
+    path: crates/data-structure/segment-tree/src/lib.rs
+    title: crates/data-structure/segment-tree/src/lib.rs
+  - icon: ':heavy_check_mark:'
+    path: crates/data-structure/tree-query/src/lib.rs
+    title: crates/data-structure/tree-query/src/lib.rs
+  - icon: ':heavy_check_mark:'
+    path: crates/graph/graph/src/lib.rs
+    title: crates/graph/graph/src/lib.rs
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: rs
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     PROBLEM: https://judge.yosupo.jp/problem/vertex_set_path_composite
     links:
@@ -32,12 +44,16 @@ data:
     \       v: usize,\n                x: Mint,\n            }\n            let (a,\
     \ b) = tq.prod_path(u, v);\n            println!(\"{}\", a * x + b);\n       \
     \ }\n    }\n}\n"
-  dependsOn: []
+  dependsOn:
+  - crates/algebraic/algebraic/src/lib.rs
+  - crates/data-structure/segment-tree/src/lib.rs
+  - crates/data-structure/tree-query/src/lib.rs
+  - crates/graph/graph/src/lib.rs
   isVerificationFile: true
   path: verify/vertex_set_path_composite/src/main.rs
   requiredBy: []
-  timestamp: '1970-01-01 00:00:00+00:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2023-04-26 12:26:24+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/vertex_set_path_composite/src/main.rs
 layout: document

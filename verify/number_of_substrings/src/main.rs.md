@@ -1,6 +1,9 @@
 ---
 data:
-  _extendedDependsOn: []
+  _extendedDependsOn:
+  - icon: ':heavy_check_mark:'
+    path: crates/string/suffix-array/src/lib.rs
+    title: crates/string/suffix-array/src/lib.rs
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
@@ -21,11 +24,12 @@ data:
     fn main() {\n    input! {\n        s: Bytes,\n    }\n    let sa = SuffixArray::build(&s);\n\
     \    let lcp = sa.lcp_array();\n    let n = s.len();\n    let res = n * (n + 1)\
     \ / 2 - lcp.iter().sum::<usize>();\n    println!(\"{}\", res);\n}\n"
-  dependsOn: []
+  dependsOn:
+  - crates/string/suffix-array/src/lib.rs
   isVerificationFile: true
   path: verify/number_of_substrings/src/main.rs
   requiredBy: []
-  timestamp: '1970-01-01 00:00:00+00:00'
+  timestamp: '2023-04-27 14:07:11+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/number_of_substrings/src/main.rs

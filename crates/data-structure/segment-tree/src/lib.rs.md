@@ -1,11 +1,29 @@
 ---
 data:
-  _extendedDependsOn: []
-  _extendedRequiredBy: []
-  _extendedVerifiedWith: []
+  _extendedDependsOn:
+  - icon: ':heavy_check_mark:'
+    path: crates/algebraic/algebraic/src/lib.rs
+    title: crates/algebraic/algebraic/src/lib.rs
+  _extendedRequiredBy:
+  - icon: ':heavy_check_mark:'
+    path: crates/data-structure/tree-query/src/lib.rs
+    title: crates/data-structure/tree-query/src/lib.rs
+  _extendedVerifiedWith:
+  - icon: ':heavy_check_mark:'
+    path: verify/point_add_range_sum/src/main.rs
+    title: verify/point_add_range_sum/src/main.rs
+  - icon: ':heavy_check_mark:'
+    path: verify/vertex_add_path_sum/src/main.rs
+    title: verify/vertex_add_path_sum/src/main.rs
+  - icon: ':heavy_check_mark:'
+    path: verify/vertex_add_subtree_sum/src/main.rs
+    title: verify/vertex_add_subtree_sum/src/main.rs
+  - icon: ':heavy_check_mark:'
+    path: verify/vertex_set_path_composite/src/main.rs
+    title: verify/vertex_set_path_composite/src/main.rs
   _isVerificationFailed: false
   _pathExtension: rs
-  _verificationStatusIcon: ':warning:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.11.3/x64/lib/python3.11/site-packages/onlinejudge_verify/documentation/build.py\"\
@@ -67,13 +85,19 @@ data:
     \ n];\n        v.append(&mut a);\n        for i in (1..n).rev() {\n          \
     \  v[i] = M::op(&v[i * 2], &v[i * 2 + 1]);\n        }\n        Self { n, v }\n\
     \    }\n}\n"
-  dependsOn: []
+  dependsOn:
+  - crates/algebraic/algebraic/src/lib.rs
   isVerificationFile: false
   path: crates/data-structure/segment-tree/src/lib.rs
-  requiredBy: []
-  timestamp: '1970-01-01 00:00:00+00:00'
-  verificationStatus: LIBRARY_NO_TESTS
-  verifiedWith: []
+  requiredBy:
+  - crates/data-structure/tree-query/src/lib.rs
+  timestamp: '2023-04-26 12:26:24+09:00'
+  verificationStatus: LIBRARY_ALL_AC
+  verifiedWith:
+  - verify/vertex_add_path_sum/src/main.rs
+  - verify/vertex_add_subtree_sum/src/main.rs
+  - verify/vertex_set_path_composite/src/main.rs
+  - verify/point_add_range_sum/src/main.rs
 documentation_of: crates/data-structure/segment-tree/src/lib.rs
 layout: document
 redirect_from:

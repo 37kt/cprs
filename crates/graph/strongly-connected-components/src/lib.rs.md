@@ -1,11 +1,20 @@
 ---
 data:
-  _extendedDependsOn: []
-  _extendedRequiredBy: []
-  _extendedVerifiedWith: []
+  _extendedDependsOn:
+  - icon: ':heavy_check_mark:'
+    path: crates/graph/graph/src/lib.rs
+    title: crates/graph/graph/src/lib.rs
+  _extendedRequiredBy:
+  - icon: ':heavy_check_mark:'
+    path: crates/math/two-satisfiability/src/lib.rs
+    title: crates/math/two-satisfiability/src/lib.rs
+  _extendedVerifiedWith:
+  - icon: ':heavy_check_mark:'
+    path: verify/scc/src/main.rs
+    title: verify/scc/src/main.rs
   _isVerificationFailed: false
   _pathExtension: rs
-  _verificationStatusIcon: ':warning:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.11.3/x64/lib/python3.11/site-packages/onlinejudge_verify/documentation/build.py\"\
@@ -43,13 +52,16 @@ data:
     \    self.m += 1;\n        }\n    }\n}\n\nstruct Scc {\n    comp: Vec<usize>,\n\
     \    low: Vec<usize>,\n    ord: Vec<usize>,\n    vis: Vec<usize>,\n    t: usize,\n\
     \    m: usize,\n}\n"
-  dependsOn: []
+  dependsOn:
+  - crates/graph/graph/src/lib.rs
   isVerificationFile: false
   path: crates/graph/strongly-connected-components/src/lib.rs
-  requiredBy: []
-  timestamp: '1970-01-01 00:00:00+00:00'
-  verificationStatus: LIBRARY_NO_TESTS
-  verifiedWith: []
+  requiredBy:
+  - crates/math/two-satisfiability/src/lib.rs
+  timestamp: '2023-04-24 12:50:05+09:00'
+  verificationStatus: LIBRARY_ALL_AC
+  verifiedWith:
+  - verify/scc/src/main.rs
 documentation_of: crates/graph/strongly-connected-components/src/lib.rs
 layout: document
 redirect_from:

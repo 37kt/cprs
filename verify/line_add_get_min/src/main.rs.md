@@ -1,6 +1,9 @@
 ---
 data:
-  _extendedDependsOn: []
+  _extendedDependsOn:
+  - icon: ':heavy_check_mark:'
+    path: crates/data-structure/li-chao-tree-dynamic/src/lib.rs
+    title: crates/data-structure/li-chao-tree-dynamic/src/lib.rs
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
@@ -27,11 +30,12 @@ data:
     \            }\n            lct.add_line(a, b);\n        } else {\n          \
     \  input! {\n                p: i64,\n            }\n            println!(\"{}\"\
     , lct.find(p).unwrap());\n        }\n    }\n}\n"
-  dependsOn: []
+  dependsOn:
+  - crates/data-structure/li-chao-tree-dynamic/src/lib.rs
   isVerificationFile: true
   path: verify/line_add_get_min/src/main.rs
   requiredBy: []
-  timestamp: '1970-01-01 00:00:00+00:00'
+  timestamp: '2023-04-21 13:06:23+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/line_add_get_min/src/main.rs

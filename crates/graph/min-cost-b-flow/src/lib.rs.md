@@ -2,10 +2,16 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy: []
-  _extendedVerifiedWith: []
+  _extendedVerifiedWith:
+  - icon: ':heavy_check_mark:'
+    path: verify/assignment/src/main.rs
+    title: verify/assignment/src/main.rs
+  - icon: ':heavy_check_mark:'
+    path: verify/min_cost_b_flow/src/main.rs
+    title: verify/min_cost_b_flow/src/main.rs
   _isVerificationFailed: false
   _pathExtension: rs
-  _verificationStatusIcon: ':warning:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links:
     - https://misawa.github.io/others/flow/lets_use_capacity_scaling.html
@@ -154,9 +160,11 @@ data:
   isVerificationFile: false
   path: crates/graph/min-cost-b-flow/src/lib.rs
   requiredBy: []
-  timestamp: '1970-01-01 00:00:00+00:00'
-  verificationStatus: LIBRARY_NO_TESTS
-  verifiedWith: []
+  timestamp: '2023-04-30 06:29:33+09:00'
+  verificationStatus: LIBRARY_ALL_AC
+  verifiedWith:
+  - verify/assignment/src/main.rs
+  - verify/min_cost_b_flow/src/main.rs
 documentation_of: crates/graph/min-cost-b-flow/src/lib.rs
 layout: document
 redirect_from:
