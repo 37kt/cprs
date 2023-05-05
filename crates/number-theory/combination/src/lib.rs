@@ -1,19 +1,19 @@
 use std::cell::RefCell;
 
-use ac_library::modint::ModIntBase;
+use modint::ModInt;
 
-pub struct Combination<M: ModIntBase> {
+pub struct Combination<M: ModInt> {
     inv: RefCell<Vec<M>>,
     fact: RefCell<Vec<M>>,
     fact_inv: RefCell<Vec<M>>,
 }
 
-impl<M: ModIntBase> Combination<M> {
+impl<M: ModInt> Combination<M> {
     pub fn new() -> Self {
         Self {
-            inv: RefCell::new(vec![M::new(0), M::new(1)]),
-            fact: RefCell::new(vec![M::new(1); 2]),
-            fact_inv: RefCell::new(vec![M::new(1); 2]),
+            inv: RefCell::new(vec![M::from(0), M::from(1)]),
+            fact: RefCell::new(vec![M::from(1); 2]),
+            fact_inv: RefCell::new(vec![M::from(1); 2]),
         }
     }
 
@@ -31,8 +31,8 @@ impl<M: ModIntBase> Combination<M> {
         fact_inv.resize(nn, M::default());
         let p = M::modulus() as usize;
         for i in m..nn {
-            inv[i] = -inv[p % i] * M::new((p / i) as u32);
-            fact[i] = fact[i - 1] * M::new(i);
+            inv[i] = -inv[p % i] * M::from((p / i) as u32);
+            fact[i] = fact[i - 1] * M::from(i);
             fact_inv[i] = fact_inv[i - 1] * inv[i];
         }
     }
@@ -54,7 +54,7 @@ impl<M: ModIntBase> Combination<M> {
 
     pub fn nck(&self, n: usize, k: usize) -> M {
         if n < k {
-            M::new(0)
+            M::from(0)
         } else {
             self.expand(n);
             self.fact.borrow()[n] * self.fact_inv.borrow()[k] * self.fact_inv.borrow()[n - k]
@@ -63,7 +63,7 @@ impl<M: ModIntBase> Combination<M> {
 
     pub fn npk(&self, n: usize, k: usize) -> M {
         if n < k {
-            M::new(0)
+            M::from(0)
         } else {
             self.expand(n);
             self.fact.borrow()[n] * self.fact_inv.borrow()[n - k]
@@ -72,7 +72,7 @@ impl<M: ModIntBase> Combination<M> {
 
     pub fn nhk(&self, n: usize, k: usize) -> M {
         if n == 0 && k == 0 {
-            M::new(1)
+            M::from(1)
         } else {
             self.nck(n + k - 1, k)
         }
