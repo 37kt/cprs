@@ -53,7 +53,8 @@ pub trait ModInt:
     fn raw(val: u32) -> Self;
     fn val(self) -> u32;
     fn inv(self) -> Self;
-    fn pow(self, exp: usize) -> Self;
+    fn pow(self, k: usize) -> Self;
+    fn sqrt(self) -> Option<Self>;
 }
 
 const fn mul(x: u32, y: u32, m: u32) -> u32 {
@@ -257,8 +258,12 @@ impl<const P: u32> ModInt for StaticModInt<P> {
         self.inv()
     }
 
-    fn pow(self, exp: usize) -> Self {
-        self.pow(exp)
+    fn pow(self, k: usize) -> Self {
+        self.pow(k)
+    }
+
+    fn sqrt(self) -> Option<Self> {
+        self.sqrt()
     }
 }
 
@@ -289,16 +294,49 @@ impl<const P: u32> StaticModInt<P> {
         self.pow(P as usize - 2)
     }
 
-    pub fn pow(mut self, mut exp: usize) -> Self {
+    pub fn pow(mut self, mut k: usize) -> Self {
         let mut res = Self::from(1);
-        while exp != 0 {
-            if exp & 1 != 0 {
+        while k != 0 {
+            if k & 1 != 0 {
                 res *= self;
             }
-            exp >>= 1;
+            k >>= 1;
             self *= self;
         }
         res
+    }
+
+    pub fn sqrt(self) -> Option<Self> {
+        let p = Self::modulus() as usize;
+        if self.val() < 2 {
+            return Some(self);
+        } else if self.pow(p - 1 >> 1).val() != 1 {
+            return None;
+        }
+        let mut b = Self::from(1);
+        while b.pow((p - 1 >> 1) as usize).val() == 1 {
+            b += 1;
+        }
+        let mut e = (p - 1).trailing_zeros() as usize;
+        let m = (p - 1) >> e;
+        let mut x = self.pow(m - 1 >> 1);
+        let mut y = self * x * x;
+        x *= self;
+        let mut z = b.pow(m);
+        while y.val() != 1 {
+            let mut j = 0;
+            let mut t = y;
+            while t.val() != 1 {
+                j += 1;
+                t *= t;
+            }
+            z = z.pow(1 << e - j - 1);
+            x *= z;
+            z *= z;
+            y *= z;
+            e = j;
+        }
+        Some(x)
     }
 }
 
@@ -323,8 +361,12 @@ impl ModInt for DynamicModInt {
         self.inv()
     }
 
-    fn pow(self, exp: usize) -> Self {
-        self.pow(exp)
+    fn pow(self, k: usize) -> Self {
+        self.pow(k)
+    }
+
+    fn sqrt(self) -> Option<Self> {
+        self.sqrt()
     }
 }
 
@@ -356,16 +398,49 @@ impl DynamicModInt {
         Self(x)
     }
 
-    pub fn pow(mut self, mut exp: usize) -> Self {
+    pub fn pow(mut self, mut k: usize) -> Self {
         let mut res = Self::from(1);
-        while exp != 0 {
-            if exp & 1 != 0 {
+        while k != 0 {
+            if k & 1 != 0 {
                 res *= self;
             }
-            exp >>= 1;
+            k >>= 1;
             self *= self;
         }
         res
+    }
+
+    pub fn sqrt(self) -> Option<Self> {
+        let p = Self::modulus() as usize;
+        if self.val() < 2 {
+            return Some(self);
+        } else if self.pow(p - 1 >> 1).val() != 1 {
+            return None;
+        }
+        let mut b = Self::from(1);
+        while b.pow((p - 1 >> 1) as usize).val() == 1 {
+            b += 1;
+        }
+        let mut e = (p - 1).trailing_zeros() as usize;
+        let m = (p - 1) >> e;
+        let mut x = self.pow(m - 1 >> 1);
+        let mut y = self * x * x;
+        x *= self;
+        let mut z = b.pow(m);
+        while y.val() != 1 {
+            let mut j = 0;
+            let mut t = y;
+            while t.val() != 1 {
+                j += 1;
+                t *= t;
+            }
+            z = z.pow(1 << e - j - 1);
+            x *= z;
+            z *= z;
+            y *= z;
+            e = j;
+        }
+        Some(x)
     }
 
     pub fn set_modulus(modulus: u32) {
@@ -386,6 +461,7 @@ impl Barrett {
         }
     }
 
+    #[inline]
     fn set(&self, m: u32) {
         let im = (!0 / m as u64).wrapping_add(1);
         self.m.store(m, atomic::Ordering::SeqCst);
@@ -412,7 +488,7 @@ impl Barrett {
     }
 }
 
-const BARRETT: Barrett = Barrett::new(998_244_353);
+static BARRETT: Barrett = Barrett::new(998_244_353);
 
 impl<const P: u32> FromStr for StaticModInt<P> {
     type Err = ParseIntError;
