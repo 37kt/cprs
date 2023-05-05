@@ -2,6 +2,7 @@ use convolution_arbitrary_mod::convolution_arbitrary_mod;
 use convolution_ntt_friendly::{convolution_ntt_friendly, ntt, ntt_inv};
 use modint::{NttInfo, StaticModInt};
 use std::{
+    fmt::{Debug, Display},
     iter::repeat,
     mem::swap,
     ops::{
@@ -406,6 +407,63 @@ impl<const P: u32> SparseFormalPowerSeries<P> {
             res[i] *= inv[i] * c;
         }
         res
+    }
+
+    pub fn sqrt(&self, d: usize) -> Option<FormalPowerSeries<P>> {
+        if self.len() == 0 {
+            return Some(fps![0; d]);
+        }
+        let p = self[0].0;
+        if p & 1 != 0 {
+            return None;
+        } else if p / 2 >= d {
+            return Some(fps![0; d]);
+        }
+        let inv_f0 = self[0].1.inv();
+        let lz = p / 2;
+        let mut g = fps![0; d];
+        g[lz] = self[0].1.sqrt()?;
+        let k = StaticModInt::new(2).inv();
+        let mut inv = vec![StaticModInt::new(1); d];
+        let m = P as usize;
+        for i in 2..d {
+            inv[i] = -inv[m % i] * (m / i);
+        }
+        for i in 1..d - lz {
+            g[lz + i] = self
+                .iter()
+                .skip(1)
+                .filter_map(|&(j, v)| (j - p <= i).then(|| (j - p, v)))
+                .map(|(j, v)| v * g[lz + i - j] * (k * j - (i - j)))
+                .product::<StaticModInt<P>>()
+                * inv[i]
+                * inv_f0;
+        }
+        Some(g)
+    }
+}
+
+impl<const P: u32> Debug for FormalPowerSeries<P> {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        f.write_fmt(format_args!("{:?}", &self.0))
+    }
+}
+
+impl<const P: u32> Display for FormalPowerSeries<P> {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        if self.len() != 0 {
+            f.write_fmt(format_args!("{}", self[0]))?;
+        }
+        for v in self.iter().skip(1) {
+            f.write_fmt(format_args!(" {}", v))?;
+        }
+        Ok(())
+    }
+}
+
+impl<const P: u32> Debug for SparseFormalPowerSeries<P> {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        f.write_fmt(format_args!("{:?}", &self.0))
     }
 }
 
