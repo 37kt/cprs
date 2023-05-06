@@ -43,6 +43,7 @@
 "verify/static_range_inversions_query/src/main.rs": "2023-04-25 15:51:20 +0900",
 "verify/static_range_sum/src/main.rs": "2023-04-21 15:23:30 +0900",
 "verify/staticrmq/src/main.rs": "2023-04-25 15:51:20 +0900",
+"verify/subset_convolution/src/main.rs": "2023-05-06 17:09:32 +0900",
 "verify/suffixarray/src/main.rs": "2023-04-27 14:07:11 +0900",
 "verify/sum_of_floor_of_linear/src/main.rs": "2023-04-27 15:09:25 +0900",
 "verify/two_sat/src/main.rs": "2023-04-24 14:15:56 +0900",
