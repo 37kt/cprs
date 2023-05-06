@@ -307,6 +307,39 @@ impl<const P: u32> FormalPowerSeries<P> {
             .map(|i| if g[i].len() == 0 { 0.into() } else { g[i][0] })
             .collect()
     }
+
+    /// f(x + c)
+    pub fn taylor_shift(mut self, c: StaticModInt<P>) -> Self {
+        if self.len() == 0 {
+            return self;
+        }
+        let n = self.len();
+        let mut fact = vec![StaticModInt::new(1); n];
+        let mut inv = vec![StaticModInt::new(1); n];
+        let mut fact_inv = vec![StaticModInt::new(1); n];
+        for i in 1..n {
+            fact[i] = fact[i - 1] * i;
+        }
+        fact_inv[n - 1] = fact[n - 1].inv();
+        for i in (1..n).rev() {
+            inv[i] = fact_inv[i] * fact[i - 1];
+            fact_inv[i - 1] = fact_inv[i] * i;
+        }
+        for i in 0..n {
+            self[i] *= fact[i];
+        }
+        self.reverse();
+        let mut g = fps![1; n];
+        for i in 1..n {
+            g[i] = g[i - 1] * c * inv[i];
+        }
+        self = (self * g).pre(n);
+        self.reverse();
+        for i in 0..n {
+            self[i] *= fact_inv[i];
+        }
+        self
+    }
 }
 
 impl<const P: u32> SparseFormalPowerSeries<P> {
