@@ -285,6 +285,26 @@ impl<const P: u32> FormalPowerSeries<P> {
         }
         Some(res.pre(d))
     }
+
+    pub fn multipoint_evaluate(&self, xs: &[StaticModInt<P>]) -> Vec<StaticModInt<P>> {
+        let m = xs.len();
+        if m == 0 {
+            return vec![];
+        }
+        let m2 = 1 << 64 - (m - 1).leading_zeros();
+        let mut g = vec![fps![1]; m2 + m2];
+        for i in 0..m {
+            g[m2 + i] = fps![-xs[i], 1];
+        }
+        for i in (1..m2).rev() {
+            g[i] = &g[i << 1 | 0] * &g[i << 1 | 1];
+        }
+        g[1] = self % &g[1];
+        for i in 2..m2 + m {
+            g[i] = &g[i >> 1] % &g[i];
+        }
+        (m2..m2 + m).map(|i| g[i][0]).collect()
+    }
 }
 
 impl<const P: u32> SparseFormalPowerSeries<P> {
