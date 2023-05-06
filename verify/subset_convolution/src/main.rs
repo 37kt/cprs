@@ -1,4 +1,4 @@
-// verification-helper: PROBLEM https://judge.yosupo.jp/problem/subset-convolution
+// verification-helper: PROBLEM https://judge.yosupo.jp/problem/subset_convolution
 
 use itertools::Itertools;
 use modint::ModInt998244353 as Mint;
