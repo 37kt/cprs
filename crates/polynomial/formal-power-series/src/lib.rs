@@ -303,7 +303,9 @@ impl<const P: u32> FormalPowerSeries<P> {
         for i in 2..m2 + m {
             g[i] = &g[i >> 1] % &g[i];
         }
-        (m2..m2 + m).map(|i| g[i][0]).collect()
+        (m2..m2 + m)
+            .map(|i| if g[i].len() == 0 { 0.into() } else { g[i][0] })
+            .collect()
     }
 }
 
