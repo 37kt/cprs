@@ -1,6 +1,6 @@
 use std::ops::{Add, MulAssign, Sub};
 
-pub fn multiple_zeta<T>(a: &mut Vec<T>)
+pub fn multiple_zeta<T>(a: &mut [T])
 where
     T: Clone + Add<Output = T>,
 {
@@ -18,7 +18,7 @@ where
     }
 }
 
-pub fn multiple_moebius<T>(a: &mut Vec<T>)
+pub fn multiple_moebius<T>(a: &mut [T])
 where
     T: Clone + Sub<Output = T>,
 {
