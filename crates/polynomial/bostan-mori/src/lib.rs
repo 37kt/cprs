@@ -2,7 +2,7 @@ use std::mem::swap;
 
 use convolution_ntt_friendly::{ntt, ntt_doubling, ntt_inv};
 use formal_power_series::{fps, FormalPowerSeries};
-use modint::{NttInfo, StaticModInt};
+use modint::StaticModInt;
 
 pub fn bostan_mori<const P: u32>(
     mut p: FormalPowerSeries<P>,
@@ -23,7 +23,7 @@ pub fn bostan_mori<const P: u32>(
         return res;
     }
 
-    if <() as NttInfo<P>>::IS_NTT_FRIENDLY {
+    if StaticModInt::<P>::IS_NTT_FRIENDLY {
         let logn = 64 - (q.len() - 1).leading_zeros() as usize;
         let n = 1 << logn;
         p.resize(n * 2, 0.into());
@@ -36,7 +36,7 @@ pub fn bostan_mori<const P: u32>(
         for i in 0..n {
             btr[i] = (btr[i >> 1] >> 1) + ((i & 1) << logn - 1);
         }
-        let dw = StaticModInt::new(<() as NttInfo<P>>::G)
+        let dw = StaticModInt::new(StaticModInt::<P>::G)
             .inv()
             .pow((P as usize - 1) / (n * 2));
         while k != 0 {

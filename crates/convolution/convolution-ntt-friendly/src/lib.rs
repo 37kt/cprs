@@ -1,8 +1,8 @@
 use convolution_naive::convolution_naive;
-use modint::{NttInfo, StaticModInt};
+use modint::StaticModInt;
 
 pub fn ntt<const P: u32>(a: &mut [StaticModInt<P>]) {
-    assert!(<() as NttInfo<P>>::IS_NTT_FRIENDLY);
+    assert!(StaticModInt::<P>::IS_NTT_FRIENDLY);
     let n = a.len();
     assert_eq!(n.count_ones(), 1);
     let h = n.trailing_zeros() as usize;
@@ -21,16 +21,15 @@ pub fn ntt<const P: u32>(a: &mut [StaticModInt<P>]) {
                     a[i + offset + p] = l - r;
                 }
                 if s + 1 != 1 << len {
-                    rot *= StaticModInt::raw(
-                        <() as NttInfo<P>>::RATE2[(!s).trailing_zeros() as usize],
-                    );
+                    rot *=
+                        StaticModInt::raw(StaticModInt::<P>::RATE2[(!s).trailing_zeros() as usize]);
                 }
             }
             len += 1;
         } else {
             let p = 1 << h - len - 2;
             let mut rot = StaticModInt::<P>::raw(1);
-            let imag = StaticModInt::<P>::raw(<() as NttInfo<P>>::ROOT[2]);
+            let imag = StaticModInt::<P>::raw(StaticModInt::<P>::ROOT[2]);
             for s in 0..1 << len {
                 let rot2 = rot * rot;
                 let rot3 = rot2 * rot;
@@ -50,9 +49,8 @@ pub fn ntt<const P: u32>(a: &mut [StaticModInt<P>]) {
                     a[i + offset + p * 3] = StaticModInt::from(a0 + na2 + mod2 - a1na3imag);
                 }
                 if s + 1 != 1 << len {
-                    rot *= StaticModInt::raw(
-                        <() as NttInfo<P>>::RATE3[(!s).trailing_zeros() as usize],
-                    );
+                    rot *=
+                        StaticModInt::raw(StaticModInt::<P>::RATE3[(!s).trailing_zeros() as usize]);
                 }
             }
             len += 2;
@@ -61,7 +59,7 @@ pub fn ntt<const P: u32>(a: &mut [StaticModInt<P>]) {
 }
 
 pub fn ntt_inv<const P: u32>(a: &mut [StaticModInt<P>]) {
-    assert!(<() as NttInfo<P>>::IS_NTT_FRIENDLY);
+    assert!(StaticModInt::<P>::IS_NTT_FRIENDLY);
     let n = a.len();
     assert_eq!(n.count_ones(), 1);
     let h = n.trailing_zeros() as usize;
@@ -84,7 +82,7 @@ pub fn ntt_inv<const P: u32>(a: &mut [StaticModInt<P>]) {
                 }
                 if s + 1 != 1 << len - 1 {
                     irot *= StaticModInt::<P>::raw(
-                        <() as NttInfo<P>>::IRATE2[(!s).trailing_zeros() as usize],
+                        StaticModInt::<P>::IRATE2[(!s).trailing_zeros() as usize],
                     );
                 }
             }
@@ -92,7 +90,7 @@ pub fn ntt_inv<const P: u32>(a: &mut [StaticModInt<P>]) {
         } else {
             let p = 1 << h - len;
             let mut irot = StaticModInt::<P>::raw(1);
-            let iimag = StaticModInt::<P>::raw(<() as NttInfo<P>>::IROOT[2]);
+            let iimag = StaticModInt::<P>::raw(StaticModInt::<P>::IROOT[2]);
             for s in 0..1 << len - 2 {
                 let irot2 = irot * irot;
                 let irot3 = irot2 * irot;
@@ -125,7 +123,7 @@ pub fn ntt_inv<const P: u32>(a: &mut [StaticModInt<P>]) {
                 }
                 if s + 1 != 1 << len - 2 {
                     irot *= StaticModInt::<P>::raw(
-                        <() as NttInfo<P>>::IRATE3[(!s).trailing_zeros() as usize],
+                        StaticModInt::<P>::IRATE3[(!s).trailing_zeros() as usize],
                     );
                 }
             }
@@ -144,7 +142,7 @@ pub fn ntt_doubling<const P: u32>(a: &mut Vec<StaticModInt<P>>) {
     a.append(&mut a.clone());
     ntt_inv(&mut a[n..]);
     let mut r = StaticModInt::new(1);
-    let zeta = StaticModInt::new(<() as NttInfo<P>>::G).pow((P - 1) as usize / (n << 1));
+    let zeta = StaticModInt::new(StaticModInt::<P>::G).pow((P - 1) as usize / (n << 1));
     for i in n..n * 2 {
         a[i] *= r;
         r *= zeta;

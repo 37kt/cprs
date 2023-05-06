@@ -825,16 +825,14 @@ impl<'a, const P: u32> Product<&'a Self> for StaticModInt<P> {
     }
 }
 
-pub trait NttInfo<const P: u32> {
-    const G: u32 = ntt_info(P).0;
-    const RANK2: usize = ntt_info(P).1;
-    const ROOT: [u32; 30] = ntt_info(P).2;
-    const IROOT: [u32; 30] = ntt_info(P).3;
-    const RATE2: [u32; 30] = ntt_info(P).4;
-    const IRATE2: [u32; 30] = ntt_info(P).5;
-    const RATE3: [u32; 30] = ntt_info(P).6;
-    const IRATE3: [u32; 30] = ntt_info(P).7;
-    const IS_NTT_FRIENDLY: bool = is_prime(P) && Self::RANK2 >= 21;
+impl<const P: u32> StaticModInt<P> {
+    pub const G: u32 = ntt_info(P).0;
+    pub const RANK2: usize = ntt_info(P).1;
+    pub const ROOT: [u32; 30] = ntt_info(P).2;
+    pub const IROOT: [u32; 30] = ntt_info(P).3;
+    pub const RATE2: [u32; 30] = ntt_info(P).4;
+    pub const IRATE2: [u32; 30] = ntt_info(P).5;
+    pub const RATE3: [u32; 30] = ntt_info(P).6;
+    pub const IRATE3: [u32; 30] = ntt_info(P).7;
+    pub const IS_NTT_FRIENDLY: bool = is_prime(P) && Self::RANK2 >= 21;
 }
-
-impl<const P: u32> NttInfo<P> for () {}

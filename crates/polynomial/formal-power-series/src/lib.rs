@@ -1,6 +1,6 @@
 use convolution_arbitrary_mod::convolution_arbitrary_mod;
 use convolution_ntt_friendly::{convolution_ntt_friendly, ntt, ntt_inv};
-use modint::{NttInfo, StaticModInt};
+use modint::StaticModInt;
 use std::{
     fmt::{Debug, Display},
     iter::repeat,
@@ -91,7 +91,7 @@ impl<const P: u32> FormalPowerSeries<P> {
 
     pub fn inv(&self, d: usize) -> Self {
         assert_ne!(self[0].val(), 0);
-        if <() as NttInfo<P>>::IS_NTT_FRIENDLY {
+        if StaticModInt::<P>::IS_NTT_FRIENDLY {
             let mut res = fps![0; d];
             res[0] = self[0].inv();
             for k in 0.. {
@@ -144,7 +144,7 @@ impl<const P: u32> FormalPowerSeries<P> {
 
     pub fn exp(&self, d: usize) -> Self {
         assert!(self.len() == 0 || self[0].val() == 0);
-        if <() as NttInfo<P>>::IS_NTT_FRIENDLY {
+        if StaticModInt::<P>::IS_NTT_FRIENDLY {
             let mut b = fps![1, if self.len() > 1 { self[1] } else { 0.into() }];
             let mut c = fps![1];
             let mut z1;
@@ -718,7 +718,7 @@ impl<const P: u32> SubAssign<SparseFormalPowerSeries<P>> for FormalPowerSeries<P
 
 impl<const P: u32> MulAssign<Self> for FormalPowerSeries<P> {
     fn mul_assign(&mut self, rhs: Self) {
-        if <() as NttInfo<P>>::IS_NTT_FRIENDLY {
+        if StaticModInt::<P>::IS_NTT_FRIENDLY {
             let mut a = vec![];
             swap(&mut a, &mut self.0);
             self.0 = convolution_ntt_friendly(a, rhs.0);
