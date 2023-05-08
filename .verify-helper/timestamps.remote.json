@@ -47,6 +47,7 @@
 "verify/subset_convolution/src/main.rs": "2023-05-06 17:09:32 +0900",
 "verify/suffixarray/src/main.rs": "2023-04-27 14:07:11 +0900",
 "verify/sum_of_floor_of_linear/src/main.rs": "2023-04-27 15:09:25 +0900",
+"verify/tree_path_composite_sum/src/main.rs": "2023-05-08 15:29:51 +0900",
 "verify/two_sat/src/main.rs": "2023-04-24 14:15:56 +0900",
 "verify/unionfind/src/main.rs": "2023-04-23 00:43:19 +0900",
 "verify/vertex_add_path_sum/src/main.rs": "2023-04-26 12:26:24 +0900",
