@@ -25,6 +25,7 @@
 "verify/min_cost_b_flow/src/main.rs": "2023-04-30 06:29:33 +0900",
 "verify/multipoint_evaluation/src/main.rs": "2023-05-06 12:11:57 +0900",
 "verify/number_of_substrings/src/main.rs": "2023-04-27 14:07:11 +0900",
+"verify/persistent_unionfind/src/main.rs": "2023-05-08 17:12:04 +0900",
 "verify/point_add_range_sum/src/main.rs": "2023-04-26 12:26:24 +0900",
 "verify/polynomial_interpolation/src/main.rs": "2023-05-06 12:11:57 +0900",
 "verify/polynomial_taylor_shift/src/main.rs": "2023-05-06 12:11:57 +0900",
