@@ -15,6 +15,9 @@ data:
     path: crates/data-structure/link-cut-tree/src/lib.rs
     title: crates/data-structure/link-cut-tree/src/lib.rs
   - icon: ':heavy_check_mark:'
+    path: crates/data-structure/range-tree/src/lib.rs
+    title: crates/data-structure/range-tree/src/lib.rs
+  - icon: ':heavy_check_mark:'
     path: crates/data-structure/segment-tree/src/lib.rs
     title: crates/data-structure/segment-tree/src/lib.rs
   - icon: ':heavy_check_mark:'
@@ -57,6 +60,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/point_add_range_sum/src/main.rs
     title: verify/point_add_range_sum/src/main.rs
+  - icon: ':heavy_check_mark:'
+    path: verify/point_add_rectangle_sum/src/main.rs
+    title: verify/point_add_rectangle_sum/src/main.rs
   - icon: ':heavy_check_mark:'
     path: verify/queue_operate_all_composite/src/main.rs
     title: verify/queue_operate_all_composite/src/main.rs
@@ -132,6 +138,7 @@ data:
   - crates/data-structure/lazy-segment-tree/src/lib.rs
   - crates/data-structure/link-cut-tree/src/lib.rs
   - crates/data-structure/splay-tree/src/lib.rs
+  - crates/data-structure/range-tree/src/lib.rs
   - crates/string/suffix-array/src/lib.rs
   timestamp: '2023-04-25 15:51:20+09:00'
   verificationStatus: LIBRARY_ALL_AC
@@ -151,6 +158,7 @@ data:
   - verify/vertex_set_path_composite/src/main.rs
   - verify/dynamic_tree_vertex_set_path_composite/src/main.rs
   - verify/point_add_range_sum/src/main.rs
+  - verify/point_add_rectangle_sum/src/main.rs
 documentation_of: crates/algebraic/algebraic/src/lib.rs
 layout: document
 redirect_from:

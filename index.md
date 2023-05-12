@@ -71,6 +71,11 @@ data:
     - icon: ':heavy_check_mark:'
       path: crates/data-structure/link-cut-tree/src/lib.rs
       title: crates/data-structure/link-cut-tree/src/lib.rs
+  - name: crates/data-structure/range-tree/src
+    pages:
+    - icon: ':heavy_check_mark:'
+      path: crates/data-structure/range-tree/src/lib.rs
+      title: crates/data-structure/range-tree/src/lib.rs
   - name: crates/data-structure/segment-tree/src
     pages:
     - icon: ':heavy_check_mark:'
@@ -322,6 +327,11 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/point_add_range_sum/src/main.rs
       title: verify/point_add_range_sum/src/main.rs
+  - name: verify/point_add_rectangle_sum/src
+    pages:
+    - icon: ':heavy_check_mark:'
+      path: verify/point_add_rectangle_sum/src/main.rs
+      title: verify/point_add_rectangle_sum/src/main.rs
   - name: verify/pow_of_formal_power_series/src
     pages:
     - icon: ':heavy_check_mark:'
