@@ -12,11 +12,20 @@ data:
     path: crates/data-structure/lazy-segment-tree/src/lib.rs
     title: crates/data-structure/lazy-segment-tree/src/lib.rs
   - icon: ':heavy_check_mark:'
+    path: crates/data-structure/link-cut-tree/src/lib.rs
+    title: crates/data-structure/link-cut-tree/src/lib.rs
+  - icon: ':heavy_check_mark:'
     path: crates/data-structure/segment-tree/src/lib.rs
     title: crates/data-structure/segment-tree/src/lib.rs
   - icon: ':heavy_check_mark:'
     path: crates/data-structure/sliding-window-aggregation/src/lib.rs
     title: crates/data-structure/sliding-window-aggregation/src/lib.rs
+  - icon: ':warning:'
+    path: crates/data-structure/splay-tree-internal/src/lib.rs
+    title: crates/data-structure/splay-tree-internal/src/lib.rs
+  - icon: ':heavy_check_mark:'
+    path: crates/data-structure/splay-tree/src/lib.rs
+    title: crates/data-structure/splay-tree/src/lib.rs
   - icon: ':heavy_check_mark:'
     path: crates/data-structure/tree-query/src/lib.rs
     title: crates/data-structure/tree-query/src/lib.rs
@@ -37,6 +46,15 @@ data:
     path: verify/discrete_logarithm_mod/src/main.rs
     title: verify/discrete_logarithm_mod/src/main.rs
   - icon: ':heavy_check_mark:'
+    path: verify/dynamic_sequence_range_affine_range_sum/src/main.rs
+    title: verify/dynamic_sequence_range_affine_range_sum/src/main.rs
+  - icon: ':heavy_check_mark:'
+    path: verify/dynamic_tree_vertex_add_path_sum/src/main.rs
+    title: verify/dynamic_tree_vertex_add_path_sum/src/main.rs
+  - icon: ':heavy_check_mark:'
+    path: verify/dynamic_tree_vertex_set_path_composite/src/main.rs
+    title: verify/dynamic_tree_vertex_set_path_composite/src/main.rs
+  - icon: ':heavy_check_mark:'
     path: verify/point_add_range_sum/src/main.rs
     title: verify/point_add_range_sum/src/main.rs
   - icon: ':heavy_check_mark:'
@@ -45,6 +63,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/range_affine_range_sum/src/main.rs
     title: verify/range_affine_range_sum/src/main.rs
+  - icon: ':heavy_check_mark:'
+    path: verify/range_reverse_range_sum/src/main.rs
+    title: verify/range_reverse_range_sum/src/main.rs
   - icon: ':heavy_check_mark:'
     path: verify/static_range_inversions_query/src/main.rs
     title: verify/static_range_inversions_query/src/main.rs
@@ -100,28 +121,35 @@ data:
   isVerificationFile: false
   path: crates/algebraic/algebraic/src/lib.rs
   requiredBy:
-  - crates/data-structure/fenwick-tree/src/lib.rs
-  - crates/data-structure/disjoint-sparse-table/src/lib.rs
-  - crates/data-structure/tree-query/src/lib.rs
-  - crates/data-structure/sliding-window-aggregation/src/lib.rs
-  - crates/data-structure/lazy-segment-tree/src/lib.rs
-  - crates/data-structure/segment-tree/src/lib.rs
-  - crates/string/suffix-array/src/lib.rs
   - crates/tree/re-rooting-dp/src/lib.rs
   - crates/math/discrete-logarithm/src/lib.rs
+  - crates/data-structure/tree-query/src/lib.rs
+  - crates/data-structure/fenwick-tree/src/lib.rs
+  - crates/data-structure/segment-tree/src/lib.rs
+  - crates/data-structure/disjoint-sparse-table/src/lib.rs
+  - crates/data-structure/sliding-window-aggregation/src/lib.rs
+  - crates/data-structure/splay-tree-internal/src/lib.rs
+  - crates/data-structure/lazy-segment-tree/src/lib.rs
+  - crates/data-structure/link-cut-tree/src/lib.rs
+  - crates/data-structure/splay-tree/src/lib.rs
+  - crates/string/suffix-array/src/lib.rs
   timestamp: '2023-04-25 15:51:20+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/vertex_add_path_sum/src/main.rs
-  - verify/range_affine_range_sum/src/main.rs
-  - verify/deque_operate_all_composite/src/main.rs
+  - verify/staticrmq/src/main.rs
   - verify/static_range_inversions_query/src/main.rs
+  - verify/dynamic_tree_vertex_add_path_sum/src/main.rs
+  - verify/deque_operate_all_composite/src/main.rs
+  - verify/discrete_logarithm_mod/src/main.rs
+  - verify/range_affine_range_sum/src/main.rs
+  - verify/dynamic_sequence_range_affine_range_sum/src/main.rs
+  - verify/vertex_add_path_sum/src/main.rs
+  - verify/range_reverse_range_sum/src/main.rs
+  - verify/vertex_add_subtree_sum/src/main.rs
   - verify/yuki1333/src/main.rs
   - verify/queue_operate_all_composite/src/main.rs
-  - verify/vertex_add_subtree_sum/src/main.rs
   - verify/vertex_set_path_composite/src/main.rs
-  - verify/staticrmq/src/main.rs
-  - verify/discrete_logarithm_mod/src/main.rs
+  - verify/dynamic_tree_vertex_set_path_composite/src/main.rs
   - verify/point_add_range_sum/src/main.rs
 documentation_of: crates/algebraic/algebraic/src/lib.rs
 layout: document

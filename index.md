@@ -66,6 +66,11 @@ data:
     - icon: ':heavy_check_mark:'
       path: crates/data-structure/li-chao-tree-dynamic/src/lib.rs
       title: crates/data-structure/li-chao-tree-dynamic/src/lib.rs
+  - name: crates/data-structure/link-cut-tree/src
+    pages:
+    - icon: ':heavy_check_mark:'
+      path: crates/data-structure/link-cut-tree/src/lib.rs
+      title: crates/data-structure/link-cut-tree/src/lib.rs
   - name: crates/data-structure/segment-tree/src
     pages:
     - icon: ':heavy_check_mark:'
@@ -81,6 +86,21 @@ data:
     - icon: ':heavy_check_mark:'
       path: crates/data-structure/sliding-window-aggregation/src/lib.rs
       title: crates/data-structure/sliding-window-aggregation/src/lib.rs
+  - name: crates/data-structure/slope-trick/src
+    pages:
+    - icon: ':warning:'
+      path: crates/data-structure/slope-trick/src/lib.rs
+      title: crates/data-structure/slope-trick/src/lib.rs
+  - name: crates/data-structure/splay-tree/src
+    pages:
+    - icon: ':heavy_check_mark:'
+      path: crates/data-structure/splay-tree/src/lib.rs
+      title: crates/data-structure/splay-tree/src/lib.rs
+  - name: crates/data-structure/splay-tree-internal/src
+    pages:
+    - icon: ':warning:'
+      path: crates/data-structure/splay-tree-internal/src/lib.rs
+      title: crates/data-structure/splay-tree-internal/src/lib.rs
   - name: crates/data-structure/tree-query/src
     pages:
     - icon: ':heavy_check_mark:'
@@ -227,6 +247,21 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/division_of_polynomials/src/main.rs
       title: verify/division_of_polynomials/src/main.rs
+  - name: verify/dynamic_sequence_range_affine_range_sum/src
+    pages:
+    - icon: ':heavy_check_mark:'
+      path: verify/dynamic_sequence_range_affine_range_sum/src/main.rs
+      title: verify/dynamic_sequence_range_affine_range_sum/src/main.rs
+  - name: verify/dynamic_tree_vertex_add_path_sum/src
+    pages:
+    - icon: ':heavy_check_mark:'
+      path: verify/dynamic_tree_vertex_add_path_sum/src/main.rs
+      title: verify/dynamic_tree_vertex_add_path_sum/src/main.rs
+  - name: verify/dynamic_tree_vertex_set_path_composite/src
+    pages:
+    - icon: ':heavy_check_mark:'
+      path: verify/dynamic_tree_vertex_set_path_composite/src/main.rs
+      title: verify/dynamic_tree_vertex_set_path_composite/src/main.rs
   - name: verify/exp_of_formal_power_series/src
     pages:
     - icon: ':heavy_check_mark:'
@@ -312,6 +347,11 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/range_kth_smallest/src/main.rs
       title: verify/range_kth_smallest/src/main.rs
+  - name: verify/range_reverse_range_sum/src
+    pages:
+    - icon: ':heavy_check_mark:'
+      path: verify/range_reverse_range_sum/src/main.rs
+      title: verify/range_reverse_range_sum/src/main.rs
   - name: verify/scc/src
     pages:
     - icon: ':heavy_check_mark:'
