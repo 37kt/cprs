@@ -23,6 +23,7 @@
 "verify/point_add_range_sum/src/main.rs": "2023-04-26 12:26:24 +0900",
 "verify/point_add_rectangle_sum/src/main.rs": "2023-05-12 16:54:11 +0900",
 "verify/pow_of_formal_power_series/src/main.rs": "2023-04-22 14:06:50 +0900",
+"verify/predecessor_problem/src/main.rs": "2023-05-13 18:34:42 +0900",
 "verify/queue_operate_all_composite/src/main.rs": "2023-04-25 15:51:20 +0900",
 "verify/range_affine_range_sum/src/main.rs": "2023-04-26 12:26:24 +0900",
 "verify/range_chmin_chmax_add_range_sum/src/main.rs": "2023-04-21 11:20:46 +0900",
