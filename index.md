@@ -116,6 +116,11 @@ data:
     - icon: ':heavy_check_mark:'
       path: crates/data-structure/union-find/src/lib.rs
       title: crates/data-structure/union-find/src/lib.rs
+  - name: crates/data-structure/w-ary-tree-set/src
+    pages:
+    - icon: ':heavy_check_mark:'
+      path: crates/data-structure/w-ary-tree-set/src/lib.rs
+      title: crates/data-structure/w-ary-tree-set/src/lib.rs
   - name: crates/data-structure/wavelet-matrix/src
     pages:
     - icon: ':heavy_check_mark:'
@@ -337,6 +342,11 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/pow_of_formal_power_series/src/main.rs
       title: verify/pow_of_formal_power_series/src/main.rs
+  - name: verify/predecessor_problem/src
+    pages:
+    - icon: ':heavy_check_mark:'
+      path: verify/predecessor_problem/src/main.rs
+      title: verify/predecessor_problem/src/main.rs
   - name: verify/queue_operate_all_composite/src
     pages:
     - icon: ':heavy_check_mark:'
