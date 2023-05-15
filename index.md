@@ -6,6 +6,11 @@ data:
     - icon: ':heavy_check_mark:'
       path: crates/algebraic/algebraic/src/lib.rs
       title: crates/algebraic/algebraic/src/lib.rs
+  - name: crates/algebraic/rational/src
+    pages:
+    - icon: ':warning:'
+      path: crates/algebraic/rational/src/lib.rs
+      title: crates/algebraic/rational/src/lib.rs
   - name: crates/algorithm/mo/src
     pages:
     - icon: ':heavy_check_mark:'
