@@ -1,7 +1,7 @@
 use std::{
     fmt::{Debug, Display},
     mem::swap,
-    ops::{AddAssign, DivAssign, MulAssign, Neg, SubAssign},
+    ops::{Add, AddAssign, Div, DivAssign, Mul, MulAssign, Neg, Sub, SubAssign},
     sync::atomic::{AtomicBool, Ordering::SeqCst},
 };
 
@@ -9,7 +9,7 @@ type Z = i64;
 
 static AUTO_REDUCE: AtomicBool = AtomicBool::new(true);
 
-#[derive(Clone, Copy)]
+#[derive(Clone, Copy, Hash)]
 pub struct Rational {
     num: Z,
     den: Z,
@@ -49,20 +49,38 @@ impl From<Z> for Rational {
     }
 }
 
+impl PartialEq for Rational {
+    fn eq(&self, other: &Self) -> bool {
+        self.num * other.den == other.num * self.den
+    }
+
+    fn ne(&self, other: &Self) -> bool {
+        !(self == other)
+    }
+}
+
+impl Eq for Rational {}
+
+impl PartialOrd for Rational {
+    fn partial_cmp(&self, other: &Self) -> Option<std::cmp::Ordering> {
+        Some(self.cmp(other))
+    }
+}
+
+impl Ord for Rational {
+    fn cmp(&self, other: &Self) -> std::cmp::Ordering {
+        (self.num * other.den).cmp(&(other.num * self.den))
+    }
+}
+
 impl Rational {
     pub fn set_auto_reduce(auto_reduce: bool) {
         AUTO_REDUCE.store(auto_reduce, SeqCst);
     }
 
-    pub fn new(mut num: Z, mut den: Z) -> Self {
-        if den < 0 {
-            num = -num;
-            den = -den;
-        }
+    pub fn new(num: Z, den: Z) -> Self {
         let mut res = Self { num, den };
-        if AUTO_REDUCE.load(SeqCst) {
-            res.reduce();
-        }
+        res.normalize();
         res
     }
 
@@ -72,6 +90,20 @@ impl Rational {
 
     pub fn den(&self) -> Z {
         self.den
+    }
+
+    pub fn normalize(&mut self) {
+        assert!(self.den != 0);
+        if self.den < 0 {
+            self.num = -self.num;
+            self.den = -self.den;
+        }
+        if self.num == 0 {
+            self.den = 1;
+        }
+        if AUTO_REDUCE.load(SeqCst) {
+            self.reduce();
+        }
     }
 
     pub fn reduce(&mut self) {
@@ -105,9 +137,7 @@ impl AddAssign<Self> for Rational {
     fn add_assign(&mut self, rhs: Self) {
         self.num = self.num * rhs.den + rhs.num * self.den;
         self.den *= rhs.den;
-        if AUTO_REDUCE.load(SeqCst) {
-            self.reduce();
-        }
+        self.normalize();
     }
 }
 
@@ -121,9 +151,7 @@ impl MulAssign<Self> for Rational {
     fn mul_assign(&mut self, rhs: Self) {
         self.num *= rhs.num;
         self.den *= rhs.den;
-        if AUTO_REDUCE.load(SeqCst) {
-            self.reduce();
-        }
+        self.normalize();
     }
 }
 
@@ -131,12 +159,53 @@ impl DivAssign<Self> for Rational {
     fn div_assign(&mut self, rhs: Self) {
         self.num *= rhs.den;
         self.den *= rhs.num;
-        if self.den < 0 {
-            self.num = -self.num;
-            self.den = -self.den;
-        }
-        if AUTO_REDUCE.load(SeqCst) {
-            self.reduce();
-        }
+        self.normalize();
     }
+}
+
+macro_rules! impl_ops {
+    ($(
+        $trait:ident,
+        $trait_assign:ident,
+        $fn:ident,
+        $fn_assign:ident,
+    )*) => {$(
+        impl $trait_assign<&Rational> for Rational {
+            fn $fn_assign(&mut self, rhs: &Rational) {
+                self.$fn_assign(*rhs);
+            }
+        }
+        impl<T: Into<Rational>> $trait<T> for Rational {
+            type Output = Rational;
+            fn $fn(mut self, rhs: T) -> Self::Output {
+                self.$fn_assign(rhs.into());
+                self
+            }
+        }
+        impl $trait<&Rational> for Rational {
+            type Output = Rational;
+            fn $fn(self, rhs: &Rational) -> Self::Output {
+                self.$fn(*rhs)
+            }
+        }
+        impl<T: Into<Rational>> $trait<T> for &Rational {
+            type Output = Rational;
+            fn $fn(self, rhs: T) -> Self::Output {
+                (*self).$fn(rhs.into())
+            }
+        }
+        impl $trait<&Rational> for &Rational {
+            type Output = Rational;
+            fn $fn(self, rhs: &Rational) -> Self::Output {
+                (*self).$fn(*rhs)
+            }
+        }
+    )*};
+}
+
+impl_ops! {
+    Add, AddAssign, add, add_assign,
+    Sub, SubAssign, sub, sub_assign,
+    Mul, MulAssign, mul, mul_assign,
+    Div, DivAssign, div, div_assign,
 }
