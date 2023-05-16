@@ -9,7 +9,7 @@ type Z = i64;
 
 static AUTO_REDUCE: AtomicBool = AtomicBool::new(true);
 
-#[derive(Clone, Copy, Hash)]
+#[derive(Clone, Copy)]
 pub struct Rational {
     num: Z,
     den: Z,
@@ -90,6 +90,13 @@ impl Rational {
 
     pub fn den(&self) -> Z {
         self.den
+    }
+
+    pub fn abs(&self) -> Self {
+        Self {
+            num: self.num.abs(),
+            den: self.den,
+        }
     }
 
     pub fn normalize(&mut self) {

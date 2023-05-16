@@ -105,14 +105,14 @@ impl Node {
     }
 }
 
-pub struct LiChaoTree {
+pub struct LiChaoTreeDynamic {
     root: Option<Node>,
     min_x: i64,
     max_x: i64,
     max_query: bool,
 }
 
-impl LiChaoTree {
+impl LiChaoTreeDynamic {
     // max_queryがfalseなら最小値クエリ、trueなら最大値クエリ
     pub fn new(min_x: i64, max_x: i64, max_query: bool) -> Self {
         Self {
