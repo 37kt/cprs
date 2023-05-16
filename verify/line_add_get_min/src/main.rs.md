@@ -20,9 +20,9 @@ data:
     \  File \"/opt/hostedtoolcache/Python/3.11.3/x64/lib/python3.11/site-packages/onlinejudge_verify/languages/rust.py\"\
     , line 288, in bundle\n    raise NotImplementedError\nNotImplementedError\n"
   code: "// verification-helper: PROBLEM https://judge.yosupo.jp/problem/line_add_get_min\n\
-    \nuse li_chao_tree_dynamic::LiChaoTree;\nuse proconio::input;\n\nconst MAX: i64\
-    \ = 1_000_000_000;\n\n#[proconio::fastout]\nfn main() {\n    input! {\n      \
-    \  n: usize,\n        q: usize,\n    }\n    let mut lct = LiChaoTree::new(-MAX,\
+    \nuse li_chao_tree_dynamic::LiChaoTreeDynamic;\nuse proconio::input;\n\nconst\
+    \ MAX: i64 = 1_000_000_000;\n\n#[proconio::fastout]\nfn main() {\n    input! {\n\
+    \        n: usize,\n        q: usize,\n    }\n    let mut lct = LiChaoTreeDynamic::new(-MAX,\
     \ MAX, false);\n    for _ in 0..n {\n        input! {\n            a: i64,\n \
     \           b: i64,\n        }\n        lct.add_line(a, b);\n    }\n    for _\
     \ in 0..q {\n        input! {\n            ty: usize,\n        }\n        if ty\
@@ -35,7 +35,7 @@ data:
   isVerificationFile: true
   path: verify/line_add_get_min/src/main.rs
   requiredBy: []
-  timestamp: '2023-04-21 13:06:23+09:00'
+  timestamp: '2023-05-16 16:25:17+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/line_add_get_min/src/main.rs

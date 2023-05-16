@@ -66,6 +66,11 @@ data:
     - icon: ':heavy_check_mark:'
       path: crates/data-structure/lazy-segment-tree/src/lib.rs
       title: crates/data-structure/lazy-segment-tree/src/lib.rs
+  - name: crates/data-structure/li-chao-tree/src
+    pages:
+    - icon: ':heavy_check_mark:'
+      path: crates/data-structure/li-chao-tree/src/lib.rs
+      title: crates/data-structure/li-chao-tree/src/lib.rs
   - name: crates/data-structure/li-chao-tree-dynamic/src
     pages:
     - icon: ':heavy_check_mark:'
@@ -312,6 +317,11 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/line_add_get_min/src/main.rs
       title: verify/line_add_get_min/src/main.rs
+  - name: verify/line_add_get_min_offline/src
+    pages:
+    - icon: ':heavy_check_mark:'
+      path: verify/line_add_get_min_offline/src/main.rs
+      title: verify/line_add_get_min_offline/src/main.rs
   - name: verify/log_of_formal_power_series/src
     pages:
     - icon: ':heavy_check_mark:'
@@ -387,6 +397,11 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/segment_add_get_min/src/main.rs
       title: verify/segment_add_get_min/src/main.rs
+  - name: verify/segment_add_get_min_offline/src
+    pages:
+    - icon: ':heavy_check_mark:'
+      path: verify/segment_add_get_min_offline/src/main.rs
+      title: verify/segment_add_get_min_offline/src/main.rs
   - name: verify/sqrt_of_formal_power_series/src
     pages:
     - icon: ':heavy_check_mark:'
