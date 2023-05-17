@@ -22,7 +22,7 @@ fn main() {
     let h = strongly_connected_components(&g);
     println!("{}", h.size());
     for i in 0..h.size() {
-        let vs = h.vertex(i);
+        let vs = &h.vertices()[i];
         println!("{} {}", vs.len(), vs.iter().join(" "));
     }
 }

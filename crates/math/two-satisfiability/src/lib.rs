@@ -35,7 +35,7 @@ impl TwoSatisfiability {
         let scc = strongly_connected_components(&self.g);
         let mut comp = vec![0; self.n * 2];
         for i in 0..scc.size() {
-            for &x in scc.vertex(i) {
+            for &x in &scc.vertices()[i] {
                 comp[x] = i;
             }
         }

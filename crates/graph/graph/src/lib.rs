@@ -4,8 +4,10 @@ where
     V: Clone,
     E: Clone,
 {
-    vs: Vec<V>,
-    es: Vec<Vec<(usize, E)>>,
+    vertices: Vec<V>,
+    head: Vec<usize>,
+    next: Vec<usize>,
+    edges: Vec<(usize, E)>,
 }
 
 impl<V, E> Graph<V, E>
@@ -15,8 +17,10 @@ where
 {
     pub fn new(n: usize) -> Self {
         Self {
-            vs: vec![Default::default(); n],
-            es: vec![vec![]; n],
+            vertices: vec![Default::default(); n],
+            head: vec![!0; n],
+            next: vec![],
+            edges: vec![],
         }
     }
 }
@@ -26,10 +30,12 @@ where
     V: Clone,
     E: Clone,
 {
-    fn from(vs: Vec<V>) -> Self {
+    fn from(vertices: Vec<V>) -> Self {
         Self {
-            es: vec![vec![]; vs.len()],
-            vs,
+            head: vec![!0; vertices.len()],
+            vertices,
+            next: vec![],
+            edges: vec![],
         }
     }
 }
@@ -40,15 +46,17 @@ where
     E: Clone,
 {
     pub fn size(&self) -> usize {
-        self.vs.len()
+        self.vertices.len()
     }
 
     pub fn set_vertex(&mut self, v: usize, w: V) {
-        self.vs[v] = w;
+        self.vertices[v] = w;
     }
 
     pub fn add_edge(&mut self, u: usize, v: usize, w: E) {
-        self.es[u].push((v, w));
+        self.next.push(self.head[u]);
+        self.head[u] = self.edges.len();
+        self.edges.push((v, w));
     }
 
     pub fn add_undirected_edge(&mut self, u: usize, v: usize, w: E) {
@@ -56,11 +64,18 @@ where
         self.add_edge(v, u, w);
     }
 
-    pub fn vertex(&self, v: usize) -> &V {
-        &self.vs[v]
+    pub fn vertices(&self) -> &[V] {
+        &self.vertices
     }
 
-    pub fn out_edges(&self, v: usize) -> &Vec<(usize, E)> {
-        &self.es[v]
+    pub fn out_edges(&self, v: usize) -> impl Iterator<Item = &(usize, E)> {
+        let mut e = self.head[v];
+        std::iter::from_fn(move || {
+            (e != !0).then(|| {
+                let res = &self.edges[e];
+                e = self.next[e];
+                res
+            })
+        })
     }
 }
