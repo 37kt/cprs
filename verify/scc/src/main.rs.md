@@ -29,15 +29,15 @@ data:
     \ {\n        input! {\n            a: usize,\n            b: usize,\n        }\n\
     \        g.add_edge(a, b, ());\n    }\n    let h = strongly_connected_components(&g);\n\
     \    println!(\"{}\", h.size());\n    for i in 0..h.size() {\n        let vs =\
-    \ h.vertex(i);\n        println!(\"{} {}\", vs.len(), vs.iter().join(\" \"));\n\
-    \    }\n}\n"
+    \ &h.vertices()[i];\n        println!(\"{} {}\", vs.len(), vs.iter().join(\" \"\
+    ));\n    }\n}\n"
   dependsOn:
   - crates/graph/graph/src/lib.rs
   - crates/graph/strongly-connected-components/src/lib.rs
   isVerificationFile: true
   path: verify/scc/src/main.rs
   requiredBy: []
-  timestamp: '2023-04-24 13:06:41+09:00'
+  timestamp: '2023-05-17 15:33:07+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/scc/src/main.rs

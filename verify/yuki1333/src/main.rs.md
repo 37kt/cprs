@@ -46,7 +46,7 @@ data:
   isVerificationFile: true
   path: verify/yuki1333/src/main.rs
   requiredBy: []
-  timestamp: '2023-04-25 15:51:20+09:00'
+  timestamp: '2023-05-17 15:33:07+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/yuki1333/src/main.rs

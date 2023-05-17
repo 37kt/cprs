@@ -59,7 +59,7 @@ data:
     \ E>) -> Self\n    where\n        E: Clone,\n    {\n        let n = g.size();\n\
     \        let hld = HeavyLightDecomposition::new(g);\n        let mut a = vec![M::e();\
     \ n];\n        for v in 0..n {\n            let k = hld.vertex(v);\n         \
-    \   a[k] = g.vertex(v).clone();\n        }\n        let seg_down = SegmentTree::from(a.clone());\n\
+    \   a[k] = g.vertices()[v].clone();\n        }\n        let seg_down = SegmentTree::from(a.clone());\n\
     \        a.reverse();\n        let seg_up = SegmentTree::from(a);\n        Self\
     \ {\n            n,\n            hld,\n            seg_up,\n            seg_down,\n\
     \            _marker: PhantomData::default(),\n        }\n    }\n\n    pub fn\
@@ -88,7 +88,7 @@ data:
   isVerificationFile: false
   path: crates/data-structure/tree-query/src/lib.rs
   requiredBy: []
-  timestamp: '2023-04-26 12:26:24+09:00'
+  timestamp: '2023-05-17 15:33:07+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/vertex_add_path_sum/src/main.rs

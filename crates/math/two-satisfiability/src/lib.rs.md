@@ -35,9 +35,9 @@ data:
     \ {\n        self.add(!x, y);\n    }\n\n    pub fn solve(&self) -> Option<Vec<bool>>\
     \ {\n        let scc = strongly_connected_components(&self.g);\n        let mut\
     \ comp = vec![0; self.n * 2];\n        for i in 0..scc.size() {\n            for\
-    \ &x in scc.vertex(i) {\n                comp[x] = i;\n            }\n       \
-    \ }\n        let mut res = vec![false; self.n];\n        for i in 0..self.n {\n\
-    \            if comp[i] == comp[i + self.n] {\n                return None;\n\
+    \ &x in &scc.vertices()[i] {\n                comp[x] = i;\n            }\n  \
+    \      }\n        let mut res = vec![false; self.n];\n        for i in 0..self.n\
+    \ {\n            if comp[i] == comp[i + self.n] {\n                return None;\n\
     \            }\n            res[i] = comp[i] > comp[i + self.n];\n        }\n\
     \        Some(res)\n    }\n\n    fn id(&self, x: usize) -> usize {\n        assert!(x\
     \ < self.n || !x < self.n);\n        if x < self.n {\n            x\n        }\
@@ -48,7 +48,7 @@ data:
   isVerificationFile: false
   path: crates/math/two-satisfiability/src/lib.rs
   requiredBy: []
-  timestamp: '2023-04-24 14:15:56+09:00'
+  timestamp: '2023-05-17 15:33:07+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/two_sat/src/main.rs

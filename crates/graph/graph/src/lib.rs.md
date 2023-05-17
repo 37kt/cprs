@@ -54,21 +54,27 @@ data:
     \  File \"/opt/hostedtoolcache/Python/3.11.3/x64/lib/python3.11/site-packages/onlinejudge_verify/languages/rust.py\"\
     , line 288, in bundle\n    raise NotImplementedError\nNotImplementedError\n"
   code: "#[derive(Clone)]\npub struct Graph<V, E>\nwhere\n    V: Clone,\n    E: Clone,\n\
-    {\n    vs: Vec<V>,\n    es: Vec<Vec<(usize, E)>>,\n}\n\nimpl<V, E> Graph<V, E>\n\
-    where\n    V: Clone + Default,\n    E: Clone,\n{\n    pub fn new(n: usize) ->\
-    \ Self {\n        Self {\n            vs: vec![Default::default(); n],\n     \
-    \       es: vec![vec![]; n],\n        }\n    }\n}\n\nimpl<V, E> From<Vec<V>> for\
-    \ Graph<V, E>\nwhere\n    V: Clone,\n    E: Clone,\n{\n    fn from(vs: Vec<V>)\
-    \ -> Self {\n        Self {\n            es: vec![vec![]; vs.len()],\n       \
-    \     vs,\n        }\n    }\n}\n\nimpl<V, E> Graph<V, E>\nwhere\n    V: Clone,\n\
-    \    E: Clone,\n{\n    pub fn size(&self) -> usize {\n        self.vs.len()\n\
-    \    }\n\n    pub fn set_vertex(&mut self, v: usize, w: V) {\n        self.vs[v]\
+    {\n    vertices: Vec<V>,\n    head: Vec<usize>,\n    next: Vec<usize>,\n    edges:\
+    \ Vec<(usize, E)>,\n}\n\nimpl<V, E> Graph<V, E>\nwhere\n    V: Clone + Default,\n\
+    \    E: Clone,\n{\n    pub fn new(n: usize) -> Self {\n        Self {\n      \
+    \      vertices: vec![Default::default(); n],\n            head: vec![!0; n],\n\
+    \            next: vec![],\n            edges: vec![],\n        }\n    }\n}\n\n\
+    impl<V, E> From<Vec<V>> for Graph<V, E>\nwhere\n    V: Clone,\n    E: Clone,\n\
+    {\n    fn from(vertices: Vec<V>) -> Self {\n        Self {\n            head:\
+    \ vec![!0; vertices.len()],\n            vertices,\n            next: vec![],\n\
+    \            edges: vec![],\n        }\n    }\n}\n\nimpl<V, E> Graph<V, E>\nwhere\n\
+    \    V: Clone,\n    E: Clone,\n{\n    pub fn size(&self) -> usize {\n        self.vertices.len()\n\
+    \    }\n\n    pub fn set_vertex(&mut self, v: usize, w: V) {\n        self.vertices[v]\
     \ = w;\n    }\n\n    pub fn add_edge(&mut self, u: usize, v: usize, w: E) {\n\
-    \        self.es[u].push((v, w));\n    }\n\n    pub fn add_undirected_edge(&mut\
+    \        self.next.push(self.head[u]);\n        self.head[u] = self.edges.len();\n\
+    \        self.edges.push((v, w));\n    }\n\n    pub fn add_undirected_edge(&mut\
     \ self, u: usize, v: usize, w: E) {\n        self.add_edge(u, v, w.clone());\n\
-    \        self.add_edge(v, u, w);\n    }\n\n    pub fn vertex(&self, v: usize)\
-    \ -> &V {\n        &self.vs[v]\n    }\n\n    pub fn out_edges(&self, v: usize)\
-    \ -> &Vec<(usize, E)> {\n        &self.es[v]\n    }\n}\n"
+    \        self.add_edge(v, u, w);\n    }\n\n    pub fn vertices(&self) -> &[V]\
+    \ {\n        &self.vertices\n    }\n\n    pub fn out_edges(&self, v: usize) ->\
+    \ impl Iterator<Item = &(usize, E)> {\n        let mut e = self.head[v];\n   \
+    \     std::iter::from_fn(move || {\n            (e != !0).then(|| {\n        \
+    \        let res = &self.edges[e];\n                e = self.next[e];\n      \
+    \          res\n            })\n        })\n    }\n}\n"
   dependsOn: []
   isVerificationFile: false
   path: crates/graph/graph/src/lib.rs
@@ -79,7 +85,7 @@ data:
   - crates/data-structure/tree-query/src/lib.rs
   - crates/data-structure/heavy-light-decomposition/src/lib.rs
   - crates/graph/strongly-connected-components/src/lib.rs
-  timestamp: '2023-04-24 12:50:05+09:00'
+  timestamp: '2023-05-17 15:33:07+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/lca/src/main.rs
