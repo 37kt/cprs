@@ -71,7 +71,7 @@ data:
   isVerificationFile: false
   path: crates/tree/re-rooting-dp/src/lib.rs
   requiredBy: []
-  timestamp: '2023-05-17 15:33:07+09:00'
+  timestamp: '2023-05-17 16:30:46+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/yuki1333/src/main.rs
