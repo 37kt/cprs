@@ -176,6 +176,11 @@ data:
     - icon: ':heavy_check_mark:'
       path: crates/math/discrete-logarithm/src/lib.rs
       title: crates/math/discrete-logarithm/src/lib.rs
+  - name: crates/math/fast-factorize/src
+    pages:
+    - icon: ':heavy_check_mark:'
+      path: crates/math/fast-factorize/src/lib.rs
+      title: crates/math/fast-factorize/src/lib.rs
   - name: crates/math/floor-sum/src
     pages:
     - icon: ':heavy_check_mark:'
@@ -186,6 +191,11 @@ data:
     - icon: ':heavy_check_mark:'
       path: crates/math/matrix/src/lib.rs
       title: crates/math/matrix/src/lib.rs
+  - name: crates/math/montgomery-modint/src
+    pages:
+    - icon: ':warning:'
+      path: crates/math/montgomery-modint/src/lib.rs
+      title: crates/math/montgomery-modint/src/lib.rs
   - name: crates/math/prime-sieve/src
     pages:
     - icon: ':heavy_check_mark:'
@@ -287,6 +297,11 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/exp_of_formal_power_series/src/main.rs
       title: verify/exp_of_formal_power_series/src/main.rs
+  - name: verify/factorize/src
+    pages:
+    - icon: ':heavy_check_mark:'
+      path: verify/factorize/src/main.rs
+      title: verify/factorize/src/main.rs
   - name: verify/gcd_convolution/src
     pages:
     - icon: ':heavy_check_mark:'
@@ -362,6 +377,11 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/predecessor_problem/src/main.rs
       title: verify/predecessor_problem/src/main.rs
+  - name: verify/primarity_test/src
+    pages:
+    - icon: ':heavy_check_mark:'
+      path: verify/primarity_test/src/main.rs
+      title: verify/primarity_test/src/main.rs
   - name: verify/queue_operate_all_composite/src
     pages:
     - icon: ':heavy_check_mark:'
