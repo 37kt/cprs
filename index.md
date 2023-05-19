@@ -211,6 +211,11 @@ data:
     - icon: ':heavy_check_mark:'
       path: crates/math/two-satisfiability/src/lib.rs
       title: crates/math/two-satisfiability/src/lib.rs
+  - name: crates/misc/random/src
+    pages:
+    - icon: ':warning:'
+      path: crates/misc/random/src/lib.rs
+      title: crates/misc/random/src/lib.rs
   - name: crates/polynomial/formal-power-series/src
     pages:
     - icon: ':heavy_check_mark:'
