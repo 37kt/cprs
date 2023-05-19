@@ -196,6 +196,11 @@ data:
     - icon: ':warning:'
       path: crates/math/montgomery-modint/src/lib.rs
       title: crates/math/montgomery-modint/src/lib.rs
+  - name: crates/math/nimber/src
+    pages:
+    - icon: ':heavy_check_mark:'
+      path: crates/math/nimber/src/lib.rs
+      title: crates/math/nimber/src/lib.rs
   - name: crates/math/prime-sieve/src
     pages:
     - icon: ':heavy_check_mark:'
@@ -352,6 +357,11 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/min_cost_b_flow/src/main.rs
       title: verify/min_cost_b_flow/src/main.rs
+  - name: verify/nim_product_64/src
+    pages:
+    - icon: ':heavy_check_mark:'
+      path: verify/nim_product_64/src/main.rs
+      title: verify/nim_product_64/src/main.rs
   - name: verify/number_of_substrings/src
     pages:
     - icon: ':heavy_check_mark:'
