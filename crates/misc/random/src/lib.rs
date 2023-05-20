@@ -1,4 +1,4 @@
-#[derive(Copy, Clone)]
+#[derive(Clone)]
 pub struct Pcg64Fast(u128);
 
 const R: f64 = 1.0 / 0xffff_ffff_ffff_ffff_u64 as f64;
