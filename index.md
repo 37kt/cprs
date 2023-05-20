@@ -191,6 +191,11 @@ data:
     - icon: ':heavy_check_mark:'
       path: crates/math/matrix/src/lib.rs
       title: crates/math/matrix/src/lib.rs
+  - name: crates/math/modint61/src
+    pages:
+    - icon: ':heavy_check_mark:'
+      path: crates/math/modint61/src/lib.rs
+      title: crates/math/modint61/src/lib.rs
   - name: crates/math/montgomery-modint/src
     pages:
     - icon: ':warning:'
@@ -231,6 +236,11 @@ data:
     - icon: ':warning:'
       path: crates/sequence/run-length-encoding/src/lib.rs
       title: crates/sequence/run-length-encoding/src/lib.rs
+  - name: crates/string/rolling-hash/src
+    pages:
+    - icon: ':heavy_check_mark:'
+      path: crates/string/rolling-hash/src/lib.rs
+      title: crates/string/rolling-hash/src/lib.rs
   - name: crates/string/suffix-array/src
     pages:
     - icon: ':heavy_check_mark:'
@@ -467,6 +477,11 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/suffixarray/src/main.rs
       title: verify/suffixarray/src/main.rs
+  - name: verify/suffixarray_rolling_hash/src
+    pages:
+    - icon: ':heavy_check_mark:'
+      path: verify/suffixarray_rolling_hash/src/main.rs
+      title: verify/suffixarray_rolling_hash/src/main.rs
   - name: verify/sum_of_floor_of_linear/src
     pages:
     - icon: ':heavy_check_mark:'
@@ -512,5 +527,10 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/zalgorithm/src/main.rs
       title: verify/zalgorithm/src/main.rs
+  - name: verify/zalgorithm_rolling_hash/src
+    pages:
+    - icon: ':heavy_check_mark:'
+      path: verify/zalgorithm_rolling_hash/src/main.rs
+      title: verify/zalgorithm_rolling_hash/src/main.rs
 layout: toppage
 ---

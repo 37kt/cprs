@@ -1,7 +1,10 @@
 ---
 data:
   _extendedDependsOn: []
-  _extendedRequiredBy: []
+  _extendedRequiredBy:
+  - icon: ':heavy_check_mark:'
+    path: crates/string/rolling-hash/src/lib.rs
+    title: crates/string/rolling-hash/src/lib.rs
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: verify/nim_product_64/src/main.rs
@@ -81,7 +84,8 @@ data:
   dependsOn: []
   isVerificationFile: false
   path: crates/math/nimber/src/lib.rs
-  requiredBy: []
+  requiredBy:
+  - crates/string/rolling-hash/src/lib.rs
   timestamp: '2023-05-19 16:25:08+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
