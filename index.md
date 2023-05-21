@@ -86,6 +86,11 @@ data:
     - icon: ':heavy_check_mark:'
       path: crates/data-structure/range-tree/src/lib.rs
       title: crates/data-structure/range-tree/src/lib.rs
+  - name: crates/data-structure/rollback-union-find/src
+    pages:
+    - icon: ':warning:'
+      path: crates/data-structure/rollback-union-find/src/lib.rs
+      title: crates/data-structure/rollback-union-find/src/lib.rs
   - name: crates/data-structure/segment-tree/src
     pages:
     - icon: ':heavy_check_mark:'
