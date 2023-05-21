@@ -42,6 +42,7 @@
 "verify/static_range_sum/src/main.rs": "2023-04-21 15:23:30 +0900",
 "verify/staticrmq/src/main.rs": "2023-04-25 15:51:20 +0900",
 "verify/suffixarray/src/main.rs": "2023-04-27 14:07:11 +0900",
+"verify/suffixarray_rolling_hash/src/main.rs": "2023-05-20 14:50:51 +0900",
 "verify/sum_of_floor_of_linear/src/main.rs": "2023-04-27 15:09:25 +0900",
 "verify/two_sat/src/main.rs": "2023-05-17 15:33:07 +0900",
 "verify/unionfind/src/main.rs": "2023-04-23 00:43:19 +0900",
@@ -50,5 +51,6 @@
 "verify/vertex_set_path_composite/src/main.rs": "2023-05-17 16:30:46 +0900",
 "verify/yuki1333/src/main.rs": "2023-05-17 16:30:46 +0900",
 "verify/yuki1737/src/main.rs": "2023-04-21 15:23:30 +0900",
-"verify/zalgorithm/src/main.rs": "2023-04-27 14:07:11 +0900"
+"verify/zalgorithm/src/main.rs": "2023-04-27 14:07:11 +0900",
+"verify/zalgorithm_rolling_hash/src/main.rs": "2023-05-20 14:50:51 +0900"
 }
