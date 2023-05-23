@@ -75,30 +75,30 @@ data:
     \ { flow, cost, .. } in &self.edges {\n            value += flow * cost;\n   \
     \     }\n        value /= 2;\n\n        if self.excess_vs.is_empty() && self.deficit_vs.is_empty()\
     \ {\n            Ok(value)\n        } else {\n            Err(value)\n       \
-    \ }\n    }\n\n    pub fn min_cost_flow(&mut self, s: usize, t: usize) -> Result<(i64,\
-    \ i64), (i64, i64)> {\n        assert!(s != t);\n        let mut inf_flow = self.b[s].abs();\n\
+    \ }\n    }\n\n    /// (\u30B3\u30B9\u30C8, \u6D41\u91CF)\n    pub fn min_cost_flow(&mut\
+    \ self, s: usize, t: usize) -> Result<(i64, i64), (i64, i64)> {\n        assert!(s\
+    \ != t);\n        let mut inf_flow = self.b[s].abs();\n        let mut e = self.head[s];\n\
+    \        while e != !0 {\n            inf_flow += 0.max(self.edges[e].cap);\n\
+    \            e = self.next[e];\n        }\n\n        self.add_edge(t, s, 0, inf_flow,\
+    \ 0);\n        if let Err(circulation_value) = self.min_cost_b_flow() {\n    \
+    \        self.head[s] = self.next[s];\n            self.head[t] = self.next[t];\n\
+    \            self.edges.pop();\n            self.edges.pop();\n            return\
+    \ Err((circulation_value, 0));\n        }\n\n        let mut inf_flow = self.b[s].abs();\n\
     \        let mut e = self.head[s];\n        while e != !0 {\n            inf_flow\
-    \ += 0.max(self.edges[e].cap);\n            e = self.next[e];\n        }\n\n \
-    \       self.add_edge(t, s, 0, inf_flow, 0);\n        if let Err(circulation_value)\
-    \ = self.min_cost_b_flow() {\n            self.head[s] = self.next[s];\n     \
-    \       self.head[t] = self.next[t];\n            self.edges.pop();\n        \
-    \    self.edges.pop();\n            return Err((circulation_value, 0));\n    \
-    \    }\n\n        let mut inf_flow = self.b[s].abs();\n        let mut e = self.head[s];\n\
-    \        while e != !0 {\n            inf_flow += self.residual_cap(e);\n    \
-    \        e = self.next[e];\n        }\n        self.b[s] += inf_flow;\n      \
-    \  self.b[t] -= inf_flow;\n        let mf_value = match self.min_cost_b_flow()\
-    \ {\n            Ok(v) => v,\n            Err(v) => v,\n        };\n        self.b[s]\
-    \ -= inf_flow;\n        self.b[t] += inf_flow;\n\n        self.head[s] = self.next[s];\n\
-    \        self.head[t] = self.next[t];\n        self.edges.pop();\n        self.edges.pop();\n\
-    \        Ok((mf_value, self.b[t]))\n    }\n\n    pub fn get_result_value_i128(&mut\
-    \ self) -> i128 {\n        let mut value = 0;\n        for e in &self.edges {\n\
-    \            value += e.flow as i128 * e.cost as i128;\n        }\n        value\
-    \ / 2\n    }\n\n    pub fn get_potential(&mut self) -> Vec<i64> {\n        self.potential\
-    \ = vec![0; self.n];\n        for _ in 0..self.n {\n            for e in 0..self.edges.len()\
-    \ {\n                if self.residual_cap(e) > 0 {\n                    let to\
-    \ = self.to(e);\n                    self.potential[to] =\n                  \
-    \      self.potential[to].min(self.potential[self.from(e)] + self.cost(e));\n\
-    \                }\n            }\n        }\n        self.potential.clone()\n\
+    \ += self.residual_cap(e);\n            e = self.next[e];\n        }\n       \
+    \ self.b[s] += inf_flow;\n        self.b[t] -= inf_flow;\n        let mf_value\
+    \ = match self.min_cost_b_flow() {\n            Ok(v) => v,\n            Err(v)\
+    \ => v,\n        };\n        self.b[s] -= inf_flow;\n        self.b[t] += inf_flow;\n\
+    \n        self.head[s] = self.next[s];\n        self.head[t] = self.next[t];\n\
+    \        self.edges.pop();\n        self.edges.pop();\n        Ok((mf_value, self.b[t]))\n\
+    \    }\n\n    pub fn get_result_value_i128(&mut self) -> i128 {\n        let mut\
+    \ value = 0;\n        for e in &self.edges {\n            value += e.flow as i128\
+    \ * e.cost as i128;\n        }\n        value / 2\n    }\n\n    pub fn get_potential(&mut\
+    \ self) -> Vec<i64> {\n        self.potential = vec![0; self.n];\n        for\
+    \ _ in 0..self.n {\n            for e in 0..self.edges.len() {\n             \
+    \   if self.residual_cap(e) > 0 {\n                    let to = self.to(e);\n\
+    \                    self.potential[to] =\n                        self.potential[to].min(self.potential[self.from(e)]\
+    \ + self.cost(e));\n                }\n            }\n        }\n        self.potential.clone()\n\
     \    }\n\n    fn from(&self, e: usize) -> usize {\n        self.edges[e ^ 1].to\n\
     \    }\n\n    fn to(&self, e: usize) -> usize {\n        self.edges[e].to\n  \
     \  }\n\n    fn flow(&self, e: usize) -> i64 {\n        self.edges[e].flow\n  \
@@ -160,7 +160,7 @@ data:
   isVerificationFile: false
   path: crates/graph/min-cost-b-flow/src/lib.rs
   requiredBy: []
-  timestamp: '2023-04-30 06:29:33+09:00'
+  timestamp: '2023-05-23 15:04:49+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/assignment/src/main.rs

@@ -61,6 +61,11 @@ data:
     - icon: ':heavy_check_mark:'
       path: crates/data-structure/heavy-light-decomposition/src/lib.rs
       title: crates/data-structure/heavy-light-decomposition/src/lib.rs
+  - name: crates/data-structure/interval-set/src
+    pages:
+    - icon: ':warning:'
+      path: crates/data-structure/interval-set/src/lib.rs
+      title: crates/data-structure/interval-set/src/lib.rs
   - name: crates/data-structure/lazy-segment-tree/src
     pages:
     - icon: ':heavy_check_mark:'

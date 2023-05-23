@@ -37,7 +37,7 @@ data:
   isVerificationFile: true
   path: verify/assignment/src/main.rs
   requiredBy: []
-  timestamp: '2023-04-30 06:29:33+09:00'
+  timestamp: '2023-05-23 15:04:49+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/assignment/src/main.rs
