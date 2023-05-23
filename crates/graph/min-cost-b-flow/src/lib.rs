@@ -161,6 +161,7 @@ impl MinCostBFlow {
         }
     }
 
+    /// (コスト, 流量)
     pub fn min_cost_flow(&mut self, s: usize, t: usize) -> Result<(i64, i64), (i64, i64)> {
         assert!(s != t);
         let mut inf_flow = self.b[s].abs();
