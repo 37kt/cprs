@@ -1,177 +1,361 @@
 use std::{
-    fmt::{Debug, Write},
-    ops::{Add, Index, IndexMut, Mul, Neg, Sub},
+    fmt::{Debug, Display},
+    ops::{Add, AddAssign, Div, DivAssign, Index, IndexMut, Mul, MulAssign, Neg, Sub, SubAssign},
 };
 
-pub trait Element: Clone {
-    type S: Copy;
-
-    /// 0
-    fn zero() -> Self::S;
-
-    /// 1
-    fn one() -> Self::S;
-
-    /// a+b
-    fn add(a: Self::S, b: Self::S) -> Self::S;
-
-    /// a*b
-    fn mul(a: Self::S, b: Self::S) -> Self::S;
-
-    #[allow(unused_variables)]
-    /// -a
-    fn neg(a: Self::S) -> Self::S {
-        unreachable!()
-    }
-
-    #[allow(unused_variables)]
-    /// 1/a
-    fn recip(a: Self::S) -> Self::S {
-        unreachable!()
-    }
-}
-
 #[derive(Clone)]
-pub struct Matrix<E: Element> {
-    h: usize,
-    w: usize,
-    v: Vec<E::S>,
+pub struct Matrix<T>
+where
+    T: From<i64> + Clone,
+{
+    n: usize,
+    m: usize,
+    v: Box<[T]>,
 }
 
-impl<E: Element> Matrix<E> {
-    pub fn new(h: usize, w: usize) -> Self {
+impl<T> From<Vec<Vec<T>>> for Matrix<T>
+where
+    T: From<i64> + Clone,
+{
+    fn from(v: Vec<Vec<T>>) -> Self {
+        let n = v.len();
+        let m = v[0].len();
+        assert!(v.iter().all(|x| x.len() == m));
         Self {
-            h,
-            w,
-            v: vec![E::zero(); h * w],
+            n,
+            m,
+            v: v.into_iter()
+                .flatten()
+                .collect::<Vec<_>>()
+                .into_boxed_slice(),
+        }
+    }
+}
+
+impl<T> Debug for Matrix<T>
+where
+    T: From<i64> + Clone + Debug,
+{
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        for i in 0..self.n {
+            for j in 0..self.m {
+                write!(
+                    f,
+                    "{:?}{}",
+                    self[i][j],
+                    if j + 1 == self.m {
+                        if i + 1 == self.n {
+                            ""
+                        } else {
+                            "\n"
+                        }
+                    } else {
+                        " "
+                    }
+                )?
+            }
+        }
+        Ok(())
+    }
+}
+
+impl<T> Display for Matrix<T>
+where
+    T: From<i64> + Clone + Display,
+{
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        for i in 0..self.n {
+            for j in 0..self.m {
+                write!(
+                    f,
+                    "{}{}",
+                    self[i][j],
+                    if j + 1 == self.m {
+                        if i + 1 == self.n {
+                            ""
+                        } else {
+                            "\n"
+                        }
+                    } else {
+                        " "
+                    }
+                )?
+            }
+        }
+        Ok(())
+    }
+}
+
+impl<T> Index<usize> for Matrix<T>
+where
+    T: From<i64> + Clone,
+{
+    type Output = [T];
+    fn index(&self, index: usize) -> &Self::Output {
+        &self.v[index * self.m..(index + 1) * self.m]
+    }
+}
+
+impl<T> IndexMut<usize> for Matrix<T>
+where
+    T: From<i64> + Clone,
+{
+    fn index_mut(&mut self, index: usize) -> &mut Self::Output {
+        &mut self.v[index * self.m..(index + 1) * self.m]
+    }
+}
+
+impl<T> Matrix<T>
+where
+    T: From<i64> + Clone,
+{
+    pub fn zeros(n: usize, m: usize) -> Self {
+        Self {
+            n,
+            m,
+            v: vec![0.into(); n * m].into_boxed_slice(),
         }
     }
 
     pub fn e(n: usize) -> Self {
-        let mut a = Self::new(n, n);
+        let mut a = Self::zeros(n, n);
         for i in 0..n {
-            a[i][i] = E::one();
+            a[i][i] = 0.into();
         }
         a
     }
 
-    pub fn h(&self) -> usize {
-        self.h
+    pub fn n(&self) -> usize {
+        self.n
     }
 
-    pub fn w(&self) -> usize {
-        self.w
+    pub fn m(&self) -> usize {
+        self.m
     }
 
-    pub fn pow(&self, mut k: usize) -> Self {
-        assert_eq!(self.h, self.w);
-        let mut res = Self::e(self.h);
-        let mut x = self.clone();
-        while k > 0 {
-            if k & 1 == 1 {
-                res = &res * &x;
+    pub fn transpose(&self) -> Self {
+        let mut a = Self::zeros(self.m, self.n);
+        for i in 0..self.n {
+            for j in 0..self.m {
+                a[j][i] = self[i][j].clone();
             }
-            x = &x * &x;
+        }
+        a
+    }
+}
+
+impl<T> Matrix<T>
+where
+    T: From<i64> + Clone + Add<Output = T> + Mul<Output = T>,
+{
+    pub fn pow(&self, mut k: usize) -> Self {
+        assert!(self.n == self.m);
+        let mut a = self.clone();
+        let mut b = Self::e(self.n);
+        while k > 0 {
+            if k & 1 != 0 {
+                b *= &a;
+            }
+            a *= &a.clone();
             k >>= 1;
         }
-        res
+        b
     }
 }
 
-impl<E> From<Vec<Vec<E::S>>> for Matrix<E>
+impl<T> Matrix<T>
 where
-    E: Element,
+    T: From<i64>
+        + Clone
+        + Eq
+        + Neg<Output = T>
+        + Add<Output = T>
+        + Sub<Output = T>
+        + Mul<Output = T>
+        + Div<Output = T>,
 {
-    fn from(v: Vec<Vec<E::S>>) -> Self {
-        assert!(v.iter().all(|x| x.len() == v[0].len()));
-        Self {
-            h: v.len(),
-            w: v[0].len(),
-            v: v.into_iter().flatten().collect(),
-        }
-    }
-}
-
-impl<E> Debug for Matrix<E>
-where
-    E: Element,
-    E::S: Debug,
-{
-    #[allow(unused_must_use)]
-    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        f.write_char('[');
-        for i in 0..self.h {
-            if i > 0 {
-                f.write_str(", ");
+    // (掃出し後の行列, rank, det(正方行列の場合))
+    pub fn gauss_elimination(&self) -> (Self, usize, Option<T>) {
+        let mut a = self.clone();
+        let mut rank = 0;
+        let mut det: T = 1.into();
+        let one = 1.into();
+        let zero = 0.into();
+        for j in 0..self.m {
+            if let Some(i) = (rank..self.n).position(|i| a[i][j] != zero) {
+                let i = i + rank;
+                if rank < i {
+                    det = -det;
+                    let (x, y) = a.v.split_at_mut(i * self.m);
+                    x[rank * self.m..(rank + 1) * self.m].swap_with_slice(&mut y[0..self.m]);
+                }
+                det = det * a[rank][j].clone();
+                if a[rank][j] != one {
+                    let coef = one.clone() / a[rank][j].clone();
+                    for k in j..self.m {
+                        a[rank][k] = a[rank][k].clone() * coef.clone();
+                    }
+                }
+                for i in 0..self.n {
+                    if i == rank {
+                        continue;
+                    }
+                    if a[i][j] != zero {
+                        let coef = a[i][j].clone() / a[rank][j].clone();
+                        for k in j..self.m {
+                            a[i][k] = a[i][k].clone() - a[rank][k].clone() * coef.clone();
+                        }
+                    }
+                }
+                rank += 1;
+            } else {
+                det = zero.clone();
             }
-            f.write_fmt(format_args!("{:?}", &self[i]));
         }
-        f.write_char(']')
+        (a, rank, Some(det))
+    }
+
+    pub fn inv(&self) -> Option<Self> {
+        assert!(self.n == self.m);
+        let one: T = 1.into();
+        let mut a = Self::zeros(self.n, self.n * 2);
+        for i in 0..self.n {
+            for j in 0..self.n {
+                a[i][j] = self[i][j].clone();
+            }
+            a[i][self.n + i] = one.clone();
+        }
+        let (b, _, _) = a.gauss_elimination();
+        if b[self.n - 1][self.n - 1] != one {
+            return None;
+        }
+        let mut c = Self::zeros(self.n, self.n);
+        for i in 0..self.n {
+            for j in 0..self.n {
+                c[i][j] = b[i][self.n + j].clone();
+            }
+        }
+        Some(c)
     }
 }
 
-impl<E: Element> Index<usize> for Matrix<E> {
-    type Output = [E::S];
-    fn index(&self, index: usize) -> &Self::Output {
-        &self.v[index * self.w..(index + 1) * self.w]
+impl<T> Neg for Matrix<T>
+where
+    T: From<i64> + Clone + Neg<Output = T>,
+{
+    type Output = Self;
+    fn neg(mut self) -> Self::Output {
+        for x in self.v.as_mut() {
+            *x = -x.clone();
+        }
+        self
     }
 }
 
-impl<E: Element> IndexMut<usize> for Matrix<E> {
-    fn index_mut(&mut self, index: usize) -> &mut Self::Output {
-        &mut self.v[index * self.w..(index + 1) * self.w]
-    }
-}
-
-impl<E: Element> Neg for &Matrix<E> {
-    type Output = Matrix<E>;
+impl<T> Neg for &Matrix<T>
+where
+    T: From<i64> + Clone + Neg<Output = T>,
+{
+    type Output = Matrix<T>;
     fn neg(self) -> Self::Output {
-        Self::Output {
-            h: self.h,
-            w: self.w,
-            v: self.v.iter().map(|&x| E::neg(x)).collect(),
+        -self.clone()
+    }
+}
+
+impl<T> AddAssign<&Self> for Matrix<T>
+where
+    T: From<i64> + Clone + Add<Output = T>,
+{
+    fn add_assign(&mut self, rhs: &Self) {
+        assert!((self.n, self.m) == (rhs.n, rhs.m));
+        for (x, y) in self.v.as_mut().iter_mut().zip(rhs.v.as_ref()) {
+            *x = x.clone() + y.clone();
         }
     }
 }
 
-impl<E: Element> Add<Self> for &Matrix<E> {
-    type Output = Matrix<E>;
-    fn add(self, rhs: Self) -> Self::Output {
-        assert_eq!(self.h, rhs.h);
-        assert_eq!(self.w, rhs.w);
-        let mut res = Matrix::new(self.h, self.w);
-        for i in 0..self.h * self.w {
-            res.v[i] = E::add(self.v[i], rhs.v[i]);
+impl<T> SubAssign<&Self> for Matrix<T>
+where
+    T: From<i64> + Clone + Sub<Output = T>,
+{
+    fn sub_assign(&mut self, rhs: &Self) {
+        assert!((self.n, self.m) == (rhs.n, rhs.m));
+        for (x, y) in self.v.as_mut().iter_mut().zip(rhs.v.as_ref()) {
+            *x = x.clone() - y.clone();
         }
-        res
     }
 }
 
-impl<E: Element> Sub<Self> for &Matrix<E> {
-    type Output = Matrix<E>;
-    fn sub(self, rhs: Self) -> Self::Output {
-        assert_eq!(self.h, rhs.h);
-        assert_eq!(self.w, rhs.w);
-        let mut res = Matrix::new(self.h, self.w);
-        for i in 0..self.h * self.w {
-            res.v[i] = E::add(self.v[i], E::neg(rhs.v[i]));
-        }
-        res
-    }
-}
-
-impl<E: Element> Mul<Self> for &Matrix<E> {
-    type Output = Matrix<E>;
-    fn mul(self, rhs: Self) -> Self::Output {
-        assert_eq!(self.w, rhs.h);
-        let mut res = Matrix::new(self.h, rhs.w);
-        for i in 0..self.h {
-            for k in 0..self.w {
-                for j in 0..rhs.w {
-                    res[i][j] = E::add(res[i][j], E::mul(self[i][k], rhs[k][j]));
+impl<T> MulAssign<&Self> for Matrix<T>
+where
+    T: From<i64> + Clone + Add<Output = T> + Mul<Output = T>,
+{
+    fn mul_assign(&mut self, rhs: &Self) {
+        assert!(self.m == rhs.n);
+        let mut a = Self::zeros(self.n, rhs.m);
+        for i in 0..self.n {
+            for j in 0..rhs.m {
+                for k in 0..self.m {
+                    a[i][j] = a[i][j].clone() + self[i][k].clone() * rhs[k][j].clone();
                 }
             }
         }
-        res
+        *self = a;
+    }
+}
+
+impl<T> MulAssign<T> for Matrix<T>
+where
+    T: From<i64> + Clone + Mul<Output = T>,
+{
+    fn mul_assign(&mut self, rhs: T) {
+        for x in self.v.as_mut() {
+            *x = x.clone() * rhs.clone();
+        }
+    }
+}
+
+impl<T> DivAssign<T> for Matrix<T>
+where
+    T: From<i64> + Clone + Mul<Output = T> + Div<Output = T>,
+{
+    fn div_assign(&mut self, rhs: T) {
+        *self *= T::from(1) / rhs;
+    }
+}
+
+impl<T> Add<Self> for &Matrix<T>
+where
+    T: From<i64> + Clone + Add<Output = T>,
+{
+    type Output = Matrix<T>;
+    fn add(self, rhs: Self) -> Self::Output {
+        let mut a = self.clone();
+        a += rhs;
+        a
+    }
+}
+
+impl<T> Sub<Self> for &Matrix<T>
+where
+    T: From<i64> + Clone + Sub<Output = T>,
+{
+    type Output = Matrix<T>;
+    fn sub(self, rhs: Self) -> Self::Output {
+        let mut a = self.clone();
+        a -= rhs;
+        a
+    }
+}
+
+impl<T> Mul<Self> for &Matrix<T>
+where
+    T: From<i64> + Clone + Add<Output = T> + Mul<Output = T>,
+{
+    type Output = Matrix<T>;
+    fn mul(self, rhs: Self) -> Self::Output {
+        let mut a = self.clone();
+        a *= rhs;
+        a
     }
 }

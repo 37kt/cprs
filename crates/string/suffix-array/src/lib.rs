@@ -108,7 +108,7 @@ where
 }
 
 algebra!(M, usize);
-monoid!(M, 0, |x: &usize, y: &usize| *x.min(y));
+monoid!(M, !0, |x: &usize, y: &usize| *x.min(y));
 
 fn sa_naive(s: &[usize]) -> Vec<usize> {
     let n = s.len();

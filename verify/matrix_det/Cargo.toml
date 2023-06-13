@@ -1,0 +1,12 @@
+[package]
+name = "matrix_det"
+version = "0.1.0"
+edition = "2018"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+proconio = { version = "=0.3.6", features = ["derive"] }
+ac-library-rs = { git = "https://github.com/rust-lang-ja/ac-library-rs" }
+matrix = { path = "../../crates/math/matrix"}
+itertools = "=0.9.0"

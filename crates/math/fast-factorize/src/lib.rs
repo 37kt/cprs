@@ -38,6 +38,9 @@ where
     F: Debug,
 {
     let f = factorize(n);
+    if f.len() == 0 {
+        return vec![];
+    }
     let mut r = vec![(f[0], 0)];
     for p in f {
         if r.last().unwrap().0 == p {
