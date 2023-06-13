@@ -1,4 +1,4 @@
-// verification-helper: PROBLEM https://judge.yosupo.jp/problem/primarity_test
+// verification-helper: PROBLEM https://judge.yosupo.jp/problem/primality_test
 
 use fast_factorize::is_prime;
 use proconio::input;
