@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: crates/math/fast-factorize/src/lib.rs
     title: crates/math/fast-factorize/src/lib.rs
   _extendedRequiredBy: []

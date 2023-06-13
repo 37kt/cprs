@@ -1,25 +1,25 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: crates/math/fast-factorize/src/lib.rs
     title: crates/math/fast-factorize/src/lib.rs
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: rs
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
-    PROBLEM: https://judge.yosupo.jp/problem/primarity_test
+    PROBLEM: https://judge.yosupo.jp/problem/primality_test
     links:
-    - https://judge.yosupo.jp/problem/primarity_test
+    - https://judge.yosupo.jp/problem/primality_test
   bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.11.3/x64/lib/python3.11/site-packages/onlinejudge_verify/documentation/build.py\"\
     , line 71, in _render_source_code_stat\n    bundled_code = language.bundle(stat.path,\
     \ basedir=basedir, options={'include_paths': [basedir]}).decode()\n          \
     \         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\
     \  File \"/opt/hostedtoolcache/Python/3.11.3/x64/lib/python3.11/site-packages/onlinejudge_verify/languages/rust.py\"\
     , line 288, in bundle\n    raise NotImplementedError\nNotImplementedError\n"
-  code: "// verification-helper: PROBLEM https://judge.yosupo.jp/problem/primarity_test\n\
+  code: "// verification-helper: PROBLEM https://judge.yosupo.jp/problem/primality_test\n\
     \nuse fast_factorize::is_prime;\nuse proconio::input;\n\n#[proconio::fastout]\n\
     fn main() {\n    input! {\n        q: usize,\n    }\n    for _ in 0..q {\n   \
     \     input! {\n            n: u64,\n        }\n        println!(\"{}\", if is_prime(n)\
@@ -27,15 +27,15 @@ data:
   dependsOn:
   - crates/math/fast-factorize/src/lib.rs
   isVerificationFile: true
-  path: verify/primarity_test/src/main.rs
+  path: verify/primality_test/src/main.rs
   requiredBy: []
-  timestamp: '2023-06-13 17:07:21+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2023-06-13 17:24:28+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
-documentation_of: verify/primarity_test/src/main.rs
+documentation_of: verify/primality_test/src/main.rs
 layout: document
 redirect_from:
-- /verify/verify/primarity_test/src/main.rs
-- /verify/verify/primarity_test/src/main.rs.html
-title: verify/primarity_test/src/main.rs
+- /verify/verify/primality_test/src/main.rs
+- /verify/verify/primality_test/src/main.rs.html
+title: verify/primality_test/src/main.rs
 ---
