@@ -120,7 +120,7 @@ where
     pub fn e(n: usize) -> Self {
         let mut a = Self::zeros(n, n);
         for i in 0..n {
-            a[i][i] = 0.into();
+            a[i][i] = 1.into();
         }
         a
     }
