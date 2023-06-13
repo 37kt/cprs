@@ -188,7 +188,7 @@ data:
       title: crates/math/discrete-logarithm/src/lib.rs
   - name: crates/math/fast-factorize/src
     pages:
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: crates/math/fast-factorize/src/lib.rs
       title: crates/math/fast-factorize/src/lib.rs
   - name: crates/math/floor-sum/src
@@ -342,6 +342,11 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/inv_of_formal_power_series/src/main.rs
       title: verify/inv_of_formal_power_series/src/main.rs
+  - name: verify/inverse_matrix/src
+    pages:
+    - icon: ':heavy_check_mark:'
+      path: verify/inverse_matrix/src/main.rs
+      title: verify/inverse_matrix/src/main.rs
   - name: verify/jump_on_tree/src
     pages:
     - icon: ':heavy_check_mark:'
@@ -372,6 +377,11 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/log_of_formal_power_series/src/main.rs
       title: verify/log_of_formal_power_series/src/main.rs
+  - name: verify/matrix_det/src
+    pages:
+    - icon: ':heavy_check_mark:'
+      path: verify/matrix_det/src/main.rs
+      title: verify/matrix_det/src/main.rs
   - name: verify/matrix_product/src
     pages:
     - icon: ':heavy_check_mark:'
@@ -414,7 +424,7 @@ data:
       title: verify/predecessor_problem/src/main.rs
   - name: verify/primarity_test/src
     pages:
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: verify/primarity_test/src/main.rs
       title: verify/primarity_test/src/main.rs
   - name: verify/queue_operate_all_composite/src

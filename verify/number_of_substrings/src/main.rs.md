@@ -29,7 +29,7 @@ data:
   isVerificationFile: true
   path: verify/number_of_substrings/src/main.rs
   requiredBy: []
-  timestamp: '2023-04-27 14:07:11+09:00'
+  timestamp: '2023-06-13 17:07:21+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/number_of_substrings/src/main.rs

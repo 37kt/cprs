@@ -65,8 +65,8 @@ data:
   timestamp: '2023-04-25 15:51:20+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/deque_operate_all_composite/src/main.rs
   - verify/queue_operate_all_composite/src/main.rs
+  - verify/deque_operate_all_composite/src/main.rs
 documentation_of: crates/data-structure/sliding-window-aggregation/src/lib.rs
 layout: document
 redirect_from:

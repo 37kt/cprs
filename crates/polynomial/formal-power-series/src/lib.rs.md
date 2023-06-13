@@ -153,11 +153,11 @@ data:
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/pow_of_formal_power_series/src/main.rs
-  - verify/sqrt_of_formal_power_series/src/main.rs
-  - verify/log_of_formal_power_series/src/main.rs
   - verify/division_of_polynomials/src/main.rs
+  - verify/sqrt_of_formal_power_series/src/main.rs
   - verify/exp_of_formal_power_series/src/main.rs
   - verify/inv_of_formal_power_series/src/main.rs
+  - verify/log_of_formal_power_series/src/main.rs
 documentation_of: crates/polynomial/formal-power-series/src/lib.rs
 layout: document
 redirect_from:

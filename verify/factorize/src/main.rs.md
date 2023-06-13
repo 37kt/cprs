@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: crates/math/fast-factorize/src/lib.rs
     title: crates/math/fast-factorize/src/lib.rs
   _extendedRequiredBy: []
@@ -30,7 +30,7 @@ data:
   isVerificationFile: true
   path: verify/factorize/src/main.rs
   requiredBy: []
-  timestamp: '2023-05-18 17:32:10+09:00'
+  timestamp: '2023-06-13 17:07:21+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/factorize/src/main.rs

@@ -61,7 +61,7 @@ data:
     \            if self.spt.borrow().is_none() {\n                self.spt\n    \
     \                .replace(Some(DisjointSparseTable::<M>::new(&self.lcp)));\n \
     \           }\n            self.spt.borrow().as_ref().unwrap().prod(i, j)\n  \
-    \      }\n    }\n}\n\nalgebra!(M, usize);\nmonoid!(M, 0, |x: &usize, y: &usize|\
+    \      }\n    }\n}\n\nalgebra!(M, usize);\nmonoid!(M, !0, |x: &usize, y: &usize|\
     \ *x.min(y));\n\nfn sa_naive(s: &[usize]) -> Vec<usize> {\n    let n = s.len();\n\
     \    let mut sa: Vec<usize> = (0..n).collect();\n    sa.sort_by(|&(mut l), &(mut\
     \ r)| {\n        if l == r {\n            return std::cmp::Ordering::Equal;\n\
@@ -140,7 +140,7 @@ data:
   isVerificationFile: false
   path: crates/string/suffix-array/src/lib.rs
   requiredBy: []
-  timestamp: '2023-04-27 14:07:11+09:00'
+  timestamp: '2023-06-13 17:07:21+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/suffixarray/src/main.rs
