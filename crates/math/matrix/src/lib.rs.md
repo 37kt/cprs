@@ -59,7 +59,7 @@ data:
     \ zeros(n: usize, m: usize) -> Self {\n        Self {\n            n,\n      \
     \      m,\n            v: vec![0.into(); n * m].into_boxed_slice(),\n        }\n\
     \    }\n\n    pub fn e(n: usize) -> Self {\n        let mut a = Self::zeros(n,\
-    \ n);\n        for i in 0..n {\n            a[i][i] = 0.into();\n        }\n \
+    \ n);\n        for i in 0..n {\n            a[i][i] = 1.into();\n        }\n \
     \       a\n    }\n\n    pub fn n(&self) -> usize {\n        self.n\n    }\n\n\
     \    pub fn m(&self) -> usize {\n        self.m\n    }\n\n    pub fn transpose(&self)\
     \ -> Self {\n        let mut a = Self::zeros(self.m, self.n);\n        for i in\
@@ -141,7 +141,7 @@ data:
   isVerificationFile: false
   path: crates/math/matrix/src/lib.rs
   requiredBy: []
-  timestamp: '2023-06-13 17:07:21+09:00'
+  timestamp: '2023-06-13 17:39:04+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/matrix_det/src/main.rs

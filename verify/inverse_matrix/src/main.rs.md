@@ -30,7 +30,7 @@ data:
   isVerificationFile: true
   path: verify/inverse_matrix/src/main.rs
   requiredBy: []
-  timestamp: '2023-06-13 17:07:21+09:00'
+  timestamp: '2023-06-13 17:39:04+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/inverse_matrix/src/main.rs
