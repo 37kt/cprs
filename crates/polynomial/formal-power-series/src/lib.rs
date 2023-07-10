@@ -192,28 +192,6 @@ impl FPS {
             return None;
         }
     }
-
-    pub fn divmod(&self, g: &FPS) -> (FPS, FPS) {
-        let mut f = self.clone();
-        let mut g = g.clone();
-        f.shrink();
-        g.shrink();
-        let n = f.len();
-        let m = g.len();
-        if n < m {
-            return (fps![], f);
-        }
-        let mut q = f.clone();
-        q.reverse();
-        g.reverse();
-        q /= &g;
-        q.resize(n + 1 - m, M::new(0));
-        q.reverse();
-        g.reverse();
-        let mut r = &f - &(&g * &q);
-        r.shrink();
-        (q, r)
-    }
 }
 
 impl Default for FPS {
@@ -339,7 +317,7 @@ impl Div<&FPS> for &FPS {
         a.truncate(n);
         let mut b = rhs.clone();
         b.reverse();
-        b.truncate(n);
+        b = b.inv(n);
         let mut c = &a * &b;
         c.truncate(n);
         c.reverse();

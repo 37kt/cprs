@@ -15,7 +15,8 @@ fn main() {
     }
     let f = FPS(f);
     let g = FPS(g);
-    let (q, r) = f.divmod(&g);
+    let q = &f / &g;
+    let r = &f % &g;
     println!("{} {}", q.len(), r.len());
     println!("{}", q.iter().join(" "));
     println!("{}", r.iter().join(" "));
