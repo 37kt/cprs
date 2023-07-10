@@ -3,7 +3,7 @@ data:
   _extendedDependsOn: []
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/division_of_polynomials/src/main.rs
     title: verify/division_of_polynomials/src/main.rs
   - icon: ':x:'
@@ -18,7 +18,7 @@ data:
   - icon: ':x:'
     path: verify/pow_of_formal_power_series/src/main.rs
     title: verify/pow_of_formal_power_series/src/main.rs
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/sqrt_of_formal_power_series/src/main.rs
     title: verify/sqrt_of_formal_power_series/src/main.rs
   _isVerificationFailed: true
@@ -95,32 +95,26 @@ data:
     \ = 1;\n            while k < d {\n                k *= 2;\n                g\
     \ = &(&g + &(&self.pre(k) * &g.inv(k))) * inv2;\n            }\n            return\
     \ Some(g.pre(d));\n        } else {\n            return None;\n        }\n   \
-    \ }\n\n    pub fn divmod(&self, g: &FPS) -> (FPS, FPS) {\n        let mut f =\
-    \ self.clone();\n        let mut g = g.clone();\n        f.shrink();\n       \
-    \ g.shrink();\n        let n = f.len();\n        let m = g.len();\n        if\
-    \ n < m {\n            return (fps![], f);\n        }\n        let mut q = f.clone();\n\
-    \        q.reverse();\n        g.reverse();\n        q /= &g;\n        q.resize(n\
-    \ + 1 - m, M::new(0));\n        q.reverse();\n        g.reverse();\n        let\
-    \ mut r = &f - &(&g * &q);\n        r.shrink();\n        (q, r)\n    }\n}\n\n\
-    impl Default for FPS {\n    fn default() -> Self {\n        fps![]\n    }\n}\n\
-    \nimpl Deref for FPS {\n    type Target = Vec<M>;\n    fn deref(&self) -> &Self::Target\
-    \ {\n        &self.0\n    }\n}\n\nimpl DerefMut for FPS {\n    fn deref_mut(&mut\
-    \ self) -> &mut Self::Target {\n        &mut self.0\n    }\n}\n\nimpl Neg for\
-    \ &FPS {\n    type Output = FPS;\n    fn neg(self) -> FPS {\n        let mut r\
-    \ = self.clone();\n        for i in 0..r.len() {\n            r[i] = -r[i];\n\
-    \        }\n        r\n    }\n}\n\nimpl AddAssign<&FPS> for FPS {\n    fn add_assign(&mut\
-    \ self, rhs: &FPS) {\n        let n = self.len();\n        self.resize(n.max(rhs.len()),\
-    \ M::new(0));\n        for i in 0..rhs.len() {\n            self[i] += rhs[i];\n\
-    \        }\n    }\n}\n\nimpl Add<&FPS> for &FPS {\n    type Output = FPS;\n  \
-    \  fn add(self, rhs: &FPS) -> FPS {\n        let mut r = self.clone();\n     \
-    \   r += rhs;\n        r\n    }\n}\n\nimpl SubAssign<&FPS> for FPS {\n    fn sub_assign(&mut\
-    \ self, rhs: &FPS) {\n        let n = self.len();\n        self.resize(n.max(rhs.len()),\
-    \ M::new(0));\n        for i in 0..rhs.len() {\n            self[i] -= rhs[i];\n\
-    \        }\n    }\n}\n\nimpl Sub<&FPS> for &FPS {\n    type Output = FPS;\n  \
-    \  fn sub(self, rhs: &FPS) -> FPS {\n        let mut r = self.clone();\n     \
-    \   r -= rhs;\n        r\n    }\n}\n\nimpl MulAssign<M> for FPS {\n    fn mul_assign(&mut\
-    \ self, rhs: M) {\n        for i in 0..self.len() {\n            self[i] *= rhs;\n\
-    \        }\n    }\n}\n\nimpl Mul<M> for &FPS {\n    type Output = FPS;\n    fn\
+    \ }\n}\n\nimpl Default for FPS {\n    fn default() -> Self {\n        fps![]\n\
+    \    }\n}\n\nimpl Deref for FPS {\n    type Target = Vec<M>;\n    fn deref(&self)\
+    \ -> &Self::Target {\n        &self.0\n    }\n}\n\nimpl DerefMut for FPS {\n \
+    \   fn deref_mut(&mut self) -> &mut Self::Target {\n        &mut self.0\n    }\n\
+    }\n\nimpl Neg for &FPS {\n    type Output = FPS;\n    fn neg(self) -> FPS {\n\
+    \        let mut r = self.clone();\n        for i in 0..r.len() {\n          \
+    \  r[i] = -r[i];\n        }\n        r\n    }\n}\n\nimpl AddAssign<&FPS> for FPS\
+    \ {\n    fn add_assign(&mut self, rhs: &FPS) {\n        let n = self.len();\n\
+    \        self.resize(n.max(rhs.len()), M::new(0));\n        for i in 0..rhs.len()\
+    \ {\n            self[i] += rhs[i];\n        }\n    }\n}\n\nimpl Add<&FPS> for\
+    \ &FPS {\n    type Output = FPS;\n    fn add(self, rhs: &FPS) -> FPS {\n     \
+    \   let mut r = self.clone();\n        r += rhs;\n        r\n    }\n}\n\nimpl\
+    \ SubAssign<&FPS> for FPS {\n    fn sub_assign(&mut self, rhs: &FPS) {\n     \
+    \   let n = self.len();\n        self.resize(n.max(rhs.len()), M::new(0));\n \
+    \       for i in 0..rhs.len() {\n            self[i] -= rhs[i];\n        }\n \
+    \   }\n}\n\nimpl Sub<&FPS> for &FPS {\n    type Output = FPS;\n    fn sub(self,\
+    \ rhs: &FPS) -> FPS {\n        let mut r = self.clone();\n        r -= rhs;\n\
+    \        r\n    }\n}\n\nimpl MulAssign<M> for FPS {\n    fn mul_assign(&mut self,\
+    \ rhs: M) {\n        for i in 0..self.len() {\n            self[i] *= rhs;\n \
+    \       }\n    }\n}\n\nimpl Mul<M> for &FPS {\n    type Output = FPS;\n    fn\
     \ mul(self, rhs: M) -> FPS {\n        let mut r = self.clone();\n        r *=\
     \ rhs;\n        r\n    }\n}\n\nimpl DivAssign<M> for FPS {\n    fn div_assign(&mut\
     \ self, rhs: M) {\n        *self *= rhs.inv();\n    }\n}\n\nimpl Div<M> for &FPS\
@@ -133,8 +127,8 @@ data:
     \ self.len() < rhs.len() {\n            return FPS::default();\n        }\n  \
     \      let n = self.len() - rhs.len() + 1;\n        let mut a = self.clone();\n\
     \        a.reverse();\n        a.truncate(n);\n        let mut b = rhs.clone();\n\
-    \        b.reverse();\n        b.truncate(n);\n        let mut c = &a * &b;\n\
-    \        c.truncate(n);\n        c.reverse();\n        c\n    }\n}\n\nimpl DivAssign<&FPS>\
+    \        b.reverse();\n        b = b.inv(n);\n        let mut c = &a * &b;\n \
+    \       c.truncate(n);\n        c.reverse();\n        c\n    }\n}\n\nimpl DivAssign<&FPS>\
     \ for FPS {\n    fn div_assign(&mut self, rhs: &FPS) {\n        *self = &*self\
     \ / rhs;\n    }\n}\n\nimpl RemAssign<&FPS> for FPS {\n    fn rem_assign(&mut self,\
     \ rhs: &FPS) {\n        *self -= &(&(&*self / rhs) * rhs);\n        self.shrink();\n\
@@ -153,7 +147,7 @@ data:
   isVerificationFile: false
   path: crates/polynomial/formal-power-series/src/lib.rs
   requiredBy: []
-  timestamp: '2023-07-10 15:59:10+09:00'
+  timestamp: '2023-07-10 16:38:33+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - verify/inv_of_formal_power_series/src/main.rs

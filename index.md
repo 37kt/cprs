@@ -314,7 +314,7 @@ data:
       title: verify/discrete_logarithm_mod/src/main.rs
   - name: verify/division_of_polynomials/src
     pages:
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verify/division_of_polynomials/src/main.rs
       title: verify/division_of_polynomials/src/main.rs
   - name: verify/dynamic_sequence_range_affine_range_sum/src
@@ -479,7 +479,7 @@ data:
       title: verify/segment_add_get_min_offline/src/main.rs
   - name: verify/sqrt_of_formal_power_series/src
     pages:
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verify/sqrt_of_formal_power_series/src/main.rs
       title: verify/sqrt_of_formal_power_series/src/main.rs
   - name: verify/static_range_frequency/src

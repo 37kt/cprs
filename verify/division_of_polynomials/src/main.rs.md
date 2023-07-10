@@ -6,9 +6,9 @@ data:
     title: crates/polynomial/formal-power-series/src/lib.rs
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: rs
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     PROBLEM: https://judge.yosupo.jp/problem/division_of_polynomials
     links:
@@ -24,15 +24,16 @@ data:
     \ itertools::Itertools;\nuse proconio::input;\n\n#[proconio::fastout]\nfn main()\
     \ {\n    input! {\n        n: usize,\n        m: usize,\n        f: [Mint; n],\n\
     \        g: [Mint; m],\n    }\n    let f = FPS(f);\n    let g = FPS(g);\n    let\
-    \ (q, r) = f.divmod(&g);\n    println!(\"{} {}\", q.len(), r.len());\n    println!(\"\
-    {}\", q.iter().join(\" \"));\n    println!(\"{}\", r.iter().join(\" \"));\n}\n"
+    \ q = &f / &g;\n    let r = &f % &g;\n    println!(\"{} {}\", q.len(), r.len());\n\
+    \    println!(\"{}\", q.iter().join(\" \"));\n    println!(\"{}\", r.iter().join(\"\
+    \ \"));\n}\n"
   dependsOn:
   - crates/polynomial/formal-power-series/src/lib.rs
   isVerificationFile: true
   path: verify/division_of_polynomials/src/main.rs
   requiredBy: []
-  timestamp: '2023-07-10 15:59:10+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2023-07-10 16:38:33+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/division_of_polynomials/src/main.rs
 layout: document

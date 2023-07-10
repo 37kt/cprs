@@ -6,9 +6,9 @@ data:
     title: crates/polynomial/formal-power-series/src/lib.rs
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: rs
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     PROBLEM: https://judge.yosupo.jp/problem/sqrt_of_formal_power_series
     links:
@@ -30,8 +30,8 @@ data:
   isVerificationFile: true
   path: verify/sqrt_of_formal_power_series/src/main.rs
   requiredBy: []
-  timestamp: '2023-07-10 15:59:10+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2023-07-10 16:38:33+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/sqrt_of_formal_power_series/src/main.rs
 layout: document

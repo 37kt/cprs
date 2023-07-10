@@ -30,7 +30,7 @@ data:
   isVerificationFile: true
   path: verify/pow_of_formal_power_series/src/main.rs
   requiredBy: []
-  timestamp: '2023-07-10 15:59:10+09:00'
+  timestamp: '2023-07-10 16:38:33+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: verify/pow_of_formal_power_series/src/main.rs
