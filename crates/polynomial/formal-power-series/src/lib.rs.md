@@ -6,24 +6,24 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/division_of_polynomials/src/main.rs
     title: verify/division_of_polynomials/src/main.rs
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/exp_of_formal_power_series/src/main.rs
     title: verify/exp_of_formal_power_series/src/main.rs
   - icon: ':heavy_check_mark:'
     path: verify/inv_of_formal_power_series/src/main.rs
     title: verify/inv_of_formal_power_series/src/main.rs
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/log_of_formal_power_series/src/main.rs
     title: verify/log_of_formal_power_series/src/main.rs
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/pow_of_formal_power_series/src/main.rs
     title: verify/pow_of_formal_power_series/src/main.rs
   - icon: ':heavy_check_mark:'
     path: verify/sqrt_of_formal_power_series/src/main.rs
     title: verify/sqrt_of_formal_power_series/src/main.rs
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: rs
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.11.4/x64/lib/python3.11/site-packages/onlinejudge_verify/documentation/build.py\"\
@@ -64,24 +64,24 @@ data:
     \        while k < d {\n            k *= 2;\n            g = &(&(&(-&self.pre(k))\
     \ * &g) + &fps![2]) * &g;\n            g.resize(k, M::new(0));\n        }\n  \
     \      g.truncate(d);\n        g\n    }\n\n    pub fn log(&self, d: usize) ->\
-    \ FPS {\n        let mut f = self.clone();\n        f.resize(d, M::new(0));\n\
-    \        (&f.diff() / &f).integral()\n    }\n\n    pub fn exp(&self, d: usize)\
-    \ -> FPS {\n        let mut g = fps![1];\n        let mut k = 1;\n        while\
-    \ k < d {\n            k *= 2;\n            g = &(&(&self.pre(k) - &g.log(k))\
-    \ + &fps![1]) * &g;\n            g.resize(k, M::new(0));\n        }\n        g.truncate(d);\n\
-    \        g\n    }\n\n    pub fn pow(&self, k: usize, d: usize) -> FPS {\n    \
-    \    if k == 0 {\n            let mut r = fps![0; d];\n            if d > 0 {\n\
-    \                r[0] = M::new(1);\n            }\n            return r;\n   \
-    \     }\n        for i in 0..d {\n            if i * k > d {\n               \
-    \ return fps![0; d];\n            }\n            if self[i].val() == 0 {\n   \
-    \             continue;\n            }\n            let inv = self[i].inv();\n\
-    \            let mut r = (&(&(self * inv) >> i).log(d) * M::new(k)).exp(d);\n\
-    \            r *= self[i].pow(k as u64);\n            r = (&r << i * k).pre(d);\n\
-    \            if r.len() < d {\n                r.resize(d, M::new(0));\n     \
-    \       }\n            return r;\n        }\n        fps![0; d]\n    }\n\n   \
-    \ pub fn sqrt(&self, d: usize) -> Option<FPS> {\n        let n = self.len();\n\
-    \        if n == 0 {\n            return Some(fps![0; d]);\n        }\n      \
-    \  if self[0].val() == 0 {\n            for i in 1..n {\n                if self[i].val()\
+    \ FPS {\n        assert!(self[0].val() == 1);\n        (&self.diff() * &self.inv(d)).pre(d\
+    \ - 1).integral()\n    }\n\n    pub fn exp(&self, d: usize) -> FPS {\n       \
+    \ let mut g = fps![1];\n        let mut k = 1;\n        while k < d {\n      \
+    \      k *= 2;\n            g = &(&(&self.pre(k) - &g.log(k)) + &fps![1]) * &g;\n\
+    \            g.resize(k, M::new(0));\n        }\n        g.truncate(d);\n    \
+    \    g\n    }\n\n    pub fn pow(&self, k: usize, d: usize) -> FPS {\n        if\
+    \ k == 0 {\n            let mut r = fps![0; d];\n            if d > 0 {\n    \
+    \            r[0] = M::new(1);\n            }\n            return r;\n       \
+    \ }\n        for i in 0..d {\n            if i * k > d {\n                return\
+    \ fps![0; d];\n            }\n            if self[i].val() == 0 {\n          \
+    \      continue;\n            }\n            let inv = self[i].inv();\n      \
+    \      let mut r = (&(&(self * inv) >> i).log(d) * M::new(k)).exp(d);\n      \
+    \      r *= self[i].pow(k as u64);\n            r = (&r << i * k).pre(d);\n  \
+    \          if r.len() < d {\n                r.resize(d, M::new(0));\n       \
+    \     }\n            return r;\n        }\n        fps![0; d]\n    }\n\n    pub\
+    \ fn sqrt(&self, d: usize) -> Option<FPS> {\n        let n = self.len();\n   \
+    \     if n == 0 {\n            return Some(fps![0; d]);\n        }\n        if\
+    \ self[0].val() == 0 {\n            for i in 1..n {\n                if self[i].val()\
     \ != 0 {\n                    if i & 1 == 1 {\n                        return\
     \ None;\n                    }\n                    if d <= i / 2 {\n        \
     \                break;\n                    }\n                    if let Some(mut\
@@ -147,8 +147,8 @@ data:
   isVerificationFile: false
   path: crates/polynomial/formal-power-series/src/lib.rs
   requiredBy: []
-  timestamp: '2023-07-10 16:38:33+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  timestamp: '2023-07-10 17:06:44+09:00'
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/inv_of_formal_power_series/src/main.rs
   - verify/exp_of_formal_power_series/src/main.rs

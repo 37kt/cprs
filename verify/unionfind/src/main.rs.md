@@ -1,14 +1,14 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: crates/data-structure/union-find/src/lib.rs
     title: crates/data-structure/union-find/src/lib.rs
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: rs
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     PROBLEM: https://judge.yosupo.jp/problem/unionfind
     links:
@@ -32,7 +32,7 @@ data:
   path: verify/unionfind/src/main.rs
   requiredBy: []
   timestamp: '2023-07-10 15:59:10+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/unionfind/src/main.rs
 layout: document

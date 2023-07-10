@@ -1,14 +1,14 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: crates/polynomial/formal-power-series/src/lib.rs
     title: crates/polynomial/formal-power-series/src/lib.rs
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: rs
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     PROBLEM: https://judge.yosupo.jp/problem/exp_of_formal_power_series
     links:
@@ -30,8 +30,8 @@ data:
   isVerificationFile: true
   path: verify/exp_of_formal_power_series/src/main.rs
   requiredBy: []
-  timestamp: '2023-07-10 16:38:33+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2023-07-10 17:06:44+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/exp_of_formal_power_series/src/main.rs
 layout: document

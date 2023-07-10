@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: crates/polynomial/formal-power-series/src/lib.rs
     title: crates/polynomial/formal-power-series/src/lib.rs
   _extendedRequiredBy: []
@@ -32,7 +32,7 @@ data:
   isVerificationFile: true
   path: verify/division_of_polynomials/src/main.rs
   requiredBy: []
-  timestamp: '2023-07-10 16:38:33+09:00'
+  timestamp: '2023-07-10 17:06:44+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/division_of_polynomials/src/main.rs
