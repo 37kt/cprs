@@ -108,9 +108,8 @@ impl FPS {
     }
 
     pub fn log(&self, d: usize) -> FPS {
-        let mut f = self.clone();
-        f.resize(d, M::new(0));
-        (&f.diff() / &f).integral()
+        assert!(self[0].val() == 1);
+        (&self.diff() * &self.inv(d)).pre(d - 1).integral()
     }
 
     pub fn exp(&self, d: usize) -> FPS {
