@@ -3,19 +3,19 @@ data:
   _extendedDependsOn: []
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/unionfind/src/main.rs
     title: verify/unionfind/src/main.rs
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: rs
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     links: []
-  bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.11.3/x64/lib/python3.11/site-packages/onlinejudge_verify/documentation/build.py\"\
+  bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.11.4/x64/lib/python3.11/site-packages/onlinejudge_verify/documentation/build.py\"\
     , line 71, in _render_source_code_stat\n    bundled_code = language.bundle(stat.path,\
     \ basedir=basedir, options={'include_paths': [basedir]}).decode()\n          \
     \         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\
-    \  File \"/opt/hostedtoolcache/Python/3.11.3/x64/lib/python3.11/site-packages/onlinejudge_verify/languages/rust.py\"\
+    \  File \"/opt/hostedtoolcache/Python/3.11.4/x64/lib/python3.11/site-packages/onlinejudge_verify/languages/rust.py\"\
     , line 288, in bundle\n    raise NotImplementedError\nNotImplementedError\n"
   code: "use std::{cell::RefCell, mem::swap};\n\n#[derive(Clone)]\npub struct UnionFind\
     \ {\n    par: RefCell<Vec<i32>>,\n}\n\nimpl UnionFind {\n    pub fn new(n: usize)\
@@ -32,17 +32,17 @@ data:
     \ par[u] >= 0 {\n            let t = par[u] as usize;\n            par[u] = v\
     \ as i32;\n            u = t;\n        }\n        u\n    }\n\n    pub fn same(&self,\
     \ x: usize, y: usize) -> bool {\n        self.leader(x) == self.leader(y)\n  \
-    \  }\n\n    pub fn size(&self, x: usize) -> usize {\n        -self.par.borrow()[self.leader(x)]\
-    \ as usize\n    }\n\n    pub fn groups(&self) -> Vec<Vec<usize>> {\n        let\
-    \ mut res = vec![vec![]; self.len()];\n        for x in 0..self.len() {\n    \
-    \        res[self.leader(x)].push(x);\n        }\n        res.into_iter().filter(|g|\
-    \ g.len() > 0).collect()\n    }\n}\n"
+    \  }\n\n    pub fn size(&self, x: usize) -> usize {\n        let x = self.leader(x);\n\
+    \        -self.par.borrow()[x] as usize\n    }\n\n    pub fn groups(&self) ->\
+    \ Vec<Vec<usize>> {\n        let mut res = vec![vec![]; self.len()];\n       \
+    \ for x in 0..self.len() {\n            res[self.leader(x)].push(x);\n       \
+    \ }\n        res.into_iter().filter(|g| g.len() > 0).collect()\n    }\n}\n"
   dependsOn: []
   isVerificationFile: false
   path: crates/data-structure/union-find/src/lib.rs
   requiredBy: []
-  timestamp: '2023-04-23 00:41:00+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2023-07-10 15:59:10+09:00'
+  verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - verify/unionfind/src/main.rs
 documentation_of: crates/data-structure/union-find/src/lib.rs

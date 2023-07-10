@@ -61,6 +61,11 @@ data:
     - icon: ':heavy_check_mark:'
       path: crates/data-structure/heavy-light-decomposition/src/lib.rs
       title: crates/data-structure/heavy-light-decomposition/src/lib.rs
+  - name: crates/data-structure/interval-heap/src
+    pages:
+    - icon: ':warning:'
+      path: crates/data-structure/interval-heap/src/lib.rs
+      title: crates/data-structure/interval-heap/src/lib.rs
   - name: crates/data-structure/interval-set/src
     pages:
     - icon: ':warning:'
@@ -133,7 +138,7 @@ data:
       title: crates/data-structure/tree-query/src/lib.rs
   - name: crates/data-structure/union-find/src
     pages:
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: crates/data-structure/union-find/src/lib.rs
       title: crates/data-structure/union-find/src/lib.rs
   - name: crates/data-structure/w-ary-tree-set/src
@@ -226,6 +231,11 @@ data:
     - icon: ':heavy_check_mark:'
       path: crates/math/two-satisfiability/src/lib.rs
       title: crates/math/two-satisfiability/src/lib.rs
+  - name: crates/misc/bitutil/src
+    pages:
+    - icon: ':warning:'
+      path: crates/misc/bitutil/src/lib.rs
+      title: crates/misc/bitutil/src/lib.rs
   - name: crates/misc/random/src
     pages:
     - icon: ':warning:'
@@ -233,7 +243,7 @@ data:
       title: crates/misc/random/src/lib.rs
   - name: crates/polynomial/formal-power-series/src
     pages:
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: crates/polynomial/formal-power-series/src/lib.rs
       title: crates/polynomial/formal-power-series/src/lib.rs
   - name: crates/sequence/mex/src
@@ -304,7 +314,7 @@ data:
       title: verify/discrete_logarithm_mod/src/main.rs
   - name: verify/division_of_polynomials/src
     pages:
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: verify/division_of_polynomials/src/main.rs
       title: verify/division_of_polynomials/src/main.rs
   - name: verify/dynamic_sequence_range_affine_range_sum/src
@@ -324,7 +334,7 @@ data:
       title: verify/dynamic_tree_vertex_set_path_composite/src/main.rs
   - name: verify/exp_of_formal_power_series/src
     pages:
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: verify/exp_of_formal_power_series/src/main.rs
       title: verify/exp_of_formal_power_series/src/main.rs
   - name: verify/factorize/src
@@ -374,7 +384,7 @@ data:
       title: verify/line_add_get_min_offline/src/main.rs
   - name: verify/log_of_formal_power_series/src
     pages:
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: verify/log_of_formal_power_series/src/main.rs
       title: verify/log_of_formal_power_series/src/main.rs
   - name: verify/matrix_det/src
@@ -414,7 +424,7 @@ data:
       title: verify/point_add_rectangle_sum/src/main.rs
   - name: verify/pow_of_formal_power_series/src
     pages:
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: verify/pow_of_formal_power_series/src/main.rs
       title: verify/pow_of_formal_power_series/src/main.rs
   - name: verify/predecessor_problem/src
@@ -469,7 +479,7 @@ data:
       title: verify/segment_add_get_min_offline/src/main.rs
   - name: verify/sqrt_of_formal_power_series/src
     pages:
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: verify/sqrt_of_formal_power_series/src/main.rs
       title: verify/sqrt_of_formal_power_series/src/main.rs
   - name: verify/static_range_frequency/src
@@ -514,7 +524,7 @@ data:
       title: verify/two_sat/src/main.rs
   - name: verify/unionfind/src
     pages:
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: verify/unionfind/src/main.rs
       title: verify/unionfind/src/main.rs
   - name: verify/vertex_add_path_sum/src

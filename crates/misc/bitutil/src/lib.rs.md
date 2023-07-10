@@ -14,21 +14,22 @@ data:
     \         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\
     \  File \"/opt/hostedtoolcache/Python/3.11.4/x64/lib/python3.11/site-packages/onlinejudge_verify/languages/rust.py\"\
     , line 288, in bundle\n    raise NotImplementedError\nNotImplementedError\n"
-  code: "/// \u30CA\u30A4\u30FC\u30D6\u306Bmex\u3092\u6C42\u3081\u308B\u3002\u5B9F\
-    \u9A13\u7528\npub fn mex(a: &[usize]) -> usize {\n    let mut a = a.to_vec();\n\
-    \    a.sort();\n    a.dedup();\n    for i in 0..a.len() {\n        if a[i] !=\
-    \ i {\n            return i;\n        }\n    }\n    a.len()\n}\n"
+  code: "pub fn bit_subsets(s: usize) -> impl Iterator<Item = usize> {\n    let mut\
+    \ x = 0;\n    std::iter::from_fn(move || {\n        let res = x;\n        if res\
+    \ == !0 {\n            None\n        } else if x == s {\n            x = !0;\n\
+    \            Some(res)\n        } else {\n            x = x.wrapping_sub(s) &\
+    \ s;\n            Some(res)\n        }\n    })\n}\n"
   dependsOn: []
   isVerificationFile: false
-  path: crates/sequence/mex/src/lib.rs
+  path: crates/misc/bitutil/src/lib.rs
   requiredBy: []
-  timestamp: '2023-04-22 22:39:06+09:00'
+  timestamp: '2023-07-10 15:59:10+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
-documentation_of: crates/sequence/mex/src/lib.rs
+documentation_of: crates/misc/bitutil/src/lib.rs
 layout: document
 redirect_from:
-- /library/crates/sequence/mex/src/lib.rs
-- /library/crates/sequence/mex/src/lib.rs.html
-title: crates/sequence/mex/src/lib.rs
+- /library/crates/misc/bitutil/src/lib.rs
+- /library/crates/misc/bitutil/src/lib.rs.html
+title: crates/misc/bitutil/src/lib.rs
 ---

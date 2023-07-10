@@ -3,34 +3,34 @@ data:
   _extendedDependsOn: []
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/division_of_polynomials/src/main.rs
     title: verify/division_of_polynomials/src/main.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/exp_of_formal_power_series/src/main.rs
     title: verify/exp_of_formal_power_series/src/main.rs
   - icon: ':heavy_check_mark:'
     path: verify/inv_of_formal_power_series/src/main.rs
     title: verify/inv_of_formal_power_series/src/main.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/log_of_formal_power_series/src/main.rs
     title: verify/log_of_formal_power_series/src/main.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/pow_of_formal_power_series/src/main.rs
     title: verify/pow_of_formal_power_series/src/main.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/sqrt_of_formal_power_series/src/main.rs
     title: verify/sqrt_of_formal_power_series/src/main.rs
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: rs
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
-  bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.11.3/x64/lib/python3.11/site-packages/onlinejudge_verify/documentation/build.py\"\
+  bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.11.4/x64/lib/python3.11/site-packages/onlinejudge_verify/documentation/build.py\"\
     , line 71, in _render_source_code_stat\n    bundled_code = language.bundle(stat.path,\
     \ basedir=basedir, options={'include_paths': [basedir]}).decode()\n          \
     \         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\
-    \  File \"/opt/hostedtoolcache/Python/3.11.3/x64/lib/python3.11/site-packages/onlinejudge_verify/languages/rust.py\"\
+    \  File \"/opt/hostedtoolcache/Python/3.11.4/x64/lib/python3.11/site-packages/onlinejudge_verify/languages/rust.py\"\
     , line 288, in bundle\n    raise NotImplementedError\nNotImplementedError\n"
   code: "use std::{\n    fmt::Debug,\n    ops::{\n        Add, AddAssign, Deref, DerefMut,\
     \ Div, DivAssign, Mul, MulAssign, Neg, Rem, RemAssign, Shl,\n        ShlAssign,\
@@ -129,35 +129,39 @@ data:
     \   fn mul(self, rhs: &FPS) -> FPS {\n        FPS(convolution(&self, &rhs))\n\
     \    }\n}\n\nimpl MulAssign<&FPS> for FPS {\n    fn mul_assign(&mut self, rhs:\
     \ &FPS) {\n        *self = &*self * rhs;\n    }\n}\n\nimpl Div<&FPS> for &FPS\
-    \ {\n    type Output = FPS;\n    fn div(self, rhs: &FPS) -> FPS {\n        (self\
-    \ * &rhs.inv(self.len())).pre(self.len())\n    }\n}\n\nimpl DivAssign<&FPS> for\
-    \ FPS {\n    fn div_assign(&mut self, rhs: &FPS) {\n        *self = &*self / rhs;\n\
-    \    }\n}\n\nimpl RemAssign<&FPS> for FPS {\n    fn rem_assign(&mut self, rhs:\
-    \ &FPS) {\n        *self -= &(&(&*self / rhs) * rhs);\n    }\n}\n\nimpl Rem<&FPS>\
-    \ for &FPS {\n    type Output = FPS;\n    fn rem(self, rhs: &FPS) -> FPS {\n \
-    \       let mut r = self.clone();\n        r %= rhs;\n        r\n    }\n}\n\n\
-    impl Shl<usize> for &FPS {\n    type Output = FPS;\n    fn shl(self, rhs: usize)\
-    \ -> FPS {\n        let mut r = fps![0; rhs];\n        r.append(&mut self.clone());\n\
-    \        r\n    }\n}\n\nimpl ShlAssign<usize> for FPS {\n    fn shl_assign(&mut\
-    \ self, rhs: usize) {\n        *self = &*self << rhs;\n    }\n}\n\nimpl Shr<usize>\
-    \ for &FPS {\n    type Output = FPS;\n    fn shr(self, rhs: usize) -> FPS {\n\
-    \        if self.len() <= rhs {\n            FPS::default()\n        } else {\n\
-    \            FPS(self[rhs..].to_vec())\n        }\n    }\n}\n\nimpl ShrAssign<usize>\
-    \ for FPS {\n    fn shr_assign(&mut self, rhs: usize) {\n        *self = &*self\
-    \ >> rhs;\n    }\n}\n"
+    \ {\n    type Output = FPS;\n    fn div(self, rhs: &FPS) -> FPS {\n        if\
+    \ self.len() < rhs.len() {\n            return FPS::default();\n        }\n  \
+    \      let n = self.len() - rhs.len() + 1;\n        let mut a = self.clone();\n\
+    \        a.reverse();\n        a.truncate(n);\n        let mut b = rhs.clone();\n\
+    \        b.reverse();\n        b.truncate(n);\n        let mut c = &a * &b;\n\
+    \        c.truncate(n);\n        c.reverse();\n        c\n    }\n}\n\nimpl DivAssign<&FPS>\
+    \ for FPS {\n    fn div_assign(&mut self, rhs: &FPS) {\n        *self = &*self\
+    \ / rhs;\n    }\n}\n\nimpl RemAssign<&FPS> for FPS {\n    fn rem_assign(&mut self,\
+    \ rhs: &FPS) {\n        *self -= &(&(&*self / rhs) * rhs);\n        self.shrink();\n\
+    \    }\n}\n\nimpl Rem<&FPS> for &FPS {\n    type Output = FPS;\n    fn rem(self,\
+    \ rhs: &FPS) -> FPS {\n        let mut r = self.clone();\n        r %= rhs;\n\
+    \        r\n    }\n}\n\nimpl Shl<usize> for &FPS {\n    type Output = FPS;\n \
+    \   fn shl(self, rhs: usize) -> FPS {\n        let mut r = fps![0; rhs];\n   \
+    \     r.append(&mut self.clone());\n        r\n    }\n}\n\nimpl ShlAssign<usize>\
+    \ for FPS {\n    fn shl_assign(&mut self, rhs: usize) {\n        *self = &*self\
+    \ << rhs;\n    }\n}\n\nimpl Shr<usize> for &FPS {\n    type Output = FPS;\n  \
+    \  fn shr(self, rhs: usize) -> FPS {\n        if self.len() <= rhs {\n       \
+    \     FPS::default()\n        } else {\n            FPS(self[rhs..].to_vec())\n\
+    \        }\n    }\n}\n\nimpl ShrAssign<usize> for FPS {\n    fn shr_assign(&mut\
+    \ self, rhs: usize) {\n        *self = &*self >> rhs;\n    }\n}\n"
   dependsOn: []
   isVerificationFile: false
   path: crates/polynomial/formal-power-series/src/lib.rs
   requiredBy: []
-  timestamp: '2023-04-22 14:06:50+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2023-07-10 15:59:10+09:00'
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
-  - verify/pow_of_formal_power_series/src/main.rs
+  - verify/inv_of_formal_power_series/src/main.rs
+  - verify/exp_of_formal_power_series/src/main.rs
+  - verify/log_of_formal_power_series/src/main.rs
   - verify/division_of_polynomials/src/main.rs
   - verify/sqrt_of_formal_power_series/src/main.rs
-  - verify/exp_of_formal_power_series/src/main.rs
-  - verify/inv_of_formal_power_series/src/main.rs
-  - verify/log_of_formal_power_series/src/main.rs
+  - verify/pow_of_formal_power_series/src/main.rs
 documentation_of: crates/polynomial/formal-power-series/src/lib.rs
 layout: document
 redirect_from:
