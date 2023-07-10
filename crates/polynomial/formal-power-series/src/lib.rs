@@ -330,7 +330,20 @@ impl MulAssign<&FPS> for FPS {
 impl Div<&FPS> for &FPS {
     type Output = FPS;
     fn div(self, rhs: &FPS) -> FPS {
-        (self * &rhs.inv(self.len())).pre(self.len())
+        if self.len() < rhs.len() {
+            return FPS::default();
+        }
+        let n = self.len() - rhs.len() + 1;
+        let mut a = self.clone();
+        a.reverse();
+        a.truncate(n);
+        let mut b = rhs.clone();
+        b.reverse();
+        b.truncate(n);
+        let mut c = &a * &b;
+        c.truncate(n);
+        c.reverse();
+        c
     }
 }
 
@@ -343,6 +356,7 @@ impl DivAssign<&FPS> for FPS {
 impl RemAssign<&FPS> for FPS {
     fn rem_assign(&mut self, rhs: &FPS) {
         *self -= &(&(&*self / rhs) * rhs);
+        self.shrink();
     }
 }
 
