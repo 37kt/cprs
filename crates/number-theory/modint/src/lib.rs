@@ -215,7 +215,7 @@ const fn ntt_info(
     let mut prod = 1;
     let mut iprod = 1;
     let mut i = 0;
-    while i <= rank2 - 2 {
+    while i + 2 <= rank2 {
         rate2[i] = mul(root[i + 2], prod, m);
         irate2[i] = mul(iroot[i + 2], iprod, m);
         prod = mul(prod, iroot[i + 2], m);
@@ -226,7 +226,7 @@ const fn ntt_info(
     let mut prod = 1;
     let mut iprod = 1;
     let mut i = 0;
-    while i <= rank2 - 3 {
+    while i + 3 <= rank2 {
         rate3[i] = mul(root[i + 3], prod, m);
         irate3[i] = mul(iroot[i + 3], iprod, m);
         prod = mul(prod, iroot[i + 3], m);
