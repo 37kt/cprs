@@ -51,7 +51,8 @@ impl UnionFind {
     }
 
     pub fn size(&self, x: usize) -> usize {
-        -self.par.borrow()[self.leader(x)] as usize
+        let x = self.leader(x);
+        -self.par.borrow()[x] as usize
     }
 
     pub fn groups(&self) -> Vec<Vec<usize>> {
