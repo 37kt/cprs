@@ -1,12 +1,12 @@
 [package]
 name = "exp_of_formal_power_series"
 version = "0.1.0"
-edition = "2018"
+edition = "2021"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-proconio = { version = "=0.3.6", features = ["derive"] }
-ac-library-rs = { git = "https://github.com/rust-lang-ja/ac-library-rs" }
-formal-power-series = { path = "../../crates/polynomial/formal-power-series" }
 itertools = "=0.9.0"
+modint = { path = "../../crates/number-theory/modint" }
+formal-power-series = { path = "../../crates/polynomial/formal-power-series" }
+proconio = { version = "=0.3.6", features = ["derive"] }

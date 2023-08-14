@@ -12,5 +12,6 @@ members = [
     "crates/string/*",
     "crates/tree/*",
     "crates/misc/*",
+    "crates/number-theory/*",
     "verify/*",
 ]

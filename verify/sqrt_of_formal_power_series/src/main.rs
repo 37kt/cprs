@@ -1,9 +1,11 @@
 // verification-helper: PROBLEM https://judge.yosupo.jp/problem/sqrt_of_formal_power_series
 
-use ac_library::ModInt998244353 as Mint;
-use formal_power_series::FPS;
+use formal_power_series::FormalPowerSeries;
 use itertools::Itertools;
+use modint::ModInt998244353;
 use proconio::input;
+
+type Mint = ModInt998244353;
 
 #[proconio::fastout]
 fn main() {
@@ -11,9 +13,9 @@ fn main() {
         n: usize,
         a: [Mint; n],
     }
-    let f = FPS(a);
-    if let Some(g) = f.sqrt(n) {
-        println!("{}", g.iter().join(" "));
+    let a = FormalPowerSeries(a);
+    if let Some(b) = a.sqrt(n) {
+        println!("{}", b.iter().join(" "));
     } else {
         println!("-1");
     }

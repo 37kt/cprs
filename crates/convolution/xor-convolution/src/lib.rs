@@ -1,6 +1,6 @@
 use std::ops::{Add, Div, DivAssign, MulAssign, Sub};
 
-pub fn hadamard<T>(a: &mut Vec<T>, inv: bool)
+pub fn hadamard<T>(a: &mut [T], inv: bool)
 where
     T: Clone
         + Default

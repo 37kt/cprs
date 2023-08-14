@@ -1,6 +1,6 @@
 use std::ops::{Add, MulAssign, Sub};
 
-pub fn subset_zeta<T>(a: &mut Vec<T>)
+pub fn subset_zeta<T>(a: &mut [T])
 where
     T: Clone + Add<Output = T>,
 {
@@ -16,7 +16,7 @@ where
     }
 }
 
-pub fn subset_moebius<T>(a: &mut Vec<T>)
+pub fn subset_moebius<T>(a: &mut [T])
 where
     T: Clone + Sub<Output = T>,
 {
