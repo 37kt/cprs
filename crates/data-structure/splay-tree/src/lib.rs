@@ -132,7 +132,9 @@ where
     if let Some(t) = unsafe { t.as_mut() } {
         deep_free(t.lch);
         deep_free(t.rch);
-        std::mem::drop(t);
+        unsafe {
+            std::mem::drop(Box::from_raw(t));
+        }
     }
 }
 

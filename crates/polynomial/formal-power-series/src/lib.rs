@@ -15,14 +15,14 @@ use std::{
 #[repr(transparent)]
 pub struct FormalPowerSeries<const P: u32>(pub Vec<StaticModInt<P>>);
 
-#[derive(Default, Clone, PartialEq, Eq)]
-#[repr(transparent)]
-pub struct SparseFormalPowerSeries<const P: u32>(pub Vec<(usize, StaticModInt<P>)>);
+// #[derive(Default, Clone, PartialEq, Eq)]
+// #[repr(transparent)]
+// pub struct SparseFormalPowerSeries<const P: u32>(pub Vec<(usize, StaticModInt<P>)>);
 
 pub type FormalPowerSeries998244353 = FormalPowerSeries<998_244_353>;
 pub type FormalPowerSeries1000000007 = FormalPowerSeries<1_000_000_007>;
-pub type SparseFormalPowerSeries998244353 = SparseFormalPowerSeries<998_244_353>;
-pub type SparseFormalPowerSeries1000000007 = SparseFormalPowerSeries<1_000_000_007>;
+// pub type SparseFormalPowerSeries998244353 = SparseFormalPowerSeries<998_244_353>;
+// pub type SparseFormalPowerSeries1000000007 = SparseFormalPowerSeries<1_000_000_007>;
 
 #[macro_export]
 macro_rules! fps {
@@ -34,12 +34,12 @@ macro_rules! fps {
     );
 }
 
-#[macro_export]
-macro_rules! sfps {
-    ($(($d:expr, $x:expr)), *) => (
-        $crate::SparseFormalPowerSeries(vec![$(($d, modint::StaticModInt::from($x))), *])
-    );
-}
+// #[macro_export]
+// macro_rules! sfps {
+//     ($(($d:expr, $x:expr)), *) => (
+//         $crate::SparseFormalPowerSeries(vec![$(($d, modint::StaticModInt::from($x))), *])
+//     );
+// }
 
 impl<const P: u32> FormalPowerSeries<P> {
     pub fn shrink(&mut self) {
@@ -342,161 +342,161 @@ impl<const P: u32> FormalPowerSeries<P> {
     }
 }
 
-impl<const P: u32> SparseFormalPowerSeries<P> {
-    pub fn normalize(&mut self) {
-        if self.len() == 0 {
-            return;
-        }
-        self.0.sort_by_key(|&(i, _)| i);
-        let mut res = Self(vec![(self[0].0, StaticModInt::new(0))]);
-        for &(i, v) in &self.0 {
-            if res.len() == 0 || res.last().unwrap().0 != i {
-                res.push((i, v));
-            } else {
-                res.last_mut().unwrap().1 += v;
-            }
-        }
-        if res.len() != 0 && res.last().unwrap().1.val() == 0 {
-            res.pop();
-        }
-        *self = res;
-    }
+// impl<const P: u32> SparseFormalPowerSeries<P> {
+//     pub fn normalize(&mut self) {
+//         if self.len() == 0 {
+//             return;
+//         }
+//         self.0.sort_by_key(|&(i, _)| i);
+//         let mut res = Self(vec![(self[0].0, StaticModInt::new(0))]);
+//         for &(i, v) in &self.0 {
+//             if res.len() == 0 || res.last().unwrap().0 != i {
+//                 res.push((i, v));
+//             } else {
+//                 res.last_mut().unwrap().1 += v;
+//             }
+//         }
+//         if res.len() != 0 && res.last().unwrap().1.val() == 0 {
+//             res.pop();
+//         }
+//         *self = res;
+//     }
 
-    pub fn differential(&self) -> Self {
-        Self(
-            self.iter()
-                .filter_map(|&(i, v)| (i > 0).then(|| (i - 1, v * i)))
-                .collect(),
-        )
-    }
+//     pub fn differential(&self) -> Self {
+//         Self(
+//             self.iter()
+//                 .filter_map(|&(i, v)| (i > 0).then(|| (i - 1, v * i)))
+//                 .collect(),
+//         )
+//     }
 
-    pub fn integral(&self) -> Self {
-        Self(self.iter().map(|&(i, v)| (i + 1, v / (i + 1))).collect())
-    }
+//     pub fn integral(&self) -> Self {
+//         Self(self.iter().map(|&(i, v)| (i + 1, v / (i + 1))).collect())
+//     }
 
-    pub fn inv(self, d: usize) -> FormalPowerSeries<P> {
-        let mut f = fps![0; d];
-        f[0] += 1;
-        f /= self;
-        f
-    }
+//     pub fn inv(self, d: usize) -> FormalPowerSeries<P> {
+//         let mut f = fps![0; d];
+//         f[0] += 1;
+//         f /= self;
+//         f
+//     }
 
-    pub fn log(self, d: usize) -> FormalPowerSeries<P> {
-        assert!(self[0].0 == 0 && self[0].1.val() == 1);
-        let f = self.differential();
-        let mut res = (self.inv(d) * f).pre(d - 1).integral();
-        res.resize(d, 0.into());
-        res
-    }
+//     pub fn log(self, d: usize) -> FormalPowerSeries<P> {
+//         assert!(self[0].0 == 0 && self[0].1.val() == 1);
+//         let f = self.differential();
+//         let mut res = (self.inv(d) * f).pre(d - 1).integral();
+//         res.resize(d, 0.into());
+//         res
+//     }
 
-    pub fn exp(&self, d: usize) -> FormalPowerSeries<P> {
-        if self.len() == 0 {
-            let mut res = fps![0; d];
-            if d > 0 {
-                res[0] = 1.into();
-            }
-            return res;
-        }
-        assert_ne!(self[0].0, 0);
-        let mut res = fps![0; d];
-        if d == 0 {
-            return res;
-        }
-        let mut a = self.differential();
-        for (d, _) in a.iter_mut() {
-            *d += 1;
-        }
-        res[0] = 1.into();
-        let mut inv = vec![StaticModInt::<P>::new(1); d];
-        let m = StaticModInt::<P>::modulus() as usize;
-        for i in 1..d {
-            if i > 1 {
-                inv[i] = -inv[m % i] * (m / i);
-            }
-            res[i] = a
-                .iter()
-                .filter_map(|&(j, v)| (i >= j).then(|| v * res[i - j]))
-                .sum::<StaticModInt<P>>()
-                * inv[i];
-        }
-        res
-    }
+//     pub fn exp(&self, d: usize) -> FormalPowerSeries<P> {
+//         if self.len() == 0 {
+//             let mut res = fps![0; d];
+//             if d > 0 {
+//                 res[0] = 1.into();
+//             }
+//             return res;
+//         }
+//         assert_ne!(self[0].0, 0);
+//         let mut res = fps![0; d];
+//         if d == 0 {
+//             return res;
+//         }
+//         let mut a = self.differential();
+//         for (d, _) in a.iter_mut() {
+//             *d += 1;
+//         }
+//         res[0] = 1.into();
+//         let mut inv = vec![StaticModInt::<P>::new(1); d];
+//         let m = StaticModInt::<P>::modulus() as usize;
+//         for i in 1..d {
+//             if i > 1 {
+//                 inv[i] = -inv[m % i] * (m / i);
+//             }
+//             res[i] = a
+//                 .iter()
+//                 .filter_map(|&(j, v)| (i >= j).then(|| v * res[i - j]))
+//                 .sum::<StaticModInt<P>>()
+//                 * inv[i];
+//         }
+//         res
+//     }
 
-    pub fn pow(&self, k: usize, d: usize) -> FormalPowerSeries<P> {
-        let offset = self.iter().position(|&(_, v)| v.val() != 0);
-        let mut res = fps![0; d];
-        if offset.is_none() {
-            if k == 0 {
-                res[0] += 1;
-            }
-            return res;
-        }
-        let offset = offset.unwrap();
-        if self[offset].0 > 0 {
-            let deg = self[offset].0;
-            if k > (d - 1) / deg {
-                return res;
-            }
-            let g = Self(
-                self.iter()
-                    .filter_map(|&(i, v)| (i >= deg).then(|| (i - deg, v)))
-                    .collect(),
-            );
-            let t = g.pow(k, d - k * deg);
-            for i in 0..d - k * deg {
-                res[k * deg + i] = t[i];
-            }
-            return res;
-        }
-        let mut inv = vec![StaticModInt::<P>::new(1); d + 1];
-        let m = P as usize;
-        for i in 2..=d {
-            inv[i] = -inv[m % i] * (m / i);
-        }
-        res[0] = self[0].1.pow(k);
-        let c = self[0].1.inv();
-        for i in 1..d {
-            for &(j, v) in self.iter().skip(1).filter(|&&(j, _)| i >= j) {
-                res[i] = res[i] + v * res[i - j] * (StaticModInt::<P>::new(k) * j - (i - j));
-            }
-            res[i] *= inv[i] * c;
-        }
-        res
-    }
+//     pub fn pow(&self, k: usize, d: usize) -> FormalPowerSeries<P> {
+//         let offset = self.iter().position(|&(_, v)| v.val() != 0);
+//         let mut res = fps![0; d];
+//         if offset.is_none() {
+//             if k == 0 {
+//                 res[0] += 1;
+//             }
+//             return res;
+//         }
+//         let offset = offset.unwrap();
+//         if self[offset].0 > 0 {
+//             let deg = self[offset].0;
+//             if k > (d - 1) / deg {
+//                 return res;
+//             }
+//             let g = Self(
+//                 self.iter()
+//                     .filter_map(|&(i, v)| (i >= deg).then(|| (i - deg, v)))
+//                     .collect(),
+//             );
+//             let t = g.pow(k, d - k * deg);
+//             for i in 0..d - k * deg {
+//                 res[k * deg + i] = t[i];
+//             }
+//             return res;
+//         }
+//         let mut inv = vec![StaticModInt::<P>::new(1); d + 1];
+//         let m = P as usize;
+//         for i in 2..=d {
+//             inv[i] = -inv[m % i] * (m / i);
+//         }
+//         res[0] = self[0].1.pow(k);
+//         let c = self[0].1.inv();
+//         for i in 1..d {
+//             for &(j, v) in self.iter().skip(1).filter(|&&(j, _)| i >= j) {
+//                 res[i] = res[i] + v * res[i - j] * (StaticModInt::<P>::new(k) * j - (i - j));
+//             }
+//             res[i] *= inv[i] * c;
+//         }
+//         res
+//     }
 
-    pub fn sqrt(&self, d: usize) -> Option<FormalPowerSeries<P>> {
-        if self.len() == 0 {
-            return Some(fps![0; d]);
-        }
-        let p = self[0].0;
-        if p & 1 != 0 {
-            return None;
-        } else if p / 2 >= d {
-            return Some(fps![0; d]);
-        }
-        let inv_f0 = self[0].1.inv();
-        let lz = p / 2;
-        let mut g = fps![0; d];
-        g[lz] = self[0].1.sqrt()?;
-        let k = StaticModInt::new(2).inv();
-        let mut inv = vec![StaticModInt::new(1); d];
-        let m = P as usize;
-        for i in 2..d {
-            inv[i] = -inv[m % i] * (m / i);
-        }
-        for i in 1..d - lz {
-            g[lz + i] = self
-                .iter()
-                .skip(1)
-                .filter_map(|&(j, v)| (j - p <= i).then(|| (j - p, v)))
-                .map(|(j, v)| v * g[lz + i - j] * (k * j - (i - j)))
-                .sum::<StaticModInt<P>>()
-                * inv[i]
-                * inv_f0;
-        }
-        Some(g)
-    }
-}
+//     pub fn sqrt(&self, d: usize) -> Option<FormalPowerSeries<P>> {
+//         if self.len() == 0 {
+//             return Some(fps![0; d]);
+//         }
+//         let p = self[0].0;
+//         if p & 1 != 0 {
+//             return None;
+//         } else if p / 2 >= d {
+//             return Some(fps![0; d]);
+//         }
+//         let inv_f0 = self[0].1.inv();
+//         let lz = p / 2;
+//         let mut g = fps![0; d];
+//         g[lz] = self[0].1.sqrt()?;
+//         let k = StaticModInt::new(2).inv();
+//         let mut inv = vec![StaticModInt::new(1); d];
+//         let m = P as usize;
+//         for i in 2..d {
+//             inv[i] = -inv[m % i] * (m / i);
+//         }
+//         for i in 1..d - lz {
+//             g[lz + i] = self
+//                 .iter()
+//                 .skip(1)
+//                 .filter_map(|&(j, v)| (j - p <= i).then(|| (j - p, v)))
+//                 .map(|(j, v)| v * g[lz + i - j] * (k * j - (i - j)))
+//                 .sum::<StaticModInt<P>>()
+//                 * inv[i]
+//                 * inv_f0;
+//         }
+//         Some(g)
+//     }
+// }
 
 impl<const P: u32> Debug for FormalPowerSeries<P> {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
@@ -516,11 +516,11 @@ impl<const P: u32> Display for FormalPowerSeries<P> {
     }
 }
 
-impl<const P: u32> Debug for SparseFormalPowerSeries<P> {
-    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        f.write_fmt(format_args!("{:?}", &self.0))
-    }
-}
+// impl<const P: u32> Debug for SparseFormalPowerSeries<P> {
+//     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+//         f.write_fmt(format_args!("{:?}", &self.0))
+//     }
+// }
 
 impl<const P: u32> Deref for FormalPowerSeries<P> {
     type Target = Vec<StaticModInt<P>>;
@@ -529,12 +529,12 @@ impl<const P: u32> Deref for FormalPowerSeries<P> {
     }
 }
 
-impl<const P: u32> Deref for SparseFormalPowerSeries<P> {
-    type Target = Vec<(usize, StaticModInt<P>)>;
-    fn deref(&self) -> &Self::Target {
-        &self.0
-    }
-}
+// impl<const P: u32> Deref for SparseFormalPowerSeries<P> {
+//     type Target = Vec<(usize, StaticModInt<P>)>;
+//     fn deref(&self) -> &Self::Target {
+//         &self.0
+//     }
+// }
 
 impl<const P: u32> DerefMut for FormalPowerSeries<P> {
     fn deref_mut(&mut self) -> &mut Self::Target {
@@ -542,11 +542,11 @@ impl<const P: u32> DerefMut for FormalPowerSeries<P> {
     }
 }
 
-impl<const P: u32> DerefMut for SparseFormalPowerSeries<P> {
-    fn deref_mut(&mut self) -> &mut Self::Target {
-        &mut self.0
-    }
-}
+// impl<const P: u32> DerefMut for SparseFormalPowerSeries<P> {
+//     fn deref_mut(&mut self) -> &mut Self::Target {
+//         &mut self.0
+//     }
+// }
 
 impl<const P: u32> From<Vec<StaticModInt<P>>> for FormalPowerSeries<P> {
     fn from(v: Vec<StaticModInt<P>>) -> Self {
@@ -554,30 +554,30 @@ impl<const P: u32> From<Vec<StaticModInt<P>>> for FormalPowerSeries<P> {
     }
 }
 
-impl<const P: u32> From<Vec<(usize, StaticModInt<P>)>> for SparseFormalPowerSeries<P> {
-    fn from(v: Vec<(usize, StaticModInt<P>)>) -> Self {
-        Self(v)
-    }
-}
+// impl<const P: u32> From<Vec<(usize, StaticModInt<P>)>> for SparseFormalPowerSeries<P> {
+//     fn from(v: Vec<(usize, StaticModInt<P>)>) -> Self {
+//         Self(v)
+//     }
+// }
 
-impl<const P: u32> From<SparseFormalPowerSeries<P>> for FormalPowerSeries<P> {
-    fn from(f: SparseFormalPowerSeries<P>) -> Self {
-        if f.len() == 0 {
-            return fps![];
-        }
-        let mut g = FormalPowerSeries(vec![0.into(); f.last().unwrap().0 + 1]);
-        for (i, v) in f.0 {
-            g[i] += v;
-        }
-        g
-    }
-}
+// impl<const P: u32> From<SparseFormalPowerSeries<P>> for FormalPowerSeries<P> {
+//     fn from(f: SparseFormalPowerSeries<P>) -> Self {
+//         if f.len() == 0 {
+//             return fps![];
+//         }
+//         let mut g = FormalPowerSeries(vec![0.into(); f.last().unwrap().0 + 1]);
+//         for (i, v) in f.0 {
+//             g[i] += v;
+//         }
+//         g
+//     }
+// }
 
-impl<const P: u32> From<FormalPowerSeries<P>> for SparseFormalPowerSeries<P> {
-    fn from(f: FormalPowerSeries<P>) -> Self {
-        Self(f.0.into_iter().enumerate().collect())
-    }
-}
+// impl<const P: u32> From<FormalPowerSeries<P>> for SparseFormalPowerSeries<P> {
+//     fn from(f: FormalPowerSeries<P>) -> Self {
+//         Self(f.0.into_iter().enumerate().collect())
+//     }
+// }
 
 impl<const P: u32> Neg for FormalPowerSeries<P> {
     type Output = Self;
@@ -589,15 +589,15 @@ impl<const P: u32> Neg for FormalPowerSeries<P> {
     }
 }
 
-impl<const P: u32> Neg for SparseFormalPowerSeries<P> {
-    type Output = Self;
-    fn neg(mut self) -> Self::Output {
-        for (_, v) in self.iter_mut() {
-            *v = -*v;
-        }
-        self
-    }
-}
+// impl<const P: u32> Neg for SparseFormalPowerSeries<P> {
+//     type Output = Self;
+//     fn neg(mut self) -> Self::Output {
+//         for (_, v) in self.iter_mut() {
+//             *v = -*v;
+//         }
+//         self
+//     }
+// }
 
 impl<const P: u32> Neg for &FormalPowerSeries<P> {
     type Output = FormalPowerSeries<P>;
@@ -606,12 +606,12 @@ impl<const P: u32> Neg for &FormalPowerSeries<P> {
     }
 }
 
-impl<const P: u32> Neg for &SparseFormalPowerSeries<P> {
-    type Output = SparseFormalPowerSeries<P>;
-    fn neg(self) -> Self::Output {
-        -self.clone()
-    }
-}
+// impl<const P: u32> Neg for &SparseFormalPowerSeries<P> {
+//     type Output = SparseFormalPowerSeries<P>;
+//     fn neg(self) -> Self::Output {
+//         -self.clone()
+//     }
+// }
 
 impl<const P: u32> MulAssign<StaticModInt<P>> for FormalPowerSeries<P> {
     fn mul_assign(&mut self, rhs: StaticModInt<P>) {
@@ -621,13 +621,13 @@ impl<const P: u32> MulAssign<StaticModInt<P>> for FormalPowerSeries<P> {
     }
 }
 
-impl<const P: u32> MulAssign<StaticModInt<P>> for SparseFormalPowerSeries<P> {
-    fn mul_assign(&mut self, rhs: StaticModInt<P>) {
-        for (_, v) in self.iter_mut() {
-            *v *= rhs;
-        }
-    }
-}
+// impl<const P: u32> MulAssign<StaticModInt<P>> for SparseFormalPowerSeries<P> {
+//     fn mul_assign(&mut self, rhs: StaticModInt<P>) {
+//         for (_, v) in self.iter_mut() {
+//             *v *= rhs;
+//         }
+//     }
+// }
 
 impl<const P: u32> DivAssign<StaticModInt<P>> for FormalPowerSeries<P> {
     fn div_assign(&mut self, rhs: StaticModInt<P>) {
@@ -635,11 +635,11 @@ impl<const P: u32> DivAssign<StaticModInt<P>> for FormalPowerSeries<P> {
     }
 }
 
-impl<const P: u32> DivAssign<StaticModInt<P>> for SparseFormalPowerSeries<P> {
-    fn div_assign(&mut self, rhs: StaticModInt<P>) {
-        *self *= rhs.inv();
-    }
-}
+// impl<const P: u32> DivAssign<StaticModInt<P>> for SparseFormalPowerSeries<P> {
+//     fn div_assign(&mut self, rhs: StaticModInt<P>) {
+//         *self *= rhs.inv();
+//     }
+// }
 
 impl<const P: u32> AddAssign<Self> for FormalPowerSeries<P> {
     fn add_assign(&mut self, rhs: Self) {
@@ -650,50 +650,50 @@ impl<const P: u32> AddAssign<Self> for FormalPowerSeries<P> {
     }
 }
 
-impl<const P: u32> AddAssign<Self> for SparseFormalPowerSeries<P> {
-    fn add_assign(&mut self, rhs: Self) {
-        let mut res = sfps![];
-        let n = self.len();
-        let m = rhs.len();
-        let mut i = 0;
-        let mut j = 0;
-        while i < n && j < m {
-            if j == m {
-                res.push(self[i]);
-                i += 1;
-            } else if i == n {
-                res.push(rhs[j]);
-                j += 1;
-            } else if self[i].0 == rhs[j].0 {
-                res.push((self[i].0, self[i].1 + rhs[j].1));
-                i += 1;
-                j += 1;
-            } else if self[i].0 < rhs[j].0 {
-                res.push(self[i]);
-                i += 1;
-            } else {
-                res.push(rhs[j]);
-                j += 1;
-            }
-        }
-        *self = res;
-    }
-}
+// impl<const P: u32> AddAssign<Self> for SparseFormalPowerSeries<P> {
+//     fn add_assign(&mut self, rhs: Self) {
+//         let mut res = sfps![];
+//         let n = self.len();
+//         let m = rhs.len();
+//         let mut i = 0;
+//         let mut j = 0;
+//         while i < n && j < m {
+//             if j == m {
+//                 res.push(self[i]);
+//                 i += 1;
+//             } else if i == n {
+//                 res.push(rhs[j]);
+//                 j += 1;
+//             } else if self[i].0 == rhs[j].0 {
+//                 res.push((self[i].0, self[i].1 + rhs[j].1));
+//                 i += 1;
+//                 j += 1;
+//             } else if self[i].0 < rhs[j].0 {
+//                 res.push(self[i]);
+//                 i += 1;
+//             } else {
+//                 res.push(rhs[j]);
+//                 j += 1;
+//             }
+//         }
+//         *self = res;
+//     }
+// }
 
-impl<const P: u32> AddAssign<SparseFormalPowerSeries<P>> for FormalPowerSeries<P> {
-    fn add_assign(&mut self, rhs: SparseFormalPowerSeries<P>) {
-        if rhs.len() == 0 {
-            return;
-        }
-        let m = rhs.last().unwrap().0 + 1;
-        if self.len() < m {
-            self.resize(m, 0.into());
-        }
-        for (i, v) in rhs.0 {
-            self[i] += v;
-        }
-    }
-}
+// impl<const P: u32> AddAssign<SparseFormalPowerSeries<P>> for FormalPowerSeries<P> {
+//     fn add_assign(&mut self, rhs: SparseFormalPowerSeries<P>) {
+//         if rhs.len() == 0 {
+//             return;
+//         }
+//         let m = rhs.last().unwrap().0 + 1;
+//         if self.len() < m {
+//             self.resize(m, 0.into());
+//         }
+//         for (i, v) in rhs.0 {
+//             self[i] += v;
+//         }
+//     }
+// }
 
 impl<const P: u32> SubAssign<Self> for FormalPowerSeries<P> {
     fn sub_assign(&mut self, rhs: Self) {
@@ -704,17 +704,17 @@ impl<const P: u32> SubAssign<Self> for FormalPowerSeries<P> {
     }
 }
 
-impl<const P: u32> SubAssign<Self> for SparseFormalPowerSeries<P> {
-    fn sub_assign(&mut self, rhs: Self) {
-        *self += -rhs;
-    }
-}
+// impl<const P: u32> SubAssign<Self> for SparseFormalPowerSeries<P> {
+//     fn sub_assign(&mut self, rhs: Self) {
+//         *self += -rhs;
+//     }
+// }
 
-impl<const P: u32> SubAssign<SparseFormalPowerSeries<P>> for FormalPowerSeries<P> {
-    fn sub_assign(&mut self, rhs: SparseFormalPowerSeries<P>) {
-        *self += -rhs;
-    }
-}
+// impl<const P: u32> SubAssign<SparseFormalPowerSeries<P>> for FormalPowerSeries<P> {
+//     fn sub_assign(&mut self, rhs: SparseFormalPowerSeries<P>) {
+//         *self += -rhs;
+//     }
+// }
 
 impl<const P: u32> MulAssign<Self> for FormalPowerSeries<P> {
     fn mul_assign(&mut self, rhs: Self) {
@@ -728,38 +728,38 @@ impl<const P: u32> MulAssign<Self> for FormalPowerSeries<P> {
     }
 }
 
-impl<const P: u32> MulAssign<Self> for SparseFormalPowerSeries<P> {
-    fn mul_assign(&mut self, rhs: Self) {
-        self.0 = self
-            .0
-            .drain(..)
-            .map(|(i, x)| rhs.iter().map(move |(j, y)| (i + j, x * y)))
-            .flatten()
-            .collect::<Vec<_>>();
-        self.normalize();
-    }
-}
+// impl<const P: u32> MulAssign<Self> for SparseFormalPowerSeries<P> {
+//     fn mul_assign(&mut self, rhs: Self) {
+//         self.0 = self
+//             .0
+//             .drain(..)
+//             .map(|(i, x)| rhs.iter().map(move |(j, y)| (i + j, x * y)))
+//             .flatten()
+//             .collect::<Vec<_>>();
+//         self.normalize();
+//     }
+// }
 
-impl<const P: u32> MulAssign<SparseFormalPowerSeries<P>> for FormalPowerSeries<P> {
-    fn mul_assign(&mut self, rhs: SparseFormalPowerSeries<P>) {
-        if self.len() == 0 || rhs.len() == 0 {
-            self.clear();
-            return;
-        }
-        let n = self.len();
-        self.resize(n + rhs.last().unwrap().0, 0.into());
-        let c = if rhs[0].0 == 0 { rhs[0].1 } else { 0.into() };
-        for i in (0..n).rev() {
-            for &(j, v) in rhs.iter().rev() {
-                if j == 0 {
-                    continue;
-                }
-                self[i + j] = self[i + j] + self[i] * v;
-            }
-            self[i] *= c;
-        }
-    }
-}
+// impl<const P: u32> MulAssign<SparseFormalPowerSeries<P>> for FormalPowerSeries<P> {
+//     fn mul_assign(&mut self, rhs: SparseFormalPowerSeries<P>) {
+//         if self.len() == 0 || rhs.len() == 0 {
+//             self.clear();
+//             return;
+//         }
+//         let n = self.len();
+//         self.resize(n + rhs.last().unwrap().0, 0.into());
+//         let c = if rhs[0].0 == 0 { rhs[0].1 } else { 0.into() };
+//         for i in (0..n).rev() {
+//             for &(j, v) in rhs.iter().rev() {
+//                 if j == 0 {
+//                     continue;
+//                 }
+//                 self[i + j] = self[i + j] + self[i] * v;
+//             }
+//             self[i] *= c;
+//         }
+//     }
+// }
 
 impl<const P: u32> DivAssign<Self> for FormalPowerSeries<P> {
     fn div_assign(&mut self, mut g: Self) {
@@ -798,19 +798,19 @@ impl<const P: u32> DivAssign<Self> for FormalPowerSeries<P> {
     }
 }
 
-impl<const P: u32> DivAssign<SparseFormalPowerSeries<P>> for FormalPowerSeries<P> {
-    fn div_assign(&mut self, mut rhs: SparseFormalPowerSeries<P>) {
-        assert_eq!(rhs[0].0, 0);
-        let c = rhs[0].1.inv();
-        self.iter_mut().for_each(|v| *v *= c);
-        rhs.iter_mut().for_each(|(_, v)| *v *= c);
-        for i in 0..self.len() {
-            for &(j, v) in rhs.iter().filter(|&&(j, _)| j > 0 && i >= j) {
-                self[i] = self[i] - self[i - j] * v;
-            }
-        }
-    }
-}
+// impl<const P: u32> DivAssign<SparseFormalPowerSeries<P>> for FormalPowerSeries<P> {
+//     fn div_assign(&mut self, mut rhs: SparseFormalPowerSeries<P>) {
+//         assert_eq!(rhs[0].0, 0);
+//         let c = rhs[0].1.inv();
+//         self.iter_mut().for_each(|v| *v *= c);
+//         rhs.iter_mut().for_each(|(_, v)| *v *= c);
+//         for i in 0..self.len() {
+//             for &(j, v) in rhs.iter().filter(|&&(j, _)| j > 0 && i >= j) {
+//                 self[i] = self[i] - self[i - j] * v;
+//             }
+//         }
+//     }
+// }
 
 impl<const P: u32> RemAssign<Self> for FormalPowerSeries<P> {
     fn rem_assign(&mut self, rhs: Self) {
@@ -825,11 +825,11 @@ impl<const P: u32> ShlAssign<usize> for FormalPowerSeries<P> {
     }
 }
 
-impl<const P: u32> ShlAssign<usize> for SparseFormalPowerSeries<P> {
-    fn shl_assign(&mut self, rhs: usize) {
-        self.iter_mut().for_each(|(i, _)| *i += rhs);
-    }
-}
+// impl<const P: u32> ShlAssign<usize> for SparseFormalPowerSeries<P> {
+//     fn shl_assign(&mut self, rhs: usize) {
+//         self.iter_mut().for_each(|(i, _)| *i += rhs);
+//     }
+// }
 
 impl<const P: u32> ShrAssign<usize> for FormalPowerSeries<P> {
     fn shr_assign(&mut self, rhs: usize) {
@@ -837,15 +837,15 @@ impl<const P: u32> ShrAssign<usize> for FormalPowerSeries<P> {
     }
 }
 
-impl<const P: u32> ShrAssign<usize> for SparseFormalPowerSeries<P> {
-    fn shr_assign(&mut self, rhs: usize) {
-        self.0 = self
-            .0
-            .drain(..)
-            .filter_map(|(i, v)| (i >= rhs).then(|| (i - rhs, v)))
-            .collect();
-    }
-}
+// impl<const P: u32> ShrAssign<usize> for SparseFormalPowerSeries<P> {
+//     fn shr_assign(&mut self, rhs: usize) {
+//         self.0 = self
+//             .0
+//             .drain(..)
+//             .filter_map(|(i, v)| (i >= rhs).then(|| (i - rhs, v)))
+//             .collect();
+//     }
+// }
 
 macro_rules! impl_ops {
     ($(
@@ -904,15 +904,15 @@ impl_ops! {
     FormalPowerSeries<P>, FormalPowerSeries<P>, Rem, RemAssign, rem, rem_assign,
     FormalPowerSeries<P>, usize, Shl, ShlAssign, shl, shl_assign,
     FormalPowerSeries<P>, usize, Shr, ShrAssign, shr, shr_assign,
-    SparseFormalPowerSeries<P>, StaticModInt<P>, Mul, MulAssign, mul, mul_assign,
-    SparseFormalPowerSeries<P>, StaticModInt<P>, Div, DivAssign, div, div_assign,
-    SparseFormalPowerSeries<P>, SparseFormalPowerSeries<P>, Add, AddAssign, add, add_assign,
-    SparseFormalPowerSeries<P>, SparseFormalPowerSeries<P>, Sub, SubAssign, sub, sub_assign,
-    SparseFormalPowerSeries<P>, SparseFormalPowerSeries<P>, Mul, MulAssign, mul, mul_assign,
-    SparseFormalPowerSeries<P>, usize, Shl, ShlAssign, shl, shl_assign,
-    SparseFormalPowerSeries<P>, usize, Shr, ShrAssign, shr, shr_assign,
-    FormalPowerSeries<P>, SparseFormalPowerSeries<P>, Add, AddAssign, add, add_assign,
-    FormalPowerSeries<P>, SparseFormalPowerSeries<P>, Sub, SubAssign, sub, sub_assign,
-    FormalPowerSeries<P>, SparseFormalPowerSeries<P>, Mul, MulAssign, mul, mul_assign,
-    FormalPowerSeries<P>, SparseFormalPowerSeries<P>, Div, DivAssign, div, div_assign,
+    // SparseFormalPowerSeries<P>, StaticModInt<P>, Mul, MulAssign, mul, mul_assign,
+    // SparseFormalPowerSeries<P>, StaticModInt<P>, Div, DivAssign, div, div_assign,
+    // SparseFormalPowerSeries<P>, SparseFormalPowerSeries<P>, Add, AddAssign, add, add_assign,
+    // SparseFormalPowerSeries<P>, SparseFormalPowerSeries<P>, Sub, SubAssign, sub, sub_assign,
+    // SparseFormalPowerSeries<P>, SparseFormalPowerSeries<P>, Mul, MulAssign, mul, mul_assign,
+    // SparseFormalPowerSeries<P>, usize, Shl, ShlAssign, shl, shl_assign,
+    // SparseFormalPowerSeries<P>, usize, Shr, ShrAssign, shr, shr_assign,
+    // FormalPowerSeries<P>, SparseFormalPowerSeries<P>, Add, AddAssign, add, add_assign,
+    // FormalPowerSeries<P>, SparseFormalPowerSeries<P>, Sub, SubAssign, sub, sub_assign,
+    // FormalPowerSeries<P>, SparseFormalPowerSeries<P>, Mul, MulAssign, mul, mul_assign,
+    // FormalPowerSeries<P>, SparseFormalPowerSeries<P>, Div, DivAssign, div, div_assign,
 }
