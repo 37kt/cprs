@@ -1,39 +1,39 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: crates/algebraic/algebraic/src/lib.rs
     title: crates/algebraic/algebraic/src/lib.rs
   - icon: ':heavy_check_mark:'
     path: crates/data-structure/heavy-light-decomposition/src/lib.rs
     title: crates/data-structure/heavy-light-decomposition/src/lib.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: crates/data-structure/segment-tree/src/lib.rs
     title: crates/data-structure/segment-tree/src/lib.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: crates/graph/graph/src/lib.rs
     title: crates/graph/graph/src/lib.rs
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/vertex_add_path_sum/src/main.rs
     title: verify/vertex_add_path_sum/src/main.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/vertex_add_subtree_sum/src/main.rs
     title: verify/vertex_add_subtree_sum/src/main.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/vertex_set_path_composite/src/main.rs
     title: verify/vertex_set_path_composite/src/main.rs
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: rs
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     links: []
-  bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.11.4/x64/lib/python3.11/site-packages/onlinejudge_verify/documentation/build.py\"\
+  bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.11.5/x64/lib/python3.11/site-packages/onlinejudge_verify/documentation/build.py\"\
     , line 71, in _render_source_code_stat\n    bundled_code = language.bundle(stat.path,\
     \ basedir=basedir, options={'include_paths': [basedir]}).decode()\n          \
     \         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\
-    \  File \"/opt/hostedtoolcache/Python/3.11.4/x64/lib/python3.11/site-packages/onlinejudge_verify/languages/rust.py\"\
+    \  File \"/opt/hostedtoolcache/Python/3.11.5/x64/lib/python3.11/site-packages/onlinejudge_verify/languages/rust.py\"\
     , line 288, in bundle\n    raise NotImplementedError\nNotImplementedError\n"
   code: "use std::marker::PhantomData;\n\nuse algebraic::Monoid;\nuse graph::Graph;\n\
     use heavy_light_decomposition::HeavyLightDecomposition;\nuse segment_tree::SegmentTree;\n\
@@ -89,11 +89,11 @@ data:
   path: crates/data-structure/tree-query/src/lib.rs
   requiredBy: []
   timestamp: '2023-05-17 16:30:46+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
+  - verify/vertex_set_path_composite/src/main.rs
   - verify/vertex_add_path_sum/src/main.rs
   - verify/vertex_add_subtree_sum/src/main.rs
-  - verify/vertex_set_path_composite/src/main.rs
 documentation_of: crates/data-structure/tree-query/src/lib.rs
 layout: document
 redirect_from:

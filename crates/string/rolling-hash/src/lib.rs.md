@@ -1,10 +1,10 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: crates/math/modint61/src/lib.rs
     title: crates/math/modint61/src/lib.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: crates/math/nimber/src/lib.rs
     title: crates/math/nimber/src/lib.rs
   - icon: ':warning:'
@@ -12,22 +12,22 @@ data:
     title: crates/misc/random/src/lib.rs
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/suffixarray_rolling_hash/src/main.rs
     title: verify/suffixarray_rolling_hash/src/main.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/zalgorithm_rolling_hash/src/main.rs
     title: verify/zalgorithm_rolling_hash/src/main.rs
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: rs
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     links: []
-  bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.11.4/x64/lib/python3.11/site-packages/onlinejudge_verify/documentation/build.py\"\
+  bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.11.5/x64/lib/python3.11/site-packages/onlinejudge_verify/documentation/build.py\"\
     , line 71, in _render_source_code_stat\n    bundled_code = language.bundle(stat.path,\
     \ basedir=basedir, options={'include_paths': [basedir]}).decode()\n          \
     \         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\
-    \  File \"/opt/hostedtoolcache/Python/3.11.4/x64/lib/python3.11/site-packages/onlinejudge_verify/languages/rust.py\"\
+    \  File \"/opt/hostedtoolcache/Python/3.11.5/x64/lib/python3.11/site-packages/onlinejudge_verify/languages/rust.py\"\
     , line 288, in bundle\n    raise NotImplementedError\nNotImplementedError\n"
   code: "use std::{\n    cmp::Ordering,\n    marker::PhantomData,\n    ops::{Add,\
     \ Bound, Mul, Neg, RangeBounds},\n};\n\nuse modint61::ModInt61;\nuse nimber::Nimber;\n\
@@ -59,34 +59,34 @@ data:
     \ n + 1];\n        for i in 0..n {\n            hs[i + 1] = hs[i] * base + s[i].into();\n\
     \            pw[i + 1] = pw[i] * base;\n        }\n        Self {\n          \
     \  s,\n            hs: hs.into_boxed_slice(),\n            pw: pw.into_boxed_slice(),\n\
-    \        }\n    }\n\n    pub fn len(&self) -> usize {\n        self.s.len()\n\
-    \    }\n\n    pub fn get(&self, index: impl RangeBounds<usize>) -> H {\n     \
-    \   let (l, r) = range_to_pair(index, self.len());\n        self.hs[l] * -self.pw[r\
-    \ - l] + self.hs[r]\n    }\n\n    pub fn lcp(\n        &self,\n        index1:\
-    \ impl RangeBounds<usize>,\n        other: &Self,\n        index2: impl RangeBounds<usize>,\n\
-    \    ) -> usize {\n        let (l1, r1) = range_to_pair(index1, self.len());\n\
-    \        let (l2, r2) = range_to_pair(index2, other.len());\n        let n = (r1\
-    \ - l1).min(r2 - l2);\n        let mut ok = 0;\n        let mut ng = n + 1;\n\
-    \        while ok + 1 < ng {\n            let md = (ok + ng) / 2;\n          \
-    \  if self.get(l1..l1 + md) == other.get(l2..l2 + md) {\n                ok =\
-    \ md;\n            } else {\n                ng = md;\n            }\n       \
-    \ }\n        ok\n    }\n}\n\nimpl<'a, C, H> RollingHash<'a, C, H>\nwhere\n   \
-    \ C: Copy + Eq + Into<H> + Ord,\n    H: Copy + Eq + From<u64> + Add<Output = H>\
-    \ + Mul<Output = H> + Neg<Output = H>,\n    GenBaseImpl<H>: GenBase<H = H>,\n\
-    {\n    pub fn compare(\n        &self,\n        index1: impl RangeBounds<usize>,\n\
-    \        other: &Self,\n        index2: impl RangeBounds<usize>,\n    ) -> Ordering\
+    \        }\n    }\n\n    pub fn base() -> H {\n        GenBaseImpl::<H>::base()\n\
+    \    }\n\n    pub fn len(&self) -> usize {\n        self.s.len()\n    }\n\n  \
+    \  pub fn get(&self, index: impl RangeBounds<usize>) -> H {\n        let (l, r)\
+    \ = range_to_pair(index, self.len());\n        self.hs[l] * -self.pw[r - l] +\
+    \ self.hs[r]\n    }\n\n    pub fn lcp(\n        &self,\n        index1: impl RangeBounds<usize>,\n\
+    \        other: &Self,\n        index2: impl RangeBounds<usize>,\n    ) -> usize\
     \ {\n        let (l1, r1) = range_to_pair(index1, self.len());\n        let (l2,\
-    \ r2) = range_to_pair(index2, other.len());\n        let n = self.lcp(l1..r1,\
-    \ other, l2..r2);\n        if l1 + n == r1 {\n            if l2 + n == r2 {\n\
-    \                Ordering::Equal\n            } else {\n                Ordering::Less\n\
-    \            }\n        } else if l2 + n == r2 {\n            Ordering::Greater\n\
-    \        } else {\n            self.s[l1 + n].cmp(&other.s[l2 + n])\n        }\n\
-    \    }\n}\n\nfn range_to_pair(range: impl RangeBounds<usize>, n: usize) -> (usize,\
-    \ usize) {\n    let l = match range.start_bound() {\n        Bound::Included(&l)\
-    \ => l,\n        Bound::Excluded(&l) => l + 1,\n        Bound::Unbounded => 0,\n\
-    \    };\n    let r = match range.end_bound() {\n        Bound::Included(&r) =>\
-    \ r + 1,\n        Bound::Excluded(&r) => r,\n        Bound::Unbounded => n,\n\
-    \    };\n    (l, r)\n}\n"
+    \ r2) = range_to_pair(index2, other.len());\n        let n = (r1 - l1).min(r2\
+    \ - l2);\n        let mut ok = 0;\n        let mut ng = n + 1;\n        while\
+    \ ok + 1 < ng {\n            let md = (ok + ng) / 2;\n            if self.get(l1..l1\
+    \ + md) == other.get(l2..l2 + md) {\n                ok = md;\n            } else\
+    \ {\n                ng = md;\n            }\n        }\n        ok\n    }\n}\n\
+    \nimpl<'a, C, H> RollingHash<'a, C, H>\nwhere\n    C: Copy + Eq + Into<H> + Ord,\n\
+    \    H: Copy + Eq + From<u64> + Add<Output = H> + Mul<Output = H> + Neg<Output\
+    \ = H>,\n    GenBaseImpl<H>: GenBase<H = H>,\n{\n    pub fn compare(\n       \
+    \ &self,\n        index1: impl RangeBounds<usize>,\n        other: &Self,\n  \
+    \      index2: impl RangeBounds<usize>,\n    ) -> Ordering {\n        let (l1,\
+    \ r1) = range_to_pair(index1, self.len());\n        let (l2, r2) = range_to_pair(index2,\
+    \ other.len());\n        let n = self.lcp(l1..r1, other, l2..r2);\n        if\
+    \ l1 + n == r1 {\n            if l2 + n == r2 {\n                Ordering::Equal\n\
+    \            } else {\n                Ordering::Less\n            }\n       \
+    \ } else if l2 + n == r2 {\n            Ordering::Greater\n        } else {\n\
+    \            self.s[l1 + n].cmp(&other.s[l2 + n])\n        }\n    }\n}\n\nfn range_to_pair(range:\
+    \ impl RangeBounds<usize>, n: usize) -> (usize, usize) {\n    let l = match range.start_bound()\
+    \ {\n        Bound::Included(&l) => l,\n        Bound::Excluded(&l) => l + 1,\n\
+    \        Bound::Unbounded => 0,\n    };\n    let r = match range.end_bound() {\n\
+    \        Bound::Included(&r) => r + 1,\n        Bound::Excluded(&r) => r,\n  \
+    \      Bound::Unbounded => n,\n    };\n    (l, r)\n}\n"
   dependsOn:
   - crates/math/modint61/src/lib.rs
   - crates/math/nimber/src/lib.rs
@@ -94,8 +94,8 @@ data:
   isVerificationFile: false
   path: crates/string/rolling-hash/src/lib.rs
   requiredBy: []
-  timestamp: '2023-05-20 14:50:51+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2023-09-16 20:40:18+09:00'
+  verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - verify/suffixarray_rolling_hash/src/main.rs
   - verify/zalgorithm_rolling_hash/src/main.rs

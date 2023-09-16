@@ -5,19 +5,19 @@ data:
   - icon: ':heavy_check_mark:'
     path: crates/data-structure/heavy-light-decomposition/src/lib.rs
     title: crates/data-structure/heavy-light-decomposition/src/lib.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: crates/data-structure/tree-query/src/lib.rs
     title: crates/data-structure/tree-query/src/lib.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: crates/graph/strongly-connected-components/src/lib.rs
     title: crates/graph/strongly-connected-components/src/lib.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: crates/math/two-satisfiability/src/lib.rs
     title: crates/math/two-satisfiability/src/lib.rs
   - icon: ':warning:'
     path: crates/tree/centroid-decomposition/src/lib.rs
     title: crates/tree/centroid-decomposition/src/lib.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: crates/tree/re-rooting-dp/src/lib.rs
     title: crates/tree/re-rooting-dp/src/lib.rs
   _extendedVerifiedWith:
@@ -27,31 +27,34 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/lca/src/main.rs
     title: verify/lca/src/main.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/scc/src/main.rs
     title: verify/scc/src/main.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
+    path: verify/tree_path_composite_sum/src/main.rs
+    title: verify/tree_path_composite_sum/src/main.rs
+  - icon: ':x:'
     path: verify/vertex_add_path_sum/src/main.rs
     title: verify/vertex_add_path_sum/src/main.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/vertex_add_subtree_sum/src/main.rs
     title: verify/vertex_add_subtree_sum/src/main.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/vertex_set_path_composite/src/main.rs
     title: verify/vertex_set_path_composite/src/main.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/yuki1333/src/main.rs
     title: verify/yuki1333/src/main.rs
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: rs
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
-  bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.11.4/x64/lib/python3.11/site-packages/onlinejudge_verify/documentation/build.py\"\
+  bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.11.5/x64/lib/python3.11/site-packages/onlinejudge_verify/documentation/build.py\"\
     , line 71, in _render_source_code_stat\n    bundled_code = language.bundle(stat.path,\
     \ basedir=basedir, options={'include_paths': [basedir]}).decode()\n          \
     \         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\
-    \  File \"/opt/hostedtoolcache/Python/3.11.4/x64/lib/python3.11/site-packages/onlinejudge_verify/languages/rust.py\"\
+    \  File \"/opt/hostedtoolcache/Python/3.11.5/x64/lib/python3.11/site-packages/onlinejudge_verify/languages/rust.py\"\
     , line 288, in bundle\n    raise NotImplementedError\nNotImplementedError\n"
   code: "#[derive(Clone)]\npub struct Graph<V, E>\nwhere\n    V: Clone,\n    E: Clone,\n\
     {\n    vertices: Vec<V>,\n    head: Vec<usize>,\n    next: Vec<usize>,\n    edges:\
@@ -98,19 +101,20 @@ data:
   - crates/math/two-satisfiability/src/lib.rs
   - crates/data-structure/heavy-light-decomposition/src/lib.rs
   - crates/data-structure/tree-query/src/lib.rs
+  - crates/graph/strongly-connected-components/src/lib.rs
   - crates/tree/centroid-decomposition/src/lib.rs
   - crates/tree/re-rooting-dp/src/lib.rs
-  - crates/graph/strongly-connected-components/src/lib.rs
   timestamp: '2023-05-17 16:30:46+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
-  - verify/vertex_add_path_sum/src/main.rs
-  - verify/vertex_add_subtree_sum/src/main.rs
+  - verify/jump_on_tree/src/main.rs
   - verify/vertex_set_path_composite/src/main.rs
+  - verify/lca/src/main.rs
   - verify/scc/src/main.rs
   - verify/yuki1333/src/main.rs
-  - verify/lca/src/main.rs
-  - verify/jump_on_tree/src/main.rs
+  - verify/vertex_add_path_sum/src/main.rs
+  - verify/tree_path_composite_sum/src/main.rs
+  - verify/vertex_add_subtree_sum/src/main.rs
 documentation_of: crates/graph/graph/src/lib.rs
 layout: document
 redirect_from:

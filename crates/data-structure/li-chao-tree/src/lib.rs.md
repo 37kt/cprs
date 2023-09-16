@@ -6,19 +6,19 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/line_add_get_min_offline/src/main.rs
     title: verify/line_add_get_min_offline/src/main.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/segment_add_get_min_offline/src/main.rs
     title: verify/segment_add_get_min_offline/src/main.rs
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: rs
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
-  bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.11.4/x64/lib/python3.11/site-packages/onlinejudge_verify/documentation/build.py\"\
+  bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.11.5/x64/lib/python3.11/site-packages/onlinejudge_verify/documentation/build.py\"\
     , line 71, in _render_source_code_stat\n    bundled_code = language.bundle(stat.path,\
     \ basedir=basedir, options={'include_paths': [basedir]}).decode()\n          \
     \         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\
-    \  File \"/opt/hostedtoolcache/Python/3.11.4/x64/lib/python3.11/site-packages/onlinejudge_verify/languages/rust.py\"\
+    \  File \"/opt/hostedtoolcache/Python/3.11.5/x64/lib/python3.11/site-packages/onlinejudge_verify/languages/rust.py\"\
     , line 288, in bundle\n    raise NotImplementedError\nNotImplementedError\n"
   code: "use std::{\n    mem::swap,\n    ops::{Add, Bound, Mul, RangeBounds},\n};\n\
     \n#[derive(Clone, Copy)]\nstruct Line<T>(T, T)\nwhere\n    T: Copy + Add<Output\
@@ -80,10 +80,10 @@ data:
   path: crates/data-structure/li-chao-tree/src/lib.rs
   requiredBy: []
   timestamp: '2023-05-16 16:25:17+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
-  - verify/line_add_get_min_offline/src/main.rs
   - verify/segment_add_get_min_offline/src/main.rs
+  - verify/line_add_get_min_offline/src/main.rs
 documentation_of: crates/data-structure/li-chao-tree/src/lib.rs
 layout: document
 redirect_from:

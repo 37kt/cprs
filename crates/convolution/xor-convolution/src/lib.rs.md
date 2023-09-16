@@ -11,14 +11,14 @@ data:
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
-  bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.11.4/x64/lib/python3.11/site-packages/onlinejudge_verify/documentation/build.py\"\
+  bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.11.5/x64/lib/python3.11/site-packages/onlinejudge_verify/documentation/build.py\"\
     , line 71, in _render_source_code_stat\n    bundled_code = language.bundle(stat.path,\
     \ basedir=basedir, options={'include_paths': [basedir]}).decode()\n          \
     \         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\
-    \  File \"/opt/hostedtoolcache/Python/3.11.4/x64/lib/python3.11/site-packages/onlinejudge_verify/languages/rust.py\"\
+    \  File \"/opt/hostedtoolcache/Python/3.11.5/x64/lib/python3.11/site-packages/onlinejudge_verify/languages/rust.py\"\
     , line 288, in bundle\n    raise NotImplementedError\nNotImplementedError\n"
   code: "use std::ops::{Add, Div, DivAssign, MulAssign, Sub};\n\npub fn hadamard<T>(a:\
-    \ &mut Vec<T>, inv: bool)\nwhere\n    T: Clone\n        + Default\n        + Eq\n\
+    \ &mut [T], inv: bool)\nwhere\n    T: Clone\n        + Default\n        + Eq\n\
     \        + Add<Output = T>\n        + Sub<Output = T>\n        + From<usize>\n\
     \        + MulAssign\n        + Div<Output = T>\n        + DivAssign,\n{\n   \
     \ let log = a.len().trailing_zeros();\n    assert_eq!(1 << log, a.len());\n  \
@@ -41,7 +41,7 @@ data:
   isVerificationFile: false
   path: crates/convolution/xor-convolution/src/lib.rs
   requiredBy: []
-  timestamp: '2023-04-14 16:37:19+09:00'
+  timestamp: '2023-05-06 16:57:25+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/bitwise_xor_convolution/src/main.rs

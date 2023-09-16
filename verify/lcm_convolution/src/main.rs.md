@@ -13,11 +13,11 @@ data:
     PROBLEM: https://judge.yosupo.jp/problem/lcm_convolution
     links:
     - https://judge.yosupo.jp/problem/lcm_convolution
-  bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.11.4/x64/lib/python3.11/site-packages/onlinejudge_verify/documentation/build.py\"\
+  bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.11.5/x64/lib/python3.11/site-packages/onlinejudge_verify/documentation/build.py\"\
     , line 71, in _render_source_code_stat\n    bundled_code = language.bundle(stat.path,\
     \ basedir=basedir, options={'include_paths': [basedir]}).decode()\n          \
     \         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\
-    \  File \"/opt/hostedtoolcache/Python/3.11.4/x64/lib/python3.11/site-packages/onlinejudge_verify/languages/rust.py\"\
+    \  File \"/opt/hostedtoolcache/Python/3.11.5/x64/lib/python3.11/site-packages/onlinejudge_verify/languages/rust.py\"\
     , line 288, in bundle\n    raise NotImplementedError\nNotImplementedError\n"
   code: "// verification-helper: PROBLEM https://judge.yosupo.jp/problem/lcm_convolution\n\
     \nuse ac_library::ModInt998244353 as Mint;\nuse itertools::Itertools;\nuse lcm_convolution::lcm_convolution;\n\
@@ -30,7 +30,7 @@ data:
   isVerificationFile: true
   path: verify/lcm_convolution/src/main.rs
   requiredBy: []
-  timestamp: '2023-04-21 13:06:23+09:00'
+  timestamp: '2023-05-06 16:57:25+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/lcm_convolution/src/main.rs

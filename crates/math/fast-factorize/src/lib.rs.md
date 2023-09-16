@@ -9,19 +9,19 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/factorize/src/main.rs
     title: verify/factorize/src/main.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/primality_test/src/main.rs
     title: verify/primality_test/src/main.rs
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: rs
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
-  bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.11.4/x64/lib/python3.11/site-packages/onlinejudge_verify/documentation/build.py\"\
+  bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.11.5/x64/lib/python3.11/site-packages/onlinejudge_verify/documentation/build.py\"\
     , line 71, in _render_source_code_stat\n    bundled_code = language.bundle(stat.path,\
     \ basedir=basedir, options={'include_paths': [basedir]}).decode()\n          \
     \         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\
-    \  File \"/opt/hostedtoolcache/Python/3.11.4/x64/lib/python3.11/site-packages/onlinejudge_verify/languages/rust.py\"\
+    \  File \"/opt/hostedtoolcache/Python/3.11.5/x64/lib/python3.11/site-packages/onlinejudge_verify/languages/rust.py\"\
     , line 288, in bundle\n    raise NotImplementedError\nNotImplementedError\n"
   code: "use std::{\n    convert::{TryFrom, TryInto},\n    fmt::Debug,\n    mem::swap,\n\
     };\n\nuse montgomery_modint::MontgomeryModInt;\n\npub fn is_prime(n: impl TryInto<u64,\
@@ -81,10 +81,10 @@ data:
   path: crates/math/fast-factorize/src/lib.rs
   requiredBy: []
   timestamp: '2023-06-13 17:07:21+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
-  - verify/factorize/src/main.rs
   - verify/primality_test/src/main.rs
+  - verify/factorize/src/main.rs
 documentation_of: crates/math/fast-factorize/src/lib.rs
 layout: document
 redirect_from:
