@@ -33,11 +33,14 @@ where
 
     pub fn build(&mut self) {
         assert!(!self.built);
-        for i in 1..self.v.len() {
-            for j in 1..self.v[i].len() {
-                self.v[i][j] =
-                    self.v[i][j].clone() + self.v[i][j - 1].clone() + self.v[i - 1][j].clone()
-                        - self.v[i - 1][j - 1].clone();
+        for i in 0..self.v.len() - 1 {
+            for j in 0..self.v[0].len() {
+                self.v[i + 1][j] = self.v[i + 1][j].clone() + self.v[i][j].clone();
+            }
+        }
+        for i in 0..self.v.len() {
+            for j in 0..self.v[0].len() - 1 {
+                self.v[i][j + 1] = self.v[i][j + 1].clone() + self.v[i][j].clone();
             }
         }
         self.built = true;
@@ -77,7 +80,7 @@ where
 
     pub fn imos_get(&self, i: usize, j: usize) -> T {
         assert!(self.built);
-        self.v[i + 1][j + 1].clone()
+        self.v[i][j].clone()
     }
 }
 

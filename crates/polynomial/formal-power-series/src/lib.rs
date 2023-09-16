@@ -48,9 +48,8 @@ impl<const P: u32> FormalPowerSeries<P> {
         }
     }
 
-    pub fn pre(mut self, d: usize) -> Self {
-        self.truncate(d);
-        self
+    pub fn pre(&self, d: usize) -> Self {
+        Self(self.0[0..d.min(self.len())].to_vec())
     }
 
     pub fn eval(&self, x: StaticModInt<P>) -> StaticModInt<P> {
@@ -126,11 +125,11 @@ impl<const P: u32> FormalPowerSeries<P> {
         } else {
             let mut res = fps![self[0].inv()];
             for k in 0.. {
+                let k = 1 << k;
                 if k >= d {
                     break;
                 }
-                let k = 1 << k;
-                res = (&res + &res - &res * &res * res.pre(k * 2)).pre(k * 2);
+                res = (&res + &res - &res * &res * self.pre(k * 2)).pre(k * 2);
             }
             res.truncate(d);
             res

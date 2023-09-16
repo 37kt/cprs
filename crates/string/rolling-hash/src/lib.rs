@@ -93,6 +93,10 @@ where
         }
     }
 
+    pub fn base() -> H {
+        GenBaseImpl::<H>::base()
+    }
+
     pub fn len(&self) -> usize {
         self.s.len()
     }
