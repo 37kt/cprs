@@ -4,7 +4,7 @@ data:
   - icon: ':x:'
     path: crates/math/modint61/src/lib.rs
     title: crates/math/modint61/src/lib.rs
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: crates/math/nimber/src/lib.rs
     title: crates/math/nimber/src/lib.rs
   - icon: ':warning:'

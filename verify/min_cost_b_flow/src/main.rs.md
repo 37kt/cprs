@@ -1,14 +1,14 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: crates/graph/min-cost-b-flow/src/lib.rs
     title: crates/graph/min-cost-b-flow/src/lib.rs
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: rs
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     PROBLEM: https://judge.yosupo.jp/problem/min_cost_b_flow
     links:
@@ -41,7 +41,7 @@ data:
   path: verify/min_cost_b_flow/src/main.rs
   requiredBy: []
   timestamp: '2023-05-23 15:04:49+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/min_cost_b_flow/src/main.rs
 layout: document

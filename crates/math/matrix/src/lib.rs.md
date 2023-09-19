@@ -6,15 +6,15 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/inverse_matrix/src/main.rs
     title: verify/inverse_matrix/src/main.rs
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/matrix_det/src/main.rs
     title: verify/matrix_det/src/main.rs
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/matrix_product/src/main.rs
     title: verify/matrix_product/src/main.rs
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: rs
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.11.5/x64/lib/python3.11/site-packages/onlinejudge_verify/documentation/build.py\"\
@@ -142,7 +142,7 @@ data:
   path: crates/math/matrix/src/lib.rs
   requiredBy: []
   timestamp: '2023-06-13 17:39:04+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/matrix_product/src/main.rs
   - verify/inverse_matrix/src/main.rs

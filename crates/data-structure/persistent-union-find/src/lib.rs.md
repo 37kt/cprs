@@ -6,12 +6,12 @@ data:
     title: crates/data-structure/persistent-array/src/lib.rs
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/persistent_unionfind/src/main.rs
     title: verify/persistent_unionfind/src/main.rs
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: rs
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.11.5/x64/lib/python3.11/site-packages/onlinejudge_verify/documentation/build.py\"\
@@ -42,7 +42,7 @@ data:
   path: crates/data-structure/persistent-union-find/src/lib.rs
   requiredBy: []
   timestamp: '2023-05-08 17:12:04+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/persistent_unionfind/src/main.rs
 documentation_of: crates/data-structure/persistent-union-find/src/lib.rs

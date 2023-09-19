@@ -14,7 +14,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: crates/polynomial/bostan-mori/src/lib.rs
     title: crates/polynomial/bostan-mori/src/lib.rs
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: crates/polynomial/polynomial-interpolation/src/lib.rs
     title: crates/polynomial/polynomial-interpolation/src/lib.rs
   - icon: ':x:'
@@ -33,16 +33,16 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/log_of_formal_power_series/src/main.rs
     title: verify/log_of_formal_power_series/src/main.rs
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/multipoint_evaluation/src/main.rs
     title: verify/multipoint_evaluation/src/main.rs
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/polynomial_interpolation/src/main.rs
     title: verify/polynomial_interpolation/src/main.rs
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/polynomial_taylor_shift/src/main.rs
     title: verify/polynomial_taylor_shift/src/main.rs
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/pow_of_formal_power_series/src/main.rs
     title: verify/pow_of_formal_power_series/src/main.rs
   - icon: ':x:'

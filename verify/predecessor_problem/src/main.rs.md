@@ -1,14 +1,14 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: crates/data-structure/w-ary-tree-set/src/lib.rs
     title: crates/data-structure/w-ary-tree-set/src/lib.rs
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: rs
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     PROBLEM: https://judge.yosupo.jp/problem/predecessor_problem
     links:
@@ -40,7 +40,7 @@ data:
   path: verify/predecessor_problem/src/main.rs
   requiredBy: []
   timestamp: '2023-05-13 18:34:42+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/predecessor_problem/src/main.rs
 layout: document

@@ -8,19 +8,19 @@ data:
   - icon: ':x:'
     path: crates/data-structure/fenwick-tree/src/lib.rs
     title: crates/data-structure/fenwick-tree/src/lib.rs
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: crates/data-structure/lazy-segment-tree/src/lib.rs
     title: crates/data-structure/lazy-segment-tree/src/lib.rs
   - icon: ':heavy_check_mark:'
     path: crates/data-structure/link-cut-tree/src/lib.rs
     title: crates/data-structure/link-cut-tree/src/lib.rs
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: crates/data-structure/range-tree/src/lib.rs
     title: crates/data-structure/range-tree/src/lib.rs
-  - icon: ':x:'
+  - icon: ':question:'
     path: crates/data-structure/segment-tree/src/lib.rs
     title: crates/data-structure/segment-tree/src/lib.rs
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: crates/data-structure/sliding-window-aggregation/src/lib.rs
     title: crates/data-structure/sliding-window-aggregation/src/lib.rs
   - icon: ':warning:'
@@ -35,7 +35,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: crates/math/discrete-logarithm/src/lib.rs
     title: crates/math/discrete-logarithm/src/lib.rs
-  - icon: ':x:'
+  - icon: ':question:'
     path: crates/string/suffix-array/src/lib.rs
     title: crates/string/suffix-array/src/lib.rs
   - icon: ':x:'
@@ -57,16 +57,16 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/dynamic_tree_vertex_set_path_composite/src/main.rs
     title: verify/dynamic_tree_vertex_set_path_composite/src/main.rs
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/point_add_range_sum/src/main.rs
     title: verify/point_add_range_sum/src/main.rs
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/point_add_rectangle_sum/src/main.rs
     title: verify/point_add_rectangle_sum/src/main.rs
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/queue_operate_all_composite/src/main.rs
     title: verify/queue_operate_all_composite/src/main.rs
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/range_affine_range_sum/src/main.rs
     title: verify/range_affine_range_sum/src/main.rs
   - icon: ':x:'

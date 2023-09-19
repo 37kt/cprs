@@ -5,7 +5,7 @@ data:
     path: crates/algebraic/algebraic/src/lib.rs
     title: crates/algebraic/algebraic/src/lib.rs
   _extendedRequiredBy:
-  - icon: ':x:'
+  - icon: ':question:'
     path: crates/string/suffix-array/src/lib.rs
     title: crates/string/suffix-array/src/lib.rs
   _extendedVerifiedWith:

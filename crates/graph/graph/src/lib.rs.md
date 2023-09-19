@@ -8,6 +8,9 @@ data:
   - icon: ':x:'
     path: crates/data-structure/tree-query/src/lib.rs
     title: crates/data-structure/tree-query/src/lib.rs
+  - icon: ':warning:'
+    path: crates/graph/complement-graph-bfs/src/lib.rs
+    title: crates/graph/complement-graph-bfs/src/lib.rs
   - icon: ':x:'
     path: crates/graph/strongly-connected-components/src/lib.rs
     title: crates/graph/strongly-connected-components/src/lib.rs
@@ -102,6 +105,7 @@ data:
   - crates/data-structure/heavy-light-decomposition/src/lib.rs
   - crates/data-structure/tree-query/src/lib.rs
   - crates/graph/strongly-connected-components/src/lib.rs
+  - crates/graph/complement-graph-bfs/src/lib.rs
   - crates/tree/centroid-decomposition/src/lib.rs
   - crates/tree/re-rooting-dp/src/lib.rs
   timestamp: '2023-05-17 16:30:46+09:00'

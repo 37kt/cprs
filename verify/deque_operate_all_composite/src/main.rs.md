@@ -4,7 +4,7 @@ data:
   - icon: ':question:'
     path: crates/algebraic/algebraic/src/lib.rs
     title: crates/algebraic/algebraic/src/lib.rs
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: crates/data-structure/sliding-window-aggregation/src/lib.rs
     title: crates/data-structure/sliding-window-aggregation/src/lib.rs
   _extendedRequiredBy: []

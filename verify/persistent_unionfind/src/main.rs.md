@@ -1,14 +1,14 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: crates/data-structure/persistent-union-find/src/lib.rs
     title: crates/data-structure/persistent-union-find/src/lib.rs
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: rs
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     PROBLEM: https://judge.yosupo.jp/problem/persistent_unionfind
     links:
@@ -34,7 +34,7 @@ data:
   path: verify/persistent_unionfind/src/main.rs
   requiredBy: []
   timestamp: '2023-05-08 17:12:04+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/persistent_unionfind/src/main.rs
 layout: document

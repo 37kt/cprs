@@ -6,12 +6,12 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/assignment/src/main.rs
     title: verify/assignment/src/main.rs
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/min_cost_b_flow/src/main.rs
     title: verify/min_cost_b_flow/src/main.rs
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: rs
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links:
     - https://misawa.github.io/others/flow/lets_use_capacity_scaling.html
@@ -161,7 +161,7 @@ data:
   path: crates/graph/min-cost-b-flow/src/lib.rs
   requiredBy: []
   timestamp: '2023-05-23 15:04:49+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/assignment/src/main.rs
   - verify/min_cost_b_flow/src/main.rs

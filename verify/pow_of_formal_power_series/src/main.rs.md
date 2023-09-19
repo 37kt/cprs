@@ -9,9 +9,9 @@ data:
     title: crates/polynomial/formal-power-series/src/lib.rs
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: rs
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     PROBLEM: https://judge.yosupo.jp/problem/pow_of_formal_power_series
     links:
@@ -35,7 +35,7 @@ data:
   path: verify/pow_of_formal_power_series/src/main.rs
   requiredBy: []
   timestamp: '2023-09-16 20:40:18+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/pow_of_formal_power_series/src/main.rs
 layout: document

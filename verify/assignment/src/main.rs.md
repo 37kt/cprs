@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: crates/graph/min-cost-b-flow/src/lib.rs
     title: crates/graph/min-cost-b-flow/src/lib.rs
   _extendedRequiredBy: []
