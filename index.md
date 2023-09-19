@@ -98,7 +98,7 @@ data:
       title: crates/data-structure/lazy-segment-tree/src/lib.rs
   - name: crates/data-structure/li-chao-tree/src
     pages:
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: crates/data-structure/li-chao-tree/src/lib.rs
       title: crates/data-structure/li-chao-tree/src/lib.rs
   - name: crates/data-structure/li-chao-tree-dynamic/src
@@ -574,7 +574,7 @@ data:
       title: verify/segment_add_get_min/src/main.rs
   - name: verify/segment_add_get_min_offline/src
     pages:
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verify/segment_add_get_min_offline/src/main.rs
       title: verify/segment_add_get_min_offline/src/main.rs
   - name: verify/shift_of_sampling_points_of_polynomial/src
