@@ -2,10 +2,10 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: crates/data-structure/disjoint-sparse-table/src/lib.rs
     title: crates/data-structure/disjoint-sparse-table/src/lib.rs
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: crates/data-structure/fenwick-tree/src/lib.rs
     title: crates/data-structure/fenwick-tree/src/lib.rs
   - icon: ':heavy_check_mark:'
@@ -17,7 +17,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: crates/data-structure/range-tree/src/lib.rs
     title: crates/data-structure/range-tree/src/lib.rs
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: crates/data-structure/segment-tree/src/lib.rs
     title: crates/data-structure/segment-tree/src/lib.rs
   - icon: ':heavy_check_mark:'
@@ -29,16 +29,16 @@ data:
   - icon: ':heavy_check_mark:'
     path: crates/data-structure/splay-tree/src/lib.rs
     title: crates/data-structure/splay-tree/src/lib.rs
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: crates/data-structure/tree-query/src/lib.rs
     title: crates/data-structure/tree-query/src/lib.rs
   - icon: ':heavy_check_mark:'
     path: crates/math/discrete-logarithm/src/lib.rs
     title: crates/math/discrete-logarithm/src/lib.rs
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: crates/string/suffix-array/src/lib.rs
     title: crates/string/suffix-array/src/lib.rs
-  - icon: ':x:'
+  - icon: ':question:'
     path: crates/tree/re-rooting-dp/src/lib.rs
     title: crates/tree/re-rooting-dp/src/lib.rs
   _extendedVerifiedWith:
@@ -72,22 +72,22 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/range_reverse_range_sum/src/main.rs
     title: verify/range_reverse_range_sum/src/main.rs
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/static_range_inversions_query/src/main.rs
     title: verify/static_range_inversions_query/src/main.rs
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/staticrmq/src/main.rs
     title: verify/staticrmq/src/main.rs
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/tree_path_composite_sum/src/main.rs
     title: verify/tree_path_composite_sum/src/main.rs
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/vertex_add_path_sum/src/main.rs
     title: verify/vertex_add_path_sum/src/main.rs
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/vertex_add_subtree_sum/src/main.rs
     title: verify/vertex_add_subtree_sum/src/main.rs
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/vertex_set_path_composite/src/main.rs
     title: verify/vertex_set_path_composite/src/main.rs
   - icon: ':x:'

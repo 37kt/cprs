@@ -1,14 +1,14 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: crates/data-structure/wavelet-matrix/src/lib.rs
     title: crates/data-structure/wavelet-matrix/src/lib.rs
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: rs
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     PROBLEM: https://judge.yosupo.jp/problem/static_range_frequency
     links:
@@ -31,7 +31,7 @@ data:
   path: verify/static_range_frequency/src/main.rs
   requiredBy: []
   timestamp: '2023-04-22 21:59:33+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/static_range_frequency/src/main.rs
 layout: document

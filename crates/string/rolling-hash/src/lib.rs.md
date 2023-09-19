@@ -12,7 +12,7 @@ data:
     title: crates/misc/random/src/lib.rs
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/suffixarray_rolling_hash/src/main.rs
     title: verify/suffixarray_rolling_hash/src/main.rs
   - icon: ':x:'
@@ -20,7 +20,7 @@ data:
     title: verify/zalgorithm_rolling_hash/src/main.rs
   _isVerificationFailed: true
   _pathExtension: rs
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.11.5/x64/lib/python3.11/site-packages/onlinejudge_verify/documentation/build.py\"\
@@ -95,7 +95,7 @@ data:
   path: crates/string/rolling-hash/src/lib.rs
   requiredBy: []
   timestamp: '2023-09-16 20:40:18+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - verify/suffixarray_rolling_hash/src/main.rs
   - verify/zalgorithm_rolling_hash/src/main.rs

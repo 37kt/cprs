@@ -7,7 +7,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: crates/convolution/convolution-ntt-friendly/src/lib.rs
     title: crates/convolution/convolution-ntt-friendly/src/lib.rs
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: crates/number-theory/modint/src/lib.rs
     title: crates/number-theory/modint/src/lib.rs
   _extendedRequiredBy:
@@ -17,7 +17,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: crates/polynomial/polynomial-interpolation/src/lib.rs
     title: crates/polynomial/polynomial-interpolation/src/lib.rs
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: crates/polynomial/shift-of-sampling-points/src/lib.rs
     title: crates/polynomial/shift-of-sampling-points/src/lib.rs
   _extendedVerifiedWith:
@@ -45,15 +45,15 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/pow_of_formal_power_series/src/main.rs
     title: verify/pow_of_formal_power_series/src/main.rs
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/shift_of_sampling_points_of_polynomial/src/main.rs
     title: verify/shift_of_sampling_points_of_polynomial/src/main.rs
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/sqrt_of_formal_power_series/src/main.rs
     title: verify/sqrt_of_formal_power_series/src/main.rs
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: rs
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.11.5/x64/lib/python3.11/site-packages/onlinejudge_verify/documentation/build.py\"\
@@ -438,7 +438,7 @@ data:
   - crates/polynomial/shift-of-sampling-points/src/lib.rs
   - crates/polynomial/bostan-mori/src/lib.rs
   timestamp: '2023-09-16 20:40:18+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/inv_of_formal_power_series/src/main.rs
   - verify/multipoint_evaluation/src/main.rs

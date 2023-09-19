@@ -4,7 +4,7 @@ data:
   - icon: ':x:'
     path: crates/math/modint61/src/lib.rs
     title: crates/math/modint61/src/lib.rs
-  - icon: ':x:'
+  - icon: ':question:'
     path: crates/string/rolling-hash/src/lib.rs
     title: crates/string/rolling-hash/src/lib.rs
   _extendedRequiredBy: []
