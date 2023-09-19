@@ -238,7 +238,7 @@ data:
       title: crates/math/matrix/src/lib.rs
   - name: crates/math/modint61/src
     pages:
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: crates/math/modint61/src/lib.rs
       title: crates/math/modint61/src/lib.rs
   - name: crates/math/montgomery-modint/src
@@ -313,7 +313,7 @@ data:
       title: crates/sequence/run-length-encoding/src/lib.rs
   - name: crates/string/rolling-hash/src
     pages:
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: crates/string/rolling-hash/src/lib.rs
       title: crates/string/rolling-hash/src/lib.rs
   - name: crates/string/suffix-array/src
@@ -323,7 +323,7 @@ data:
       title: crates/string/suffix-array/src/lib.rs
   - name: crates/string/z-algorithm/src
     pages:
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: crates/string/z-algorithm/src/lib.rs
       title: crates/string/z-algorithm/src/lib.rs
   - name: crates/tree/centroid-decomposition/src
@@ -674,12 +674,12 @@ data:
       title: verify/yuki1737/src/main.rs
   - name: verify/zalgorithm/src
     pages:
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verify/zalgorithm/src/main.rs
       title: verify/zalgorithm/src/main.rs
   - name: verify/zalgorithm_rolling_hash/src
     pages:
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verify/zalgorithm_rolling_hash/src/main.rs
       title: verify/zalgorithm_rolling_hash/src/main.rs
 layout: toppage

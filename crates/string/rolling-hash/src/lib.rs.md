@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: crates/math/modint61/src/lib.rs
     title: crates/math/modint61/src/lib.rs
   - icon: ':heavy_check_mark:'
@@ -15,12 +15,12 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/suffixarray_rolling_hash/src/main.rs
     title: verify/suffixarray_rolling_hash/src/main.rs
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/zalgorithm_rolling_hash/src/main.rs
     title: verify/zalgorithm_rolling_hash/src/main.rs
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: rs
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.11.5/x64/lib/python3.11/site-packages/onlinejudge_verify/documentation/build.py\"\
@@ -95,7 +95,7 @@ data:
   path: crates/string/rolling-hash/src/lib.rs
   requiredBy: []
   timestamp: '2023-09-16 20:40:18+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/suffixarray_rolling_hash/src/main.rs
   - verify/zalgorithm_rolling_hash/src/main.rs
