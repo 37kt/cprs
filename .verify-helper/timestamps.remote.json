@@ -62,5 +62,7 @@
 "verify/unionfind/src/main.rs": "2023-07-10 15:59:10 +0900",
 "verify/vertex_add_path_sum/src/main.rs": "2023-05-17 16:30:46 +0900",
 "verify/vertex_add_subtree_sum/src/main.rs": "2023-05-17 16:30:46 +0900",
-"verify/vertex_set_path_composite/src/main.rs": "2023-05-17 16:30:46 +0900"
+"verify/vertex_set_path_composite/src/main.rs": "2023-05-17 16:30:46 +0900",
+"verify/zalgorithm/src/main.rs": "2023-04-27 14:07:11 +0900",
+"verify/zalgorithm_rolling_hash/src/main.rs": "2023-09-16 20:40:18 +0900"
 }
