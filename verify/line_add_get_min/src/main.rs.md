@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: crates/data-structure/li-chao-tree-dynamic/src/lib.rs
     title: crates/data-structure/li-chao-tree-dynamic/src/lib.rs
   _extendedRequiredBy: []

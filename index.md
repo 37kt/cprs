@@ -103,7 +103,7 @@ data:
       title: crates/data-structure/li-chao-tree/src/lib.rs
   - name: crates/data-structure/li-chao-tree-dynamic/src
     pages:
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: crates/data-structure/li-chao-tree-dynamic/src/lib.rs
       title: crates/data-structure/li-chao-tree-dynamic/src/lib.rs
   - name: crates/data-structure/link-cut-tree/src
@@ -153,7 +153,7 @@ data:
       title: crates/data-structure/slope-trick/src/lib.rs
   - name: crates/data-structure/splay-tree/src
     pages:
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: crates/data-structure/splay-tree/src/lib.rs
       title: crates/data-structure/splay-tree/src/lib.rs
   - name: crates/data-structure/splay-tree-internal/src
@@ -178,7 +178,7 @@ data:
       title: crates/data-structure/w-ary-tree-set/src/lib.rs
   - name: crates/data-structure/wavelet-matrix/src
     pages:
-    - icon: ':x:'
+    - icon: ':question:'
       path: crates/data-structure/wavelet-matrix/src/lib.rs
       title: crates/data-structure/wavelet-matrix/src/lib.rs
   - name: crates/graph/complement-graph-bfs/src
@@ -208,7 +208,7 @@ data:
       title: crates/graph/min-cost-b-flow/src/lib.rs
   - name: crates/graph/strongly-connected-components/src
     pages:
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: crates/graph/strongly-connected-components/src/lib.rs
       title: crates/graph/strongly-connected-components/src/lib.rs
   - name: crates/macros/chminmax/src
@@ -554,22 +554,22 @@ data:
       title: verify/range_chmin_chmax_add_range_sum/src/main.rs
   - name: verify/range_kth_smallest/src
     pages:
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verify/range_kth_smallest/src/main.rs
       title: verify/range_kth_smallest/src/main.rs
   - name: verify/range_reverse_range_sum/src
     pages:
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verify/range_reverse_range_sum/src/main.rs
       title: verify/range_reverse_range_sum/src/main.rs
   - name: verify/scc/src
     pages:
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verify/scc/src/main.rs
       title: verify/scc/src/main.rs
   - name: verify/segment_add_get_min/src
     pages:
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verify/segment_add_get_min/src/main.rs
       title: verify/segment_add_get_min/src/main.rs
   - name: verify/segment_add_get_min_offline/src

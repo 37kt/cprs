@@ -26,7 +26,7 @@ data:
   - icon: ':warning:'
     path: crates/data-structure/splay-tree-internal/src/lib.rs
     title: crates/data-structure/splay-tree-internal/src/lib.rs
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: crates/data-structure/splay-tree/src/lib.rs
     title: crates/data-structure/splay-tree/src/lib.rs
   - icon: ':x:'
@@ -69,7 +69,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/range_affine_range_sum/src/main.rs
     title: verify/range_affine_range_sum/src/main.rs
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/range_reverse_range_sum/src/main.rs
     title: verify/range_reverse_range_sum/src/main.rs
   - icon: ':x:'

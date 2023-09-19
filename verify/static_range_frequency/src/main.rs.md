@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':x:'
+  - icon: ':question:'
     path: crates/data-structure/wavelet-matrix/src/lib.rs
     title: crates/data-structure/wavelet-matrix/src/lib.rs
   _extendedRequiredBy: []

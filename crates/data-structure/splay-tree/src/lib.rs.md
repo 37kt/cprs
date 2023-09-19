@@ -12,12 +12,12 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/dynamic_sequence_range_affine_range_sum/src/main.rs
     title: verify/dynamic_sequence_range_affine_range_sum/src/main.rs
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/range_reverse_range_sum/src/main.rs
     title: verify/range_reverse_range_sum/src/main.rs
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: rs
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.11.5/x64/lib/python3.11/site-packages/onlinejudge_verify/documentation/build.py\"\
@@ -84,7 +84,7 @@ data:
   path: crates/data-structure/splay-tree/src/lib.rs
   requiredBy: []
   timestamp: '2023-08-25 17:13:17+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/dynamic_sequence_range_affine_range_sum/src/main.rs
   - verify/range_reverse_range_sum/src/main.rs
