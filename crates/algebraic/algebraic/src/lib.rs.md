@@ -38,7 +38,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: crates/string/suffix-array/src/lib.rs
     title: crates/string/suffix-array/src/lib.rs
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: crates/tree/re-rooting-dp/src/lib.rs
     title: crates/tree/re-rooting-dp/src/lib.rs
   _extendedVerifiedWith:
@@ -90,12 +90,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/vertex_set_path_composite/src/main.rs
     title: verify/vertex_set_path_composite/src/main.rs
-  - icon: ':x:'
-    path: verify/yuki1333/src/main.rs
-    title: verify/yuki1333/src/main.rs
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: rs
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.11.5/x64/lib/python3.11/site-packages/onlinejudge_verify/documentation/build.py\"\
@@ -144,7 +141,7 @@ data:
   - crates/string/suffix-array/src/lib.rs
   - crates/tree/re-rooting-dp/src/lib.rs
   timestamp: '2023-04-25 15:51:20+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/discrete_logarithm_mod/src/main.rs
   - verify/queue_operate_all_composite/src/main.rs
@@ -155,7 +152,6 @@ data:
   - verify/point_add_rectangle_sum/src/main.rs
   - verify/vertex_set_path_composite/src/main.rs
   - verify/staticrmq/src/main.rs
-  - verify/yuki1333/src/main.rs
   - verify/static_range_inversions_query/src/main.rs
   - verify/vertex_add_path_sum/src/main.rs
   - verify/point_add_range_sum/src/main.rs

@@ -20,7 +20,7 @@ data:
   - icon: ':warning:'
     path: crates/tree/centroid-decomposition/src/lib.rs
     title: crates/tree/centroid-decomposition/src/lib.rs
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: crates/tree/re-rooting-dp/src/lib.rs
     title: crates/tree/re-rooting-dp/src/lib.rs
   _extendedVerifiedWith:
@@ -45,12 +45,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/vertex_set_path_composite/src/main.rs
     title: verify/vertex_set_path_composite/src/main.rs
-  - icon: ':x:'
-    path: verify/yuki1333/src/main.rs
-    title: verify/yuki1333/src/main.rs
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: rs
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.11.5/x64/lib/python3.11/site-packages/onlinejudge_verify/documentation/build.py\"\
@@ -109,13 +106,12 @@ data:
   - crates/tree/centroid-decomposition/src/lib.rs
   - crates/tree/re-rooting-dp/src/lib.rs
   timestamp: '2023-05-17 16:30:46+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/jump_on_tree/src/main.rs
   - verify/vertex_set_path_composite/src/main.rs
   - verify/lca/src/main.rs
   - verify/scc/src/main.rs
-  - verify/yuki1333/src/main.rs
   - verify/vertex_add_path_sum/src/main.rs
   - verify/tree_path_composite_sum/src/main.rs
   - verify/vertex_add_subtree_sum/src/main.rs

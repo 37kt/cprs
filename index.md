@@ -3,7 +3,7 @@ data:
   libraryCategories:
   - name: crates/algebraic/algebraic/src
     pages:
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: crates/algebraic/algebraic/src/lib.rs
       title: crates/algebraic/algebraic/src/lib.rs
   - name: crates/algebraic/rational/src
@@ -188,7 +188,7 @@ data:
       title: crates/graph/complement-graph-bfs/src/lib.rs
   - name: crates/graph/graph/src
     pages:
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: crates/graph/graph/src/lib.rs
       title: crates/graph/graph/src/lib.rs
   - name: crates/graph/max-flow/src
@@ -253,7 +253,7 @@ data:
       title: crates/math/nimber/src/lib.rs
   - name: crates/math/prime-sieve/src
     pages:
-    - icon: ':x:'
+    - icon: ':warning:'
       path: crates/math/prime-sieve/src/lib.rs
       title: crates/math/prime-sieve/src/lib.rs
   - name: crates/math/two-satisfiability/src
@@ -333,7 +333,7 @@ data:
       title: crates/tree/centroid-decomposition/src/lib.rs
   - name: crates/tree/re-rooting-dp/src
     pages:
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: crates/tree/re-rooting-dp/src/lib.rs
       title: crates/tree/re-rooting-dp/src/lib.rs
   verificationCategories:
@@ -662,16 +662,6 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/vertex_set_path_composite/src/main.rs
       title: verify/vertex_set_path_composite/src/main.rs
-  - name: verify/yuki1333/src
-    pages:
-    - icon: ':x:'
-      path: verify/yuki1333/src/main.rs
-      title: verify/yuki1333/src/main.rs
-  - name: verify/yuki1737/src
-    pages:
-    - icon: ':x:'
-      path: verify/yuki1737/src/main.rs
-      title: verify/yuki1737/src/main.rs
   - name: verify/zalgorithm/src
     pages:
     - icon: ':heavy_check_mark:'
