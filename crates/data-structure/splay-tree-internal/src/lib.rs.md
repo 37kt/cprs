@@ -8,7 +8,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: crates/data-structure/link-cut-tree/src/lib.rs
     title: crates/data-structure/link-cut-tree/src/lib.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: crates/data-structure/splay-tree/src/lib.rs
     title: crates/data-structure/splay-tree/src/lib.rs
   _extendedVerifiedWith: []

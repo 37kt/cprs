@@ -5,16 +5,16 @@ data:
     path: crates/graph/graph/src/lib.rs
     title: crates/graph/graph/src/lib.rs
   _extendedRequiredBy:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: crates/math/two-satisfiability/src/lib.rs
     title: crates/math/two-satisfiability/src/lib.rs
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/scc/src/main.rs
     title: verify/scc/src/main.rs
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: rs
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     links: []
   bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.11.5/x64/lib/python3.11/site-packages/onlinejudge_verify/documentation/build.py\"\
@@ -59,7 +59,7 @@ data:
   requiredBy:
   - crates/math/two-satisfiability/src/lib.rs
   timestamp: '2023-05-17 16:30:46+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - verify/scc/src/main.rs
 documentation_of: crates/graph/strongly-connected-components/src/lib.rs

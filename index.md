@@ -13,7 +13,7 @@ data:
       title: crates/algebraic/rational/src/lib.rs
   - name: crates/algorithm/mo/src
     pages:
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: crates/algorithm/mo/src/lib.rs
       title: crates/algorithm/mo/src/lib.rs
   - name: crates/convolution/and-convolution/src
@@ -53,7 +53,7 @@ data:
       title: crates/convolution/or-convolution/src/lib.rs
   - name: crates/convolution/subset-convolution/src
     pages:
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: crates/convolution/subset-convolution/src/lib.rs
       title: crates/convolution/subset-convolution/src/lib.rs
   - name: crates/convolution/xor-convolution/src
@@ -68,12 +68,12 @@ data:
       title: crates/data-structure/cumulative-sum-2d/src/lib.rs
   - name: crates/data-structure/disjoint-sparse-table/src
     pages:
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: crates/data-structure/disjoint-sparse-table/src/lib.rs
       title: crates/data-structure/disjoint-sparse-table/src/lib.rs
   - name: crates/data-structure/fenwick-tree/src
     pages:
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: crates/data-structure/fenwick-tree/src/lib.rs
       title: crates/data-structure/fenwick-tree/src/lib.rs
   - name: crates/data-structure/heavy-light-decomposition/src
@@ -98,12 +98,12 @@ data:
       title: crates/data-structure/lazy-segment-tree/src/lib.rs
   - name: crates/data-structure/li-chao-tree/src
     pages:
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: crates/data-structure/li-chao-tree/src/lib.rs
       title: crates/data-structure/li-chao-tree/src/lib.rs
   - name: crates/data-structure/li-chao-tree-dynamic/src
     pages:
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: crates/data-structure/li-chao-tree-dynamic/src/lib.rs
       title: crates/data-structure/li-chao-tree-dynamic/src/lib.rs
   - name: crates/data-structure/link-cut-tree/src
@@ -133,12 +133,12 @@ data:
       title: crates/data-structure/rollback-union-find/src/lib.rs
   - name: crates/data-structure/segment-tree/src
     pages:
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: crates/data-structure/segment-tree/src/lib.rs
       title: crates/data-structure/segment-tree/src/lib.rs
   - name: crates/data-structure/segtree-beats/src
     pages:
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: crates/data-structure/segtree-beats/src/lib.rs
       title: crates/data-structure/segtree-beats/src/lib.rs
   - name: crates/data-structure/sliding-window-aggregation/src
@@ -153,7 +153,7 @@ data:
       title: crates/data-structure/slope-trick/src/lib.rs
   - name: crates/data-structure/splay-tree/src
     pages:
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: crates/data-structure/splay-tree/src/lib.rs
       title: crates/data-structure/splay-tree/src/lib.rs
   - name: crates/data-structure/splay-tree-internal/src
@@ -163,12 +163,12 @@ data:
       title: crates/data-structure/splay-tree-internal/src/lib.rs
   - name: crates/data-structure/tree-query/src
     pages:
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: crates/data-structure/tree-query/src/lib.rs
       title: crates/data-structure/tree-query/src/lib.rs
   - name: crates/data-structure/union-find/src
     pages:
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: crates/data-structure/union-find/src/lib.rs
       title: crates/data-structure/union-find/src/lib.rs
   - name: crates/data-structure/w-ary-tree-set/src
@@ -178,7 +178,7 @@ data:
       title: crates/data-structure/w-ary-tree-set/src/lib.rs
   - name: crates/data-structure/wavelet-matrix/src
     pages:
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: crates/data-structure/wavelet-matrix/src/lib.rs
       title: crates/data-structure/wavelet-matrix/src/lib.rs
   - name: crates/graph/complement-graph-bfs/src
@@ -208,7 +208,7 @@ data:
       title: crates/graph/min-cost-b-flow/src/lib.rs
   - name: crates/graph/strongly-connected-components/src
     pages:
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: crates/graph/strongly-connected-components/src/lib.rs
       title: crates/graph/strongly-connected-components/src/lib.rs
   - name: crates/macros/chminmax/src
@@ -228,7 +228,7 @@ data:
       title: crates/math/fast-factorize/src/lib.rs
   - name: crates/math/floor-sum/src
     pages:
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: crates/math/floor-sum/src/lib.rs
       title: crates/math/floor-sum/src/lib.rs
   - name: crates/math/matrix/src
@@ -238,7 +238,7 @@ data:
       title: crates/math/matrix/src/lib.rs
   - name: crates/math/modint61/src
     pages:
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: crates/math/modint61/src/lib.rs
       title: crates/math/modint61/src/lib.rs
   - name: crates/math/montgomery-modint/src
@@ -258,7 +258,7 @@ data:
       title: crates/math/prime-sieve/src/lib.rs
   - name: crates/math/two-satisfiability/src
     pages:
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: crates/math/two-satisfiability/src/lib.rs
       title: crates/math/two-satisfiability/src/lib.rs
   - name: crates/misc/bitutil/src
@@ -278,7 +278,7 @@ data:
       title: crates/number-theory/combination/src/lib.rs
   - name: crates/number-theory/modint/src
     pages:
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: crates/number-theory/modint/src/lib.rs
       title: crates/number-theory/modint/src/lib.rs
   - name: crates/polynomial/bostan-mori/src
@@ -288,7 +288,7 @@ data:
       title: crates/polynomial/bostan-mori/src/lib.rs
   - name: crates/polynomial/formal-power-series/src
     pages:
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: crates/polynomial/formal-power-series/src/lib.rs
       title: crates/polynomial/formal-power-series/src/lib.rs
   - name: crates/polynomial/polynomial-interpolation/src
@@ -298,7 +298,7 @@ data:
       title: crates/polynomial/polynomial-interpolation/src/lib.rs
   - name: crates/polynomial/shift-of-sampling-points/src
     pages:
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: crates/polynomial/shift-of-sampling-points/src/lib.rs
       title: crates/polynomial/shift-of-sampling-points/src/lib.rs
   - name: crates/sequence/mex/src
@@ -313,17 +313,17 @@ data:
       title: crates/sequence/run-length-encoding/src/lib.rs
   - name: crates/string/rolling-hash/src
     pages:
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: crates/string/rolling-hash/src/lib.rs
       title: crates/string/rolling-hash/src/lib.rs
   - name: crates/string/suffix-array/src
     pages:
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: crates/string/suffix-array/src/lib.rs
       title: crates/string/suffix-array/src/lib.rs
   - name: crates/string/z-algorithm/src
     pages:
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: crates/string/z-algorithm/src/lib.rs
       title: crates/string/z-algorithm/src/lib.rs
   - name: crates/tree/centroid-decomposition/src
@@ -333,14 +333,9 @@ data:
       title: crates/tree/centroid-decomposition/src/lib.rs
   - name: crates/tree/re-rooting-dp/src
     pages:
-    - icon: ':question:'
+    - icon: ':x:'
       path: crates/tree/re-rooting-dp/src/lib.rs
       title: crates/tree/re-rooting-dp/src/lib.rs
-  - name: verify/division_of_polynomials/src
-    pages:
-    - icon: ':warning:'
-      path: verify/division_of_polynomials/src/main.rs
-      title: verify/division_of_polynomials/src/main.rs
   verificationCategories:
   - name: verify/aplusb/src
     pages:
@@ -392,6 +387,11 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/discrete_logarithm_mod/src/main.rs
       title: verify/discrete_logarithm_mod/src/main.rs
+  - name: verify/division_of_polynomials/src
+    pages:
+    - icon: ':x:'
+      path: verify/division_of_polynomials/src/main.rs
+      title: verify/division_of_polynomials/src/main.rs
   - name: verify/dynamic_sequence_range_affine_range_sum/src
     pages:
     - icon: ':heavy_check_mark:'
@@ -549,117 +549,117 @@ data:
       title: verify/range_affine_range_sum/src/main.rs
   - name: verify/range_chmin_chmax_add_range_sum/src
     pages:
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: verify/range_chmin_chmax_add_range_sum/src/main.rs
       title: verify/range_chmin_chmax_add_range_sum/src/main.rs
   - name: verify/range_kth_smallest/src
     pages:
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: verify/range_kth_smallest/src/main.rs
       title: verify/range_kth_smallest/src/main.rs
   - name: verify/range_reverse_range_sum/src
     pages:
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: verify/range_reverse_range_sum/src/main.rs
       title: verify/range_reverse_range_sum/src/main.rs
   - name: verify/scc/src
     pages:
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: verify/scc/src/main.rs
       title: verify/scc/src/main.rs
   - name: verify/segment_add_get_min/src
     pages:
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: verify/segment_add_get_min/src/main.rs
       title: verify/segment_add_get_min/src/main.rs
   - name: verify/segment_add_get_min_offline/src
     pages:
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: verify/segment_add_get_min_offline/src/main.rs
       title: verify/segment_add_get_min_offline/src/main.rs
   - name: verify/shift_of_sampling_points_of_polynomial/src
     pages:
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: verify/shift_of_sampling_points_of_polynomial/src/main.rs
       title: verify/shift_of_sampling_points_of_polynomial/src/main.rs
   - name: verify/sqrt_mod/src
     pages:
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: verify/sqrt_mod/src/main.rs
       title: verify/sqrt_mod/src/main.rs
   - name: verify/sqrt_of_formal_power_series/src
     pages:
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: verify/sqrt_of_formal_power_series/src/main.rs
       title: verify/sqrt_of_formal_power_series/src/main.rs
   - name: verify/static_range_frequency/src
     pages:
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: verify/static_range_frequency/src/main.rs
       title: verify/static_range_frequency/src/main.rs
   - name: verify/static_range_inversions_query/src
     pages:
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: verify/static_range_inversions_query/src/main.rs
       title: verify/static_range_inversions_query/src/main.rs
   - name: verify/static_range_sum/src
     pages:
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: verify/static_range_sum/src/main.rs
       title: verify/static_range_sum/src/main.rs
   - name: verify/staticrmq/src
     pages:
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: verify/staticrmq/src/main.rs
       title: verify/staticrmq/src/main.rs
   - name: verify/subset_convolution/src
     pages:
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: verify/subset_convolution/src/main.rs
       title: verify/subset_convolution/src/main.rs
   - name: verify/suffixarray/src
     pages:
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: verify/suffixarray/src/main.rs
       title: verify/suffixarray/src/main.rs
   - name: verify/suffixarray_rolling_hash/src
     pages:
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: verify/suffixarray_rolling_hash/src/main.rs
       title: verify/suffixarray_rolling_hash/src/main.rs
   - name: verify/sum_of_floor_of_linear/src
     pages:
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: verify/sum_of_floor_of_linear/src/main.rs
       title: verify/sum_of_floor_of_linear/src/main.rs
   - name: verify/tree_path_composite_sum/src
     pages:
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: verify/tree_path_composite_sum/src/main.rs
       title: verify/tree_path_composite_sum/src/main.rs
   - name: verify/two_sat/src
     pages:
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: verify/two_sat/src/main.rs
       title: verify/two_sat/src/main.rs
   - name: verify/unionfind/src
     pages:
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: verify/unionfind/src/main.rs
       title: verify/unionfind/src/main.rs
   - name: verify/vertex_add_path_sum/src
     pages:
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: verify/vertex_add_path_sum/src/main.rs
       title: verify/vertex_add_path_sum/src/main.rs
   - name: verify/vertex_add_subtree_sum/src
     pages:
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: verify/vertex_add_subtree_sum/src/main.rs
       title: verify/vertex_add_subtree_sum/src/main.rs
   - name: verify/vertex_set_path_composite/src
     pages:
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: verify/vertex_set_path_composite/src/main.rs
       title: verify/vertex_set_path_composite/src/main.rs
   - name: verify/yuki1333/src
@@ -674,12 +674,12 @@ data:
       title: verify/yuki1737/src/main.rs
   - name: verify/zalgorithm/src
     pages:
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: verify/zalgorithm/src/main.rs
       title: verify/zalgorithm/src/main.rs
   - name: verify/zalgorithm_rolling_hash/src
     pages:
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: verify/zalgorithm_rolling_hash/src/main.rs
       title: verify/zalgorithm_rolling_hash/src/main.rs
 layout: toppage

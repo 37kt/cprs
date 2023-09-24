@@ -1,10 +1,10 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: crates/number-theory/modint/src/lib.rs
     title: crates/number-theory/modint/src/lib.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: crates/polynomial/formal-power-series/src/lib.rs
     title: crates/polynomial/formal-power-series/src/lib.rs
   _extendedRequiredBy: []
@@ -34,7 +34,7 @@ data:
   isVerificationFile: true
   path: verify/inv_of_formal_power_series/src/main.rs
   requiredBy: []
-  timestamp: '2023-09-16 20:40:18+09:00'
+  timestamp: '2023-09-24 09:08:17+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/inv_of_formal_power_series/src/main.rs

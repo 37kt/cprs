@@ -1,10 +1,10 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: crates/number-theory/modint/src/lib.rs
     title: crates/number-theory/modint/src/lib.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: crates/polynomial/formal-power-series/src/lib.rs
     title: crates/polynomial/formal-power-series/src/lib.rs
   _extendedRequiredBy: []
@@ -30,18 +30,18 @@ data:
     \    }\n    let m2 = 1 << 64 - (m - 1).leading_zeros();\n    let mut mul = vec![fps![1];\
     \ m2 + m2];\n    for i in 0..m {\n        mul[m2 + i] = fps![-xs[i], 1];\n   \
     \ }\n    for i in (1..m2).rev() {\n        mul[i] = &mul[i << 1 | 0] * &mul[i\
-    \ << 1 | 1];\n    }\n    let mut g = vec![fps![]; m2 + m2];\n    g[1] = mul[1].differential()\
-    \ % &mul[1];\n    for i in 2..m2 + m {\n        g[i] = &g[i >> 1] % &mul[i];\n\
-    \    }\n    for i in 0..m {\n        g[m2 + i] = fps![ys[i] / g[m2 + i][0]];\n\
-    \    }\n    for i in (1..m2).rev() {\n        g[i] = &g[i << 1] * &mul[i << 1\
-    \ | 1] + &g[i << 1 | 1] * &mul[i << 1];\n    }\n    g[1].clone()\n}\n"
+    \ << 1 | 1];\n    }\n    let mut g = vec![fps![]; m2 + m2];\n    g[1] = mul[1].differential().div_mod(&mul[1]).1;\n\
+    \    for i in 2..m2 + m {\n        g[i] = g[i >> 1].div_mod(&mul[i]).1;\n    }\n\
+    \    for i in 0..m {\n        g[m2 + i] = fps![ys[i] / g[m2 + i][0]];\n    }\n\
+    \    for i in (1..m2).rev() {\n        g[i] = &g[i << 1] * &mul[i << 1 | 1] +\
+    \ &g[i << 1 | 1] * &mul[i << 1];\n    }\n    g[1].clone()\n}\n"
   dependsOn:
   - crates/number-theory/modint/src/lib.rs
   - crates/polynomial/formal-power-series/src/lib.rs
   isVerificationFile: false
   path: crates/polynomial/polynomial-interpolation/src/lib.rs
   requiredBy: []
-  timestamp: '2023-09-16 20:40:18+09:00'
+  timestamp: '2023-09-24 09:08:17+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/polynomial_interpolation/src/main.rs

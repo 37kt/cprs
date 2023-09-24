@@ -17,13 +17,13 @@ data:
   - icon: ':heavy_check_mark:'
     path: crates/polynomial/bostan-mori/src/lib.rs
     title: crates/polynomial/bostan-mori/src/lib.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: crates/polynomial/formal-power-series/src/lib.rs
     title: crates/polynomial/formal-power-series/src/lib.rs
   - icon: ':heavy_check_mark:'
     path: crates/polynomial/polynomial-interpolation/src/lib.rs
     title: crates/polynomial/polynomial-interpolation/src/lib.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: crates/polynomial/shift-of-sampling-points/src/lib.rs
     title: crates/polynomial/shift-of-sampling-points/src/lib.rs
   _extendedVerifiedWith:
@@ -39,6 +39,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/convolution_mod_1000000007/src/main.rs
     title: verify/convolution_mod_1000000007/src/main.rs
+  - icon: ':x:'
+    path: verify/division_of_polynomials/src/main.rs
+    title: verify/division_of_polynomials/src/main.rs
   - icon: ':heavy_check_mark:'
     path: verify/exp_of_formal_power_series/src/main.rs
     title: verify/exp_of_formal_power_series/src/main.rs
@@ -63,24 +66,24 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/pow_of_formal_power_series/src/main.rs
     title: verify/pow_of_formal_power_series/src/main.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/shift_of_sampling_points_of_polynomial/src/main.rs
     title: verify/shift_of_sampling_points_of_polynomial/src/main.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/sqrt_mod/src/main.rs
     title: verify/sqrt_mod/src/main.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/sqrt_of_formal_power_series/src/main.rs
     title: verify/sqrt_of_formal_power_series/src/main.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/subset_convolution/src/main.rs
     title: verify/subset_convolution/src/main.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/tree_path_composite_sum/src/main.rs
     title: verify/tree_path_composite_sum/src/main.rs
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: rs
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links:
     - https://rsk0315.hatenablog.com/entry/2023/04/29/043512
@@ -363,7 +366,7 @@ data:
   - crates/convolution/convolution-naive/src/lib.rs
   - crates/number-theory/combination/src/lib.rs
   timestamp: '2023-07-15 18:59:53+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - verify/inv_of_formal_power_series/src/main.rs
   - verify/binomial_coefficient_prime_mod/src/main.rs
@@ -371,6 +374,7 @@ data:
   - verify/multipoint_evaluation/src/main.rs
   - verify/subset_convolution/src/main.rs
   - verify/log_of_formal_power_series/src/main.rs
+  - verify/division_of_polynomials/src/main.rs
   - verify/sqrt_mod/src/main.rs
   - verify/bitwise_or_convolution/src/main.rs
   - verify/polynomial_taylor_shift/src/main.rs
