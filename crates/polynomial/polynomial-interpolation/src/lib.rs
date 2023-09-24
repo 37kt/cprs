@@ -19,9 +19,9 @@ pub fn polynomial_interpolation<const P: u32>(
         mul[i] = &mul[i << 1 | 0] * &mul[i << 1 | 1];
     }
     let mut g = vec![fps![]; m2 + m2];
-    g[1] = mul[1].differential() % &mul[1];
+    g[1] = mul[1].differential().div_mod(&mul[1]).1;
     for i in 2..m2 + m {
-        g[i] = &g[i >> 1] % &mul[i];
+        g[i] = g[i >> 1].div_mod(&mul[i]).1;
     }
     for i in 0..m {
         g[m2 + i] = fps![ys[i] / g[m2 + i][0]];
