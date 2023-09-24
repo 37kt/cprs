@@ -138,7 +138,7 @@ data:
       title: crates/data-structure/segment-tree/src/lib.rs
   - name: crates/data-structure/segtree-beats/src
     pages:
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: crates/data-structure/segtree-beats/src/lib.rs
       title: crates/data-structure/segtree-beats/src/lib.rs
   - name: crates/data-structure/sliding-window-aggregation/src
@@ -549,7 +549,7 @@ data:
       title: verify/range_affine_range_sum/src/main.rs
   - name: verify/range_chmin_chmax_add_range_sum/src
     pages:
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verify/range_chmin_chmax_add_range_sum/src/main.rs
       title: verify/range_chmin_chmax_add_range_sum/src/main.rs
   - name: verify/range_kth_smallest/src

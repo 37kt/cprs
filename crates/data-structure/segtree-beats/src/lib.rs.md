@@ -3,12 +3,12 @@ data:
   _extendedDependsOn: []
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/range_chmin_chmax_add_range_sum/src/main.rs
     title: verify/range_chmin_chmax_add_range_sum/src/main.rs
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: rs
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.11.5/x64/lib/python3.11/site-packages/onlinejudge_verify/documentation/build.py\"\
@@ -165,7 +165,7 @@ data:
   path: crates/data-structure/segtree-beats/src/lib.rs
   requiredBy: []
   timestamp: '2023-04-21 11:20:46+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/range_chmin_chmax_add_range_sum/src/main.rs
 documentation_of: crates/data-structure/segtree-beats/src/lib.rs
