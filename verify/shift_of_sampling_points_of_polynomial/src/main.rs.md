@@ -4,17 +4,17 @@ data:
   - icon: ':question:'
     path: crates/number-theory/modint/src/lib.rs
     title: crates/number-theory/modint/src/lib.rs
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: crates/polynomial/formal-power-series/src/lib.rs
     title: crates/polynomial/formal-power-series/src/lib.rs
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: crates/polynomial/shift-of-sampling-points/src/lib.rs
     title: crates/polynomial/shift-of-sampling-points/src/lib.rs
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: rs
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     PROBLEM: https://judge.yosupo.jp/problem/shift_of_sampling_points_of_polynomial
     links:
@@ -38,8 +38,8 @@ data:
   isVerificationFile: true
   path: verify/shift_of_sampling_points_of_polynomial/src/main.rs
   requiredBy: []
-  timestamp: '2023-09-24 09:08:17+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2023-09-24 09:50:05+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/shift_of_sampling_points_of_polynomial/src/main.rs
 layout: document

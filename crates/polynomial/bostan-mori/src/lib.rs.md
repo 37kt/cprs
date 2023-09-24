@@ -7,7 +7,7 @@ data:
   - icon: ':question:'
     path: crates/number-theory/modint/src/lib.rs
     title: crates/number-theory/modint/src/lib.rs
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: crates/polynomial/formal-power-series/src/lib.rs
     title: crates/polynomial/formal-power-series/src/lib.rs
   _extendedRequiredBy: []
@@ -68,7 +68,7 @@ data:
   isVerificationFile: false
   path: crates/polynomial/bostan-mori/src/lib.rs
   requiredBy: []
-  timestamp: '2023-09-24 09:08:17+09:00'
+  timestamp: '2023-09-24 09:50:05+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/kth_term_of_linearly_recurrent_sequence/src/main.rs

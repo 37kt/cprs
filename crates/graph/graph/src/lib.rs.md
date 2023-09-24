@@ -11,7 +11,7 @@ data:
   - icon: ':warning:'
     path: crates/graph/complement-graph-bfs/src/lib.rs
     title: crates/graph/complement-graph-bfs/src/lib.rs
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: crates/graph/strongly-connected-components/src/lib.rs
     title: crates/graph/strongly-connected-components/src/lib.rs
   - icon: ':x:'
@@ -30,7 +30,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/lca/src/main.rs
     title: verify/lca/src/main.rs
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/scc/src/main.rs
     title: verify/scc/src/main.rs
   - icon: ':x:'

@@ -2,10 +2,10 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: crates/data-structure/disjoint-sparse-table/src/lib.rs
     title: crates/data-structure/disjoint-sparse-table/src/lib.rs
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: crates/data-structure/fenwick-tree/src/lib.rs
     title: crates/data-structure/fenwick-tree/src/lib.rs
   - icon: ':heavy_check_mark:'
@@ -26,7 +26,7 @@ data:
   - icon: ':warning:'
     path: crates/data-structure/splay-tree-internal/src/lib.rs
     title: crates/data-structure/splay-tree-internal/src/lib.rs
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: crates/data-structure/splay-tree/src/lib.rs
     title: crates/data-structure/splay-tree/src/lib.rs
   - icon: ':x:'
@@ -69,13 +69,13 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/range_affine_range_sum/src/main.rs
     title: verify/range_affine_range_sum/src/main.rs
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/range_reverse_range_sum/src/main.rs
     title: verify/range_reverse_range_sum/src/main.rs
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/static_range_inversions_query/src/main.rs
     title: verify/static_range_inversions_query/src/main.rs
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/staticrmq/src/main.rs
     title: verify/staticrmq/src/main.rs
   - icon: ':x:'

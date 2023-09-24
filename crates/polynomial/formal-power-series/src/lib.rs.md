@@ -17,11 +17,11 @@ data:
   - icon: ':heavy_check_mark:'
     path: crates/polynomial/polynomial-interpolation/src/lib.rs
     title: crates/polynomial/polynomial-interpolation/src/lib.rs
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: crates/polynomial/shift-of-sampling-points/src/lib.rs
     title: crates/polynomial/shift-of-sampling-points/src/lib.rs
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/division_of_polynomials/src/main.rs
     title: verify/division_of_polynomials/src/main.rs
   - icon: ':heavy_check_mark:'
@@ -48,15 +48,15 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/pow_of_formal_power_series/src/main.rs
     title: verify/pow_of_formal_power_series/src/main.rs
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/shift_of_sampling_points_of_polynomial/src/main.rs
     title: verify/shift_of_sampling_points_of_polynomial/src/main.rs
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/sqrt_of_formal_power_series/src/main.rs
     title: verify/sqrt_of_formal_power_series/src/main.rs
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: rs
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.11.5/x64/lib/python3.11/site-packages/onlinejudge_verify/documentation/build.py\"\
@@ -296,32 +296,32 @@ data:
     \   fn sub_assign(&mut self, rhs: Self) {\n        if self.len() < rhs.len() {\n\
     \            self.resize(rhs.len(), 0.into());\n        }\n        self.iter_mut().zip(rhs.iter()).for_each(|(a,\
     \ b)| *a -= b);\n    }\n}\n\nimpl<const P: u32> MulAssign<Self> for FormalPowerSeries<P>\
-    \ {\n    fn mul_assign(&mut self, rhs: Self) {\n        if rhs.count_terms() <\
-    \ 64 {\n            let mut v = vec![];\n            for i in 0..rhs.len() {\n\
-    \                if rhs[i].val() != 0 {\n                    v.push((i, rhs[i]));\n\
-    \                }\n            }\n            if v.len() == 0 {\n           \
-    \     *self = fps![];\n                return;\n            }\n            let\
-    \ n = self.len();\n            self.resize(n + v[v.len() - 1].0, 0.into());\n\
-    \            for i in (0..n).rev() {\n                for &(j, c) in v.iter().rev()\
-    \ {\n                    if j > 0 {\n                        self[i + j] = self[i\
-    \ + j] + self[i] * c;\n                    } else {\n                        self[i]\
-    \ *= c;\n                    }\n                }\n            }\n        } else\
-    \ if StaticModInt::<P>::IS_NTT_FRIENDLY {\n            let mut a = vec![];\n \
-    \           swap(&mut a, &mut self.0);\n            self.0 = convolution_ntt_friendly(a,\
-    \ rhs.0);\n        } else {\n            self.0 = convolution_arbitrary_mod(&self.0,\
-    \ &rhs.0);\n        }\n    }\n}\n\nimpl<const P: u32> DivAssign<Self> for FormalPowerSeries<P>\
-    \ {\n    fn div_assign(&mut self, mut g: Self) {\n        if g.count_terms() <\
-    \ 64 {\n            if g[0].val() != 1 {\n                let c = g[0].inv();\n\
-    \                for v in self.iter_mut() {\n                    *v *= c;\n  \
-    \              }\n                for v in g.iter_mut() {\n                  \
-    \  *v *= c;\n                }\n            }\n            let mut v = vec![];\n\
-    \            for i in 1..g.len() {\n                if g[i].val() != 0 {\n   \
-    \                 v.push((i, -g[i]));\n                }\n            }\n    \
-    \        for i in 0..self.len() {\n                for &(j, c) in &v {\n     \
-    \               if i >= j {\n                        self[i] = self[i] + self[i\
-    \ - j] * c;\n                    }\n                }\n            }\n       \
-    \ } else {\n            let n = self.len();\n            *self *= g.inv(n);\n\
-    \            self.truncate(n);\n        }\n    }\n}\n\nimpl<const P: u32> ShlAssign<usize>\
+    \ {\n    fn mul_assign(&mut self, rhs: Self) {\n        if rhs.len() == 0 {\n\
+    \            *self = fps![];\n            return;\n        }\n        if rhs.count_terms()\
+    \ < 64 {\n            let mut v = vec![];\n            for i in 0..rhs.len() {\n\
+    \                if i == 0 || rhs[i].val() != 0 {\n                    v.push((i,\
+    \ rhs[i]));\n                }\n            }\n            let n = self.len();\n\
+    \            self.resize(n + rhs.len() - 1, 0.into());\n            for i in (0..n).rev()\
+    \ {\n                for &(j, c) in v.iter().rev() {\n                    if j\
+    \ > 0 {\n                        self[i + j] = self[i + j] + self[i] * c;\n  \
+    \                  } else {\n                        self[i] *= c;\n         \
+    \           }\n                }\n            }\n        } else if StaticModInt::<P>::IS_NTT_FRIENDLY\
+    \ {\n            let mut a = vec![];\n            swap(&mut a, &mut self.0);\n\
+    \            self.0 = convolution_ntt_friendly(a, rhs.0);\n        } else {\n\
+    \            self.0 = convolution_arbitrary_mod(&self.0, &rhs.0);\n        }\n\
+    \    }\n}\n\nimpl<const P: u32> DivAssign<Self> for FormalPowerSeries<P> {\n \
+    \   fn div_assign(&mut self, mut g: Self) {\n        if g.count_terms() < 64 {\n\
+    \            if g[0].val() != 1 {\n                let c = g[0].inv();\n     \
+    \           for v in self.iter_mut() {\n                    *v *= c;\n       \
+    \         }\n                for v in g.iter_mut() {\n                    *v *=\
+    \ c;\n                }\n            }\n            let mut v = vec![];\n    \
+    \        for i in 1..g.len() {\n                if g[i].val() != 0 {\n       \
+    \             v.push((i, -g[i]));\n                }\n            }\n        \
+    \    for i in 0..self.len() {\n                for &(j, c) in &v {\n         \
+    \           if i >= j {\n                        self[i] = self[i] + self[i -\
+    \ j] * c;\n                    }\n                }\n            }\n        }\
+    \ else {\n            let n = self.len();\n            *self *= g.inv(n);\n  \
+    \          self.truncate(n);\n        }\n    }\n}\n\nimpl<const P: u32> ShlAssign<usize>\
     \ for FormalPowerSeries<P> {\n    fn shl_assign(&mut self, rhs: usize) {\n   \
     \     self.0 = repeat(0.into()).take(rhs).chain(self.0.drain(..)).collect();\n\
     \    }\n}\n\nimpl<const P: u32> ShrAssign<usize> for FormalPowerSeries<P> {\n\
@@ -361,8 +361,8 @@ data:
   - crates/polynomial/polynomial-interpolation/src/lib.rs
   - crates/polynomial/shift-of-sampling-points/src/lib.rs
   - crates/polynomial/bostan-mori/src/lib.rs
-  timestamp: '2023-09-24 09:08:17+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  timestamp: '2023-09-24 09:50:05+09:00'
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/inv_of_formal_power_series/src/main.rs
   - verify/multipoint_evaluation/src/main.rs

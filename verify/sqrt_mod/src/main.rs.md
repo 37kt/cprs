@@ -6,9 +6,9 @@ data:
     title: crates/number-theory/modint/src/lib.rs
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: rs
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     PROBLEM: https://judge.yosupo.jp/problem/sqrt_mod
     links:
@@ -31,7 +31,7 @@ data:
   path: verify/sqrt_mod/src/main.rs
   requiredBy: []
   timestamp: '2023-07-15 18:59:53+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/sqrt_mod/src/main.rs
 layout: document

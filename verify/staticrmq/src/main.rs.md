@@ -4,14 +4,14 @@ data:
   - icon: ':question:'
     path: crates/algebraic/algebraic/src/lib.rs
     title: crates/algebraic/algebraic/src/lib.rs
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: crates/data-structure/disjoint-sparse-table/src/lib.rs
     title: crates/data-structure/disjoint-sparse-table/src/lib.rs
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: rs
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     PROBLEM: https://judge.yosupo.jp/problem/staticrmq
     links:
@@ -36,7 +36,7 @@ data:
   path: verify/staticrmq/src/main.rs
   requiredBy: []
   timestamp: '2023-04-25 15:51:20+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/staticrmq/src/main.rs
 layout: document

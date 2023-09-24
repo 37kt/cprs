@@ -14,7 +14,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: crates/polynomial/bostan-mori/src/lib.rs
     title: crates/polynomial/bostan-mori/src/lib.rs
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: crates/polynomial/formal-power-series/src/lib.rs
     title: crates/polynomial/formal-power-series/src/lib.rs
   _extendedVerifiedWith:

@@ -17,13 +17,13 @@ data:
   - icon: ':heavy_check_mark:'
     path: crates/polynomial/bostan-mori/src/lib.rs
     title: crates/polynomial/bostan-mori/src/lib.rs
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: crates/polynomial/formal-power-series/src/lib.rs
     title: crates/polynomial/formal-power-series/src/lib.rs
   - icon: ':heavy_check_mark:'
     path: crates/polynomial/polynomial-interpolation/src/lib.rs
     title: crates/polynomial/polynomial-interpolation/src/lib.rs
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: crates/polynomial/shift-of-sampling-points/src/lib.rs
     title: crates/polynomial/shift-of-sampling-points/src/lib.rs
   _extendedVerifiedWith:
@@ -39,7 +39,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/convolution_mod_1000000007/src/main.rs
     title: verify/convolution_mod_1000000007/src/main.rs
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/division_of_polynomials/src/main.rs
     title: verify/division_of_polynomials/src/main.rs
   - icon: ':heavy_check_mark:'
@@ -66,16 +66,16 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/pow_of_formal_power_series/src/main.rs
     title: verify/pow_of_formal_power_series/src/main.rs
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/shift_of_sampling_points_of_polynomial/src/main.rs
     title: verify/shift_of_sampling_points_of_polynomial/src/main.rs
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/sqrt_mod/src/main.rs
     title: verify/sqrt_mod/src/main.rs
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/sqrt_of_formal_power_series/src/main.rs
     title: verify/sqrt_of_formal_power_series/src/main.rs
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/subset_convolution/src/main.rs
     title: verify/subset_convolution/src/main.rs
   - icon: ':x:'
