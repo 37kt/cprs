@@ -600,19 +600,19 @@ impl<const P: u32> SubAssign<Self> for FormalPowerSeries<P> {
 
 impl<const P: u32> MulAssign<Self> for FormalPowerSeries<P> {
     fn mul_assign(&mut self, rhs: Self) {
+        if rhs.len() == 0 {
+            *self = fps![];
+            return;
+        }
         if rhs.count_terms() < 64 {
             let mut v = vec![];
             for i in 0..rhs.len() {
-                if rhs[i].val() != 0 {
+                if i == 0 || rhs[i].val() != 0 {
                     v.push((i, rhs[i]));
                 }
             }
-            if v.len() == 0 {
-                *self = fps![];
-                return;
-            }
             let n = self.len();
-            self.resize(n + v[v.len() - 1].0, 0.into());
+            self.resize(n + rhs.len() - 1, 0.into());
             for i in (0..n).rev() {
                 for &(j, c) in v.iter().rev() {
                     if j > 0 {
