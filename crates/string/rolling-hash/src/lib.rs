@@ -59,6 +59,31 @@ impl GenBase for GenBaseImpl<ModInt61> {
     }
 }
 
+#[derive(Hash, PartialEq, Eq, Clone, Copy)]
+pub struct Hash<H>
+where
+    H: Copy + Eq + Add<Output = H> + Mul<Output = H> + Neg<Output = H>,
+{
+    hash: H,
+    pow: H,
+}
+
+impl<H> Hash<H>
+where
+    H: Copy + Eq + Add<Output = H> + Mul<Output = H> + Neg<Output = H>,
+{
+    pub fn val(&self) -> H {
+        self.hash
+    }
+
+    pub fn concat(&self, other: Self) -> Self {
+        Self {
+            hash: self.hash * other.pow + other.hash,
+            pow: self.pow * other.pow,
+        }
+    }
+}
+
 #[derive(Clone)]
 pub struct RollingHash<'a, C, H>
 where
@@ -101,9 +126,12 @@ where
         self.s.len()
     }
 
-    pub fn get(&self, index: impl RangeBounds<usize>) -> H {
+    pub fn get(&self, index: impl RangeBounds<usize>) -> Hash<H> {
         let (l, r) = range_to_pair(index, self.len());
-        self.hs[l] * -self.pw[r - l] + self.hs[r]
+        Hash {
+            hash: self.hs[l] * -self.pw[r - l] + self.hs[r],
+            pow: self.pw[r - l],
+        }
     }
 
     pub fn lcp(
