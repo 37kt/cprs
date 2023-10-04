@@ -84,8 +84,8 @@ data:
   timestamp: '2023-05-16 16:25:17+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/segment_add_get_min/src/main.rs
   - verify/line_add_get_min/src/main.rs
+  - verify/segment_add_get_min/src/main.rs
 documentation_of: crates/data-structure/li-chao-tree-dynamic/src/lib.rs
 layout: document
 redirect_from:

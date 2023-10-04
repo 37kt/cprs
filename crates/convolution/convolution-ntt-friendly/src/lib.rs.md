@@ -131,8 +131,8 @@ data:
   timestamp: '2023-07-15 18:59:53+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/convolution_mod/src/main.rs
   - verify/convolution_mod_1000000007/src/main.rs
+  - verify/convolution_mod/src/main.rs
 documentation_of: crates/convolution/convolution-ntt-friendly/src/lib.rs
 layout: document
 redirect_from:

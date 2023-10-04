@@ -34,7 +34,7 @@ data:
   isVerificationFile: true
   path: verify/zalgorithm_rolling_hash/src/main.rs
   requiredBy: []
-  timestamp: '2023-09-16 20:40:18+09:00'
+  timestamp: '2023-10-04 11:25:13+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/zalgorithm_rolling_hash/src/main.rs

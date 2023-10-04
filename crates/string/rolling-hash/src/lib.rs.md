@@ -47,46 +47,54 @@ data:
     \ x.pow((ModInt61::modulus() as usize - 1) / f).val() > 1)\n                {\n\
     \                    return x;\n                }\n            }\n        }\n\n\
     \        thread_local! {\n            static BASE: ModInt61 = gen();\n       \
-    \ }\n        BASE.with(|base| *base)\n    }\n}\n\n#[derive(Clone)]\npub struct\
-    \ RollingHash<'a, C, H>\nwhere\n    C: Copy + Eq + Into<H>,\n    H: Copy + Eq\
-    \ + Add<Output = H> + Mul<Output = H> + Neg<Output = H>,\n    GenBaseImpl<H>:\
-    \ GenBase<H = H>,\n{\n    s: &'a [C],\n    hs: Box<[H]>,\n    pw: Box<[H]>,\n\
-    }\n\nimpl<'a, C, H> RollingHash<'a, C, H>\nwhere\n    C: Copy + Eq + Into<H>,\n\
-    \    H: Copy + Eq + From<u64> + Add<Output = H> + Mul<Output = H> + Neg<Output\
-    \ = H>,\n    GenBaseImpl<H>: GenBase<H = H>,\n{\n    pub fn new(s: &'a [C]) ->\
-    \ Self {\n        let n = s.len();\n        let base = GenBaseImpl::<H>::base();\n\
-    \        let mut hs = vec![H::from(0); n + 1];\n        let mut pw = vec![H::from(1);\
-    \ n + 1];\n        for i in 0..n {\n            hs[i + 1] = hs[i] * base + s[i].into();\n\
-    \            pw[i + 1] = pw[i] * base;\n        }\n        Self {\n          \
-    \  s,\n            hs: hs.into_boxed_slice(),\n            pw: pw.into_boxed_slice(),\n\
-    \        }\n    }\n\n    pub fn base() -> H {\n        GenBaseImpl::<H>::base()\n\
-    \    }\n\n    pub fn len(&self) -> usize {\n        self.s.len()\n    }\n\n  \
-    \  pub fn get(&self, index: impl RangeBounds<usize>) -> H {\n        let (l, r)\
-    \ = range_to_pair(index, self.len());\n        self.hs[l] * -self.pw[r - l] +\
-    \ self.hs[r]\n    }\n\n    pub fn lcp(\n        &self,\n        index1: impl RangeBounds<usize>,\n\
-    \        other: &Self,\n        index2: impl RangeBounds<usize>,\n    ) -> usize\
+    \ }\n        BASE.with(|base| *base)\n    }\n}\n\n#[derive(Hash, PartialEq, Eq,\
+    \ Clone, Copy)]\npub struct Hash<H>\nwhere\n    H: Copy + Eq + Add<Output = H>\
+    \ + Mul<Output = H> + Neg<Output = H>,\n{\n    hash: H,\n    pow: H,\n}\n\nimpl<H>\
+    \ Hash<H>\nwhere\n    H: Copy + Eq + Add<Output = H> + Mul<Output = H> + Neg<Output\
+    \ = H>,\n{\n    pub fn val(&self) -> H {\n        self.hash\n    }\n\n    pub\
+    \ fn concat(&self, other: Self) -> Self {\n        Self {\n            hash: self.hash\
+    \ * other.pow + other.hash,\n            pow: self.pow * other.pow,\n        }\n\
+    \    }\n}\n\n#[derive(Clone)]\npub struct RollingHash<'a, C, H>\nwhere\n    C:\
+    \ Copy + Eq + Into<H>,\n    H: Copy + Eq + Add<Output = H> + Mul<Output = H> +\
+    \ Neg<Output = H>,\n    GenBaseImpl<H>: GenBase<H = H>,\n{\n    s: &'a [C],\n\
+    \    hs: Box<[H]>,\n    pw: Box<[H]>,\n}\n\nimpl<'a, C, H> RollingHash<'a, C,\
+    \ H>\nwhere\n    C: Copy + Eq + Into<H>,\n    H: Copy + Eq + From<u64> + Add<Output\
+    \ = H> + Mul<Output = H> + Neg<Output = H>,\n    GenBaseImpl<H>: GenBase<H = H>,\n\
+    {\n    pub fn new(s: &'a [C]) -> Self {\n        let n = s.len();\n        let\
+    \ base = GenBaseImpl::<H>::base();\n        let mut hs = vec![H::from(0); n +\
+    \ 1];\n        let mut pw = vec![H::from(1); n + 1];\n        for i in 0..n {\n\
+    \            hs[i + 1] = hs[i] * base + s[i].into();\n            pw[i + 1] =\
+    \ pw[i] * base;\n        }\n        Self {\n            s,\n            hs: hs.into_boxed_slice(),\n\
+    \            pw: pw.into_boxed_slice(),\n        }\n    }\n\n    pub fn base()\
+    \ -> H {\n        GenBaseImpl::<H>::base()\n    }\n\n    pub fn len(&self) ->\
+    \ usize {\n        self.s.len()\n    }\n\n    pub fn get(&self, index: impl RangeBounds<usize>)\
+    \ -> Hash<H> {\n        let (l, r) = range_to_pair(index, self.len());\n     \
+    \   Hash {\n            hash: self.hs[l] * -self.pw[r - l] + self.hs[r],\n   \
+    \         pow: self.pw[r - l],\n        }\n    }\n\n    pub fn lcp(\n        &self,\n\
+    \        index1: impl RangeBounds<usize>,\n        other: &Self,\n        index2:\
+    \ impl RangeBounds<usize>,\n    ) -> usize {\n        let (l1, r1) = range_to_pair(index1,\
+    \ self.len());\n        let (l2, r2) = range_to_pair(index2, other.len());\n \
+    \       let n = (r1 - l1).min(r2 - l2);\n        let mut ok = 0;\n        let\
+    \ mut ng = n + 1;\n        while ok + 1 < ng {\n            let md = (ok + ng)\
+    \ / 2;\n            if self.get(l1..l1 + md) == other.get(l2..l2 + md) {\n   \
+    \             ok = md;\n            } else {\n                ng = md;\n     \
+    \       }\n        }\n        ok\n    }\n}\n\nimpl<'a, C, H> RollingHash<'a, C,\
+    \ H>\nwhere\n    C: Copy + Eq + Into<H> + Ord,\n    H: Copy + Eq + From<u64> +\
+    \ Add<Output = H> + Mul<Output = H> + Neg<Output = H>,\n    GenBaseImpl<H>: GenBase<H\
+    \ = H>,\n{\n    pub fn compare(\n        &self,\n        index1: impl RangeBounds<usize>,\n\
+    \        other: &Self,\n        index2: impl RangeBounds<usize>,\n    ) -> Ordering\
     \ {\n        let (l1, r1) = range_to_pair(index1, self.len());\n        let (l2,\
-    \ r2) = range_to_pair(index2, other.len());\n        let n = (r1 - l1).min(r2\
-    \ - l2);\n        let mut ok = 0;\n        let mut ng = n + 1;\n        while\
-    \ ok + 1 < ng {\n            let md = (ok + ng) / 2;\n            if self.get(l1..l1\
-    \ + md) == other.get(l2..l2 + md) {\n                ok = md;\n            } else\
-    \ {\n                ng = md;\n            }\n        }\n        ok\n    }\n}\n\
-    \nimpl<'a, C, H> RollingHash<'a, C, H>\nwhere\n    C: Copy + Eq + Into<H> + Ord,\n\
-    \    H: Copy + Eq + From<u64> + Add<Output = H> + Mul<Output = H> + Neg<Output\
-    \ = H>,\n    GenBaseImpl<H>: GenBase<H = H>,\n{\n    pub fn compare(\n       \
-    \ &self,\n        index1: impl RangeBounds<usize>,\n        other: &Self,\n  \
-    \      index2: impl RangeBounds<usize>,\n    ) -> Ordering {\n        let (l1,\
-    \ r1) = range_to_pair(index1, self.len());\n        let (l2, r2) = range_to_pair(index2,\
-    \ other.len());\n        let n = self.lcp(l1..r1, other, l2..r2);\n        if\
-    \ l1 + n == r1 {\n            if l2 + n == r2 {\n                Ordering::Equal\n\
-    \            } else {\n                Ordering::Less\n            }\n       \
-    \ } else if l2 + n == r2 {\n            Ordering::Greater\n        } else {\n\
-    \            self.s[l1 + n].cmp(&other.s[l2 + n])\n        }\n    }\n}\n\nfn range_to_pair(range:\
-    \ impl RangeBounds<usize>, n: usize) -> (usize, usize) {\n    let l = match range.start_bound()\
-    \ {\n        Bound::Included(&l) => l,\n        Bound::Excluded(&l) => l + 1,\n\
-    \        Bound::Unbounded => 0,\n    };\n    let r = match range.end_bound() {\n\
-    \        Bound::Included(&r) => r + 1,\n        Bound::Excluded(&r) => r,\n  \
-    \      Bound::Unbounded => n,\n    };\n    (l, r)\n}\n"
+    \ r2) = range_to_pair(index2, other.len());\n        let n = self.lcp(l1..r1,\
+    \ other, l2..r2);\n        if l1 + n == r1 {\n            if l2 + n == r2 {\n\
+    \                Ordering::Equal\n            } else {\n                Ordering::Less\n\
+    \            }\n        } else if l2 + n == r2 {\n            Ordering::Greater\n\
+    \        } else {\n            self.s[l1 + n].cmp(&other.s[l2 + n])\n        }\n\
+    \    }\n}\n\nfn range_to_pair(range: impl RangeBounds<usize>, n: usize) -> (usize,\
+    \ usize) {\n    let l = match range.start_bound() {\n        Bound::Included(&l)\
+    \ => l,\n        Bound::Excluded(&l) => l + 1,\n        Bound::Unbounded => 0,\n\
+    \    };\n    let r = match range.end_bound() {\n        Bound::Included(&r) =>\
+    \ r + 1,\n        Bound::Excluded(&r) => r,\n        Bound::Unbounded => n,\n\
+    \    };\n    (l, r)\n}\n"
   dependsOn:
   - crates/math/modint61/src/lib.rs
   - crates/math/nimber/src/lib.rs
@@ -94,7 +102,7 @@ data:
   isVerificationFile: false
   path: crates/string/rolling-hash/src/lib.rs
   requiredBy: []
-  timestamp: '2023-09-16 20:40:18+09:00'
+  timestamp: '2023-10-04 11:25:13+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/suffixarray_rolling_hash/src/main.rs

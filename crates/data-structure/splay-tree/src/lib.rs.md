@@ -86,8 +86,8 @@ data:
   timestamp: '2023-08-25 17:13:17+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/dynamic_sequence_range_affine_range_sum/src/main.rs
   - verify/range_reverse_range_sum/src/main.rs
+  - verify/dynamic_sequence_range_affine_range_sum/src/main.rs
 documentation_of: crates/data-structure/splay-tree/src/lib.rs
 layout: document
 redirect_from:

@@ -93,15 +93,15 @@ data:
   isVerificationFile: false
   path: crates/data-structure/segment-tree/src/lib.rs
   requiredBy:
-  - crates/data-structure/range-tree/src/lib.rs
   - crates/data-structure/tree-query/src/lib.rs
+  - crates/data-structure/range-tree/src/lib.rs
   timestamp: '2023-04-26 12:26:24+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/vertex_set_path_composite/src/main.rs
-  - verify/vertex_add_path_sum/src/main.rs
-  - verify/point_add_range_sum/src/main.rs
   - verify/vertex_add_subtree_sum/src/main.rs
+  - verify/vertex_set_path_composite/src/main.rs
+  - verify/point_add_range_sum/src/main.rs
+  - verify/vertex_add_path_sum/src/main.rs
 documentation_of: crates/data-structure/segment-tree/src/lib.rs
 layout: document
 redirect_from:
