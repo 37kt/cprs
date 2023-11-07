@@ -8,11 +8,11 @@ data:
   _verificationStatusIcon: ':warning:'
   attributes:
     links: []
-  bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.11.5/x64/lib/python3.11/site-packages/onlinejudge_verify/documentation/build.py\"\
+  bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.12.0/x64/lib/python3.12/site-packages/onlinejudge_verify/documentation/build.py\"\
     , line 71, in _render_source_code_stat\n    bundled_code = language.bundle(stat.path,\
     \ basedir=basedir, options={'include_paths': [basedir]}).decode()\n          \
     \         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\
-    \  File \"/opt/hostedtoolcache/Python/3.11.5/x64/lib/python3.11/site-packages/onlinejudge_verify/languages/rust.py\"\
+    \  File \"/opt/hostedtoolcache/Python/3.12.0/x64/lib/python3.12/site-packages/onlinejudge_verify/languages/rust.py\"\
     , line 288, in bundle\n    raise NotImplementedError\nNotImplementedError\n"
   code: "pub struct PrimeSieve {\n    primes: Vec<usize>,\n    div: Vec<usize>,\n\
     }\n\nimpl PrimeSieve {\n    pub fn new(n: usize) -> Self {\n        let n = n.max(2);\n\
@@ -46,12 +46,13 @@ data:
     \ mut t = res[i];\n                for _ in 0..k {\n                    t *= p;\n\
     \                    res.push(t);\n                }\n            }\n        }\n\
     \        res.sort();\n        res\n    }\n\n    pub fn primes(&self) -> Vec<usize>\
-    \ {\n        self.primes.clone()\n    }\n}\n"
+    \ {\n        self.primes.clone()\n    }\n\n    pub fn min_divisor(&self, x: usize)\
+    \ -> usize {\n        self.div[x]\n    }\n}\n"
   dependsOn: []
   isVerificationFile: false
   path: crates/math/prime-sieve/src/lib.rs
   requiredBy: []
-  timestamp: '2023-04-21 15:23:30+09:00'
+  timestamp: '2023-11-07 11:26:18+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: crates/math/prime-sieve/src/lib.rs

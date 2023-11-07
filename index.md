@@ -121,6 +121,11 @@ data:
     - icon: ':heavy_check_mark:'
       path: crates/data-structure/persistent-union-find/src/lib.rs
       title: crates/data-structure/persistent-union-find/src/lib.rs
+  - name: crates/data-structure/potentialized-union-find/src
+    pages:
+    - icon: ':warning:'
+      path: crates/data-structure/potentialized-union-find/src/lib.rs
+      title: crates/data-structure/potentialized-union-find/src/lib.rs
   - name: crates/data-structure/range-tree/src
     pages:
     - icon: ':heavy_check_mark:'
