@@ -96,4 +96,8 @@ impl PrimeSieve {
     pub fn primes(&self) -> Vec<usize> {
         self.primes.clone()
     }
+
+    pub fn min_divisor(&self, x: usize) -> usize {
+        self.div[x]
+    }
 }
