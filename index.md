@@ -216,6 +216,16 @@ data:
     - icon: ':heavy_check_mark:'
       path: crates/graph/strongly-connected-components/src/lib.rs
       title: crates/graph/strongly-connected-components/src/lib.rs
+  - name: crates/heuristic/beam-search/src
+    pages:
+    - icon: ':warning:'
+      path: crates/heuristic/beam-search/src/lib.rs
+      title: crates/heuristic/beam-search/src/lib.rs
+  - name: crates/heuristic/timer/src
+    pages:
+    - icon: ':warning:'
+      path: crates/heuristic/timer/src/lib.rs
+      title: crates/heuristic/timer/src/lib.rs
   - name: crates/macros/chminmax/src
     pages:
     - icon: ':warning:'
