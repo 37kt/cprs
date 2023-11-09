@@ -5,6 +5,7 @@ members = [
     "crates/convolution/*",
     "crates/data-structure/*",
     "crates/graph/*",
+    "crates/heuristic/*",
     "crates/macros/*",
     "crates/math/*",
     "crates/polynomial/*",
