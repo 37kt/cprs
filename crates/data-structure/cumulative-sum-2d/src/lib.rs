@@ -25,6 +25,8 @@ where
 
     pub fn add(&mut self, i: usize, j: usize, x: T) {
         assert!(!self.built);
+        let i = i + 1;
+        let j = j + 1;
         if i >= self.v.len() || j >= self.v[0].len() {
             return;
         }
@@ -72,10 +74,10 @@ where
         assert!(!self.built);
         let (bi, ei) = range_to_pair(i, self.v.len() - 1);
         let (bj, ej) = range_to_pair(j, self.v[0].len() - 1);
-        self.add(bi, bj, x.clone());
-        self.add(bi, ej, -x.clone());
-        self.add(ei, bj, -x.clone());
-        self.add(ei, ej, x);
+        self.v[bi][bj] = self.v[bi][bj].clone() + x.clone();
+        self.v[bi][ej] = self.v[bi][ej].clone() - x.clone();
+        self.v[ei][bj] = self.v[ei][bj].clone() - x.clone();
+        self.v[ei][ej] = self.v[ei][ej].clone() + x;
     }
 
     pub fn imos_get(&self, i: usize, j: usize) -> T {
