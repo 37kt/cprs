@@ -196,6 +196,11 @@ data:
     - icon: ':heavy_check_mark:'
       path: crates/graph/graph/src/lib.rs
       title: crates/graph/graph/src/lib.rs
+  - name: crates/graph/low-link/src
+    pages:
+    - icon: ':warning:'
+      path: crates/graph/low-link/src/lib.rs
+      title: crates/graph/low-link/src/lib.rs
   - name: crates/graph/max-flow/src
     pages:
     - icon: ':warning:'
@@ -236,6 +241,11 @@ data:
     - icon: ':heavy_check_mark:'
       path: crates/math/discrete-logarithm/src/lib.rs
       title: crates/math/discrete-logarithm/src/lib.rs
+  - name: crates/math/euler-phi/src
+    pages:
+    - icon: ':warning:'
+      path: crates/math/euler-phi/src/lib.rs
+      title: crates/math/euler-phi/src/lib.rs
   - name: crates/math/fast-factorize/src
     pages:
     - icon: ':heavy_check_mark:'

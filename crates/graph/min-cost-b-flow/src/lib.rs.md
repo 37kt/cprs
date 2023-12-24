@@ -15,11 +15,11 @@ data:
   attributes:
     links:
     - https://misawa.github.io/others/flow/lets_use_capacity_scaling.html
-  bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.12.0/x64/lib/python3.12/site-packages/onlinejudge_verify/documentation/build.py\"\
+  bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.12.1/x64/lib/python3.12/site-packages/onlinejudge_verify/documentation/build.py\"\
     , line 71, in _render_source_code_stat\n    bundled_code = language.bundle(stat.path,\
     \ basedir=basedir, options={'include_paths': [basedir]}).decode()\n          \
     \         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\
-    \  File \"/opt/hostedtoolcache/Python/3.12.0/x64/lib/python3.12/site-packages/onlinejudge_verify/languages/rust.py\"\
+    \  File \"/opt/hostedtoolcache/Python/3.12.1/x64/lib/python3.12/site-packages/onlinejudge_verify/languages/rust.py\"\
     , line 288, in bundle\n    raise NotImplementedError\nNotImplementedError\n"
   code: "// reference: https://misawa.github.io/others/flow/lets_use_capacity_scaling.html\n\
     \nuse std::{cmp::Reverse, collections::BinaryHeap};\n\nconst UNREACHABLE: i64\
@@ -163,8 +163,8 @@ data:
   timestamp: '2023-05-23 15:04:49+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/assignment/src/main.rs
   - verify/min_cost_b_flow/src/main.rs
+  - verify/assignment/src/main.rs
 documentation_of: crates/graph/min-cost-b-flow/src/lib.rs
 layout: document
 redirect_from:
