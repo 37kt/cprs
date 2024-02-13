@@ -113,4 +113,8 @@ where
             self.dph[p].clone()
         }
     }
+
+    pub fn par(&self, v: usize) -> usize {
+        self.par[v]
+    }
 }

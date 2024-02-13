@@ -1,0 +1,14 @@
+[package]
+name = "offline-dynamic-connectivity"
+version = "0.1.0"
+edition = "2021"
+license = "CC0-1.0"
+publish = false
+
+[lib]
+name = "offline_dynamic_connectivity"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+rollback-union-find = { path = "../../data-structure/rollback-union-find" }

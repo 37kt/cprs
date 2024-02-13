@@ -7,7 +7,7 @@ where
         + Eq
         + Add<Output = T>
         + Sub<Output = T>
-        + From<usize>
+        + From<i64>
         + MulAssign
         + Div<Output = T>
         + DivAssign,
@@ -26,9 +26,9 @@ where
         }
     }
     if inv {
-        let inv_n = T::from(1) / T::from(a.len());
+        let inv_n = T::from(1) / T::from(a.len() as i64);
         if inv_n == T::default() {
-            let n = T::from(a.len());
+            let n = T::from(a.len() as i64);
             for i in 0..a.len() {
                 a[i] /= n.clone();
             }
@@ -47,7 +47,7 @@ where
         + Eq
         + Add<Output = T>
         + Sub<Output = T>
-        + From<usize>
+        + From<i64>
         + MulAssign
         + Div<Output = T>
         + DivAssign,

@@ -110,8 +110,8 @@ where
         Bound::Unbounded => 0,
     };
     let r = match range.end_bound() {
-        Bound::Included(&r) => r + 1,
-        Bound::Excluded(&r) => r,
+        Bound::Included(&r) => (r + 1).min(n),
+        Bound::Excluded(&r) => r.min(n),
         Bound::Unbounded => n,
     };
     (l, r)
