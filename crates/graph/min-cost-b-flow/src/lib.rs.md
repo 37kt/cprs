@@ -163,8 +163,8 @@ data:
   timestamp: '2023-05-23 15:04:49+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/min_cost_b_flow/src/main.rs
   - verify/assignment/src/main.rs
+  - verify/min_cost_b_flow/src/main.rs
 documentation_of: crates/graph/min-cost-b-flow/src/lib.rs
 layout: document
 redirect_from:

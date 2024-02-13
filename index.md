@@ -16,6 +16,11 @@ data:
     - icon: ':heavy_check_mark:'
       path: crates/algorithm/mo/src/lib.rs
       title: crates/algorithm/mo/src/lib.rs
+  - name: crates/algorithm/offline-dynamic-connectivity/src
+    pages:
+    - icon: ':warning:'
+      path: crates/algorithm/offline-dynamic-connectivity/src/lib.rs
+      title: crates/algorithm/offline-dynamic-connectivity/src/lib.rs
   - name: crates/convolution/and-convolution/src
     pages:
     - icon: ':heavy_check_mark:'
@@ -191,6 +196,11 @@ data:
     - icon: ':warning:'
       path: crates/graph/complement-graph-bfs/src/lib.rs
       title: crates/graph/complement-graph-bfs/src/lib.rs
+  - name: crates/graph/compressed-tree/src
+    pages:
+    - icon: ':warning:'
+      path: crates/graph/compressed-tree/src/lib.rs
+      title: crates/graph/compressed-tree/src/lib.rs
   - name: crates/graph/graph/src
     pages:
     - icon: ':heavy_check_mark:'

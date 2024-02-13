@@ -49,7 +49,7 @@ data:
   isVerificationFile: true
   path: verify/tree_path_composite_sum/src/main.rs
   requiredBy: []
-  timestamp: '2023-08-14 09:31:33+09:00'
+  timestamp: '2024-02-13 13:29:05+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/tree_path_composite_sum/src/main.rs

@@ -30,7 +30,7 @@ data:
   isVerificationFile: true
   path: verify/bitwise_xor_convolution/src/main.rs
   requiredBy: []
-  timestamp: '2023-05-06 16:57:25+09:00'
+  timestamp: '2024-02-13 13:29:05+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/bitwise_xor_convolution/src/main.rs

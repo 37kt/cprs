@@ -54,13 +54,13 @@ data:
     \ (usize, usize)\nwhere\n    R: RangeBounds<usize>,\n{\n    let l = match range.start_bound()\
     \ {\n        Bound::Included(&l) => l,\n        Bound::Excluded(&l) => l + 1,\n\
     \        Bound::Unbounded => 0,\n    };\n    let r = match range.end_bound() {\n\
-    \        Bound::Included(&r) => r + 1,\n        Bound::Excluded(&r) => r,\n  \
-    \      Bound::Unbounded => n,\n    };\n    (l, r)\n}\n"
+    \        Bound::Included(&r) => (r + 1).min(n),\n        Bound::Excluded(&r) =>\
+    \ r.min(n),\n        Bound::Unbounded => n,\n    };\n    (l, r)\n}\n"
   dependsOn: []
   isVerificationFile: false
   path: crates/data-structure/cumulative-sum-2d/src/lib.rs
   requiredBy: []
-  timestamp: '2023-12-24 10:25:28+09:00'
+  timestamp: '2024-02-13 13:29:05+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: crates/data-structure/cumulative-sum-2d/src/lib.rs

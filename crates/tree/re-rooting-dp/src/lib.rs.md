@@ -64,14 +64,15 @@ data:
     \ -> T {\n        self.dp[v].clone()\n    }\n\n    pub fn prod_subtree(&self,\
     \ v: usize, p: usize) -> T {\n        if p == !0 {\n            self.dp[v].clone()\n\
     \        } else if self.par[v] == p {\n            self.dpl[v].clone()\n     \
-    \   } else {\n            self.dph[p].clone()\n        }\n    }\n}\n"
+    \   } else {\n            self.dph[p].clone()\n        }\n    }\n\n    pub fn\
+    \ par(&self, v: usize) -> usize {\n        self.par[v]\n    }\n}\n"
   dependsOn:
   - crates/algebraic/algebraic/src/lib.rs
   - crates/graph/graph/src/lib.rs
   isVerificationFile: false
   path: crates/tree/re-rooting-dp/src/lib.rs
   requiredBy: []
-  timestamp: '2023-05-17 16:30:46+09:00'
+  timestamp: '2024-02-13 13:29:05+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/tree_path_composite_sum/src/main.rs
