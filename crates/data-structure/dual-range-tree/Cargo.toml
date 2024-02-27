@@ -1,0 +1,15 @@
+[package]
+name = "dual-range-tree"
+version = "0.1.0"
+edition = "2021"
+license = "CC0-1.0"
+publish = false
+
+[lib]
+name = "dual_range_tree"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+dual-segment-tree = { path = "../dual-segment-tree" }
+algebraic = { path = "../../algebraic/algebraic" }
