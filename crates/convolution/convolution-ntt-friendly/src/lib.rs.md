@@ -29,11 +29,11 @@ data:
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
-  bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.12.1/x64/lib/python3.12/site-packages/onlinejudge_verify/documentation/build.py\"\
+  bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.12.2/x64/lib/python3.12/site-packages/onlinejudge_verify/documentation/build.py\"\
     , line 71, in _render_source_code_stat\n    bundled_code = language.bundle(stat.path,\
     \ basedir=basedir, options={'include_paths': [basedir]}).decode()\n          \
     \         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\
-    \  File \"/opt/hostedtoolcache/Python/3.12.1/x64/lib/python3.12/site-packages/onlinejudge_verify/languages/rust.py\"\
+    \  File \"/opt/hostedtoolcache/Python/3.12.2/x64/lib/python3.12/site-packages/onlinejudge_verify/languages/rust.py\"\
     , line 288, in bundle\n    raise NotImplementedError\nNotImplementedError\n"
   code: "use convolution_naive::convolution_naive;\nuse modint::StaticModInt;\n\n\
     pub fn ntt<const P: u32>(a: &mut [StaticModInt<P>]) {\n    assert!(StaticModInt::<P>::IS_NTT_FRIENDLY);\n\
@@ -125,14 +125,14 @@ data:
   isVerificationFile: false
   path: crates/convolution/convolution-ntt-friendly/src/lib.rs
   requiredBy:
+  - crates/convolution/convolution-arbitrary-mod/src/lib.rs
   - crates/polynomial/bostan-mori/src/lib.rs
   - crates/polynomial/formal-power-series/src/lib.rs
-  - crates/convolution/convolution-arbitrary-mod/src/lib.rs
   timestamp: '2023-07-15 18:59:53+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/convolution_mod_1000000007/src/main.rs
   - verify/convolution_mod/src/main.rs
+  - verify/convolution_mod_1000000007/src/main.rs
 documentation_of: crates/convolution/convolution-ntt-friendly/src/lib.rs
 layout: document
 redirect_from:

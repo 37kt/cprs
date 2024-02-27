@@ -59,11 +59,11 @@ data:
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
-  bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.12.1/x64/lib/python3.12/site-packages/onlinejudge_verify/documentation/build.py\"\
+  bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.12.2/x64/lib/python3.12/site-packages/onlinejudge_verify/documentation/build.py\"\
     , line 71, in _render_source_code_stat\n    bundled_code = language.bundle(stat.path,\
     \ basedir=basedir, options={'include_paths': [basedir]}).decode()\n          \
     \         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\
-    \  File \"/opt/hostedtoolcache/Python/3.12.1/x64/lib/python3.12/site-packages/onlinejudge_verify/languages/rust.py\"\
+    \  File \"/opt/hostedtoolcache/Python/3.12.2/x64/lib/python3.12/site-packages/onlinejudge_verify/languages/rust.py\"\
     , line 288, in bundle\n    raise NotImplementedError\nNotImplementedError\n"
   code: "use convolution_arbitrary_mod::convolution_arbitrary_mod;\nuse convolution_ntt_friendly::{convolution_ntt_friendly,\
     \ ntt, ntt_inv};\nuse modint::StaticModInt;\nuse std::{\n    fmt::{Debug, Display},\n\
@@ -358,23 +358,23 @@ data:
   isVerificationFile: false
   path: crates/polynomial/formal-power-series/src/lib.rs
   requiredBy:
-  - crates/polynomial/shift-of-sampling-points/src/lib.rs
   - crates/polynomial/bostan-mori/src/lib.rs
+  - crates/polynomial/shift-of-sampling-points/src/lib.rs
   - crates/polynomial/polynomial-interpolation/src/lib.rs
   timestamp: '2023-09-24 09:50:05+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/polynomial_interpolation/src/main.rs
-  - verify/pow_of_formal_power_series/src/main.rs
   - verify/division_of_polynomials/src/main.rs
-  - verify/exp_of_formal_power_series/src/main.rs
-  - verify/sqrt_of_formal_power_series/src/main.rs
-  - verify/multipoint_evaluation/src/main.rs
+  - verify/kth_term_of_linearly_recurrent_sequence/src/main.rs
   - verify/inv_of_formal_power_series/src/main.rs
   - verify/shift_of_sampling_points_of_polynomial/src/main.rs
-  - verify/log_of_formal_power_series/src/main.rs
-  - verify/kth_term_of_linearly_recurrent_sequence/src/main.rs
   - verify/polynomial_taylor_shift/src/main.rs
+  - verify/sqrt_of_formal_power_series/src/main.rs
+  - verify/multipoint_evaluation/src/main.rs
+  - verify/log_of_formal_power_series/src/main.rs
+  - verify/exp_of_formal_power_series/src/main.rs
+  - verify/pow_of_formal_power_series/src/main.rs
+  - verify/polynomial_interpolation/src/main.rs
 documentation_of: crates/polynomial/formal-power-series/src/lib.rs
 layout: document
 redirect_from:

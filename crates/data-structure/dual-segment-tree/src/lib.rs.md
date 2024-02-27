@@ -1,0 +1,67 @@
+---
+data:
+  _extendedDependsOn:
+  - icon: ':heavy_check_mark:'
+    path: crates/algebraic/algebraic/src/lib.rs
+    title: crates/algebraic/algebraic/src/lib.rs
+  _extendedRequiredBy:
+  - icon: ':warning:'
+    path: crates/data-structure/dual-range-tree/src/lib.rs
+    title: crates/data-structure/dual-range-tree/src/lib.rs
+  _extendedVerifiedWith: []
+  _isVerificationFailed: false
+  _pathExtension: rs
+  _verificationStatusIcon: ':warning:'
+  attributes:
+    links: []
+  bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.12.2/x64/lib/python3.12/site-packages/onlinejudge_verify/documentation/build.py\"\
+    , line 71, in _render_source_code_stat\n    bundled_code = language.bundle(stat.path,\
+    \ basedir=basedir, options={'include_paths': [basedir]}).decode()\n          \
+    \         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\
+    \  File \"/opt/hostedtoolcache/Python/3.12.2/x64/lib/python3.12/site-packages/onlinejudge_verify/languages/rust.py\"\
+    , line 288, in bundle\n    raise NotImplementedError\nNotImplementedError\n"
+  code: "use std::ops::{Bound, RangeBounds};\n\nuse algebraic::Monoid;\n\n#[derive(Clone)]\n\
+    pub struct DualSegmentTree<M>\nwhere\n    M: Monoid,\n    M::S: Clone,\n{\n  \
+    \  n: usize,\n    v: Vec<M::S>,\n}\n\nimpl<M> DualSegmentTree<M>\nwhere\n    M:\
+    \ Monoid,\n    M::S: Clone,\n{\n    pub fn new(n: usize) -> Self {\n        Self\
+    \ {\n            n,\n            v: vec![M::e(); n * 2],\n        }\n    }\n\n\
+    \    pub fn apply_range(&mut self, range: impl RangeBounds<usize>, f: M::S) {\n\
+    \        let mut l = match range.start_bound() {\n            Bound::Excluded(&l)\
+    \ => l + 1,\n            Bound::Included(&l) => l,\n            Bound::Unbounded\
+    \ => 0,\n        };\n        let mut r = match range.end_bound() {\n         \
+    \   Bound::Excluded(&r) => r,\n            Bound::Included(&r) => r + 1,\n   \
+    \         Bound::Unbounded => self.n,\n        };\n        assert!(l <= r);\n\
+    \        assert!(r <= self.n);\n        l += self.n;\n        r += self.n;\n \
+    \       self.propagate(l);\n        self.propagate(r - 1);\n        while l <\
+    \ r {\n            if l & 1 != 0 {\n                self.v[l] = M::op(&self.v[l],\
+    \ &f);\n                l += 1;\n            }\n            if r & 1 != 0 {\n\
+    \                r -= 1;\n                self.v[r] = M::op(&self.v[r], &f);\n\
+    \            }\n            l >>= 1;\n            r >>= 1;\n        }\n    }\n\
+    \n    pub fn apply(&mut self, k: usize, f: M::S) {\n        assert!(k < self.n);\n\
+    \        self.apply_range(k..=k, f);\n    }\n\n    pub fn get(&self, mut k: usize)\
+    \ -> M::S {\n        assert!(k < self.n);\n        k += self.n;\n        let mut\
+    \ res = self.v[k].clone();\n        while k > 1 {\n            k >>= 1;\n    \
+    \        res = M::op(&res, &self.v[k]);\n        }\n        res\n    }\n\n   \
+    \ fn push(&mut self, i: usize) {\n        if i < self.n {\n            self.v[i\
+    \ * 2] = M::op(&self.v[i * 2], &self.v[i]);\n            self.v[i * 2 + 1] = M::op(&self.v[i\
+    \ * 2 + 1], &self.v[i]);\n            self.v[i] = M::e();\n        }\n    }\n\n\
+    \    fn propagate(&mut self, i: usize) {\n        if i == 0 {\n            return;\n\
+    \        }\n        let crz = i.trailing_zeros() as usize;\n        for h in (crz\
+    \ + 1..63 - i.leading_zeros() as usize).rev() {\n            self.push(i >> h);\n\
+    \        }\n    }\n}\n"
+  dependsOn:
+  - crates/algebraic/algebraic/src/lib.rs
+  isVerificationFile: false
+  path: crates/data-structure/dual-segment-tree/src/lib.rs
+  requiredBy:
+  - crates/data-structure/dual-range-tree/src/lib.rs
+  timestamp: '2024-02-27 16:25:11+09:00'
+  verificationStatus: LIBRARY_NO_TESTS
+  verifiedWith: []
+documentation_of: crates/data-structure/dual-segment-tree/src/lib.rs
+layout: document
+redirect_from:
+- /library/crates/data-structure/dual-segment-tree/src/lib.rs
+- /library/crates/data-structure/dual-segment-tree/src/lib.rs.html
+title: crates/data-structure/dual-segment-tree/src/lib.rs
+---

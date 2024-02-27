@@ -76,6 +76,16 @@ data:
     - icon: ':heavy_check_mark:'
       path: crates/data-structure/disjoint-sparse-table/src/lib.rs
       title: crates/data-structure/disjoint-sparse-table/src/lib.rs
+  - name: crates/data-structure/dual-range-tree/src
+    pages:
+    - icon: ':warning:'
+      path: crates/data-structure/dual-range-tree/src/lib.rs
+      title: crates/data-structure/dual-range-tree/src/lib.rs
+  - name: crates/data-structure/dual-segment-tree/src
+    pages:
+    - icon: ':warning:'
+      path: crates/data-structure/dual-segment-tree/src/lib.rs
+      title: crates/data-structure/dual-segment-tree/src/lib.rs
   - name: crates/data-structure/fenwick-tree/src
     pages:
     - icon: ':heavy_check_mark:'
