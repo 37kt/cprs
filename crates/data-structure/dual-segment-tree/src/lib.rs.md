@@ -32,30 +32,29 @@ data:
     \   Bound::Excluded(&r) => r,\n            Bound::Included(&r) => r + 1,\n   \
     \         Bound::Unbounded => self.n,\n        };\n        assert!(l <= r);\n\
     \        assert!(r <= self.n);\n        l += self.n;\n        r += self.n;\n \
-    \       self.propagate(l);\n        self.propagate(r - 1);\n        while l <\
-    \ r {\n            if l & 1 != 0 {\n                self.v[l] = M::op(&self.v[l],\
-    \ &f);\n                l += 1;\n            }\n            if r & 1 != 0 {\n\
-    \                r -= 1;\n                self.v[r] = M::op(&self.v[r], &f);\n\
-    \            }\n            l >>= 1;\n            r >>= 1;\n        }\n    }\n\
-    \n    pub fn apply(&mut self, k: usize, f: M::S) {\n        assert!(k < self.n);\n\
+    \       self.propagate(l);\n        self.propagate(r);\n        while l < r {\n\
+    \            if l & 1 != 0 {\n                self.v[l] = M::op(&f, &self.v[l]);\n\
+    \                l += 1;\n            }\n            if r & 1 != 0 {\n       \
+    \         r -= 1;\n                self.v[r] = M::op(&f, &self.v[r]);\n      \
+    \      }\n            l >>= 1;\n            r >>= 1;\n        }\n    }\n\n   \
+    \ pub fn apply(&mut self, k: usize, f: M::S) {\n        assert!(k < self.n);\n\
     \        self.apply_range(k..=k, f);\n    }\n\n    pub fn get(&self, mut k: usize)\
     \ -> M::S {\n        assert!(k < self.n);\n        k += self.n;\n        let mut\
     \ res = self.v[k].clone();\n        while k > 1 {\n            k >>= 1;\n    \
-    \        res = M::op(&res, &self.v[k]);\n        }\n        res\n    }\n\n   \
-    \ fn push(&mut self, i: usize) {\n        if i < self.n {\n            self.v[i\
-    \ * 2] = M::op(&self.v[i * 2], &self.v[i]);\n            self.v[i * 2 + 1] = M::op(&self.v[i\
-    \ * 2 + 1], &self.v[i]);\n            self.v[i] = M::e();\n        }\n    }\n\n\
-    \    fn propagate(&mut self, i: usize) {\n        if i == 0 {\n            return;\n\
-    \        }\n        let crz = i.trailing_zeros() as usize;\n        for h in (crz\
-    \ + 1..63 - i.leading_zeros() as usize).rev() {\n            self.push(i >> h);\n\
-    \        }\n    }\n}\n"
+    \        res = M::op(&self.v[k], &res);\n        }\n        res\n    }\n\n   \
+    \ fn push(&mut self, i: usize) {\n        self.v[i * 2] = M::op(&self.v[i], &self.v[i\
+    \ * 2]);\n        self.v[i * 2 + 1] = M::op(&self.v[i], &self.v[i * 2 + 1]);\n\
+    \        self.v[i] = M::e();\n    }\n\n    fn propagate(&mut self, i: usize) {\n\
+    \        if i == 0 {\n            return;\n        }\n        let crz = i.trailing_zeros()\
+    \ as usize;\n        for h in (crz + 1..64 - i.leading_zeros() as usize).rev()\
+    \ {\n            self.push(i >> h);\n        }\n    }\n}\n"
   dependsOn:
   - crates/algebraic/algebraic/src/lib.rs
   isVerificationFile: false
   path: crates/data-structure/dual-segment-tree/src/lib.rs
   requiredBy:
   - crates/data-structure/dual-range-tree/src/lib.rs
-  timestamp: '2024-02-27 16:25:11+09:00'
+  timestamp: '2024-02-27 18:00:57+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: crates/data-structure/dual-segment-tree/src/lib.rs
