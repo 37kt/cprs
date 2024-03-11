@@ -22,13 +22,13 @@ data:
     \ = vec![0; n];\n    let mut j = 0;\n    for i in 1..n {\n        let mut k =\
     \ if j + z[j] <= i {\n            0\n        } else {\n            z[i - j].min(j\
     \ + z[j] - i)\n        };\n        while i + k < n && s[k] == s[i + k] {\n   \
-    \         k += 1;\n        }\n        z[i] = k;\n        if j + z[j] < i + z[j]\
+    \         k += 1;\n        }\n        z[i] = k;\n        if j + z[j] < i + z[i]\
     \ {\n            j = i;\n        }\n    }\n    z[0] = n;\n    z\n}\n"
   dependsOn: []
   isVerificationFile: false
   path: crates/string/z-algorithm/src/lib.rs
   requiredBy: []
-  timestamp: '2023-04-27 14:07:11+09:00'
+  timestamp: '2024-03-11 09:14:28+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/zalgorithm/src/main.rs

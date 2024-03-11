@@ -78,12 +78,12 @@ data:
       title: crates/data-structure/disjoint-sparse-table/src/lib.rs
   - name: crates/data-structure/dual-range-tree/src
     pages:
-    - icon: ':warning:'
+    - icon: ':heavy_check_mark:'
       path: crates/data-structure/dual-range-tree/src/lib.rs
       title: crates/data-structure/dual-range-tree/src/lib.rs
   - name: crates/data-structure/dual-segment-tree/src
     pages:
-    - icon: ':warning:'
+    - icon: ':heavy_check_mark:'
       path: crates/data-structure/dual-segment-tree/src/lib.rs
       title: crates/data-structure/dual-segment-tree/src/lib.rs
   - name: crates/data-structure/fenwick-tree/src
@@ -211,6 +211,11 @@ data:
     - icon: ':warning:'
       path: crates/graph/compressed-tree/src/lib.rs
       title: crates/graph/compressed-tree/src/lib.rs
+  - name: crates/graph/dijkstra/src
+    pages:
+    - icon: ':heavy_check_mark:'
+      path: crates/graph/dijkstra/src/lib.rs
+      title: crates/graph/dijkstra/src/lib.rs
   - name: crates/graph/graph/src
     pages:
     - icon: ':heavy_check_mark:'
@@ -587,6 +592,11 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/queue_operate_all_composite/src/main.rs
       title: verify/queue_operate_all_composite/src/main.rs
+  - name: verify/range_affine_point_get/src
+    pages:
+    - icon: ':heavy_check_mark:'
+      path: verify/range_affine_point_get/src/main.rs
+      title: verify/range_affine_point_get/src/main.rs
   - name: verify/range_affine_range_sum/src
     pages:
     - icon: ':heavy_check_mark:'
@@ -607,6 +617,11 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/range_reverse_range_sum/src/main.rs
       title: verify/range_reverse_range_sum/src/main.rs
+  - name: verify/rectangle_add_point_get/src
+    pages:
+    - icon: ':heavy_check_mark:'
+      path: verify/rectangle_add_point_get/src/main.rs
+      title: verify/rectangle_add_point_get/src/main.rs
   - name: verify/scc/src
     pages:
     - icon: ':heavy_check_mark:'
@@ -627,6 +642,11 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/shift_of_sampling_points_of_polynomial/src/main.rs
       title: verify/shift_of_sampling_points_of_polynomial/src/main.rs
+  - name: verify/shortest_path/src
+    pages:
+    - icon: ':heavy_check_mark:'
+      path: verify/shortest_path/src/main.rs
+      title: verify/shortest_path/src/main.rs
   - name: verify/sqrt_mod/src
     pages:
     - icon: ':heavy_check_mark:'

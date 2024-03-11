@@ -14,6 +14,9 @@ data:
   - icon: ':warning:'
     path: crates/graph/compressed-tree/src/lib.rs
     title: crates/graph/compressed-tree/src/lib.rs
+  - icon: ':heavy_check_mark:'
+    path: crates/graph/dijkstra/src/lib.rs
+    title: crates/graph/dijkstra/src/lib.rs
   - icon: ':warning:'
     path: crates/graph/low-link/src/lib.rs
     title: crates/graph/low-link/src/lib.rs
@@ -39,6 +42,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/scc/src/main.rs
     title: verify/scc/src/main.rs
+  - icon: ':heavy_check_mark:'
+    path: verify/shortest_path/src/main.rs
+    title: verify/shortest_path/src/main.rs
   - icon: ':heavy_check_mark:'
     path: verify/tree_path_composite_sum/src/main.rs
     title: verify/tree_path_composite_sum/src/main.rs
@@ -104,25 +110,27 @@ data:
   isVerificationFile: false
   path: crates/graph/graph/src/lib.rs
   requiredBy:
-  - crates/graph/strongly-connected-components/src/lib.rs
-  - crates/graph/low-link/src/lib.rs
-  - crates/graph/complement-graph-bfs/src/lib.rs
-  - crates/graph/compressed-tree/src/lib.rs
   - crates/data-structure/heavy-light-decomposition/src/lib.rs
   - crates/data-structure/tree-query/src/lib.rs
-  - crates/math/two-satisfiability/src/lib.rs
-  - crates/tree/centroid-decomposition/src/lib.rs
+  - crates/graph/compressed-tree/src/lib.rs
+  - crates/graph/low-link/src/lib.rs
+  - crates/graph/strongly-connected-components/src/lib.rs
+  - crates/graph/complement-graph-bfs/src/lib.rs
+  - crates/graph/dijkstra/src/lib.rs
   - crates/tree/re-rooting-dp/src/lib.rs
+  - crates/tree/centroid-decomposition/src/lib.rs
+  - crates/math/two-satisfiability/src/lib.rs
   timestamp: '2023-05-17 16:30:46+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/vertex_set_path_composite/src/main.rs
-  - verify/vertex_add_path_sum/src/main.rs
-  - verify/vertex_add_subtree_sum/src/main.rs
   - verify/tree_path_composite_sum/src/main.rs
-  - verify/jump_on_tree/src/main.rs
   - verify/scc/src/main.rs
   - verify/lca/src/main.rs
+  - verify/vertex_add_subtree_sum/src/main.rs
+  - verify/vertex_add_path_sum/src/main.rs
+  - verify/vertex_set_path_composite/src/main.rs
+  - verify/shortest_path/src/main.rs
+  - verify/jump_on_tree/src/main.rs
 documentation_of: crates/graph/graph/src/lib.rs
 layout: document
 redirect_from:

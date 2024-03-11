@@ -4,14 +4,17 @@ data:
   - icon: ':heavy_check_mark:'
     path: crates/algebraic/algebraic/src/lib.rs
     title: crates/algebraic/algebraic/src/lib.rs
-  - icon: ':warning:'
+  - icon: ':heavy_check_mark:'
     path: crates/data-structure/dual-segment-tree/src/lib.rs
     title: crates/data-structure/dual-segment-tree/src/lib.rs
   _extendedRequiredBy: []
-  _extendedVerifiedWith: []
+  _extendedVerifiedWith:
+  - icon: ':heavy_check_mark:'
+    path: verify/rectangle_add_point_get/src/main.rs
+    title: verify/rectangle_add_point_get/src/main.rs
   _isVerificationFailed: false
   _pathExtension: rs
-  _verificationStatusIcon: ':warning:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.12.2/x64/lib/python3.12/site-packages/onlinejudge_verify/documentation/build.py\"\
@@ -83,8 +86,9 @@ data:
   path: crates/data-structure/dual-range-tree/src/lib.rs
   requiredBy: []
   timestamp: '2024-02-27 18:00:57+09:00'
-  verificationStatus: LIBRARY_NO_TESTS
-  verifiedWith: []
+  verificationStatus: LIBRARY_ALL_AC
+  verifiedWith:
+  - verify/rectangle_add_point_get/src/main.rs
 documentation_of: crates/data-structure/dual-range-tree/src/lib.rs
 layout: document
 redirect_from:

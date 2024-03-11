@@ -57,7 +57,7 @@ data:
   path: crates/convolution/convolution-arbitrary-mod/src/lib.rs
   requiredBy:
   - crates/polynomial/formal-power-series/src/lib.rs
-  timestamp: '2023-07-15 18:59:53+09:00'
+  timestamp: '2024-03-11 09:14:28+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/convolution_mod_1000000007/src/main.rs

@@ -114,7 +114,7 @@ data:
     \    }\n    ntt(&mut a[n..]);\n}\n\npub fn convolution_ntt_friendly<const P: u32>(\n\
     \    mut a: Vec<StaticModInt<P>>,\n    mut b: Vec<StaticModInt<P>>,\n) -> Vec<StaticModInt<P>>\
     \ {\n    let n = a.len();\n    let m = b.len();\n    if n == 0 || m == 0 {\n \
-    \       return vec![];\n    } else if n.min(m) <= 60 {\n        return convolution_naive(&a,\
+    \       return vec![];\n    }\n    if n.min(m) <= 60 {\n        return convolution_naive(&a,\
     \ &b);\n    }\n    let len = n + m - 1;\n    let z = 1 << 64 - (len - 1).leading_zeros();\n\
     \    a.resize(z, 0.into());\n    b.resize(z, 0.into());\n    ntt(&mut a);\n  \
     \  ntt(&mut b);\n    for i in 0..z {\n        a[i] *= b[i];\n    }\n    ntt_inv(&mut\
@@ -126,9 +126,9 @@ data:
   path: crates/convolution/convolution-ntt-friendly/src/lib.rs
   requiredBy:
   - crates/convolution/convolution-arbitrary-mod/src/lib.rs
-  - crates/polynomial/bostan-mori/src/lib.rs
   - crates/polynomial/formal-power-series/src/lib.rs
-  timestamp: '2023-07-15 18:59:53+09:00'
+  - crates/polynomial/bostan-mori/src/lib.rs
+  timestamp: '2024-03-11 09:14:28+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/convolution_mod/src/main.rs
