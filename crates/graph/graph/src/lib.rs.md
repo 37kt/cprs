@@ -9,6 +9,9 @@ data:
     path: crates/data-structure/tree-query/src/lib.rs
     title: crates/data-structure/tree-query/src/lib.rs
   - icon: ':warning:'
+    path: crates/graph/bellman-ford/src/lib.rs
+    title: crates/graph/bellman-ford/src/lib.rs
+  - icon: ':warning:'
     path: crates/graph/complement-graph-bfs/src/lib.rs
     title: crates/graph/complement-graph-bfs/src/lib.rs
   - icon: ':warning:'
@@ -114,6 +117,7 @@ data:
   - crates/data-structure/tree-query/src/lib.rs
   - crates/graph/compressed-tree/src/lib.rs
   - crates/graph/low-link/src/lib.rs
+  - crates/graph/bellman-ford/src/lib.rs
   - crates/graph/strongly-connected-components/src/lib.rs
   - crates/graph/complement-graph-bfs/src/lib.rs
   - crates/graph/dijkstra/src/lib.rs

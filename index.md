@@ -201,6 +201,11 @@ data:
     - icon: ':heavy_check_mark:'
       path: crates/data-structure/wavelet-matrix/src/lib.rs
       title: crates/data-structure/wavelet-matrix/src/lib.rs
+  - name: crates/graph/bellman-ford/src
+    pages:
+    - icon: ':warning:'
+      path: crates/graph/bellman-ford/src/lib.rs
+      title: crates/graph/bellman-ford/src/lib.rs
   - name: crates/graph/complement-graph-bfs/src
     pages:
     - icon: ':warning:'
