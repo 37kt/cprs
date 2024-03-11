@@ -18,7 +18,7 @@ where
             k += 1;
         }
         z[i] = k;
-        if j + z[j] < i + z[j] {
+        if j + z[j] < i + z[i] {
             j = i;
         }
     }

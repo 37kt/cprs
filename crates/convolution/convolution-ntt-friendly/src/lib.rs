@@ -158,7 +158,8 @@ pub fn convolution_ntt_friendly<const P: u32>(
     let m = b.len();
     if n == 0 || m == 0 {
         return vec![];
-    } else if n.min(m) <= 60 {
+    }
+    if n.min(m) <= 60 {
         return convolution_naive(&a, &b);
     }
     let len = n + m - 1;
