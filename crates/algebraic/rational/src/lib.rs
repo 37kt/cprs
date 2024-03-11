@@ -5,14 +5,14 @@ use std::{
     sync::atomic::{AtomicBool, Ordering::SeqCst},
 };
 
-type Z = i64;
+type Z = i128;
 
 static AUTO_REDUCE: AtomicBool = AtomicBool::new(true);
 
 #[derive(Clone, Copy)]
 pub struct Rational {
-    num: Z,
-    den: Z,
+    pub num: Z,
+    pub den: Z,
 }
 
 fn gcd(mut a: Z, mut b: Z) -> Z {
@@ -84,6 +84,10 @@ impl Rational {
         res
     }
 
+    pub fn raw(num: Z, den: Z) -> Self {
+        Self { num, den }
+    }
+
     pub fn num(&self) -> Z {
         self.num
     }
@@ -100,7 +104,12 @@ impl Rational {
     }
 
     pub fn normalize(&mut self) {
-        assert!(self.den != 0);
+        assert!(self.num != 0 || self.den != 0);
+        if self.den == 0 {
+            self.num = if self.num > 0 { 1 } else { -1 };
+            self.den = 0;
+            return;
+        }
         if self.den < 0 {
             self.num = -self.num;
             self.den = -self.den;
