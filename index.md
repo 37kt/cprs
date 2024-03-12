@@ -8,7 +8,7 @@ data:
       title: crates/algebraic/algebraic/src/lib.rs
   - name: crates/algebraic/rational/src
     pages:
-    - icon: ':warning:'
+    - icon: ':heavy_check_mark:'
       path: crates/algebraic/rational/src/lib.rs
       title: crates/algebraic/rational/src/lib.rs
   - name: crates/algorithm/mo/src
@@ -311,6 +311,11 @@ data:
     - icon: ':warning:'
       path: crates/math/prime-sieve/src/lib.rs
       title: crates/math/prime-sieve/src/lib.rs
+  - name: crates/math/stern-brocot-tree/src
+    pages:
+    - icon: ':heavy_check_mark:'
+      path: crates/math/stern-brocot-tree/src/lib.rs
+      title: crates/math/stern-brocot-tree/src/lib.rs
   - name: crates/math/two-satisfiability/src
     pages:
     - icon: ':heavy_check_mark:'
@@ -682,6 +687,11 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/staticrmq/src/main.rs
       title: verify/staticrmq/src/main.rs
+  - name: verify/stern_brocot_tree/src
+    pages:
+    - icon: ':heavy_check_mark:'
+      path: verify/stern_brocot_tree/src/main.rs
+      title: verify/stern_brocot_tree/src/main.rs
   - name: verify/subset_convolution/src
     pages:
     - icon: ':heavy_check_mark:'
