@@ -143,8 +143,8 @@ data:
   timestamp: '2023-06-13 17:07:21+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/number_of_substrings/src/main.rs
   - verify/suffixarray/src/main.rs
+  - verify/number_of_substrings/src/main.rs
 documentation_of: crates/string/suffix-array/src/lib.rs
 layout: document
 redirect_from:

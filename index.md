@@ -156,6 +156,11 @@ data:
     - icon: ':heavy_check_mark:'
       path: crates/data-structure/segment-tree/src/lib.rs
       title: crates/data-structure/segment-tree/src/lib.rs
+  - name: crates/data-structure/segment-tree-on-wavelet-matrix/src
+    pages:
+    - icon: ':heavy_check_mark:'
+      path: crates/data-structure/segment-tree-on-wavelet-matrix/src/lib.rs
+      title: crates/data-structure/segment-tree-on-wavelet-matrix/src/lib.rs
   - name: crates/data-structure/segtree-beats/src
     pages:
     - icon: ':heavy_check_mark:'
@@ -386,6 +391,11 @@ data:
     - icon: ':heavy_check_mark:'
       path: crates/string/z-algorithm/src/lib.rs
       title: crates/string/z-algorithm/src/lib.rs
+  - name: crates/tree/cartesian-tree/src
+    pages:
+    - icon: ':heavy_check_mark:'
+      path: crates/tree/cartesian-tree/src/lib.rs
+      title: crates/tree/cartesian-tree/src/lib.rs
   - name: crates/tree/centroid-decomposition/src
     pages:
     - icon: ':warning:'
@@ -427,6 +437,11 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/bitwise_xor_convolution/src/main.rs
       title: verify/bitwise_xor_convolution/src/main.rs
+  - name: verify/cartesian_tree/src
+    pages:
+    - icon: ':heavy_check_mark:'
+      path: verify/cartesian_tree/src/main.rs
+      title: verify/cartesian_tree/src/main.rs
   - name: verify/convolution_mod/src
     pages:
     - icon: ':heavy_check_mark:'
@@ -572,6 +587,11 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/point_add_rectangle_sum/src/main.rs
       title: verify/point_add_rectangle_sum/src/main.rs
+  - name: verify/point_add_rectangle_sum_2/src
+    pages:
+    - icon: ':heavy_check_mark:'
+      path: verify/point_add_rectangle_sum_2/src/main.rs
+      title: verify/point_add_rectangle_sum_2/src/main.rs
   - name: verify/polynomial_interpolation/src
     pages:
     - icon: ':heavy_check_mark:'

@@ -125,9 +125,9 @@ data:
   isVerificationFile: false
   path: crates/convolution/convolution-ntt-friendly/src/lib.rs
   requiredBy:
-  - crates/convolution/convolution-arbitrary-mod/src/lib.rs
   - crates/polynomial/formal-power-series/src/lib.rs
   - crates/polynomial/bostan-mori/src/lib.rs
+  - crates/convolution/convolution-arbitrary-mod/src/lib.rs
   timestamp: '2024-03-11 09:14:28+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
