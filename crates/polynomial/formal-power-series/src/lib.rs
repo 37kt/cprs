@@ -258,7 +258,7 @@ impl<const P: u32> FormalPowerSeries<P> {
                 }
                 return res;
             }
-            if i + 1 >= d / k {
+            if (i + 1).saturating_mul(k) >= d {
                 return fps![0; d];
             }
         }
