@@ -3,10 +3,12 @@ use std::{
     ops::{Add, AddAssign, Div, DivAssign, Index, IndexMut, Mul, MulAssign, Neg, Sub, SubAssign},
 };
 
+use algebraic::{One, Zero};
+
 #[derive(Clone)]
 pub struct Matrix<T>
 where
-    T: From<i64> + Clone,
+    T: Clone,
 {
     n: usize,
     m: usize,
@@ -15,7 +17,7 @@ where
 
 impl<T> From<Vec<Vec<T>>> for Matrix<T>
 where
-    T: From<i64> + Clone,
+    T: Clone,
 {
     fn from(v: Vec<Vec<T>>) -> Self {
         let n = v.len();
@@ -34,7 +36,7 @@ where
 
 impl<T> Debug for Matrix<T>
 where
-    T: From<i64> + Clone + Debug,
+    T: Clone + Debug,
 {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         for i in 0..self.n {
@@ -61,7 +63,7 @@ where
 
 impl<T> Display for Matrix<T>
 where
-    T: From<i64> + Clone + Display,
+    T: Clone + Display,
 {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         for i in 0..self.n {
@@ -88,7 +90,7 @@ where
 
 impl<T> Index<usize> for Matrix<T>
 where
-    T: From<i64> + Clone,
+    T: Clone,
 {
     type Output = [T];
     fn index(&self, index: usize) -> &Self::Output {
@@ -98,7 +100,7 @@ where
 
 impl<T> IndexMut<usize> for Matrix<T>
 where
-    T: From<i64> + Clone,
+    T: Clone,
 {
     fn index_mut(&mut self, index: usize) -> &mut Self::Output {
         &mut self.v[index * self.m..(index + 1) * self.m]
@@ -107,24 +109,8 @@ where
 
 impl<T> Matrix<T>
 where
-    T: From<i64> + Clone,
+    T: Clone,
 {
-    pub fn zeros(n: usize, m: usize) -> Self {
-        Self {
-            n,
-            m,
-            v: vec![0.into(); n * m].into_boxed_slice(),
-        }
-    }
-
-    pub fn e(n: usize) -> Self {
-        let mut a = Self::zeros(n, n);
-        for i in 0..n {
-            a[i][i] = 1.into();
-        }
-        a
-    }
-
     pub fn n(&self) -> usize {
         self.n
     }
@@ -134,7 +120,11 @@ where
     }
 
     pub fn transpose(&self) -> Self {
-        let mut a = Self::zeros(self.m, self.n);
+        let mut a = Self {
+            n: self.m,
+            m: self.n,
+            v: self.v.clone(),
+        };
         for i in 0..self.n {
             for j in 0..self.m {
                 a[j][i] = self[i][j].clone();
@@ -146,7 +136,33 @@ where
 
 impl<T> Matrix<T>
 where
-    T: From<i64> + Clone + Add<Output = T> + Mul<Output = T>,
+    T: Zero + Clone,
+{
+    pub fn zeros(n: usize, m: usize) -> Self {
+        Self {
+            n,
+            m,
+            v: vec![T::zero(); n * m].into_boxed_slice(),
+        }
+    }
+}
+
+impl<T> Matrix<T>
+where
+    T: Zero + One + Clone,
+{
+    pub fn e(n: usize) -> Self {
+        let mut a = Self::zeros(n, n);
+        for i in 0..n {
+            a[i][i] = T::one();
+        }
+        a
+    }
+}
+
+impl<T> Matrix<T>
+where
+    T: Zero + One + Clone + Add<Output = T> + Mul<Output = T>,
 {
     pub fn pow(&self, mut k: usize) -> Self {
         assert!(self.n == self.m);
@@ -165,7 +181,8 @@ where
 
 impl<T> Matrix<T>
 where
-    T: From<i64>
+    T: Zero
+        + One
         + Clone
         + Eq
         + Neg<Output = T>
@@ -178,9 +195,9 @@ where
     pub fn gauss_elimination(&self) -> (Self, usize, Option<T>) {
         let mut a = self.clone();
         let mut rank = 0;
-        let mut det: T = 1.into();
-        let one = 1.into();
-        let zero = 0.into();
+        let mut det = T::one();
+        let one = T::one();
+        let zero = T::zero();
         for j in 0..self.m {
             if let Some(i) = (rank..self.n).position(|i| a[i][j] != zero) {
                 let i = i + rank;
@@ -217,7 +234,7 @@ where
 
     pub fn inv(&self) -> Option<Self> {
         assert!(self.n == self.m);
-        let one: T = 1.into();
+        let one = T::one();
         let mut a = Self::zeros(self.n, self.n * 2);
         for i in 0..self.n {
             for j in 0..self.n {
@@ -241,7 +258,7 @@ where
 
 impl<T> Neg for Matrix<T>
 where
-    T: From<i64> + Clone + Neg<Output = T>,
+    T: Clone + Neg<Output = T>,
 {
     type Output = Self;
     fn neg(mut self) -> Self::Output {
@@ -254,7 +271,7 @@ where
 
 impl<T> Neg for &Matrix<T>
 where
-    T: From<i64> + Clone + Neg<Output = T>,
+    T: Clone + Neg<Output = T>,
 {
     type Output = Matrix<T>;
     fn neg(self) -> Self::Output {
@@ -264,7 +281,7 @@ where
 
 impl<T> AddAssign<&Self> for Matrix<T>
 where
-    T: From<i64> + Clone + Add<Output = T>,
+    T: Clone + Add<Output = T>,
 {
     fn add_assign(&mut self, rhs: &Self) {
         assert!((self.n, self.m) == (rhs.n, rhs.m));
@@ -276,7 +293,7 @@ where
 
 impl<T> SubAssign<&Self> for Matrix<T>
 where
-    T: From<i64> + Clone + Sub<Output = T>,
+    T: Clone + Sub<Output = T>,
 {
     fn sub_assign(&mut self, rhs: &Self) {
         assert!((self.n, self.m) == (rhs.n, rhs.m));
@@ -288,14 +305,14 @@ where
 
 impl<T> MulAssign<&Self> for Matrix<T>
 where
-    T: From<i64> + Clone + Add<Output = T> + Mul<Output = T>,
+    T: Zero + Clone + Add<Output = T> + Mul<Output = T>,
 {
     fn mul_assign(&mut self, rhs: &Self) {
         assert!(self.m == rhs.n);
         let mut a = Self::zeros(self.n, rhs.m);
         for i in 0..self.n {
-            for j in 0..rhs.m {
-                for k in 0..self.m {
+            for k in 0..self.m {
+                for j in 0..rhs.m {
                     a[i][j] = a[i][j].clone() + self[i][k].clone() * rhs[k][j].clone();
                 }
             }
@@ -306,7 +323,7 @@ where
 
 impl<T> MulAssign<T> for Matrix<T>
 where
-    T: From<i64> + Clone + Mul<Output = T>,
+    T: Zero + Clone + Mul<Output = T>,
 {
     fn mul_assign(&mut self, rhs: T) {
         for x in self.v.as_mut() {
@@ -317,10 +334,10 @@ where
 
 impl<T> DivAssign<T> for Matrix<T>
 where
-    T: From<i64> + Clone + Mul<Output = T> + Div<Output = T>,
+    T: Zero + One + Clone + Mul<Output = T> + Div<Output = T>,
 {
     fn div_assign(&mut self, rhs: T) {
-        *self *= T::from(1) / rhs;
+        *self *= T::one() / rhs;
     }
 }
 
@@ -338,7 +355,7 @@ where
 
 impl<T> Sub<Self> for &Matrix<T>
 where
-    T: From<i64> + Clone + Sub<Output = T>,
+    T: Clone + Sub<Output = T>,
 {
     type Output = Matrix<T>;
     fn sub(self, rhs: Self) -> Self::Output {
@@ -350,7 +367,7 @@ where
 
 impl<T> Mul<Self> for &Matrix<T>
 where
-    T: From<i64> + Clone + Add<Output = T> + Mul<Output = T>,
+    T: Zero + Clone + Add<Output = T> + Mul<Output = T>,
 {
     type Output = Matrix<T>;
     fn mul(self, rhs: Self) -> Self::Output {

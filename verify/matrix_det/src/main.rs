@@ -1,7 +1,7 @@
 // verification-helper: PROBLEM https://judge.yosupo.jp/problem/matrix_det
 
-use ac_library::ModInt998244353 as Mint;
 use matrix::Matrix;
+use modint::ModInt998244353 as Mint;
 use proconio::input;
 
 #[proconio::fastout]

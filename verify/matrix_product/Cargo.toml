@@ -7,6 +7,6 @@ edition = "2018"
 
 [dependencies]
 proconio = { version = "=0.3.6", features = ["derive"] }
-ac-library-rs = { git = "https://github.com/rust-lang-ja/ac-library-rs" }
+modint = { path = "../../crates/number-theory/modint"}
 matrix = { path = "../../crates/math/matrix"}
 itertools = "=0.9.0"

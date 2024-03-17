@@ -5,6 +5,8 @@ use std::{
     sync::atomic::{AtomicBool, Ordering::SeqCst},
 };
 
+use algebraic::{One, Zero};
+
 type Z = i128;
 
 static AUTO_REDUCE: AtomicBool = AtomicBool::new(true);
@@ -224,4 +226,24 @@ impl_ops! {
     Sub, SubAssign, sub, sub_assign,
     Mul, MulAssign, mul, mul_assign,
     Div, DivAssign, div, div_assign,
+}
+
+impl Zero for Rational {
+    fn zero() -> Self {
+        Self::from(0)
+    }
+
+    fn is_zero(&self) -> bool {
+        self.num == 0
+    }
+}
+
+impl One for Rational {
+    fn one() -> Self {
+        Self::from(1)
+    }
+
+    fn is_one(&self) -> bool {
+        self.num == 1 && self.den == 1
+    }
 }

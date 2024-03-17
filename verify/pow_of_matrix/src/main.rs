@@ -1,4 +1,4 @@
-// verification-helper: PROBLEM https://judge.yosupo.jp/problem/matrix_product
+// verification-helper: PROBLEM https://judge.yosupo.jp/problem/pow_of_matrix
 
 use itertools::Itertools;
 use matrix::Matrix;
@@ -9,15 +9,12 @@ use proconio::input;
 fn main() {
     input! {
         n: usize,
-        m: usize,
         k: usize,
-        a: [[Mint; m]; n],
-        b: [[Mint; k]; m],
+        a: [[Mint; n]; n],
     }
     let a = Matrix::<Mint>::from(a);
-    let b = Matrix::<Mint>::from(b);
-    let c = &a * &b;
+    let b = a.pow(k);
     for i in 0..n {
-        println!("{}", c[i].iter().join(" "));
+        println!("{}", b[i].iter().join(" "));
     }
 }

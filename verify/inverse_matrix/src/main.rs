@@ -1,7 +1,7 @@
 // verification-helper: PROBLEM https://judge.yosupo.jp/problem/inverse_matrix
 
-use ac_library::ModInt998244353 as Mint;
 use matrix::Matrix;
+use modint::ModInt998244353 as Mint;
 use proconio::input;
 
 #[proconio::fastout]

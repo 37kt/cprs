@@ -5,6 +5,8 @@ use std::{
     sync::atomic::{AtomicU64, Ordering::SeqCst},
 };
 
+use algebraic::{One, Zero};
+
 struct Montgomery {
     m: AtomicU64,
     r: AtomicU64,
@@ -160,3 +162,23 @@ impl PartialEq for MontgomeryModInt {
 }
 
 impl Eq for MontgomeryModInt {}
+
+impl Zero for MontgomeryModInt {
+    fn zero() -> Self {
+        Self(0)
+    }
+
+    fn is_zero(&self) -> bool {
+        self.0 == 0
+    }
+}
+
+impl One for MontgomeryModInt {
+    fn one() -> Self {
+        Self(1)
+    }
+
+    fn is_one(&self) -> bool {
+        self == &Self::new(1)
+    }
+}

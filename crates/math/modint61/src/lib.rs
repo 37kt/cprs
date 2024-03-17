@@ -3,6 +3,8 @@ use std::{
     ops::{Add, AddAssign, Div, DivAssign, Mul, MulAssign, Neg, Sub, SubAssign},
 };
 
+use algebraic::{One, Zero};
+
 const P: u64 = (1 << 61) - 1;
 
 #[derive(Clone, Copy, Default, PartialEq, Eq, Hash)]
@@ -178,4 +180,24 @@ impl_ops! {
     Sub, SubAssign, sub, sub_assign,
     Mul, MulAssign, mul, mul_assign,
     Div, DivAssign, div, div_assign,
+}
+
+impl Zero for ModInt61 {
+    fn zero() -> Self {
+        Self::raw(0)
+    }
+
+    fn is_zero(&self) -> bool {
+        self.0 == 0
+    }
+}
+
+impl One for ModInt61 {
+    fn one() -> Self {
+        Self::raw(1)
+    }
+
+    fn is_one(&self) -> bool {
+        self.0 == 1
+    }
 }

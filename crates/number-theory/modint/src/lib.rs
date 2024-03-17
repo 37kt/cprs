@@ -8,6 +8,8 @@ use std::{
     sync::atomic::{self, AtomicU32, AtomicU64},
 };
 
+use algebraic::{One, Zero};
+
 #[derive(Clone, Copy, Default, PartialEq, Eq, Hash)]
 #[repr(transparent)]
 pub struct StaticModInt<const P: u32>(u32);
@@ -835,4 +837,44 @@ impl<const P: u32> StaticModInt<P> {
     pub const RATE3: [u32; 30] = ntt_info(P).6;
     pub const IRATE3: [u32; 30] = ntt_info(P).7;
     pub const IS_NTT_FRIENDLY: bool = is_prime(P) && Self::RANK2 >= 21;
+}
+
+impl<const P: u32> Zero for StaticModInt<P> {
+    fn zero() -> Self {
+        Self(0)
+    }
+
+    fn is_zero(&self) -> bool {
+        self.0 == 0
+    }
+}
+
+impl<const P: u32> One for StaticModInt<P> {
+    fn one() -> Self {
+        Self::new(1)
+    }
+
+    fn is_one(&self) -> bool {
+        self == &Self::one()
+    }
+}
+
+impl Zero for DynamicModInt {
+    fn zero() -> Self {
+        Self(0)
+    }
+
+    fn is_zero(&self) -> bool {
+        self.0 == 0
+    }
+}
+
+impl One for DynamicModInt {
+    fn one() -> Self {
+        Self::new(1)
+    }
+
+    fn is_one(&self) -> bool {
+        self == &Self::one()
+    }
 }
