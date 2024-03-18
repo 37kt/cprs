@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: crates/algebraic/algebraic/src/lib.rs
     title: crates/algebraic/algebraic/src/lib.rs
   - icon: ':warning:'
@@ -12,12 +12,12 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/dynamic_sequence_range_affine_range_sum/src/main.rs
     title: verify/dynamic_sequence_range_affine_range_sum/src/main.rs
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/range_reverse_range_sum/src/main.rs
     title: verify/range_reverse_range_sum/src/main.rs
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: rs
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.12.2/x64/lib/python3.12/site-packages/onlinejudge_verify/documentation/build.py\"\
@@ -84,7 +84,7 @@ data:
   path: crates/data-structure/splay-tree/src/lib.rs
   requiredBy: []
   timestamp: '2024-03-18 01:19:47+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/range_reverse_range_sum/src/main.rs
   - verify/dynamic_sequence_range_affine_range_sum/src/main.rs

@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: crates/algebraic/algebraic/src/lib.rs
     title: crates/algebraic/algebraic/src/lib.rs
   _extendedRequiredBy:
@@ -26,7 +26,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: crates/polynomial/polynomial-interpolation/src/lib.rs
     title: crates/polynomial/polynomial-interpolation/src/lib.rs
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: crates/polynomial/shift-of-sampling-points/src/lib.rs
     title: crates/polynomial/shift-of-sampling-points/src/lib.rs
   _extendedVerifiedWith:
@@ -81,22 +81,22 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/pow_of_matrix/src/main.rs
     title: verify/pow_of_matrix/src/main.rs
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/range_affine_point_get/src/main.rs
     title: verify/range_affine_point_get/src/main.rs
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/shift_of_sampling_points_of_polynomial/src/main.rs
     title: verify/shift_of_sampling_points_of_polynomial/src/main.rs
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/sqrt_mod/src/main.rs
     title: verify/sqrt_mod/src/main.rs
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/sqrt_of_formal_power_series/src/main.rs
     title: verify/sqrt_of_formal_power_series/src/main.rs
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/subset_convolution/src/main.rs
     title: verify/subset_convolution/src/main.rs
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/tree_path_composite_sum/src/main.rs
     title: verify/tree_path_composite_sum/src/main.rs
   _isVerificationFailed: true

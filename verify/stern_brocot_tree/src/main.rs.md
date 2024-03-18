@@ -1,17 +1,17 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: crates/algebraic/rational/src/lib.rs
     title: crates/algebraic/rational/src/lib.rs
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: crates/math/stern-brocot-tree/src/lib.rs
     title: crates/math/stern-brocot-tree/src/lib.rs
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: rs
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     PROBLEM: https://judge.yosupo.jp/problem/stern_brocot_tree
     links:
@@ -68,7 +68,7 @@ data:
   path: verify/stern_brocot_tree/src/main.rs
   requiredBy: []
   timestamp: '2024-03-18 01:19:47+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/stern_brocot_tree/src/main.rs
 layout: document

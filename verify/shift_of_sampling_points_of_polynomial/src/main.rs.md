@@ -7,14 +7,14 @@ data:
   - icon: ':question:'
     path: crates/polynomial/formal-power-series/src/lib.rs
     title: crates/polynomial/formal-power-series/src/lib.rs
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: crates/polynomial/shift-of-sampling-points/src/lib.rs
     title: crates/polynomial/shift-of-sampling-points/src/lib.rs
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: rs
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     PROBLEM: https://judge.yosupo.jp/problem/shift_of_sampling_points_of_polynomial
     links:
@@ -39,7 +39,7 @@ data:
   path: verify/shift_of_sampling_points_of_polynomial/src/main.rs
   requiredBy: []
   timestamp: '2024-03-18 01:19:47+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/shift_of_sampling_points_of_polynomial/src/main.rs
 layout: document

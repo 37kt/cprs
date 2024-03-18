@@ -2,22 +2,22 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: crates/algebraic/rational/src/lib.rs
     title: crates/algebraic/rational/src/lib.rs
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: crates/data-structure/disjoint-sparse-table/src/lib.rs
     title: crates/data-structure/disjoint-sparse-table/src/lib.rs
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: crates/data-structure/dual-range-tree/src/lib.rs
     title: crates/data-structure/dual-range-tree/src/lib.rs
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: crates/data-structure/dual-segment-tree/src/lib.rs
     title: crates/data-structure/dual-segment-tree/src/lib.rs
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: crates/data-structure/fenwick-tree/src/lib.rs
     title: crates/data-structure/fenwick-tree/src/lib.rs
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: crates/data-structure/lazy-segment-tree/src/lib.rs
     title: crates/data-structure/lazy-segment-tree/src/lib.rs
   - icon: ':heavy_check_mark:'
@@ -29,7 +29,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: crates/data-structure/segment-tree-on-wavelet-matrix/src/lib.rs
     title: crates/data-structure/segment-tree-on-wavelet-matrix/src/lib.rs
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: crates/data-structure/segment-tree/src/lib.rs
     title: crates/data-structure/segment-tree/src/lib.rs
   - icon: ':heavy_check_mark:'
@@ -38,10 +38,10 @@ data:
   - icon: ':warning:'
     path: crates/data-structure/splay-tree-internal/src/lib.rs
     title: crates/data-structure/splay-tree-internal/src/lib.rs
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: crates/data-structure/splay-tree/src/lib.rs
     title: crates/data-structure/splay-tree/src/lib.rs
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: crates/data-structure/tree-query/src/lib.rs
     title: crates/data-structure/tree-query/src/lib.rs
   - icon: ':heavy_check_mark:'
@@ -50,7 +50,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: crates/math/matrix/src/lib.rs
     title: crates/math/matrix/src/lib.rs
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: crates/math/modint61/src/lib.rs
     title: crates/math/modint61/src/lib.rs
   - icon: ':warning:'
@@ -62,7 +62,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: crates/string/suffix-array/src/lib.rs
     title: crates/string/suffix-array/src/lib.rs
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: crates/tree/re-rooting-dp/src/lib.rs
     title: crates/tree/re-rooting-dp/src/lib.rs
   _extendedVerifiedWith:
@@ -93,39 +93,39 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/queue_operate_all_composite/src/main.rs
     title: verify/queue_operate_all_composite/src/main.rs
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/range_affine_point_get/src/main.rs
     title: verify/range_affine_point_get/src/main.rs
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/range_affine_range_sum/src/main.rs
     title: verify/range_affine_range_sum/src/main.rs
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/range_reverse_range_sum/src/main.rs
     title: verify/range_reverse_range_sum/src/main.rs
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/rectangle_add_point_get/src/main.rs
     title: verify/rectangle_add_point_get/src/main.rs
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/static_range_inversions_query/src/main.rs
     title: verify/static_range_inversions_query/src/main.rs
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/staticrmq/src/main.rs
     title: verify/staticrmq/src/main.rs
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/tree_path_composite_sum/src/main.rs
     title: verify/tree_path_composite_sum/src/main.rs
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/vertex_add_path_sum/src/main.rs
     title: verify/vertex_add_path_sum/src/main.rs
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/vertex_add_subtree_sum/src/main.rs
     title: verify/vertex_add_subtree_sum/src/main.rs
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/vertex_set_path_composite/src/main.rs
     title: verify/vertex_set_path_composite/src/main.rs
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: rs
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.12.2/x64/lib/python3.12/site-packages/onlinejudge_verify/documentation/build.py\"\
@@ -192,7 +192,7 @@ data:
   - crates/data-structure/sliding-window-aggregation/src/lib.rs
   - crates/tree/re-rooting-dp/src/lib.rs
   timestamp: '2024-03-18 01:19:47+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/queue_operate_all_composite/src/main.rs
   - verify/tree_path_composite_sum/src/main.rs

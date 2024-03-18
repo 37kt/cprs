@@ -1,14 +1,14 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: crates/algebraic/algebraic/src/lib.rs
     title: crates/algebraic/algebraic/src/lib.rs
   _extendedRequiredBy:
   - icon: ':heavy_check_mark:'
     path: crates/data-structure/link-cut-tree/src/lib.rs
     title: crates/data-structure/link-cut-tree/src/lib.rs
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: crates/data-structure/splay-tree/src/lib.rs
     title: crates/data-structure/splay-tree/src/lib.rs
   _extendedVerifiedWith: []

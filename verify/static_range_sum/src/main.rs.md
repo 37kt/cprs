@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: crates/algorithm/mo/src/lib.rs
     title: crates/algorithm/mo/src/lib.rs
   _extendedRequiredBy: []

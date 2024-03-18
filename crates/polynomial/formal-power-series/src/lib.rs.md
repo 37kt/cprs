@@ -17,7 +17,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: crates/polynomial/polynomial-interpolation/src/lib.rs
     title: crates/polynomial/polynomial-interpolation/src/lib.rs
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: crates/polynomial/shift-of-sampling-points/src/lib.rs
     title: crates/polynomial/shift-of-sampling-points/src/lib.rs
   _extendedVerifiedWith:
@@ -48,10 +48,10 @@ data:
   - icon: ':x:'
     path: verify/pow_of_formal_power_series/src/main.rs
     title: verify/pow_of_formal_power_series/src/main.rs
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/shift_of_sampling_points_of_polynomial/src/main.rs
     title: verify/shift_of_sampling_points_of_polynomial/src/main.rs
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/sqrt_of_formal_power_series/src/main.rs
     title: verify/sqrt_of_formal_power_series/src/main.rs
   _isVerificationFailed: true

@@ -1,10 +1,10 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: crates/algebraic/algebraic/src/lib.rs
     title: crates/algebraic/algebraic/src/lib.rs
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: crates/data-structure/disjoint-sparse-table/src/lib.rs
     title: crates/data-structure/disjoint-sparse-table/src/lib.rs
   _extendedRequiredBy: []

@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: crates/algebraic/algebraic/src/lib.rs
     title: crates/algebraic/algebraic/src/lib.rs
   _extendedRequiredBy:
@@ -11,25 +11,25 @@ data:
   - icon: ':heavy_check_mark:'
     path: crates/data-structure/segment-tree-on-wavelet-matrix/src/lib.rs
     title: crates/data-structure/segment-tree-on-wavelet-matrix/src/lib.rs
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: crates/data-structure/tree-query/src/lib.rs
     title: crates/data-structure/tree-query/src/lib.rs
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: verify/point_add_range_sum/src/main.rs
     title: verify/point_add_range_sum/src/main.rs
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/vertex_add_path_sum/src/main.rs
     title: verify/vertex_add_path_sum/src/main.rs
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/vertex_add_subtree_sum/src/main.rs
     title: verify/vertex_add_subtree_sum/src/main.rs
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/vertex_set_path_composite/src/main.rs
     title: verify/vertex_set_path_composite/src/main.rs
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: rs
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.12.2/x64/lib/python3.12/site-packages/onlinejudge_verify/documentation/build.py\"\
@@ -100,7 +100,7 @@ data:
   - crates/data-structure/range-tree/src/lib.rs
   - crates/data-structure/tree-query/src/lib.rs
   timestamp: '2024-03-18 01:19:47+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/vertex_add_subtree_sum/src/main.rs
   - verify/point_add_range_sum/src/main.rs
