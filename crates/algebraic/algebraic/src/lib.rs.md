@@ -56,7 +56,7 @@ data:
   - icon: ':warning:'
     path: crates/math/montgomery-modint/src/lib.rs
     title: crates/math/montgomery-modint/src/lib.rs
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: crates/number-theory/modint/src/lib.rs
     title: crates/number-theory/modint/src/lib.rs
   - icon: ':heavy_check_mark:'

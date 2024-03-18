@@ -1,17 +1,17 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: crates/number-theory/modint/src/lib.rs
     title: crates/number-theory/modint/src/lib.rs
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: crates/polynomial/formal-power-series/src/lib.rs
     title: crates/polynomial/formal-power-series/src/lib.rs
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: rs
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     PROBLEM: https://judge.yosupo.jp/problem/pow_of_formal_power_series
     links:
@@ -34,8 +34,8 @@ data:
   isVerificationFile: true
   path: verify/pow_of_formal_power_series/src/main.rs
   requiredBy: []
-  timestamp: '2024-03-18 01:19:47+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2024-03-18 03:03:26+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/pow_of_formal_power_series/src/main.rs
 layout: document

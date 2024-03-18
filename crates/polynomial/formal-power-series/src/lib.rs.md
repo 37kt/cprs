@@ -7,7 +7,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: crates/convolution/convolution-ntt-friendly/src/lib.rs
     title: crates/convolution/convolution-ntt-friendly/src/lib.rs
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: crates/number-theory/modint/src/lib.rs
     title: crates/number-theory/modint/src/lib.rs
   _extendedRequiredBy:
@@ -45,7 +45,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/polynomial_taylor_shift/src/main.rs
     title: verify/polynomial_taylor_shift/src/main.rs
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/pow_of_formal_power_series/src/main.rs
     title: verify/pow_of_formal_power_series/src/main.rs
   - icon: ':heavy_check_mark:'
@@ -54,9 +54,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/sqrt_of_formal_power_series/src/main.rs
     title: verify/sqrt_of_formal_power_series/src/main.rs
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: rs
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.12.2/x64/lib/python3.12/site-packages/onlinejudge_verify/documentation/build.py\"\
@@ -166,18 +166,19 @@ data:
     \                res *= self[i].pow(k);\n                res = (res << i * k).pre(d);\n\
     \                if res.len() < d {\n                    res.resize(d, 0.into());\n\
     \                }\n                return res;\n            }\n            if\
-    \ i + 1 >= d / k {\n                return fps![0; d];\n            }\n      \
-    \  }\n        fps![0; d]\n    }\n\n    pub fn sqrt(&self, d: usize) -> Option<FormalPowerSeries<P>>\
-    \ {\n        if self.len() == 0 {\n            return Some(fps![0; d]);\n    \
-    \    }\n        if self[0].val() == 0 {\n            if let Some(i) = self.iter().position(|&x|\
-    \ x.val() != 0) {\n                if i & 1 != 0 {\n                    return\
-    \ None;\n                } else if d <= i / 2 {\n                    return Some(fps![0;\
-    \ d]);\n                }\n                let mut res = (self >> i).sqrt(d -\
-    \ i / 2)?;\n                res <<= i / 2;\n                if res.len() < d {\n\
-    \                    res.resize(d, 0.into());\n                }\n           \
-    \     return Some(res);\n            }\n            return Some(fps![0; d]);\n\
-    \        }\n\n        let r = self[0].sqrt()?;\n        assert_eq!(r * r, self[0]);\n\
-    \        let mut res = fps![r];\n        let inv2 = StaticModInt::new(2).inv();\n\
+    \ (i + 1).saturating_mul(k) >= d {\n                return fps![0; d];\n     \
+    \       }\n        }\n        fps![0; d]\n    }\n\n    pub fn sqrt(&self, d: usize)\
+    \ -> Option<FormalPowerSeries<P>> {\n        if self.len() == 0 {\n          \
+    \  return Some(fps![0; d]);\n        }\n        if self[0].val() == 0 {\n    \
+    \        if let Some(i) = self.iter().position(|&x| x.val() != 0) {\n        \
+    \        if i & 1 != 0 {\n                    return None;\n                }\
+    \ else if d <= i / 2 {\n                    return Some(fps![0; d]);\n       \
+    \         }\n                let mut res = (self >> i).sqrt(d - i / 2)?;\n   \
+    \             res <<= i / 2;\n                if res.len() < d {\n           \
+    \         res.resize(d, 0.into());\n                }\n                return\
+    \ Some(res);\n            }\n            return Some(fps![0; d]);\n        }\n\
+    \n        let r = self[0].sqrt()?;\n        assert_eq!(r * r, self[0]);\n    \
+    \    let mut res = fps![r];\n        let inv2 = StaticModInt::new(2).inv();\n\
     \        for i in 0.. {\n            let i = 1 << i;\n            if i >= d {\n\
     \                break;\n            }\n            res = (&res + self.clone().pre(i\
     \ << 1) * res.inv(i << 1)) * inv2;\n        }\n        Some(res.pre(d))\n    }\n\
@@ -361,8 +362,8 @@ data:
   - crates/polynomial/bostan-mori/src/lib.rs
   - crates/polynomial/polynomial-interpolation/src/lib.rs
   - crates/polynomial/shift-of-sampling-points/src/lib.rs
-  timestamp: '2024-03-18 01:19:47+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  timestamp: '2024-03-18 03:03:26+09:00'
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/inv_of_formal_power_series/src/main.rs
   - verify/pow_of_formal_power_series/src/main.rs

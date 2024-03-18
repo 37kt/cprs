@@ -348,7 +348,7 @@ data:
       title: crates/number-theory/combination/src/lib.rs
   - name: crates/number-theory/modint/src
     pages:
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: crates/number-theory/modint/src/lib.rs
       title: crates/number-theory/modint/src/lib.rs
   - name: crates/polynomial/bostan-mori/src
@@ -358,7 +358,7 @@ data:
       title: crates/polynomial/bostan-mori/src/lib.rs
   - name: crates/polynomial/formal-power-series/src
     pages:
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: crates/polynomial/formal-power-series/src/lib.rs
       title: crates/polynomial/formal-power-series/src/lib.rs
   - name: crates/polynomial/polynomial-interpolation/src
@@ -609,7 +609,7 @@ data:
       title: verify/polynomial_taylor_shift/src/main.rs
   - name: verify/pow_of_formal_power_series/src
     pages:
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verify/pow_of_formal_power_series/src/main.rs
       title: verify/pow_of_formal_power_series/src/main.rs
   - name: verify/pow_of_matrix/src

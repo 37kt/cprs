@@ -20,7 +20,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: crates/polynomial/bostan-mori/src/lib.rs
     title: crates/polynomial/bostan-mori/src/lib.rs
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: crates/polynomial/formal-power-series/src/lib.rs
     title: crates/polynomial/formal-power-series/src/lib.rs
   - icon: ':heavy_check_mark:'
@@ -75,7 +75,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/polynomial_taylor_shift/src/main.rs
     title: verify/polynomial_taylor_shift/src/main.rs
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/pow_of_formal_power_series/src/main.rs
     title: verify/pow_of_formal_power_series/src/main.rs
   - icon: ':heavy_check_mark:'
@@ -99,9 +99,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/tree_path_composite_sum/src/main.rs
     title: verify/tree_path_composite_sum/src/main.rs
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: rs
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links:
     - https://rsk0315.hatenablog.com/entry/2023/04/29/043512
@@ -394,7 +394,7 @@ data:
   - crates/convolution/convolution-arbitrary-mod/src/lib.rs
   - crates/convolution/convolution-ntt-friendly/src/lib.rs
   timestamp: '2024-03-18 01:19:47+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/convolution_mod/src/main.rs
   - verify/inv_of_formal_power_series/src/main.rs
