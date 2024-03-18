@@ -186,6 +186,11 @@ data:
     - icon: ':warning:'
       path: crates/data-structure/splay-tree-internal/src/lib.rs
       title: crates/data-structure/splay-tree-internal/src/lib.rs
+  - name: crates/data-structure/top2/src
+    pages:
+    - icon: ':warning:'
+      path: crates/data-structure/top2/src/lib.rs
+      title: crates/data-structure/top2/src/lib.rs
   - name: crates/data-structure/tree-query/src
     pages:
     - icon: ':heavy_check_mark:'
