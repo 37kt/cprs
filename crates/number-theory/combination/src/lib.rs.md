@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: crates/number-theory/modint/src/lib.rs
     title: crates/number-theory/modint/src/lib.rs
   _extendedRequiredBy: []
@@ -54,7 +54,7 @@ data:
   isVerificationFile: false
   path: crates/number-theory/combination/src/lib.rs
   requiredBy: []
-  timestamp: '2023-07-15 18:59:53+09:00'
+  timestamp: '2024-03-18 01:19:47+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/binomial_coefficient_prime_mod/src/main.rs

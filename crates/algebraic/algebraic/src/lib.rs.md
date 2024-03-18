@@ -2,19 +2,22 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
+    path: crates/algebraic/rational/src/lib.rs
+    title: crates/algebraic/rational/src/lib.rs
+  - icon: ':x:'
     path: crates/data-structure/disjoint-sparse-table/src/lib.rs
     title: crates/data-structure/disjoint-sparse-table/src/lib.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: crates/data-structure/dual-range-tree/src/lib.rs
     title: crates/data-structure/dual-range-tree/src/lib.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: crates/data-structure/dual-segment-tree/src/lib.rs
     title: crates/data-structure/dual-segment-tree/src/lib.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: crates/data-structure/fenwick-tree/src/lib.rs
     title: crates/data-structure/fenwick-tree/src/lib.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: crates/data-structure/lazy-segment-tree/src/lib.rs
     title: crates/data-structure/lazy-segment-tree/src/lib.rs
   - icon: ':heavy_check_mark:'
@@ -26,7 +29,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: crates/data-structure/segment-tree-on-wavelet-matrix/src/lib.rs
     title: crates/data-structure/segment-tree-on-wavelet-matrix/src/lib.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: crates/data-structure/segment-tree/src/lib.rs
     title: crates/data-structure/segment-tree/src/lib.rs
   - icon: ':heavy_check_mark:'
@@ -35,19 +38,31 @@ data:
   - icon: ':warning:'
     path: crates/data-structure/splay-tree-internal/src/lib.rs
     title: crates/data-structure/splay-tree-internal/src/lib.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: crates/data-structure/splay-tree/src/lib.rs
     title: crates/data-structure/splay-tree/src/lib.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: crates/data-structure/tree-query/src/lib.rs
     title: crates/data-structure/tree-query/src/lib.rs
   - icon: ':heavy_check_mark:'
     path: crates/math/discrete-logarithm/src/lib.rs
     title: crates/math/discrete-logarithm/src/lib.rs
   - icon: ':heavy_check_mark:'
+    path: crates/math/matrix/src/lib.rs
+    title: crates/math/matrix/src/lib.rs
+  - icon: ':x:'
+    path: crates/math/modint61/src/lib.rs
+    title: crates/math/modint61/src/lib.rs
+  - icon: ':warning:'
+    path: crates/math/montgomery-modint/src/lib.rs
+    title: crates/math/montgomery-modint/src/lib.rs
+  - icon: ':question:'
+    path: crates/number-theory/modint/src/lib.rs
+    title: crates/number-theory/modint/src/lib.rs
+  - icon: ':heavy_check_mark:'
     path: crates/string/suffix-array/src/lib.rs
     title: crates/string/suffix-array/src/lib.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: crates/tree/re-rooting-dp/src/lib.rs
     title: crates/tree/re-rooting-dp/src/lib.rs
   _extendedVerifiedWith:
@@ -78,39 +93,39 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/queue_operate_all_composite/src/main.rs
     title: verify/queue_operate_all_composite/src/main.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/range_affine_point_get/src/main.rs
     title: verify/range_affine_point_get/src/main.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/range_affine_range_sum/src/main.rs
     title: verify/range_affine_range_sum/src/main.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/range_reverse_range_sum/src/main.rs
     title: verify/range_reverse_range_sum/src/main.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/rectangle_add_point_get/src/main.rs
     title: verify/rectangle_add_point_get/src/main.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/static_range_inversions_query/src/main.rs
     title: verify/static_range_inversions_query/src/main.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/staticrmq/src/main.rs
     title: verify/staticrmq/src/main.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/tree_path_composite_sum/src/main.rs
     title: verify/tree_path_composite_sum/src/main.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/vertex_add_path_sum/src/main.rs
     title: verify/vertex_add_path_sum/src/main.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/vertex_add_subtree_sum/src/main.rs
     title: verify/vertex_add_subtree_sum/src/main.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/vertex_set_path_composite/src/main.rs
     title: verify/vertex_set_path_composite/src/main.rs
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: rs
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.12.2/x64/lib/python3.12/site-packages/onlinejudge_verify/documentation/build.py\"\
@@ -122,7 +137,9 @@ data:
   code: "pub trait Algebra {\n    type S;\n}\n\npub trait Act: Algebra {\n    type\
     \ X;\n    fn act(f: &Self::S, x: &Self::X) -> Self::X;\n}\n\npub trait Monoid:\
     \ Algebra {\n    fn e() -> Self::S;\n    fn op(x: &Self::S, y: &Self::S) -> Self::S;\n\
-    }\n\npub trait Group: Monoid {\n    fn inv(x: &Self::S) -> Self::S;\n}\n\n#[macro_export]\n\
+    }\n\npub trait Group: Monoid {\n    fn inv(x: &Self::S) -> Self::S;\n}\n\npub\
+    \ trait Zero {\n    fn zero() -> Self;\n    fn is_zero(&self) -> bool;\n}\n\n\
+    pub trait One {\n    fn one() -> Self;\n    fn is_one(&self) -> bool;\n}\n\n#[macro_export]\n\
     macro_rules! algebra {\n    ($ident:ident, $ty:ty) => {\n        #[derive(Clone)]\n\
     \        enum $ident {}\n        impl $crate::Algebra for $ident {\n         \
     \   type S = $ty;\n        }\n    };\n}\n\n#[macro_export]\nmacro_rules! act {\n\
@@ -140,13 +157,26 @@ data:
     \            fn op(x: &Self::S, y: &Self::S) -> Self::S {\n                $op(x,\
     \ y)\n            }\n        }\n        impl $crate::Group for $ident {\n    \
     \        #[inline]\n            fn inv(x: &Self::S) -> Self::S {\n           \
-    \     $inv(x)\n            }\n        }\n    };\n}\n"
+    \     $inv(x)\n            }\n        }\n    };\n}\n\nmacro_rules! impl_zero_one\
+    \ {\n    ($($t:ty)*) => {\n        $(\n            impl $crate::Zero for $t {\n\
+    \                fn zero() -> Self {\n                    0\n                }\n\
+    \                fn is_zero(&self) -> bool {\n                    *self == 0\n\
+    \                }\n            }\n            impl $crate::One for $t {\n   \
+    \             fn one() -> Self {\n                    1\n                }\n \
+    \               fn is_one(&self) -> bool {\n                    *self == 1\n \
+    \               }\n            }\n        )*\n    };\n}\n\nimpl_zero_one!(usize\
+    \ u8 u16 u32 u64 u128 isize i8 i16 i32 i64 i128);\n"
   dependsOn: []
   isVerificationFile: false
   path: crates/algebraic/algebraic/src/lib.rs
   requiredBy:
   - crates/string/suffix-array/src/lib.rs
+  - crates/math/modint61/src/lib.rs
+  - crates/math/montgomery-modint/src/lib.rs
   - crates/math/discrete-logarithm/src/lib.rs
+  - crates/math/matrix/src/lib.rs
+  - crates/number-theory/modint/src/lib.rs
+  - crates/algebraic/rational/src/lib.rs
   - crates/data-structure/splay-tree/src/lib.rs
   - crates/data-structure/dual-segment-tree/src/lib.rs
   - crates/data-structure/dual-range-tree/src/lib.rs
@@ -161,8 +191,8 @@ data:
   - crates/data-structure/splay-tree-internal/src/lib.rs
   - crates/data-structure/sliding-window-aggregation/src/lib.rs
   - crates/tree/re-rooting-dp/src/lib.rs
-  timestamp: '2023-04-25 15:51:20+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2024-03-18 01:19:47+09:00'
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - verify/queue_operate_all_composite/src/main.rs
   - verify/tree_path_composite_sum/src/main.rs

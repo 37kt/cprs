@@ -1,17 +1,17 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: crates/convolution/subset-convolution/src/lib.rs
     title: crates/convolution/subset-convolution/src/lib.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: crates/number-theory/modint/src/lib.rs
     title: crates/number-theory/modint/src/lib.rs
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: rs
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     PROBLEM: https://judge.yosupo.jp/problem/subset_convolution
     links:
@@ -34,8 +34,8 @@ data:
   isVerificationFile: true
   path: verify/subset_convolution/src/main.rs
   requiredBy: []
-  timestamp: '2023-07-15 18:59:53+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2024-03-18 01:19:47+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: verify/subset_convolution/src/main.rs
 layout: document

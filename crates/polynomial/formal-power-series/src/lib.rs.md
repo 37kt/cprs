@@ -7,7 +7,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: crates/convolution/convolution-ntt-friendly/src/lib.rs
     title: crates/convolution/convolution-ntt-friendly/src/lib.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: crates/number-theory/modint/src/lib.rs
     title: crates/number-theory/modint/src/lib.rs
   _extendedRequiredBy:
@@ -17,7 +17,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: crates/polynomial/polynomial-interpolation/src/lib.rs
     title: crates/polynomial/polynomial-interpolation/src/lib.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: crates/polynomial/shift-of-sampling-points/src/lib.rs
     title: crates/polynomial/shift-of-sampling-points/src/lib.rs
   _extendedVerifiedWith:
@@ -45,18 +45,18 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/polynomial_taylor_shift/src/main.rs
     title: verify/polynomial_taylor_shift/src/main.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/pow_of_formal_power_series/src/main.rs
     title: verify/pow_of_formal_power_series/src/main.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/shift_of_sampling_points_of_polynomial/src/main.rs
     title: verify/shift_of_sampling_points_of_polynomial/src/main.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/sqrt_of_formal_power_series/src/main.rs
     title: verify/sqrt_of_formal_power_series/src/main.rs
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: rs
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.12.2/x64/lib/python3.12/site-packages/onlinejudge_verify/documentation/build.py\"\
@@ -361,8 +361,8 @@ data:
   - crates/polynomial/bostan-mori/src/lib.rs
   - crates/polynomial/polynomial-interpolation/src/lib.rs
   - crates/polynomial/shift-of-sampling-points/src/lib.rs
-  timestamp: '2024-03-11 09:14:28+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2024-03-18 01:19:47+09:00'
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - verify/inv_of_formal_power_series/src/main.rs
   - verify/pow_of_formal_power_series/src/main.rs

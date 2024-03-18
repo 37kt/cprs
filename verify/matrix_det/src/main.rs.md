@@ -4,6 +4,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: crates/math/matrix/src/lib.rs
     title: crates/math/matrix/src/lib.rs
+  - icon: ':question:'
+    path: crates/number-theory/modint/src/lib.rs
+    title: crates/number-theory/modint/src/lib.rs
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
@@ -20,16 +23,17 @@ data:
     \  File \"/opt/hostedtoolcache/Python/3.12.2/x64/lib/python3.12/site-packages/onlinejudge_verify/languages/rust.py\"\
     , line 288, in bundle\n    raise NotImplementedError\nNotImplementedError\n"
   code: "// verification-helper: PROBLEM https://judge.yosupo.jp/problem/matrix_det\n\
-    \nuse ac_library::ModInt998244353 as Mint;\nuse matrix::Matrix;\nuse proconio::input;\n\
+    \nuse matrix::Matrix;\nuse modint::ModInt998244353 as Mint;\nuse proconio::input;\n\
     \n#[proconio::fastout]\nfn main() {\n    input! {\n        n: usize,\n       \
     \ a: [[Mint; n]; n],\n    }\n    let a = Matrix::<Mint>::from(a);\n    let (_,\
     \ _, det) = a.gauss_elimination();\n    println!(\"{}\", det.unwrap());\n}\n"
   dependsOn:
   - crates/math/matrix/src/lib.rs
+  - crates/number-theory/modint/src/lib.rs
   isVerificationFile: true
   path: verify/matrix_det/src/main.rs
   requiredBy: []
-  timestamp: '2023-06-13 17:39:04+09:00'
+  timestamp: '2024-03-18 01:19:47+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/matrix_det/src/main.rs

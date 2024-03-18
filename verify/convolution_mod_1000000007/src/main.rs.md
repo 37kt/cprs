@@ -7,7 +7,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: crates/convolution/convolution-ntt-friendly/src/lib.rs
     title: crates/convolution/convolution-ntt-friendly/src/lib.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: crates/number-theory/modint/src/lib.rs
     title: crates/number-theory/modint/src/lib.rs
   _extendedRequiredBy: []
@@ -38,7 +38,7 @@ data:
   isVerificationFile: true
   path: verify/convolution_mod_1000000007/src/main.rs
   requiredBy: []
-  timestamp: '2024-03-11 09:14:28+09:00'
+  timestamp: '2024-03-18 01:19:47+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/convolution_mod_1000000007/src/main.rs

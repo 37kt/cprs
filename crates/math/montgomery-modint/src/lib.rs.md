@@ -1,6 +1,9 @@
 ---
 data:
-  _extendedDependsOn: []
+  _extendedDependsOn:
+  - icon: ':question:'
+    path: crates/algebraic/algebraic/src/lib.rs
+    title: crates/algebraic/algebraic/src/lib.rs
   _extendedRequiredBy:
   - icon: ':heavy_check_mark:'
     path: crates/math/fast-factorize/src/lib.rs
@@ -19,17 +22,17 @@ data:
     , line 288, in bundle\n    raise NotImplementedError\nNotImplementedError\n"
   code: "use std::{\n    convert::TryInto,\n    fmt::Debug,\n    ops::{Add, AddAssign,\
     \ Mul, MulAssign, Neg, Sub, SubAssign},\n    sync::atomic::{AtomicU64, Ordering::SeqCst},\n\
-    };\n\nstruct Montgomery {\n    m: AtomicU64,\n    r: AtomicU64,\n    n2: AtomicU64,\n\
-    }\n\nimpl Montgomery {\n    const fn new() -> Self {\n        Self {\n       \
-    \     m: AtomicU64::new(0),\n            r: AtomicU64::new(0),\n            n2:\
-    \ AtomicU64::new(0),\n        }\n    }\n\n    fn set(&self, m: u64) {\n      \
-    \  assert!(m < 1 << 62);\n        assert!(m & 1 != 0);\n        if self.m.load(SeqCst)\
-    \ == m {\n            return;\n        }\n        let n2 = ((m as u128).wrapping_neg()\
-    \ % m as u128) as u64;\n        let mut r = m;\n        for _ in 0..5 {\n    \
-    \        r = r.wrapping_mul(2u64.wrapping_sub(m.wrapping_mul(r)));\n        }\n\
-    \        assert!(r.wrapping_mul(m) == 1);\n        self.m.store(m, SeqCst);\n\
-    \        self.r.store(r, SeqCst);\n        self.n2.store(n2, SeqCst);\n    }\n\
-    \n    fn reduce(&self, x: u128) -> u64 {\n        let r = self.r.load(SeqCst);\n\
+    };\n\nuse algebraic::{One, Zero};\n\nstruct Montgomery {\n    m: AtomicU64,\n\
+    \    r: AtomicU64,\n    n2: AtomicU64,\n}\n\nimpl Montgomery {\n    const fn new()\
+    \ -> Self {\n        Self {\n            m: AtomicU64::new(0),\n            r:\
+    \ AtomicU64::new(0),\n            n2: AtomicU64::new(0),\n        }\n    }\n\n\
+    \    fn set(&self, m: u64) {\n        assert!(m < 1 << 62);\n        assert!(m\
+    \ & 1 != 0);\n        if self.m.load(SeqCst) == m {\n            return;\n   \
+    \     }\n        let n2 = ((m as u128).wrapping_neg() % m as u128) as u64;\n \
+    \       let mut r = m;\n        for _ in 0..5 {\n            r = r.wrapping_mul(2u64.wrapping_sub(m.wrapping_mul(r)));\n\
+    \        }\n        assert!(r.wrapping_mul(m) == 1);\n        self.m.store(m,\
+    \ SeqCst);\n        self.r.store(r, SeqCst);\n        self.n2.store(n2, SeqCst);\n\
+    \    }\n\n    fn reduce(&self, x: u128) -> u64 {\n        let r = self.r.load(SeqCst);\n\
     \        let m = self.m.load(SeqCst);\n        (x.wrapping_add(\n            ((x\
     \ as u64).wrapping_mul(r.wrapping_neg()) as u128).wrapping_mul(m as u128),\n \
     \       ) >> 64) as u64\n    }\n}\n\nstatic MONTGOMERY: Montgomery = Montgomery::new();\n\
@@ -67,13 +70,17 @@ data:
     \   fn eq(&self, other: &Self) -> bool {\n        let m = Self::modulus();\n \
     \       (if self.0 >= m { self.0 - m } else { self.0 })\n            == (if other.0\
     \ >= m { other.0 - m } else { other.0 })\n    }\n}\n\nimpl Eq for MontgomeryModInt\
-    \ {}\n"
-  dependsOn: []
+    \ {}\n\nimpl Zero for MontgomeryModInt {\n    fn zero() -> Self {\n        Self(0)\n\
+    \    }\n\n    fn is_zero(&self) -> bool {\n        self.0 == 0\n    }\n}\n\nimpl\
+    \ One for MontgomeryModInt {\n    fn one() -> Self {\n        Self(1)\n    }\n\
+    \n    fn is_one(&self) -> bool {\n        self == &Self::new(1)\n    }\n}\n"
+  dependsOn:
+  - crates/algebraic/algebraic/src/lib.rs
   isVerificationFile: false
   path: crates/math/montgomery-modint/src/lib.rs
   requiredBy:
   - crates/math/fast-factorize/src/lib.rs
-  timestamp: '2023-05-18 17:32:10+09:00'
+  timestamp: '2024-03-18 01:19:47+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: crates/math/montgomery-modint/src/lib.rs

@@ -1,17 +1,17 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: crates/algebraic/rational/src/lib.rs
     title: crates/algebraic/rational/src/lib.rs
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/stern_brocot_tree/src/main.rs
     title: verify/stern_brocot_tree/src/main.rs
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: rs
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     links: []
   bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.12.2/x64/lib/python3.12/site-packages/onlinejudge_verify/documentation/build.py\"\
@@ -79,8 +79,8 @@ data:
   isVerificationFile: false
   path: crates/math/stern-brocot-tree/src/lib.rs
   requiredBy: []
-  timestamp: '2024-03-11 13:55:24+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2024-03-18 01:19:47+09:00'
+  verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - verify/stern_brocot_tree/src/main.rs
 documentation_of: crates/math/stern-brocot-tree/src/lib.rs

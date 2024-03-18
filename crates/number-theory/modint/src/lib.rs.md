@@ -1,6 +1,9 @@
 ---
 data:
-  _extendedDependsOn: []
+  _extendedDependsOn:
+  - icon: ':question:'
+    path: crates/algebraic/algebraic/src/lib.rs
+    title: crates/algebraic/algebraic/src/lib.rs
   _extendedRequiredBy:
   - icon: ':heavy_check_mark:'
     path: crates/convolution/convolution-arbitrary-mod/src/lib.rs
@@ -17,13 +20,13 @@ data:
   - icon: ':heavy_check_mark:'
     path: crates/polynomial/bostan-mori/src/lib.rs
     title: crates/polynomial/bostan-mori/src/lib.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: crates/polynomial/formal-power-series/src/lib.rs
     title: crates/polynomial/formal-power-series/src/lib.rs
   - icon: ':heavy_check_mark:'
     path: crates/polynomial/polynomial-interpolation/src/lib.rs
     title: crates/polynomial/polynomial-interpolation/src/lib.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: crates/polynomial/shift-of-sampling-points/src/lib.rs
     title: crates/polynomial/shift-of-sampling-points/src/lib.rs
   _extendedVerifiedWith:
@@ -49,11 +52,20 @@ data:
     path: verify/inv_of_formal_power_series/src/main.rs
     title: verify/inv_of_formal_power_series/src/main.rs
   - icon: ':heavy_check_mark:'
+    path: verify/inverse_matrix/src/main.rs
+    title: verify/inverse_matrix/src/main.rs
+  - icon: ':heavy_check_mark:'
     path: verify/kth_term_of_linearly_recurrent_sequence/src/main.rs
     title: verify/kth_term_of_linearly_recurrent_sequence/src/main.rs
   - icon: ':heavy_check_mark:'
     path: verify/log_of_formal_power_series/src/main.rs
     title: verify/log_of_formal_power_series/src/main.rs
+  - icon: ':heavy_check_mark:'
+    path: verify/matrix_det/src/main.rs
+    title: verify/matrix_det/src/main.rs
+  - icon: ':heavy_check_mark:'
+    path: verify/matrix_product/src/main.rs
+    title: verify/matrix_product/src/main.rs
   - icon: ':heavy_check_mark:'
     path: verify/multipoint_evaluation/src/main.rs
     title: verify/multipoint_evaluation/src/main.rs
@@ -63,30 +75,33 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/polynomial_taylor_shift/src/main.rs
     title: verify/polynomial_taylor_shift/src/main.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/pow_of_formal_power_series/src/main.rs
     title: verify/pow_of_formal_power_series/src/main.rs
   - icon: ':heavy_check_mark:'
+    path: verify/pow_of_matrix/src/main.rs
+    title: verify/pow_of_matrix/src/main.rs
+  - icon: ':x:'
     path: verify/range_affine_point_get/src/main.rs
     title: verify/range_affine_point_get/src/main.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/shift_of_sampling_points_of_polynomial/src/main.rs
     title: verify/shift_of_sampling_points_of_polynomial/src/main.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/sqrt_mod/src/main.rs
     title: verify/sqrt_mod/src/main.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/sqrt_of_formal_power_series/src/main.rs
     title: verify/sqrt_of_formal_power_series/src/main.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/subset_convolution/src/main.rs
     title: verify/subset_convolution/src/main.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/tree_path_composite_sum/src/main.rs
     title: verify/tree_path_composite_sum/src/main.rs
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: rs
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links:
     - https://rsk0315.hatenablog.com/entry/2023/04/29/043512
@@ -98,50 +113,51 @@ data:
     , line 288, in bundle\n    raise NotImplementedError\nNotImplementedError\n"
   code: "use std::{\n    fmt,\n    hash::Hash,\n    iter::{Product, Sum},\n    num::ParseIntError,\n\
     \    ops::{Add, AddAssign, Div, DivAssign, Mul, MulAssign, Neg, Sub, SubAssign},\n\
-    \    str::FromStr,\n    sync::atomic::{self, AtomicU32, AtomicU64},\n};\n\n#[derive(Clone,\
-    \ Copy, Default, PartialEq, Eq, Hash)]\n#[repr(transparent)]\npub struct StaticModInt<const\
-    \ P: u32>(u32);\n\n#[derive(Clone, Copy, Default, PartialEq, Eq, Hash)]\n#[repr(transparent)]\n\
-    pub struct DynamicModInt(u32);\n\npub type ModInt998244353 = StaticModInt<998_244_353>;\n\
-    pub type ModInt1000000007 = StaticModInt<1_000_000_007>;\n\npub trait ModInt:\n\
-    \    Default\n    + FromStr\n    + From<i8>\n    + From<i16>\n    + From<i32>\n\
-    \    + From<i64>\n    + From<i128>\n    + From<isize>\n    + From<u8>\n    + From<u16>\n\
-    \    + From<u32>\n    + From<u64>\n    + From<u128>\n    + From<usize>\n    +\
-    \ Copy\n    + Eq\n    + Hash\n    + fmt::Display\n    + fmt::Debug\n    + Neg<Output\
-    \ = Self>\n    + Add<Output = Self>\n    + Sub<Output = Self>\n    + Mul<Output\
-    \ = Self>\n    + Div<Output = Self>\n    + AddAssign\n    + SubAssign\n    + MulAssign\n\
-    \    + DivAssign\n{\n    fn modulus() -> u32;\n    fn raw(val: u32) -> Self;\n\
-    \    fn val(self) -> u32;\n    fn inv(self) -> Self;\n    fn pow(self, k: usize)\
-    \ -> Self;\n    fn sqrt(self) -> Option<Self>;\n}\n\nconst fn mul(x: u32, y: u32,\
-    \ m: u32) -> u32 {\n    (x as u64 * y as u64 % m as u64) as u32\n}\n\nconst fn\
-    \ pow(x: u32, mut n: u32, m: u32) -> u32 {\n    if m == 1 {\n        return 0;\n\
-    \    }\n    let mut r = 1u64;\n    let mut y = (x % m) as u64;\n    while n !=\
-    \ 0 {\n        if n & 1 != 0 {\n            r = r * y % m as u64;\n        }\n\
-    \        y = y * y % m as u64;\n        n >>= 1;\n    }\n    r as u32\n}\n\nconst\
-    \ fn is_prime(n: u32) -> bool {\n    match n {\n        _ if n <= 1 => return\
-    \ false,\n        2 | 7 | 61 => return true,\n        _ if n & 1 == 0 => return\
-    \ false,\n        _ => {}\n    }\n    let mut d = n - 1;\n    while d & 1 == 0\
-    \ {\n        d >>= 1;\n    }\n    let a = [2, 7, 61];\n    let mut i = 0;\n  \
-    \  while i < 3 {\n        let mut t = d;\n        let mut y = pow(a[i], t, n);\n\
-    \        while t != n - 1 && y != 1 && y != n - 1 {\n            y = (y as u64\
-    \ * y as u64 % n as u64) as u32;\n            t <<= 1;\n        }\n        if\
-    \ y != n - 1 && t & 1 == 0 {\n            return false;\n        }\n        i\
-    \ += 1;\n    }\n    true\n}\n\nconst fn extgcd(mut a: u32, b: u32) -> (u32, u32)\
-    \ {\n    a = a % b;\n    if a == 0 {\n        return (b, 0);\n    }\n\n    let\
-    \ mut s = b as i64;\n    let mut t = a as i64;\n    let mut m0 = 0;\n    let mut\
-    \ m1 = 1;\n    while t != 0 {\n        let u = s / t;\n        s -= t * u;\n \
-    \       m0 -= m1 * u;\n        let tmp = s;\n        s = t;\n        t = tmp;\n\
-    \        let tmp = m0;\n        m0 = m1;\n        m1 = tmp;\n    }\n    if m0\
-    \ < 0 {\n        m0 += b as i64 / s;\n    }\n    (s as u32, m0 as u32)\n}\n\n\
-    const fn primitive_root(m: u32) -> u32 {\n    match m {\n        2 => return 1,\n\
-    \        167_772_161 => return 3,\n        469_762_049 => return 3,\n        754_974_721\
-    \ => return 11,\n        998_244_353 => return 3,\n        _ => {}\n    }\n  \
-    \  let mut divs = [0; 20];\n    divs[0] = 2;\n    let mut cnt = 1;\n    let mut\
-    \ x = (m - 1) / 2;\n    while x % 2 == 0 {\n        x /= 2;\n    }\n    let mut\
-    \ i = 3;\n    while i < std::u32::MAX {\n        if i as u64 * i as u64 > x as\
-    \ u64 {\n            break;\n        }\n        if x % i == 0 {\n            divs[cnt]\
-    \ = i;\n            cnt += 1;\n            while x % i == 0 {\n              \
-    \  x /= i;\n            }\n        }\n        i += 2;\n    }\n    if x > 1 {\n\
-    \        divs[cnt] = x;\n        cnt += 1;\n    }\n    let mut g = 2;\n    loop\
+    \    str::FromStr,\n    sync::atomic::{self, AtomicU32, AtomicU64},\n};\n\nuse\
+    \ algebraic::{One, Zero};\n\n#[derive(Clone, Copy, Default, PartialEq, Eq, Hash)]\n\
+    #[repr(transparent)]\npub struct StaticModInt<const P: u32>(u32);\n\n#[derive(Clone,\
+    \ Copy, Default, PartialEq, Eq, Hash)]\n#[repr(transparent)]\npub struct DynamicModInt(u32);\n\
+    \npub type ModInt998244353 = StaticModInt<998_244_353>;\npub type ModInt1000000007\
+    \ = StaticModInt<1_000_000_007>;\n\npub trait ModInt:\n    Default\n    + FromStr\n\
+    \    + From<i8>\n    + From<i16>\n    + From<i32>\n    + From<i64>\n    + From<i128>\n\
+    \    + From<isize>\n    + From<u8>\n    + From<u16>\n    + From<u32>\n    + From<u64>\n\
+    \    + From<u128>\n    + From<usize>\n    + Copy\n    + Eq\n    + Hash\n    +\
+    \ fmt::Display\n    + fmt::Debug\n    + Neg<Output = Self>\n    + Add<Output =\
+    \ Self>\n    + Sub<Output = Self>\n    + Mul<Output = Self>\n    + Div<Output\
+    \ = Self>\n    + AddAssign\n    + SubAssign\n    + MulAssign\n    + DivAssign\n\
+    {\n    fn modulus() -> u32;\n    fn raw(val: u32) -> Self;\n    fn val(self) ->\
+    \ u32;\n    fn inv(self) -> Self;\n    fn pow(self, k: usize) -> Self;\n    fn\
+    \ sqrt(self) -> Option<Self>;\n}\n\nconst fn mul(x: u32, y: u32, m: u32) -> u32\
+    \ {\n    (x as u64 * y as u64 % m as u64) as u32\n}\n\nconst fn pow(x: u32, mut\
+    \ n: u32, m: u32) -> u32 {\n    if m == 1 {\n        return 0;\n    }\n    let\
+    \ mut r = 1u64;\n    let mut y = (x % m) as u64;\n    while n != 0 {\n       \
+    \ if n & 1 != 0 {\n            r = r * y % m as u64;\n        }\n        y = y\
+    \ * y % m as u64;\n        n >>= 1;\n    }\n    r as u32\n}\n\nconst fn is_prime(n:\
+    \ u32) -> bool {\n    match n {\n        _ if n <= 1 => return false,\n      \
+    \  2 | 7 | 61 => return true,\n        _ if n & 1 == 0 => return false,\n    \
+    \    _ => {}\n    }\n    let mut d = n - 1;\n    while d & 1 == 0 {\n        d\
+    \ >>= 1;\n    }\n    let a = [2, 7, 61];\n    let mut i = 0;\n    while i < 3\
+    \ {\n        let mut t = d;\n        let mut y = pow(a[i], t, n);\n        while\
+    \ t != n - 1 && y != 1 && y != n - 1 {\n            y = (y as u64 * y as u64 %\
+    \ n as u64) as u32;\n            t <<= 1;\n        }\n        if y != n - 1 &&\
+    \ t & 1 == 0 {\n            return false;\n        }\n        i += 1;\n    }\n\
+    \    true\n}\n\nconst fn extgcd(mut a: u32, b: u32) -> (u32, u32) {\n    a = a\
+    \ % b;\n    if a == 0 {\n        return (b, 0);\n    }\n\n    let mut s = b as\
+    \ i64;\n    let mut t = a as i64;\n    let mut m0 = 0;\n    let mut m1 = 1;\n\
+    \    while t != 0 {\n        let u = s / t;\n        s -= t * u;\n        m0 -=\
+    \ m1 * u;\n        let tmp = s;\n        s = t;\n        t = tmp;\n        let\
+    \ tmp = m0;\n        m0 = m1;\n        m1 = tmp;\n    }\n    if m0 < 0 {\n   \
+    \     m0 += b as i64 / s;\n    }\n    (s as u32, m0 as u32)\n}\n\nconst fn primitive_root(m:\
+    \ u32) -> u32 {\n    match m {\n        2 => return 1,\n        167_772_161 =>\
+    \ return 3,\n        469_762_049 => return 3,\n        754_974_721 => return 11,\n\
+    \        998_244_353 => return 3,\n        _ => {}\n    }\n    let mut divs =\
+    \ [0; 20];\n    divs[0] = 2;\n    let mut cnt = 1;\n    let mut x = (m - 1) /\
+    \ 2;\n    while x % 2 == 0 {\n        x /= 2;\n    }\n    let mut i = 3;\n   \
+    \ while i < std::u32::MAX {\n        if i as u64 * i as u64 > x as u64 {\n   \
+    \         break;\n        }\n        if x % i == 0 {\n            divs[cnt] =\
+    \ i;\n            cnt += 1;\n            while x % i == 0 {\n                x\
+    \ /= i;\n            }\n        }\n        i += 2;\n    }\n    if x > 1 {\n  \
+    \      divs[cnt] = x;\n        cnt += 1;\n    }\n    let mut g = 2;\n    loop\
     \ {\n        let mut i = 0;\n        while i < cnt {\n            if pow(g, (m\
     \ - 1) / divs[i], m) == 1 {\n                break;\n            }\n         \
     \   i += 1;\n        }\n        if i == cnt {\n            break g;\n        }\n\
@@ -355,8 +371,17 @@ data:
     \ = ntt_info(P).3;\n    pub const RATE2: [u32; 30] = ntt_info(P).4;\n    pub const\
     \ IRATE2: [u32; 30] = ntt_info(P).5;\n    pub const RATE3: [u32; 30] = ntt_info(P).6;\n\
     \    pub const IRATE3: [u32; 30] = ntt_info(P).7;\n    pub const IS_NTT_FRIENDLY:\
-    \ bool = is_prime(P) && Self::RANK2 >= 21;\n}\n"
-  dependsOn: []
+    \ bool = is_prime(P) && Self::RANK2 >= 21;\n}\n\nimpl<const P: u32> Zero for StaticModInt<P>\
+    \ {\n    fn zero() -> Self {\n        Self(0)\n    }\n\n    fn is_zero(&self)\
+    \ -> bool {\n        self.0 == 0\n    }\n}\n\nimpl<const P: u32> One for StaticModInt<P>\
+    \ {\n    fn one() -> Self {\n        Self::new(1)\n    }\n\n    fn is_one(&self)\
+    \ -> bool {\n        self == &Self::one()\n    }\n}\n\nimpl Zero for DynamicModInt\
+    \ {\n    fn zero() -> Self {\n        Self(0)\n    }\n\n    fn is_zero(&self)\
+    \ -> bool {\n        self.0 == 0\n    }\n}\n\nimpl One for DynamicModInt {\n \
+    \   fn one() -> Self {\n        Self::new(1)\n    }\n\n    fn is_one(&self) ->\
+    \ bool {\n        self == &Self::one()\n    }\n}\n"
+  dependsOn:
+  - crates/algebraic/algebraic/src/lib.rs
   isVerificationFile: false
   path: crates/number-theory/modint/src/lib.rs
   requiredBy:
@@ -368,15 +393,17 @@ data:
   - crates/convolution/convolution-naive/src/lib.rs
   - crates/convolution/convolution-arbitrary-mod/src/lib.rs
   - crates/convolution/convolution-ntt-friendly/src/lib.rs
-  timestamp: '2023-07-15 18:59:53+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2024-03-18 01:19:47+09:00'
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - verify/convolution_mod/src/main.rs
   - verify/inv_of_formal_power_series/src/main.rs
   - verify/tree_path_composite_sum/src/main.rs
   - verify/pow_of_formal_power_series/src/main.rs
+  - verify/pow_of_matrix/src/main.rs
   - verify/division_of_polynomials/src/main.rs
   - verify/polynomial_interpolation/src/main.rs
+  - verify/inverse_matrix/src/main.rs
   - verify/sqrt_mod/src/main.rs
   - verify/multipoint_evaluation/src/main.rs
   - verify/log_of_formal_power_series/src/main.rs
@@ -388,7 +415,9 @@ data:
   - verify/convolution_mod_1000000007/src/main.rs
   - verify/range_affine_point_get/src/main.rs
   - verify/shift_of_sampling_points_of_polynomial/src/main.rs
+  - verify/matrix_det/src/main.rs
   - verify/binomial_coefficient_prime_mod/src/main.rs
+  - verify/matrix_product/src/main.rs
   - verify/sqrt_of_formal_power_series/src/main.rs
 documentation_of: crates/number-theory/modint/src/lib.rs
 layout: document

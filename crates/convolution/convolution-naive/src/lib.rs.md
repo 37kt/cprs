@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: crates/number-theory/modint/src/lib.rs
     title: crates/number-theory/modint/src/lib.rs
   _extendedRequiredBy:
@@ -35,7 +35,7 @@ data:
   requiredBy:
   - crates/convolution/convolution-arbitrary-mod/src/lib.rs
   - crates/convolution/convolution-ntt-friendly/src/lib.rs
-  timestamp: '2023-07-15 18:59:53+09:00'
+  timestamp: '2024-03-18 01:19:47+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: crates/convolution/convolution-naive/src/lib.rs

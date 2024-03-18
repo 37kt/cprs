@@ -1,10 +1,10 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: crates/algebraic/algebraic/src/lib.rs
     title: crates/algebraic/algebraic/src/lib.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: crates/data-structure/splay-tree/src/lib.rs
     title: crates/data-structure/splay-tree/src/lib.rs
   _extendedRequiredBy: []
@@ -50,7 +50,7 @@ data:
   isVerificationFile: true
   path: verify/dynamic_sequence_range_affine_range_sum/src/main.rs
   requiredBy: []
-  timestamp: '2023-08-25 17:13:17+09:00'
+  timestamp: '2024-03-18 01:19:47+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/dynamic_sequence_range_affine_range_sum/src/main.rs

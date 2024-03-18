@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: crates/algebraic/algebraic/src/lib.rs
     title: crates/algebraic/algebraic/src/lib.rs
   - icon: ':heavy_check_mark:'
@@ -40,7 +40,7 @@ data:
   isVerificationFile: true
   path: verify/queue_operate_all_composite/src/main.rs
   requiredBy: []
-  timestamp: '2023-04-25 15:51:20+09:00'
+  timestamp: '2024-03-18 01:19:47+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/queue_operate_all_composite/src/main.rs
