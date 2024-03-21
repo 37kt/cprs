@@ -15,6 +15,9 @@ data:
     path: crates/convolution/convolution-ntt-friendly/src/lib.rs
     title: crates/convolution/convolution-ntt-friendly/src/lib.rs
   - icon: ':heavy_check_mark:'
+    path: crates/convolution/convolution-u64/src/lib.rs
+    title: crates/convolution/convolution-u64/src/lib.rs
+  - icon: ':heavy_check_mark:'
     path: crates/number-theory/combination/src/lib.rs
     title: crates/number-theory/combination/src/lib.rs
   - icon: ':heavy_check_mark:'
@@ -393,6 +396,7 @@ data:
   - crates/convolution/convolution-naive/src/lib.rs
   - crates/convolution/convolution-arbitrary-mod/src/lib.rs
   - crates/convolution/convolution-ntt-friendly/src/lib.rs
+  - crates/convolution/convolution-u64/src/lib.rs
   timestamp: '2024-03-18 01:19:47+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:

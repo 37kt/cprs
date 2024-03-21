@@ -41,6 +41,11 @@ data:
     - icon: ':heavy_check_mark:'
       path: crates/convolution/convolution-ntt-friendly/src/lib.rs
       title: crates/convolution/convolution-ntt-friendly/src/lib.rs
+  - name: crates/convolution/convolution-u64/src
+    pages:
+    - icon: ':heavy_check_mark:'
+      path: crates/convolution/convolution-u64/src/lib.rs
+      title: crates/convolution/convolution-u64/src/lib.rs
   - name: crates/convolution/gcd-convolution/src
     pages:
     - icon: ':heavy_check_mark:'
@@ -457,6 +462,11 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/convolution_mod_1000000007/src/main.rs
       title: verify/convolution_mod_1000000007/src/main.rs
+  - name: verify/convolution_mod_2_64/src
+    pages:
+    - icon: ':heavy_check_mark:'
+      path: verify/convolution_mod_2_64/src/main.rs
+      title: verify/convolution_mod_2_64/src/main.rs
   - name: verify/deque_operate_all_composite/src
     pages:
     - icon: ':heavy_check_mark:'
