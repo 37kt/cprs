@@ -18,7 +18,7 @@ data:
       title: crates/algorithm/mo/src/lib.rs
   - name: crates/algorithm/offline-dynamic-connectivity/src
     pages:
-    - icon: ':warning:'
+    - icon: ':heavy_check_mark:'
       path: crates/algorithm/offline-dynamic-connectivity/src/lib.rs
       title: crates/algorithm/offline-dynamic-connectivity/src/lib.rs
   - name: crates/convolution/and-convolution/src
@@ -156,6 +156,11 @@ data:
     - icon: ':warning:'
       path: crates/data-structure/rollback-union-find/src/lib.rs
       title: crates/data-structure/rollback-union-find/src/lib.rs
+  - name: crates/data-structure/rollback-union-find-component-sum/src
+    pages:
+    - icon: ':heavy_check_mark:'
+      path: crates/data-structure/rollback-union-find-component-sum/src/lib.rs
+      title: crates/data-structure/rollback-union-find-component-sum/src/lib.rs
   - name: crates/data-structure/segment-tree/src
     pages:
     - icon: ':heavy_check_mark:'
@@ -206,6 +211,11 @@ data:
     - icon: ':heavy_check_mark:'
       path: crates/data-structure/union-find/src/lib.rs
       title: crates/data-structure/union-find/src/lib.rs
+  - name: crates/data-structure/union-find-component-sum/src
+    pages:
+    - icon: ':warning:'
+      path: crates/data-structure/union-find-component-sum/src/lib.rs
+      title: crates/data-structure/union-find-component-sum/src/lib.rs
   - name: crates/data-structure/w-ary-tree-set/src
     pages:
     - icon: ':heavy_check_mark:'
@@ -487,6 +497,11 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/division_of_polynomials/src/main.rs
       title: verify/division_of_polynomials/src/main.rs
+  - name: verify/dynamic_graph_vertex_add_component_sum/src
+    pages:
+    - icon: ':heavy_check_mark:'
+      path: verify/dynamic_graph_vertex_add_component_sum/src/main.rs
+      title: verify/dynamic_graph_vertex_add_component_sum/src/main.rs
   - name: verify/dynamic_sequence_range_affine_range_sum/src
     pages:
     - icon: ':heavy_check_mark:'

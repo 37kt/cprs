@@ -1,0 +1,64 @@
+---
+data:
+  _extendedDependsOn:
+  - icon: ':heavy_check_mark:'
+    path: crates/algebraic/algebraic/src/lib.rs
+    title: crates/algebraic/algebraic/src/lib.rs
+  _extendedRequiredBy: []
+  _extendedVerifiedWith:
+  - icon: ':heavy_check_mark:'
+    path: verify/dynamic_graph_vertex_add_component_sum/src/main.rs
+    title: verify/dynamic_graph_vertex_add_component_sum/src/main.rs
+  _isVerificationFailed: false
+  _pathExtension: rs
+  _verificationStatusIcon: ':heavy_check_mark:'
+  attributes:
+    links: []
+  bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.12.2/x64/lib/python3.12/site-packages/onlinejudge_verify/documentation/build.py\"\
+    , line 71, in _render_source_code_stat\n    bundled_code = language.bundle(stat.path,\
+    \ basedir=basedir, options={'include_paths': [basedir]}).decode()\n          \
+    \         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\
+    \  File \"/opt/hostedtoolcache/Python/3.12.2/x64/lib/python3.12/site-packages/onlinejudge_verify/languages/rust.py\"\
+    , line 288, in bundle\n    raise NotImplementedError\nNotImplementedError\n"
+  code: "use std::mem::swap;\n\nuse algebraic::Monoid;\n\n#[derive(Clone)]\npub struct\
+    \ RollbackUnionFindComponentSum<M>\nwhere\n    M: Monoid,\n    M::S: Clone,\n\
+    {\n    par: Vec<i32>,\n    sum: Vec<M::S>,\n    his: Vec<(usize, i32, M::S)>,\n\
+    }\n\nimpl<M> RollbackUnionFindComponentSum<M>\nwhere\n    M: Monoid,\n    M::S:\
+    \ Clone,\n{\n    pub fn new(n: usize, a: &[M::S]) -> Self {\n        Self {\n\
+    \            par: vec![-1; n],\n            sum: a.to_vec(),\n            his:\
+    \ vec![],\n        }\n    }\n\n    pub fn len(&self) -> usize {\n        self.par.len()\n\
+    \    }\n\n    pub fn merge(&mut self, x: usize, y: usize) -> bool {\n        let\
+    \ mut x = self.leader(x);\n        let mut y = self.leader(y);\n        self.his.push((x,\
+    \ self.par[x], self.sum[x].clone()));\n        self.his.push((y, self.par[y],\
+    \ self.sum[y].clone()));\n        if x == y {\n            return false;\n   \
+    \     }\n        if -self.par[x] < -self.par[y] {\n            swap(&mut x, &mut\
+    \ y);\n        }\n        self.par[x] += self.par[y];\n        self.sum[x] = M::op(&self.sum[x],\
+    \ &self.sum[y]);\n        self.par[y] = x as i32;\n        true\n    }\n\n   \
+    \ pub fn leader(&self, mut x: usize) -> usize {\n        while self.par[x] >=\
+    \ 0 {\n            x = self.par[x] as usize;\n        }\n        x\n    }\n\n\
+    \    pub fn same(&self, x: usize, y: usize) -> bool {\n        self.leader(x)\
+    \ == self.leader(y)\n    }\n\n    pub fn size(&self, x: usize) -> usize {\n  \
+    \      -self.par[self.leader(x)] as usize\n    }\n\n    pub fn undo(&mut self)\
+    \ {\n        for _ in 0..2 {\n            let (x, par, sum) = self.his.pop().unwrap();\n\
+    \            self.par[x] = par;\n            self.sum[x] = sum;\n        }\n \
+    \   }\n\n    pub fn groups(&self) -> Vec<Vec<usize>> {\n        let mut res =\
+    \ vec![vec![]; self.len()];\n        for x in 0..self.len() {\n            res[self.leader(x)].push(x);\n\
+    \        }\n        res.into_iter().filter(|g| g.len() > 0).collect()\n    }\n\
+    \n    pub fn sum(&self, x: usize) -> M::S {\n        let x = self.leader(x);\n\
+    \        self.sum[x].clone()\n    }\n}\n"
+  dependsOn:
+  - crates/algebraic/algebraic/src/lib.rs
+  isVerificationFile: false
+  path: crates/data-structure/rollback-union-find-component-sum/src/lib.rs
+  requiredBy: []
+  timestamp: '2024-03-21 16:19:45+09:00'
+  verificationStatus: LIBRARY_ALL_AC
+  verifiedWith:
+  - verify/dynamic_graph_vertex_add_component_sum/src/main.rs
+documentation_of: crates/data-structure/rollback-union-find-component-sum/src/lib.rs
+layout: document
+redirect_from:
+- /library/crates/data-structure/rollback-union-find-component-sum/src/lib.rs
+- /library/crates/data-structure/rollback-union-find-component-sum/src/lib.rs.html
+title: crates/data-structure/rollback-union-find-component-sum/src/lib.rs
+---

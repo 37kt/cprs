@@ -27,6 +27,9 @@ data:
     path: crates/data-structure/range-tree/src/lib.rs
     title: crates/data-structure/range-tree/src/lib.rs
   - icon: ':heavy_check_mark:'
+    path: crates/data-structure/rollback-union-find-component-sum/src/lib.rs
+    title: crates/data-structure/rollback-union-find-component-sum/src/lib.rs
+  - icon: ':heavy_check_mark:'
     path: crates/data-structure/segment-tree-on-wavelet-matrix/src/lib.rs
     title: crates/data-structure/segment-tree-on-wavelet-matrix/src/lib.rs
   - icon: ':heavy_check_mark:'
@@ -44,6 +47,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: crates/data-structure/tree-query/src/lib.rs
     title: crates/data-structure/tree-query/src/lib.rs
+  - icon: ':warning:'
+    path: crates/data-structure/union-find-component-sum/src/lib.rs
+    title: crates/data-structure/union-find-component-sum/src/lib.rs
   - icon: ':heavy_check_mark:'
     path: crates/math/discrete-logarithm/src/lib.rs
     title: crates/math/discrete-logarithm/src/lib.rs
@@ -75,6 +81,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/discrete_logarithm_mod/src/main.rs
     title: verify/discrete_logarithm_mod/src/main.rs
+  - icon: ':heavy_check_mark:'
+    path: verify/dynamic_graph_vertex_add_component_sum/src/main.rs
+    title: verify/dynamic_graph_vertex_add_component_sum/src/main.rs
   - icon: ':heavy_check_mark:'
     path: verify/dynamic_sequence_range_affine_range_sum/src/main.rs
     title: verify/dynamic_sequence_range_affine_range_sum/src/main.rs
@@ -185,10 +194,12 @@ data:
   - crates/data-structure/dual-segment-tree/src/lib.rs
   - crates/data-structure/dual-range-tree/src/lib.rs
   - crates/data-structure/segment-tree-on-wavelet-matrix/src/lib.rs
+  - crates/data-structure/rollback-union-find-component-sum/src/lib.rs
   - crates/data-structure/fenwick-tree/src/lib.rs
   - crates/data-structure/range-tree/src/lib.rs
   - crates/data-structure/segment-tree/src/lib.rs
   - crates/data-structure/link-cut-tree/src/lib.rs
+  - crates/data-structure/union-find-component-sum/src/lib.rs
   - crates/data-structure/lazy-segment-tree/src/lib.rs
   - crates/data-structure/tree-query/src/lib.rs
   - crates/data-structure/disjoint-sparse-table/src/lib.rs
@@ -203,6 +214,7 @@ data:
   - verify/vertex_add_subtree_sum/src/main.rs
   - verify/dynamic_tree_vertex_add_path_sum/src/main.rs
   - verify/dynamic_tree_vertex_set_path_composite/src/main.rs
+  - verify/dynamic_graph_vertex_add_component_sum/src/main.rs
   - verify/point_add_rectangle_sum/src/main.rs
   - verify/rectangle_add_point_get/src/main.rs
   - verify/staticrmq/src/main.rs

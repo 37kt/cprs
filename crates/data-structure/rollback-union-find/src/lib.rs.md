@@ -1,10 +1,7 @@
 ---
 data:
   _extendedDependsOn: []
-  _extendedRequiredBy:
-  - icon: ':warning:'
-    path: crates/algorithm/offline-dynamic-connectivity/src/lib.rs
-    title: crates/algorithm/offline-dynamic-connectivity/src/lib.rs
+  _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
   _pathExtension: rs
@@ -41,8 +38,7 @@ data:
   dependsOn: []
   isVerificationFile: false
   path: crates/data-structure/rollback-union-find/src/lib.rs
-  requiredBy:
-  - crates/algorithm/offline-dynamic-connectivity/src/lib.rs
+  requiredBy: []
   timestamp: '2023-05-21 09:38:35+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
