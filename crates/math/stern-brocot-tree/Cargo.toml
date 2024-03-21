@@ -12,3 +12,4 @@ name = "stern_brocot_tree"
 
 [dependencies]
 rational = { path = "../../algebraic/rational" }
+algebraic = { path = "../../algebraic/algebraic" }

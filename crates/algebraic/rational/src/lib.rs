@@ -1,57 +1,115 @@
 use std::{
     fmt::{Debug, Display},
-    mem::swap,
-    ops::{Add, AddAssign, Div, DivAssign, Mul, MulAssign, Neg, Sub, SubAssign},
+    ops::{Add, AddAssign, Div, DivAssign, Mul, MulAssign, Neg, Rem, RemAssign, Sub, SubAssign},
     sync::atomic::{AtomicBool, Ordering::SeqCst},
 };
 
 use algebraic::{One, Zero};
 
-type Z = i128;
-
 static AUTO_REDUCE: AtomicBool = AtomicBool::new(true);
 
-#[derive(Clone, Copy)]
-pub struct Rational {
-    pub num: Z,
-    pub den: Z,
+pub trait ZTrait:
+    Copy
+    + PartialEq
+    + PartialOrd
+    + Eq
+    + Ord
+    + Zero
+    + One
+    + Add<Output = Self>
+    + Sub<Output = Self>
+    + Mul<Output = Self>
+    + Div<Output = Self>
+    + Neg<Output = Self>
+    + Rem<Output = Self>
+    + AddAssign
+    + SubAssign
+    + MulAssign
+    + DivAssign
+    + RemAssign
+    + Debug
+    + Display
+    + std::iter::Sum
+    + From<i32>
+{
+    fn abs(&self) -> Self {
+        if *self < Self::zero() {
+            -*self
+        } else {
+            *self
+        }
+    }
 }
 
-fn gcd(mut a: Z, mut b: Z) -> Z {
+impl ZTrait for i32 {}
+impl ZTrait for i64 {}
+impl ZTrait for i128 {}
+
+#[derive(Clone, Copy)]
+pub struct Rational<T>
+where
+    T: ZTrait,
+{
+    pub num: T,
+    pub den: T,
+}
+
+fn gcd<T: ZTrait>(mut a: T, mut b: T) -> T {
     a = a.abs();
     b = b.abs();
-    while b != 0 {
+    while b != T::zero() {
         a %= b;
-        swap(&mut a, &mut b);
+        std::mem::swap(&mut a, &mut b);
     }
     a
 }
 
-impl Default for Rational {
+impl<T> Default for Rational<T>
+where
+    T: ZTrait,
+{
     fn default() -> Self {
-        Self { num: 0, den: 1 }
+        Self {
+            num: T::zero(),
+            den: T::one(),
+        }
     }
 }
 
-impl Display for Rational {
+impl<T> Display for Rational<T>
+where
+    T: ZTrait,
+{
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         write!(f, "{}/{}", self.num, self.den)
     }
 }
 
-impl Debug for Rational {
+impl<T> Debug for Rational<T>
+where
+    T: ZTrait,
+{
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         write!(f, "{}/{}", self.num, self.den)
     }
 }
 
-impl From<Z> for Rational {
-    fn from(x: Z) -> Self {
-        Self { num: x, den: 1 }
+impl<T> From<T> for Rational<T>
+where
+    T: ZTrait,
+{
+    fn from(x: T) -> Self {
+        Self {
+            num: x,
+            den: T::one(),
+        }
     }
 }
 
-impl PartialEq for Rational {
+impl<T> PartialEq for Rational<T>
+where
+    T: ZTrait,
+{
     fn eq(&self, other: &Self) -> bool {
         self.num * other.den == other.num * self.den
     }
@@ -61,40 +119,49 @@ impl PartialEq for Rational {
     }
 }
 
-impl Eq for Rational {}
+impl<T> Eq for Rational<T> where T: ZTrait {}
 
-impl PartialOrd for Rational {
+impl<T> PartialOrd for Rational<T>
+where
+    T: ZTrait,
+{
     fn partial_cmp(&self, other: &Self) -> Option<std::cmp::Ordering> {
         Some(self.cmp(other))
     }
 }
 
-impl Ord for Rational {
+impl<T> Ord for Rational<T>
+where
+    T: ZTrait,
+{
     fn cmp(&self, other: &Self) -> std::cmp::Ordering {
         (self.num * other.den).cmp(&(other.num * self.den))
     }
 }
 
-impl Rational {
+impl<T> Rational<T>
+where
+    T: ZTrait,
+{
     pub fn set_auto_reduce(auto_reduce: bool) {
         AUTO_REDUCE.store(auto_reduce, SeqCst);
     }
 
-    pub fn new(num: Z, den: Z) -> Self {
+    pub fn new(num: T, den: T) -> Self {
         let mut res = Self { num, den };
         res.normalize();
         res
     }
 
-    pub fn raw(num: Z, den: Z) -> Self {
+    pub fn raw(num: T, den: T) -> Self {
         Self { num, den }
     }
 
-    pub fn num(&self) -> Z {
+    pub fn num(&self) -> T {
         self.num
     }
 
-    pub fn den(&self) -> Z {
+    pub fn den(&self) -> T {
         self.den
     }
 
@@ -106,18 +173,22 @@ impl Rational {
     }
 
     pub fn normalize(&mut self) {
-        assert!(self.num != 0 || self.den != 0);
-        if self.den == 0 {
-            self.num = if self.num > 0 { 1 } else { -1 };
-            self.den = 0;
+        assert!(self.num != T::zero() || self.den != T::zero());
+        if self.den == T::zero() {
+            self.num = if self.num > T::zero() {
+                T::one()
+            } else {
+                -T::one()
+            };
+            self.den = T::zero();
             return;
         }
-        if self.den < 0 {
+        if self.den < T::zero() {
             self.num = -self.num;
             self.den = -self.den;
         }
-        if self.num == 0 {
-            self.den = 1;
+        if self.num == T::zero() {
+            self.den = T::one();
         }
         if AUTO_REDUCE.load(SeqCst) {
             self.reduce();
@@ -131,7 +202,10 @@ impl Rational {
     }
 }
 
-impl Neg for Rational {
+impl<T> Neg for Rational<T>
+where
+    T: ZTrait,
+{
     type Output = Self;
     fn neg(self) -> Self::Output {
         Self {
@@ -141,8 +215,11 @@ impl Neg for Rational {
     }
 }
 
-impl Neg for &Rational {
-    type Output = Rational;
+impl<T> Neg for &Rational<T>
+where
+    T: ZTrait,
+{
+    type Output = Rational<T>;
     fn neg(self) -> Self::Output {
         Rational {
             num: -self.num,
@@ -151,7 +228,10 @@ impl Neg for &Rational {
     }
 }
 
-impl AddAssign<Self> for Rational {
+impl<T> AddAssign<Self> for Rational<T>
+where
+    T: ZTrait,
+{
     fn add_assign(&mut self, rhs: Self) {
         self.num = self.num * rhs.den + rhs.num * self.den;
         self.den *= rhs.den;
@@ -159,13 +239,19 @@ impl AddAssign<Self> for Rational {
     }
 }
 
-impl SubAssign<Self> for Rational {
+impl<T> SubAssign<Self> for Rational<T>
+where
+    T: ZTrait,
+{
     fn sub_assign(&mut self, rhs: Self) {
         *self += -rhs;
     }
 }
 
-impl MulAssign<Self> for Rational {
+impl<T> MulAssign<Self> for Rational<T>
+where
+    T: ZTrait,
+{
     fn mul_assign(&mut self, rhs: Self) {
         self.num *= rhs.num;
         self.den *= rhs.den;
@@ -173,7 +259,10 @@ impl MulAssign<Self> for Rational {
     }
 }
 
-impl DivAssign<Self> for Rational {
+impl<T> DivAssign<Self> for Rational<T>
+where
+    T: ZTrait,
+{
     fn div_assign(&mut self, rhs: Self) {
         self.num *= rhs.den;
         self.den *= rhs.num;
@@ -188,33 +277,48 @@ macro_rules! impl_ops {
         $fn:ident,
         $fn_assign:ident,
     )*) => {$(
-        impl $trait_assign<&Rational> for Rational {
-            fn $fn_assign(&mut self, rhs: &Rational) {
+        impl<T> $trait_assign<&Rational<T>> for Rational<T>
+        where
+            T: ZTrait,
+        {
+            fn $fn_assign(&mut self, rhs: &Rational<T>) {
                 self.$fn_assign(*rhs);
             }
         }
-        impl<T: Into<Rational>> $trait<T> for Rational {
-            type Output = Rational;
-            fn $fn(mut self, rhs: T) -> Self::Output {
+        impl<T, U: Into<Rational<T>>> $trait<U> for Rational<T>
+        where
+            T: ZTrait,
+        {
+            type Output = Rational<T>;
+            fn $fn(mut self, rhs: U) -> Self::Output {
                 self.$fn_assign(rhs.into());
                 self
             }
         }
-        impl $trait<&Rational> for Rational {
-            type Output = Rational;
-            fn $fn(self, rhs: &Rational) -> Self::Output {
+        impl<T> $trait<&Rational<T>> for Rational<T>
+        where
+            T: ZTrait,
+        {
+            type Output = Rational<T>;
+            fn $fn(self, rhs: &Rational<T>) -> Self::Output {
                 self.$fn(*rhs)
             }
         }
-        impl<T: Into<Rational>> $trait<T> for &Rational {
-            type Output = Rational;
-            fn $fn(self, rhs: T) -> Self::Output {
+        impl<T, U: Into<Rational<T>>> $trait<U> for &Rational<T>
+        where
+            T: ZTrait,
+        {
+            type Output = Rational<T>;
+            fn $fn(self, rhs: U) -> Self::Output {
                 (*self).$fn(rhs.into())
             }
         }
-        impl $trait<&Rational> for &Rational {
-            type Output = Rational;
-            fn $fn(self, rhs: &Rational) -> Self::Output {
+        impl<T> $trait<&Rational<T>> for &Rational<T>
+        where
+            T: ZTrait,
+        {
+            type Output = Rational<T>;
+            fn $fn(self, rhs: &Rational<T>) -> Self::Output {
                 (*self).$fn(*rhs)
             }
         }
@@ -228,22 +332,28 @@ impl_ops! {
     Div, DivAssign, div, div_assign,
 }
 
-impl Zero for Rational {
+impl<T> Zero for Rational<T>
+where
+    T: ZTrait,
+{
     fn zero() -> Self {
-        Self::from(0)
+        Self::from(T::zero())
     }
 
     fn is_zero(&self) -> bool {
-        self.num == 0
+        self.num == T::zero()
     }
 }
 
-impl One for Rational {
+impl<T> One for Rational<T>
+where
+    T: ZTrait,
+{
     fn one() -> Self {
-        Self::from(1)
+        Self::from(T::one())
     }
 
     fn is_one(&self) -> bool {
-        self.num == 1 && self.den == 1
+        self.num == T::one() && self.den == T::one()
     }
 }
