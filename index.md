@@ -306,6 +306,11 @@ data:
     - icon: ':heavy_check_mark:'
       path: crates/math/matrix/src/lib.rs
       title: crates/math/matrix/src/lib.rs
+  - name: crates/math/matrix-mod2/src
+    pages:
+    - icon: ':heavy_check_mark:'
+      path: crates/math/matrix-mod2/src/lib.rs
+      title: crates/math/matrix-mod2/src/lib.rs
   - name: crates/math/modint61/src
     pages:
     - icon: ':heavy_check_mark:'
@@ -562,11 +567,21 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/matrix_det/src/main.rs
       title: verify/matrix_det/src/main.rs
+  - name: verify/matrix_det_mod_2/src
+    pages:
+    - icon: ':heavy_check_mark:'
+      path: verify/matrix_det_mod_2/src/main.rs
+      title: verify/matrix_det_mod_2/src/main.rs
   - name: verify/matrix_product/src
     pages:
     - icon: ':heavy_check_mark:'
       path: verify/matrix_product/src/main.rs
       title: verify/matrix_product/src/main.rs
+  - name: verify/matrix_product_mod_2/src
+    pages:
+    - icon: ':heavy_check_mark:'
+      path: verify/matrix_product_mod_2/src/main.rs
+      title: verify/matrix_product_mod_2/src/main.rs
   - name: verify/min_cost_b_flow/src
     pages:
     - icon: ':heavy_check_mark:'
