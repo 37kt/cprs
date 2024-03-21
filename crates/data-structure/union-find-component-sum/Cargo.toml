@@ -1,0 +1,14 @@
+[package]
+name = "union-find-component-sum"
+version = "0.1.0"
+edition = "2021"
+license = "CC0-1.0"
+publish = false
+
+[lib]
+name = "union_find_component_sum"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+algebraic = { path = "../../algebraic/algebraic" }
