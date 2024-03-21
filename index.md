@@ -667,6 +667,11 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/range_reverse_range_sum/src/main.rs
       title: verify/range_reverse_range_sum/src/main.rs
+  - name: verify/rational_approximation/src
+    pages:
+    - icon: ':heavy_check_mark:'
+      path: verify/rational_approximation/src/main.rs
+      title: verify/rational_approximation/src/main.rs
   - name: verify/rectangle_add_point_get/src
     pages:
     - icon: ':heavy_check_mark:'

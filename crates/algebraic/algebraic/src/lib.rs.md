@@ -57,6 +57,9 @@ data:
     path: crates/math/montgomery-modint/src/lib.rs
     title: crates/math/montgomery-modint/src/lib.rs
   - icon: ':heavy_check_mark:'
+    path: crates/math/stern-brocot-tree/src/lib.rs
+    title: crates/math/stern-brocot-tree/src/lib.rs
+  - icon: ':heavy_check_mark:'
     path: crates/number-theory/modint/src/lib.rs
     title: crates/number-theory/modint/src/lib.rs
   - icon: ':heavy_check_mark:'
@@ -172,6 +175,7 @@ data:
   requiredBy:
   - crates/string/suffix-array/src/lib.rs
   - crates/math/modint61/src/lib.rs
+  - crates/math/stern-brocot-tree/src/lib.rs
   - crates/math/montgomery-modint/src/lib.rs
   - crates/math/discrete-logarithm/src/lib.rs
   - crates/math/matrix/src/lib.rs
