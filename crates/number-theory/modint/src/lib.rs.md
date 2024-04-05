@@ -21,11 +21,17 @@ data:
     path: crates/number-theory/combination/src/lib.rs
     title: crates/number-theory/combination/src/lib.rs
   - icon: ':heavy_check_mark:'
+    path: crates/polynomial/berlekamp-massey/src/lib.rs
+    title: crates/polynomial/berlekamp-massey/src/lib.rs
+  - icon: ':heavy_check_mark:'
     path: crates/polynomial/bostan-mori/src/lib.rs
     title: crates/polynomial/bostan-mori/src/lib.rs
   - icon: ':heavy_check_mark:'
     path: crates/polynomial/formal-power-series/src/lib.rs
     title: crates/polynomial/formal-power-series/src/lib.rs
+  - icon: ':warning:'
+    path: crates/polynomial/lagrange-interpolation/src/lib.rs
+    title: crates/polynomial/lagrange-interpolation/src/lib.rs
   - icon: ':heavy_check_mark:'
     path: crates/polynomial/polynomial-interpolation/src/lib.rs
     title: crates/polynomial/polynomial-interpolation/src/lib.rs
@@ -51,6 +57,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/exp_of_formal_power_series/src/main.rs
     title: verify/exp_of_formal_power_series/src/main.rs
+  - icon: ':heavy_check_mark:'
+    path: verify/find_linear_recurrence/src/main.rs
+    title: verify/find_linear_recurrence/src/main.rs
   - icon: ':heavy_check_mark:'
     path: verify/inv_of_formal_power_series/src/main.rs
     title: verify/inv_of_formal_power_series/src/main.rs
@@ -389,7 +398,9 @@ data:
   path: crates/number-theory/modint/src/lib.rs
   requiredBy:
   - crates/polynomial/formal-power-series/src/lib.rs
+  - crates/polynomial/berlekamp-massey/src/lib.rs
   - crates/polynomial/bostan-mori/src/lib.rs
+  - crates/polynomial/lagrange-interpolation/src/lib.rs
   - crates/polynomial/polynomial-interpolation/src/lib.rs
   - crates/polynomial/shift-of-sampling-points/src/lib.rs
   - crates/number-theory/combination/src/lib.rs
@@ -414,6 +425,7 @@ data:
   - verify/polynomial_taylor_shift/src/main.rs
   - verify/bitwise_or_convolution/src/main.rs
   - verify/kth_term_of_linearly_recurrent_sequence/src/main.rs
+  - verify/find_linear_recurrence/src/main.rs
   - verify/subset_convolution/src/main.rs
   - verify/exp_of_formal_power_series/src/main.rs
   - verify/convolution_mod_1000000007/src/main.rs

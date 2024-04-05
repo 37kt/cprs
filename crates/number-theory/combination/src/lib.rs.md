@@ -4,7 +4,10 @@ data:
   - icon: ':heavy_check_mark:'
     path: crates/number-theory/modint/src/lib.rs
     title: crates/number-theory/modint/src/lib.rs
-  _extendedRequiredBy: []
+  _extendedRequiredBy:
+  - icon: ':warning:'
+    path: crates/polynomial/lagrange-interpolation/src/lib.rs
+    title: crates/polynomial/lagrange-interpolation/src/lib.rs
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: verify/binomial_coefficient_prime_mod/src/main.rs
@@ -53,7 +56,8 @@ data:
   - crates/number-theory/modint/src/lib.rs
   isVerificationFile: false
   path: crates/number-theory/combination/src/lib.rs
-  requiredBy: []
+  requiredBy:
+  - crates/polynomial/lagrange-interpolation/src/lib.rs
   timestamp: '2024-03-18 01:19:47+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:

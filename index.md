@@ -251,6 +251,11 @@ data:
     - icon: ':heavy_check_mark:'
       path: crates/graph/graph/src/lib.rs
       title: crates/graph/graph/src/lib.rs
+  - name: crates/graph/k-project-selection/src
+    pages:
+    - icon: ':warning:'
+      path: crates/graph/k-project-selection/src/lib.rs
+      title: crates/graph/k-project-selection/src/lib.rs
   - name: crates/graph/low-link/src
     pages:
     - icon: ':warning:'
@@ -271,6 +276,11 @@ data:
     - icon: ':heavy_check_mark:'
       path: crates/graph/min-cost-b-flow/src/lib.rs
       title: crates/graph/min-cost-b-flow/src/lib.rs
+  - name: crates/graph/project-selection/src
+    pages:
+    - icon: ':warning:'
+      path: crates/graph/project-selection/src/lib.rs
+      title: crates/graph/project-selection/src/lib.rs
   - name: crates/graph/strongly-connected-components/src
     pages:
     - icon: ':heavy_check_mark:'
@@ -371,6 +381,11 @@ data:
     - icon: ':heavy_check_mark:'
       path: crates/number-theory/modint/src/lib.rs
       title: crates/number-theory/modint/src/lib.rs
+  - name: crates/polynomial/berlekamp-massey/src
+    pages:
+    - icon: ':heavy_check_mark:'
+      path: crates/polynomial/berlekamp-massey/src/lib.rs
+      title: crates/polynomial/berlekamp-massey/src/lib.rs
   - name: crates/polynomial/bostan-mori/src
     pages:
     - icon: ':heavy_check_mark:'
@@ -381,6 +396,11 @@ data:
     - icon: ':heavy_check_mark:'
       path: crates/polynomial/formal-power-series/src/lib.rs
       title: crates/polynomial/formal-power-series/src/lib.rs
+  - name: crates/polynomial/lagrange-interpolation/src
+    pages:
+    - icon: ':warning:'
+      path: crates/polynomial/lagrange-interpolation/src/lib.rs
+      title: crates/polynomial/lagrange-interpolation/src/lib.rs
   - name: crates/polynomial/polynomial-interpolation/src
     pages:
     - icon: ':heavy_check_mark:'
@@ -527,6 +547,11 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/factorize/src/main.rs
       title: verify/factorize/src/main.rs
+  - name: verify/find_linear_recurrence/src
+    pages:
+    - icon: ':heavy_check_mark:'
+      path: verify/find_linear_recurrence/src/main.rs
+      title: verify/find_linear_recurrence/src/main.rs
   - name: verify/gcd_convolution/src
     pages:
     - icon: ':heavy_check_mark:'
