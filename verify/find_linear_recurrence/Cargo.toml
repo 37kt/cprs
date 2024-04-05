@@ -1,0 +1,11 @@
+[package]
+name = "find_linear_recurrence"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+modint = { path = "../../crates/number-theory/modint" }
+berlekamp-massey = { path = "../../crates/polynomial/berlekamp-massey" }
+proconio = { version = "=0.3.6", features = ["derive"] }

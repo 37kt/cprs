@@ -1,0 +1,14 @@
+[package]
+name = "k-project-selection"
+version = "0.1.0"
+edition = "2021"
+license = "CC0-1.0"
+publish = false
+
+[lib]
+name = "k_project_selection"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+project-selection = { path = "../../graph/project-selection" }

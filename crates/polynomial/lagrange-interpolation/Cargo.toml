@@ -1,0 +1,15 @@
+[package]
+name = "lagrange-interpolation"
+version = "0.1.0"
+edition = "2021"
+license = "CC0-1.0"
+publish = false
+
+[lib]
+name = "lagrange_interpolation"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+modint = { path = "../../number-theory/modint" }
+combination = { path = "../../number-theory/combination" }
