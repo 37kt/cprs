@@ -18,6 +18,7 @@
 "verify/dynamic_tree_vertex_set_path_composite/src/main.rs": "2024-03-18 01:19:47 +0900",
 "verify/exp_of_formal_power_series/src/main.rs": "2024-03-18 03:03:26 +0900",
 "verify/factorize/src/main.rs": "2023-06-13 17:07:21 +0900",
+"verify/find_linear_recurrence/src/main.rs": "2024-04-05 14:38:09 +0900",
 "verify/gcd_convolution/src/main.rs": "2023-05-06 16:57:25 +0900",
 "verify/inv_of_formal_power_series/src/main.rs": "2024-03-18 03:03:26 +0900",
 "verify/inverse_matrix/src/main.rs": "2024-03-18 01:19:47 +0900",
