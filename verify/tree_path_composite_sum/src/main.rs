@@ -24,16 +24,9 @@ fn main() {
     input! {
         n: usize,
         a: [Mint; n],
+        uvw: [(usize, usize, (Mint, Mint)); n - 1],
     }
-    let mut g = Graph::from(a);
-    for _ in 0..n - 1 {
-        input! {
-            u: usize,
-            v: usize,
-            w: (Mint, Mint),
-        }
-        g.add_undirected_edge(u, v, w);
-    }
+    let g = Graph::from_vertices_and_undirected_edges(&a, &uvw);
     let dp = ReRootingDP::build::<M, V, E>(&g);
     println!("{}", (0..n).map(|v| dp.prod(v).1).join(" "));
 }

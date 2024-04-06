@@ -15,8 +15,8 @@ where
     T: Clone + Ord + Add<Output = T> + Default,
 {
     assert!(starts.len() > 0);
-    let mut dist = vec![inf.clone(); g.size()];
-    let mut prev = vec![!0; g.size()];
+    let mut dist = vec![inf.clone(); g.len()];
+    let mut prev = vec![!0; g.len()];
     let mut pq = BinaryHeap::new();
     for &s in starts {
         dist[s] = T::default();
@@ -26,7 +26,7 @@ where
         if dist[v] < s {
             continue;
         }
-        for (u, w) in g.out_edges(v) {
+        for (u, w) in &g[v] {
             assert!(w.clone() >= T::default());
             if dist[*u] > dist[v].clone() + w.clone() {
                 dist[*u] = dist[v].clone() + w.clone();

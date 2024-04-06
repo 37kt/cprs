@@ -14,16 +14,16 @@ pub struct LowLink {
 impl LowLink {
     pub fn new(g: &Graph<(), ()>) -> Self {
         let mut this = Self {
-            vis: vec![false; g.size()],
-            ord: vec![0; g.size()],
-            low: vec![0; g.size()],
-            par: vec![!0; g.size()],
+            vis: vec![false; g.len()],
+            ord: vec![0; g.len()],
+            low: vec![0; g.len()],
+            par: vec![!0; g.len()],
             articulation: vec![],
             bridge: vec![],
             cnt: 0,
             component_count: 0,
         };
-        for i in 0..g.size() {
+        for i in 0..g.len() {
             if !this.vis[i] {
                 this.dfs(i, !0, g);
                 this.component_count += 1;
@@ -40,7 +40,7 @@ impl LowLink {
         self.cnt += 1;
         let mut is_articulation = false;
         let mut cnt = 0;
-        for &(u, _) in g.out_edges(v) {
+        for &(u, _) in &g[v] {
             if !self.vis[u] {
                 cnt += 1;
                 self.dfs(u, v, g);

@@ -18,7 +18,7 @@ impl HeavyLightDecomposition {
         V: Clone,
         E: Clone,
     {
-        let n = g.size();
+        let n = g.len();
         let mut hld = HeavyLightDecomposition {
             t_in: vec![0; n],
             t_out: vec![0; n],
@@ -40,7 +40,7 @@ impl HeavyLightDecomposition {
         E: Clone,
     {
         self.size[v] = 1;
-        for &(u, _) in g.out_edges(v) {
+        for &(u, _) in &g[v] {
             if u == self.par[v] {
                 continue;
             }
@@ -67,7 +67,7 @@ impl HeavyLightDecomposition {
             self.head[u] = self.head[v];
             self.dfs_hld(g, u, t);
         }
-        for &(u, _) in g.out_edges(v) {
+        for &(u, _) in &g[v] {
             if u == self.par[v] {
                 continue;
             }

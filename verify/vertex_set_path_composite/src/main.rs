@@ -18,15 +18,9 @@ fn main() {
         n: usize,
         q: usize,
         a: [(Mint, Mint); n],
+        uv: [(usize, usize); n - 1],
     }
-    let mut g = Graph::from(a);
-    for _ in 0..n - 1 {
-        input! {
-            u: usize,
-            v: usize,
-        }
-        g.add_undirected_edge(u, v, ());
-    }
+    let g = Graph::from_vertices_and_unweighted_undirected_edges(&a, &uv);
     let mut tq = TreeQueryVertex::<M>::build(&g);
     for _ in 0..q {
         input! {

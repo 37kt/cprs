@@ -10,19 +10,13 @@ fn main() {
     input! {
         n: usize,
         m: usize,
+        ab: [(usize, usize); m]
     }
-    let mut g = Graph::<(), ()>::new(n);
-    for _ in 0..m {
-        input! {
-            a: usize,
-            b: usize,
-        }
-        g.add_edge(a, b, ());
-    }
+    let g = Graph::from_unweighted_directed_edges(n, &ab);
     let h = strongly_connected_components(&g);
-    println!("{}", h.size());
-    for i in 0..h.size() {
-        let vs = &h.vertices()[i];
+    println!("{}", h.len());
+    for i in 0..h.len() {
+        let vs = h.vertex(i);
         println!("{} {}", vs.len(), vs.iter().join(" "));
     }
 }

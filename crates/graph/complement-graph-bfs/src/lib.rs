@@ -5,7 +5,7 @@ use graph::Graph;
 const INF: usize = 1 << 60;
 
 pub fn complement_graph_bfs(g: &Graph<(), ()>, start: usize) -> Vec<usize> {
-    let n = g.size();
+    let n = g.len();
     let mut dist = vec![INF; n];
     let mut q = VecDeque::new();
     dist[start] = 0;
@@ -14,7 +14,7 @@ pub fn complement_graph_bfs(g: &Graph<(), ()>, start: usize) -> Vec<usize> {
     let mut f = vec![false; n];
     while let Some(v) = q.pop_front() {
         let mut l = vec![];
-        for &(u, _) in g.out_edges(v) {
+        for &(u, _) in &g[v] {
             f[u] = true;
         }
         for &u in &s {
@@ -25,7 +25,7 @@ pub fn complement_graph_bfs(g: &Graph<(), ()>, start: usize) -> Vec<usize> {
                 q.push_back(u);
             }
         }
-        for &(u, _) in g.out_edges(v) {
+        for &(u, _) in &g[v] {
             f[u] = false;
         }
         s = l;

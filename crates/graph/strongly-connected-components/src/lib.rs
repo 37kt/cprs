@@ -7,7 +7,7 @@ where
     V: Clone,
     E: Clone,
 {
-    let n = g.size();
+    let n = g.len();
     let mut scc = Scc {
         comp: vec![0; n],
         low: vec![0; n],
@@ -26,17 +26,17 @@ where
         scc.comp[v] = scc.m - 1 - scc.comp[v];
         groups[scc.comp[v]].push(v);
     }
-    let mut res = Graph::from(groups);
+    let mut edges = vec![];
     for v in 0..n {
-        for (u, w) in g.out_edges(v) {
+        for (u, w) in &g[v] {
             let a = scc.comp[v];
             let b = scc.comp[*u];
             if a != b {
-                res.add_edge(a, b, w.clone());
+                edges.push((a, b, w.clone()));
             }
         }
     }
-    res
+    Graph::from_vertices_and_directed_edges(&groups, &edges)
 }
 
 impl Scc {
@@ -49,7 +49,7 @@ impl Scc {
         self.ord[v] = self.t;
         self.t += 1;
         self.vis.push(v);
-        for &(u, _) in g.out_edges(v) {
+        for &(u, _) in &g[v] {
             if self.ord[u] == !0 {
                 self.dfs(u, g);
                 self.low[v] = self.low[v].min(self.low[u]);
@@ -60,7 +60,7 @@ impl Scc {
         if self.low[v] == self.ord[v] {
             loop {
                 let u = self.vis.pop().unwrap();
-                self.ord[u] = g.size();
+                self.ord[u] = g.len();
                 self.comp[u] = self.m;
                 if u == v {
                     break;

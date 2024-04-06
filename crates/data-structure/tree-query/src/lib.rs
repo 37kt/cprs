@@ -82,12 +82,12 @@ where
     where
         E: Clone,
     {
-        let n = g.size();
+        let n = g.len();
         let hld = HeavyLightDecomposition::new(g);
         let mut a = vec![M::e(); n];
         for v in 0..n {
             let k = hld.vertex(v);
-            a[k] = g.vertices()[v].clone();
+            a[k] = g.vertex(v).clone();
         }
         let seg_down = SegmentTree::from(a.clone());
         a.reverse();
@@ -122,11 +122,11 @@ where
     where
         V: Clone,
     {
-        let n = g.size();
+        let n = g.len();
         let hld = HeavyLightDecomposition::new(g);
         let mut a = vec![M::e(); n];
         for v in 0..n {
-            for (u, w) in g.out_edges(v) {
+            for (u, w) in &g[v] {
                 let k = hld.edge(*u, v);
                 a[k] = w.clone();
             }

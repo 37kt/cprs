@@ -11,16 +11,9 @@ fn main() {
         m: usize,
         s: usize,
         t: usize,
+        abc: [(usize, usize, i64); m],
     }
-    let mut g = Graph::<(), i64>::new(n);
-    for _ in 0..m {
-        input! {
-            a: usize,
-            b: usize,
-            c: i64,
-        }
-        g.add_edge(a, b, c);
-    }
+    let g = Graph::from_directed_edges(n, &abc);
     let dijkstra_result = dijkstra(&g, &[s], 1 << 60);
     if let Some(path) = dijkstra_result.path(t) {
         println!("{} {}", dijkstra_result.dist[t], path.len() - 1);

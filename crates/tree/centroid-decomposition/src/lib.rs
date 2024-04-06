@@ -2,13 +2,13 @@ use graph::Graph;
 
 /// 重心分解をする
 /// 入力: 木
-/// 戻り値: 重心分解後の木?についての (親, 行きがけ順)
+/// 戻り値: 重心分解の木についての (親, 行きがけ順)
 pub fn build<V, E>(g: &Graph<V, E>) -> (Vec<usize>, Vec<usize>)
 where
     V: Clone,
     E: Clone,
 {
-    let mut cd = CentroidDecomposition::new(g.size());
+    let mut cd = CentroidDecomposition::new(g.len());
     cd.build(0, g);
     (cd.par, cd.ord)
 }
@@ -39,7 +39,7 @@ impl CentroidDecomposition {
         let c = self.search_centroid(v, !0, sz / 2, g);
         self.used[c] = true;
         self.ord.push(v);
-        for &(u, _) in g.out_edges(v) {
+        for &(u, _) in &g[v] {
             if !self.used[u] {
                 let d = self.build(u, g);
                 self.par[d] = c;
@@ -55,7 +55,7 @@ impl CentroidDecomposition {
         E: Clone,
     {
         self.sz[v] = 1;
-        for &(u, _) in g.out_edges(v) {
+        for &(u, _) in &g[v] {
             if u == p || self.used[u] {
                 continue;
             }
@@ -69,7 +69,7 @@ impl CentroidDecomposition {
         V: Clone,
         E: Clone,
     {
-        for &(u, _) in g.out_edges(v) {
+        for &(u, _) in &g[v] {
             if u == p || self.used[u] {
                 continue;
             }

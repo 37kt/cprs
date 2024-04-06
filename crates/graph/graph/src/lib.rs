@@ -1,3 +1,5 @@
+use std::ops::Index;
+
 #[derive(Clone)]
 pub struct Graph<V, E>
 where
@@ -5,9 +7,8 @@ where
     E: Clone,
 {
     vertices: Vec<V>,
-    head: Vec<usize>,
-    next: Vec<usize>,
     edges: Vec<(usize, E)>,
+    pos: Vec<usize>,
 }
 
 pub const GRID_NEIGHBOURS_4: &[(usize, usize)] = &[(!0, 0), (0, !0), (1, 0), (0, 1)];
@@ -24,81 +25,108 @@ pub const GRID_NEIGHBOURS_8: &[(usize, usize)] = &[
 
 impl<V, E> Graph<V, E>
 where
-    V: Clone + Default,
-    E: Clone,
-{
-    pub fn new(n: usize) -> Self {
-        Self {
-            vertices: vec![Default::default(); n],
-            head: vec![!0; n],
-            next: vec![],
-            edges: vec![],
-        }
-    }
-}
-
-impl<V, E> From<Vec<V>> for Graph<V, E>
-where
     V: Clone,
     E: Clone,
 {
-    fn from(vertices: Vec<V>) -> Self {
+    pub fn from_vertices_and_directed_edges(vertices: &[V], edges: &[(usize, usize, E)]) -> Self {
+        if edges.is_empty() {
+            return Self {
+                vertices: vertices.to_vec(),
+                edges: vec![],
+                pos: vec![0; vertices.len() + 1],
+            };
+        }
+
+        let n = vertices.len();
+        let mut pos = vec![0; n + 1];
+        for &(u, _, _) in edges {
+            pos[u] += 1;
+        }
+        for i in 1..=n {
+            pos[i] += pos[i - 1];
+        }
+        let mut ord = vec![0; edges.len()];
+        for i in (0..edges.len()).rev() {
+            let u = edges[i].0;
+            pos[u] -= 1;
+            ord[pos[u]] = i;
+        }
+
         Self {
-            head: vec![!0; vertices.len()],
-            vertices,
-            next: vec![],
-            edges: vec![],
+            vertices: vertices.to_vec(),
+            edges: ord
+                .into_iter()
+                .map(|i| (edges[i].1, edges[i].2.clone()))
+                .collect(),
+            pos,
         }
     }
-}
 
-impl<V, E> Graph<V, E>
-where
-    V: Clone,
-    E: Clone,
-{
-    pub fn size(&self) -> usize {
+    pub fn from_vertices_and_undirected_edges(vertices: &[V], edges: &[(usize, usize, E)]) -> Self {
+        if edges.is_empty() {
+            return Self {
+                vertices: vertices.to_vec(),
+                edges: vec![],
+                pos: vec![0; vertices.len() + 1],
+            };
+        }
+
+        let n = vertices.len();
+        let mut pos = vec![0; n + 1];
+        for &(u, v, _) in edges {
+            pos[u] += 1;
+            pos[v] += 1;
+        }
+        for i in 1..=n {
+            pos[i] += pos[i - 1];
+        }
+        let mut ord = vec![0; edges.len() * 2];
+        for i in (0..edges.len() * 2).rev() {
+            if i & 1 == 0 {
+                let u = edges[i >> 1].0;
+                pos[u] -= 1;
+                ord[pos[u]] = i;
+            } else {
+                let v = edges[i >> 1].1;
+                pos[v] -= 1;
+                ord[pos[v]] = i;
+            }
+        }
+
+        Self {
+            vertices: vertices.to_vec(),
+            edges: ord
+                .into_iter()
+                .map(|i| {
+                    (
+                        if i & 1 == 0 {
+                            edges[i >> 1].1
+                        } else {
+                            edges[i >> 1].0
+                        },
+                        edges[i >> 1].2.clone(),
+                    )
+                })
+                .collect(),
+            pos,
+        }
+    }
+
+    pub fn len(&self) -> usize {
         self.vertices.len()
     }
 
-    pub fn set_vertex(&mut self, v: usize, w: V) {
-        self.vertices[v] = w;
+    pub fn vertex(&self, v: usize) -> &V {
+        &self.vertices[v]
     }
 
-    pub fn add_vertex(&mut self, w: V) -> usize {
-        self.vertices.push(w);
-        self.head.push(!0);
-        self.vertices.len() - 1
+    pub fn edges(&self, v: usize) -> &[(usize, E)] {
+        let l = self.pos[v];
+        let r = self.pos[v + 1];
+        &self.edges[l..r]
     }
 
-    pub fn add_edge(&mut self, u: usize, v: usize, w: E) {
-        self.next.push(self.head[u]);
-        self.head[u] = self.edges.len();
-        self.edges.push((v, w));
-    }
-
-    pub fn add_undirected_edge(&mut self, u: usize, v: usize, w: E) {
-        self.add_edge(u, v, w.clone());
-        self.add_edge(v, u, w);
-    }
-
-    pub fn vertices(&self) -> &[V] {
-        &self.vertices
-    }
-
-    pub fn out_edges(&self, v: usize) -> impl Iterator<Item = &(usize, E)> {
-        let mut e = self.head[v];
-        std::iter::from_fn(move || {
-            if e != !0 {
-                let res = &self.edges[e];
-                e = self.next[e];
-                Some(res)
-            } else {
-                None
-            }
-        })
-    }
-
+    /// (i, j) -> i * w + j
     pub fn from_grid(
         grid: &Vec<Vec<V>>,
         neighbours: &[(usize, usize)],
@@ -106,7 +134,7 @@ where
     ) -> Self {
         let h = grid.len();
         let w = grid[0].len();
-        let mut g = Self::from(grid.into_iter().flatten().cloned().collect::<Vec<_>>());
+        let mut edges = vec![];
         for i in 0..h {
             for j in 0..w {
                 for &(di, dj) in neighbours {
@@ -116,11 +144,80 @@ where
                         continue;
                     }
                     if let Some(c) = cost(&grid[i][j], &grid[ni][nj]) {
-                        g.add_edge(i * w + j, ni * w + nj, c);
+                        edges.push((i * w + j, ni * w + nj, c));
                     }
                 }
             }
         }
-        g
+        Self::from_vertices_and_directed_edges(
+            &grid.into_iter().flatten().cloned().collect::<Vec<_>>(),
+            &edges,
+        )
+    }
+}
+
+impl<V, E> Index<usize> for Graph<V, E>
+where
+    V: Clone,
+    E: Clone,
+{
+    type Output = [(usize, E)];
+
+    fn index(&self, v: usize) -> &[(usize, E)] {
+        self.edges(v)
+    }
+}
+
+impl<E> Graph<(), E>
+where
+    E: Clone,
+{
+    pub fn from_directed_edges(n: usize, edges: &[(usize, usize, E)]) -> Self {
+        Self::from_vertices_and_directed_edges(&vec![(); n], edges)
+    }
+
+    pub fn from_undirected_edges(n: usize, edges: &[(usize, usize, E)]) -> Self {
+        Self::from_vertices_and_undirected_edges(&vec![(); n], edges)
+    }
+}
+
+impl<V> Graph<V, ()>
+where
+    V: Clone,
+{
+    pub fn from_vertices_and_unweighted_directed_edges(
+        vertices: &[V],
+        edges: &[(usize, usize)],
+    ) -> Self {
+        Self::from_vertices_and_directed_edges(
+            vertices,
+            &edges.iter().map(|&(u, v)| (u, v, ())).collect::<Vec<_>>(),
+        )
+    }
+
+    pub fn from_vertices_and_unweighted_undirected_edges(
+        vertices: &[V],
+        edges: &[(usize, usize)],
+    ) -> Self {
+        Self::from_vertices_and_undirected_edges(
+            vertices,
+            &edges.iter().map(|&(u, v)| (u, v, ())).collect::<Vec<_>>(),
+        )
+    }
+}
+
+impl Graph<(), ()> {
+    pub fn from_unweighted_directed_edges(n: usize, edges: &[(usize, usize)]) -> Self {
+        Self::from_directed_edges(
+            n,
+            &edges.iter().map(|&(u, v)| (u, v, ())).collect::<Vec<_>>(),
+        )
+    }
+
+    pub fn from_unweighted_undirected_edges(n: usize, edges: &[(usize, usize)]) -> Self {
+        Self::from_undirected_edges(
+            n,
+            &edges.iter().map(|&(u, v)| (u, v, ())).collect::<Vec<_>>(),
+        )
     }
 }

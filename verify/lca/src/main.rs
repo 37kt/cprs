@@ -10,13 +10,14 @@ fn main() {
         n: usize,
         q: usize,
     }
-    let mut g = Graph::<(), ()>::new(n);
+    let mut es = vec![];
     for v in 1..n {
         input! {
             p: usize,
         }
-        g.add_undirected_edge(v, p, ());
+        es.push((p, v));
     }
+    let g = Graph::from_vertices_and_unweighted_undirected_edges(&vec![(); n], &es);
     let hld = HeavyLightDecomposition::new(&g);
     for _ in 0..q {
         input! {

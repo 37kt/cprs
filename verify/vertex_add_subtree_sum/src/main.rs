@@ -15,13 +15,14 @@ fn main() {
         q: usize,
         a: [i64; n],
     }
-    let mut g = Graph::from(a);
+    let mut es = vec![];
     for v in 1..n {
         input! {
             p: usize,
         }
-        g.add_undirected_edge(p, v, ());
+        es.push((p, v));
     }
+    let g = Graph::from_vertices_and_unweighted_undirected_edges(&a, &es);
     let mut tq = TreeQueryVertex::<M>::build(&g);
     for _ in 0..q {
         input! {

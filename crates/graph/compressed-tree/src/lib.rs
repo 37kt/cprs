@@ -14,7 +14,7 @@ pub struct CompressedTree {
 
 impl CompressedTree {
     pub fn new(g: &Graph<(), ()>) -> Self {
-        let n = g.size();
+        let n = g.len();
         let mut c = Self {
             fs: vec![0; n],
             ls: vec![0; n],
@@ -57,7 +57,7 @@ impl CompressedTree {
         vs.sort_by_key(|&v| self.fs[v]);
         vs.dedup();
         let mut stk = vec![];
-        let mut g = Graph::new(vs.len());
+        let mut es = vec![];
         let mut idx = vec![0; vs.len()];
         for i in 0..vs.len() {
             self.idx[vs[i]] = i;
@@ -68,11 +68,11 @@ impl CompressedTree {
                 stk.pop();
             }
             if let Some(&u) = stk.last() {
-                g.add_edge(self.idx[u], self.idx[v], ());
+                es.push((self.idx[u], self.idx[v]));
             }
             stk.push(v);
         }
-        (g, idx)
+        (Graph::from_unweighted_directed_edges(vs.len(), &es), idx)
     }
 
     fn ett_dfs(&mut self, v: usize, p: usize, d: usize, g: &Graph<(), ()>) {
@@ -80,7 +80,7 @@ impl CompressedTree {
         self.fs[v] = c;
         self.st[0].push(v);
         self.depth[v] = d;
-        for &(u, _) in g.out_edges(v) {
+        for &(u, _) in &g[v] {
             if u == p {
                 continue;
             }
