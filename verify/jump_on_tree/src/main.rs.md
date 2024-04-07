@@ -25,20 +25,19 @@ data:
   code: "// verification-helper: PROBLEM https://judge.yosupo.jp/problem/jump_on_tree\n\
     \nuse graph::Graph;\nuse heavy_light_decomposition::HeavyLightDecomposition;\n\
     use proconio::input;\n\n#[proconio::fastout]\nfn main() {\n    input! {\n    \
-    \    n: usize,\n        q: usize,\n    }\n    let mut g = Graph::<(), ()>::new(n);\n\
-    \    for _ in 1..n {\n        input! {\n            a: usize,\n            b:\
-    \ usize,\n        }\n        g.add_undirected_edge(a, b, ());\n    }\n    let\
-    \ hld = HeavyLightDecomposition::new(&g);\n    for _ in 0..q {\n        input!\
-    \ {\n            s: usize,\n            t: usize,\n            i: usize,\n   \
-    \     }\n        let v = hld.jump(s, t, i);\n        println!(\"{}\", v as i64);\n\
-    \    }\n}\n"
+    \    n: usize,\n        q: usize,\n        ab: [(usize, usize); n - 1],\n    }\n\
+    \    let g = Graph::from_vertices_and_unweighted_undirected_edges(&vec![(); n],\
+    \ &ab);\n    let hld = HeavyLightDecomposition::new(&g);\n    for _ in 0..q {\n\
+    \        input! {\n            s: usize,\n            t: usize,\n            i:\
+    \ usize,\n        }\n        let v = hld.jump(s, t, i);\n        println!(\"{}\"\
+    , v as i64);\n    }\n}\n"
   dependsOn:
   - crates/data-structure/heavy-light-decomposition/src/lib.rs
   - crates/graph/graph/src/lib.rs
   isVerificationFile: true
   path: verify/jump_on_tree/src/main.rs
   requiredBy: []
-  timestamp: '2023-05-17 16:30:46+09:00'
+  timestamp: '2024-04-07 08:56:09+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/jump_on_tree/src/main.rs

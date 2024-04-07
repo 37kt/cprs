@@ -32,16 +32,15 @@ data:
     \nuse algebraic::{algebra, monoid};\nuse graph::Graph;\nuse proconio::input;\n\
     use tree_query::TreeQueryVertex;\n\nalgebra!(M, i64);\nmonoid!(M, 0, |x, y| x\
     \ + y);\n\n#[proconio::fastout]\nfn main() {\n    input! {\n        n: usize,\n\
-    \        q: usize,\n        a: [i64; n],\n    }\n    let mut g = Graph::from(a);\n\
-    \    for _ in 0..n - 1 {\n        input! {\n            u: usize,\n          \
-    \  v: usize,\n        }\n        g.add_undirected_edge(u, v, ());\n    }\n   \
-    \ let mut tq = TreeQueryVertex::<M>::build(&g);\n    for _ in 0..q {\n       \
-    \ input! {\n            ty: usize,\n        }\n        if ty == 0 {\n        \
-    \    input! {\n                p: usize,\n                x: i64,\n          \
-    \  }\n            let t = tq.get(p);\n            tq.set(p, t + x);\n        }\
-    \ else {\n            input! {\n                u: usize,\n                v:\
-    \ usize,\n            }\n            let t = tq.prod_path(u, v);\n           \
-    \ println!(\"{}\", t);\n        }\n    }\n}\n"
+    \        q: usize,\n        a: [i64; n],\n        uv: [(usize, usize); n - 1],\n\
+    \    }\n    let g = Graph::from_vertices_and_unweighted_undirected_edges(&a, &uv);\n\
+    \    let mut tq = TreeQueryVertex::<M>::build(&g);\n    for _ in 0..q {\n    \
+    \    input! {\n            ty: usize,\n        }\n        if ty == 0 {\n     \
+    \       input! {\n                p: usize,\n                x: i64,\n       \
+    \     }\n            let t = tq.get(p);\n            tq.set(p, t + x);\n     \
+    \   } else {\n            input! {\n                u: usize,\n              \
+    \  v: usize,\n            }\n            let t = tq.prod_path(u, v);\n       \
+    \     println!(\"{}\", t);\n        }\n    }\n}\n"
   dependsOn:
   - crates/algebraic/algebraic/src/lib.rs
   - crates/data-structure/segment-tree/src/lib.rs
@@ -50,7 +49,7 @@ data:
   isVerificationFile: true
   path: verify/vertex_add_path_sum/src/main.rs
   requiredBy: []
-  timestamp: '2024-03-18 01:19:47+09:00'
+  timestamp: '2024-04-07 08:56:09+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/vertex_add_path_sum/src/main.rs

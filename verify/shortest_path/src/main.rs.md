@@ -25,20 +25,19 @@ data:
   code: "// verification-helper: PROBLEM https://judge.yosupo.jp/problem/shortest_path\n\
     \nuse dijkstra::dijkstra;\nuse graph::Graph;\nuse proconio::input;\n\n#[proconio::fastout]\n\
     fn main() {\n    input! {\n        n: usize,\n        m: usize,\n        s: usize,\n\
-    \        t: usize,\n    }\n    let mut g = Graph::<(), i64>::new(n);\n    for\
-    \ _ in 0..m {\n        input! {\n            a: usize,\n            b: usize,\n\
-    \            c: i64,\n        }\n        g.add_edge(a, b, c);\n    }\n    let\
-    \ dijkstra_result = dijkstra(&g, &[s], 1 << 60);\n    if let Some(path) = dijkstra_result.path(t)\
-    \ {\n        println!(\"{} {}\", dijkstra_result.dist[t], path.len() - 1);\n \
-    \       for i in 0..path.len() - 1 {\n            println!(\"{} {}\", path[i],\
-    \ path[i + 1]);\n        }\n    } else {\n        println!(\"-1\");\n    }\n}\n"
+    \        t: usize,\n        abc: [(usize, usize, i64); m],\n    }\n    let g =\
+    \ Graph::from_directed_edges(n, &abc);\n    let dijkstra_result = dijkstra(&g,\
+    \ &[s], 1 << 60);\n    if let Some(path) = dijkstra_result.path(t) {\n       \
+    \ println!(\"{} {}\", dijkstra_result.dist[t], path.len() - 1);\n        for i\
+    \ in 0..path.len() - 1 {\n            println!(\"{} {}\", path[i], path[i + 1]);\n\
+    \        }\n    } else {\n        println!(\"-1\");\n    }\n}\n"
   dependsOn:
   - crates/graph/dijkstra/src/lib.rs
   - crates/graph/graph/src/lib.rs
   isVerificationFile: true
   path: verify/shortest_path/src/main.rs
   requiredBy: []
-  timestamp: '2024-03-11 09:14:28+09:00'
+  timestamp: '2024-04-07 08:56:09+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/shortest_path/src/main.rs

@@ -25,19 +25,17 @@ data:
   code: "// verification-helper: PROBLEM https://judge.yosupo.jp/problem/scc\n\nuse\
     \ graph::Graph;\nuse itertools::Itertools;\nuse proconio::input;\nuse strongly_connected_components::strongly_connected_components;\n\
     \n#[proconio::fastout]\nfn main() {\n    input! {\n        n: usize,\n       \
-    \ m: usize,\n    }\n    let mut g = Graph::<(), ()>::new(n);\n    for _ in 0..m\
-    \ {\n        input! {\n            a: usize,\n            b: usize,\n        }\n\
-    \        g.add_edge(a, b, ());\n    }\n    let h = strongly_connected_components(&g);\n\
-    \    println!(\"{}\", h.size());\n    for i in 0..h.size() {\n        let vs =\
-    \ &h.vertices()[i];\n        println!(\"{} {}\", vs.len(), vs.iter().join(\" \"\
-    ));\n    }\n}\n"
+    \ m: usize,\n        ab: [(usize, usize); m]\n    }\n    let g = Graph::from_unweighted_directed_edges(n,\
+    \ &ab);\n    let h = strongly_connected_components(&g);\n    println!(\"{}\",\
+    \ h.len());\n    for i in 0..h.len() {\n        let vs = h.vertex(i);\n      \
+    \  println!(\"{} {}\", vs.len(), vs.iter().join(\" \"));\n    }\n}\n"
   dependsOn:
   - crates/graph/graph/src/lib.rs
   - crates/graph/strongly-connected-components/src/lib.rs
   isVerificationFile: true
   path: verify/scc/src/main.rs
   requiredBy: []
-  timestamp: '2023-05-17 16:30:46+09:00'
+  timestamp: '2024-04-07 08:56:09+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/scc/src/main.rs

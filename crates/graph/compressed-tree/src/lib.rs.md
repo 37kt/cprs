@@ -22,7 +22,7 @@ data:
     \npub struct CompressedTree {\n    fs: Vec<usize>,\n    ls: Vec<usize>,\n    depth:\
     \ Vec<usize>,\n    st: Vec<Vec<usize>>,\n    lg: Vec<usize>,\n    idx: Vec<usize>,\n\
     }\n\nimpl CompressedTree {\n    pub fn new(g: &Graph<(), ()>) -> Self {\n    \
-    \    let n = g.size();\n        let mut c = Self {\n            fs: vec![0; n],\n\
+    \    let n = g.len();\n        let mut c = Self {\n            fs: vec![0; n],\n\
     \            ls: vec![0; n],\n            depth: vec![0; n],\n            st:\
     \ vec![vec![]],\n            lg: vec![],\n            idx: vec![0; n],\n     \
     \   };\n\n        c.ett_dfs(0, !0, 0, g);\n\n        c.lg = vec![0; 2];\n    \
@@ -37,17 +37,17 @@ data:
     \  vs.sort_by_key(|&v| self.fs[v]);\n        for i in 0..vs.len() - 1 {\n    \
     \        vs.push(self.lca(vs[i], vs[i + 1]));\n        }\n        vs.sort_by_key(|&v|\
     \ self.fs[v]);\n        vs.dedup();\n        let mut stk = vec![];\n        let\
-    \ mut g = Graph::new(vs.len());\n        let mut idx = vec![0; vs.len()];\n  \
-    \      for i in 0..vs.len() {\n            self.idx[vs[i]] = i;\n            idx[i]\
-    \ = vs[i];\n        }\n        for &v in &vs {\n            while stk.len() >\
-    \ 0 && self.ls[*stk.last().unwrap()] < self.fs[v] {\n                stk.pop();\n\
-    \            }\n            if let Some(&u) = stk.last() {\n                g.add_edge(self.idx[u],\
-    \ self.idx[v], ());\n            }\n            stk.push(v);\n        }\n    \
-    \    (g, idx)\n    }\n\n    fn ett_dfs(&mut self, v: usize, p: usize, d: usize,\
+    \ mut es = vec![];\n        let mut idx = vec![0; vs.len()];\n        for i in\
+    \ 0..vs.len() {\n            self.idx[vs[i]] = i;\n            idx[i] = vs[i];\n\
+    \        }\n        for &v in &vs {\n            while stk.len() > 0 && self.ls[*stk.last().unwrap()]\
+    \ < self.fs[v] {\n                stk.pop();\n            }\n            if let\
+    \ Some(&u) = stk.last() {\n                es.push((self.idx[u], self.idx[v]));\n\
+    \            }\n            stk.push(v);\n        }\n        (Graph::from_unweighted_directed_edges(vs.len(),\
+    \ &es), idx)\n    }\n\n    fn ett_dfs(&mut self, v: usize, p: usize, d: usize,\
     \ g: &Graph<(), ()>) {\n        let c = self.st[0].len();\n        self.fs[v]\
     \ = c;\n        self.st[0].push(v);\n        self.depth[v] = d;\n        for &(u,\
-    \ _) in g.out_edges(v) {\n            if u == p {\n                continue;\n\
-    \            }\n            self.ett_dfs(u, v, d + 1, g);\n            self.st[0].push(v);\n\
+    \ _) in &g[v] {\n            if u == p {\n                continue;\n        \
+    \    }\n            self.ett_dfs(u, v, d + 1, g);\n            self.st[0].push(v);\n\
     \        }\n        self.ls[v] = self.st[0].len() - 1;\n    }\n\n    fn lca(&self,\
     \ u: usize, v: usize) -> usize {\n        let mut x = self.fs[u];\n        let\
     \ mut y = self.fs[v];\n        if x > y {\n            std::mem::swap(&mut x,\
@@ -60,7 +60,7 @@ data:
   isVerificationFile: false
   path: crates/graph/compressed-tree/src/lib.rs
   requiredBy: []
-  timestamp: '2024-02-13 13:29:05+09:00'
+  timestamp: '2024-04-07 08:56:09+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: crates/graph/compressed-tree/src/lib.rs

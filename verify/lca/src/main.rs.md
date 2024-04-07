@@ -25,18 +25,19 @@ data:
   code: "// verification-helper: PROBLEM https://judge.yosupo.jp/problem/lca\n\nuse\
     \ graph::Graph;\nuse heavy_light_decomposition::HeavyLightDecomposition;\nuse\
     \ proconio::input;\n\n#[proconio::fastout]\nfn main() {\n    input! {\n      \
-    \  n: usize,\n        q: usize,\n    }\n    let mut g = Graph::<(), ()>::new(n);\n\
-    \    for v in 1..n {\n        input! {\n            p: usize,\n        }\n   \
-    \     g.add_undirected_edge(v, p, ());\n    }\n    let hld = HeavyLightDecomposition::new(&g);\n\
-    \    for _ in 0..q {\n        input! {\n            u: usize,\n            v:\
-    \ usize,\n        }\n        println!(\"{}\", hld.lca(u, v));\n    }\n}\n"
+    \  n: usize,\n        q: usize,\n    }\n    let mut es = vec![];\n    for v in\
+    \ 1..n {\n        input! {\n            p: usize,\n        }\n        es.push((p,\
+    \ v));\n    }\n    let g = Graph::from_vertices_and_unweighted_undirected_edges(&vec![();\
+    \ n], &es);\n    let hld = HeavyLightDecomposition::new(&g);\n    for _ in 0..q\
+    \ {\n        input! {\n            u: usize,\n            v: usize,\n        }\n\
+    \        println!(\"{}\", hld.lca(u, v));\n    }\n}\n"
   dependsOn:
   - crates/data-structure/heavy-light-decomposition/src/lib.rs
   - crates/graph/graph/src/lib.rs
   isVerificationFile: true
   path: verify/lca/src/main.rs
   requiredBy: []
-  timestamp: '2023-05-17 16:30:46+09:00'
+  timestamp: '2024-04-07 08:56:09+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/lca/src/main.rs

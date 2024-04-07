@@ -24,22 +24,27 @@ data:
     \  File \"/opt/hostedtoolcache/Python/3.12.2/x64/lib/python3.12/site-packages/onlinejudge_verify/languages/rust.py\"\
     , line 288, in bundle\n    raise NotImplementedError\nNotImplementedError\n"
   code: "use graph::Graph;\nuse strongly_connected_components::strongly_connected_components;\n\
-    \npub struct TwoSatisfiability {\n    n: usize,\n    g: Graph<(), ()>,\n}\n\n\
-    impl TwoSatisfiability {\n    pub fn new(n: usize) -> Self {\n        Self {\n\
-    \            n,\n            g: Graph::new(n * 2),\n        }\n    }\n\n    pub\
-    \ fn set(&mut self, x: usize) {\n        if x < self.n {\n            self.g.add_edge(self.id(!x),\
-    \ self.id(x), ());\n        } else {\n            self.g.add_edge(self.id(x),\
-    \ self.id(!x), ());\n        }\n    }\n\n    pub fn add(&mut self, x: usize, y:\
-    \ usize) {\n        self.g.add_edge(self.id(!x), self.id(y), ());\n        self.g.add_edge(self.id(!y),\
-    \ self.id(x), ());\n    }\n\n    pub fn if_then(&mut self, x: usize, y: usize)\
-    \ {\n        self.add(!x, y);\n    }\n\n    pub fn solve(&self) -> Option<Vec<bool>>\
-    \ {\n        let scc = strongly_connected_components(&self.g);\n        let mut\
-    \ comp = vec![0; self.n * 2];\n        for i in 0..scc.size() {\n            for\
-    \ &x in &scc.vertices()[i] {\n                comp[x] = i;\n            }\n  \
-    \      }\n        let mut res = vec![false; self.n];\n        for i in 0..self.n\
-    \ {\n            if comp[i] == comp[i + self.n] {\n                return None;\n\
-    \            }\n            res[i] = comp[i] > comp[i + self.n];\n        }\n\
-    \        Some(res)\n    }\n\n    fn id(&self, x: usize) -> usize {\n        assert!(x\
+    \npub struct TwoSatisfiability {\n    n: usize,\n    // g: Graph<(), ()>,\n  \
+    \  es: Vec<(usize, usize)>,\n}\n\nimpl TwoSatisfiability {\n    pub fn new(n:\
+    \ usize) -> Self {\n        Self {\n            n,\n            // g: Graph::new(n\
+    \ * 2),\n            es: vec![],\n        }\n    }\n\n    pub fn set(&mut self,\
+    \ x: usize) {\n        if x < self.n {\n            // self.g.add_edge(self.id(!x),\
+    \ self.id(x), ());\n            self.es.push((self.id(!x), self.id(x)));\n   \
+    \     } else {\n            // self.g.add_edge(self.id(x), self.id(!x), ());\n\
+    \            self.es.push((self.id(x), self.id(!x)));\n        }\n    }\n\n  \
+    \  pub fn add(&mut self, x: usize, y: usize) {\n        // self.g.add_edge(self.id(!x),\
+    \ self.id(y), ());\n        // self.g.add_edge(self.id(!y), self.id(x), ());\n\
+    \        self.es.push((self.id(!x), self.id(y)));\n        self.es.push((self.id(!y),\
+    \ self.id(x)));\n    }\n\n    pub fn if_then(&mut self, x: usize, y: usize) {\n\
+    \        self.add(!x, y);\n    }\n\n    pub fn solve(&self) -> Option<Vec<bool>>\
+    \ {\n        let g = Graph::from_unweighted_directed_edges(self.n * 2, &self.es);\n\
+    \        let scc = strongly_connected_components(&g);\n        let mut comp =\
+    \ vec![0; self.n * 2];\n        for i in 0..scc.len() {\n            for &x in\
+    \ scc.vertex(i) {\n                comp[x] = i;\n            }\n        }\n  \
+    \      let mut res = vec![false; self.n];\n        for i in 0..self.n {\n    \
+    \        if comp[i] == comp[i + self.n] {\n                return None;\n    \
+    \        }\n            res[i] = comp[i] > comp[i + self.n];\n        }\n    \
+    \    Some(res)\n    }\n\n    fn id(&self, x: usize) -> usize {\n        assert!(x\
     \ < self.n || !x < self.n);\n        if x < self.n {\n            x\n        }\
     \ else {\n            !x + self.n\n        }\n    }\n}\n"
   dependsOn:
@@ -48,7 +53,7 @@ data:
   isVerificationFile: false
   path: crates/math/two-satisfiability/src/lib.rs
   requiredBy: []
-  timestamp: '2023-05-17 16:30:46+09:00'
+  timestamp: '2024-04-07 08:56:09+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/two_sat/src/main.rs

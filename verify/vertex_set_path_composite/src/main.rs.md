@@ -34,16 +34,15 @@ data:
     algebra!(M, (Mint, Mint));\nmonoid!(M, (1.into(), 0.into()), |&(a, b), &(c, d)|\
     \ (\n    a * c,\n    b * c + d\n));\n\n#[proconio::fastout]\nfn main() {\n   \
     \ input! {\n        n: usize,\n        q: usize,\n        a: [(Mint, Mint); n],\n\
-    \    }\n    let mut g = Graph::from(a);\n    for _ in 0..n - 1 {\n        input!\
-    \ {\n            u: usize,\n            v: usize,\n        }\n        g.add_undirected_edge(u,\
-    \ v, ());\n    }\n    let mut tq = TreeQueryVertex::<M>::build(&g);\n    for _\
-    \ in 0..q {\n        input! {\n            ty: usize,\n        }\n        if ty\
-    \ == 0 {\n            input! {\n                p: usize,\n                c:\
-    \ Mint,\n                d: Mint,\n            }\n            tq.set(p, (c, d));\n\
-    \        } else {\n            input! {\n                u: usize,\n         \
-    \       v: usize,\n                x: Mint,\n            }\n            let (a,\
-    \ b) = tq.prod_path(u, v);\n            println!(\"{}\", a * x + b);\n       \
-    \ }\n    }\n}\n"
+    \        uv: [(usize, usize); n - 1],\n    }\n    let g = Graph::from_vertices_and_unweighted_undirected_edges(&a,\
+    \ &uv);\n    let mut tq = TreeQueryVertex::<M>::build(&g);\n    for _ in 0..q\
+    \ {\n        input! {\n            ty: usize,\n        }\n        if ty == 0 {\n\
+    \            input! {\n                p: usize,\n                c: Mint,\n \
+    \               d: Mint,\n            }\n            tq.set(p, (c, d));\n    \
+    \    } else {\n            input! {\n                u: usize,\n             \
+    \   v: usize,\n                x: Mint,\n            }\n            let (a, b)\
+    \ = tq.prod_path(u, v);\n            println!(\"{}\", a * x + b);\n        }\n\
+    \    }\n}\n"
   dependsOn:
   - crates/algebraic/algebraic/src/lib.rs
   - crates/data-structure/segment-tree/src/lib.rs
@@ -52,7 +51,7 @@ data:
   isVerificationFile: true
   path: verify/vertex_set_path_composite/src/main.rs
   requiredBy: []
-  timestamp: '2024-03-18 01:19:47+09:00'
+  timestamp: '2024-04-07 08:56:09+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/vertex_set_path_composite/src/main.rs

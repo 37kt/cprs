@@ -105,8 +105,8 @@ data:
   timestamp: '2024-03-18 01:19:47+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/suffixarray_rolling_hash/src/main.rs
   - verify/zalgorithm_rolling_hash/src/main.rs
+  - verify/suffixarray_rolling_hash/src/main.rs
 documentation_of: crates/string/rolling-hash/src/lib.rs
 layout: document
 redirect_from:

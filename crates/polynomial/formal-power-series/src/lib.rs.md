@@ -359,23 +359,23 @@ data:
   isVerificationFile: false
   path: crates/polynomial/formal-power-series/src/lib.rs
   requiredBy:
+  - crates/polynomial/shift-of-sampling-points/src/lib.rs
   - crates/polynomial/bostan-mori/src/lib.rs
   - crates/polynomial/polynomial-interpolation/src/lib.rs
-  - crates/polynomial/shift-of-sampling-points/src/lib.rs
   timestamp: '2024-03-18 03:03:26+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/inv_of_formal_power_series/src/main.rs
-  - verify/pow_of_formal_power_series/src/main.rs
-  - verify/division_of_polynomials/src/main.rs
-  - verify/polynomial_interpolation/src/main.rs
-  - verify/multipoint_evaluation/src/main.rs
-  - verify/log_of_formal_power_series/src/main.rs
-  - verify/polynomial_taylor_shift/src/main.rs
-  - verify/kth_term_of_linearly_recurrent_sequence/src/main.rs
   - verify/exp_of_formal_power_series/src/main.rs
   - verify/shift_of_sampling_points_of_polynomial/src/main.rs
+  - verify/log_of_formal_power_series/src/main.rs
   - verify/sqrt_of_formal_power_series/src/main.rs
+  - verify/kth_term_of_linearly_recurrent_sequence/src/main.rs
+  - verify/polynomial_interpolation/src/main.rs
+  - verify/multipoint_evaluation/src/main.rs
+  - verify/division_of_polynomials/src/main.rs
+  - verify/polynomial_taylor_shift/src/main.rs
+  - verify/pow_of_formal_power_series/src/main.rs
 documentation_of: crates/polynomial/formal-power-series/src/lib.rs
 layout: document
 redirect_from:

@@ -120,8 +120,8 @@ data:
   timestamp: '2024-03-21 13:40:37+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/matrix_product_mod_2/src/main.rs
   - verify/matrix_det_mod_2/src/main.rs
+  - verify/matrix_product_mod_2/src/main.rs
 documentation_of: crates/math/matrix-mod2/src/lib.rs
 layout: document
 redirect_from:

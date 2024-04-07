@@ -21,22 +21,22 @@ data:
     \ Vec<usize>,\n    pub low: Vec<usize>,\n    pub par: Vec<usize>,\n    pub articulation:\
     \ Vec<usize>,\n    pub bridge: Vec<(usize, usize)>,\n    cnt: usize,\n    pub\
     \ component_count: usize,\n}\n\nimpl LowLink {\n    pub fn new(g: &Graph<(), ()>)\
-    \ -> Self {\n        let mut this = Self {\n            vis: vec![false; g.size()],\n\
-    \            ord: vec![0; g.size()],\n            low: vec![0; g.size()],\n  \
-    \          par: vec![!0; g.size()],\n            articulation: vec![],\n     \
-    \       bridge: vec![],\n            cnt: 0,\n            component_count: 0,\n\
-    \        };\n        for i in 0..g.size() {\n            if !this.vis[i] {\n \
-    \               this.dfs(i, !0, g);\n                this.component_count += 1;\n\
+    \ -> Self {\n        let mut this = Self {\n            vis: vec![false; g.len()],\n\
+    \            ord: vec![0; g.len()],\n            low: vec![0; g.len()],\n    \
+    \        par: vec![!0; g.len()],\n            articulation: vec![],\n        \
+    \    bridge: vec![],\n            cnt: 0,\n            component_count: 0,\n \
+    \       };\n        for i in 0..g.len() {\n            if !this.vis[i] {\n   \
+    \             this.dfs(i, !0, g);\n                this.component_count += 1;\n\
     \            }\n        }\n        this\n    }\n\n    fn dfs(&mut self, v: usize,\
     \ p: usize, g: &Graph<(), ()>) {\n        self.vis[v] = true;\n        self.ord[v]\
     \ = self.cnt;\n        self.low[v] = self.cnt;\n        self.par[v] = p;\n   \
     \     self.cnt += 1;\n        let mut is_articulation = false;\n        let mut\
-    \ cnt = 0;\n        for &(u, _) in g.out_edges(v) {\n            if !self.vis[u]\
-    \ {\n                cnt += 1;\n                self.dfs(u, v, g);\n         \
-    \       if u != p {\n                    self.low[v] = std::cmp::min(self.low[v],\
-    \ self.low[u]);\n                }\n                if p != !0 && self.ord[v]\
-    \ <= self.low[u] {\n                    is_articulation = true;\n            \
-    \    }\n                if self.ord[v] < self.low[u] {\n                    self.bridge.push((std::cmp::min(u,\
+    \ cnt = 0;\n        for &(u, _) in &g[v] {\n            if !self.vis[u] {\n  \
+    \              cnt += 1;\n                self.dfs(u, v, g);\n               \
+    \ if u != p {\n                    self.low[v] = std::cmp::min(self.low[v], self.low[u]);\n\
+    \                }\n                if p != !0 && self.ord[v] <= self.low[u] {\n\
+    \                    is_articulation = true;\n                }\n            \
+    \    if self.ord[v] < self.low[u] {\n                    self.bridge.push((std::cmp::min(u,\
     \ v), std::cmp::max(u, v)));\n                }\n            } else {\n      \
     \          if u != p {\n                    self.low[v] = std::cmp::min(self.low[v],\
     \ self.ord[u]);\n                }\n            }\n        }\n        if p ==\
@@ -48,7 +48,7 @@ data:
   isVerificationFile: false
   path: crates/graph/low-link/src/lib.rs
   requiredBy: []
-  timestamp: '2023-12-24 10:25:28+09:00'
+  timestamp: '2024-04-07 08:56:09+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: crates/graph/low-link/src/lib.rs

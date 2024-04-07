@@ -31,31 +31,31 @@ data:
     \ size: Vec<usize>,\n    heavy: Vec<usize>,\n    head: Vec<usize>,\n    par: Vec<usize>,\n\
     \    depth: Vec<usize>,\n}\n\nimpl HeavyLightDecomposition {\n    pub fn new<V,\
     \ E>(g: &Graph<V, E>) -> Self\n    where\n        V: Clone,\n        E: Clone,\n\
-    \    {\n        let n = g.size();\n        let mut hld = HeavyLightDecomposition\
+    \    {\n        let n = g.len();\n        let mut hld = HeavyLightDecomposition\
     \ {\n            t_in: vec![0; n],\n            t_out: vec![0; n],\n         \
     \   ord: vec![],\n            size: vec![0; n],\n            heavy: vec![!0; n],\n\
     \            head: vec![0; n],\n            par: vec![!0; n],\n            depth:\
     \ vec![0; n],\n        };\n        hld.dfs_sz(g, 0);\n        hld.dfs_hld(g, 0,\
     \ &mut 0);\n        hld\n    }\n\n    fn dfs_sz<V, E>(&mut self, g: &Graph<V,\
     \ E>, v: usize)\n    where\n        V: Clone,\n        E: Clone,\n    {\n    \
-    \    self.size[v] = 1;\n        for &(u, _) in g.out_edges(v) {\n            if\
-    \ u == self.par[v] {\n                continue;\n            }\n            self.par[u]\
-    \ = v;\n            self.depth[u] = self.depth[v] + 1;\n            self.dfs_sz(g,\
-    \ u);\n            self.size[v] += self.size[u];\n            if self.heavy[v]\
-    \ == !0 || self.size[u] > self.size[self.heavy[v]] {\n                self.heavy[v]\
+    \    self.size[v] = 1;\n        for &(u, _) in &g[v] {\n            if u == self.par[v]\
+    \ {\n                continue;\n            }\n            self.par[u] = v;\n\
+    \            self.depth[u] = self.depth[v] + 1;\n            self.dfs_sz(g, u);\n\
+    \            self.size[v] += self.size[u];\n            if self.heavy[v] == !0\
+    \ || self.size[u] > self.size[self.heavy[v]] {\n                self.heavy[v]\
     \ = u;\n            }\n        }\n    }\n\n    fn dfs_hld<V, E>(&mut self, g:\
     \ &Graph<V, E>, v: usize, t: &mut usize)\n    where\n        V: Clone,\n     \
     \   E: Clone,\n    {\n        self.t_in[v] = *t;\n        self.ord.push(v);\n\
     \        *t += 1;\n        if self.heavy[v] != !0 {\n            let u = self.heavy[v];\n\
     \            self.head[u] = self.head[v];\n            self.dfs_hld(g, u, t);\n\
-    \        }\n        for &(u, _) in g.out_edges(v) {\n            if u == self.par[v]\
-    \ {\n                continue;\n            }\n            if u == self.heavy[v]\
-    \ {\n                continue;\n            }\n            self.head[u] = u;\n\
-    \            self.dfs_hld(g, u, t);\n        }\n        self.t_out[v] = *t;\n\
-    \    }\n}\n\nimpl HeavyLightDecomposition {\n    // \u9802\u70B9v\u306Ek\u500B\
-    \u89AA\n    pub fn kth_ancestor(&self, mut v: usize, mut k: usize) -> usize {\n\
-    \        if self.depth[v] < k {\n            return !0;\n        }\n        loop\
-    \ {\n            let u = self.head[v];\n            if self.t_in[v] - k >= self.t_in[u]\
+    \        }\n        for &(u, _) in &g[v] {\n            if u == self.par[v] {\n\
+    \                continue;\n            }\n            if u == self.heavy[v] {\n\
+    \                continue;\n            }\n            self.head[u] = u;\n   \
+    \         self.dfs_hld(g, u, t);\n        }\n        self.t_out[v] = *t;\n   \
+    \ }\n}\n\nimpl HeavyLightDecomposition {\n    // \u9802\u70B9v\u306Ek\u500B\u89AA\
+    \n    pub fn kth_ancestor(&self, mut v: usize, mut k: usize) -> usize {\n    \
+    \    if self.depth[v] < k {\n            return !0;\n        }\n        loop {\n\
+    \            let u = self.head[v];\n            if self.t_in[v] - k >= self.t_in[u]\
     \ {\n                return self.ord[self.t_in[v] - k];\n            }\n     \
     \       k -= 1 + self.t_in[v] - self.t_in[u];\n            v = self.par[u];\n\
     \        }\n    }\n\n    // \u9802\u70B9u\u3068\u9802\u70B9v\u306ELCA\n    pub\
@@ -103,11 +103,11 @@ data:
   path: crates/data-structure/heavy-light-decomposition/src/lib.rs
   requiredBy:
   - crates/data-structure/tree-query/src/lib.rs
-  timestamp: '2023-05-17 16:30:46+09:00'
+  timestamp: '2024-04-07 08:56:09+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/jump_on_tree/src/main.rs
   - verify/lca/src/main.rs
+  - verify/jump_on_tree/src/main.rs
 documentation_of: crates/data-structure/heavy-light-decomposition/src/lib.rs
 layout: document
 redirect_from:

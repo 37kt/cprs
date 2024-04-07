@@ -56,10 +56,10 @@ data:
     \ v: usize) -> M::S {\n        let (l, r) = self.hld.subtree(v, Q::edge());\n\
     \        self.seg_down.prod(l..r)\n    }\n}\n\nimpl<V, M> TreeQuery<M, Vertex>\n\
     where\n    V: Clone,\n    M: Monoid<S = V>,\n{\n    pub fn build<E>(g: &Graph<V,\
-    \ E>) -> Self\n    where\n        E: Clone,\n    {\n        let n = g.size();\n\
+    \ E>) -> Self\n    where\n        E: Clone,\n    {\n        let n = g.len();\n\
     \        let hld = HeavyLightDecomposition::new(g);\n        let mut a = vec![M::e();\
     \ n];\n        for v in 0..n {\n            let k = hld.vertex(v);\n         \
-    \   a[k] = g.vertices()[v].clone();\n        }\n        let seg_down = SegmentTree::from(a.clone());\n\
+    \   a[k] = g.vertex(v).clone();\n        }\n        let seg_down = SegmentTree::from(a.clone());\n\
     \        a.reverse();\n        let seg_up = SegmentTree::from(a);\n        Self\
     \ {\n            n,\n            hld,\n            seg_up,\n            seg_down,\n\
     \            _marker: PhantomData::default(),\n        }\n    }\n\n    pub fn\
@@ -68,13 +68,13 @@ data:
     \ x);\n    }\n\n    pub fn get(&self, v: usize) -> M::S {\n        let k = self.hld.vertex(v);\n\
     \        self.seg_down.get(k)\n    }\n}\n\nimpl<E, M> TreeQuery<M, Edge>\nwhere\n\
     \    E: Clone,\n    M: Monoid<S = E>,\n{\n    pub fn build<V>(g: &Graph<V, E>)\
-    \ -> Self\n    where\n        V: Clone,\n    {\n        let n = g.size();\n  \
-    \      let hld = HeavyLightDecomposition::new(g);\n        let mut a = vec![M::e();\
-    \ n];\n        for v in 0..n {\n            for (u, w) in g.out_edges(v) {\n \
-    \               let k = hld.edge(*u, v);\n                a[k] = w.clone();\n\
-    \            }\n        }\n        let seg_down = SegmentTree::from(a.clone());\n\
-    \        a.reverse();\n        let seg_up = SegmentTree::from(a);\n        Self\
-    \ {\n            n,\n            hld,\n            seg_up,\n            seg_down,\n\
+    \ -> Self\n    where\n        V: Clone,\n    {\n        let n = g.len();\n   \
+    \     let hld = HeavyLightDecomposition::new(g);\n        let mut a = vec![M::e();\
+    \ n];\n        for v in 0..n {\n            for (u, w) in &g[v] {\n          \
+    \      let k = hld.edge(*u, v);\n                a[k] = w.clone();\n         \
+    \   }\n        }\n        let seg_down = SegmentTree::from(a.clone());\n     \
+    \   a.reverse();\n        let seg_up = SegmentTree::from(a);\n        Self {\n\
+    \            n,\n            hld,\n            seg_up,\n            seg_down,\n\
     \            _marker: PhantomData::default(),\n        }\n    }\n\n    pub fn\
     \ set(&mut self, u: usize, v: usize, x: M::S) {\n        let k = self.hld.edge(u,\
     \ v);\n        self.seg_up.set(self.n - 1 - k, x.clone());\n        self.seg_down.set(k,\
@@ -88,12 +88,12 @@ data:
   isVerificationFile: false
   path: crates/data-structure/tree-query/src/lib.rs
   requiredBy: []
-  timestamp: '2024-03-18 01:19:47+09:00'
+  timestamp: '2024-04-07 08:56:09+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/vertex_add_subtree_sum/src/main.rs
   - verify/vertex_set_path_composite/src/main.rs
   - verify/vertex_add_path_sum/src/main.rs
+  - verify/vertex_add_subtree_sum/src/main.rs
 documentation_of: crates/data-structure/tree-query/src/lib.rs
 layout: document
 redirect_from:

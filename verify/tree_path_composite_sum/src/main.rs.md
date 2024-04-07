@@ -35,12 +35,10 @@ data:
     \ s2)| (\n    c1 + c2,\n    s1 + s2\n));\n\nalgebra!(V, Mint);\nact!(V, (Mint,\
     \ Mint), |&v, &(c, s)| (c + 1, s + v));\n\nalgebra!(E, (Mint, Mint));\nact!(E,\
     \ (Mint, Mint), |&(a, b), &(c, s)| (c, a * s + b * c));\n\n#[proconio::fastout]\n\
-    fn main() {\n    input! {\n        n: usize,\n        a: [Mint; n],\n    }\n \
-    \   let mut g = Graph::from(a);\n    for _ in 0..n - 1 {\n        input! {\n \
-    \           u: usize,\n            v: usize,\n            w: (Mint, Mint),\n \
-    \       }\n        g.add_undirected_edge(u, v, w);\n    }\n    let dp = ReRootingDP::build::<M,\
-    \ V, E>(&g);\n    println!(\"{}\", (0..n).map(|v| dp.prod(v).1).join(\" \"));\n\
-    }\n"
+    fn main() {\n    input! {\n        n: usize,\n        a: [Mint; n],\n        uvw:\
+    \ [(usize, usize, (Mint, Mint)); n - 1],\n    }\n    let g = Graph::from_vertices_and_undirected_edges(&a,\
+    \ &uvw);\n    let dp = ReRootingDP::build::<M, V, E>(&g);\n    println!(\"{}\"\
+    , (0..n).map(|v| dp.prod(v).1).join(\" \"));\n}\n"
   dependsOn:
   - crates/algebraic/algebraic/src/lib.rs
   - crates/graph/graph/src/lib.rs
@@ -49,7 +47,7 @@ data:
   isVerificationFile: true
   path: verify/tree_path_composite_sum/src/main.rs
   requiredBy: []
-  timestamp: '2024-03-18 01:19:47+09:00'
+  timestamp: '2024-04-07 08:56:09+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/tree_path_composite_sum/src/main.rs
