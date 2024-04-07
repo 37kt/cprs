@@ -11,11 +11,21 @@ data:
     - icon: ':heavy_check_mark:'
       path: crates/algebraic/rational/src/lib.rs
       title: crates/algebraic/rational/src/lib.rs
+  - name: crates/algorithm/min-plus-convolution/src
+    pages:
+    - icon: ':heavy_check_mark:'
+      path: crates/algorithm/min-plus-convolution/src/lib.rs
+      title: crates/algorithm/min-plus-convolution/src/lib.rs
   - name: crates/algorithm/mo/src
     pages:
     - icon: ':heavy_check_mark:'
       path: crates/algorithm/mo/src/lib.rs
       title: crates/algorithm/mo/src/lib.rs
+  - name: crates/algorithm/monotone-minima/src
+    pages:
+    - icon: ':warning:'
+      path: crates/algorithm/monotone-minima/src/lib.rs
+      title: crates/algorithm/monotone-minima/src/lib.rs
   - name: crates/algorithm/offline-dynamic-connectivity/src
     pages:
     - icon: ':heavy_check_mark:'
@@ -627,6 +637,16 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/min_cost_b_flow/src/main.rs
       title: verify/min_cost_b_flow/src/main.rs
+  - name: verify/min_plus_convolution_convex_arbitrary/src
+    pages:
+    - icon: ':heavy_check_mark:'
+      path: verify/min_plus_convolution_convex_arbitrary/src/main.rs
+      title: verify/min_plus_convolution_convex_arbitrary/src/main.rs
+  - name: verify/min_plus_convolution_convex_convex/src
+    pages:
+    - icon: ':heavy_check_mark:'
+      path: verify/min_plus_convolution_convex_convex/src/main.rs
+      title: verify/min_plus_convolution_convex_convex/src/main.rs
   - name: verify/multipoint_evaluation/src
     pages:
     - icon: ':heavy_check_mark:'
