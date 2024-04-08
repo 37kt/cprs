@@ -65,7 +65,7 @@ data:
     \ 1];\n        let mut pw = vec![H::from(1); n + 1];\n        for i in 0..n {\n\
     \            hs[i + 1] = hs[i] * base + s[i].into();\n            pw[i + 1] =\
     \ pw[i] * base;\n        }\n        Self {\n            s,\n            hs: hs.into_boxed_slice(),\n\
-    \            pw: pw.into_boxed_slice(),\n        }\n    }\n\n    pub fn base()\
+    \            pw: pw.into_boxed_slice(),\n        }\n    }\n\n    pub fn base(&self)\
     \ -> H {\n        GenBaseImpl::<H>::base()\n    }\n\n    pub fn len(&self) ->\
     \ usize {\n        self.s.len()\n    }\n\n    pub fn get(&self, index: impl RangeBounds<usize>)\
     \ -> Hash<H> {\n        let (l, r) = range_to_pair(index, self.len());\n     \
@@ -102,7 +102,7 @@ data:
   isVerificationFile: false
   path: crates/string/rolling-hash/src/lib.rs
   requiredBy: []
-  timestamp: '2024-03-18 01:19:47+09:00'
+  timestamp: '2024-04-08 11:12:42+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/zalgorithm_rolling_hash/src/main.rs
