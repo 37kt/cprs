@@ -47,22 +47,3 @@ impl<T: Clone, const M: usize> PersistentArray<T, M> {
         }
     }
 }
-
-#[cfg(test)]
-mod tests {
-    use super::*;
-    #[test]
-    fn test() {
-        let mut pa = vec![PersistentArray::<_, 8>::new()];
-        for i in 1..100 {
-            pa.push(pa[0].set(i, 100));
-        }
-        for i in 0..100 {
-            for j in 0..100 {
-                if let Some(&x) = pa[i].get(j) {
-                    println!("pa[{}][{}] = {}", i, j, x);
-                }
-            }
-        }
-    }
-}

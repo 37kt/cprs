@@ -170,18 +170,3 @@ impl<T: Clone + Ord> IntervalHeap<T> {
         k
     }
 }
-
-#[cfg(test)]
-mod tests {
-    use super::*;
-    #[test]
-    fn test() {
-        let mut pq = IntervalHeap::from(vec![1, 2, 5, 10, 9, 2]);
-        let mut pq2 = IntervalHeap::from(vec![11, 9, 99999, 10, 0, 0]);
-        pq.append(&mut pq2);
-        while let Some(x) = pq.pop_min() {
-            eprint!("{} ", x);
-        }
-        eprintln!();
-    }
-}
