@@ -24,6 +24,9 @@ data:
     path: crates/graph/low-link/src/lib.rs
     title: crates/graph/low-link/src/lib.rs
   - icon: ':heavy_check_mark:'
+    path: crates/graph/range-edge-graph/src/lib.rs
+    title: crates/graph/range-edge-graph/src/lib.rs
+  - icon: ':heavy_check_mark:'
     path: crates/graph/strongly-connected-components/src/lib.rs
     title: crates/graph/strongly-connected-components/src/lib.rs
   - icon: ':heavy_check_mark:'
@@ -60,6 +63,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/vertex_set_path_composite/src/main.rs
     title: verify/vertex_set_path_composite/src/main.rs
+  - icon: ':heavy_check_mark:'
+    path: verify/yuki1014/src/main.rs
+    title: verify/yuki1014/src/main.rs
   _isVerificationFailed: false
   _pathExtension: rs
   _verificationStatusIcon: ':heavy_check_mark:'
@@ -157,6 +163,7 @@ data:
   - crates/graph/complement-graph-bfs/src/lib.rs
   - crates/graph/strongly-connected-components/src/lib.rs
   - crates/graph/dijkstra/src/lib.rs
+  - crates/graph/range-edge-graph/src/lib.rs
   - crates/graph/bellman-ford/src/lib.rs
   - crates/data-structure/tree-query/src/lib.rs
   - crates/data-structure/heavy-light-decomposition/src/lib.rs
@@ -168,6 +175,7 @@ data:
   - verify/tree_path_composite_sum/src/main.rs
   - verify/jump_on_tree/src/main.rs
   - verify/scc/src/main.rs
+  - verify/yuki1014/src/main.rs
   - verify/shortest_path/src/main.rs
   - verify/vertex_add_path_sum/src/main.rs
   - verify/vertex_add_subtree_sum/src/main.rs

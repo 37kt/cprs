@@ -291,6 +291,11 @@ data:
     - icon: ':warning:'
       path: crates/graph/project-selection/src/lib.rs
       title: crates/graph/project-selection/src/lib.rs
+  - name: crates/graph/range-edge-graph/src
+    pages:
+    - icon: ':heavy_check_mark:'
+      path: crates/graph/range-edge-graph/src/lib.rs
+      title: crates/graph/range-edge-graph/src/lib.rs
   - name: crates/graph/strongly-connected-components/src
     pages:
     - icon: ':heavy_check_mark:'
@@ -308,7 +313,7 @@ data:
       title: crates/heuristic/timer/src/lib.rs
   - name: crates/macros/chminmax/src
     pages:
-    - icon: ':warning:'
+    - icon: ':heavy_check_mark:'
       path: crates/macros/chminmax/src/lib.rs
       title: crates/macros/chminmax/src/lib.rs
   - name: crates/math/discrete-logarithm/src
@@ -867,6 +872,11 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/vertex_set_path_composite/src/main.rs
       title: verify/vertex_set_path_composite/src/main.rs
+  - name: verify/yuki1014/src
+    pages:
+    - icon: ':heavy_check_mark:'
+      path: verify/yuki1014/src/main.rs
+      title: verify/yuki1014/src/main.rs
   - name: verify/zalgorithm/src
     pages:
     - icon: ':heavy_check_mark:'
