@@ -2,10 +2,13 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy: []
-  _extendedVerifiedWith: []
+  _extendedVerifiedWith:
+  - icon: ':heavy_check_mark:'
+    path: verify/double_ended_priority_queue/src/main.rs
+    title: verify/double_ended_priority_queue/src/main.rs
   _isVerificationFailed: false
   _pathExtension: rs
-  _verificationStatusIcon: ':warning:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.12.2/x64/lib/python3.12/site-packages/onlinejudge_verify/documentation/build.py\"\
@@ -68,19 +71,15 @@ data:
     \            self.0.swap(p, k);\n            k = p;\n        }\n        while\
     \ root < k {\n            p = Self::parent(k) | 1;\n            if self.0[k] >=\
     \ self.0[p] {\n                break;\n            }\n            self.0.swap(p,\
-    \ k);\n            k = p;\n        }\n        k\n    }\n}\n\n#[cfg(test)]\nmod\
-    \ tests {\n    use super::*;\n    #[test]\n    fn test() {\n        let mut pq\
-    \ = IntervalHeap::from(vec![1, 2, 5, 10, 9, 2]);\n        let mut pq2 = IntervalHeap::from(vec![11,\
-    \ 9, 99999, 10, 0, 0]);\n        pq.append(&mut pq2);\n        while let Some(x)\
-    \ = pq.pop_min() {\n            eprint!(\"{} \", x);\n        }\n        eprintln!();\n\
-    \    }\n}\n"
+    \ k);\n            k = p;\n        }\n        k\n    }\n}\n"
   dependsOn: []
   isVerificationFile: false
   path: crates/data-structure/interval-heap/src/lib.rs
   requiredBy: []
-  timestamp: '2023-07-10 15:59:10+09:00'
-  verificationStatus: LIBRARY_NO_TESTS
-  verifiedWith: []
+  timestamp: '2024-04-08 11:43:23+09:00'
+  verificationStatus: LIBRARY_ALL_AC
+  verifiedWith:
+  - verify/double_ended_priority_queue/src/main.rs
 documentation_of: crates/data-structure/interval-heap/src/lib.rs
 layout: document
 redirect_from:

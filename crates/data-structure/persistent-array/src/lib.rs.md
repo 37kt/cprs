@@ -33,18 +33,13 @@ data:
     \            v\n        }\n    }\n\n    pub fn get(&self, i: usize) -> Option<&T>\
     \ {\n        if i == 0 {\n            self.val.as_ref().map(|v| v.as_ref())\n\
     \        } else {\n            self.ch.as_ref().and_then(|ch| ch[i % M].get((i\
-    \ - 1) / M))\n        }\n    }\n}\n\n#[cfg(test)]\nmod tests {\n    use super::*;\n\
-    \    #[test]\n    fn test() {\n        let mut pa = vec![PersistentArray::<_,\
-    \ 8>::new()];\n        for i in 1..100 {\n            pa.push(pa[0].set(i, 100));\n\
-    \        }\n        for i in 0..100 {\n            for j in 0..100 {\n       \
-    \         if let Some(&x) = pa[i].get(j) {\n                    println!(\"pa[{}][{}]\
-    \ = {}\", i, j, x);\n                }\n            }\n        }\n    }\n}\n"
+    \ - 1) / M))\n        }\n    }\n}\n"
   dependsOn: []
   isVerificationFile: false
   path: crates/data-structure/persistent-array/src/lib.rs
   requiredBy:
   - crates/data-structure/persistent-union-find/src/lib.rs
-  timestamp: '2023-05-08 17:12:04+09:00'
+  timestamp: '2024-04-08 11:43:23+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: crates/data-structure/persistent-array/src/lib.rs

@@ -113,7 +113,7 @@ data:
       title: crates/data-structure/heavy-light-decomposition/src/lib.rs
   - name: crates/data-structure/interval-heap/src
     pages:
-    - icon: ':warning:'
+    - icon: ':heavy_check_mark:'
       path: crates/data-structure/interval-heap/src/lib.rs
       title: crates/data-structure/interval-heap/src/lib.rs
   - name: crates/data-structure/interval-set/src
@@ -527,6 +527,11 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/division_of_polynomials/src/main.rs
       title: verify/division_of_polynomials/src/main.rs
+  - name: verify/double_ended_priority_queue/src
+    pages:
+    - icon: ':heavy_check_mark:'
+      path: verify/double_ended_priority_queue/src/main.rs
+      title: verify/double_ended_priority_queue/src/main.rs
   - name: verify/dynamic_graph_vertex_add_component_sum/src
     pages:
     - icon: ':heavy_check_mark:'

@@ -41,7 +41,7 @@ data:
   isVerificationFile: false
   path: crates/data-structure/persistent-union-find/src/lib.rs
   requiredBy: []
-  timestamp: '2023-05-08 17:12:04+09:00'
+  timestamp: '2024-04-08 11:43:23+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/persistent_unionfind/src/main.rs
