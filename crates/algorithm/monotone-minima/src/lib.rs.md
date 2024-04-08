@@ -5,10 +5,13 @@ data:
   - icon: ':heavy_check_mark:'
     path: crates/algorithm/min-plus-convolution/src/lib.rs
     title: crates/algorithm/min-plus-convolution/src/lib.rs
-  _extendedVerifiedWith: []
+  _extendedVerifiedWith:
+  - icon: ':heavy_check_mark:'
+    path: verify/yuki952/src/main.rs
+    title: verify/yuki952/src/main.rs
   _isVerificationFailed: false
   _pathExtension: rs
-  _verificationStatusIcon: ':warning:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.12.2/x64/lib/python3.12/site-packages/onlinejudge_verify/documentation/build.py\"\
@@ -33,8 +36,9 @@ data:
   requiredBy:
   - crates/algorithm/min-plus-convolution/src/lib.rs
   timestamp: '2024-04-07 09:46:12+09:00'
-  verificationStatus: LIBRARY_NO_TESTS
-  verifiedWith: []
+  verificationStatus: LIBRARY_ALL_AC
+  verifiedWith:
+  - verify/yuki952/src/main.rs
 documentation_of: crates/algorithm/monotone-minima/src/lib.rs
 layout: document
 redirect_from:

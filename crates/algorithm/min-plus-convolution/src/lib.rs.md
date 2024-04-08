@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':warning:'
+  - icon: ':heavy_check_mark:'
     path: crates/algorithm/monotone-minima/src/lib.rs
     title: crates/algorithm/monotone-minima/src/lib.rs
   _extendedRequiredBy: []

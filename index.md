@@ -23,7 +23,7 @@ data:
       title: crates/algorithm/mo/src/lib.rs
   - name: crates/algorithm/monotone-minima/src
     pages:
-    - icon: ':warning:'
+    - icon: ':heavy_check_mark:'
       path: crates/algorithm/monotone-minima/src/lib.rs
       title: crates/algorithm/monotone-minima/src/lib.rs
   - name: crates/algorithm/offline-dynamic-connectivity/src
@@ -877,6 +877,11 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/yuki1014/src/main.rs
       title: verify/yuki1014/src/main.rs
+  - name: verify/yuki952/src
+    pages:
+    - icon: ':heavy_check_mark:'
+      path: verify/yuki952/src/main.rs
+      title: verify/yuki952/src/main.rs
   - name: verify/zalgorithm/src
     pages:
     - icon: ':heavy_check_mark:'
