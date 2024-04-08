@@ -12,6 +12,7 @@
 "verify/deque_operate_all_composite/src/main.rs": "2024-03-18 01:19:47 +0900",
 "verify/discrete_logarithm_mod/src/main.rs": "2024-03-18 01:19:47 +0900",
 "verify/division_of_polynomials/src/main.rs": "2024-03-18 03:03:26 +0900",
+"verify/double_ended_priority_queue/src/main.rs": "2024-04-08 11:43:23 +0900",
 "verify/dynamic_graph_vertex_add_component_sum/src/main.rs": "2024-03-21 16:19:45 +0900",
 "verify/dynamic_sequence_range_affine_range_sum/src/main.rs": "2024-03-18 01:19:47 +0900",
 "verify/dynamic_tree_vertex_add_path_sum/src/main.rs": "2024-03-18 01:19:47 +0900",
