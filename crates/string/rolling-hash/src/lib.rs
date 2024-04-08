@@ -118,7 +118,7 @@ where
         }
     }
 
-    pub fn base() -> H {
+    pub fn base(&self) -> H {
         GenBaseImpl::<H>::base()
     }
 
