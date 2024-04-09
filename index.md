@@ -256,6 +256,11 @@ data:
     - icon: ':heavy_check_mark:'
       path: crates/graph/dijkstra/src/lib.rs
       title: crates/graph/dijkstra/src/lib.rs
+  - name: crates/graph/extended-block-cut-tree/src
+    pages:
+    - icon: ':heavy_check_mark:'
+      path: crates/graph/extended-block-cut-tree/src/lib.rs
+      title: crates/graph/extended-block-cut-tree/src/lib.rs
   - name: crates/graph/graph/src
     pages:
     - icon: ':heavy_check_mark:'
@@ -477,6 +482,11 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/assignment/src/main.rs
       title: verify/assignment/src/main.rs
+  - name: verify/biconnected_components/src
+    pages:
+    - icon: ':heavy_check_mark:'
+      path: verify/biconnected_components/src/main.rs
+      title: verify/biconnected_components/src/main.rs
   - name: verify/binomial_coefficient_prime_mod/src
     pages:
     - icon: ':heavy_check_mark:'
