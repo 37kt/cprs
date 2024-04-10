@@ -58,7 +58,7 @@ data:
   path: crates/graph/strongly-connected-components/src/lib.rs
   requiredBy:
   - crates/math/two-satisfiability/src/lib.rs
-  timestamp: '2024-04-07 08:56:09+09:00'
+  timestamp: '2024-04-10 09:38:39+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/scc/src/main.rs

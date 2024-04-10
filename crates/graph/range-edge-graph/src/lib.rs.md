@@ -60,7 +60,7 @@ data:
   isVerificationFile: false
   path: crates/graph/range-edge-graph/src/lib.rs
   requiredBy: []
-  timestamp: '2024-04-08 14:43:14+09:00'
+  timestamp: '2024-04-10 09:38:39+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/yuki1014/src/main.rs

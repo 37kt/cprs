@@ -37,7 +37,7 @@ data:
   isVerificationFile: true
   path: verify/biconnected_components/src/main.rs
   requiredBy: []
-  timestamp: '2024-04-09 14:55:39+09:00'
+  timestamp: '2024-04-10 09:38:39+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/biconnected_components/src/main.rs

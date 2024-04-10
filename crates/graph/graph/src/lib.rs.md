@@ -33,6 +33,9 @@ data:
     path: crates/graph/strongly-connected-components/src/lib.rs
     title: crates/graph/strongly-connected-components/src/lib.rs
   - icon: ':heavy_check_mark:'
+    path: crates/graph/two-edge-connected-components/src/lib.rs
+    title: crates/graph/two-edge-connected-components/src/lib.rs
+  - icon: ':heavy_check_mark:'
     path: crates/math/two-satisfiability/src/lib.rs
     title: crates/math/two-satisfiability/src/lib.rs
   - icon: ':warning:'
@@ -61,6 +64,9 @@ data:
     path: verify/tree_path_composite_sum/src/main.rs
     title: verify/tree_path_composite_sum/src/main.rs
   - icon: ':heavy_check_mark:'
+    path: verify/two_edge_connected_components/src/main.rs
+    title: verify/two_edge_connected_components/src/main.rs
+  - icon: ':heavy_check_mark:'
     path: verify/vertex_add_path_sum/src/main.rs
     title: verify/vertex_add_path_sum/src/main.rs
   - icon: ':heavy_check_mark:'
@@ -85,45 +91,52 @@ data:
     , line 288, in bundle\n    raise NotImplementedError\nNotImplementedError\n"
   code: "use std::ops::Index;\n\n#[derive(Clone)]\npub struct Graph<V, E>\nwhere\n\
     \    V: Clone,\n    E: Clone,\n{\n    vertices: Vec<V>,\n    edges: Vec<(usize,\
-    \ E)>,\n    pos: Vec<usize>,\n}\n\npub const GRID_NEIGHBOURS_4: &[(usize, usize)]\
-    \ = &[(!0, 0), (0, !0), (1, 0), (0, 1)];\npub const GRID_NEIGHBOURS_8: &[(usize,\
-    \ usize)] = &[\n    (!0, 0),\n    (0, !0),\n    (1, 0),\n    (0, 1),\n    (!0,\
-    \ !0),\n    (!0, 1),\n    (1, !0),\n    (1, 1),\n];\n\nimpl<V, E> Graph<V, E>\n\
-    where\n    V: Clone,\n    E: Clone,\n{\n    pub fn from_vertices_and_directed_edges(vertices:\
-    \ &[V], edges: &[(usize, usize, E)]) -> Self {\n        if edges.is_empty() {\n\
-    \            return Self {\n                vertices: vertices.to_vec(),\n   \
-    \             edges: vec![],\n                pos: vec![0; vertices.len() + 1],\n\
-    \            };\n        }\n\n        let n = vertices.len();\n        let mut\
-    \ pos = vec![0; n + 1];\n        for &(u, _, _) in edges {\n            pos[u]\
-    \ += 1;\n        }\n        for i in 1..=n {\n            pos[i] += pos[i - 1];\n\
-    \        }\n        let mut ord = vec![0; edges.len()];\n        for i in (0..edges.len()).rev()\
+    \ E)>,\n    pos: Vec<usize>,\n    edge_id: Vec<usize>,\n    edges_count: usize,\n\
+    }\n\npub const GRID_NEIGHBOURS_4: &[(usize, usize)] = &[(!0, 0), (0, !0), (1,\
+    \ 0), (0, 1)];\npub const GRID_NEIGHBOURS_8: &[(usize, usize)] = &[\n    (!0,\
+    \ 0),\n    (0, !0),\n    (1, 0),\n    (0, 1),\n    (!0, !0),\n    (!0, 1),\n \
+    \   (1, !0),\n    (1, 1),\n];\n\nimpl<V, E> Graph<V, E>\nwhere\n    V: Clone,\n\
+    \    E: Clone,\n{\n    pub fn from_vertices_and_directed_edges(vertices: &[V],\
+    \ edges: &[(usize, usize, E)]) -> Self {\n        if edges.is_empty() {\n    \
+    \        return Self {\n                vertices: vertices.to_vec(),\n       \
+    \         edges: vec![],\n                pos: vec![0; vertices.len() + 1],\n\
+    \                edge_id: vec![],\n                edges_count: 0,\n         \
+    \   };\n        }\n\n        let n = vertices.len();\n        let mut pos = vec![0;\
+    \ n + 1];\n        for &(u, _, _) in edges {\n            pos[u] += 1;\n     \
+    \   }\n        for i in 1..=n {\n            pos[i] += pos[i - 1];\n        }\n\
+    \        let mut ord = vec![0; edges.len()];\n        for i in (0..edges.len()).rev()\
     \ {\n            let u = edges[i].0;\n            pos[u] -= 1;\n            ord[pos[u]]\
     \ = i;\n        }\n\n        Self {\n            vertices: vertices.to_vec(),\n\
-    \            edges: ord\n                .into_iter()\n                .map(|i|\
-    \ (edges[i].1, edges[i].2.clone()))\n                .collect(),\n           \
-    \ pos,\n        }\n    }\n\n    pub fn from_vertices_and_undirected_edges(vertices:\
-    \ &[V], edges: &[(usize, usize, E)]) -> Self {\n        if edges.is_empty() {\n\
-    \            return Self {\n                vertices: vertices.to_vec(),\n   \
-    \             edges: vec![],\n                pos: vec![0; vertices.len() + 1],\n\
-    \            };\n        }\n\n        let n = vertices.len();\n        let mut\
-    \ pos = vec![0; n + 1];\n        for &(u, v, _) in edges {\n            pos[u]\
-    \ += 1;\n            pos[v] += 1;\n        }\n        for i in 1..=n {\n     \
-    \       pos[i] += pos[i - 1];\n        }\n        let mut ord = vec![0; edges.len()\
-    \ * 2];\n        for i in (0..edges.len() * 2).rev() {\n            if i & 1 ==\
-    \ 0 {\n                let u = edges[i >> 1].0;\n                pos[u] -= 1;\n\
-    \                ord[pos[u]] = i;\n            } else {\n                let v\
-    \ = edges[i >> 1].1;\n                pos[v] -= 1;\n                ord[pos[v]]\
-    \ = i;\n            }\n        }\n\n        Self {\n            vertices: vertices.to_vec(),\n\
-    \            edges: ord\n                .into_iter()\n                .map(|i|\
-    \ {\n                    (\n                        if i & 1 == 0 {\n        \
-    \                    edges[i >> 1].1\n                        } else {\n     \
-    \                       edges[i >> 1].0\n                        },\n        \
-    \                edges[i >> 1].2.clone(),\n                    )\n           \
-    \     })\n                .collect(),\n            pos,\n        }\n    }\n\n\
-    \    pub fn len(&self) -> usize {\n        self.vertices.len()\n    }\n\n    pub\
-    \ fn vertex(&self, v: usize) -> &V {\n        &self.vertices[v]\n    }\n\n   \
-    \ pub fn edges(&self, v: usize) -> &[(usize, E)] {\n        let l = self.pos[v];\n\
-    \        let r = self.pos[v + 1];\n        &self.edges[l..r]\n    }\n\n    ///\
+    \            edge_id: ord.clone(),\n            edges: ord\n                .into_iter()\n\
+    \                .map(|i| (edges[i].1, edges[i].2.clone()))\n                .collect(),\n\
+    \            pos,\n            edges_count: edges.len(),\n        }\n    }\n\n\
+    \    pub fn from_vertices_and_undirected_edges(vertices: &[V], edges: &[(usize,\
+    \ usize, E)]) -> Self {\n        if edges.is_empty() {\n            return Self\
+    \ {\n                vertices: vertices.to_vec(),\n                edges: vec![],\n\
+    \                pos: vec![0; vertices.len() + 1],\n                edge_id: vec![],\n\
+    \                edges_count: 0,\n            };\n        }\n\n        let n =\
+    \ vertices.len();\n        let mut pos = vec![0; n + 1];\n        for &(u, v,\
+    \ _) in edges {\n            pos[u] += 1;\n            pos[v] += 1;\n        }\n\
+    \        for i in 1..=n {\n            pos[i] += pos[i - 1];\n        }\n    \
+    \    let mut ord = vec![0; edges.len() * 2];\n        for i in (0..edges.len()\
+    \ * 2).rev() {\n            if i & 1 == 0 {\n                let u = edges[i >>\
+    \ 1].0;\n                pos[u] -= 1;\n                ord[pos[u]] = i;\n    \
+    \        } else {\n                let v = edges[i >> 1].1;\n                pos[v]\
+    \ -= 1;\n                ord[pos[v]] = i;\n            }\n        }\n\n      \
+    \  Self {\n            vertices: vertices.to_vec(),\n            edge_id: ord.iter().map(|&i|\
+    \ i / 2).collect(),\n            edges: ord\n                .into_iter()\n  \
+    \              .map(|i| {\n                    (\n                        if i\
+    \ & 1 == 0 {\n                            edges[i >> 1].1\n                  \
+    \      } else {\n                            edges[i >> 1].0\n               \
+    \         },\n                        edges[i >> 1].2.clone(),\n             \
+    \       )\n                })\n                .collect(),\n            pos,\n\
+    \            edges_count: edges.len(),\n        }\n    }\n\n    pub fn len(&self)\
+    \ -> usize {\n        self.vertices.len()\n    }\n\n    pub fn edges_count(&self)\
+    \ -> usize {\n        self.edges_count\n    }\n\n    pub fn vertex(&self, v: usize)\
+    \ -> &V {\n        &self.vertices[v]\n    }\n\n    pub fn edges(&self, v: usize)\
+    \ -> &[(usize, E)] {\n        let l = self.pos[v];\n        let r = self.pos[v\
+    \ + 1];\n        &self.edges[l..r]\n    }\n\n    pub fn edge_id(&self, v: usize,\
+    \ i: usize) -> usize {\n        self.edge_id[self.pos[v] + i]\n    }\n\n    ///\
     \ (i, j) -> i * w + j\n    pub fn from_grid(\n        grid: &Vec<Vec<V>>,\n  \
     \      neighbours: &[(usize, usize)],\n        cost: impl Fn(&V, &V) -> Option<E>,\n\
     \    ) -> Self {\n        let h = grid.len();\n        let w = grid[0].len();\n\
@@ -167,6 +180,7 @@ data:
   - crates/graph/compressed-tree/src/lib.rs
   - crates/graph/low-link/src/lib.rs
   - crates/graph/complement-graph-bfs/src/lib.rs
+  - crates/graph/two-edge-connected-components/src/lib.rs
   - crates/graph/strongly-connected-components/src/lib.rs
   - crates/graph/dijkstra/src/lib.rs
   - crates/graph/range-edge-graph/src/lib.rs
@@ -174,7 +188,7 @@ data:
   - crates/graph/extended-block-cut-tree/src/lib.rs
   - crates/data-structure/tree-query/src/lib.rs
   - crates/data-structure/heavy-light-decomposition/src/lib.rs
-  timestamp: '2024-04-07 08:56:09+09:00'
+  timestamp: '2024-04-10 09:38:39+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/lca/src/main.rs
@@ -182,6 +196,7 @@ data:
   - verify/vertex_set_path_composite/src/main.rs
   - verify/tree_path_composite_sum/src/main.rs
   - verify/jump_on_tree/src/main.rs
+  - verify/two_edge_connected_components/src/main.rs
   - verify/scc/src/main.rs
   - verify/yuki1014/src/main.rs
   - verify/shortest_path/src/main.rs

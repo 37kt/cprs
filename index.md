@@ -306,6 +306,11 @@ data:
     - icon: ':heavy_check_mark:'
       path: crates/graph/strongly-connected-components/src/lib.rs
       title: crates/graph/strongly-connected-components/src/lib.rs
+  - name: crates/graph/two-edge-connected-components/src
+    pages:
+    - icon: ':heavy_check_mark:'
+      path: crates/graph/two-edge-connected-components/src/lib.rs
+      title: crates/graph/two-edge-connected-components/src/lib.rs
   - name: crates/heuristic/beam-search/src
     pages:
     - icon: ':warning:'
@@ -857,6 +862,11 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/tree_path_composite_sum/src/main.rs
       title: verify/tree_path_composite_sum/src/main.rs
+  - name: verify/two_edge_connected_components/src
+    pages:
+    - icon: ':heavy_check_mark:'
+      path: verify/two_edge_connected_components/src/main.rs
+      title: verify/two_edge_connected_components/src/main.rs
   - name: verify/two_sat/src
     pages:
     - icon: ':heavy_check_mark:'

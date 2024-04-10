@@ -103,7 +103,7 @@ data:
   path: crates/data-structure/heavy-light-decomposition/src/lib.rs
   requiredBy:
   - crates/data-structure/tree-query/src/lib.rs
-  timestamp: '2024-04-07 08:56:09+09:00'
+  timestamp: '2024-04-10 09:38:39+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/lca/src/main.rs

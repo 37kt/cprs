@@ -48,7 +48,7 @@ data:
   isVerificationFile: false
   path: crates/tree/centroid-decomposition/src/lib.rs
   requiredBy: []
-  timestamp: '2024-04-07 08:56:09+09:00'
+  timestamp: '2024-04-10 09:38:39+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: crates/tree/centroid-decomposition/src/lib.rs

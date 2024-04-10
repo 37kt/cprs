@@ -17,7 +17,8 @@ data:
     \         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\
     \  File \"/opt/hostedtoolcache/Python/3.12.2/x64/lib/python3.12/site-packages/onlinejudge_verify/languages/rust.py\"\
     , line 288, in bundle\n    raise NotImplementedError\nNotImplementedError\n"
-  code: "use graph::Graph;\n\npub struct LowLink {\n    vis: Vec<bool>,\n    pub ord:\
+  code: "use graph::Graph;\n\n/// \u591A\u91CD\u8FBA\u304C\u3042\u308B\u3068\u304D\
+    \u306B\u30D0\u30B0\u308B\npub struct LowLink {\n    vis: Vec<bool>,\n    pub ord:\
     \ Vec<usize>,\n    pub low: Vec<usize>,\n    pub par: Vec<usize>,\n    pub articulation:\
     \ Vec<usize>,\n    pub bridge: Vec<(usize, usize)>,\n    cnt: usize,\n    pub\
     \ component_count: usize,\n}\n\nimpl LowLink {\n    pub fn new(g: &Graph<(), ()>)\
@@ -48,7 +49,7 @@ data:
   isVerificationFile: false
   path: crates/graph/low-link/src/lib.rs
   requiredBy: []
-  timestamp: '2024-04-07 08:56:09+09:00'
+  timestamp: '2024-04-10 09:38:39+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: crates/graph/low-link/src/lib.rs
