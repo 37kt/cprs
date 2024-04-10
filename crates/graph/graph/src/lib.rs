@@ -9,6 +9,8 @@ where
     vertices: Vec<V>,
     edges: Vec<(usize, E)>,
     pos: Vec<usize>,
+    edge_id: Vec<usize>,
+    edges_count: usize,
 }
 
 pub const GRID_NEIGHBOURS_4: &[(usize, usize)] = &[(!0, 0), (0, !0), (1, 0), (0, 1)];
@@ -34,6 +36,8 @@ where
                 vertices: vertices.to_vec(),
                 edges: vec![],
                 pos: vec![0; vertices.len() + 1],
+                edge_id: vec![],
+                edges_count: 0,
             };
         }
 
@@ -54,11 +58,13 @@ where
 
         Self {
             vertices: vertices.to_vec(),
+            edge_id: ord.clone(),
             edges: ord
                 .into_iter()
                 .map(|i| (edges[i].1, edges[i].2.clone()))
                 .collect(),
             pos,
+            edges_count: edges.len(),
         }
     }
 
@@ -68,6 +74,8 @@ where
                 vertices: vertices.to_vec(),
                 edges: vec![],
                 pos: vec![0; vertices.len() + 1],
+                edge_id: vec![],
+                edges_count: 0,
             };
         }
 
@@ -95,6 +103,7 @@ where
 
         Self {
             vertices: vertices.to_vec(),
+            edge_id: ord.iter().map(|&i| i / 2).collect(),
             edges: ord
                 .into_iter()
                 .map(|i| {
@@ -109,11 +118,16 @@ where
                 })
                 .collect(),
             pos,
+            edges_count: edges.len(),
         }
     }
 
     pub fn len(&self) -> usize {
         self.vertices.len()
+    }
+
+    pub fn edges_count(&self) -> usize {
+        self.edges_count
     }
 
     pub fn vertex(&self, v: usize) -> &V {
@@ -124,6 +138,10 @@ where
         let l = self.pos[v];
         let r = self.pos[v + 1];
         &self.edges[l..r]
+    }
+
+    pub fn edge_id(&self, v: usize, i: usize) -> usize {
+        self.edge_id[self.pos[v] + i]
     }
 
     /// (i, j) -> i * w + j

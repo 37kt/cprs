@@ -1,5 +1,6 @@
 use graph::Graph;
 
+/// 多重辺があるときにバグる
 pub struct LowLink {
     vis: Vec<bool>,
     pub ord: Vec<usize>,
