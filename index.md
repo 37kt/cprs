@@ -446,6 +446,11 @@ data:
     - icon: ':warning:'
       path: crates/sequence/run-length-encoding/src/lib.rs
       title: crates/sequence/run-length-encoding/src/lib.rs
+  - name: crates/string/manacher/src
+    pages:
+    - icon: ':warning:'
+      path: crates/string/manacher/src/lib.rs
+      title: crates/string/manacher/src/lib.rs
   - name: crates/string/rolling-hash/src
     pages:
     - icon: ':heavy_check_mark:'
