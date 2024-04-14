@@ -8,6 +8,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: crates/data-structure/range-tree/src/lib.rs
     title: crates/data-structure/range-tree/src/lib.rs
+  - icon: ':warning:'
+    path: crates/data-structure/range-union-find/src/lib.rs
+    title: crates/data-structure/range-union-find/src/lib.rs
   - icon: ':heavy_check_mark:'
     path: crates/data-structure/segment-tree-on-wavelet-matrix/src/lib.rs
     title: crates/data-structure/segment-tree-on-wavelet-matrix/src/lib.rs
@@ -97,6 +100,7 @@ data:
   path: crates/data-structure/segment-tree/src/lib.rs
   requiredBy:
   - crates/data-structure/tree-query/src/lib.rs
+  - crates/data-structure/range-union-find/src/lib.rs
   - crates/data-structure/segment-tree-on-wavelet-matrix/src/lib.rs
   - crates/data-structure/range-tree/src/lib.rs
   timestamp: '2024-03-18 01:19:47+09:00'

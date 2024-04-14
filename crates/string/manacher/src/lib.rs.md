@@ -2,10 +2,13 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy: []
-  _extendedVerifiedWith: []
+  _extendedVerifiedWith:
+  - icon: ':heavy_check_mark:'
+    path: verify/enumerate_palindromes/src/main.rs
+    title: verify/enumerate_palindromes/src/main.rs
   _isVerificationFailed: false
   _pathExtension: rs
-  _verificationStatusIcon: ':warning:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links:
     - https://ngtkana.hatenablog.com/entry/2024/03/17/034026
@@ -32,8 +35,9 @@ data:
   path: crates/string/manacher/src/lib.rs
   requiredBy: []
   timestamp: '2024-04-14 08:31:37+09:00'
-  verificationStatus: LIBRARY_NO_TESTS
-  verifiedWith: []
+  verificationStatus: LIBRARY_ALL_AC
+  verifiedWith:
+  - verify/enumerate_palindromes/src/main.rs
 documentation_of: crates/string/manacher/src/lib.rs
 layout: document
 redirect_from:

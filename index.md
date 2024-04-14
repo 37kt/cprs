@@ -161,6 +161,11 @@ data:
     - icon: ':heavy_check_mark:'
       path: crates/data-structure/range-tree/src/lib.rs
       title: crates/data-structure/range-tree/src/lib.rs
+  - name: crates/data-structure/range-union-find/src
+    pages:
+    - icon: ':warning:'
+      path: crates/data-structure/range-union-find/src/lib.rs
+      title: crates/data-structure/range-union-find/src/lib.rs
   - name: crates/data-structure/rollback-union-find/src
     pages:
     - icon: ':warning:'
@@ -448,7 +453,7 @@ data:
       title: crates/sequence/run-length-encoding/src/lib.rs
   - name: crates/string/manacher/src
     pages:
-    - icon: ':warning:'
+    - icon: ':heavy_check_mark:'
       path: crates/string/manacher/src/lib.rs
       title: crates/string/manacher/src/lib.rs
   - name: crates/string/rolling-hash/src
@@ -577,6 +582,11 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/dynamic_tree_vertex_set_path_composite/src/main.rs
       title: verify/dynamic_tree_vertex_set_path_composite/src/main.rs
+  - name: verify/enumerate_palindromes/src
+    pages:
+    - icon: ':heavy_check_mark:'
+      path: verify/enumerate_palindromes/src/main.rs
+      title: verify/enumerate_palindromes/src/main.rs
   - name: verify/exp_of_formal_power_series/src
     pages:
     - icon: ':heavy_check_mark:'

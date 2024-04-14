@@ -5,6 +5,9 @@ data:
     path: crates/algebraic/algebraic/src/lib.rs
     title: crates/algebraic/algebraic/src/lib.rs
   _extendedRequiredBy:
+  - icon: ':warning:'
+    path: crates/data-structure/range-union-find/src/lib.rs
+    title: crates/data-structure/range-union-find/src/lib.rs
   - icon: ':heavy_check_mark:'
     path: crates/string/rolling-hash/src/lib.rs
     title: crates/string/rolling-hash/src/lib.rs
@@ -85,6 +88,7 @@ data:
   path: crates/math/modint61/src/lib.rs
   requiredBy:
   - crates/string/rolling-hash/src/lib.rs
+  - crates/data-structure/range-union-find/src/lib.rs
   timestamp: '2024-03-18 01:19:47+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:

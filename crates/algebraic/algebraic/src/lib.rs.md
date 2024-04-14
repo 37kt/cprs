@@ -26,6 +26,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: crates/data-structure/range-tree/src/lib.rs
     title: crates/data-structure/range-tree/src/lib.rs
+  - icon: ':warning:'
+    path: crates/data-structure/range-union-find/src/lib.rs
+    title: crates/data-structure/range-union-find/src/lib.rs
   - icon: ':heavy_check_mark:'
     path: crates/data-structure/rollback-union-find-component-sum/src/lib.rs
     title: crates/data-structure/rollback-union-find-component-sum/src/lib.rs
@@ -199,6 +202,7 @@ data:
   - crates/data-structure/sliding-window-aggregation/src/lib.rs
   - crates/data-structure/lazy-segment-tree/src/lib.rs
   - crates/data-structure/union-find-component-sum/src/lib.rs
+  - crates/data-structure/range-union-find/src/lib.rs
   - crates/data-structure/dual-range-tree/src/lib.rs
   - crates/data-structure/splay-tree/src/lib.rs
   - crates/data-structure/segment-tree-on-wavelet-matrix/src/lib.rs
