@@ -35,11 +35,11 @@ data:
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
-  bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.12.2/x64/lib/python3.12/site-packages/onlinejudge_verify/documentation/build.py\"\
+  bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.12.3/x64/lib/python3.12/site-packages/onlinejudge_verify/documentation/build.py\"\
     , line 71, in _render_source_code_stat\n    bundled_code = language.bundle(stat.path,\
     \ basedir=basedir, options={'include_paths': [basedir]}).decode()\n          \
     \         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\
-    \  File \"/opt/hostedtoolcache/Python/3.12.2/x64/lib/python3.12/site-packages/onlinejudge_verify/languages/rust.py\"\
+    \  File \"/opt/hostedtoolcache/Python/3.12.3/x64/lib/python3.12/site-packages/onlinejudge_verify/languages/rust.py\"\
     , line 288, in bundle\n    raise NotImplementedError\nNotImplementedError\n"
   code: "use std::ops::{Bound, RangeBounds};\n\nuse algebraic::Monoid;\n\n#[derive(Clone)]\n\
     pub struct SegmentTree<M>\nwhere\n    M: Monoid,\n    M::S: Clone,\n{\n    n:\
@@ -100,16 +100,16 @@ data:
   path: crates/data-structure/segment-tree/src/lib.rs
   requiredBy:
   - crates/data-structure/tree-query/src/lib.rs
-  - crates/data-structure/range-union-find/src/lib.rs
   - crates/data-structure/segment-tree-on-wavelet-matrix/src/lib.rs
+  - crates/data-structure/range-union-find/src/lib.rs
   - crates/data-structure/range-tree/src/lib.rs
   timestamp: '2024-03-18 01:19:47+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/vertex_set_path_composite/src/main.rs
-  - verify/point_add_range_sum/src/main.rs
-  - verify/vertex_add_path_sum/src/main.rs
   - verify/vertex_add_subtree_sum/src/main.rs
+  - verify/point_add_range_sum/src/main.rs
+  - verify/vertex_set_path_composite/src/main.rs
+  - verify/vertex_add_path_sum/src/main.rs
 documentation_of: crates/data-structure/segment-tree/src/lib.rs
 layout: document
 redirect_from:

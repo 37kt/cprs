@@ -14,11 +14,11 @@ data:
   _verificationStatusIcon: ':warning:'
   attributes:
     links: []
-  bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.12.2/x64/lib/python3.12/site-packages/onlinejudge_verify/documentation/build.py\"\
+  bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.12.3/x64/lib/python3.12/site-packages/onlinejudge_verify/documentation/build.py\"\
     , line 71, in _render_source_code_stat\n    bundled_code = language.bundle(stat.path,\
     \ basedir=basedir, options={'include_paths': [basedir]}).decode()\n          \
     \         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\
-    \  File \"/opt/hostedtoolcache/Python/3.12.2/x64/lib/python3.12/site-packages/onlinejudge_verify/languages/rust.py\"\
+    \  File \"/opt/hostedtoolcache/Python/3.12.3/x64/lib/python3.12/site-packages/onlinejudge_verify/languages/rust.py\"\
     , line 288, in bundle\n    raise NotImplementedError\nNotImplementedError\n"
   code: "#[derive(Clone)]\npub struct Pcg64Fast(u128);\n\nconst R: f64 = 1.0 / 0xffff_ffff_ffff_ffff_u64\
     \ as f64;\n\nimpl Default for Pcg64Fast {\n    fn default() -> Self {\n      \
@@ -36,8 +36,8 @@ data:
   isVerificationFile: false
   path: crates/misc/random/src/lib.rs
   requiredBy:
-  - crates/string/rolling-hash/src/lib.rs
   - crates/data-structure/range-union-find/src/lib.rs
+  - crates/string/rolling-hash/src/lib.rs
   timestamp: '2023-05-20 14:50:51+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []

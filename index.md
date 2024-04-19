@@ -11,6 +11,11 @@ data:
     - icon: ':heavy_check_mark:'
       path: crates/algebraic/rational/src/lib.rs
       title: crates/algebraic/rational/src/lib.rs
+  - name: crates/algorithm/aliens-dp/src
+    pages:
+    - icon: ':warning:'
+      path: crates/algorithm/aliens-dp/src/lib.rs
+      title: crates/algorithm/aliens-dp/src/lib.rs
   - name: crates/algorithm/min-plus-convolution/src
     pages:
     - icon: ':heavy_check_mark:'
