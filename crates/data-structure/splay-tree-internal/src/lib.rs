@@ -12,6 +12,7 @@ where
     pub lch: *mut Self,
     pub rch: *mut Self,
     pub par: *mut Self,
+    pub idx: usize,
     pub len: usize,
     pub rev: bool,
     pub val: M::S,
@@ -27,11 +28,12 @@ where
     F: Monoid + Act<X = M::S>,
     F::S: Clone,
 {
-    pub fn new(val: M::S) -> Self {
+    pub fn new(val: M::S, idx: usize) -> Self {
         Self {
             lch: null_mut(),
             rch: null_mut(),
             par: null_mut(),
+            idx,
             len: 1,
             rev: false,
             prod: val.clone(),
@@ -126,7 +128,7 @@ where
             t.splay();
         }
         let (x, y) = Self::split(*t, k);
-        let z = Box::leak(Box::new(Self::new(val)));
+        let z = Box::leak(Box::new(Self::new(val, !0)));
         *t = Self::merge(Self::merge(x, z), y);
     }
 
@@ -159,13 +161,20 @@ where
     }
 
     pub fn build(a: &[M::S]) -> *mut Self {
+        Self::build_(a, 0)
+    }
+
+    fn build_(a: &[M::S], l: usize) -> *mut Self {
         let n = a.len();
         if n == 0 {
             null_mut()
         } else if n == 1 {
-            Box::leak(Box::new(Self::new(a[0].clone())))
+            Box::leak(Box::new(Self::new(a[0].clone(), l)))
         } else {
-            Self::merge(Self::build(&a[0..n / 2]), Self::build(&a[n / 2..n]))
+            Self::merge(
+                Self::build_(&a[0..n / 2], l),
+                Self::build_(&a[n / 2..n], l + n / 2),
+            )
         }
     }
 
