@@ -47,7 +47,7 @@ data:
   isVerificationFile: true
   path: verify/dynamic_tree_vertex_set_path_composite/src/main.rs
   requiredBy: []
-  timestamp: '2024-03-18 01:19:47+09:00'
+  timestamp: '2024-04-21 23:45:22+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/dynamic_tree_vertex_set_path_composite/src/main.rs

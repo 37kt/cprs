@@ -26,65 +26,69 @@ data:
   code: "use std::{cmp::Ordering, mem::swap, ptr::null_mut};\n\nuse algebraic::{Act,\
     \ Monoid};\n\npub struct SplayTreeNode<M, F>\nwhere\n    M: Monoid,\n    M::S:\
     \ Clone,\n    F: Monoid + Act<X = M::S>,\n    F::S: Clone,\n{\n    pub lch: *mut\
-    \ Self,\n    pub rch: *mut Self,\n    pub par: *mut Self,\n    pub len: usize,\n\
-    \    pub rev: bool,\n    pub val: M::S,\n    pub prod: M::S,\n    pub prod_rev:\
-    \ M::S,\n    pub lazy: F::S,\n}\n\nimpl<M, F> SplayTreeNode<M, F>\nwhere\n   \
-    \ M: Monoid,\n    M::S: Clone,\n    F: Monoid + Act<X = M::S>,\n    F::S: Clone,\n\
-    {\n    pub fn new(val: M::S) -> Self {\n        Self {\n            lch: null_mut(),\n\
-    \            rch: null_mut(),\n            par: null_mut(),\n            len:\
-    \ 1,\n            rev: false,\n            prod: val.clone(),\n            prod_rev:\
-    \ val.clone(),\n            val,\n            lazy: F::e(),\n        }\n    }\n\
-    \n    pub fn splay(&mut self) {\n        Self::push(self);\n        while !self.is_root()\
-    \ {\n            let p = unsafe { self.par.as_mut() }.unwrap();\n            if\
-    \ p.is_root() {\n                Self::push(p);\n                Self::push(self);\n\
-    \                self.rotate();\n            } else {\n                let g =\
-    \ unsafe { p.par.as_mut() }.unwrap();\n                Self::push(g);\n      \
-    \          Self::push(p);\n                Self::push(self);\n               \
-    \ if self.pos() == p.pos() {\n                    p.rotate();\n              \
-    \      self.rotate();\n                } else {\n                    self.rotate();\n\
-    \                    self.rotate();\n                }\n            }\n      \
-    \  }\n    }\n\n    pub fn merge(l: *mut Self, r: *mut Self) -> *mut Self {\n \
-    \       match unsafe { (l.as_mut(), r.as_mut()) } {\n            (None, None)\
-    \ => null_mut(),\n            (None, Some(r)) => {\n                r.splay();\n\
-    \                r\n            }\n            (Some(l), None) => {\n        \
-    \        l.splay();\n                l\n            }\n            (Some(mut l),\
-    \ Some(r)) => {\n                l.splay();\n                r.splay();\n    \
-    \            l = l.get_right();\n                l.splay();\n                l.rch\
-    \ = r;\n                r.par = l;\n                Self::update(l);\n       \
-    \         l\n            }\n        }\n    }\n\n    pub fn split(t: *mut Self,\
-    \ k: usize) -> (*mut Self, *mut Self) {\n        if t.is_null() {\n          \
-    \  (null_mut(), null_mut())\n        } else if k == 0 {\n            (null_mut(),\
-    \ t)\n        } else if k == Self::len(t) {\n            (t, null_mut())\n   \
-    \     } else {\n            let t = unsafe { t.as_mut() }.unwrap();\n        \
-    \    Self::push(t);\n            if k <= Self::len(t.lch) {\n                let\
-    \ (x, y) = Self::split(t.lch, k);\n                t.lch = y;\n              \
-    \  t.par = null_mut();\n                if let Some(y) = unsafe { y.as_mut() }\
-    \ {\n                    y.par = t;\n                }\n                Self::update(t);\n\
-    \                (x, t)\n            } else {\n                let (x, y) = Self::split(t.rch,\
-    \ k - Self::len(t.lch) - 1);\n                t.rch = x;\n                t.par\
+    \ Self,\n    pub rch: *mut Self,\n    pub par: *mut Self,\n    pub idx: usize,\n\
+    \    pub len: usize,\n    pub rev: bool,\n    pub val: M::S,\n    pub prod: M::S,\n\
+    \    pub prod_rev: M::S,\n    pub lazy: F::S,\n}\n\nimpl<M, F> SplayTreeNode<M,\
+    \ F>\nwhere\n    M: Monoid,\n    M::S: Clone,\n    F: Monoid + Act<X = M::S>,\n\
+    \    F::S: Clone,\n{\n    pub fn new(val: M::S, idx: usize) -> Self {\n      \
+    \  Self {\n            lch: null_mut(),\n            rch: null_mut(),\n      \
+    \      par: null_mut(),\n            idx,\n            len: 1,\n            rev:\
+    \ false,\n            prod: val.clone(),\n            prod_rev: val.clone(),\n\
+    \            val,\n            lazy: F::e(),\n        }\n    }\n\n    pub fn splay(&mut\
+    \ self) {\n        Self::push(self);\n        while !self.is_root() {\n      \
+    \      let p = unsafe { self.par.as_mut() }.unwrap();\n            if p.is_root()\
+    \ {\n                Self::push(p);\n                Self::push(self);\n     \
+    \           self.rotate();\n            } else {\n                let g = unsafe\
+    \ { p.par.as_mut() }.unwrap();\n                Self::push(g);\n             \
+    \   Self::push(p);\n                Self::push(self);\n                if self.pos()\
+    \ == p.pos() {\n                    p.rotate();\n                    self.rotate();\n\
+    \                } else {\n                    self.rotate();\n              \
+    \      self.rotate();\n                }\n            }\n        }\n    }\n\n\
+    \    pub fn merge(l: *mut Self, r: *mut Self) -> *mut Self {\n        match unsafe\
+    \ { (l.as_mut(), r.as_mut()) } {\n            (None, None) => null_mut(),\n  \
+    \          (None, Some(r)) => {\n                r.splay();\n                r\n\
+    \            }\n            (Some(l), None) => {\n                l.splay();\n\
+    \                l\n            }\n            (Some(mut l), Some(r)) => {\n \
+    \               l.splay();\n                r.splay();\n                l = l.get_right();\n\
+    \                l.splay();\n                l.rch = r;\n                r.par\
+    \ = l;\n                Self::update(l);\n                l\n            }\n \
+    \       }\n    }\n\n    pub fn split(t: *mut Self, k: usize) -> (*mut Self, *mut\
+    \ Self) {\n        if t.is_null() {\n            (null_mut(), null_mut())\n  \
+    \      } else if k == 0 {\n            (null_mut(), t)\n        } else if k ==\
+    \ Self::len(t) {\n            (t, null_mut())\n        } else {\n            let\
+    \ t = unsafe { t.as_mut() }.unwrap();\n            Self::push(t);\n          \
+    \  if k <= Self::len(t.lch) {\n                let (x, y) = Self::split(t.lch,\
+    \ k);\n                t.lch = y;\n                t.par = null_mut();\n     \
+    \           if let Some(y) = unsafe { y.as_mut() } {\n                    y.par\
+    \ = t;\n                }\n                Self::update(t);\n                (x,\
+    \ t)\n            } else {\n                let (x, y) = Self::split(t.rch, k\
+    \ - Self::len(t.lch) - 1);\n                t.rch = x;\n                t.par\
     \ = null_mut();\n                if let Some(x) = unsafe { x.as_mut() } {\n  \
     \                  x.par = t;\n                }\n                Self::update(t);\n\
     \                (t, y)\n            }\n        }\n    }\n\n    pub fn insert(t:\
     \ &mut *mut Self, k: usize, val: M::S) {\n        if let Some(t) = unsafe { t.as_mut()\
     \ } {\n            t.splay();\n        }\n        let (x, y) = Self::split(*t,\
-    \ k);\n        let z = Box::leak(Box::new(Self::new(val)));\n        *t = Self::merge(Self::merge(x,\
-    \ z), y);\n    }\n\n    pub fn remove(t: &mut *mut Self, k: usize) -> M::S {\n\
-    \        unsafe { t.as_mut() }.unwrap().splay();\n        let (x, y) = Self::split(*t,\
-    \ k);\n        let (y, z) = Self::split(y, 1);\n        *t = Self::merge(x, z);\n\
-    \        unsafe { Box::from_raw(y) }.val\n    }\n\n    pub fn access(&mut self,\
-    \ mut k: usize) -> &mut Self {\n        let mut v = self;\n        loop {\n  \
-    \          Self::push(v);\n            Self::push(v.lch);\n            Self::push(v.rch);\n\
-    \            v = match k.cmp(&Self::len(v.lch)) {\n                Ordering::Less\
-    \ => unsafe { v.lch.as_mut() }.unwrap(),\n                Ordering::Equal => {\n\
-    \                    v.splay();\n                    return v;\n             \
-    \   }\n                Ordering::Greater => {\n                    k -= Self::len(v.lch)\
-    \ + 1;\n                    unsafe { v.rch.as_mut() }.unwrap()\n             \
-    \   }\n            }\n        }\n    }\n\n    pub fn build(a: &[M::S]) -> *mut\
-    \ Self {\n        let n = a.len();\n        if n == 0 {\n            null_mut()\n\
-    \        } else if n == 1 {\n            Box::leak(Box::new(Self::new(a[0].clone())))\n\
-    \        } else {\n            Self::merge(Self::build(&a[0..n / 2]), Self::build(&a[n\
-    \ / 2..n]))\n        }\n    }\n\n    pub fn get_left(&mut self) -> &mut Self {\n\
-    \        let mut v: &mut Self = self;\n        while let Some(l) = unsafe { v.lch.as_mut()\
+    \ k);\n        let z = Box::leak(Box::new(Self::new(val, !0)));\n        *t =\
+    \ Self::merge(Self::merge(x, z), y);\n    }\n\n    pub fn remove(t: &mut *mut\
+    \ Self, k: usize) -> M::S {\n        unsafe { t.as_mut() }.unwrap().splay();\n\
+    \        let (x, y) = Self::split(*t, k);\n        let (y, z) = Self::split(y,\
+    \ 1);\n        *t = Self::merge(x, z);\n        unsafe { Box::from_raw(y) }.val\n\
+    \    }\n\n    pub fn access(&mut self, mut k: usize) -> &mut Self {\n        let\
+    \ mut v = self;\n        loop {\n            Self::push(v);\n            Self::push(v.lch);\n\
+    \            Self::push(v.rch);\n            v = match k.cmp(&Self::len(v.lch))\
+    \ {\n                Ordering::Less => unsafe { v.lch.as_mut() }.unwrap(),\n \
+    \               Ordering::Equal => {\n                    v.splay();\n       \
+    \             return v;\n                }\n                Ordering::Greater\
+    \ => {\n                    k -= Self::len(v.lch) + 1;\n                    unsafe\
+    \ { v.rch.as_mut() }.unwrap()\n                }\n            }\n        }\n \
+    \   }\n\n    pub fn build(a: &[M::S]) -> *mut Self {\n        Self::build_(a,\
+    \ 0)\n    }\n\n    fn build_(a: &[M::S], l: usize) -> *mut Self {\n        let\
+    \ n = a.len();\n        if n == 0 {\n            null_mut()\n        } else if\
+    \ n == 1 {\n            Box::leak(Box::new(Self::new(a[0].clone(), l)))\n    \
+    \    } else {\n            Self::merge(\n                Self::build_(&a[0..n\
+    \ / 2], l),\n                Self::build_(&a[n / 2..n], l + n / 2),\n        \
+    \    )\n        }\n    }\n\n    pub fn get_left(&mut self) -> &mut Self {\n  \
+    \      let mut v: &mut Self = self;\n        while let Some(l) = unsafe { v.lch.as_mut()\
     \ } {\n            Self::push(l);\n            v = l;\n        }\n        v\n\
     \    }\n\n    pub fn get_right(&mut self) -> &mut Self {\n        let mut v: &mut\
     \ Self = self;\n        while let Some(r) = unsafe { v.rch.as_mut() } {\n    \
@@ -137,7 +141,7 @@ data:
   requiredBy:
   - crates/data-structure/splay-tree/src/lib.rs
   - crates/data-structure/link-cut-tree/src/lib.rs
-  timestamp: '2024-03-18 01:19:47+09:00'
+  timestamp: '2024-04-21 23:45:22+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: crates/data-structure/splay-tree-internal/src/lib.rs
