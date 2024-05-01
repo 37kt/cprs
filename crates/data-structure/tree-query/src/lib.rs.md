@@ -88,7 +88,7 @@ data:
   isVerificationFile: false
   path: crates/data-structure/tree-query/src/lib.rs
   requiredBy: []
-  timestamp: '2024-04-10 09:38:39+09:00'
+  timestamp: '2024-05-01 10:03:09+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/vertex_add_subtree_sum/src/main.rs

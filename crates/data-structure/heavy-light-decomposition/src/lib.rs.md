@@ -8,6 +8,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: crates/data-structure/tree-query/src/lib.rs
     title: crates/data-structure/tree-query/src/lib.rs
+  - icon: ':heavy_check_mark:'
+    path: crates/tree/static-top-tree-dp/src/lib.rs
+    title: crates/tree/static-top-tree-dp/src/lib.rs
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: verify/jump_on_tree/src/main.rs
@@ -27,11 +30,11 @@ data:
     \  File \"/opt/hostedtoolcache/Python/3.12.3/x64/lib/python3.12/site-packages/onlinejudge_verify/languages/rust.py\"\
     , line 288, in bundle\n    raise NotImplementedError\nNotImplementedError\n"
   code: "use graph::Graph;\nuse std::mem::swap;\n\npub struct HeavyLightDecomposition\
-    \ {\n    t_in: Vec<usize>,\n    t_out: Vec<usize>,\n    ord: Vec<usize>,\n   \
-    \ size: Vec<usize>,\n    heavy: Vec<usize>,\n    head: Vec<usize>,\n    par: Vec<usize>,\n\
-    \    depth: Vec<usize>,\n}\n\nimpl HeavyLightDecomposition {\n    pub fn new<V,\
-    \ E>(g: &Graph<V, E>) -> Self\n    where\n        V: Clone,\n        E: Clone,\n\
-    \    {\n        let n = g.len();\n        let mut hld = HeavyLightDecomposition\
+    \ {\n    pub t_in: Vec<usize>,\n    pub t_out: Vec<usize>,\n    pub ord: Vec<usize>,\n\
+    \    pub size: Vec<usize>,\n    pub heavy: Vec<usize>,\n    pub head: Vec<usize>,\n\
+    \    pub par: Vec<usize>,\n    pub depth: Vec<usize>,\n}\n\nimpl HeavyLightDecomposition\
+    \ {\n    pub fn new<V, E>(g: &Graph<V, E>) -> Self\n    where\n        V: Clone,\n\
+    \        E: Clone,\n    {\n        let n = g.len();\n        let mut hld = HeavyLightDecomposition\
     \ {\n            t_in: vec![0; n],\n            t_out: vec![0; n],\n         \
     \   ord: vec![],\n            size: vec![0; n],\n            heavy: vec![!0; n],\n\
     \            head: vec![0; n],\n            par: vec![!0; n],\n            depth:\
@@ -103,7 +106,8 @@ data:
   path: crates/data-structure/heavy-light-decomposition/src/lib.rs
   requiredBy:
   - crates/data-structure/tree-query/src/lib.rs
-  timestamp: '2024-04-10 09:38:39+09:00'
+  - crates/tree/static-top-tree-dp/src/lib.rs
+  timestamp: '2024-05-01 10:03:09+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/jump_on_tree/src/main.rs

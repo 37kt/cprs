@@ -82,6 +82,9 @@ data:
     path: verify/multipoint_evaluation/src/main.rs
     title: verify/multipoint_evaluation/src/main.rs
   - icon: ':heavy_check_mark:'
+    path: verify/point_set_tree_path_composite_sum_fixed_root/src/main.rs
+    title: verify/point_set_tree_path_composite_sum_fixed_root/src/main.rs
+  - icon: ':heavy_check_mark:'
     path: verify/polynomial_interpolation/src/main.rs
     title: verify/polynomial_interpolation/src/main.rs
   - icon: ':heavy_check_mark:'
@@ -426,6 +429,7 @@ data:
   - verify/shift_of_sampling_points_of_polynomial/src/main.rs
   - verify/range_affine_point_get/src/main.rs
   - verify/division_of_polynomials/src/main.rs
+  - verify/point_set_tree_path_composite_sum_fixed_root/src/main.rs
   - verify/sqrt_of_formal_power_series/src/main.rs
   - verify/binomial_coefficient_prime_mod/src/main.rs
   - verify/bitwise_or_convolution/src/main.rs

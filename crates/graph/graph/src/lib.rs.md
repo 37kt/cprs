@@ -44,6 +44,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: crates/tree/re-rooting-dp/src/lib.rs
     title: crates/tree/re-rooting-dp/src/lib.rs
+  - icon: ':heavy_check_mark:'
+    path: crates/tree/static-top-tree-dp/src/lib.rs
+    title: crates/tree/static-top-tree-dp/src/lib.rs
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: verify/biconnected_components/src/main.rs
@@ -54,6 +57,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/lca/src/main.rs
     title: verify/lca/src/main.rs
+  - icon: ':heavy_check_mark:'
+    path: verify/point_set_tree_path_composite_sum_fixed_root/src/main.rs
+    title: verify/point_set_tree_path_composite_sum_fixed_root/src/main.rs
   - icon: ':heavy_check_mark:'
     path: verify/scc/src/main.rs
     title: verify/scc/src/main.rs
@@ -188,6 +194,7 @@ data:
   - crates/math/two-satisfiability/src/lib.rs
   - crates/tree/re-rooting-dp/src/lib.rs
   - crates/tree/centroid-decomposition/src/lib.rs
+  - crates/tree/static-top-tree-dp/src/lib.rs
   timestamp: '2024-04-10 09:38:39+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
@@ -196,6 +203,7 @@ data:
   - verify/two_edge_connected_components/src/main.rs
   - verify/tree_path_composite_sum/src/main.rs
   - verify/yuki1014/src/main.rs
+  - verify/point_set_tree_path_composite_sum_fixed_root/src/main.rs
   - verify/vertex_set_path_composite/src/main.rs
   - verify/jump_on_tree/src/main.rs
   - verify/scc/src/main.rs
