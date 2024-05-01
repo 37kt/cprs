@@ -2,14 +2,14 @@ use graph::Graph;
 use std::mem::swap;
 
 pub struct HeavyLightDecomposition {
-    t_in: Vec<usize>,
-    t_out: Vec<usize>,
-    ord: Vec<usize>,
-    size: Vec<usize>,
-    heavy: Vec<usize>,
-    head: Vec<usize>,
-    par: Vec<usize>,
-    depth: Vec<usize>,
+    pub t_in: Vec<usize>,
+    pub t_out: Vec<usize>,
+    pub ord: Vec<usize>,
+    pub size: Vec<usize>,
+    pub heavy: Vec<usize>,
+    pub head: Vec<usize>,
+    pub par: Vec<usize>,
+    pub depth: Vec<usize>,
 }
 
 impl HeavyLightDecomposition {

@@ -1,0 +1,15 @@
+[package]
+name = "static-top-tree-dp"
+version = "0.1.0"
+edition = "2021"
+license = "CC0-1.0"
+publish = false
+
+[lib]
+name = "static_top_tree_dp"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+graph = { path = "../../graph/graph" }
+heavy-light-decomposition = { path = "../../data-structure/heavy-light-decomposition" }
