@@ -20,6 +20,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: crates/polynomial/formal-power-series/src/lib.rs
     title: crates/polynomial/formal-power-series/src/lib.rs
+  - icon: ':heavy_check_mark:'
+    path: crates/string/wildcard-pattern-matching/src/lib.rs
+    title: crates/string/wildcard-pattern-matching/src/lib.rs
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: verify/convolution_mod/src/main.rs
@@ -130,6 +133,7 @@ data:
   requiredBy:
   - crates/convolution/convolution-arbitrary-mod/src/lib.rs
   - crates/convolution/convolution-u64/src/lib.rs
+  - crates/string/wildcard-pattern-matching/src/lib.rs
   - crates/polynomial/formal-power-series/src/lib.rs
   - crates/polynomial/bostan-mori/src/lib.rs
   timestamp: '2024-03-18 01:19:47+09:00'

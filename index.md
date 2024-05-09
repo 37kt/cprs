@@ -471,6 +471,11 @@ data:
     - icon: ':heavy_check_mark:'
       path: crates/string/suffix-array/src/lib.rs
       title: crates/string/suffix-array/src/lib.rs
+  - name: crates/string/wildcard-pattern-matching/src
+    pages:
+    - icon: ':heavy_check_mark:'
+      path: crates/string/wildcard-pattern-matching/src/lib.rs
+      title: crates/string/wildcard-pattern-matching/src/lib.rs
   - name: crates/string/z-algorithm/src
     pages:
     - icon: ':heavy_check_mark:'
@@ -922,6 +927,11 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/vertex_set_path_composite/src/main.rs
       title: verify/vertex_set_path_composite/src/main.rs
+  - name: verify/wildcard_pattern_matching/src
+    pages:
+    - icon: ':heavy_check_mark:'
+      path: verify/wildcard_pattern_matching/src/main.rs
+      title: verify/wildcard_pattern_matching/src/main.rs
   - name: verify/yuki1014/src
     pages:
     - icon: ':heavy_check_mark:'

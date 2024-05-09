@@ -38,6 +38,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: crates/polynomial/shift-of-sampling-points/src/lib.rs
     title: crates/polynomial/shift-of-sampling-points/src/lib.rs
+  - icon: ':heavy_check_mark:'
+    path: crates/string/wildcard-pattern-matching/src/lib.rs
+    title: crates/string/wildcard-pattern-matching/src/lib.rs
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: verify/binomial_coefficient_prime_mod/src/main.rs
@@ -405,6 +408,7 @@ data:
   - crates/convolution/convolution-naive/src/lib.rs
   - crates/convolution/convolution-arbitrary-mod/src/lib.rs
   - crates/convolution/convolution-u64/src/lib.rs
+  - crates/string/wildcard-pattern-matching/src/lib.rs
   - crates/polynomial/lagrange-interpolation/src/lib.rs
   - crates/polynomial/berlekamp-massey/src/lib.rs
   - crates/polynomial/formal-power-series/src/lib.rs
