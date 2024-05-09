@@ -1,0 +1,16 @@
+[package]
+name = "wildcard-pattern-matching"
+version = "0.1.0"
+edition = "2021"
+license = "CC0-1.0"
+publish = false
+
+[lib]
+name = "wildcard_pattern_matching"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+random = { path = "../../misc/random" }
+modint = { path = "../../number-theory/modint" }
+convolution-ntt-friendly = { path = "../../convolution/convolution-ntt-friendly" }
