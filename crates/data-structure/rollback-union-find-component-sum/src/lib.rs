@@ -11,6 +11,7 @@ where
     par: Vec<i32>,
     sum: Vec<M::S>,
     his: Vec<(usize, i32, M::S)>,
+    cnt: usize,
 }
 
 impl<M> RollbackUnionFindComponentSum<M>
@@ -23,11 +24,16 @@ where
             par: vec![-1; n],
             sum: a.to_vec(),
             his: vec![],
+            cnt: n,
         }
     }
 
     pub fn len(&self) -> usize {
         self.par.len()
+    }
+
+    pub fn count(&self) -> usize {
+        self.cnt
     }
 
     pub fn merge(&mut self, x: usize, y: usize) -> bool {
@@ -38,6 +44,7 @@ where
         if x == y {
             return false;
         }
+        self.cnt -= 1;
         if -self.par[x] < -self.par[y] {
             swap(&mut x, &mut y);
         }
@@ -65,6 +72,9 @@ where
     pub fn undo(&mut self) {
         for _ in 0..2 {
             let (x, par, sum) = self.his.pop().unwrap();
+            if self.par[x] >= 0 && par < 0 {
+                self.cnt += 1;
+            }
             self.par[x] = par;
             self.sum[x] = sum;
         }

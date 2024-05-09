@@ -3,12 +3,14 @@ use std::{cell::RefCell, mem::swap};
 #[derive(Clone)]
 pub struct UnionFind {
     par: RefCell<Vec<i32>>,
+    cnt: usize,
 }
 
 impl UnionFind {
     pub fn new(n: usize) -> Self {
         Self {
             par: RefCell::new(vec![-1; n]),
+            cnt: n,
         }
     }
 
@@ -22,6 +24,7 @@ impl UnionFind {
         if x == y {
             return false;
         }
+        self.cnt -= 1;
         let mut par = self.par.borrow_mut();
         if -par[x] < -par[y] {
             swap(&mut x, &mut y);
@@ -53,6 +56,10 @@ impl UnionFind {
     pub fn size(&self, x: usize) -> usize {
         let x = self.leader(x);
         -self.par.borrow()[x] as usize
+    }
+
+    pub fn count(&self) -> usize {
+        self.cnt
     }
 
     pub fn groups(&self) -> Vec<Vec<usize>> {
