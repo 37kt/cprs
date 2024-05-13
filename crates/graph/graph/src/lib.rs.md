@@ -35,6 +35,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: crates/graph/two-edge-connected-components/src/lib.rs
     title: crates/graph/two-edge-connected-components/src/lib.rs
+  - icon: ':warning:'
+    path: crates/graph/zero-one-bfs/src/lib.rs
+    title: crates/graph/zero-one-bfs/src/lib.rs
   - icon: ':heavy_check_mark:'
     path: crates/math/two-satisfiability/src/lib.rs
     title: crates/math/two-satisfiability/src/lib.rs
@@ -185,6 +188,7 @@ data:
   - crates/graph/range-edge-graph/src/lib.rs
   - crates/graph/low-link/src/lib.rs
   - crates/graph/bellman-ford/src/lib.rs
+  - crates/graph/zero-one-bfs/src/lib.rs
   - crates/graph/extended-block-cut-tree/src/lib.rs
   - crates/graph/compressed-tree/src/lib.rs
   - crates/graph/dijkstra/src/lib.rs

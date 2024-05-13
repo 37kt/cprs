@@ -321,6 +321,11 @@ data:
     - icon: ':heavy_check_mark:'
       path: crates/graph/two-edge-connected-components/src/lib.rs
       title: crates/graph/two-edge-connected-components/src/lib.rs
+  - name: crates/graph/zero-one-bfs/src
+    pages:
+    - icon: ':warning:'
+      path: crates/graph/zero-one-bfs/src/lib.rs
+      title: crates/graph/zero-one-bfs/src/lib.rs
   - name: crates/heuristic/beam-search/src
     pages:
     - icon: ':warning:'

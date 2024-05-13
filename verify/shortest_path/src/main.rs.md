@@ -37,7 +37,7 @@ data:
   isVerificationFile: true
   path: verify/shortest_path/src/main.rs
   requiredBy: []
-  timestamp: '2024-04-10 09:38:39+09:00'
+  timestamp: '2024-05-13 10:35:48+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/shortest_path/src/main.rs
