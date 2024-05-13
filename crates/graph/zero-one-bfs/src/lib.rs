@@ -1,8 +1,8 @@
-use std::{cmp::Reverse, collections::BinaryHeap, ops::Add};
+use std::{collections::VecDeque, ops::Add};
 
 use graph::Graph;
 
-pub struct DijkstraResult<T>
+pub struct ZeroOneBFSResult<T>
 where
     T: Clone + Ord + Add<Output = T> + Default,
 {
@@ -10,36 +10,43 @@ where
     pub prev: Vec<usize>,
 }
 
-pub fn dijkstra<V, T>(g: &Graph<V, T>, starts: &[usize], inf: T) -> DijkstraResult<T>
+pub fn zero_one_bfs<V, T>(g: &Graph<V, T>, starts: &[usize], inf: T) -> ZeroOneBFSResult<T>
 where
     V: Clone,
-    T: Clone + Ord + Add<Output = T> + Default,
+    T: Clone + Ord + Add<Output = T> + Default + From<u8>,
 {
     assert!(starts.len() > 0);
+    let zero = T::from(0);
+    let one = T::from(1);
     let mut dist = vec![inf.clone(); g.len()];
     let mut prev = vec![!0; g.len()];
-    let mut pq = BinaryHeap::new();
+    let mut dq = VecDeque::new();
     for &s in starts {
         dist[s] = T::default();
-        pq.push(Reverse((T::default(), s)));
+        dq.push_back((zero.clone(), s));
     }
-    while let Some(Reverse((s, v))) = pq.pop() {
+    while let Some((s, v)) = dq.pop_front() {
         if dist[v] < s {
             continue;
         }
         for (u, w) in &g[v] {
-            assert!(w.clone() >= T::default());
-            if dist[*u] > dist[v].clone() + w.clone() {
-                dist[*u] = dist[v].clone() + w.clone();
+            assert!(*w == zero || *w == one);
+            let t = dist[v].clone() + w.clone();
+            if dist[*u] > t {
+                dist[*u] = t.clone();
                 prev[*u] = v;
-                pq.push(Reverse((dist[*u].clone(), *u)));
+                if *w == zero {
+                    dq.push_front((t.clone(), *u));
+                } else {
+                    dq.push_back((t.clone(), *u));
+                }
             }
         }
     }
-    DijkstraResult { dist, prev }
+    ZeroOneBFSResult { dist, prev }
 }
 
-impl<T> DijkstraResult<T>
+impl<T> ZeroOneBFSResult<T>
 where
     T: Clone + Ord + Add<Output = T> + Default,
 {
