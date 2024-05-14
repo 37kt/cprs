@@ -1,0 +1,13 @@
+[package]
+name = "static-rectangle-add-rectangle-sum"
+version = "0.1.0"
+edition = "2021"
+license = "CC0-1.0"
+publish = false
+
+[lib]
+name = "static_rectangle_add_rectangle_sum"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
