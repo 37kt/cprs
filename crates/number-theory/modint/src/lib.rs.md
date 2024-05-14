@@ -112,6 +112,9 @@ data:
     path: verify/sqrt_of_formal_power_series/src/main.rs
     title: verify/sqrt_of_formal_power_series/src/main.rs
   - icon: ':heavy_check_mark:'
+    path: verify/static_rectangle_add_rectangle_sum/src/main.rs
+    title: verify/static_rectangle_add_rectangle_sum/src/main.rs
+  - icon: ':heavy_check_mark:'
     path: verify/subset_convolution/src/main.rs
     title: verify/subset_convolution/src/main.rs
   - icon: ':heavy_check_mark:'
@@ -422,6 +425,7 @@ data:
   - verify/inv_of_formal_power_series/src/main.rs
   - verify/find_linear_recurrence/src/main.rs
   - verify/subset_convolution/src/main.rs
+  - verify/static_rectangle_add_rectangle_sum/src/main.rs
   - verify/matrix_product/src/main.rs
   - verify/matrix_det/src/main.rs
   - verify/exp_of_formal_power_series/src/main.rs

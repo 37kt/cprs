@@ -36,6 +36,11 @@ data:
     - icon: ':heavy_check_mark:'
       path: crates/algorithm/offline-dynamic-connectivity/src/lib.rs
       title: crates/algorithm/offline-dynamic-connectivity/src/lib.rs
+  - name: crates/algorithm/static-rectangle-add-rectangle-sum/src
+    pages:
+    - icon: ':heavy_check_mark:'
+      path: crates/algorithm/static-rectangle-add-rectangle-sum/src/lib.rs
+      title: crates/algorithm/static-rectangle-add-rectangle-sum/src/lib.rs
   - name: crates/convolution/and-convolution/src
     pages:
     - icon: ':heavy_check_mark:'
@@ -867,6 +872,11 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/static_range_sum/src/main.rs
       title: verify/static_range_sum/src/main.rs
+  - name: verify/static_rectangle_add_rectangle_sum/src
+    pages:
+    - icon: ':heavy_check_mark:'
+      path: verify/static_rectangle_add_rectangle_sum/src/main.rs
+      title: verify/static_rectangle_add_rectangle_sum/src/main.rs
   - name: verify/staticrmq/src
     pages:
     - icon: ':heavy_check_mark:'
