@@ -21,6 +21,13 @@ where
 {
     fn from(v: Vec<Vec<T>>) -> Self {
         let n = v.len();
+        if n == 0 {
+            return Self {
+                n: 0,
+                m: 0,
+                v: vec![].into_boxed_slice(),
+            };
+        }
         let m = v[0].len();
         assert!(v.iter().all(|x| x.len() == m));
         Self {
@@ -230,6 +237,12 @@ where
             }
         }
         (a, rank, Some(det))
+    }
+
+    pub fn det(&self) -> T {
+        assert!(self.n == self.m);
+        let (_, _, det) = self.gauss_elimination();
+        det.unwrap()
     }
 
     pub fn inv(&self) -> Option<Self> {

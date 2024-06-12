@@ -23,6 +23,8 @@ pub type ModInt1000000007 = StaticModInt<1_000_000_007>;
 
 pub trait ModInt:
     Default
+    + Zero
+    + One
     + FromStr
     + From<i8>
     + From<i16>
