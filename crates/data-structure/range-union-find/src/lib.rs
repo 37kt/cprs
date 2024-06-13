@@ -1,108 +1,64 @@
-use std::{
-    mem::swap,
-    ops::{Bound, RangeBounds},
-};
+use std::ops::{Bound, RangeBounds};
 
-use algebraic::{algebra, monoid};
-use modint61::ModInt61;
-use random::Pcg64Fast;
-use segment_tree::SegmentTree;
-
-algebra!(M, (ModInt61, ModInt61));
-monoid!(
-    M,
-    (0.into(), 1.into()),
-    |&(a, b): &(ModInt61, ModInt61), &(c, d): &(ModInt61, ModInt61)| (a * d + c, b * d)
-);
+use union_find::UnionFind;
 
 pub struct RangeUnionFind {
     n: usize,
-    base: ModInt61,
-    seg: SegmentTree<M>,
-    data: Vec<i32>,
-    next: Vec<usize>,
+    uf: Vec<UnionFind>,
 }
 
 impl RangeUnionFind {
     pub fn new(n: usize) -> Self {
-        let base = base();
-        let seg = SegmentTree::from((0..n).map(|i| (i.into(), base)).collect::<Vec<_>>());
-        Self {
-            n,
-            base,
-            seg,
-            data: vec![-1; n],
-            next: vec![!0; n],
+        let mut log = 1;
+        while 1 << log < n {
+            log += 1;
         }
+        let uf = (0..log).map(|i| UnionFind::new(n - (1 << i) + 1)).collect();
+        Self { n, uf }
     }
 
     pub fn leader(&self, x: usize) -> usize {
-        if self.data[x] < 0 {
-            x
-        } else {
-            self.data[x] as usize
-        }
+        self.uf[0].leader(x)
     }
 
     pub fn size(&self, x: usize) -> usize {
-        -self.data[self.leader(x)] as usize
+        self.uf[0].size(x)
     }
 
-    pub fn connected_components(&self, x: usize) -> Vec<usize> {
-        let mut x = self.leader(x);
-        let mut res = vec![x];
-        while self.next[x] != !0 {
-            x = self.next[x];
-            res.push(x);
+    pub fn merge_range(
+        &mut self,
+        xs: impl RangeBounds<usize>,
+        ys: impl RangeBounds<usize>,
+    ) -> Vec<(usize, usize)> {
+        let (a, b) = self.range_to_pair(xs);
+        let (c, d) = self.range_to_pair(ys);
+        assert!(b - a == d - c);
+        let mut res = vec![];
+        if a == c || b - a == 0 {
+            return res;
         }
+        let s = 63 - (b - a).leading_zeros() as usize;
+        self.merge_range_(a, c, s, &mut res);
+        self.merge_range_(b - (1 << s), d - (1 << s), s, &mut res);
         res
     }
 
-    pub fn merge_range(&mut self, xs: impl RangeBounds<usize>, ys: impl RangeBounds<usize>) {
-        let (mut a, b) = self.range_to_pair(xs);
-        let (mut c, d) = self.range_to_pair(ys);
-        assert!(b - a == d - c);
-        loop {
-            let mut ok = 0;
-            let mut ng = b - a + 1;
-            while ok + 1 < ng {
-                let md = (ok + ng) / 2;
-                if self.seg.prod(a..a + md) == self.seg.prod(c..c + md) {
-                    ok = md;
-                } else {
-                    ng = md;
-                }
-            }
-            if ok == b - a {
-                break;
-            }
-            a += ok;
-            c += ok;
-            let mut x = self.leader(a);
-            let mut y = self.leader(c);
-            assert!(x != y);
-            if self.size(x) < self.size(y) {
-                swap(&mut x, &mut y);
-            }
-            while self.next[y] != !0 {
-                let v = self.next[y];
-                self.next[y] = self.next[v];
-                self.seg.set(v, (x.into(), self.base));
-                self.data[v] = x as i32;
-                self.data[x] -= 1;
-                self.next[v] = self.next[x];
-                self.next[x] = v;
-            }
-            self.seg.set(y, (x.into(), self.base));
-            self.data[y] = x as i32;
-            self.data[x] -= 1;
-            self.next[y] = self.next[x];
-            self.next[x] = y;
-        }
+    pub fn merge(&mut self, x: usize, y: usize) -> Option<(usize, usize)> {
+        self.merge_range(x..x + 1, y..y + 1).pop()
     }
 
-    pub fn merge(&mut self, x: usize, y: usize) {
-        self.merge_range(x..x + 1, y..y + 1);
+    fn merge_range_(&mut self, l: usize, r: usize, k: usize, res: &mut Vec<(usize, usize)>) {
+        let x = self.uf[k].leader(l);
+        let y = self.uf[k].leader(r);
+        if self.uf[k].merge(l, r) {
+            if k == 0 {
+                let z = self.uf[k].leader(l);
+                res.push((z, x ^ y ^ z));
+            } else {
+                self.merge_range_(l, r, k - 1, res);
+                self.merge_range_(l + (1 << k - 1), r + (1 << k - 1), k - 1, res);
+            }
+        }
     }
 
     fn range_to_pair(&self, range: impl RangeBounds<usize>) -> (usize, usize) {
@@ -118,25 +74,4 @@ impl RangeUnionFind {
         };
         (l, r)
     }
-}
-
-fn base() -> ModInt61 {
-    fn gen() -> ModInt61 {
-        const FACTORS: [usize; 12] = [2, 3, 5, 7, 11, 13, 31, 41, 61, 151, 331, 1321];
-        let mut rng = Pcg64Fast::default();
-        loop {
-            let x = ModInt61::new(rng.u64());
-            if FACTORS
-                .iter()
-                .all(|&f| x.pow((ModInt61::modulus() as usize - 1) / f).val() > 1)
-            {
-                return x;
-            }
-        }
-    }
-
-    thread_local! {
-        static BASE: ModInt61 = gen();
-    }
-    BASE.with(|base| *base)
 }
