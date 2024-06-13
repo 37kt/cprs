@@ -2,9 +2,6 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy:
-  - icon: ':warning:'
-    path: crates/data-structure/range-union-find/src/lib.rs
-    title: crates/data-structure/range-union-find/src/lib.rs
   - icon: ':heavy_check_mark:'
     path: crates/string/rolling-hash/src/lib.rs
     title: crates/string/rolling-hash/src/lib.rs
@@ -39,7 +36,6 @@ data:
   isVerificationFile: false
   path: crates/misc/random/src/lib.rs
   requiredBy:
-  - crates/data-structure/range-union-find/src/lib.rs
   - crates/string/wildcard-pattern-matching/src/lib.rs
   - crates/string/rolling-hash/src/lib.rs
   timestamp: '2023-05-20 14:50:51+09:00'

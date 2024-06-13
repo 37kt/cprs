@@ -173,7 +173,7 @@ data:
       title: crates/data-structure/range-tree/src/lib.rs
   - name: crates/data-structure/range-union-find/src
     pages:
-    - icon: ':warning:'
+    - icon: ':heavy_check_mark:'
       path: crates/data-structure/range-union-find/src/lib.rs
       title: crates/data-structure/range-union-find/src/lib.rs
   - name: crates/data-structure/rollback-union-find/src
@@ -827,6 +827,11 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/range_kth_smallest/src/main.rs
       title: verify/range_kth_smallest/src/main.rs
+  - name: verify/range_parallel_unionfind/src
+    pages:
+    - icon: ':heavy_check_mark:'
+      path: verify/range_parallel_unionfind/src/main.rs
+      title: verify/range_parallel_unionfind/src/main.rs
   - name: verify/range_reverse_range_sum/src
     pages:
     - icon: ':heavy_check_mark:'

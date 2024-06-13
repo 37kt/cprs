@@ -115,6 +115,9 @@ data:
     path: verify/range_affine_point_get/src/main.rs
     title: verify/range_affine_point_get/src/main.rs
   - icon: ':heavy_check_mark:'
+    path: verify/range_parallel_unionfind/src/main.rs
+    title: verify/range_parallel_unionfind/src/main.rs
+  - icon: ':heavy_check_mark:'
     path: verify/shift_of_sampling_points_of_polynomial/src/main.rs
     title: verify/shift_of_sampling_points_of_polynomial/src/main.rs
   - icon: ':heavy_check_mark:'
@@ -453,6 +456,7 @@ data:
   - verify/bitwise_or_convolution/src/main.rs
   - verify/multipoint_evaluation/src/main.rs
   - verify/sqrt_mod/src/main.rs
+  - verify/range_parallel_unionfind/src/main.rs
   - verify/point_set_tree_path_composite_sum_fixed_root/src/main.rs
   - verify/inverse_matrix/src/main.rs
   - verify/log_of_formal_power_series/src/main.rs
