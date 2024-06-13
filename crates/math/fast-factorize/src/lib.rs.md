@@ -83,8 +83,8 @@ data:
   timestamp: '2024-03-18 01:19:47+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/factorize/src/main.rs
   - verify/primality_test/src/main.rs
+  - verify/factorize/src/main.rs
 documentation_of: crates/math/fast-factorize/src/lib.rs
 layout: document
 redirect_from:

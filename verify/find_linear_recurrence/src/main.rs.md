@@ -34,7 +34,7 @@ data:
   isVerificationFile: true
   path: verify/find_linear_recurrence/src/main.rs
   requiredBy: []
-  timestamp: '2024-04-05 14:38:09+09:00'
+  timestamp: '2024-06-13 08:47:29+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/find_linear_recurrence/src/main.rs

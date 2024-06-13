@@ -47,7 +47,7 @@ data:
   isVerificationFile: true
   path: verify/tree_path_composite_sum/src/main.rs
   requiredBy: []
-  timestamp: '2024-04-10 09:38:39+09:00'
+  timestamp: '2024-06-13 08:47:29+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/tree_path_composite_sum/src/main.rs

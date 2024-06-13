@@ -51,7 +51,7 @@ data:
   isVerificationFile: false
   path: crates/polynomial/shift-of-sampling-points/src/lib.rs
   requiredBy: []
-  timestamp: '2024-03-18 03:03:26+09:00'
+  timestamp: '2024-06-13 08:47:29+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/shift_of_sampling_points_of_polynomial/src/main.rs

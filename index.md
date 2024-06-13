@@ -266,6 +266,16 @@ data:
     - icon: ':warning:'
       path: crates/graph/compressed-tree/src/lib.rs
       title: crates/graph/compressed-tree/src/lib.rs
+  - name: crates/graph/count-spanning-tree-directed/src
+    pages:
+    - icon: ':heavy_check_mark:'
+      path: crates/graph/count-spanning-tree-directed/src/lib.rs
+      title: crates/graph/count-spanning-tree-directed/src/lib.rs
+  - name: crates/graph/count-spanning-tree-undirected/src
+    pages:
+    - icon: ':heavy_check_mark:'
+      path: crates/graph/count-spanning-tree-undirected/src/lib.rs
+      title: crates/graph/count-spanning-tree-undirected/src/lib.rs
   - name: crates/graph/dijkstra/src
     pages:
     - icon: ':heavy_check_mark:'
@@ -567,6 +577,16 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/convolution_mod_2_64/src/main.rs
       title: verify/convolution_mod_2_64/src/main.rs
+  - name: verify/count_spanning_tree_directed/src
+    pages:
+    - icon: ':heavy_check_mark:'
+      path: verify/count_spanning_tree_directed/src/main.rs
+      title: verify/count_spanning_tree_directed/src/main.rs
+  - name: verify/count_spanning_tree_undirected/src
+    pages:
+    - icon: ':heavy_check_mark:'
+      path: verify/count_spanning_tree_undirected/src/main.rs
+      title: verify/count_spanning_tree_undirected/src/main.rs
   - name: verify/deque_operate_all_composite/src
     pages:
     - icon: ':heavy_check_mark:'

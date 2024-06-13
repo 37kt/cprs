@@ -48,8 +48,8 @@ data:
   timestamp: '2023-04-20 08:15:08+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/static_range_sum/src/main.rs
   - verify/static_range_inversions_query/src/main.rs
+  - verify/static_range_sum/src/main.rs
 documentation_of: crates/algorithm/mo/src/lib.rs
 layout: document
 redirect_from:

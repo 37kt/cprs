@@ -38,7 +38,7 @@ data:
   isVerificationFile: false
   path: crates/polynomial/berlekamp-massey/src/lib.rs
   requiredBy: []
-  timestamp: '2024-04-05 14:38:09+09:00'
+  timestamp: '2024-06-13 08:47:29+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/find_linear_recurrence/src/main.rs

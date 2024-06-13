@@ -2,8 +2,8 @@
 data:
   _extendedDependsOn:
   - icon: ':heavy_check_mark:'
-    path: crates/math/matrix/src/lib.rs
-    title: crates/math/matrix/src/lib.rs
+    path: crates/graph/count-spanning-tree-undirected/src/lib.rs
+    title: crates/graph/count-spanning-tree-undirected/src/lib.rs
   - icon: ':heavy_check_mark:'
     path: crates/number-theory/modint/src/lib.rs
     title: crates/number-theory/modint/src/lib.rs
@@ -13,34 +13,35 @@ data:
   _pathExtension: rs
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
-    PROBLEM: https://judge.yosupo.jp/problem/pow_of_matrix
+    PROBLEM: https://judge.yosupo.jp/problem/counting_spanning_tree_undirected
     links:
-    - https://judge.yosupo.jp/problem/pow_of_matrix
+    - https://judge.yosupo.jp/problem/counting_spanning_tree_undirected
   bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.12.3/x64/lib/python3.12/site-packages/onlinejudge_verify/documentation/build.py\"\
     , line 71, in _render_source_code_stat\n    bundled_code = language.bundle(stat.path,\
     \ basedir=basedir, options={'include_paths': [basedir]}).decode()\n          \
     \         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\
     \  File \"/opt/hostedtoolcache/Python/3.12.3/x64/lib/python3.12/site-packages/onlinejudge_verify/languages/rust.py\"\
     , line 288, in bundle\n    raise NotImplementedError\nNotImplementedError\n"
-  code: "// verification-helper: PROBLEM https://judge.yosupo.jp/problem/pow_of_matrix\n\
-    \nuse itertools::Itertools;\nuse matrix::Matrix;\nuse modint::ModInt998244353\
+  code: "// verification-helper: PROBLEM https://judge.yosupo.jp/problem/counting_spanning_tree_undirected\n\
+    \nuse count_spanning_tree_undirected::count_spanning_tree_undirected;\nuse modint::ModInt998244353\
     \ as Mint;\nuse proconio::input;\n\n#[proconio::fastout]\nfn main() {\n    input!\
-    \ {\n        n: usize,\n        k: usize,\n        a: [[Mint; n]; n],\n    }\n\
-    \    let a = Matrix::<Mint>::from(a);\n    let b = a.pow(k);\n    for i in 0..n\
-    \ {\n        println!(\"{}\", b[i].iter().join(\" \"));\n    }\n}\n"
+    \ {\n        n: usize,\n        m: usize,\n        uv: [(usize, usize); m],\n\
+    \    }\n    let mut g = vec![vec![0; n]; n];\n    for &(u, v) in &uv {\n     \
+    \   g[u][v] += 1;\n        g[v][u] += 1;\n    }\n    let res: Mint = count_spanning_tree_undirected(&g);\n\
+    \    println!(\"{}\", res);\n}\n"
   dependsOn:
-  - crates/math/matrix/src/lib.rs
+  - crates/graph/count-spanning-tree-undirected/src/lib.rs
   - crates/number-theory/modint/src/lib.rs
   isVerificationFile: true
-  path: verify/pow_of_matrix/src/main.rs
+  path: verify/count_spanning_tree_undirected/src/main.rs
   requiredBy: []
   timestamp: '2024-06-13 08:47:29+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
-documentation_of: verify/pow_of_matrix/src/main.rs
+documentation_of: verify/count_spanning_tree_undirected/src/main.rs
 layout: document
 redirect_from:
-- /verify/verify/pow_of_matrix/src/main.rs
-- /verify/verify/pow_of_matrix/src/main.rs.html
-title: verify/pow_of_matrix/src/main.rs
+- /verify/verify/count_spanning_tree_undirected/src/main.rs
+- /verify/verify/count_spanning_tree_undirected/src/main.rs.html
+title: verify/count_spanning_tree_undirected/src/main.rs
 ---

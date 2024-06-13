@@ -33,7 +33,7 @@ data:
   isVerificationFile: true
   path: verify/matrix_det/src/main.rs
   requiredBy: []
-  timestamp: '2024-03-18 01:19:47+09:00'
+  timestamp: '2024-06-13 08:47:29+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/matrix_det/src/main.rs

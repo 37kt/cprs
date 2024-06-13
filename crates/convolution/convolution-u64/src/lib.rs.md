@@ -71,7 +71,7 @@ data:
   isVerificationFile: false
   path: crates/convolution/convolution-u64/src/lib.rs
   requiredBy: []
-  timestamp: '2024-03-21 10:13:16+09:00'
+  timestamp: '2024-06-13 08:47:29+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/convolution_mod_2_64/src/main.rs

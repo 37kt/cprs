@@ -58,7 +58,7 @@ data:
   isVerificationFile: true
   path: verify/point_set_tree_path_composite_sum_fixed_root/src/main.rs
   requiredBy: []
-  timestamp: '2024-05-01 10:03:09+09:00'
+  timestamp: '2024-06-13 08:47:29+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/point_set_tree_path_composite_sum_fixed_root/src/main.rs

@@ -4,7 +4,13 @@ data:
   - icon: ':heavy_check_mark:'
     path: crates/algebraic/algebraic/src/lib.rs
     title: crates/algebraic/algebraic/src/lib.rs
-  _extendedRequiredBy: []
+  _extendedRequiredBy:
+  - icon: ':heavy_check_mark:'
+    path: crates/graph/count-spanning-tree-directed/src/lib.rs
+    title: crates/graph/count-spanning-tree-directed/src/lib.rs
+  - icon: ':heavy_check_mark:'
+    path: crates/graph/count-spanning-tree-undirected/src/lib.rs
+    title: crates/graph/count-spanning-tree-undirected/src/lib.rs
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: verify/inverse_matrix/src/main.rs
@@ -34,7 +40,9 @@ data:
     \ Zero};\n\n#[derive(Clone)]\npub struct Matrix<T>\nwhere\n    T: Clone,\n{\n\
     \    n: usize,\n    m: usize,\n    v: Box<[T]>,\n}\n\nimpl<T> From<Vec<Vec<T>>>\
     \ for Matrix<T>\nwhere\n    T: Clone,\n{\n    fn from(v: Vec<Vec<T>>) -> Self\
-    \ {\n        let n = v.len();\n        let m = v[0].len();\n        assert!(v.iter().all(|x|\
+    \ {\n        let n = v.len();\n        if n == 0 {\n            return Self {\n\
+    \                n: 0,\n                m: 0,\n                v: vec![].into_boxed_slice(),\n\
+    \            };\n        }\n        let m = v[0].len();\n        assert!(v.iter().all(|x|\
     \ x.len() == m));\n        Self {\n            n,\n            m,\n          \
     \  v: v.into_iter()\n                .flatten()\n                .collect::<Vec<_>>()\n\
     \                .into_boxed_slice(),\n        }\n    }\n}\n\nimpl<T> Debug for\
@@ -101,7 +109,9 @@ data:
     \ * coef.clone();\n                        }\n                    }\n        \
     \        }\n                rank += 1;\n            } else {\n               \
     \ det = zero.clone();\n            }\n        }\n        (a, rank, Some(det))\n\
-    \    }\n\n    pub fn inv(&self) -> Option<Self> {\n        assert!(self.n == self.m);\n\
+    \    }\n\n    pub fn det(&self) -> T {\n        assert!(self.n == self.m);\n \
+    \       let (_, _, det) = self.gauss_elimination();\n        det.unwrap()\n  \
+    \  }\n\n    pub fn inv(&self) -> Option<Self> {\n        assert!(self.n == self.m);\n\
     \        let one = T::one();\n        let mut a = Self::zeros(self.n, self.n *\
     \ 2);\n        for i in 0..self.n {\n            for j in 0..self.n {\n      \
     \          a[i][j] = self[i][j].clone();\n            }\n            a[i][self.n\
@@ -148,14 +158,16 @@ data:
   - crates/algebraic/algebraic/src/lib.rs
   isVerificationFile: false
   path: crates/math/matrix/src/lib.rs
-  requiredBy: []
-  timestamp: '2024-03-18 01:19:47+09:00'
+  requiredBy:
+  - crates/graph/count-spanning-tree-undirected/src/lib.rs
+  - crates/graph/count-spanning-tree-directed/src/lib.rs
+  timestamp: '2024-06-13 08:47:29+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/matrix_product/src/main.rs
   - verify/matrix_det/src/main.rs
-  - verify/inverse_matrix/src/main.rs
   - verify/pow_of_matrix/src/main.rs
+  - verify/inverse_matrix/src/main.rs
+  - verify/matrix_product/src/main.rs
 documentation_of: crates/math/matrix/src/lib.rs
 layout: document
 redirect_from:

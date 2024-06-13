@@ -127,8 +127,8 @@ data:
   timestamp: '2024-03-21 11:10:47+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/stern_brocot_tree/src/main.rs
   - verify/rational_approximation/src/main.rs
+  - verify/stern_brocot_tree/src/main.rs
 documentation_of: crates/algebraic/rational/src/lib.rs
 layout: document
 redirect_from:
