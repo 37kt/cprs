@@ -51,36 +51,37 @@ data:
     \      self.nodes[next as usize].prev = new;\n        }\n        self.nodes[cand.parent\
     \ as usize].child = new;\n\n        self.nodes[new as usize] = Node {\n      \
     \      action: Some(cand.action),\n            parent: cand.parent,\n        \
-    \    child: !0,\n            prev: !0,\n            next: next,\n            refs:\
-    \ 0,\n            valid: 0,\n        };\n        self.retarget(new);\n    }\n\n\
-    \    fn del_node(&mut self, mut idx: u32) {\n        assert_eq!(self.nodes[idx\
-    \ as usize].refs, 0);\n        loop {\n            self.free.push(idx);\n    \
-    \        let Node {\n                prev, next, parent, ..\n            } = self.nodes[idx\
-    \ as usize];\n            assert_ne!(parent, !0);\n            if prev & next\
-    \ == !0 && self.nodes[parent as usize].refs == 0 {\n                idx = parent;\n\
-    \                continue;\n            }\n\n            if prev != !0 {\n   \
-    \             self.nodes[prev as usize].next = next;\n            } else {\n \
-    \               self.nodes[parent as usize].child = next;\n            }\n   \
-    \         if next != !0 {\n                self.nodes[next as usize].prev = prev;\n\
-    \            }\n\n            break;\n        }\n    }\n\n    fn dfs(&mut self,\
-    \ turn: usize, cands: &mut Vec<Vec<Candidate<A>>>, single: bool) {\n        if\
-    \ self.nodes[self.cur_node].child == !0 {\n            let cnt = self.append_cands(turn,\
-    \ self.cur_node, cands);\n            if cnt == 0 {\n                self.que.push(self.cur_node\
-    \ as u32);\n            }\n            self.nodes[self.cur_node].refs += cnt;\n\
-    \            return;\n        }\n\n        let node = self.cur_node;\n       \
-    \ let mut child = self.nodes[node].child;\n        let next_single = single &\
-    \ (self.nodes[child as usize].next == !0);\n\n        'a: loop {\n           \
-    \ loop {\n                if child == !0 {\n                    break 'a;\n  \
-    \              } else if self.nodes[child as usize].valid == self.at {\n     \
-    \               break;\n                }\n                child = self.nodes[child\
-    \ as usize].next;\n            }\n\n            self.cur_node = child as usize;\n\
-    \            self.nodes[child as usize]\n                .action\n           \
-    \     .as_ref()\n                .unwrap()\n                .apply(&mut self.state);\n\
-    \            self.dfs(turn, cands, next_single);\n\n            if !next_single\
-    \ {\n                self.nodes[child as usize]\n                    .action\n\
-    \                    .as_ref()\n                    .unwrap()\n              \
-    \      .revert(&mut self.state);\n            }\n\n            child = self.nodes[child\
-    \ as usize].next;\n        }\n\n        if !next_single {\n            self.cur_node\
+    \    child: !0,\n            prev: !0,\n            next,\n            refs: 0,\n\
+    \            valid: 0,\n        };\n        self.retarget(new);\n    }\n\n   \
+    \ fn del_node(&mut self, mut idx: u32) {\n        assert_eq!(self.nodes[idx as\
+    \ usize].refs, 0);\n        loop {\n            self.free.push(idx);\n       \
+    \     let Node {\n                prev, next, parent, ..\n            } = self.nodes[idx\
+    \ as usize];\n            assert_ne!(parent, !0);\n            self.nodes[parent\
+    \ as usize].refs -= 1;\n            if prev & next == !0 && self.nodes[parent\
+    \ as usize].refs == 0 {\n                idx = parent;\n                continue;\n\
+    \            }\n\n            if prev != !0 {\n                self.nodes[prev\
+    \ as usize].next = next;\n            } else {\n                self.nodes[parent\
+    \ as usize].child = next;\n            }\n            if next != !0 {\n      \
+    \          self.nodes[next as usize].prev = prev;\n            }\n\n         \
+    \   break;\n        }\n    }\n\n    fn dfs(&mut self, turn: usize, cands: &mut\
+    \ Vec<Vec<Candidate<A>>>, single: bool) {\n        if self.nodes[self.cur_node].child\
+    \ == !0 {\n            let cnt = self.append_cands(turn, self.cur_node, cands);\n\
+    \            if cnt == 0 {\n                self.que.push(self.cur_node as u32);\n\
+    \            }\n            self.nodes[self.cur_node].refs += cnt;\n         \
+    \   return;\n        }\n\n        let node = self.cur_node;\n        let mut child\
+    \ = self.nodes[node].child;\n        let next_single = single & (self.nodes[child\
+    \ as usize].next == !0);\n\n        'a: loop {\n            while self.nodes[child\
+    \ as usize].valid != self.at {\n                child = self.nodes[child as usize].next;\n\
+    \                if child == !0 {\n                    break 'a;\n           \
+    \     }\n            }\n\n            self.cur_node = child as usize;\n      \
+    \      self.nodes[child as usize]\n                .action\n                .as_ref()\n\
+    \                .unwrap()\n                .apply(&mut self.state);\n       \
+    \     self.dfs(turn, cands, next_single);\n\n            if !next_single {\n \
+    \               self.nodes[child as usize]\n                    .action\n    \
+    \                .as_ref()\n                    .unwrap()\n                  \
+    \  .revert(&mut self.state);\n            }\n\n            child = self.nodes[child\
+    \ as usize].next;\n            if child == !0 {\n                break;\n    \
+    \        }\n        }\n\n        if !next_single {\n            self.cur_node\
     \ = node;\n        }\n    }\n\n    fn enum_cands(&mut self, turn: usize, cands:\
     \ &mut Vec<Vec<Candidate<A>>>) {\n        assert_eq!(self.nodes[self.cur_node].valid,\
     \ self.at);\n        self.que.clear();\n        self.dfs(turn, cands, true);\n\
@@ -91,43 +92,50 @@ data:
     \  }\n\n    fn update(&mut self, cands: impl Iterator<Item = (Candidate<A>, bool)>)\
     \ {\n        self.at += 1;\n        for i in 0..self.que.len() {\n           \
     \ self.del_node(self.que[i]);\n        }\n\n        for (cand, f) in cands {\n\
-    \            let node = &mut self.nodes[cand.parent as usize];\n            node.refs\
-    \ -= 1;\n            if f {\n                self.add_node(cand)\n           \
-    \ } else if node.refs == 0 && node.child == !0 {\n                self.del_node(cand.parent);\n\
-    \            }\n        }\n    }\n\n    fn append_cands(&mut self, turn: usize,\
-    \ idx: usize, cands: &mut Vec<Vec<Candidate<A>>>) -> u32 {\n        let node =\
-    \ &self.nodes[idx];\n        assert_eq!(node.child, !0);\n\n        let mut res\
-    \ = 0;\n        let mut actions = vec![];\n        A::enumerate_actions(&self.state,\
-    \ &mut actions);\n        for action in actions {\n            let next_turn =\
-    \ turn + action.comsumed_turns();\n            if next_turn > self.max_turn {\n\
-    \                continue;\n            }\n            action.apply(&mut self.state);\n\
-    \            cands[next_turn].push(Candidate {\n                action: action.clone(),\n\
-    \                parent: idx as u32,\n                score: self.state.score(),\n\
-    \                hash: self.state.hash(),\n                valid: self.state.is_valid(),\n\
-    \            });\n            action.revert(&mut self.state);\n            res\
-    \ += 1;\n        }\n        res\n    }\n\n    pub fn solve(&mut self) -> (Vec<A>,\
-    \ i32) {\n        let start = std::time::Instant::now();\n        let mut cands:\
-    \ Vec<Vec<Candidate<A>>> =\n            (0..=self.max_turn).map(|_| vec![]).collect::<Vec<_>>();\n\
-    \        let mut set = NopHashSet::default();\n        let mut best = None;\n\
-    \        for t in 0..=self.max_turn {\n            let w = self\n            \
-    \    .width_manager\n                .beam_width(t, start.elapsed().as_secs_f64());\n\
-    \            if t != 0 {\n                let cands = &mut cands[t];\n       \
-    \         if cands.len() > w * 2 {\n                    cands.select_nth_unstable_by_key(w\
-    \ * 2, |c| Reverse(c.score));\n                    cands.truncate(w * 2);\n  \
-    \              }\n\n                cands.sort_unstable_by_key(|c| Reverse(c.score));\n\
-    \                set.clear();\n                let mut total = 0;\n          \
-    \      self.update(cands.iter().map(|c| {\n                    let f = total <\
-    \ w && set.insert(c.hash);\n                    total += f as usize;\n       \
-    \             if f && best\n                        .as_ref()\n              \
-    \          .map_or(std::i32::MIN, |b: &Candidate<A>| b.score)\n              \
-    \          < c.score\n                        && c.valid\n                   \
-    \ {\n                        best = Some(c.clone());\n                    }\n\
-    \                    (c.clone(), f)\n                }));\n            }\n   \
-    \         if t < self.max_turn {\n                self.enum_cands(t, &mut cands);\n\
-    \            }\n        }\n\n        let best = best.unwrap();\n        let mut\
-    \ res = vec![];\n        let mut idx = best.parent;\n        loop {\n        \
-    \    let Node { action, parent, .. } = &self.nodes[idx as usize];\n          \
-    \  if *parent == !0 {\n                break;\n            }\n            res.push(action.as_ref().unwrap().clone());\n\
+    \            let node = &mut self.nodes[cand.parent as usize];\n            if\
+    \ f {\n                self.add_node(cand)\n            } else {\n           \
+    \     node.refs -= 1;\n                if node.refs == 0 {\n                 \
+    \   self.del_node(cand.parent);\n                }\n            }\n        }\n\
+    \    }\n\n    fn append_cands(&mut self, turn: usize, idx: usize, cands: &mut\
+    \ Vec<Vec<Candidate<A>>>) -> u32 {\n        let node = &self.nodes[idx];\n   \
+    \     assert_eq!(node.child, !0);\n\n        let mut res = 0;\n        let mut\
+    \ actions = vec![];\n        A::enumerate_actions(&self.state, &mut actions);\n\
+    \        for action in actions {\n            let mut next_turn = turn + action.comsumed_turns();\n\
+    \            if next_turn > self.max_turn {\n                continue;\n     \
+    \       }\n            action.apply(&mut self.state);\n            if self.state.is_valid()\
+    \ {\n                next_turn = self.max_turn;\n            }\n            cands[next_turn].push(Candidate\
+    \ {\n                action: action.clone(),\n                parent: idx as u32,\n\
+    \                score: self.state.score(),\n                hash: self.state.hash(),\n\
+    \                valid: self.state.is_valid(),\n            });\n            action.revert(&mut\
+    \ self.state);\n            res += 1;\n        }\n        res\n    }\n\n    pub\
+    \ fn solve(&mut self) -> (Vec<A>, i32) {\n        let start = std::time::Instant::now();\n\
+    \        let mut cands: Vec<Vec<Candidate<A>>> =\n            (0..=self.max_turn).map(|_|\
+    \ vec![]).collect::<Vec<_>>();\n        let mut set = NopHashSet::default();\n\
+    \        // let mut best = None;\n        for t in 0..self.max_turn {\n      \
+    \      let w = self\n                .width_manager\n                .beam_width(t,\
+    \ start.elapsed().as_secs_f64());\n            if t != 0 {\n                let\
+    \ cands = &mut cands[t];\n                if cands.len() > w * 2 {\n         \
+    \           cands.select_nth_unstable_by_key(w * 2, |c| Reverse(c.score));\n \
+    \                   cands.truncate(w * 2);\n                }\n\n            \
+    \    cands.sort_unstable_by_key(|c| Reverse(c.score));\n                set.clear();\n\
+    \                let mut total = 0;\n                // self.update(cands.iter().map(|c|\
+    \ {\n                //     let f = total < w && set.insert(c.hash);\n       \
+    \         //     total += f as usize;\n                //     if f && best\n \
+    \               //         .as_ref()\n                //         .map_or(std::i32::MIN,\
+    \ |b: &Candidate<A>| b.score)\n                //         < c.score\n        \
+    \        //         && c.valid\n                //     {\n                // \
+    \        best = Some(c.clone());\n                //     }\n                //\
+    \     (c.clone(), f)\n                // }));\n                self.update(cands.iter().map(|c|\
+    \ {\n                    let f = total < w && set.insert(c.hash);\n          \
+    \          total += f as usize;\n                    (c.clone(), f)\n        \
+    \        }));\n            }\n            // if t < self.max_turn {\n        \
+    \    if t == 0 || cands[t].len() != 0 {\n                self.enum_cands(t, &mut\
+    \ cands);\n            }\n            // }\n        }\n\n        let best = cands[self.max_turn]\n\
+    \            .iter()\n            .filter(|c| c.valid)\n            .max_by_key(|c|\
+    \ c.score)\n            .cloned()\n            .unwrap();\n        let mut res\
+    \ = vec![];\n        let mut idx = best.parent;\n        loop {\n            let\
+    \ Node { action, parent, .. } = &self.nodes[idx as usize];\n            if *parent\
+    \ == !0 {\n                break;\n            }\n            res.push(action.as_ref().unwrap().clone());\n\
     \            idx = *parent;\n        }\n        res.reverse();\n        res.push(best.action);\n\
     \        (res, best.score)\n    }\n}\n\n#[derive(Default)]\nstruct NopHasher {\n\
     \    hash: u64,\n}\n\nimpl Hasher for NopHasher {\n    fn write(&mut self, _:\
@@ -140,7 +148,7 @@ data:
   isVerificationFile: false
   path: crates/heuristic/beam-search/src/lib.rs
   requiredBy: []
-  timestamp: '2023-11-09 12:46:30+09:00'
+  timestamp: '2024-06-19 10:50:00+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: crates/heuristic/beam-search/src/lib.rs
