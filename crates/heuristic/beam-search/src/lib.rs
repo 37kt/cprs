@@ -129,7 +129,7 @@ where
             parent: cand.parent,
             child: !0,
             prev: !0,
-            next: next,
+            next,
             refs: 0,
             valid: 0,
         };
@@ -144,6 +144,7 @@ where
                 prev, next, parent, ..
             } = self.nodes[idx as usize];
             assert_ne!(parent, !0);
+            self.nodes[parent as usize].refs -= 1;
             if prev & next == !0 && self.nodes[parent as usize].refs == 0 {
                 idx = parent;
                 continue;
@@ -177,13 +178,11 @@ where
         let next_single = single & (self.nodes[child as usize].next == !0);
 
         'a: loop {
-            loop {
+            while self.nodes[child as usize].valid != self.at {
+                child = self.nodes[child as usize].next;
                 if child == !0 {
                     break 'a;
-                } else if self.nodes[child as usize].valid == self.at {
-                    break;
                 }
-                child = self.nodes[child as usize].next;
             }
 
             self.cur_node = child as usize;
@@ -203,6 +202,9 @@ where
             }
 
             child = self.nodes[child as usize].next;
+            if child == !0 {
+                break;
+            }
         }
 
         if !next_single {
@@ -234,11 +236,13 @@ where
 
         for (cand, f) in cands {
             let node = &mut self.nodes[cand.parent as usize];
-            node.refs -= 1;
             if f {
                 self.add_node(cand)
-            } else if node.refs == 0 && node.child == !0 {
-                self.del_node(cand.parent);
+            } else {
+                node.refs -= 1;
+                if node.refs == 0 {
+                    self.del_node(cand.parent);
+                }
             }
         }
     }
@@ -251,11 +255,14 @@ where
         let mut actions = vec![];
         A::enumerate_actions(&self.state, &mut actions);
         for action in actions {
-            let next_turn = turn + action.comsumed_turns();
+            let mut next_turn = turn + action.comsumed_turns();
             if next_turn > self.max_turn {
                 continue;
             }
             action.apply(&mut self.state);
+            if self.state.is_valid() {
+                next_turn = self.max_turn;
+            }
             cands[next_turn].push(Candidate {
                 action: action.clone(),
                 parent: idx as u32,
@@ -274,8 +281,8 @@ where
         let mut cands: Vec<Vec<Candidate<A>>> =
             (0..=self.max_turn).map(|_| vec![]).collect::<Vec<_>>();
         let mut set = NopHashSet::default();
-        let mut best = None;
-        for t in 0..=self.max_turn {
+        // let mut best = None;
+        for t in 0..self.max_turn {
             let w = self
                 .width_manager
                 .beam_width(t, start.elapsed().as_secs_f64());
@@ -289,26 +296,38 @@ where
                 cands.sort_unstable_by_key(|c| Reverse(c.score));
                 set.clear();
                 let mut total = 0;
+                // self.update(cands.iter().map(|c| {
+                //     let f = total < w && set.insert(c.hash);
+                //     total += f as usize;
+                //     if f && best
+                //         .as_ref()
+                //         .map_or(std::i32::MIN, |b: &Candidate<A>| b.score)
+                //         < c.score
+                //         && c.valid
+                //     {
+                //         best = Some(c.clone());
+                //     }
+                //     (c.clone(), f)
+                // }));
                 self.update(cands.iter().map(|c| {
                     let f = total < w && set.insert(c.hash);
                     total += f as usize;
-                    if f && best
-                        .as_ref()
-                        .map_or(std::i32::MIN, |b: &Candidate<A>| b.score)
-                        < c.score
-                        && c.valid
-                    {
-                        best = Some(c.clone());
-                    }
                     (c.clone(), f)
                 }));
             }
-            if t < self.max_turn {
+            // if t < self.max_turn {
+            if t == 0 || cands[t].len() != 0 {
                 self.enum_cands(t, &mut cands);
             }
+            // }
         }
 
-        let best = best.unwrap();
+        let best = cands[self.max_turn]
+            .iter()
+            .filter(|c| c.valid)
+            .max_by_key(|c| c.score)
+            .cloned()
+            .unwrap();
         let mut res = vec![];
         let mut idx = best.parent;
         loop {
