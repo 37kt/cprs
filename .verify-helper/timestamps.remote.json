@@ -60,6 +60,7 @@
 "verify/range_affine_range_sum/src/main.rs": "2024-03-18 01:19:47 +0900",
 "verify/range_chmin_chmax_add_range_sum/src/main.rs": "2023-04-21 11:20:46 +0900",
 "verify/range_kth_smallest/src/main.rs": "2023-04-22 21:59:33 +0900",
+"verify/range_parallel_unionfind/src/main.rs": "2024-06-13 09:46:47 +0900",
 "verify/range_reverse_range_sum/src/main.rs": "2024-03-18 01:19:47 +0900",
 "verify/rational_approximation/src/main.rs": "2024-03-21 11:10:47 +0900",
 "verify/rectangle_add_point_get/src/main.rs": "2024-03-18 01:19:47 +0900",
