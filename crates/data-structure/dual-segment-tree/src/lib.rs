@@ -87,3 +87,19 @@ where
         }
     }
 }
+
+impl<M> From<Vec<M::S>> for DualSegmentTree<M>
+where
+    M: Monoid,
+    M::S: Clone,
+{
+    fn from(mut a: Vec<M::S>) -> Self {
+        let n = a.len();
+        let mut v = vec![M::e(); n];
+        v.append(&mut a);
+        for i in (1..n).rev() {
+            v[i] = M::op(&v[i * 2], &v[i * 2 + 1]);
+        }
+        Self { n, v }
+    }
+}

@@ -1,6 +1,7 @@
 use graph::Graph;
 use std::mem::swap;
 
+#[derive(Clone)]
 pub struct HeavyLightDecomposition {
     pub t_in: Vec<usize>,
     pub t_out: Vec<usize>,

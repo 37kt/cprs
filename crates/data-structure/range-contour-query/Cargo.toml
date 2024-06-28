@@ -1,0 +1,15 @@
+[package]
+name = "range-contour-query"
+version = "0.1.0"
+edition = "2021"
+license = "CC0-1.0"
+publish = false
+
+[lib]
+name = "range_contour_query"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+graph = { package = "graph", path = "../../graph/graph" }
+heavy-light-decomposition = { path = "../../data-structure/heavy-light-decomposition" }
