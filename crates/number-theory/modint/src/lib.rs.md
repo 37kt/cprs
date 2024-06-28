@@ -141,11 +141,11 @@ data:
   attributes:
     links:
     - https://rsk0315.hatenablog.com/entry/2023/04/29/043512
-  bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.12.3/x64/lib/python3.12/site-packages/onlinejudge_verify/documentation/build.py\"\
+  bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.12.4/x64/lib/python3.12/site-packages/onlinejudge_verify/documentation/build.py\"\
     , line 71, in _render_source_code_stat\n    bundled_code = language.bundle(stat.path,\
     \ basedir=basedir, options={'include_paths': [basedir]}).decode()\n          \
     \         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\
-    \  File \"/opt/hostedtoolcache/Python/3.12.3/x64/lib/python3.12/site-packages/onlinejudge_verify/languages/rust.py\"\
+    \  File \"/opt/hostedtoolcache/Python/3.12.4/x64/lib/python3.12/site-packages/onlinejudge_verify/languages/rust.py\"\
     , line 288, in bundle\n    raise NotImplementedError\nNotImplementedError\n"
   code: "use std::{\n    fmt,\n    hash::Hash,\n    iter::{Product, Sum},\n    num::ParseIntError,\n\
     \    ops::{Add, AddAssign, Div, DivAssign, Mul, MulAssign, Neg, Sub, SubAssign},\n\
@@ -421,52 +421,52 @@ data:
   isVerificationFile: false
   path: crates/number-theory/modint/src/lib.rs
   requiredBy:
-  - crates/polynomial/shift-of-sampling-points/src/lib.rs
-  - crates/polynomial/polynomial-interpolation/src/lib.rs
-  - crates/polynomial/lagrange-interpolation/src/lib.rs
-  - crates/polynomial/formal-power-series/src/lib.rs
-  - crates/polynomial/bostan-mori/src/lib.rs
-  - crates/polynomial/berlekamp-massey/src/lib.rs
+  - crates/number-theory/combination/src/lib.rs
   - crates/graph/count-spanning-tree-undirected/src/lib.rs
   - crates/graph/count-spanning-tree-directed/src/lib.rs
-  - crates/string/wildcard-pattern-matching/src/lib.rs
-  - crates/number-theory/combination/src/lib.rs
-  - crates/convolution/convolution-naive/src/lib.rs
+  - crates/polynomial/polynomial-interpolation/src/lib.rs
+  - crates/polynomial/shift-of-sampling-points/src/lib.rs
+  - crates/polynomial/formal-power-series/src/lib.rs
+  - crates/polynomial/bostan-mori/src/lib.rs
+  - crates/polynomial/lagrange-interpolation/src/lib.rs
+  - crates/polynomial/berlekamp-massey/src/lib.rs
   - crates/convolution/convolution-ntt-friendly/src/lib.rs
   - crates/convolution/convolution-arbitrary-mod/src/lib.rs
+  - crates/convolution/convolution-naive/src/lib.rs
   - crates/convolution/convolution-u64/src/lib.rs
+  - crates/string/wildcard-pattern-matching/src/lib.rs
   timestamp: '2024-06-13 08:47:29+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/subset_convolution/src/main.rs
-  - verify/sqrt_of_formal_power_series/src/main.rs
-  - verify/range_affine_point_get/src/main.rs
   - verify/division_of_polynomials/src/main.rs
-  - verify/polynomial_taylor_shift/src/main.rs
-  - verify/inv_of_formal_power_series/src/main.rs
-  - verify/matrix_det/src/main.rs
-  - verify/convolution_mod_1000000007/src/main.rs
-  - verify/tree_path_composite_sum/src/main.rs
-  - verify/find_linear_recurrence/src/main.rs
-  - verify/shift_of_sampling_points_of_polynomial/src/main.rs
   - verify/static_rectangle_add_rectangle_sum/src/main.rs
-  - verify/pow_of_matrix/src/main.rs
-  - verify/kth_term_of_linearly_recurrent_sequence/src/main.rs
-  - verify/binomial_coefficient_prime_mod/src/main.rs
-  - verify/bitwise_or_convolution/src/main.rs
   - verify/multipoint_evaluation/src/main.rs
+  - verify/count_spanning_tree_directed/src/main.rs
+  - verify/matrix_product/src/main.rs
+  - verify/kth_term_of_linearly_recurrent_sequence/src/main.rs
+  - verify/count_spanning_tree_undirected/src/main.rs
+  - verify/find_linear_recurrence/src/main.rs
+  - verify/pow_of_matrix/src/main.rs
+  - verify/polynomial_interpolation/src/main.rs
+  - verify/point_set_tree_path_composite_sum_fixed_root/src/main.rs
+  - verify/polynomial_taylor_shift/src/main.rs
+  - verify/convolution_mod/src/main.rs
   - verify/sqrt_mod/src/main.rs
   - verify/range_parallel_unionfind/src/main.rs
-  - verify/point_set_tree_path_composite_sum_fixed_root/src/main.rs
-  - verify/inverse_matrix/src/main.rs
-  - verify/log_of_formal_power_series/src/main.rs
-  - verify/exp_of_formal_power_series/src/main.rs
-  - verify/polynomial_interpolation/src/main.rs
-  - verify/convolution_mod/src/main.rs
-  - verify/count_spanning_tree_directed/src/main.rs
-  - verify/count_spanning_tree_undirected/src/main.rs
-  - verify/matrix_product/src/main.rs
   - verify/pow_of_formal_power_series/src/main.rs
+  - verify/matrix_det/src/main.rs
+  - verify/binomial_coefficient_prime_mod/src/main.rs
+  - verify/log_of_formal_power_series/src/main.rs
+  - verify/shift_of_sampling_points_of_polynomial/src/main.rs
+  - verify/tree_path_composite_sum/src/main.rs
+  - verify/subset_convolution/src/main.rs
+  - verify/exp_of_formal_power_series/src/main.rs
+  - verify/range_affine_point_get/src/main.rs
+  - verify/bitwise_or_convolution/src/main.rs
+  - verify/inv_of_formal_power_series/src/main.rs
+  - verify/inverse_matrix/src/main.rs
+  - verify/sqrt_of_formal_power_series/src/main.rs
+  - verify/convolution_mod_1000000007/src/main.rs
 documentation_of: crates/number-theory/modint/src/lib.rs
 layout: document
 redirect_from:

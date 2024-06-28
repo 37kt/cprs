@@ -166,6 +166,11 @@ data:
     - icon: ':warning:'
       path: crates/data-structure/potentialized-union-find/src/lib.rs
       title: crates/data-structure/potentialized-union-find/src/lib.rs
+  - name: crates/data-structure/range-contour-query/src
+    pages:
+    - icon: ':warning:'
+      path: crates/data-structure/range-contour-query/src/lib.rs
+      title: crates/data-structure/range-contour-query/src/lib.rs
   - name: crates/data-structure/range-tree/src
     pages:
     - icon: ':heavy_check_mark:'
@@ -241,6 +246,16 @@ data:
     - icon: ':warning:'
       path: crates/data-structure/union-find-component-sum/src/lib.rs
       title: crates/data-structure/union-find-component-sum/src/lib.rs
+  - name: crates/data-structure/vertex-add-range-contour-sum/src
+    pages:
+    - icon: ':heavy_check_mark:'
+      path: crates/data-structure/vertex-add-range-contour-sum/src/lib.rs
+      title: crates/data-structure/vertex-add-range-contour-sum/src/lib.rs
+  - name: crates/data-structure/vertex-get-range-contour-add/src
+    pages:
+    - icon: ':heavy_check_mark:'
+      path: crates/data-structure/vertex-get-range-contour-add/src/lib.rs
+      title: crates/data-structure/vertex-get-range-contour-add/src/lib.rs
   - name: crates/data-structure/w-ary-tree-set/src
     pages:
     - icon: ':heavy_check_mark:'
@@ -508,7 +523,7 @@ data:
       title: crates/tree/cartesian-tree/src/lib.rs
   - name: crates/tree/centroid-decomposition/src
     pages:
-    - icon: ':warning:'
+    - icon: ':heavy_check_mark:'
       path: crates/tree/centroid-decomposition/src/lib.rs
       title: crates/tree/centroid-decomposition/src/lib.rs
   - name: crates/tree/re-rooting-dp/src
@@ -647,6 +662,11 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/find_linear_recurrence/src/main.rs
       title: verify/find_linear_recurrence/src/main.rs
+  - name: verify/frequency_table_of_tree_distance/src
+    pages:
+    - icon: ':heavy_check_mark:'
+      path: verify/frequency_table_of_tree_distance/src/main.rs
+      title: verify/frequency_table_of_tree_distance/src/main.rs
   - name: verify/gcd_convolution/src
     pages:
     - icon: ':heavy_check_mark:'
@@ -957,11 +977,21 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/vertex_add_path_sum/src/main.rs
       title: verify/vertex_add_path_sum/src/main.rs
+  - name: verify/vertex_add_range_contour_sum_on_tree/src
+    pages:
+    - icon: ':heavy_check_mark:'
+      path: verify/vertex_add_range_contour_sum_on_tree/src/main.rs
+      title: verify/vertex_add_range_contour_sum_on_tree/src/main.rs
   - name: verify/vertex_add_subtree_sum/src
     pages:
     - icon: ':heavy_check_mark:'
       path: verify/vertex_add_subtree_sum/src/main.rs
       title: verify/vertex_add_subtree_sum/src/main.rs
+  - name: verify/vertex_get_range_contour_add_on_tree/src
+    pages:
+    - icon: ':heavy_check_mark:'
+      path: verify/vertex_get_range_contour_add_on_tree/src/main.rs
+      title: verify/vertex_get_range_contour_add_on_tree/src/main.rs
   - name: verify/vertex_set_path_composite/src
     pages:
     - icon: ':heavy_check_mark:'

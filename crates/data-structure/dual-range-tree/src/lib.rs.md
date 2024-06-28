@@ -17,11 +17,11 @@ data:
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
-  bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.12.3/x64/lib/python3.12/site-packages/onlinejudge_verify/documentation/build.py\"\
+  bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.12.4/x64/lib/python3.12/site-packages/onlinejudge_verify/documentation/build.py\"\
     , line 71, in _render_source_code_stat\n    bundled_code = language.bundle(stat.path,\
     \ basedir=basedir, options={'include_paths': [basedir]}).decode()\n          \
     \         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\
-    \  File \"/opt/hostedtoolcache/Python/3.12.3/x64/lib/python3.12/site-packages/onlinejudge_verify/languages/rust.py\"\
+    \  File \"/opt/hostedtoolcache/Python/3.12.4/x64/lib/python3.12/site-packages/onlinejudge_verify/languages/rust.py\"\
     , line 288, in bundle\n    raise NotImplementedError\nNotImplementedError\n"
   code: "use std::ops::{Bound, RangeBounds};\n\nuse algebraic::Monoid;\nuse dual_segment_tree::DualSegmentTree;\n\
     \npub struct DualRangeTree<I, M>\nwhere\n    I: Ord + Copy,\n    M: Monoid,\n\
@@ -85,7 +85,7 @@ data:
   isVerificationFile: false
   path: crates/data-structure/dual-range-tree/src/lib.rs
   requiredBy: []
-  timestamp: '2024-03-18 01:19:47+09:00'
+  timestamp: '2024-06-28 10:31:31+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/rectangle_add_point_get/src/main.rs

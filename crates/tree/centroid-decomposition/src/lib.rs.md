@@ -5,52 +5,70 @@ data:
     path: crates/graph/graph/src/lib.rs
     title: crates/graph/graph/src/lib.rs
   _extendedRequiredBy: []
-  _extendedVerifiedWith: []
+  _extendedVerifiedWith:
+  - icon: ':heavy_check_mark:'
+    path: verify/frequency_table_of_tree_distance/src/main.rs
+    title: verify/frequency_table_of_tree_distance/src/main.rs
   _isVerificationFailed: false
   _pathExtension: rs
-  _verificationStatusIcon: ':warning:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
-  bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.12.3/x64/lib/python3.12/site-packages/onlinejudge_verify/documentation/build.py\"\
+  bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.12.4/x64/lib/python3.12/site-packages/onlinejudge_verify/documentation/build.py\"\
     , line 71, in _render_source_code_stat\n    bundled_code = language.bundle(stat.path,\
     \ basedir=basedir, options={'include_paths': [basedir]}).decode()\n          \
     \         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\
-    \  File \"/opt/hostedtoolcache/Python/3.12.3/x64/lib/python3.12/site-packages/onlinejudge_verify/languages/rust.py\"\
+    \  File \"/opt/hostedtoolcache/Python/3.12.4/x64/lib/python3.12/site-packages/onlinejudge_verify/languages/rust.py\"\
     , line 288, in bundle\n    raise NotImplementedError\nNotImplementedError\n"
-  code: "use graph::Graph;\n\n/// \u91CD\u5FC3\u5206\u89E3\u3092\u3059\u308B\n///\
-    \ \u5165\u529B: \u6728\n/// \u623B\u308A\u5024: \u91CD\u5FC3\u5206\u89E3\u306E\
-    \u6728\u306B\u3064\u3044\u3066\u306E (\u89AA, \u884C\u304D\u304C\u3051\u9806)\n\
-    pub fn build<V, E>(g: &Graph<V, E>) -> (Vec<usize>, Vec<usize>)\nwhere\n    V:\
-    \ Clone,\n    E: Clone,\n{\n    let mut cd = CentroidDecomposition::new(g.len());\n\
-    \    cd.build(0, g);\n    (cd.par, cd.ord)\n}\n\nstruct CentroidDecomposition\
-    \ {\n    sz: Vec<usize>,\n    par: Vec<usize>,\n    used: Vec<bool>,\n    ord:\
-    \ Vec<usize>,\n}\n\nimpl CentroidDecomposition {\n    fn new(n: usize) -> Self\
-    \ {\n        Self {\n            sz: vec![1; n],\n            par: vec![!0; n],\n\
-    \            used: vec![false; n],\n            ord: vec![],\n        }\n    }\n\
-    \n    fn build<V, E>(&mut self, v: usize, g: &Graph<V, E>) -> usize\n    where\n\
-    \        V: Clone,\n        E: Clone,\n    {\n        let sz = self.dfs_size(v,\
-    \ !0, g);\n        let c = self.search_centroid(v, !0, sz / 2, g);\n        self.used[c]\
-    \ = true;\n        self.ord.push(v);\n        for &(u, _) in &g[v] {\n       \
-    \     if !self.used[u] {\n                let d = self.build(u, g);\n        \
-    \        self.par[d] = c;\n            }\n        }\n        self.used[c] = false;\n\
-    \        c\n    }\n\n    fn dfs_size<V, E>(&mut self, v: usize, p: usize, g: &Graph<V,\
-    \ E>) -> usize\n    where\n        V: Clone,\n        E: Clone,\n    {\n     \
-    \   self.sz[v] = 1;\n        for &(u, _) in &g[v] {\n            if u == p ||\
-    \ self.used[u] {\n                continue;\n            }\n            self.sz[v]\
-    \ += self.dfs_size(u, v, g);\n        }\n        self.sz[v]\n    }\n\n    fn search_centroid<V,\
-    \ E>(&mut self, v: usize, p: usize, mid: usize, g: &Graph<V, E>) -> usize\n  \
-    \  where\n        V: Clone,\n        E: Clone,\n    {\n        for &(u, _) in\
-    \ &g[v] {\n            if u == p || self.used[u] {\n                continue;\n\
-    \            }\n            if self.sz[u] > mid {\n                return self.search_centroid(u,\
-    \ v, mid, g);\n            }\n        }\n        v\n    }\n}\n"
+  code: "use graph::Graph;\n\nfn dfs1(v: usize, p: usize, g: &Graph<(), ()>, sz: &mut\
+    \ [usize]) {\n    sz[v] = 1;\n    for &(u, _) in &g[v] {\n        if u == p {\n\
+    \            continue;\n        }\n        dfs1(u, v, g, sz);\n        sz[v] +=\
+    \ sz[u];\n    }\n}\n\nfn dfs2(v: usize, p: usize, mid: usize, g: &Graph<(), ()>,\
+    \ sz: &[usize]) -> usize {\n    for &(u, _) in &g[v] {\n        if u == p {\n\
+    \            continue;\n        }\n        if sz[u] > mid {\n            return\
+    \ dfs2(u, v, mid, g, sz);\n        }\n    }\n    v\n}\n\nfn dfs4(\n    v: usize,\n\
+    \    p: usize,\n    g: &Graph<(), ()>,\n    pre_idx: &[usize],\n    idx: &mut\
+    \ Vec<usize>,\n    par: &mut Vec<usize>,\n) {\n    idx.push(pre_idx[v]);\n   \
+    \ par.push(pre_idx[p]);\n    for &(u, _) in &g[v] {\n        if u == p {\n   \
+    \         continue;\n        }\n        dfs4(u, v, g, pre_idx, idx, par);\n  \
+    \  }\n}\n\nfn dfs3(\n    v: usize,\n    g: &Graph<(), ()>,\n    pre_idx: &[usize],\n\
+    \    conv: &mut [usize],\n    f: &mut impl FnMut(&[usize], &[usize], usize),\n\
+    ) {\n    let n = g.len();\n    let mut sz = vec![0; n];\n    dfs1(v, !0, g, &mut\
+    \ sz);\n    let c = dfs2(v, !0, sz[v] / 2, g, &sz);\n    dfs1(c, !0, g, &mut sz);\n\
+    \    let n = sz[c];\n    if n <= 2 {\n        return;\n    }\n    let mut szsum\
+    \ = 0;\n    let mut rl = vec![];\n    let mut rr = vec![];\n    for &(u, _) in\
+    \ &g[c] {\n        if szsum + sz[u] <= (n - 1) / 2 {\n            szsum += sz[u];\n\
+    \            rl.push(u);\n        } else {\n            rr.push(u);\n        }\n\
+    \    }\n    conv[pre_idx[c]] = 0;\n    let mut idx_l = vec![];\n    let mut par_l\
+    \ = vec![];\n    let mut es_l = vec![];\n    for &u in &rl {\n        dfs4(u,\
+    \ c, g, pre_idx, &mut idx_l, &mut par_l);\n    }\n    for i in 0..idx_l.len()\
+    \ {\n        conv[idx_l[i]] = i + 1;\n        es_l.push((conv[par_l[i]], i + 1));\n\
+    \    }\n    let mut idx_r = vec![];\n    let mut par_r = vec![];\n    let mut\
+    \ es_r = vec![];\n    for &u in &rr {\n        dfs4(u, c, g, pre_idx, &mut idx_r,\
+    \ &mut par_r);\n    }\n    for i in 0..idx_r.len() {\n        conv[idx_r[i]] =\
+    \ i + 1;\n        es_r.push((conv[par_r[i]], i + 1));\n    }\n    let gl = Graph::from_unweighted_undirected_edges(idx_l.len()\
+    \ + 1, &es_l);\n    let gr = Graph::from_unweighted_undirected_edges(idx_r.len()\
+    \ + 1, &es_r);\n    let mut idx = vec![];\n    idx.append(&mut idx_l.clone());\n\
+    \    idx.append(&mut idx_r.clone());\n    let mut par = vec![];\n    par.append(&mut\
+    \ par_l);\n    par.append(&mut par_r);\n    f(&idx, &par, idx_l.len());\n    idx_l.insert(0,\
+    \ pre_idx[c]);\n    idx_r.insert(0, pre_idx[c]);\n    dfs3(0, &gl, &idx_l, conv,\
+    \ f);\n    dfs3(0, &gr, &idx_r, conv, f);\n}\n\n/// f: (idx, par, m)\n/// par[0]\
+    \ \u3092\u6839\u3068\u3059\u308B\u90E8\u5206\u6728\u304C\u30C8\u30DD\u30ED\u30B8\
+    \u30AB\u30EB\u9806\u5E8F\u3067\u6E21\u3055\u308C\u308B\n/// idx: \u9802\u70B9\u756A\
+    \u53F7\n/// par: \u89AA\u306E\u9802\u70B9\u756A\u53F7\n/// idx[..m] \u304C\u8D64\
+    \uFF0Cidx[m..] \u304C\u9752\npub fn centroid_decomposision(g: &Graph<(), ()>,\
+    \ f: &mut impl FnMut(&[usize], &[usize], usize)) {\n    let n = g.len();\n   \
+    \ let mut conv = vec![!0; n];\n    dfs3(0, g, &(0..n).collect::<Vec<_>>(), &mut\
+    \ conv, f);\n}\n"
   dependsOn:
   - crates/graph/graph/src/lib.rs
   isVerificationFile: false
   path: crates/tree/centroid-decomposition/src/lib.rs
   requiredBy: []
-  timestamp: '2024-04-10 09:38:39+09:00'
-  verificationStatus: LIBRARY_NO_TESTS
-  verifiedWith: []
+  timestamp: '2024-06-28 10:31:31+09:00'
+  verificationStatus: LIBRARY_ALL_AC
+  verifiedWith:
+  - verify/frequency_table_of_tree_distance/src/main.rs
 documentation_of: crates/tree/centroid-decomposition/src/lib.rs
 layout: document
 redirect_from:

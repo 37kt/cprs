@@ -12,16 +12,19 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/convolution_mod_2_64/src/main.rs
     title: verify/convolution_mod_2_64/src/main.rs
+  - icon: ':heavy_check_mark:'
+    path: verify/frequency_table_of_tree_distance/src/main.rs
+    title: verify/frequency_table_of_tree_distance/src/main.rs
   _isVerificationFailed: false
   _pathExtension: rs
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
-  bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.12.3/x64/lib/python3.12/site-packages/onlinejudge_verify/documentation/build.py\"\
+  bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.12.4/x64/lib/python3.12/site-packages/onlinejudge_verify/documentation/build.py\"\
     , line 71, in _render_source_code_stat\n    bundled_code = language.bundle(stat.path,\
     \ basedir=basedir, options={'include_paths': [basedir]}).decode()\n          \
     \         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\
-    \  File \"/opt/hostedtoolcache/Python/3.12.3/x64/lib/python3.12/site-packages/onlinejudge_verify/languages/rust.py\"\
+    \  File \"/opt/hostedtoolcache/Python/3.12.4/x64/lib/python3.12/site-packages/onlinejudge_verify/languages/rust.py\"\
     , line 288, in bundle\n    raise NotImplementedError\nNotImplementedError\n"
   code: "use convolution_ntt_friendly::convolution_ntt_friendly;\nuse modint::StaticModInt;\n\
     \nconst M1: u32 = 167_772_161;\nconst M2: u32 = 469_762_049;\nconst M3: u32 =\
@@ -74,6 +77,7 @@ data:
   timestamp: '2024-06-13 08:47:29+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
+  - verify/frequency_table_of_tree_distance/src/main.rs
   - verify/convolution_mod_2_64/src/main.rs
 documentation_of: crates/convolution/convolution-u64/src/lib.rs
 layout: document

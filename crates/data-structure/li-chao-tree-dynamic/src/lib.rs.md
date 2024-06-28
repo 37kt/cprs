@@ -14,11 +14,11 @@ data:
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
-  bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.12.3/x64/lib/python3.12/site-packages/onlinejudge_verify/documentation/build.py\"\
+  bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.12.4/x64/lib/python3.12/site-packages/onlinejudge_verify/documentation/build.py\"\
     , line 71, in _render_source_code_stat\n    bundled_code = language.bundle(stat.path,\
     \ basedir=basedir, options={'include_paths': [basedir]}).decode()\n          \
     \         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\
-    \  File \"/opt/hostedtoolcache/Python/3.12.3/x64/lib/python3.12/site-packages/onlinejudge_verify/languages/rust.py\"\
+    \  File \"/opt/hostedtoolcache/Python/3.12.4/x64/lib/python3.12/site-packages/onlinejudge_verify/languages/rust.py\"\
     , line 288, in bundle\n    raise NotImplementedError\nNotImplementedError\n"
   code: "fn mid(l: i64, r: i64) -> i64 {\n    l + (r - l) / 2\n}\n\nfn min(a: Option<i64>,\
     \ b: Option<i64>) -> Option<i64> {\n    match (a, b) {\n        (None, _) => b,\n\
@@ -84,8 +84,8 @@ data:
   timestamp: '2023-05-16 16:25:17+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/segment_add_get_min/src/main.rs
   - verify/line_add_get_min/src/main.rs
+  - verify/segment_add_get_min/src/main.rs
 documentation_of: crates/data-structure/li-chao-tree-dynamic/src/lib.rs
 layout: document
 redirect_from:
