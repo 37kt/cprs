@@ -16,6 +16,11 @@ data:
     - icon: ':warning:'
       path: crates/algorithm/aliens-dp/src/lib.rs
       title: crates/algorithm/aliens-dp/src/lib.rs
+  - name: crates/algorithm/binary-search/src
+    pages:
+    - icon: ':warning:'
+      path: crates/algorithm/binary-search/src/lib.rs
+      title: crates/algorithm/binary-search/src/lib.rs
   - name: crates/algorithm/min-plus-convolution/src
     pages:
     - icon: ':heavy_check_mark:'
@@ -41,6 +46,11 @@ data:
     - icon: ':heavy_check_mark:'
       path: crates/algorithm/static-rectangle-add-rectangle-sum/src/lib.rs
       title: crates/algorithm/static-rectangle-add-rectangle-sum/src/lib.rs
+  - name: crates/algorithm/ternary-search/src
+    pages:
+    - icon: ':warning:'
+      path: crates/algorithm/ternary-search/src/lib.rs
+      title: crates/algorithm/ternary-search/src/lib.rs
   - name: crates/convolution/and-convolution/src
     pages:
     - icon: ':heavy_check_mark:'
