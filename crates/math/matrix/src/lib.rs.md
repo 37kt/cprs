@@ -165,9 +165,9 @@ data:
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/matrix_product/src/main.rs
-  - verify/pow_of_matrix/src/main.rs
   - verify/matrix_det/src/main.rs
   - verify/inverse_matrix/src/main.rs
+  - verify/pow_of_matrix/src/main.rs
 documentation_of: crates/math/matrix/src/lib.rs
 layout: document
 redirect_from:

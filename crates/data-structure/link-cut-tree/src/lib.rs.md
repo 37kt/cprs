@@ -89,8 +89,8 @@ data:
   timestamp: '2024-04-21 23:45:22+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/dynamic_tree_vertex_add_path_sum/src/main.rs
   - verify/dynamic_tree_vertex_set_path_composite/src/main.rs
+  - verify/dynamic_tree_vertex_add_path_sum/src/main.rs
 documentation_of: crates/data-structure/link-cut-tree/src/lib.rs
 layout: document
 redirect_from:

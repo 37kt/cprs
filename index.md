@@ -376,6 +376,11 @@ data:
     - icon: ':heavy_check_mark:'
       path: crates/math/discrete-logarithm/src/lib.rs
       title: crates/math/discrete-logarithm/src/lib.rs
+  - name: crates/math/div/src
+    pages:
+    - icon: ':warning:'
+      path: crates/math/div/src/lib.rs
+      title: crates/math/div/src/lib.rs
   - name: crates/math/euler-phi/src
     pages:
     - icon: ':warning:'

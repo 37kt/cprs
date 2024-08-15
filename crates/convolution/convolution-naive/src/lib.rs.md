@@ -33,8 +33,8 @@ data:
   isVerificationFile: false
   path: crates/convolution/convolution-naive/src/lib.rs
   requiredBy:
-  - crates/convolution/convolution-ntt-friendly/src/lib.rs
   - crates/convolution/convolution-arbitrary-mod/src/lib.rs
+  - crates/convolution/convolution-ntt-friendly/src/lib.rs
   timestamp: '2024-06-13 08:47:29+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
