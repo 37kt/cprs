@@ -1,69 +1,18 @@
 ---
 data:
-  _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
-    path: crates/convolution/convolution-arbitrary-mod/src/lib.rs
-    title: crates/convolution/convolution-arbitrary-mod/src/lib.rs
-  - icon: ':heavy_check_mark:'
-    path: crates/convolution/convolution-ntt-friendly/src/lib.rs
-    title: crates/convolution/convolution-ntt-friendly/src/lib.rs
-  - icon: ':heavy_check_mark:'
-    path: crates/number-theory/modint/src/lib.rs
-    title: crates/number-theory/modint/src/lib.rs
-  _extendedRequiredBy:
-  - icon: ':heavy_check_mark:'
-    path: crates/polynomial/bostan-mori/src/lib.rs
-    title: crates/polynomial/bostan-mori/src/lib.rs
-  - icon: ':heavy_check_mark:'
-    path: crates/polynomial/polynomial-interpolation/src/lib.rs
-    title: crates/polynomial/polynomial-interpolation/src/lib.rs
-  - icon: ':heavy_check_mark:'
-    path: crates/polynomial/shift-of-sampling-points/src/lib.rs
-    title: crates/polynomial/shift-of-sampling-points/src/lib.rs
-  _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
-    path: verify/division_of_polynomials/src/main.rs
-    title: verify/division_of_polynomials/src/main.rs
-  - icon: ':heavy_check_mark:'
-    path: verify/exp_of_formal_power_series/src/main.rs
-    title: verify/exp_of_formal_power_series/src/main.rs
-  - icon: ':heavy_check_mark:'
-    path: verify/inv_of_formal_power_series/src/main.rs
-    title: verify/inv_of_formal_power_series/src/main.rs
-  - icon: ':heavy_check_mark:'
-    path: verify/kth_term_of_linearly_recurrent_sequence/src/main.rs
-    title: verify/kth_term_of_linearly_recurrent_sequence/src/main.rs
-  - icon: ':heavy_check_mark:'
-    path: verify/log_of_formal_power_series/src/main.rs
-    title: verify/log_of_formal_power_series/src/main.rs
-  - icon: ':heavy_check_mark:'
-    path: verify/multipoint_evaluation/src/main.rs
-    title: verify/multipoint_evaluation/src/main.rs
-  - icon: ':heavy_check_mark:'
-    path: verify/polynomial_interpolation/src/main.rs
-    title: verify/polynomial_interpolation/src/main.rs
-  - icon: ':heavy_check_mark:'
-    path: verify/polynomial_taylor_shift/src/main.rs
-    title: verify/polynomial_taylor_shift/src/main.rs
-  - icon: ':heavy_check_mark:'
-    path: verify/pow_of_formal_power_series/src/main.rs
-    title: verify/pow_of_formal_power_series/src/main.rs
-  - icon: ':heavy_check_mark:'
-    path: verify/shift_of_sampling_points_of_polynomial/src/main.rs
-    title: verify/shift_of_sampling_points_of_polynomial/src/main.rs
-  - icon: ':heavy_check_mark:'
-    path: verify/sqrt_of_formal_power_series/src/main.rs
-    title: verify/sqrt_of_formal_power_series/src/main.rs
+  _extendedDependsOn: []
+  _extendedRequiredBy: []
+  _extendedVerifiedWith: []
   _isVerificationFailed: false
   _pathExtension: rs
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':warning:'
   attributes:
     links: []
-  bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.12.4/x64/lib/python3.12/site-packages/onlinejudge_verify/documentation/build.py\"\
+  bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.12.6/x64/lib/python3.12/site-packages/onlinejudge_verify/documentation/build.py\"\
     , line 71, in _render_source_code_stat\n    bundled_code = language.bundle(stat.path,\
     \ basedir=basedir, options={'include_paths': [basedir]}).decode()\n          \
     \         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\
-    \  File \"/opt/hostedtoolcache/Python/3.12.4/x64/lib/python3.12/site-packages/onlinejudge_verify/languages/rust.py\"\
+    \  File \"/opt/hostedtoolcache/Python/3.12.6/x64/lib/python3.12/site-packages/onlinejudge_verify/languages/rust.py\"\
     , line 288, in bundle\n    raise NotImplementedError\nNotImplementedError\n"
   code: "use convolution_arbitrary_mod::convolution_arbitrary_mod;\nuse convolution_ntt_friendly::{convolution_ntt_friendly,\
     \ ntt, ntt_inv};\nuse modint::StaticModInt;\nuse std::{\n    fmt::{Debug, Display},\n\
@@ -352,30 +301,13 @@ data:
     \ mul, mul_assign,\n    FormalPowerSeries<P>, FormalPowerSeries<P>, Div, DivAssign,\
     \ div, div_assign,\n    FormalPowerSeries<P>, usize, Shl, ShlAssign, shl, shl_assign,\n\
     \    FormalPowerSeries<P>, usize, Shr, ShrAssign, shr, shr_assign,\n}\n"
-  dependsOn:
-  - crates/convolution/convolution-arbitrary-mod/src/lib.rs
-  - crates/convolution/convolution-ntt-friendly/src/lib.rs
-  - crates/number-theory/modint/src/lib.rs
+  dependsOn: []
   isVerificationFile: false
   path: crates/polynomial/formal-power-series/src/lib.rs
-  requiredBy:
-  - crates/polynomial/shift-of-sampling-points/src/lib.rs
-  - crates/polynomial/bostan-mori/src/lib.rs
-  - crates/polynomial/polynomial-interpolation/src/lib.rs
-  timestamp: '2024-06-13 08:47:29+09:00'
-  verificationStatus: LIBRARY_ALL_AC
-  verifiedWith:
-  - verify/pow_of_formal_power_series/src/main.rs
-  - verify/exp_of_formal_power_series/src/main.rs
-  - verify/sqrt_of_formal_power_series/src/main.rs
-  - verify/kth_term_of_linearly_recurrent_sequence/src/main.rs
-  - verify/shift_of_sampling_points_of_polynomial/src/main.rs
-  - verify/polynomial_interpolation/src/main.rs
-  - verify/log_of_formal_power_series/src/main.rs
-  - verify/multipoint_evaluation/src/main.rs
-  - verify/polynomial_taylor_shift/src/main.rs
-  - verify/inv_of_formal_power_series/src/main.rs
-  - verify/division_of_polynomials/src/main.rs
+  requiredBy: []
+  timestamp: '1970-01-01 00:00:00+00:00'
+  verificationStatus: LIBRARY_NO_TESTS
+  verifiedWith: []
 documentation_of: crates/polynomial/formal-power-series/src/lib.rs
 layout: document
 redirect_from:

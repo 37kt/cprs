@@ -1,12 +1,6 @@
 ---
 data:
-  _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
-    path: crates/data-structure/range-union-find/src/lib.rs
-    title: crates/data-structure/range-union-find/src/lib.rs
-  - icon: ':heavy_check_mark:'
-    path: crates/number-theory/modint/src/lib.rs
-    title: crates/number-theory/modint/src/lib.rs
+  _extendedDependsOn: []
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
@@ -16,11 +10,11 @@ data:
     PROBLEM: https://judge.yosupo.jp/problem/range_parallel_unionfind
     links:
     - https://judge.yosupo.jp/problem/range_parallel_unionfind
-  bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.12.4/x64/lib/python3.12/site-packages/onlinejudge_verify/documentation/build.py\"\
+  bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.12.6/x64/lib/python3.12/site-packages/onlinejudge_verify/documentation/build.py\"\
     , line 71, in _render_source_code_stat\n    bundled_code = language.bundle(stat.path,\
     \ basedir=basedir, options={'include_paths': [basedir]}).decode()\n          \
     \         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\
-    \  File \"/opt/hostedtoolcache/Python/3.12.4/x64/lib/python3.12/site-packages/onlinejudge_verify/languages/rust.py\"\
+    \  File \"/opt/hostedtoolcache/Python/3.12.6/x64/lib/python3.12/site-packages/onlinejudge_verify/languages/rust.py\"\
     , line 288, in bundle\n    raise NotImplementedError\nNotImplementedError\n"
   code: "// verification-helper: PROBLEM https://judge.yosupo.jp/problem/range_parallel_unionfind\n\
     \nuse modint::ModInt998244353 as Mint;\nuse proconio::input;\nuse range_union_find::RangeUnionFind;\n\
@@ -31,13 +25,11 @@ data:
     \     }\n        for (u, v) in uf.merge_range(a..a + k, b..b + k) {\n        \
     \    sum += x[u] * x[v];\n            x[u] = x[u] + x[v];\n        }\n       \
     \ println!(\"{}\", sum);\n    }\n}\n"
-  dependsOn:
-  - crates/data-structure/range-union-find/src/lib.rs
-  - crates/number-theory/modint/src/lib.rs
+  dependsOn: []
   isVerificationFile: true
   path: verify/range_parallel_unionfind/src/main.rs
   requiredBy: []
-  timestamp: '2024-06-13 09:46:47+09:00'
+  timestamp: '1970-01-01 00:00:00+00:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/range_parallel_unionfind/src/main.rs

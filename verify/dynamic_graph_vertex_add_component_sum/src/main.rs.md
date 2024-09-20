@@ -1,15 +1,6 @@
 ---
 data:
-  _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
-    path: crates/algebraic/algebraic/src/lib.rs
-    title: crates/algebraic/algebraic/src/lib.rs
-  - icon: ':heavy_check_mark:'
-    path: crates/algorithm/offline-dynamic-connectivity/src/lib.rs
-    title: crates/algorithm/offline-dynamic-connectivity/src/lib.rs
-  - icon: ':heavy_check_mark:'
-    path: crates/data-structure/rollback-union-find-component-sum/src/lib.rs
-    title: crates/data-structure/rollback-union-find-component-sum/src/lib.rs
+  _extendedDependsOn: []
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
@@ -19,11 +10,11 @@ data:
     PROBLEM: https://judge.yosupo.jp/problem/dynamic_graph_vertex_add_component_sum
     links:
     - https://judge.yosupo.jp/problem/dynamic_graph_vertex_add_component_sum
-  bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.12.4/x64/lib/python3.12/site-packages/onlinejudge_verify/documentation/build.py\"\
+  bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.12.6/x64/lib/python3.12/site-packages/onlinejudge_verify/documentation/build.py\"\
     , line 71, in _render_source_code_stat\n    bundled_code = language.bundle(stat.path,\
     \ basedir=basedir, options={'include_paths': [basedir]}).decode()\n          \
     \         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\
-    \  File \"/opt/hostedtoolcache/Python/3.12.4/x64/lib/python3.12/site-packages/onlinejudge_verify/languages/rust.py\"\
+    \  File \"/opt/hostedtoolcache/Python/3.12.6/x64/lib/python3.12/site-packages/onlinejudge_verify/languages/rust.py\"\
     , line 288, in bundle\n    raise NotImplementedError\nNotImplementedError\n"
   code: "// verification-helper: PROBLEM https://judge.yosupo.jp/problem/dynamic_graph_vertex_add_component_sum\n\
     \nuse algebraic::{algebra, monoid};\nuse offline_dynamic_connectivity::{OfflineDynamicConnectivity,\
@@ -46,14 +37,11 @@ data:
     \ dc.add_edge(u, v),\n            1 => dc.remove_edge(u, v),\n            2 =>\
     \ dc.add_edge(u, n + i),\n            3 => dc.get(u),\n            _ => unreachable!(),\n\
     \        }\n    }\n    dc.run();\n}\n"
-  dependsOn:
-  - crates/algebraic/algebraic/src/lib.rs
-  - crates/algorithm/offline-dynamic-connectivity/src/lib.rs
-  - crates/data-structure/rollback-union-find-component-sum/src/lib.rs
+  dependsOn: []
   isVerificationFile: true
   path: verify/dynamic_graph_vertex_add_component_sum/src/main.rs
   requiredBy: []
-  timestamp: '2024-05-09 13:55:09+09:00'
+  timestamp: '1970-01-01 00:00:00+00:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/dynamic_graph_vertex_add_component_sum/src/main.rs

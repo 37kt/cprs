@@ -1,18 +1,6 @@
 ---
 data:
-  _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
-    path: crates/algebraic/algebraic/src/lib.rs
-    title: crates/algebraic/algebraic/src/lib.rs
-  - icon: ':heavy_check_mark:'
-    path: crates/graph/graph/src/lib.rs
-    title: crates/graph/graph/src/lib.rs
-  - icon: ':heavy_check_mark:'
-    path: crates/number-theory/modint/src/lib.rs
-    title: crates/number-theory/modint/src/lib.rs
-  - icon: ':heavy_check_mark:'
-    path: crates/tree/re-rooting-dp/src/lib.rs
-    title: crates/tree/re-rooting-dp/src/lib.rs
+  _extendedDependsOn: []
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
@@ -22,11 +10,11 @@ data:
     PROBLEM: https://judge.yosupo.jp/problem/tree_path_composite_sum
     links:
     - https://judge.yosupo.jp/problem/tree_path_composite_sum
-  bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.12.4/x64/lib/python3.12/site-packages/onlinejudge_verify/documentation/build.py\"\
+  bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.12.6/x64/lib/python3.12/site-packages/onlinejudge_verify/documentation/build.py\"\
     , line 71, in _render_source_code_stat\n    bundled_code = language.bundle(stat.path,\
     \ basedir=basedir, options={'include_paths': [basedir]}).decode()\n          \
     \         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\
-    \  File \"/opt/hostedtoolcache/Python/3.12.4/x64/lib/python3.12/site-packages/onlinejudge_verify/languages/rust.py\"\
+    \  File \"/opt/hostedtoolcache/Python/3.12.6/x64/lib/python3.12/site-packages/onlinejudge_verify/languages/rust.py\"\
     , line 288, in bundle\n    raise NotImplementedError\nNotImplementedError\n"
   code: "// verification-helper: PROBLEM https://judge.yosupo.jp/problem/tree_path_composite_sum\n\
     \nuse algebraic::{act, algebra, monoid};\nuse graph::Graph;\nuse itertools::Itertools;\n\
@@ -39,15 +27,11 @@ data:
     \ [(usize, usize, (Mint, Mint)); n - 1],\n    }\n    let g = Graph::from_vertices_and_undirected_edges(&a,\
     \ &uvw);\n    let dp = ReRootingDP::build::<M, V, E>(&g);\n    println!(\"{}\"\
     , (0..n).map(|v| dp.prod(v).1).join(\" \"));\n}\n"
-  dependsOn:
-  - crates/algebraic/algebraic/src/lib.rs
-  - crates/graph/graph/src/lib.rs
-  - crates/number-theory/modint/src/lib.rs
-  - crates/tree/re-rooting-dp/src/lib.rs
+  dependsOn: []
   isVerificationFile: true
   path: verify/tree_path_composite_sum/src/main.rs
   requiredBy: []
-  timestamp: '2024-06-13 08:47:29+09:00'
+  timestamp: '1970-01-01 00:00:00+00:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/tree_path_composite_sum/src/main.rs

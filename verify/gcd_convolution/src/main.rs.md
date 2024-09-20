@@ -1,9 +1,6 @@
 ---
 data:
-  _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
-    path: crates/convolution/gcd-convolution/src/lib.rs
-    title: crates/convolution/gcd-convolution/src/lib.rs
+  _extendedDependsOn: []
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
@@ -13,11 +10,11 @@ data:
     PROBLEM: https://judge.yosupo.jp/problem/gcd_convolution
     links:
     - https://judge.yosupo.jp/problem/gcd_convolution
-  bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.12.4/x64/lib/python3.12/site-packages/onlinejudge_verify/documentation/build.py\"\
+  bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.12.6/x64/lib/python3.12/site-packages/onlinejudge_verify/documentation/build.py\"\
     , line 71, in _render_source_code_stat\n    bundled_code = language.bundle(stat.path,\
     \ basedir=basedir, options={'include_paths': [basedir]}).decode()\n          \
     \         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\
-    \  File \"/opt/hostedtoolcache/Python/3.12.4/x64/lib/python3.12/site-packages/onlinejudge_verify/languages/rust.py\"\
+    \  File \"/opt/hostedtoolcache/Python/3.12.6/x64/lib/python3.12/site-packages/onlinejudge_verify/languages/rust.py\"\
     , line 288, in bundle\n    raise NotImplementedError\nNotImplementedError\n"
   code: "// verification-helper: PROBLEM https://judge.yosupo.jp/problem/gcd_convolution\n\
     \nuse ac_library::ModInt998244353 as Mint;\nuse gcd_convolution::gcd_convolution;\n\
@@ -26,12 +23,11 @@ data:
     \ [Mint; n],\n    }\n    a.insert(0, 0.into());\n    b.insert(0, 0.into());\n\
     \    let c = gcd_convolution(a, b);\n    println!(\"{}\", c[1..].iter().join(\"\
     \ \"));\n}\n"
-  dependsOn:
-  - crates/convolution/gcd-convolution/src/lib.rs
+  dependsOn: []
   isVerificationFile: true
   path: verify/gcd_convolution/src/main.rs
   requiredBy: []
-  timestamp: '2023-05-06 16:57:25+09:00'
+  timestamp: '1970-01-01 00:00:00+00:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/gcd_convolution/src/main.rs

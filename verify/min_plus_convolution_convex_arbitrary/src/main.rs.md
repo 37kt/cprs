@@ -1,9 +1,6 @@
 ---
 data:
-  _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
-    path: crates/algorithm/min-plus-convolution/src/lib.rs
-    title: crates/algorithm/min-plus-convolution/src/lib.rs
+  _extendedDependsOn: []
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
@@ -13,11 +10,11 @@ data:
     PROBLEM: https://judge.yosupo.jp/problem/min_plus_convolution_convex_arbitrary
     links:
     - https://judge.yosupo.jp/problem/min_plus_convolution_convex_arbitrary
-  bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.12.4/x64/lib/python3.12/site-packages/onlinejudge_verify/documentation/build.py\"\
+  bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.12.6/x64/lib/python3.12/site-packages/onlinejudge_verify/documentation/build.py\"\
     , line 71, in _render_source_code_stat\n    bundled_code = language.bundle(stat.path,\
     \ basedir=basedir, options={'include_paths': [basedir]}).decode()\n          \
     \         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\
-    \  File \"/opt/hostedtoolcache/Python/3.12.4/x64/lib/python3.12/site-packages/onlinejudge_verify/languages/rust.py\"\
+    \  File \"/opt/hostedtoolcache/Python/3.12.6/x64/lib/python3.12/site-packages/onlinejudge_verify/languages/rust.py\"\
     , line 288, in bundle\n    raise NotImplementedError\nNotImplementedError\n"
   code: "// verification-helper: PROBLEM https://judge.yosupo.jp/problem/min_plus_convolution_convex_arbitrary\n\
     \nuse itertools::Itertools;\nuse min_plus_convolution::min_plus_convolution_arbitrary_convex;\n\
@@ -25,12 +22,11 @@ data:
     \    n: usize,\n        m: usize,\n        a: [i64; n],\n        b: [i64; m],\n\
     \    }\n    let c = min_plus_convolution_arbitrary_convex(&b, &a);\n    println!(\"\
     {}\", c.iter().join(\" \"));\n}\n"
-  dependsOn:
-  - crates/algorithm/min-plus-convolution/src/lib.rs
+  dependsOn: []
   isVerificationFile: true
   path: verify/min_plus_convolution_convex_arbitrary/src/main.rs
   requiredBy: []
-  timestamp: '2024-04-07 09:46:12+09:00'
+  timestamp: '1970-01-01 00:00:00+00:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/min_plus_convolution_convex_arbitrary/src/main.rs

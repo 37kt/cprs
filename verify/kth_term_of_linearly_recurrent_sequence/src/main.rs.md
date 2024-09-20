@@ -1,15 +1,6 @@
 ---
 data:
-  _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
-    path: crates/number-theory/modint/src/lib.rs
-    title: crates/number-theory/modint/src/lib.rs
-  - icon: ':heavy_check_mark:'
-    path: crates/polynomial/bostan-mori/src/lib.rs
-    title: crates/polynomial/bostan-mori/src/lib.rs
-  - icon: ':heavy_check_mark:'
-    path: crates/polynomial/formal-power-series/src/lib.rs
-    title: crates/polynomial/formal-power-series/src/lib.rs
+  _extendedDependsOn: []
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
@@ -19,11 +10,11 @@ data:
     PROBLEM: https://judge.yosupo.jp/problem/kth_term_of_linearly_recurrent_sequence
     links:
     - https://judge.yosupo.jp/problem/kth_term_of_linearly_recurrent_sequence
-  bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.12.4/x64/lib/python3.12/site-packages/onlinejudge_verify/documentation/build.py\"\
+  bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.12.6/x64/lib/python3.12/site-packages/onlinejudge_verify/documentation/build.py\"\
     , line 71, in _render_source_code_stat\n    bundled_code = language.bundle(stat.path,\
     \ basedir=basedir, options={'include_paths': [basedir]}).decode()\n          \
     \         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\
-    \  File \"/opt/hostedtoolcache/Python/3.12.4/x64/lib/python3.12/site-packages/onlinejudge_verify/languages/rust.py\"\
+    \  File \"/opt/hostedtoolcache/Python/3.12.6/x64/lib/python3.12/site-packages/onlinejudge_verify/languages/rust.py\"\
     , line 288, in bundle\n    raise NotImplementedError\nNotImplementedError\n"
   code: "// verification-helper: PROBLEM https://judge.yosupo.jp/problem/kth_term_of_linearly_recurrent_sequence\n\
     \nuse bostan_mori::bostan_mori;\nuse formal_power_series::{fps, FormalPowerSeries};\n\
@@ -33,14 +24,11 @@ data:
     \ FormalPowerSeries(a);\n    let c = FormalPowerSeries(c);\n    let c = fps![1]\
     \ - (c << 1);\n    let res = bostan_mori((&a * &c).pre(d), c, k);\n    println!(\"\
     {}\", res);\n}\n"
-  dependsOn:
-  - crates/number-theory/modint/src/lib.rs
-  - crates/polynomial/bostan-mori/src/lib.rs
-  - crates/polynomial/formal-power-series/src/lib.rs
+  dependsOn: []
   isVerificationFile: true
   path: verify/kth_term_of_linearly_recurrent_sequence/src/main.rs
   requiredBy: []
-  timestamp: '2024-06-13 08:47:29+09:00'
+  timestamp: '1970-01-01 00:00:00+00:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/kth_term_of_linearly_recurrent_sequence/src/main.rs

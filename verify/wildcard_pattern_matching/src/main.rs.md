@@ -1,9 +1,6 @@
 ---
 data:
-  _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
-    path: crates/string/wildcard-pattern-matching/src/lib.rs
-    title: crates/string/wildcard-pattern-matching/src/lib.rs
+  _extendedDependsOn: []
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
@@ -13,23 +10,22 @@ data:
     PROBLEM: https://judge.yosupo.jp/problem/wildcard_pattern_matching
     links:
     - https://judge.yosupo.jp/problem/wildcard_pattern_matching
-  bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.12.4/x64/lib/python3.12/site-packages/onlinejudge_verify/documentation/build.py\"\
+  bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.12.6/x64/lib/python3.12/site-packages/onlinejudge_verify/documentation/build.py\"\
     , line 71, in _render_source_code_stat\n    bundled_code = language.bundle(stat.path,\
     \ basedir=basedir, options={'include_paths': [basedir]}).decode()\n          \
     \         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\
-    \  File \"/opt/hostedtoolcache/Python/3.12.4/x64/lib/python3.12/site-packages/onlinejudge_verify/languages/rust.py\"\
+    \  File \"/opt/hostedtoolcache/Python/3.12.6/x64/lib/python3.12/site-packages/onlinejudge_verify/languages/rust.py\"\
     , line 288, in bundle\n    raise NotImplementedError\nNotImplementedError\n"
   code: "// verification-helper: PROBLEM https://judge.yosupo.jp/problem/wildcard_pattern_matching\n\
     \nuse itertools::Itertools;\nuse proconio::{input, marker::Bytes};\nuse wildcard_pattern_matching::wildcard_pattern_matching;\n\
     \n#[proconio::fastout]\nfn main() {\n    input! {\n        s: Bytes,\n       \
     \ t: Bytes,\n    }\n    let res = wildcard_pattern_matching(&s, &t, b'*');\n \
     \   println!(\"{}\", res.iter().map(|&f| f as u8).join(\"\"));\n}\n"
-  dependsOn:
-  - crates/string/wildcard-pattern-matching/src/lib.rs
+  dependsOn: []
   isVerificationFile: true
   path: verify/wildcard_pattern_matching/src/main.rs
   requiredBy: []
-  timestamp: '2024-05-09 10:04:53+09:00'
+  timestamp: '1970-01-01 00:00:00+00:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/wildcard_pattern_matching/src/main.rs

@@ -1,24 +1,18 @@
 ---
 data:
-  _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
-    path: crates/algebraic/algebraic/src/lib.rs
-    title: crates/algebraic/algebraic/src/lib.rs
-  _extendedRequiredBy:
-  - icon: ':heavy_check_mark:'
-    path: crates/math/fast-factorize/src/lib.rs
-    title: crates/math/fast-factorize/src/lib.rs
+  _extendedDependsOn: []
+  _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
   _pathExtension: rs
   _verificationStatusIcon: ':warning:'
   attributes:
     links: []
-  bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.12.4/x64/lib/python3.12/site-packages/onlinejudge_verify/documentation/build.py\"\
+  bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.12.6/x64/lib/python3.12/site-packages/onlinejudge_verify/documentation/build.py\"\
     , line 71, in _render_source_code_stat\n    bundled_code = language.bundle(stat.path,\
     \ basedir=basedir, options={'include_paths': [basedir]}).decode()\n          \
     \         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\
-    \  File \"/opt/hostedtoolcache/Python/3.12.4/x64/lib/python3.12/site-packages/onlinejudge_verify/languages/rust.py\"\
+    \  File \"/opt/hostedtoolcache/Python/3.12.6/x64/lib/python3.12/site-packages/onlinejudge_verify/languages/rust.py\"\
     , line 288, in bundle\n    raise NotImplementedError\nNotImplementedError\n"
   code: "use std::{\n    convert::TryInto,\n    fmt::Debug,\n    ops::{Add, AddAssign,\
     \ Mul, MulAssign, Neg, Sub, SubAssign},\n    sync::atomic::{AtomicU64, Ordering::SeqCst},\n\
@@ -74,13 +68,11 @@ data:
     \    }\n\n    fn is_zero(&self) -> bool {\n        self.0 == 0\n    }\n}\n\nimpl\
     \ One for MontgomeryModInt {\n    fn one() -> Self {\n        Self(1)\n    }\n\
     \n    fn is_one(&self) -> bool {\n        self == &Self::new(1)\n    }\n}\n"
-  dependsOn:
-  - crates/algebraic/algebraic/src/lib.rs
+  dependsOn: []
   isVerificationFile: false
   path: crates/math/montgomery-modint/src/lib.rs
-  requiredBy:
-  - crates/math/fast-factorize/src/lib.rs
-  timestamp: '2024-03-18 01:19:47+09:00'
+  requiredBy: []
+  timestamp: '1970-01-01 00:00:00+00:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: crates/math/montgomery-modint/src/lib.rs

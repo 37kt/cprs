@@ -1,24 +1,18 @@
 ---
 data:
   _extendedDependsOn: []
-  _extendedRequiredBy:
-  - icon: ':heavy_check_mark:'
-    path: crates/algorithm/min-plus-convolution/src/lib.rs
-    title: crates/algorithm/min-plus-convolution/src/lib.rs
-  _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
-    path: verify/yuki952/src/main.rs
-    title: verify/yuki952/src/main.rs
+  _extendedRequiredBy: []
+  _extendedVerifiedWith: []
   _isVerificationFailed: false
   _pathExtension: rs
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':warning:'
   attributes:
     links: []
-  bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.12.4/x64/lib/python3.12/site-packages/onlinejudge_verify/documentation/build.py\"\
+  bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.12.6/x64/lib/python3.12/site-packages/onlinejudge_verify/documentation/build.py\"\
     , line 71, in _render_source_code_stat\n    bundled_code = language.bundle(stat.path,\
     \ basedir=basedir, options={'include_paths': [basedir]}).decode()\n          \
     \         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\
-    \  File \"/opt/hostedtoolcache/Python/3.12.4/x64/lib/python3.12/site-packages/onlinejudge_verify/languages/rust.py\"\
+    \  File \"/opt/hostedtoolcache/Python/3.12.6/x64/lib/python3.12/site-packages/onlinejudge_verify/languages/rust.py\"\
     , line 288, in bundle\n    raise NotImplementedError\nNotImplementedError\n"
   code: "fn dfs(\n    x1: usize,\n    x2: usize,\n    y1: usize,\n    y2: usize,\n\
     \    select: &impl Fn(usize, usize, usize) -> bool,\n    res: &mut [usize],\n\
@@ -33,12 +27,10 @@ data:
   dependsOn: []
   isVerificationFile: false
   path: crates/algorithm/monotone-minima/src/lib.rs
-  requiredBy:
-  - crates/algorithm/min-plus-convolution/src/lib.rs
-  timestamp: '2024-04-07 09:46:12+09:00'
-  verificationStatus: LIBRARY_ALL_AC
-  verifiedWith:
-  - verify/yuki952/src/main.rs
+  requiredBy: []
+  timestamp: '1970-01-01 00:00:00+00:00'
+  verificationStatus: LIBRARY_NO_TESTS
+  verifiedWith: []
 documentation_of: crates/algorithm/monotone-minima/src/lib.rs
 layout: document
 redirect_from:

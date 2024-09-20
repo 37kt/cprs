@@ -1,27 +1,18 @@
 ---
 data:
-  _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
-    path: crates/algebraic/algebraic/src/lib.rs
-    title: crates/algebraic/algebraic/src/lib.rs
-  _extendedRequiredBy:
-  - icon: ':heavy_check_mark:'
-    path: crates/data-structure/link-cut-tree/src/lib.rs
-    title: crates/data-structure/link-cut-tree/src/lib.rs
-  - icon: ':heavy_check_mark:'
-    path: crates/data-structure/splay-tree/src/lib.rs
-    title: crates/data-structure/splay-tree/src/lib.rs
+  _extendedDependsOn: []
+  _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
   _pathExtension: rs
   _verificationStatusIcon: ':warning:'
   attributes:
     links: []
-  bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.12.4/x64/lib/python3.12/site-packages/onlinejudge_verify/documentation/build.py\"\
+  bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.12.6/x64/lib/python3.12/site-packages/onlinejudge_verify/documentation/build.py\"\
     , line 71, in _render_source_code_stat\n    bundled_code = language.bundle(stat.path,\
     \ basedir=basedir, options={'include_paths': [basedir]}).decode()\n          \
     \         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\
-    \  File \"/opt/hostedtoolcache/Python/3.12.4/x64/lib/python3.12/site-packages/onlinejudge_verify/languages/rust.py\"\
+    \  File \"/opt/hostedtoolcache/Python/3.12.6/x64/lib/python3.12/site-packages/onlinejudge_verify/languages/rust.py\"\
     , line 288, in bundle\n    raise NotImplementedError\nNotImplementedError\n"
   code: "use std::{cmp::Ordering, mem::swap, ptr::null_mut};\n\nuse algebraic::{Act,\
     \ Monoid};\n\npub struct SplayTreeNode<M, F>\nwhere\n    M: Monoid,\n    M::S:\
@@ -134,14 +125,11 @@ data:
     \ unsafe { g.as_mut() } {\n            if std::ptr::eq(p, g.lch) {\n         \
     \       g.lch = self;\n            } else if std::ptr::eq(p, g.rch) {\n      \
     \          g.rch = self;\n            }\n        }\n    }\n}\n"
-  dependsOn:
-  - crates/algebraic/algebraic/src/lib.rs
+  dependsOn: []
   isVerificationFile: false
   path: crates/data-structure/splay-tree-internal/src/lib.rs
-  requiredBy:
-  - crates/data-structure/link-cut-tree/src/lib.rs
-  - crates/data-structure/splay-tree/src/lib.rs
-  timestamp: '2024-04-21 23:45:22+09:00'
+  requiredBy: []
+  timestamp: '1970-01-01 00:00:00+00:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: crates/data-structure/splay-tree-internal/src/lib.rs

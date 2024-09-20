@@ -1,9 +1,6 @@
 ---
 data:
-  _extendedDependsOn:
-  - icon: ':warning:'
-    path: crates/graph/project-selection/src/lib.rs
-    title: crates/graph/project-selection/src/lib.rs
+  _extendedDependsOn: []
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
@@ -11,11 +8,11 @@ data:
   _verificationStatusIcon: ':warning:'
   attributes:
     links: []
-  bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.12.4/x64/lib/python3.12/site-packages/onlinejudge_verify/documentation/build.py\"\
+  bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.12.6/x64/lib/python3.12/site-packages/onlinejudge_verify/documentation/build.py\"\
     , line 71, in _render_source_code_stat\n    bundled_code = language.bundle(stat.path,\
     \ basedir=basedir, options={'include_paths': [basedir]}).decode()\n          \
     \         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\
-    \  File \"/opt/hostedtoolcache/Python/3.12.4/x64/lib/python3.12/site-packages/onlinejudge_verify/languages/rust.py\"\
+    \  File \"/opt/hostedtoolcache/Python/3.12.6/x64/lib/python3.12/site-packages/onlinejudge_verify/languages/rust.py\"\
     , line 288, in bundle\n    raise NotImplementedError\nNotImplementedError\n"
   code: "use project_selection::ProjectSelection;\n\nconst INF: i64 = 1 << 61;\n\n\
     pub struct KProjectSelection {\n    n: usize,\n    ks: Vec<usize>,\n    id: Vec<Vec<usize>>,\n\
@@ -60,12 +57,11 @@ data:
     \    (res, g)\n    }\n\n    pub fn max_profit(&mut self) -> (i64, Vec<usize>)\
     \ {\n        let (mut res, f) = self.min_cost();\n        res = -res;\n      \
     \  (res, f)\n    }\n}\n"
-  dependsOn:
-  - crates/graph/project-selection/src/lib.rs
+  dependsOn: []
   isVerificationFile: false
   path: crates/graph/k-project-selection/src/lib.rs
   requiredBy: []
-  timestamp: '2024-04-23 13:31:46+09:00'
+  timestamp: '1970-01-01 00:00:00+00:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: crates/graph/k-project-selection/src/lib.rs

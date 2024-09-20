@@ -1,9 +1,6 @@
 ---
 data:
-  _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
-    path: crates/algorithm/monotone-minima/src/lib.rs
-    title: crates/algorithm/monotone-minima/src/lib.rs
+  _extendedDependsOn: []
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
@@ -13,11 +10,11 @@ data:
     PROBLEM: https://yukicoder.me/problems/no/952
     links:
     - https://yukicoder.me/problems/no/952
-  bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.12.4/x64/lib/python3.12/site-packages/onlinejudge_verify/documentation/build.py\"\
+  bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.12.6/x64/lib/python3.12/site-packages/onlinejudge_verify/documentation/build.py\"\
     , line 71, in _render_source_code_stat\n    bundled_code = language.bundle(stat.path,\
     \ basedir=basedir, options={'include_paths': [basedir]}).decode()\n          \
     \         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\
-    \  File \"/opt/hostedtoolcache/Python/3.12.4/x64/lib/python3.12/site-packages/onlinejudge_verify/languages/rust.py\"\
+    \  File \"/opt/hostedtoolcache/Python/3.12.6/x64/lib/python3.12/site-packages/onlinejudge_verify/languages/rust.py\"\
     , line 288, in bundle\n    raise NotImplementedError\nNotImplementedError\n"
   code: "// verification-helper: PROBLEM https://yukicoder.me/problems/no/952\n\n\
     use monotone_minima::monotone_minima;\nuse proconio::input;\n\nconst INF: usize\
@@ -32,12 +29,11 @@ data:
     \ + 2];\n        for i in k..=n + 1 {\n            dpn[i] = f(i, mn[i]);\n   \
     \     }\n        dp = dpn;\n        res[n - k] = dp[n + 1];\n    }\n    for i\
     \ in 0..n {\n        println!(\"{}\", res[i]);\n    }\n}\n"
-  dependsOn:
-  - crates/algorithm/monotone-minima/src/lib.rs
+  dependsOn: []
   isVerificationFile: true
   path: verify/yuki952/src/main.rs
   requiredBy: []
-  timestamp: '2024-04-08 15:33:16+09:00'
+  timestamp: '1970-01-01 00:00:00+00:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/yuki952/src/main.rs

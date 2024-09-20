@@ -1,30 +1,18 @@
 ---
 data:
-  _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
-    path: crates/data-structure/heavy-light-decomposition/src/lib.rs
-    title: crates/data-structure/heavy-light-decomposition/src/lib.rs
-  - icon: ':heavy_check_mark:'
-    path: crates/graph/graph/src/lib.rs
-    title: crates/graph/graph/src/lib.rs
-  _extendedRequiredBy:
-  - icon: ':heavy_check_mark:'
-    path: crates/data-structure/vertex-add-range-contour-sum/src/lib.rs
-    title: crates/data-structure/vertex-add-range-contour-sum/src/lib.rs
-  - icon: ':heavy_check_mark:'
-    path: crates/data-structure/vertex-get-range-contour-add/src/lib.rs
-    title: crates/data-structure/vertex-get-range-contour-add/src/lib.rs
+  _extendedDependsOn: []
+  _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
   _pathExtension: rs
   _verificationStatusIcon: ':warning:'
   attributes:
     links: []
-  bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.12.4/x64/lib/python3.12/site-packages/onlinejudge_verify/documentation/build.py\"\
+  bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.12.6/x64/lib/python3.12/site-packages/onlinejudge_verify/documentation/build.py\"\
     , line 71, in _render_source_code_stat\n    bundled_code = language.bundle(stat.path,\
     \ basedir=basedir, options={'include_paths': [basedir]}).decode()\n          \
     \         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\
-    \  File \"/opt/hostedtoolcache/Python/3.12.4/x64/lib/python3.12/site-packages/onlinejudge_verify/languages/rust.py\"\
+    \  File \"/opt/hostedtoolcache/Python/3.12.6/x64/lib/python3.12/site-packages/onlinejudge_verify/languages/rust.py\"\
     , line 288, in bundle\n    raise NotImplementedError\nNotImplementedError\n"
   code: "use std::{\n    cmp::Reverse,\n    collections::{BinaryHeap, VecDeque},\n\
     };\n\nuse graph::Graph;\nuse heavy_light_decomposition::HeavyLightDecomposition;\n\
@@ -116,15 +104,11 @@ data:
     \                    res.push((u, f(u, l), f(u, r)));\n                }\n   \
     \         }\n            v = p;\n        }\n        res.retain(|&(_, l, r)| l\
     \ < r);\n        res\n    }\n}\n"
-  dependsOn:
-  - crates/data-structure/heavy-light-decomposition/src/lib.rs
-  - crates/graph/graph/src/lib.rs
+  dependsOn: []
   isVerificationFile: false
   path: crates/data-structure/range-contour-query/src/lib.rs
-  requiredBy:
-  - crates/data-structure/vertex-get-range-contour-add/src/lib.rs
-  - crates/data-structure/vertex-add-range-contour-sum/src/lib.rs
-  timestamp: '2024-06-28 10:31:31+09:00'
+  requiredBy: []
+  timestamp: '1970-01-01 00:00:00+00:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: crates/data-structure/range-contour-query/src/lib.rs

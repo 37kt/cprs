@@ -1,24 +1,18 @@
 ---
 data:
-  _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
-    path: crates/graph/graph/src/lib.rs
-    title: crates/graph/graph/src/lib.rs
+  _extendedDependsOn: []
   _extendedRequiredBy: []
-  _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
-    path: verify/two_edge_connected_components/src/main.rs
-    title: verify/two_edge_connected_components/src/main.rs
+  _extendedVerifiedWith: []
   _isVerificationFailed: false
   _pathExtension: rs
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':warning:'
   attributes:
     links: []
-  bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.12.4/x64/lib/python3.12/site-packages/onlinejudge_verify/documentation/build.py\"\
+  bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.12.6/x64/lib/python3.12/site-packages/onlinejudge_verify/documentation/build.py\"\
     , line 71, in _render_source_code_stat\n    bundled_code = language.bundle(stat.path,\
     \ basedir=basedir, options={'include_paths': [basedir]}).decode()\n          \
     \         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\
-    \  File \"/opt/hostedtoolcache/Python/3.12.4/x64/lib/python3.12/site-packages/onlinejudge_verify/languages/rust.py\"\
+    \  File \"/opt/hostedtoolcache/Python/3.12.6/x64/lib/python3.12/site-packages/onlinejudge_verify/languages/rust.py\"\
     , line 288, in bundle\n    raise NotImplementedError\nNotImplementedError\n"
   code: "use graph::Graph;\n\nfn dfs(\n    v: usize,\n    g: &Graph<(), ()>,\n   \
     \ ord: &mut Vec<usize>,\n    par: &mut Vec<usize>,\n    imos: &mut Vec<i32>,\n\
@@ -40,15 +34,13 @@ data:
     \            comp[v] = comp[par[v]];\n        }\n    }\n    let mut groups = vec![vec![];\
     \ comp_cnt];\n    for v in 0..n {\n        groups[comp[v]].push(v);\n    }\n \
     \   (groups, comp)\n}\n"
-  dependsOn:
-  - crates/graph/graph/src/lib.rs
+  dependsOn: []
   isVerificationFile: false
   path: crates/graph/two-edge-connected-components/src/lib.rs
   requiredBy: []
-  timestamp: '2024-04-10 09:38:39+09:00'
-  verificationStatus: LIBRARY_ALL_AC
-  verifiedWith:
-  - verify/two_edge_connected_components/src/main.rs
+  timestamp: '1970-01-01 00:00:00+00:00'
+  verificationStatus: LIBRARY_NO_TESTS
+  verifiedWith: []
 documentation_of: crates/graph/two-edge-connected-components/src/lib.rs
 layout: document
 redirect_from:

@@ -1,12 +1,6 @@
 ---
 data:
-  _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
-    path: crates/math/modint61/src/lib.rs
-    title: crates/math/modint61/src/lib.rs
-  - icon: ':heavy_check_mark:'
-    path: crates/string/rolling-hash/src/lib.rs
-    title: crates/string/rolling-hash/src/lib.rs
+  _extendedDependsOn: []
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
@@ -16,11 +10,11 @@ data:
     PROBLEM: https://judge.yosupo.jp/problem/zalgorithm
     links:
     - https://judge.yosupo.jp/problem/zalgorithm
-  bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.12.4/x64/lib/python3.12/site-packages/onlinejudge_verify/documentation/build.py\"\
+  bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.12.6/x64/lib/python3.12/site-packages/onlinejudge_verify/documentation/build.py\"\
     , line 71, in _render_source_code_stat\n    bundled_code = language.bundle(stat.path,\
     \ basedir=basedir, options={'include_paths': [basedir]}).decode()\n          \
     \         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\
-    \  File \"/opt/hostedtoolcache/Python/3.12.4/x64/lib/python3.12/site-packages/onlinejudge_verify/languages/rust.py\"\
+    \  File \"/opt/hostedtoolcache/Python/3.12.6/x64/lib/python3.12/site-packages/onlinejudge_verify/languages/rust.py\"\
     , line 288, in bundle\n    raise NotImplementedError\nNotImplementedError\n"
   code: "// verification-helper: PROBLEM https://judge.yosupo.jp/problem/zalgorithm\n\
     \nuse itertools::Itertools;\nuse proconio::{input, marker::Bytes};\nuse rolling_hash::RollingHashModInt61;\n\
@@ -28,13 +22,11 @@ data:
     \    let rh = RollingHashModInt61::new(&s);\n    let res = (0..s.len()).map(|i|\
     \ rh.lcp(.., &rh, i..)).collect_vec();\n    println!(\"{}\", res.iter().join(\"\
     \ \"));\n}\n"
-  dependsOn:
-  - crates/math/modint61/src/lib.rs
-  - crates/string/rolling-hash/src/lib.rs
+  dependsOn: []
   isVerificationFile: true
   path: verify/zalgorithm_rolling_hash/src/main.rs
   requiredBy: []
-  timestamp: '2024-04-08 11:12:42+09:00'
+  timestamp: '1970-01-01 00:00:00+00:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/zalgorithm_rolling_hash/src/main.rs

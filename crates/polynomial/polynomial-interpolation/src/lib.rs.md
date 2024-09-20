@@ -1,27 +1,18 @@
 ---
 data:
-  _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
-    path: crates/number-theory/modint/src/lib.rs
-    title: crates/number-theory/modint/src/lib.rs
-  - icon: ':heavy_check_mark:'
-    path: crates/polynomial/formal-power-series/src/lib.rs
-    title: crates/polynomial/formal-power-series/src/lib.rs
+  _extendedDependsOn: []
   _extendedRequiredBy: []
-  _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
-    path: verify/polynomial_interpolation/src/main.rs
-    title: verify/polynomial_interpolation/src/main.rs
+  _extendedVerifiedWith: []
   _isVerificationFailed: false
   _pathExtension: rs
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':warning:'
   attributes:
     links: []
-  bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.12.4/x64/lib/python3.12/site-packages/onlinejudge_verify/documentation/build.py\"\
+  bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.12.6/x64/lib/python3.12/site-packages/onlinejudge_verify/documentation/build.py\"\
     , line 71, in _render_source_code_stat\n    bundled_code = language.bundle(stat.path,\
     \ basedir=basedir, options={'include_paths': [basedir]}).decode()\n          \
     \         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\
-    \  File \"/opt/hostedtoolcache/Python/3.12.4/x64/lib/python3.12/site-packages/onlinejudge_verify/languages/rust.py\"\
+    \  File \"/opt/hostedtoolcache/Python/3.12.6/x64/lib/python3.12/site-packages/onlinejudge_verify/languages/rust.py\"\
     , line 288, in bundle\n    raise NotImplementedError\nNotImplementedError\n"
   code: "use formal_power_series::{fps, FormalPowerSeries};\nuse modint::StaticModInt;\n\
     \npub fn polynomial_interpolation<const P: u32>(\n    xs: &[StaticModInt<P>],\n\
@@ -35,16 +26,13 @@ data:
     \    for i in 0..m {\n        g[m2 + i] = fps![ys[i] / g[m2 + i][0]];\n    }\n\
     \    for i in (1..m2).rev() {\n        g[i] = &g[i << 1] * &mul[i << 1 | 1] +\
     \ &g[i << 1 | 1] * &mul[i << 1];\n    }\n    g[1].clone()\n}\n"
-  dependsOn:
-  - crates/number-theory/modint/src/lib.rs
-  - crates/polynomial/formal-power-series/src/lib.rs
+  dependsOn: []
   isVerificationFile: false
   path: crates/polynomial/polynomial-interpolation/src/lib.rs
   requiredBy: []
-  timestamp: '2024-06-13 08:47:29+09:00'
-  verificationStatus: LIBRARY_ALL_AC
-  verifiedWith:
-  - verify/polynomial_interpolation/src/main.rs
+  timestamp: '1970-01-01 00:00:00+00:00'
+  verificationStatus: LIBRARY_NO_TESTS
+  verifiedWith: []
 documentation_of: crates/polynomial/polynomial-interpolation/src/lib.rs
 layout: document
 redirect_from:

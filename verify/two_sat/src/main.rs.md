@@ -1,9 +1,6 @@
 ---
 data:
-  _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
-    path: crates/math/two-satisfiability/src/lib.rs
-    title: crates/math/two-satisfiability/src/lib.rs
+  _extendedDependsOn: []
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
@@ -13,11 +10,11 @@ data:
     PROBLEM: https://judge.yosupo.jp/problem/two_sat
     links:
     - https://judge.yosupo.jp/problem/two_sat
-  bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.12.4/x64/lib/python3.12/site-packages/onlinejudge_verify/documentation/build.py\"\
+  bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.12.6/x64/lib/python3.12/site-packages/onlinejudge_verify/documentation/build.py\"\
     , line 71, in _render_source_code_stat\n    bundled_code = language.bundle(stat.path,\
     \ basedir=basedir, options={'include_paths': [basedir]}).decode()\n          \
     \         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\
-    \  File \"/opt/hostedtoolcache/Python/3.12.4/x64/lib/python3.12/site-packages/onlinejudge_verify/languages/rust.py\"\
+    \  File \"/opt/hostedtoolcache/Python/3.12.6/x64/lib/python3.12/site-packages/onlinejudge_verify/languages/rust.py\"\
     , line 288, in bundle\n    raise NotImplementedError\nNotImplementedError\n"
   code: "// verification-helper: PROBLEM https://judge.yosupo.jp/problem/two_sat\n\
     \nuse proconio::input;\nuse two_satisfiability::TwoSatisfiability;\n\n#[proconio::fastout]\n\
@@ -31,12 +28,11 @@ data:
     \    if !res[i] {\n                print!(\"-\");\n            }\n           \
     \ print!(\"{} \", i + 1);\n        }\n        println!(\"0\");\n    } else {\n\
     \        println!(\"s UNSATISFIABLE\");\n    }\n}\n"
-  dependsOn:
-  - crates/math/two-satisfiability/src/lib.rs
+  dependsOn: []
   isVerificationFile: true
   path: verify/two_sat/src/main.rs
   requiredBy: []
-  timestamp: '2024-04-07 08:56:09+09:00'
+  timestamp: '1970-01-01 00:00:00+00:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/two_sat/src/main.rs

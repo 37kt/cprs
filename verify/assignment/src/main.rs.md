@@ -1,9 +1,6 @@
 ---
 data:
-  _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
-    path: crates/graph/min-cost-b-flow/src/lib.rs
-    title: crates/graph/min-cost-b-flow/src/lib.rs
+  _extendedDependsOn: []
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
@@ -13,11 +10,11 @@ data:
     PROBLEM: https://judge.yosupo.jp/problem/assignment
     links:
     - https://judge.yosupo.jp/problem/assignment
-  bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.12.4/x64/lib/python3.12/site-packages/onlinejudge_verify/documentation/build.py\"\
+  bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.12.6/x64/lib/python3.12/site-packages/onlinejudge_verify/documentation/build.py\"\
     , line 71, in _render_source_code_stat\n    bundled_code = language.bundle(stat.path,\
     \ basedir=basedir, options={'include_paths': [basedir]}).decode()\n          \
     \         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\
-    \  File \"/opt/hostedtoolcache/Python/3.12.4/x64/lib/python3.12/site-packages/onlinejudge_verify/languages/rust.py\"\
+    \  File \"/opt/hostedtoolcache/Python/3.12.6/x64/lib/python3.12/site-packages/onlinejudge_verify/languages/rust.py\"\
     , line 288, in bundle\n    raise NotImplementedError\nNotImplementedError\n"
   code: "// verification-helper: PROBLEM https://judge.yosupo.jp/problem/assignment\n\
     \nuse itertools::Itertools;\nuse min_cost_b_flow::MinCostBFlow;\nuse proconio::input;\n\
@@ -32,12 +29,11 @@ data:
     \ mut res = vec![];\n    for i in 0..n {\n        for j in 0..n {\n          \
     \  if mcf.get_edge(es[i][j]).flow > 0 {\n                res.push(j);\n      \
     \      }\n        }\n    }\n    println!(\"{}\", res.iter().join(\" \"));\n}\n"
-  dependsOn:
-  - crates/graph/min-cost-b-flow/src/lib.rs
+  dependsOn: []
   isVerificationFile: true
   path: verify/assignment/src/main.rs
   requiredBy: []
-  timestamp: '2023-05-23 15:04:49+09:00'
+  timestamp: '1970-01-01 00:00:00+00:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/assignment/src/main.rs

@@ -1,12 +1,6 @@
 ---
 data:
-  _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
-    path: crates/algebraic/algebraic/src/lib.rs
-    title: crates/algebraic/algebraic/src/lib.rs
-  - icon: ':heavy_check_mark:'
-    path: crates/data-structure/vertex-add-range-contour-sum/src/lib.rs
-    title: crates/data-structure/vertex-add-range-contour-sum/src/lib.rs
+  _extendedDependsOn: []
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
@@ -16,11 +10,11 @@ data:
     PROBLEM: https://judge.yosupo.jp/problem/vertex_add_range_contour_sum_on_tree
     links:
     - https://judge.yosupo.jp/problem/vertex_add_range_contour_sum_on_tree
-  bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.12.4/x64/lib/python3.12/site-packages/onlinejudge_verify/documentation/build.py\"\
+  bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.12.6/x64/lib/python3.12/site-packages/onlinejudge_verify/documentation/build.py\"\
     , line 71, in _render_source_code_stat\n    bundled_code = language.bundle(stat.path,\
     \ basedir=basedir, options={'include_paths': [basedir]}).decode()\n          \
     \         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\
-    \  File \"/opt/hostedtoolcache/Python/3.12.4/x64/lib/python3.12/site-packages/onlinejudge_verify/languages/rust.py\"\
+    \  File \"/opt/hostedtoolcache/Python/3.12.6/x64/lib/python3.12/site-packages/onlinejudge_verify/languages/rust.py\"\
     , line 288, in bundle\n    raise NotImplementedError\nNotImplementedError\n"
   code: "// verification-helper: PROBLEM https://judge.yosupo.jp/problem/vertex_add_range_contour_sum_on_tree\n\
     \nuse algebraic::{algebra, monoid};\nuse proconio::input;\nuse vertex_add_range_contour_sum::VertexAddRangeContourSum;\n\
@@ -33,13 +27,11 @@ data:
     \ {\n            input! {\n                l: usize,\n                r: usize,\n\
     \            }\n            println!(\"{}\", rcq.prod(p, l, r));\n        }\n\
     \    }\n}\n"
-  dependsOn:
-  - crates/algebraic/algebraic/src/lib.rs
-  - crates/data-structure/vertex-add-range-contour-sum/src/lib.rs
+  dependsOn: []
   isVerificationFile: true
   path: verify/vertex_add_range_contour_sum_on_tree/src/main.rs
   requiredBy: []
-  timestamp: '2024-06-28 10:31:31+09:00'
+  timestamp: '1970-01-01 00:00:00+00:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/vertex_add_range_contour_sum_on_tree/src/main.rs

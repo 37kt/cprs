@@ -1,9 +1,6 @@
 ---
 data:
-  _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
-    path: crates/data-structure/li-chao-tree-dynamic/src/lib.rs
-    title: crates/data-structure/li-chao-tree-dynamic/src/lib.rs
+  _extendedDependsOn: []
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
@@ -13,11 +10,11 @@ data:
     PROBLEM: https://judge.yosupo.jp/problem/segment_add_get_min
     links:
     - https://judge.yosupo.jp/problem/segment_add_get_min
-  bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.12.4/x64/lib/python3.12/site-packages/onlinejudge_verify/documentation/build.py\"\
+  bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.12.6/x64/lib/python3.12/site-packages/onlinejudge_verify/documentation/build.py\"\
     , line 71, in _render_source_code_stat\n    bundled_code = language.bundle(stat.path,\
     \ basedir=basedir, options={'include_paths': [basedir]}).decode()\n          \
     \         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\
-    \  File \"/opt/hostedtoolcache/Python/3.12.4/x64/lib/python3.12/site-packages/onlinejudge_verify/languages/rust.py\"\
+    \  File \"/opt/hostedtoolcache/Python/3.12.6/x64/lib/python3.12/site-packages/onlinejudge_verify/languages/rust.py\"\
     , line 288, in bundle\n    raise NotImplementedError\nNotImplementedError\n"
   code: "// verification-helper: PROBLEM https://judge.yosupo.jp/problem/segment_add_get_min\n\
     \nuse li_chao_tree_dynamic::LiChaoTreeDynamic;\nuse proconio::input;\n\nconst\
@@ -33,12 +30,11 @@ data:
     \       }\n            if let Some(res) = lct.find(p) {\n                println!(\"\
     {}\", res);\n            } else {\n                println!(\"INFINITY\");\n \
     \           }\n        }\n    }\n}\n"
-  dependsOn:
-  - crates/data-structure/li-chao-tree-dynamic/src/lib.rs
+  dependsOn: []
   isVerificationFile: true
   path: verify/segment_add_get_min/src/main.rs
   requiredBy: []
-  timestamp: '2023-05-16 16:25:17+09:00'
+  timestamp: '1970-01-01 00:00:00+00:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/segment_add_get_min/src/main.rs

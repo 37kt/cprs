@@ -1,12 +1,6 @@
 ---
 data:
-  _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
-    path: crates/algebraic/rational/src/lib.rs
-    title: crates/algebraic/rational/src/lib.rs
-  - icon: ':heavy_check_mark:'
-    path: crates/math/stern-brocot-tree/src/lib.rs
-    title: crates/math/stern-brocot-tree/src/lib.rs
+  _extendedDependsOn: []
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
@@ -16,11 +10,11 @@ data:
     PROBLEM: https://judge.yosupo.jp/problem/rational_approximation
     links:
     - https://judge.yosupo.jp/problem/rational_approximation
-  bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.12.4/x64/lib/python3.12/site-packages/onlinejudge_verify/documentation/build.py\"\
+  bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.12.6/x64/lib/python3.12/site-packages/onlinejudge_verify/documentation/build.py\"\
     , line 71, in _render_source_code_stat\n    bundled_code = language.bundle(stat.path,\
     \ basedir=basedir, options={'include_paths': [basedir]}).decode()\n          \
     \         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\
-    \  File \"/opt/hostedtoolcache/Python/3.12.4/x64/lib/python3.12/site-packages/onlinejudge_verify/languages/rust.py\"\
+    \  File \"/opt/hostedtoolcache/Python/3.12.6/x64/lib/python3.12/site-packages/onlinejudge_verify/languages/rust.py\"\
     , line 288, in bundle\n    raise NotImplementedError\nNotImplementedError\n"
   code: "// verification-helper: PROBLEM https://judge.yosupo.jp/problem/rational_approximation\n\
     \nuse proconio::input;\nuse rational::Rational;\nuse stern_brocot_tree::SternBrocotTreeNode;\n\
@@ -30,13 +24,11 @@ data:
     \ a, den: b }, _) = SternBrocotTreeNode::binary_search(|x| x <= r, n);\n     \
     \   let (_, Rational { num: c, den: d }) = SternBrocotTreeNode::binary_search(|x|\
     \ x >= r, n);\n        println!(\"{} {} {} {}\", a, b, c, d);\n    }\n}\n"
-  dependsOn:
-  - crates/algebraic/rational/src/lib.rs
-  - crates/math/stern-brocot-tree/src/lib.rs
+  dependsOn: []
   isVerificationFile: true
   path: verify/rational_approximation/src/main.rs
   requiredBy: []
-  timestamp: '2024-03-21 11:10:47+09:00'
+  timestamp: '1970-01-01 00:00:00+00:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/rational_approximation/src/main.rs

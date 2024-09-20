@@ -1,24 +1,18 @@
 ---
 data:
-  _extendedDependsOn:
-  - icon: ':warning:'
-    path: crates/graph/max-flow/src/lib.rs
-    title: crates/graph/max-flow/src/lib.rs
-  _extendedRequiredBy:
-  - icon: ':warning:'
-    path: crates/graph/k-project-selection/src/lib.rs
-    title: crates/graph/k-project-selection/src/lib.rs
+  _extendedDependsOn: []
+  _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
   _pathExtension: rs
   _verificationStatusIcon: ':warning:'
   attributes:
     links: []
-  bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.12.4/x64/lib/python3.12/site-packages/onlinejudge_verify/documentation/build.py\"\
+  bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.12.6/x64/lib/python3.12/site-packages/onlinejudge_verify/documentation/build.py\"\
     , line 71, in _render_source_code_stat\n    bundled_code = language.bundle(stat.path,\
     \ basedir=basedir, options={'include_paths': [basedir]}).decode()\n          \
     \         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\
-    \  File \"/opt/hostedtoolcache/Python/3.12.4/x64/lib/python3.12/site-packages/onlinejudge_verify/languages/rust.py\"\
+    \  File \"/opt/hostedtoolcache/Python/3.12.6/x64/lib/python3.12/site-packages/onlinejudge_verify/languages/rust.py\"\
     , line 288, in bundle\n    raise NotImplementedError\nNotImplementedError\n"
   code: "use max_flow::MaxFlow;\n\ntype Cost1 = [i64; 2];\ntype Cost2 = [Cost1; 2];\n\
     type Cost3 = [Cost2; 2];\n\nconst S: usize = !0;\nconst T: usize = !1;\n\n#[derive(Clone)]\n\
@@ -130,13 +124,11 @@ data:
     \        assert!(j == S || j == T || j < self.n_item + self.n_aux);\n        if\
     \ cost == 0 {\n            return;\n        }\n        self.edges.push((i, j,\
     \ cost));\n    }\n}\n"
-  dependsOn:
-  - crates/graph/max-flow/src/lib.rs
+  dependsOn: []
   isVerificationFile: false
   path: crates/graph/project-selection/src/lib.rs
-  requiredBy:
-  - crates/graph/k-project-selection/src/lib.rs
-  timestamp: '2024-04-05 14:38:09+09:00'
+  requiredBy: []
+  timestamp: '1970-01-01 00:00:00+00:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: crates/graph/project-selection/src/lib.rs

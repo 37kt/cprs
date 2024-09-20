@@ -1,9 +1,6 @@
 ---
 data:
-  _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
-    path: crates/graph/graph/src/lib.rs
-    title: crates/graph/graph/src/lib.rs
+  _extendedDependsOn: []
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
@@ -12,11 +9,11 @@ data:
   attributes:
     links:
     - https://tjkendev.github.io/procon-library/cpp/graph/auxiliary_tree.html
-  bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.12.4/x64/lib/python3.12/site-packages/onlinejudge_verify/documentation/build.py\"\
+  bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.12.6/x64/lib/python3.12/site-packages/onlinejudge_verify/documentation/build.py\"\
     , line 71, in _render_source_code_stat\n    bundled_code = language.bundle(stat.path,\
     \ basedir=basedir, options={'include_paths': [basedir]}).decode()\n          \
     \         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\
-    \  File \"/opt/hostedtoolcache/Python/3.12.4/x64/lib/python3.12/site-packages/onlinejudge_verify/languages/rust.py\"\
+    \  File \"/opt/hostedtoolcache/Python/3.12.6/x64/lib/python3.12/site-packages/onlinejudge_verify/languages/rust.py\"\
     , line 288, in bundle\n    raise NotImplementedError\nNotImplementedError\n"
   code: "use graph::Graph;\n\n// Reference:\n// https://tjkendev.github.io/procon-library/cpp/graph/auxiliary_tree.html\n\
     \npub struct CompressedTree {\n    fs: Vec<usize>,\n    ls: Vec<usize>,\n    depth:\
@@ -55,12 +52,11 @@ data:
     \ <= self.depth[self.st[l][y + 1 - (1 << l)]] {\n            self.st[l][x]\n \
     \       } else {\n            self.st[l][y + 1 - (1 << l)]\n        }\n    }\n\
     }\n"
-  dependsOn:
-  - crates/graph/graph/src/lib.rs
+  dependsOn: []
   isVerificationFile: false
   path: crates/graph/compressed-tree/src/lib.rs
   requiredBy: []
-  timestamp: '2024-04-10 09:38:39+09:00'
+  timestamp: '1970-01-01 00:00:00+00:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: crates/graph/compressed-tree/src/lib.rs

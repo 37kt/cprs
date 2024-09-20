@@ -1,30 +1,18 @@
 ---
 data:
-  _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
-    path: crates/algebraic/algebraic/src/lib.rs
-    title: crates/algebraic/algebraic/src/lib.rs
-  - icon: ':heavy_check_mark:'
-    path: crates/algebraic/rational/src/lib.rs
-    title: crates/algebraic/rational/src/lib.rs
+  _extendedDependsOn: []
   _extendedRequiredBy: []
-  _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
-    path: verify/rational_approximation/src/main.rs
-    title: verify/rational_approximation/src/main.rs
-  - icon: ':heavy_check_mark:'
-    path: verify/stern_brocot_tree/src/main.rs
-    title: verify/stern_brocot_tree/src/main.rs
+  _extendedVerifiedWith: []
   _isVerificationFailed: false
   _pathExtension: rs
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':warning:'
   attributes:
     links: []
-  bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.12.4/x64/lib/python3.12/site-packages/onlinejudge_verify/documentation/build.py\"\
+  bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.12.6/x64/lib/python3.12/site-packages/onlinejudge_verify/documentation/build.py\"\
     , line 71, in _render_source_code_stat\n    bundled_code = language.bundle(stat.path,\
     \ basedir=basedir, options={'include_paths': [basedir]}).decode()\n          \
     \         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\
-    \  File \"/opt/hostedtoolcache/Python/3.12.4/x64/lib/python3.12/site-packages/onlinejudge_verify/languages/rust.py\"\
+    \  File \"/opt/hostedtoolcache/Python/3.12.6/x64/lib/python3.12/site-packages/onlinejudge_verify/languages/rust.py\"\
     , line 288, in bundle\n    raise NotImplementedError\nNotImplementedError\n"
   code: "use rational::{Rational, ZTrait};\n\npub struct SternBrocotTreeNode<T>\n\
     where\n    T: ZTrait,\n{\n    l: Rational<T>,\n    m: Rational<T>,\n    r: Rational<T>,\n\
@@ -115,17 +103,13 @@ data:
     \ {\n        Some(self.cmp(other))\n    }\n}\n\nimpl<T> Ord for SternBrocotTreeNode<T>\n\
     where\n    T: ZTrait,\n{\n    fn cmp(&self, other: &Self) -> std::cmp::Ordering\
     \ {\n        self.m.cmp(&other.m)\n    }\n}\n"
-  dependsOn:
-  - crates/algebraic/algebraic/src/lib.rs
-  - crates/algebraic/rational/src/lib.rs
+  dependsOn: []
   isVerificationFile: false
   path: crates/math/stern-brocot-tree/src/lib.rs
   requiredBy: []
-  timestamp: '2024-03-21 11:10:47+09:00'
-  verificationStatus: LIBRARY_ALL_AC
-  verifiedWith:
-  - verify/stern_brocot_tree/src/main.rs
-  - verify/rational_approximation/src/main.rs
+  timestamp: '1970-01-01 00:00:00+00:00'
+  verificationStatus: LIBRARY_NO_TESTS
+  verifiedWith: []
 documentation_of: crates/math/stern-brocot-tree/src/lib.rs
 layout: document
 redirect_from:

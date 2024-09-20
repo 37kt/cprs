@@ -1,114 +1,18 @@
 ---
 data:
   _extendedDependsOn: []
-  _extendedRequiredBy:
-  - icon: ':heavy_check_mark:'
-    path: crates/data-structure/heavy-light-decomposition/src/lib.rs
-    title: crates/data-structure/heavy-light-decomposition/src/lib.rs
-  - icon: ':warning:'
-    path: crates/data-structure/range-contour-query/src/lib.rs
-    title: crates/data-structure/range-contour-query/src/lib.rs
-  - icon: ':heavy_check_mark:'
-    path: crates/data-structure/tree-query/src/lib.rs
-    title: crates/data-structure/tree-query/src/lib.rs
-  - icon: ':heavy_check_mark:'
-    path: crates/data-structure/vertex-add-range-contour-sum/src/lib.rs
-    title: crates/data-structure/vertex-add-range-contour-sum/src/lib.rs
-  - icon: ':heavy_check_mark:'
-    path: crates/data-structure/vertex-get-range-contour-add/src/lib.rs
-    title: crates/data-structure/vertex-get-range-contour-add/src/lib.rs
-  - icon: ':warning:'
-    path: crates/graph/bellman-ford/src/lib.rs
-    title: crates/graph/bellman-ford/src/lib.rs
-  - icon: ':warning:'
-    path: crates/graph/complement-graph-bfs/src/lib.rs
-    title: crates/graph/complement-graph-bfs/src/lib.rs
-  - icon: ':warning:'
-    path: crates/graph/compressed-tree/src/lib.rs
-    title: crates/graph/compressed-tree/src/lib.rs
-  - icon: ':heavy_check_mark:'
-    path: crates/graph/dijkstra/src/lib.rs
-    title: crates/graph/dijkstra/src/lib.rs
-  - icon: ':heavy_check_mark:'
-    path: crates/graph/extended-block-cut-tree/src/lib.rs
-    title: crates/graph/extended-block-cut-tree/src/lib.rs
-  - icon: ':warning:'
-    path: crates/graph/low-link/src/lib.rs
-    title: crates/graph/low-link/src/lib.rs
-  - icon: ':heavy_check_mark:'
-    path: crates/graph/range-edge-graph/src/lib.rs
-    title: crates/graph/range-edge-graph/src/lib.rs
-  - icon: ':heavy_check_mark:'
-    path: crates/graph/strongly-connected-components/src/lib.rs
-    title: crates/graph/strongly-connected-components/src/lib.rs
-  - icon: ':heavy_check_mark:'
-    path: crates/graph/two-edge-connected-components/src/lib.rs
-    title: crates/graph/two-edge-connected-components/src/lib.rs
-  - icon: ':warning:'
-    path: crates/graph/zero-one-bfs/src/lib.rs
-    title: crates/graph/zero-one-bfs/src/lib.rs
-  - icon: ':heavy_check_mark:'
-    path: crates/math/two-satisfiability/src/lib.rs
-    title: crates/math/two-satisfiability/src/lib.rs
-  - icon: ':heavy_check_mark:'
-    path: crates/tree/centroid-decomposition/src/lib.rs
-    title: crates/tree/centroid-decomposition/src/lib.rs
-  - icon: ':heavy_check_mark:'
-    path: crates/tree/re-rooting-dp/src/lib.rs
-    title: crates/tree/re-rooting-dp/src/lib.rs
-  - icon: ':heavy_check_mark:'
-    path: crates/tree/static-top-tree-dp/src/lib.rs
-    title: crates/tree/static-top-tree-dp/src/lib.rs
-  _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
-    path: verify/biconnected_components/src/main.rs
-    title: verify/biconnected_components/src/main.rs
-  - icon: ':heavy_check_mark:'
-    path: verify/frequency_table_of_tree_distance/src/main.rs
-    title: verify/frequency_table_of_tree_distance/src/main.rs
-  - icon: ':heavy_check_mark:'
-    path: verify/jump_on_tree/src/main.rs
-    title: verify/jump_on_tree/src/main.rs
-  - icon: ':heavy_check_mark:'
-    path: verify/lca/src/main.rs
-    title: verify/lca/src/main.rs
-  - icon: ':heavy_check_mark:'
-    path: verify/point_set_tree_path_composite_sum_fixed_root/src/main.rs
-    title: verify/point_set_tree_path_composite_sum_fixed_root/src/main.rs
-  - icon: ':heavy_check_mark:'
-    path: verify/scc/src/main.rs
-    title: verify/scc/src/main.rs
-  - icon: ':heavy_check_mark:'
-    path: verify/shortest_path/src/main.rs
-    title: verify/shortest_path/src/main.rs
-  - icon: ':heavy_check_mark:'
-    path: verify/tree_path_composite_sum/src/main.rs
-    title: verify/tree_path_composite_sum/src/main.rs
-  - icon: ':heavy_check_mark:'
-    path: verify/two_edge_connected_components/src/main.rs
-    title: verify/two_edge_connected_components/src/main.rs
-  - icon: ':heavy_check_mark:'
-    path: verify/vertex_add_path_sum/src/main.rs
-    title: verify/vertex_add_path_sum/src/main.rs
-  - icon: ':heavy_check_mark:'
-    path: verify/vertex_add_subtree_sum/src/main.rs
-    title: verify/vertex_add_subtree_sum/src/main.rs
-  - icon: ':heavy_check_mark:'
-    path: verify/vertex_set_path_composite/src/main.rs
-    title: verify/vertex_set_path_composite/src/main.rs
-  - icon: ':heavy_check_mark:'
-    path: verify/yuki1014/src/main.rs
-    title: verify/yuki1014/src/main.rs
+  _extendedRequiredBy: []
+  _extendedVerifiedWith: []
   _isVerificationFailed: false
   _pathExtension: rs
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':warning:'
   attributes:
     links: []
-  bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.12.4/x64/lib/python3.12/site-packages/onlinejudge_verify/documentation/build.py\"\
+  bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.12.6/x64/lib/python3.12/site-packages/onlinejudge_verify/documentation/build.py\"\
     , line 71, in _render_source_code_stat\n    bundled_code = language.bundle(stat.path,\
     \ basedir=basedir, options={'include_paths': [basedir]}).decode()\n          \
     \         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\
-    \  File \"/opt/hostedtoolcache/Python/3.12.4/x64/lib/python3.12/site-packages/onlinejudge_verify/languages/rust.py\"\
+    \  File \"/opt/hostedtoolcache/Python/3.12.6/x64/lib/python3.12/site-packages/onlinejudge_verify/languages/rust.py\"\
     , line 288, in bundle\n    raise NotImplementedError\nNotImplementedError\n"
   code: "use std::ops::Index;\n\n#[derive(Clone)]\npub struct Graph<V, E>\nwhere\n\
     \    V: Clone,\n    E: Clone,\n{\n    vertices: Vec<V>,\n    edges: Vec<(usize,\
@@ -194,42 +98,10 @@ data:
   dependsOn: []
   isVerificationFile: false
   path: crates/graph/graph/src/lib.rs
-  requiredBy:
-  - crates/tree/centroid-decomposition/src/lib.rs
-  - crates/tree/re-rooting-dp/src/lib.rs
-  - crates/tree/static-top-tree-dp/src/lib.rs
-  - crates/graph/low-link/src/lib.rs
-  - crates/graph/range-edge-graph/src/lib.rs
-  - crates/graph/bellman-ford/src/lib.rs
-  - crates/graph/compressed-tree/src/lib.rs
-  - crates/graph/zero-one-bfs/src/lib.rs
-  - crates/graph/dijkstra/src/lib.rs
-  - crates/graph/strongly-connected-components/src/lib.rs
-  - crates/graph/extended-block-cut-tree/src/lib.rs
-  - crates/graph/complement-graph-bfs/src/lib.rs
-  - crates/graph/two-edge-connected-components/src/lib.rs
-  - crates/math/two-satisfiability/src/lib.rs
-  - crates/data-structure/vertex-get-range-contour-add/src/lib.rs
-  - crates/data-structure/heavy-light-decomposition/src/lib.rs
-  - crates/data-structure/tree-query/src/lib.rs
-  - crates/data-structure/vertex-add-range-contour-sum/src/lib.rs
-  - crates/data-structure/range-contour-query/src/lib.rs
-  timestamp: '2024-04-10 09:38:39+09:00'
-  verificationStatus: LIBRARY_ALL_AC
-  verifiedWith:
-  - verify/frequency_table_of_tree_distance/src/main.rs
-  - verify/vertex_set_path_composite/src/main.rs
-  - verify/shortest_path/src/main.rs
-  - verify/vertex_add_subtree_sum/src/main.rs
-  - verify/lca/src/main.rs
-  - verify/point_set_tree_path_composite_sum_fixed_root/src/main.rs
-  - verify/tree_path_composite_sum/src/main.rs
-  - verify/vertex_add_path_sum/src/main.rs
-  - verify/two_edge_connected_components/src/main.rs
-  - verify/jump_on_tree/src/main.rs
-  - verify/yuki1014/src/main.rs
-  - verify/scc/src/main.rs
-  - verify/biconnected_components/src/main.rs
+  requiredBy: []
+  timestamp: '1970-01-01 00:00:00+00:00'
+  verificationStatus: LIBRARY_NO_TESTS
+  verifiedWith: []
 documentation_of: crates/graph/graph/src/lib.rs
 layout: document
 redirect_from:

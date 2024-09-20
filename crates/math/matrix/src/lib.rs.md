@@ -1,39 +1,18 @@
 ---
 data:
-  _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
-    path: crates/algebraic/algebraic/src/lib.rs
-    title: crates/algebraic/algebraic/src/lib.rs
-  _extendedRequiredBy:
-  - icon: ':heavy_check_mark:'
-    path: crates/graph/count-spanning-tree-directed/src/lib.rs
-    title: crates/graph/count-spanning-tree-directed/src/lib.rs
-  - icon: ':heavy_check_mark:'
-    path: crates/graph/count-spanning-tree-undirected/src/lib.rs
-    title: crates/graph/count-spanning-tree-undirected/src/lib.rs
-  _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
-    path: verify/inverse_matrix/src/main.rs
-    title: verify/inverse_matrix/src/main.rs
-  - icon: ':heavy_check_mark:'
-    path: verify/matrix_det/src/main.rs
-    title: verify/matrix_det/src/main.rs
-  - icon: ':heavy_check_mark:'
-    path: verify/matrix_product/src/main.rs
-    title: verify/matrix_product/src/main.rs
-  - icon: ':heavy_check_mark:'
-    path: verify/pow_of_matrix/src/main.rs
-    title: verify/pow_of_matrix/src/main.rs
+  _extendedDependsOn: []
+  _extendedRequiredBy: []
+  _extendedVerifiedWith: []
   _isVerificationFailed: false
   _pathExtension: rs
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':warning:'
   attributes:
     links: []
-  bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.12.4/x64/lib/python3.12/site-packages/onlinejudge_verify/documentation/build.py\"\
+  bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.12.6/x64/lib/python3.12/site-packages/onlinejudge_verify/documentation/build.py\"\
     , line 71, in _render_source_code_stat\n    bundled_code = language.bundle(stat.path,\
     \ basedir=basedir, options={'include_paths': [basedir]}).decode()\n          \
     \         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\
-    \  File \"/opt/hostedtoolcache/Python/3.12.4/x64/lib/python3.12/site-packages/onlinejudge_verify/languages/rust.py\"\
+    \  File \"/opt/hostedtoolcache/Python/3.12.6/x64/lib/python3.12/site-packages/onlinejudge_verify/languages/rust.py\"\
     , line 288, in bundle\n    raise NotImplementedError\nNotImplementedError\n"
   code: "use std::{\n    fmt::{Debug, Display},\n    ops::{Add, AddAssign, Div, DivAssign,\
     \ Index, IndexMut, Mul, MulAssign, Neg, Sub, SubAssign},\n};\n\nuse algebraic::{One,\
@@ -154,20 +133,13 @@ data:
     where\n    T: Zero + Clone + Add<Output = T> + Mul<Output = T>,\n{\n    type Output\
     \ = Matrix<T>;\n    fn mul(self, rhs: Self) -> Self::Output {\n        let mut\
     \ a = self.clone();\n        a *= rhs;\n        a\n    }\n}\n"
-  dependsOn:
-  - crates/algebraic/algebraic/src/lib.rs
+  dependsOn: []
   isVerificationFile: false
   path: crates/math/matrix/src/lib.rs
-  requiredBy:
-  - crates/graph/count-spanning-tree-undirected/src/lib.rs
-  - crates/graph/count-spanning-tree-directed/src/lib.rs
-  timestamp: '2024-06-13 08:47:29+09:00'
-  verificationStatus: LIBRARY_ALL_AC
-  verifiedWith:
-  - verify/matrix_product/src/main.rs
-  - verify/matrix_det/src/main.rs
-  - verify/inverse_matrix/src/main.rs
-  - verify/pow_of_matrix/src/main.rs
+  requiredBy: []
+  timestamp: '1970-01-01 00:00:00+00:00'
+  verificationStatus: LIBRARY_NO_TESTS
+  verifiedWith: []
 documentation_of: crates/math/matrix/src/lib.rs
 layout: document
 redirect_from:

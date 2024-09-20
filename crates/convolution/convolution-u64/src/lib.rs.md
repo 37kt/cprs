@@ -1,30 +1,18 @@
 ---
 data:
-  _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
-    path: crates/convolution/convolution-ntt-friendly/src/lib.rs
-    title: crates/convolution/convolution-ntt-friendly/src/lib.rs
-  - icon: ':heavy_check_mark:'
-    path: crates/number-theory/modint/src/lib.rs
-    title: crates/number-theory/modint/src/lib.rs
+  _extendedDependsOn: []
   _extendedRequiredBy: []
-  _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
-    path: verify/convolution_mod_2_64/src/main.rs
-    title: verify/convolution_mod_2_64/src/main.rs
-  - icon: ':heavy_check_mark:'
-    path: verify/frequency_table_of_tree_distance/src/main.rs
-    title: verify/frequency_table_of_tree_distance/src/main.rs
+  _extendedVerifiedWith: []
   _isVerificationFailed: false
   _pathExtension: rs
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':warning:'
   attributes:
     links: []
-  bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.12.4/x64/lib/python3.12/site-packages/onlinejudge_verify/documentation/build.py\"\
+  bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.12.6/x64/lib/python3.12/site-packages/onlinejudge_verify/documentation/build.py\"\
     , line 71, in _render_source_code_stat\n    bundled_code = language.bundle(stat.path,\
     \ basedir=basedir, options={'include_paths': [basedir]}).decode()\n          \
     \         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\
-    \  File \"/opt/hostedtoolcache/Python/3.12.4/x64/lib/python3.12/site-packages/onlinejudge_verify/languages/rust.py\"\
+    \  File \"/opt/hostedtoolcache/Python/3.12.6/x64/lib/python3.12/site-packages/onlinejudge_verify/languages/rust.py\"\
     , line 288, in bundle\n    raise NotImplementedError\nNotImplementedError\n"
   code: "use convolution_ntt_friendly::convolution_ntt_friendly;\nuse modint::StaticModInt;\n\
     \nconst M1: u32 = 167_772_161;\nconst M2: u32 = 469_762_049;\nconst M3: u32 =\
@@ -68,17 +56,13 @@ data:
     \                            .wrapping_mul(Fp3::modulus() as u64)\n          \
     \                  .wrapping_mul(Fp4::modulus() as u64),\n                   \
     \ ),\n                )\n        })\n        .collect()\n}\n"
-  dependsOn:
-  - crates/convolution/convolution-ntt-friendly/src/lib.rs
-  - crates/number-theory/modint/src/lib.rs
+  dependsOn: []
   isVerificationFile: false
   path: crates/convolution/convolution-u64/src/lib.rs
   requiredBy: []
-  timestamp: '2024-06-13 08:47:29+09:00'
-  verificationStatus: LIBRARY_ALL_AC
-  verifiedWith:
-  - verify/frequency_table_of_tree_distance/src/main.rs
-  - verify/convolution_mod_2_64/src/main.rs
+  timestamp: '1970-01-01 00:00:00+00:00'
+  verificationStatus: LIBRARY_NO_TESTS
+  verifiedWith: []
 documentation_of: crates/convolution/convolution-u64/src/lib.rs
 layout: document
 redirect_from:

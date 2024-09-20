@@ -1,30 +1,18 @@
 ---
 data:
-  _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
-    path: crates/algebraic/algebraic/src/lib.rs
-    title: crates/algebraic/algebraic/src/lib.rs
-  - icon: ':warning:'
-    path: crates/data-structure/splay-tree-internal/src/lib.rs
-    title: crates/data-structure/splay-tree-internal/src/lib.rs
+  _extendedDependsOn: []
   _extendedRequiredBy: []
-  _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
-    path: verify/dynamic_sequence_range_affine_range_sum/src/main.rs
-    title: verify/dynamic_sequence_range_affine_range_sum/src/main.rs
-  - icon: ':heavy_check_mark:'
-    path: verify/range_reverse_range_sum/src/main.rs
-    title: verify/range_reverse_range_sum/src/main.rs
+  _extendedVerifiedWith: []
   _isVerificationFailed: false
   _pathExtension: rs
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':warning:'
   attributes:
     links: []
-  bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.12.4/x64/lib/python3.12/site-packages/onlinejudge_verify/documentation/build.py\"\
+  bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.12.6/x64/lib/python3.12/site-packages/onlinejudge_verify/documentation/build.py\"\
     , line 71, in _render_source_code_stat\n    bundled_code = language.bundle(stat.path,\
     \ basedir=basedir, options={'include_paths': [basedir]}).decode()\n          \
     \         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\
-    \  File \"/opt/hostedtoolcache/Python/3.12.4/x64/lib/python3.12/site-packages/onlinejudge_verify/languages/rust.py\"\
+    \  File \"/opt/hostedtoolcache/Python/3.12.6/x64/lib/python3.12/site-packages/onlinejudge_verify/languages/rust.py\"\
     , line 288, in bundle\n    raise NotImplementedError\nNotImplementedError\n"
   code: "use std::{\n    fmt::Debug,\n    ops::{Bound, RangeBounds},\n};\n\nuse algebraic::{Act,\
     \ Monoid};\nuse splay_tree_internal::SplayTreeNode;\n\npub struct SplayTree<M,\
@@ -77,17 +65,13 @@ data:
     \        }\n    }\n}\n\nimpl<M, F> Drop for SplayTree<M, F>\nwhere\n    M: Monoid,\n\
     \    M::S: Clone,\n    F: Monoid + Act<X = M::S>,\n    F::S: Clone,\n{\n    fn\
     \ drop(&mut self) {\n        deep_free(self.0)\n    }\n}\n"
-  dependsOn:
-  - crates/algebraic/algebraic/src/lib.rs
-  - crates/data-structure/splay-tree-internal/src/lib.rs
+  dependsOn: []
   isVerificationFile: false
   path: crates/data-structure/splay-tree/src/lib.rs
   requiredBy: []
-  timestamp: '2024-04-21 23:45:22+09:00'
-  verificationStatus: LIBRARY_ALL_AC
-  verifiedWith:
-  - verify/range_reverse_range_sum/src/main.rs
-  - verify/dynamic_sequence_range_affine_range_sum/src/main.rs
+  timestamp: '1970-01-01 00:00:00+00:00'
+  verificationStatus: LIBRARY_NO_TESTS
+  verifiedWith: []
 documentation_of: crates/data-structure/splay-tree/src/lib.rs
 layout: document
 redirect_from:

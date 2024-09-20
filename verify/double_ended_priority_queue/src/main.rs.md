@@ -1,9 +1,6 @@
 ---
 data:
-  _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
-    path: crates/data-structure/interval-heap/src/lib.rs
-    title: crates/data-structure/interval-heap/src/lib.rs
+  _extendedDependsOn: []
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
@@ -13,11 +10,11 @@ data:
     PROBLEM: https://judge.yosupo.jp/problem/double_ended_priority_queue
     links:
     - https://judge.yosupo.jp/problem/double_ended_priority_queue
-  bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.12.4/x64/lib/python3.12/site-packages/onlinejudge_verify/documentation/build.py\"\
+  bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.12.6/x64/lib/python3.12/site-packages/onlinejudge_verify/documentation/build.py\"\
     , line 71, in _render_source_code_stat\n    bundled_code = language.bundle(stat.path,\
     \ basedir=basedir, options={'include_paths': [basedir]}).decode()\n          \
     \         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\
-    \  File \"/opt/hostedtoolcache/Python/3.12.4/x64/lib/python3.12/site-packages/onlinejudge_verify/languages/rust.py\"\
+    \  File \"/opt/hostedtoolcache/Python/3.12.6/x64/lib/python3.12/site-packages/onlinejudge_verify/languages/rust.py\"\
     , line 288, in bundle\n    raise NotImplementedError\nNotImplementedError\n"
   code: "// verification-helper: PROBLEM https://judge.yosupo.jp/problem/double_ended_priority_queue\n\
     \nuse interval_heap::IntervalHeap;\nuse proconio::input;\n\n#[proconio::fastout]\n\
@@ -28,12 +25,11 @@ data:
     \        } else if t == 1 {\n            println!(\"{}\", pq.pop_min().unwrap());\n\
     \        } else {\n            println!(\"{}\", pq.pop_max().unwrap());\n    \
     \    }\n    }\n}\n"
-  dependsOn:
-  - crates/data-structure/interval-heap/src/lib.rs
+  dependsOn: []
   isVerificationFile: true
   path: verify/double_ended_priority_queue/src/main.rs
   requiredBy: []
-  timestamp: '2024-04-08 11:43:23+09:00'
+  timestamp: '1970-01-01 00:00:00+00:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/double_ended_priority_queue/src/main.rs

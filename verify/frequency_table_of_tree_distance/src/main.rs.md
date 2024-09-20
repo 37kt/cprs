@@ -1,29 +1,20 @@
 ---
 data:
-  _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
-    path: crates/convolution/convolution-u64/src/lib.rs
-    title: crates/convolution/convolution-u64/src/lib.rs
-  - icon: ':heavy_check_mark:'
-    path: crates/graph/graph/src/lib.rs
-    title: crates/graph/graph/src/lib.rs
-  - icon: ':heavy_check_mark:'
-    path: crates/tree/centroid-decomposition/src/lib.rs
-    title: crates/tree/centroid-decomposition/src/lib.rs
+  _extendedDependsOn: []
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: rs
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     PROBLEM: https://judge.yosupo.jp/problem/frequency_table_of_tree_distance
     links:
     - https://judge.yosupo.jp/problem/frequency_table_of_tree_distance
-  bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.12.4/x64/lib/python3.12/site-packages/onlinejudge_verify/documentation/build.py\"\
+  bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.12.6/x64/lib/python3.12/site-packages/onlinejudge_verify/documentation/build.py\"\
     , line 71, in _render_source_code_stat\n    bundled_code = language.bundle(stat.path,\
     \ basedir=basedir, options={'include_paths': [basedir]}).decode()\n          \
     \         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\
-    \  File \"/opt/hostedtoolcache/Python/3.12.4/x64/lib/python3.12/site-packages/onlinejudge_verify/languages/rust.py\"\
+    \  File \"/opt/hostedtoolcache/Python/3.12.6/x64/lib/python3.12/site-packages/onlinejudge_verify/languages/rust.py\"\
     , line 288, in bundle\n    raise NotImplementedError\nNotImplementedError\n"
   code: "// verification-helper: PROBLEM https://judge.yosupo.jp/problem/frequency_table_of_tree_distance\n\
     \nuse centroid_decomposition::centroid_decomposision;\nuse convolution_u64::convolution_u64;\n\
@@ -42,15 +33,12 @@ data:
     \        for i in 0..c.len().min(res.len()) {\n            res[i] += c[i];\n \
     \       }\n    };\n    centroid_decomposision(&g, &mut f);\n    res[1] += n as\
     \ u64 - 1;\n    println!(\"{}\", res[1..].iter().join(\" \"));\n}\n"
-  dependsOn:
-  - crates/convolution/convolution-u64/src/lib.rs
-  - crates/graph/graph/src/lib.rs
-  - crates/tree/centroid-decomposition/src/lib.rs
+  dependsOn: []
   isVerificationFile: true
   path: verify/frequency_table_of_tree_distance/src/main.rs
   requiredBy: []
-  timestamp: '2024-06-28 10:31:31+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '1970-01-01 00:00:00+00:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: verify/frequency_table_of_tree_distance/src/main.rs
 layout: document
