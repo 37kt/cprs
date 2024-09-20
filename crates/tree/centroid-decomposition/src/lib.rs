@@ -109,7 +109,7 @@ fn dfs3(
 /// idx: 頂点番号
 /// par: 親の頂点番号
 /// idx[..m] が赤，idx[m..] が青
-pub fn centroid_decomposision(g: &Graph<(), ()>, f: &mut impl FnMut(&[usize], &[usize], usize)) {
+pub fn centroid_decomposition(g: &Graph<(), ()>, f: &mut impl FnMut(&[usize], &[usize], usize)) {
     let n = g.len();
     let mut conv = vec![!0; n];
     dfs3(0, g, &(0..n).collect::<Vec<_>>(), &mut conv, f);
