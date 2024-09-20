@@ -1,6 +1,6 @@
 // verification-helper: PROBLEM https://judge.yosupo.jp/problem/frequency_table_of_tree_distance
 
-use centroid_decomposition::centroid_decomposision;
+use centroid_decomposition::centroid_decomposition;
 use convolution_u64::convolution_u64;
 use graph::Graph;
 use itertools::Itertools;
@@ -41,7 +41,7 @@ fn main() {
             res[i] += c[i];
         }
     };
-    centroid_decomposision(&g, &mut f);
+    centroid_decomposition(&g, &mut f);
     res[1] += n as u64 - 1;
     println!("{}", res[1..].iter().join(" "));
 }
