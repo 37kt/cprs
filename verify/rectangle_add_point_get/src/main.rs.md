@@ -1,6 +1,12 @@
 ---
 data:
-  _extendedDependsOn: []
+  _extendedDependsOn:
+  - icon: ':heavy_check_mark:'
+    path: crates/algebraic/algebraic/src/lib.rs
+    title: crates/algebraic/algebraic/src/lib.rs
+  - icon: ':heavy_check_mark:'
+    path: crates/data-structure/dual-range-tree/src/lib.rs
+    title: crates/data-structure/dual-range-tree/src/lib.rs
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
@@ -33,11 +39,13 @@ data:
     \ F>::new(ps);\n    for (t, l, d, r, u, w) in qs {\n        if t == 0 {\n    \
     \        seg.apply_range(l..r, d..u, w);\n        } else {\n            println!(\"\
     {}\", seg.get((l, d)));\n        }\n    }\n}\n"
-  dependsOn: []
+  dependsOn:
+  - crates/algebraic/algebraic/src/lib.rs
+  - crates/data-structure/dual-range-tree/src/lib.rs
   isVerificationFile: true
   path: verify/rectangle_add_point_get/src/main.rs
   requiredBy: []
-  timestamp: '1970-01-01 00:00:00+00:00'
+  timestamp: '2024-03-18 01:19:47+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/rectangle_add_point_get/src/main.rs

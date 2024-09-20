@@ -1,6 +1,12 @@
 ---
 data:
-  _extendedDependsOn: []
+  _extendedDependsOn:
+  - icon: ':heavy_check_mark:'
+    path: crates/number-theory/modint/src/lib.rs
+    title: crates/number-theory/modint/src/lib.rs
+  - icon: ':heavy_check_mark:'
+    path: crates/polynomial/formal-power-series/src/lib.rs
+    title: crates/polynomial/formal-power-series/src/lib.rs
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
@@ -24,11 +30,13 @@ data:
     \ g = FormalPowerSeries(g);\n    let (q, r) = f.div_mod(&g);\n    println!(\"\
     {} {}\", q.len(), r.len());\n    println!(\"{}\", q);\n    println!(\"{}\", r);\n\
     }\n"
-  dependsOn: []
+  dependsOn:
+  - crates/number-theory/modint/src/lib.rs
+  - crates/polynomial/formal-power-series/src/lib.rs
   isVerificationFile: true
   path: verify/division_of_polynomials/src/main.rs
   requiredBy: []
-  timestamp: '1970-01-01 00:00:00+00:00'
+  timestamp: '2024-06-13 08:47:29+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/division_of_polynomials/src/main.rs

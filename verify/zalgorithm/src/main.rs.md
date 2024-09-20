@@ -1,6 +1,9 @@
 ---
 data:
-  _extendedDependsOn: []
+  _extendedDependsOn:
+  - icon: ':heavy_check_mark:'
+    path: crates/string/z-algorithm/src/lib.rs
+    title: crates/string/z-algorithm/src/lib.rs
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
@@ -20,11 +23,12 @@ data:
     \nuse itertools::Itertools;\nuse proconio::{input, marker::Bytes};\nuse z_algorithm::z_algorithm;\n\
     \n#[proconio::fastout]\nfn main() {\n    input! {\n        s: Bytes,\n    }\n\
     \    let z = z_algorithm(&s);\n    println!(\"{}\", z.iter().join(\" \"));\n}\n"
-  dependsOn: []
+  dependsOn:
+  - crates/string/z-algorithm/src/lib.rs
   isVerificationFile: true
   path: verify/zalgorithm/src/main.rs
   requiredBy: []
-  timestamp: '1970-01-01 00:00:00+00:00'
+  timestamp: '2024-03-11 09:14:28+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/zalgorithm/src/main.rs

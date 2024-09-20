@@ -1,6 +1,9 @@
 ---
 data:
-  _extendedDependsOn: []
+  _extendedDependsOn:
+  - icon: ':heavy_check_mark:'
+    path: crates/data-structure/li-chao-tree-dynamic/src/lib.rs
+    title: crates/data-structure/li-chao-tree-dynamic/src/lib.rs
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
@@ -30,11 +33,12 @@ data:
     \       }\n            if let Some(res) = lct.find(p) {\n                println!(\"\
     {}\", res);\n            } else {\n                println!(\"INFINITY\");\n \
     \           }\n        }\n    }\n}\n"
-  dependsOn: []
+  dependsOn:
+  - crates/data-structure/li-chao-tree-dynamic/src/lib.rs
   isVerificationFile: true
   path: verify/segment_add_get_min/src/main.rs
   requiredBy: []
-  timestamp: '1970-01-01 00:00:00+00:00'
+  timestamp: '2023-05-16 16:25:17+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/segment_add_get_min/src/main.rs

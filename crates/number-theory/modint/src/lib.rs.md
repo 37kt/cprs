@@ -1,11 +1,143 @@
 ---
 data:
-  _extendedDependsOn: []
-  _extendedRequiredBy: []
-  _extendedVerifiedWith: []
+  _extendedDependsOn:
+  - icon: ':heavy_check_mark:'
+    path: crates/algebraic/algebraic/src/lib.rs
+    title: crates/algebraic/algebraic/src/lib.rs
+  _extendedRequiredBy:
+  - icon: ':heavy_check_mark:'
+    path: crates/convolution/convolution-arbitrary-mod/src/lib.rs
+    title: crates/convolution/convolution-arbitrary-mod/src/lib.rs
+  - icon: ':warning:'
+    path: crates/convolution/convolution-naive/src/lib.rs
+    title: crates/convolution/convolution-naive/src/lib.rs
+  - icon: ':heavy_check_mark:'
+    path: crates/convolution/convolution-ntt-friendly/src/lib.rs
+    title: crates/convolution/convolution-ntt-friendly/src/lib.rs
+  - icon: ':heavy_check_mark:'
+    path: crates/convolution/convolution-u64/src/lib.rs
+    title: crates/convolution/convolution-u64/src/lib.rs
+  - icon: ':heavy_check_mark:'
+    path: crates/graph/count-spanning-tree-directed/src/lib.rs
+    title: crates/graph/count-spanning-tree-directed/src/lib.rs
+  - icon: ':heavy_check_mark:'
+    path: crates/graph/count-spanning-tree-undirected/src/lib.rs
+    title: crates/graph/count-spanning-tree-undirected/src/lib.rs
+  - icon: ':heavy_check_mark:'
+    path: crates/number-theory/combination/src/lib.rs
+    title: crates/number-theory/combination/src/lib.rs
+  - icon: ':heavy_check_mark:'
+    path: crates/polynomial/berlekamp-massey/src/lib.rs
+    title: crates/polynomial/berlekamp-massey/src/lib.rs
+  - icon: ':heavy_check_mark:'
+    path: crates/polynomial/bostan-mori/src/lib.rs
+    title: crates/polynomial/bostan-mori/src/lib.rs
+  - icon: ':heavy_check_mark:'
+    path: crates/polynomial/formal-power-series/src/lib.rs
+    title: crates/polynomial/formal-power-series/src/lib.rs
+  - icon: ':warning:'
+    path: crates/polynomial/lagrange-interpolation/src/lib.rs
+    title: crates/polynomial/lagrange-interpolation/src/lib.rs
+  - icon: ':heavy_check_mark:'
+    path: crates/polynomial/polynomial-interpolation/src/lib.rs
+    title: crates/polynomial/polynomial-interpolation/src/lib.rs
+  - icon: ':heavy_check_mark:'
+    path: crates/polynomial/shift-of-sampling-points/src/lib.rs
+    title: crates/polynomial/shift-of-sampling-points/src/lib.rs
+  - icon: ':heavy_check_mark:'
+    path: crates/string/wildcard-pattern-matching/src/lib.rs
+    title: crates/string/wildcard-pattern-matching/src/lib.rs
+  _extendedVerifiedWith:
+  - icon: ':heavy_check_mark:'
+    path: verify/binomial_coefficient_prime_mod/src/main.rs
+    title: verify/binomial_coefficient_prime_mod/src/main.rs
+  - icon: ':heavy_check_mark:'
+    path: verify/bitwise_or_convolution/src/main.rs
+    title: verify/bitwise_or_convolution/src/main.rs
+  - icon: ':heavy_check_mark:'
+    path: verify/convolution_mod/src/main.rs
+    title: verify/convolution_mod/src/main.rs
+  - icon: ':heavy_check_mark:'
+    path: verify/convolution_mod_1000000007/src/main.rs
+    title: verify/convolution_mod_1000000007/src/main.rs
+  - icon: ':heavy_check_mark:'
+    path: verify/count_spanning_tree_directed/src/main.rs
+    title: verify/count_spanning_tree_directed/src/main.rs
+  - icon: ':heavy_check_mark:'
+    path: verify/count_spanning_tree_undirected/src/main.rs
+    title: verify/count_spanning_tree_undirected/src/main.rs
+  - icon: ':heavy_check_mark:'
+    path: verify/division_of_polynomials/src/main.rs
+    title: verify/division_of_polynomials/src/main.rs
+  - icon: ':heavy_check_mark:'
+    path: verify/exp_of_formal_power_series/src/main.rs
+    title: verify/exp_of_formal_power_series/src/main.rs
+  - icon: ':heavy_check_mark:'
+    path: verify/find_linear_recurrence/src/main.rs
+    title: verify/find_linear_recurrence/src/main.rs
+  - icon: ':heavy_check_mark:'
+    path: verify/inv_of_formal_power_series/src/main.rs
+    title: verify/inv_of_formal_power_series/src/main.rs
+  - icon: ':heavy_check_mark:'
+    path: verify/inverse_matrix/src/main.rs
+    title: verify/inverse_matrix/src/main.rs
+  - icon: ':heavy_check_mark:'
+    path: verify/kth_term_of_linearly_recurrent_sequence/src/main.rs
+    title: verify/kth_term_of_linearly_recurrent_sequence/src/main.rs
+  - icon: ':heavy_check_mark:'
+    path: verify/log_of_formal_power_series/src/main.rs
+    title: verify/log_of_formal_power_series/src/main.rs
+  - icon: ':heavy_check_mark:'
+    path: verify/matrix_det/src/main.rs
+    title: verify/matrix_det/src/main.rs
+  - icon: ':heavy_check_mark:'
+    path: verify/matrix_product/src/main.rs
+    title: verify/matrix_product/src/main.rs
+  - icon: ':heavy_check_mark:'
+    path: verify/multipoint_evaluation/src/main.rs
+    title: verify/multipoint_evaluation/src/main.rs
+  - icon: ':heavy_check_mark:'
+    path: verify/point_set_tree_path_composite_sum_fixed_root/src/main.rs
+    title: verify/point_set_tree_path_composite_sum_fixed_root/src/main.rs
+  - icon: ':heavy_check_mark:'
+    path: verify/polynomial_interpolation/src/main.rs
+    title: verify/polynomial_interpolation/src/main.rs
+  - icon: ':heavy_check_mark:'
+    path: verify/polynomial_taylor_shift/src/main.rs
+    title: verify/polynomial_taylor_shift/src/main.rs
+  - icon: ':heavy_check_mark:'
+    path: verify/pow_of_formal_power_series/src/main.rs
+    title: verify/pow_of_formal_power_series/src/main.rs
+  - icon: ':heavy_check_mark:'
+    path: verify/pow_of_matrix/src/main.rs
+    title: verify/pow_of_matrix/src/main.rs
+  - icon: ':heavy_check_mark:'
+    path: verify/range_affine_point_get/src/main.rs
+    title: verify/range_affine_point_get/src/main.rs
+  - icon: ':heavy_check_mark:'
+    path: verify/range_parallel_unionfind/src/main.rs
+    title: verify/range_parallel_unionfind/src/main.rs
+  - icon: ':heavy_check_mark:'
+    path: verify/shift_of_sampling_points_of_polynomial/src/main.rs
+    title: verify/shift_of_sampling_points_of_polynomial/src/main.rs
+  - icon: ':heavy_check_mark:'
+    path: verify/sqrt_mod/src/main.rs
+    title: verify/sqrt_mod/src/main.rs
+  - icon: ':heavy_check_mark:'
+    path: verify/sqrt_of_formal_power_series/src/main.rs
+    title: verify/sqrt_of_formal_power_series/src/main.rs
+  - icon: ':heavy_check_mark:'
+    path: verify/static_rectangle_add_rectangle_sum/src/main.rs
+    title: verify/static_rectangle_add_rectangle_sum/src/main.rs
+  - icon: ':heavy_check_mark:'
+    path: verify/subset_convolution/src/main.rs
+    title: verify/subset_convolution/src/main.rs
+  - icon: ':heavy_check_mark:'
+    path: verify/tree_path_composite_sum/src/main.rs
+    title: verify/tree_path_composite_sum/src/main.rs
   _isVerificationFailed: false
   _pathExtension: rs
-  _verificationStatusIcon: ':warning:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links:
     - https://rsk0315.hatenablog.com/entry/2023/04/29/043512
@@ -284,13 +416,57 @@ data:
     \ -> bool {\n        self.0 == 0\n    }\n}\n\nimpl One for DynamicModInt {\n \
     \   fn one() -> Self {\n        Self::new(1)\n    }\n\n    fn is_one(&self) ->\
     \ bool {\n        self == &Self::one()\n    }\n}\n"
-  dependsOn: []
+  dependsOn:
+  - crates/algebraic/algebraic/src/lib.rs
   isVerificationFile: false
   path: crates/number-theory/modint/src/lib.rs
-  requiredBy: []
-  timestamp: '1970-01-01 00:00:00+00:00'
-  verificationStatus: LIBRARY_NO_TESTS
-  verifiedWith: []
+  requiredBy:
+  - crates/string/wildcard-pattern-matching/src/lib.rs
+  - crates/graph/count-spanning-tree-directed/src/lib.rs
+  - crates/graph/count-spanning-tree-undirected/src/lib.rs
+  - crates/number-theory/combination/src/lib.rs
+  - crates/convolution/convolution-arbitrary-mod/src/lib.rs
+  - crates/convolution/convolution-ntt-friendly/src/lib.rs
+  - crates/convolution/convolution-u64/src/lib.rs
+  - crates/convolution/convolution-naive/src/lib.rs
+  - crates/polynomial/bostan-mori/src/lib.rs
+  - crates/polynomial/berlekamp-massey/src/lib.rs
+  - crates/polynomial/formal-power-series/src/lib.rs
+  - crates/polynomial/lagrange-interpolation/src/lib.rs
+  - crates/polynomial/shift-of-sampling-points/src/lib.rs
+  - crates/polynomial/polynomial-interpolation/src/lib.rs
+  timestamp: '2024-06-13 08:47:29+09:00'
+  verificationStatus: LIBRARY_ALL_AC
+  verifiedWith:
+  - verify/range_parallel_unionfind/src/main.rs
+  - verify/convolution_mod_1000000007/src/main.rs
+  - verify/sqrt_mod/src/main.rs
+  - verify/pow_of_matrix/src/main.rs
+  - verify/convolution_mod/src/main.rs
+  - verify/exp_of_formal_power_series/src/main.rs
+  - verify/polynomial_interpolation/src/main.rs
+  - verify/matrix_product/src/main.rs
+  - verify/matrix_det/src/main.rs
+  - verify/count_spanning_tree_directed/src/main.rs
+  - verify/static_rectangle_add_rectangle_sum/src/main.rs
+  - verify/subset_convolution/src/main.rs
+  - verify/division_of_polynomials/src/main.rs
+  - verify/count_spanning_tree_undirected/src/main.rs
+  - verify/multipoint_evaluation/src/main.rs
+  - verify/inv_of_formal_power_series/src/main.rs
+  - verify/shift_of_sampling_points_of_polynomial/src/main.rs
+  - verify/point_set_tree_path_composite_sum_fixed_root/src/main.rs
+  - verify/inverse_matrix/src/main.rs
+  - verify/pow_of_formal_power_series/src/main.rs
+  - verify/polynomial_taylor_shift/src/main.rs
+  - verify/kth_term_of_linearly_recurrent_sequence/src/main.rs
+  - verify/tree_path_composite_sum/src/main.rs
+  - verify/bitwise_or_convolution/src/main.rs
+  - verify/sqrt_of_formal_power_series/src/main.rs
+  - verify/range_affine_point_get/src/main.rs
+  - verify/log_of_formal_power_series/src/main.rs
+  - verify/binomial_coefficient_prime_mod/src/main.rs
+  - verify/find_linear_recurrence/src/main.rs
 documentation_of: crates/number-theory/modint/src/lib.rs
 layout: document
 redirect_from:

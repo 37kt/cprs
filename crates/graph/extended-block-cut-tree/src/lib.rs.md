@@ -1,11 +1,17 @@
 ---
 data:
-  _extendedDependsOn: []
+  _extendedDependsOn:
+  - icon: ':heavy_check_mark:'
+    path: crates/graph/graph/src/lib.rs
+    title: crates/graph/graph/src/lib.rs
   _extendedRequiredBy: []
-  _extendedVerifiedWith: []
+  _extendedVerifiedWith:
+  - icon: ':heavy_check_mark:'
+    path: verify/biconnected_components/src/main.rs
+    title: verify/biconnected_components/src/main.rs
   _isVerificationFailed: false
   _pathExtension: rs
-  _verificationStatusIcon: ':warning:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.12.6/x64/lib/python3.12/site-packages/onlinejudge_verify/documentation/build.py\"\
@@ -40,13 +46,15 @@ data:
     \ n + *cnt));\n                *cnt += 1;\n                dfs2(u, *cnt - 1, g,\
     \ d, imos, used, cnt, edges);\n            }\n        }\n    }\n    if !ok &&\
     \ d[v] > 0 {\n        edges.push((v, n + b));\n    }\n}\n"
-  dependsOn: []
+  dependsOn:
+  - crates/graph/graph/src/lib.rs
   isVerificationFile: false
   path: crates/graph/extended-block-cut-tree/src/lib.rs
   requiredBy: []
-  timestamp: '1970-01-01 00:00:00+00:00'
-  verificationStatus: LIBRARY_NO_TESTS
-  verifiedWith: []
+  timestamp: '2024-04-10 09:38:39+09:00'
+  verificationStatus: LIBRARY_ALL_AC
+  verifiedWith:
+  - verify/biconnected_components/src/main.rs
 documentation_of: crates/graph/extended-block-cut-tree/src/lib.rs
 layout: document
 redirect_from:

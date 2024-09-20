@@ -1,6 +1,12 @@
 ---
 data:
-  _extendedDependsOn: []
+  _extendedDependsOn:
+  - icon: ':heavy_check_mark:'
+    path: crates/algebraic/algebraic/src/lib.rs
+    title: crates/algebraic/algebraic/src/lib.rs
+  - icon: ':heavy_check_mark:'
+    path: crates/data-structure/splay-tree/src/lib.rs
+    title: crates/data-structure/splay-tree/src/lib.rs
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
@@ -26,11 +32,13 @@ data:
     \          r: usize,\n        }\n        if ty == 0 {\n            sp.reverse(l..r);\n\
     \        } else {\n            println!(\"{}\", sp.prod(l..r));\n        }\n \
     \   }\n}\n"
-  dependsOn: []
+  dependsOn:
+  - crates/algebraic/algebraic/src/lib.rs
+  - crates/data-structure/splay-tree/src/lib.rs
   isVerificationFile: true
   path: verify/range_reverse_range_sum/src/main.rs
   requiredBy: []
-  timestamp: '1970-01-01 00:00:00+00:00'
+  timestamp: '2024-03-18 01:19:47+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/range_reverse_range_sum/src/main.rs

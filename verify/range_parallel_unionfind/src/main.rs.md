@@ -1,6 +1,12 @@
 ---
 data:
-  _extendedDependsOn: []
+  _extendedDependsOn:
+  - icon: ':heavy_check_mark:'
+    path: crates/data-structure/range-union-find/src/lib.rs
+    title: crates/data-structure/range-union-find/src/lib.rs
+  - icon: ':heavy_check_mark:'
+    path: crates/number-theory/modint/src/lib.rs
+    title: crates/number-theory/modint/src/lib.rs
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
@@ -25,11 +31,13 @@ data:
     \     }\n        for (u, v) in uf.merge_range(a..a + k, b..b + k) {\n        \
     \    sum += x[u] * x[v];\n            x[u] = x[u] + x[v];\n        }\n       \
     \ println!(\"{}\", sum);\n    }\n}\n"
-  dependsOn: []
+  dependsOn:
+  - crates/data-structure/range-union-find/src/lib.rs
+  - crates/number-theory/modint/src/lib.rs
   isVerificationFile: true
   path: verify/range_parallel_unionfind/src/main.rs
   requiredBy: []
-  timestamp: '1970-01-01 00:00:00+00:00'
+  timestamp: '2024-06-13 09:46:47+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/range_parallel_unionfind/src/main.rs

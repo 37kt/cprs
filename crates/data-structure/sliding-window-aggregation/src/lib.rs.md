@@ -1,11 +1,20 @@
 ---
 data:
-  _extendedDependsOn: []
+  _extendedDependsOn:
+  - icon: ':heavy_check_mark:'
+    path: crates/algebraic/algebraic/src/lib.rs
+    title: crates/algebraic/algebraic/src/lib.rs
   _extendedRequiredBy: []
-  _extendedVerifiedWith: []
+  _extendedVerifiedWith:
+  - icon: ':heavy_check_mark:'
+    path: verify/deque_operate_all_composite/src/main.rs
+    title: verify/deque_operate_all_composite/src/main.rs
+  - icon: ':heavy_check_mark:'
+    path: verify/queue_operate_all_composite/src/main.rs
+    title: verify/queue_operate_all_composite/src/main.rs
   _isVerificationFailed: false
   _pathExtension: rs
-  _verificationStatusIcon: ':warning:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.12.6/x64/lib/python3.12/site-packages/onlinejudge_verify/documentation/build.py\"\
@@ -48,13 +57,16 @@ data:
     \ {\n            self.push_front(x.clone());\n        }\n        for x in &v[v.len()\
     \ / 2..v.len()] {\n            self.push_back(x.clone());\n        }\n    }\n\
     }\n"
-  dependsOn: []
+  dependsOn:
+  - crates/algebraic/algebraic/src/lib.rs
   isVerificationFile: false
   path: crates/data-structure/sliding-window-aggregation/src/lib.rs
   requiredBy: []
-  timestamp: '1970-01-01 00:00:00+00:00'
-  verificationStatus: LIBRARY_NO_TESTS
-  verifiedWith: []
+  timestamp: '2024-03-18 01:19:47+09:00'
+  verificationStatus: LIBRARY_ALL_AC
+  verifiedWith:
+  - verify/queue_operate_all_composite/src/main.rs
+  - verify/deque_operate_all_composite/src/main.rs
 documentation_of: crates/data-structure/sliding-window-aggregation/src/lib.rs
 layout: document
 redirect_from:

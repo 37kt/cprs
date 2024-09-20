@@ -1,7 +1,16 @@
 ---
 data:
-  _extendedDependsOn: []
-  _extendedRequiredBy: []
+  _extendedDependsOn:
+  - icon: ':heavy_check_mark:'
+    path: crates/number-theory/modint/src/lib.rs
+    title: crates/number-theory/modint/src/lib.rs
+  _extendedRequiredBy:
+  - icon: ':heavy_check_mark:'
+    path: crates/convolution/convolution-arbitrary-mod/src/lib.rs
+    title: crates/convolution/convolution-arbitrary-mod/src/lib.rs
+  - icon: ':heavy_check_mark:'
+    path: crates/convolution/convolution-ntt-friendly/src/lib.rs
+    title: crates/convolution/convolution-ntt-friendly/src/lib.rs
   _extendedVerifiedWith: []
   _isVerificationFailed: false
   _pathExtension: rs
@@ -19,11 +28,14 @@ data:
     \ == 0 {\n        return vec![];\n    }\n    let l = n + m - 1;\n    let mut c\
     \ = vec![0.into(); l];\n    for i in 0..n {\n        for j in 0..m {\n       \
     \     c[i + j] += a[i] * b[j];\n        }\n    }\n    c\n}\n"
-  dependsOn: []
+  dependsOn:
+  - crates/number-theory/modint/src/lib.rs
   isVerificationFile: false
   path: crates/convolution/convolution-naive/src/lib.rs
-  requiredBy: []
-  timestamp: '1970-01-01 00:00:00+00:00'
+  requiredBy:
+  - crates/convolution/convolution-arbitrary-mod/src/lib.rs
+  - crates/convolution/convolution-ntt-friendly/src/lib.rs
+  timestamp: '2024-06-13 08:47:29+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: crates/convolution/convolution-naive/src/lib.rs

@@ -1,6 +1,9 @@
 ---
 data:
-  _extendedDependsOn: []
+  _extendedDependsOn:
+  - icon: ':heavy_check_mark:'
+    path: crates/data-structure/w-ary-tree-set/src/lib.rs
+    title: crates/data-structure/w-ary-tree-set/src/lib.rs
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
@@ -31,11 +34,12 @@ data:
     \     _ => {\n                if let Some(x) = tr.prev(k) {\n                \
     \    println!(\"{}\", x);\n                } else {\n                    println!(\"\
     -1\");\n                }\n            }\n        }\n    }\n}\n"
-  dependsOn: []
+  dependsOn:
+  - crates/data-structure/w-ary-tree-set/src/lib.rs
   isVerificationFile: true
   path: verify/predecessor_problem/src/main.rs
   requiredBy: []
-  timestamp: '1970-01-01 00:00:00+00:00'
+  timestamp: '2023-05-13 18:34:42+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/predecessor_problem/src/main.rs

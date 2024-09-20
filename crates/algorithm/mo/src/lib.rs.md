@@ -2,10 +2,16 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy: []
-  _extendedVerifiedWith: []
+  _extendedVerifiedWith:
+  - icon: ':heavy_check_mark:'
+    path: verify/static_range_inversions_query/src/main.rs
+    title: verify/static_range_inversions_query/src/main.rs
+  - icon: ':heavy_check_mark:'
+    path: verify/static_range_sum/src/main.rs
+    title: verify/static_range_sum/src/main.rs
   _isVerificationFailed: false
   _pathExtension: rs
-  _verificationStatusIcon: ':warning:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.12.6/x64/lib/python3.12/site-packages/onlinejudge_verify/documentation/build.py\"\
@@ -39,9 +45,11 @@ data:
   isVerificationFile: false
   path: crates/algorithm/mo/src/lib.rs
   requiredBy: []
-  timestamp: '1970-01-01 00:00:00+00:00'
-  verificationStatus: LIBRARY_NO_TESTS
-  verifiedWith: []
+  timestamp: '2023-04-20 08:15:08+09:00'
+  verificationStatus: LIBRARY_ALL_AC
+  verifiedWith:
+  - verify/static_range_inversions_query/src/main.rs
+  - verify/static_range_sum/src/main.rs
 documentation_of: crates/algorithm/mo/src/lib.rs
 layout: document
 redirect_from:

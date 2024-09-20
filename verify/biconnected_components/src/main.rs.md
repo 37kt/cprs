@@ -1,6 +1,12 @@
 ---
 data:
-  _extendedDependsOn: []
+  _extendedDependsOn:
+  - icon: ':heavy_check_mark:'
+    path: crates/graph/extended-block-cut-tree/src/lib.rs
+    title: crates/graph/extended-block-cut-tree/src/lib.rs
+  - icon: ':heavy_check_mark:'
+    path: crates/graph/graph/src/lib.rs
+    title: crates/graph/graph/src/lib.rs
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
@@ -25,11 +31,13 @@ data:
     \ n);\n    for i in n..bct.len() {\n        println!(\n            \"{} {}\",\n\
     \            bct[i].len(),\n            bct[i].iter().map(|&(i, _)| i).join(\"\
     \ \")\n        );\n    }\n}\n"
-  dependsOn: []
+  dependsOn:
+  - crates/graph/extended-block-cut-tree/src/lib.rs
+  - crates/graph/graph/src/lib.rs
   isVerificationFile: true
   path: verify/biconnected_components/src/main.rs
   requiredBy: []
-  timestamp: '1970-01-01 00:00:00+00:00'
+  timestamp: '2024-04-10 09:38:39+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/biconnected_components/src/main.rs

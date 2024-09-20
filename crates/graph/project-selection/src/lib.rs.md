@@ -1,7 +1,13 @@
 ---
 data:
-  _extendedDependsOn: []
-  _extendedRequiredBy: []
+  _extendedDependsOn:
+  - icon: ':warning:'
+    path: crates/graph/max-flow/src/lib.rs
+    title: crates/graph/max-flow/src/lib.rs
+  _extendedRequiredBy:
+  - icon: ':warning:'
+    path: crates/graph/k-project-selection/src/lib.rs
+    title: crates/graph/k-project-selection/src/lib.rs
   _extendedVerifiedWith: []
   _isVerificationFailed: false
   _pathExtension: rs
@@ -124,11 +130,13 @@ data:
     \        assert!(j == S || j == T || j < self.n_item + self.n_aux);\n        if\
     \ cost == 0 {\n            return;\n        }\n        self.edges.push((i, j,\
     \ cost));\n    }\n}\n"
-  dependsOn: []
+  dependsOn:
+  - crates/graph/max-flow/src/lib.rs
   isVerificationFile: false
   path: crates/graph/project-selection/src/lib.rs
-  requiredBy: []
-  timestamp: '1970-01-01 00:00:00+00:00'
+  requiredBy:
+  - crates/graph/k-project-selection/src/lib.rs
+  timestamp: '2024-04-05 14:38:09+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: crates/graph/project-selection/src/lib.rs

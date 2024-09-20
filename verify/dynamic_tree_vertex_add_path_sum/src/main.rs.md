@@ -1,6 +1,12 @@
 ---
 data:
-  _extendedDependsOn: []
+  _extendedDependsOn:
+  - icon: ':heavy_check_mark:'
+    path: crates/algebraic/algebraic/src/lib.rs
+    title: crates/algebraic/algebraic/src/lib.rs
+  - icon: ':heavy_check_mark:'
+    path: crates/data-structure/link-cut-tree/src/lib.rs
+    title: crates/data-structure/link-cut-tree/src/lib.rs
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
@@ -32,11 +38,13 @@ data:
     \       lct.apply(p, p, x);\n        } else {\n            input! {\n        \
     \        u: usize,\n                v: usize,\n            }\n            println!(\"\
     {}\", lct.prod(u, v));\n        }\n    }\n}\n"
-  dependsOn: []
+  dependsOn:
+  - crates/algebraic/algebraic/src/lib.rs
+  - crates/data-structure/link-cut-tree/src/lib.rs
   isVerificationFile: true
   path: verify/dynamic_tree_vertex_add_path_sum/src/main.rs
   requiredBy: []
-  timestamp: '1970-01-01 00:00:00+00:00'
+  timestamp: '2024-04-21 23:45:22+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/dynamic_tree_vertex_add_path_sum/src/main.rs

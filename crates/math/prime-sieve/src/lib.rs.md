@@ -52,7 +52,7 @@ data:
   isVerificationFile: false
   path: crates/math/prime-sieve/src/lib.rs
   requiredBy: []
-  timestamp: '1970-01-01 00:00:00+00:00'
+  timestamp: '2023-11-07 11:26:18+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: crates/math/prime-sieve/src/lib.rs

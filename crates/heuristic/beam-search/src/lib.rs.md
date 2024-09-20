@@ -148,7 +148,7 @@ data:
   isVerificationFile: false
   path: crates/heuristic/beam-search/src/lib.rs
   requiredBy: []
-  timestamp: '1970-01-01 00:00:00+00:00'
+  timestamp: '2024-06-19 10:50:00+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: crates/heuristic/beam-search/src/lib.rs

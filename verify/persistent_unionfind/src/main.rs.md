@@ -1,6 +1,9 @@
 ---
 data:
-  _extendedDependsOn: []
+  _extendedDependsOn:
+  - icon: ':heavy_check_mark:'
+    path: crates/data-structure/persistent-union-find/src/lib.rs
+    title: crates/data-structure/persistent-union-find/src/lib.rs
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
@@ -25,11 +28,12 @@ data:
     \        if t == 0 {\n            uf[i] = uf[k].merge(u, v);\n        } else {\n\
     \            println!(\"{}\", uf[k].same(u, v) as usize);\n        }\n    }\n\
     }\n"
-  dependsOn: []
+  dependsOn:
+  - crates/data-structure/persistent-union-find/src/lib.rs
   isVerificationFile: true
   path: verify/persistent_unionfind/src/main.rs
   requiredBy: []
-  timestamp: '1970-01-01 00:00:00+00:00'
+  timestamp: '2023-05-08 17:12:04+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/persistent_unionfind/src/main.rs

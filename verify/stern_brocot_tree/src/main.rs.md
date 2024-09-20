@@ -1,6 +1,12 @@
 ---
 data:
-  _extendedDependsOn: []
+  _extendedDependsOn:
+  - icon: ':heavy_check_mark:'
+    path: crates/algebraic/rational/src/lib.rs
+    title: crates/algebraic/rational/src/lib.rs
+  - icon: ':heavy_check_mark:'
+    path: crates/math/stern-brocot-tree/src/lib.rs
+    title: crates/math/stern-brocot-tree/src/lib.rs
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
@@ -55,11 +61,13 @@ data:
     \        let Rational { num: h, den: k } = sbt.upper_bound();\n              \
     \  println!(\"{} {} {} {}\", f, g, h, k);\n            }\n            _ => unreachable!(),\n\
     \        }\n    }\n}\n"
-  dependsOn: []
+  dependsOn:
+  - crates/algebraic/rational/src/lib.rs
+  - crates/math/stern-brocot-tree/src/lib.rs
   isVerificationFile: true
   path: verify/stern_brocot_tree/src/main.rs
   requiredBy: []
-  timestamp: '1970-01-01 00:00:00+00:00'
+  timestamp: '2024-03-21 11:10:47+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/stern_brocot_tree/src/main.rs

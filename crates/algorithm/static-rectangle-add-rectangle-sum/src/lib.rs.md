@@ -2,10 +2,13 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy: []
-  _extendedVerifiedWith: []
+  _extendedVerifiedWith:
+  - icon: ':heavy_check_mark:'
+    path: verify/static_rectangle_add_rectangle_sum/src/main.rs
+    title: verify/static_rectangle_add_rectangle_sum/src/main.rs
   _isVerificationFailed: false
   _pathExtension: rs
-  _verificationStatusIcon: ':warning:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.12.6/x64/lib/python3.12/site-packages/onlinejudge_verify/documentation/build.py\"\
@@ -59,9 +62,10 @@ data:
   isVerificationFile: false
   path: crates/algorithm/static-rectangle-add-rectangle-sum/src/lib.rs
   requiredBy: []
-  timestamp: '1970-01-01 00:00:00+00:00'
-  verificationStatus: LIBRARY_NO_TESTS
-  verifiedWith: []
+  timestamp: '2024-05-14 13:30:35+09:00'
+  verificationStatus: LIBRARY_ALL_AC
+  verifiedWith:
+  - verify/static_rectangle_add_rectangle_sum/src/main.rs
 documentation_of: crates/algorithm/static-rectangle-add-rectangle-sum/src/lib.rs
 layout: document
 redirect_from:

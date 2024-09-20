@@ -1,6 +1,9 @@
 ---
 data:
-  _extendedDependsOn: []
+  _extendedDependsOn:
+  - icon: ':heavy_check_mark:'
+    path: crates/data-structure/li-chao-tree/src/lib.rs
+    title: crates/data-structure/li-chao-tree/src/lib.rs
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
@@ -32,11 +35,12 @@ data:
     \ (a, b));\n        } else if let Some(y) = tr.min(l) {\n            println!(\"\
     {}\", y);\n        } else {\n            println!(\"INFINITY\");\n        }\n\
     \    }\n}\n"
-  dependsOn: []
+  dependsOn:
+  - crates/data-structure/li-chao-tree/src/lib.rs
   isVerificationFile: true
   path: verify/segment_add_get_min_offline/src/main.rs
   requiredBy: []
-  timestamp: '1970-01-01 00:00:00+00:00'
+  timestamp: '2023-05-16 16:25:17+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/segment_add_get_min_offline/src/main.rs

@@ -39,7 +39,7 @@ data:
   isVerificationFile: false
   path: crates/data-structure/interval-set/src/lib.rs
   requiredBy: []
-  timestamp: '1970-01-01 00:00:00+00:00'
+  timestamp: '2023-05-23 15:04:49+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: crates/data-structure/interval-set/src/lib.rs

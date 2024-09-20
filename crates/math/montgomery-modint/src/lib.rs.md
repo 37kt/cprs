@@ -1,7 +1,13 @@
 ---
 data:
-  _extendedDependsOn: []
-  _extendedRequiredBy: []
+  _extendedDependsOn:
+  - icon: ':heavy_check_mark:'
+    path: crates/algebraic/algebraic/src/lib.rs
+    title: crates/algebraic/algebraic/src/lib.rs
+  _extendedRequiredBy:
+  - icon: ':heavy_check_mark:'
+    path: crates/math/fast-factorize/src/lib.rs
+    title: crates/math/fast-factorize/src/lib.rs
   _extendedVerifiedWith: []
   _isVerificationFailed: false
   _pathExtension: rs
@@ -68,11 +74,13 @@ data:
     \    }\n\n    fn is_zero(&self) -> bool {\n        self.0 == 0\n    }\n}\n\nimpl\
     \ One for MontgomeryModInt {\n    fn one() -> Self {\n        Self(1)\n    }\n\
     \n    fn is_one(&self) -> bool {\n        self == &Self::new(1)\n    }\n}\n"
-  dependsOn: []
+  dependsOn:
+  - crates/algebraic/algebraic/src/lib.rs
   isVerificationFile: false
   path: crates/math/montgomery-modint/src/lib.rs
-  requiredBy: []
-  timestamp: '1970-01-01 00:00:00+00:00'
+  requiredBy:
+  - crates/math/fast-factorize/src/lib.rs
+  timestamp: '2024-03-18 01:19:47+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: crates/math/montgomery-modint/src/lib.rs

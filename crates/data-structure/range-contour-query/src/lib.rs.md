@@ -1,7 +1,19 @@
 ---
 data:
-  _extendedDependsOn: []
-  _extendedRequiredBy: []
+  _extendedDependsOn:
+  - icon: ':heavy_check_mark:'
+    path: crates/data-structure/heavy-light-decomposition/src/lib.rs
+    title: crates/data-structure/heavy-light-decomposition/src/lib.rs
+  - icon: ':heavy_check_mark:'
+    path: crates/graph/graph/src/lib.rs
+    title: crates/graph/graph/src/lib.rs
+  _extendedRequiredBy:
+  - icon: ':heavy_check_mark:'
+    path: crates/data-structure/vertex-add-range-contour-sum/src/lib.rs
+    title: crates/data-structure/vertex-add-range-contour-sum/src/lib.rs
+  - icon: ':heavy_check_mark:'
+    path: crates/data-structure/vertex-get-range-contour-add/src/lib.rs
+    title: crates/data-structure/vertex-get-range-contour-add/src/lib.rs
   _extendedVerifiedWith: []
   _isVerificationFailed: false
   _pathExtension: rs
@@ -104,11 +116,15 @@ data:
     \                    res.push((u, f(u, l), f(u, r)));\n                }\n   \
     \         }\n            v = p;\n        }\n        res.retain(|&(_, l, r)| l\
     \ < r);\n        res\n    }\n}\n"
-  dependsOn: []
+  dependsOn:
+  - crates/data-structure/heavy-light-decomposition/src/lib.rs
+  - crates/graph/graph/src/lib.rs
   isVerificationFile: false
   path: crates/data-structure/range-contour-query/src/lib.rs
-  requiredBy: []
-  timestamp: '1970-01-01 00:00:00+00:00'
+  requiredBy:
+  - crates/data-structure/vertex-add-range-contour-sum/src/lib.rs
+  - crates/data-structure/vertex-get-range-contour-add/src/lib.rs
+  timestamp: '2024-06-28 10:31:31+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: crates/data-structure/range-contour-query/src/lib.rs

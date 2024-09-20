@@ -1,6 +1,12 @@
 ---
 data:
-  _extendedDependsOn: []
+  _extendedDependsOn:
+  - icon: ':heavy_check_mark:'
+    path: crates/math/matrix/src/lib.rs
+    title: crates/math/matrix/src/lib.rs
+  - icon: ':heavy_check_mark:'
+    path: crates/number-theory/modint/src/lib.rs
+    title: crates/number-theory/modint/src/lib.rs
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
@@ -21,11 +27,13 @@ data:
     \n#[proconio::fastout]\nfn main() {\n    input! {\n        n: usize,\n       \
     \ a: [[Mint; n]; n],\n    }\n    let a = Matrix::<Mint>::from(a);\n    let (_,\
     \ _, det) = a.gauss_elimination();\n    println!(\"{}\", det.unwrap());\n}\n"
-  dependsOn: []
+  dependsOn:
+  - crates/math/matrix/src/lib.rs
+  - crates/number-theory/modint/src/lib.rs
   isVerificationFile: true
   path: verify/matrix_det/src/main.rs
   requiredBy: []
-  timestamp: '1970-01-01 00:00:00+00:00'
+  timestamp: '2024-06-13 08:47:29+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/matrix_det/src/main.rs

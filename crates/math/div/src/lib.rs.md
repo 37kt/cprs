@@ -45,7 +45,7 @@ data:
   isVerificationFile: false
   path: crates/math/div/src/lib.rs
   requiredBy: []
-  timestamp: '1970-01-01 00:00:00+00:00'
+  timestamp: '2024-08-15 14:31:02+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: crates/math/div/src/lib.rs

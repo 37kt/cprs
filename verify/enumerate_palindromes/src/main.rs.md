@@ -1,6 +1,9 @@
 ---
 data:
-  _extendedDependsOn: []
+  _extendedDependsOn:
+  - icon: ':heavy_check_mark:'
+    path: crates/string/manacher/src/lib.rs
+    title: crates/string/manacher/src/lib.rs
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
@@ -21,11 +24,12 @@ data:
     \n#[proconio::fastout]\nfn main() {\n    input! {\n        s: Bytes,\n    }\n\
     \    let res = manacher(&s);\n    println!(\"{}\", res[1..res.len() - 1].iter().join(\"\
     \ \"));\n}\n"
-  dependsOn: []
+  dependsOn:
+  - crates/string/manacher/src/lib.rs
   isVerificationFile: true
   path: verify/enumerate_palindromes/src/main.rs
   requiredBy: []
-  timestamp: '1970-01-01 00:00:00+00:00'
+  timestamp: '2024-04-14 08:35:43+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/enumerate_palindromes/src/main.rs

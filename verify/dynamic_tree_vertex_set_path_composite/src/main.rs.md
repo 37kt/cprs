@@ -1,6 +1,12 @@
 ---
 data:
-  _extendedDependsOn: []
+  _extendedDependsOn:
+  - icon: ':heavy_check_mark:'
+    path: crates/algebraic/algebraic/src/lib.rs
+    title: crates/algebraic/algebraic/src/lib.rs
+  - icon: ':heavy_check_mark:'
+    path: crates/data-structure/link-cut-tree/src/lib.rs
+    title: crates/data-structure/link-cut-tree/src/lib.rs
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
@@ -35,11 +41,13 @@ data:
     \   v: usize,\n                x: Mint,\n            }\n            let (a, b)\
     \ = lct.prod(v, u);\n            println!(\"{}\", a * x + b);\n        }\n   \
     \ }\n}\n"
-  dependsOn: []
+  dependsOn:
+  - crates/algebraic/algebraic/src/lib.rs
+  - crates/data-structure/link-cut-tree/src/lib.rs
   isVerificationFile: true
   path: verify/dynamic_tree_vertex_set_path_composite/src/main.rs
   requiredBy: []
-  timestamp: '1970-01-01 00:00:00+00:00'
+  timestamp: '2024-04-21 23:45:22+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/dynamic_tree_vertex_set_path_composite/src/main.rs

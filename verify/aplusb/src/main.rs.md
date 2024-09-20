@@ -23,7 +23,7 @@ data:
   isVerificationFile: true
   path: verify/aplusb/src/main.rs
   requiredBy: []
-  timestamp: '1970-01-01 00:00:00+00:00'
+  timestamp: '2023-04-21 11:20:46+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/aplusb/src/main.rs

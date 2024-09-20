@@ -1,6 +1,9 @@
 ---
 data:
-  _extendedDependsOn: []
+  _extendedDependsOn:
+  - icon: ':heavy_check_mark:'
+    path: crates/convolution/lcm-convolution/src/lib.rs
+    title: crates/convolution/lcm-convolution/src/lib.rs
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
@@ -22,11 +25,12 @@ data:
     \    n: usize,\n        mut a: [Mint; n],\n        mut b: [Mint; n],\n    }\n\
     \    a.insert(0, 0.into());\n    b.insert(0, 0.into());\n    let c = lcm_convolution(a,\
     \ b);\n    println!(\"{}\", c[1..].iter().join(\" \"));\n}\n"
-  dependsOn: []
+  dependsOn:
+  - crates/convolution/lcm-convolution/src/lib.rs
   isVerificationFile: true
   path: verify/lcm_convolution/src/main.rs
   requiredBy: []
-  timestamp: '1970-01-01 00:00:00+00:00'
+  timestamp: '2023-05-06 16:57:25+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/lcm_convolution/src/main.rs

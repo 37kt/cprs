@@ -1,6 +1,15 @@
 ---
 data:
-  _extendedDependsOn: []
+  _extendedDependsOn:
+  - icon: ':heavy_check_mark:'
+    path: crates/number-theory/modint/src/lib.rs
+    title: crates/number-theory/modint/src/lib.rs
+  - icon: ':heavy_check_mark:'
+    path: crates/polynomial/bostan-mori/src/lib.rs
+    title: crates/polynomial/bostan-mori/src/lib.rs
+  - icon: ':heavy_check_mark:'
+    path: crates/polynomial/formal-power-series/src/lib.rs
+    title: crates/polynomial/formal-power-series/src/lib.rs
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
@@ -24,11 +33,14 @@ data:
     \ FormalPowerSeries(a);\n    let c = FormalPowerSeries(c);\n    let c = fps![1]\
     \ - (c << 1);\n    let res = bostan_mori((&a * &c).pre(d), c, k);\n    println!(\"\
     {}\", res);\n}\n"
-  dependsOn: []
+  dependsOn:
+  - crates/number-theory/modint/src/lib.rs
+  - crates/polynomial/bostan-mori/src/lib.rs
+  - crates/polynomial/formal-power-series/src/lib.rs
   isVerificationFile: true
   path: verify/kth_term_of_linearly_recurrent_sequence/src/main.rs
   requiredBy: []
-  timestamp: '1970-01-01 00:00:00+00:00'
+  timestamp: '2024-06-13 08:47:29+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/kth_term_of_linearly_recurrent_sequence/src/main.rs

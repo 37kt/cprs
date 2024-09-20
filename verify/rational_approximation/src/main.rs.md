@@ -1,6 +1,12 @@
 ---
 data:
-  _extendedDependsOn: []
+  _extendedDependsOn:
+  - icon: ':heavy_check_mark:'
+    path: crates/algebraic/rational/src/lib.rs
+    title: crates/algebraic/rational/src/lib.rs
+  - icon: ':heavy_check_mark:'
+    path: crates/math/stern-brocot-tree/src/lib.rs
+    title: crates/math/stern-brocot-tree/src/lib.rs
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
@@ -24,11 +30,13 @@ data:
     \ a, den: b }, _) = SternBrocotTreeNode::binary_search(|x| x <= r, n);\n     \
     \   let (_, Rational { num: c, den: d }) = SternBrocotTreeNode::binary_search(|x|\
     \ x >= r, n);\n        println!(\"{} {} {} {}\", a, b, c, d);\n    }\n}\n"
-  dependsOn: []
+  dependsOn:
+  - crates/algebraic/rational/src/lib.rs
+  - crates/math/stern-brocot-tree/src/lib.rs
   isVerificationFile: true
   path: verify/rational_approximation/src/main.rs
   requiredBy: []
-  timestamp: '1970-01-01 00:00:00+00:00'
+  timestamp: '2024-03-21 11:10:47+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/rational_approximation/src/main.rs

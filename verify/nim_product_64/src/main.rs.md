@@ -1,6 +1,9 @@
 ---
 data:
-  _extendedDependsOn: []
+  _extendedDependsOn:
+  - icon: ':heavy_check_mark:'
+    path: crates/math/nimber/src/lib.rs
+    title: crates/math/nimber/src/lib.rs
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
@@ -21,11 +24,12 @@ data:
     \ {\n    input! {\n        q: usize,\n    }\n    for _ in 0..q {\n        input!\
     \ {\n            a: Nimber,\n            b: Nimber,\n        }\n        println!(\"\
     {}\", a * b);\n    }\n}\n"
-  dependsOn: []
+  dependsOn:
+  - crates/math/nimber/src/lib.rs
   isVerificationFile: true
   path: verify/nim_product_64/src/main.rs
   requiredBy: []
-  timestamp: '1970-01-01 00:00:00+00:00'
+  timestamp: '2023-05-19 16:25:08+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/nim_product_64/src/main.rs

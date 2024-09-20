@@ -1,6 +1,9 @@
 ---
 data:
-  _extendedDependsOn: []
+  _extendedDependsOn:
+  - icon: ':heavy_check_mark:'
+    path: crates/math/matrix-mod2/src/lib.rs
+    title: crates/math/matrix-mod2/src/lib.rs
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
@@ -22,11 +25,12 @@ data:
     \    let mut a = MatrixMod2::new(n, n);\n    for i in 0..n {\n        for j in\
     \ 0..n {\n            if s[i][j] == b'1' {\n                a.set(i, j, true);\n\
     \            }\n        }\n    }\n    println!(\"{}\", a.det() as u8);\n}\n"
-  dependsOn: []
+  dependsOn:
+  - crates/math/matrix-mod2/src/lib.rs
   isVerificationFile: true
   path: verify/matrix_det_mod_2/src/main.rs
   requiredBy: []
-  timestamp: '1970-01-01 00:00:00+00:00'
+  timestamp: '2024-03-21 13:40:37+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/matrix_det_mod_2/src/main.rs

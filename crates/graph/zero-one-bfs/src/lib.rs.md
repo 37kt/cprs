@@ -1,6 +1,9 @@
 ---
 data:
-  _extendedDependsOn: []
+  _extendedDependsOn:
+  - icon: ':heavy_check_mark:'
+    path: crates/graph/graph/src/lib.rs
+    title: crates/graph/graph/src/lib.rs
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
@@ -36,11 +39,12 @@ data:
     \            return None;\n        }\n        let mut path = vec![];\n       \
     \ while v != !0 {\n            path.push(v);\n            v = self.prev[v];\n\
     \        }\n        path.reverse();\n        Some(path)\n    }\n}\n"
-  dependsOn: []
+  dependsOn:
+  - crates/graph/graph/src/lib.rs
   isVerificationFile: false
   path: crates/graph/zero-one-bfs/src/lib.rs
   requiredBy: []
-  timestamp: '1970-01-01 00:00:00+00:00'
+  timestamp: '2024-05-13 10:35:48+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: crates/graph/zero-one-bfs/src/lib.rs

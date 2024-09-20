@@ -1,6 +1,9 @@
 ---
 data:
-  _extendedDependsOn: []
+  _extendedDependsOn:
+  - icon: ':heavy_check_mark:'
+    path: crates/math/fast-factorize/src/lib.rs
+    title: crates/math/fast-factorize/src/lib.rs
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
@@ -21,11 +24,12 @@ data:
     fn main() {\n    input! {\n        q: usize,\n    }\n    for _ in 0..q {\n   \
     \     input! {\n            n: u64,\n        }\n        println!(\"{}\", if is_prime(n)\
     \ { \"Yes\" } else { \"No\" });\n    }\n}\n"
-  dependsOn: []
+  dependsOn:
+  - crates/math/fast-factorize/src/lib.rs
   isVerificationFile: true
   path: verify/primality_test/src/main.rs
   requiredBy: []
-  timestamp: '1970-01-01 00:00:00+00:00'
+  timestamp: '2023-06-13 17:24:28+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/primality_test/src/main.rs

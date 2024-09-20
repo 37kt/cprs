@@ -1,6 +1,15 @@
 ---
 data:
-  _extendedDependsOn: []
+  _extendedDependsOn:
+  - icon: ':heavy_check_mark:'
+    path: crates/graph/graph/src/lib.rs
+    title: crates/graph/graph/src/lib.rs
+  - icon: ':heavy_check_mark:'
+    path: crates/number-theory/modint/src/lib.rs
+    title: crates/number-theory/modint/src/lib.rs
+  - icon: ':heavy_check_mark:'
+    path: crates/tree/static-top-tree-dp/src/lib.rs
+    title: crates/tree/static-top-tree-dp/src/lib.rs
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
@@ -42,11 +51,14 @@ data:
     \  input! {\n                e: usize,\n                y: Mint,\n           \
     \     z: Mint,\n            }\n            dp.set_edge(e, (y, z));\n        }\n\
     \        println!(\"{}\", dp.prod().0);\n    }\n}\n"
-  dependsOn: []
+  dependsOn:
+  - crates/graph/graph/src/lib.rs
+  - crates/number-theory/modint/src/lib.rs
+  - crates/tree/static-top-tree-dp/src/lib.rs
   isVerificationFile: true
   path: verify/point_set_tree_path_composite_sum_fixed_root/src/main.rs
   requiredBy: []
-  timestamp: '1970-01-01 00:00:00+00:00'
+  timestamp: '2024-06-13 08:47:29+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/point_set_tree_path_composite_sum_fixed_root/src/main.rs

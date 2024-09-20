@@ -1,6 +1,12 @@
 ---
 data:
-  _extendedDependsOn: []
+  _extendedDependsOn:
+  - icon: ':heavy_check_mark:'
+    path: crates/algebraic/algebraic/src/lib.rs
+    title: crates/algebraic/algebraic/src/lib.rs
+  - icon: ':heavy_check_mark:'
+    path: crates/data-structure/vertex-get-range-contour-add/src/lib.rs
+    title: crates/data-structure/vertex-get-range-contour-add/src/lib.rs
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
@@ -26,11 +32,13 @@ data:
     \           l: usize,\n                r: usize,\n                x: i64,\n  \
     \          }\n            rcq.apply_range(p, l, r, x);\n        } else {\n   \
     \         println!(\"{}\", rcq.get(p));\n        }\n    }\n}\n"
-  dependsOn: []
+  dependsOn:
+  - crates/algebraic/algebraic/src/lib.rs
+  - crates/data-structure/vertex-get-range-contour-add/src/lib.rs
   isVerificationFile: true
   path: verify/vertex_get_range_contour_add_on_tree/src/main.rs
   requiredBy: []
-  timestamp: '1970-01-01 00:00:00+00:00'
+  timestamp: '2024-06-28 10:31:31+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/vertex_get_range_contour_add_on_tree/src/main.rs

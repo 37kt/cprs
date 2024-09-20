@@ -1,6 +1,15 @@
 ---
 data:
-  _extendedDependsOn: []
+  _extendedDependsOn:
+  - icon: ':heavy_check_mark:'
+    path: crates/algebraic/algebraic/src/lib.rs
+    title: crates/algebraic/algebraic/src/lib.rs
+  - icon: ':heavy_check_mark:'
+    path: crates/algorithm/offline-dynamic-connectivity/src/lib.rs
+    title: crates/algorithm/offline-dynamic-connectivity/src/lib.rs
+  - icon: ':heavy_check_mark:'
+    path: crates/data-structure/rollback-union-find-component-sum/src/lib.rs
+    title: crates/data-structure/rollback-union-find-component-sum/src/lib.rs
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
@@ -37,11 +46,14 @@ data:
     \ dc.add_edge(u, v),\n            1 => dc.remove_edge(u, v),\n            2 =>\
     \ dc.add_edge(u, n + i),\n            3 => dc.get(u),\n            _ => unreachable!(),\n\
     \        }\n    }\n    dc.run();\n}\n"
-  dependsOn: []
+  dependsOn:
+  - crates/algebraic/algebraic/src/lib.rs
+  - crates/algorithm/offline-dynamic-connectivity/src/lib.rs
+  - crates/data-structure/rollback-union-find-component-sum/src/lib.rs
   isVerificationFile: true
   path: verify/dynamic_graph_vertex_add_component_sum/src/main.rs
   requiredBy: []
-  timestamp: '1970-01-01 00:00:00+00:00'
+  timestamp: '2024-05-09 13:55:09+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/dynamic_graph_vertex_add_component_sum/src/main.rs

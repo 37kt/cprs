@@ -1,6 +1,12 @@
 ---
 data:
-  _extendedDependsOn: []
+  _extendedDependsOn:
+  - icon: ':heavy_check_mark:'
+    path: crates/math/modint61/src/lib.rs
+    title: crates/math/modint61/src/lib.rs
+  - icon: ':heavy_check_mark:'
+    path: crates/string/rolling-hash/src/lib.rs
+    title: crates/string/rolling-hash/src/lib.rs
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
@@ -22,11 +28,13 @@ data:
     \    let rh = RollingHashModInt61::new(&s);\n    let res = (0..s.len()).map(|i|\
     \ rh.lcp(.., &rh, i..)).collect_vec();\n    println!(\"{}\", res.iter().join(\"\
     \ \"));\n}\n"
-  dependsOn: []
+  dependsOn:
+  - crates/math/modint61/src/lib.rs
+  - crates/string/rolling-hash/src/lib.rs
   isVerificationFile: true
   path: verify/zalgorithm_rolling_hash/src/main.rs
   requiredBy: []
-  timestamp: '1970-01-01 00:00:00+00:00'
+  timestamp: '2024-04-08 11:12:42+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/zalgorithm_rolling_hash/src/main.rs

@@ -1,11 +1,29 @@
 ---
 data:
-  _extendedDependsOn: []
-  _extendedRequiredBy: []
-  _extendedVerifiedWith: []
+  _extendedDependsOn:
+  - icon: ':heavy_check_mark:'
+    path: crates/graph/graph/src/lib.rs
+    title: crates/graph/graph/src/lib.rs
+  _extendedRequiredBy:
+  - icon: ':warning:'
+    path: crates/data-structure/range-contour-query/src/lib.rs
+    title: crates/data-structure/range-contour-query/src/lib.rs
+  - icon: ':heavy_check_mark:'
+    path: crates/data-structure/tree-query/src/lib.rs
+    title: crates/data-structure/tree-query/src/lib.rs
+  - icon: ':heavy_check_mark:'
+    path: crates/tree/static-top-tree-dp/src/lib.rs
+    title: crates/tree/static-top-tree-dp/src/lib.rs
+  _extendedVerifiedWith:
+  - icon: ':heavy_check_mark:'
+    path: verify/jump_on_tree/src/main.rs
+    title: verify/jump_on_tree/src/main.rs
+  - icon: ':heavy_check_mark:'
+    path: verify/lca/src/main.rs
+    title: verify/lca/src/main.rs
   _isVerificationFailed: false
   _pathExtension: rs
-  _verificationStatusIcon: ':warning:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.12.6/x64/lib/python3.12/site-packages/onlinejudge_verify/documentation/build.py\"\
@@ -85,13 +103,19 @@ data:
     \u3059\u308B\u90E8\u5206\u6728\u306EHLD\u4E0A\u306E\u7BC4\u56F2\n    pub fn subtree(&self,\
     \ v: usize, edge: bool) -> (usize, usize) {\n        let e = if edge { 1 } else\
     \ { 0 };\n        (self.t_in[v] + e, self.t_out[v])\n    }\n}\n"
-  dependsOn: []
+  dependsOn:
+  - crates/graph/graph/src/lib.rs
   isVerificationFile: false
   path: crates/data-structure/heavy-light-decomposition/src/lib.rs
-  requiredBy: []
-  timestamp: '1970-01-01 00:00:00+00:00'
-  verificationStatus: LIBRARY_NO_TESTS
-  verifiedWith: []
+  requiredBy:
+  - crates/data-structure/range-contour-query/src/lib.rs
+  - crates/data-structure/tree-query/src/lib.rs
+  - crates/tree/static-top-tree-dp/src/lib.rs
+  timestamp: '2024-06-28 10:31:31+09:00'
+  verificationStatus: LIBRARY_ALL_AC
+  verifiedWith:
+  - verify/jump_on_tree/src/main.rs
+  - verify/lca/src/main.rs
 documentation_of: crates/data-structure/heavy-light-decomposition/src/lib.rs
 layout: document
 redirect_from:

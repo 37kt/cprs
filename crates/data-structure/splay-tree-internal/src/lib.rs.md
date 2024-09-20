@@ -1,7 +1,16 @@
 ---
 data:
-  _extendedDependsOn: []
-  _extendedRequiredBy: []
+  _extendedDependsOn:
+  - icon: ':heavy_check_mark:'
+    path: crates/algebraic/algebraic/src/lib.rs
+    title: crates/algebraic/algebraic/src/lib.rs
+  _extendedRequiredBy:
+  - icon: ':heavy_check_mark:'
+    path: crates/data-structure/link-cut-tree/src/lib.rs
+    title: crates/data-structure/link-cut-tree/src/lib.rs
+  - icon: ':heavy_check_mark:'
+    path: crates/data-structure/splay-tree/src/lib.rs
+    title: crates/data-structure/splay-tree/src/lib.rs
   _extendedVerifiedWith: []
   _isVerificationFailed: false
   _pathExtension: rs
@@ -125,11 +134,14 @@ data:
     \ unsafe { g.as_mut() } {\n            if std::ptr::eq(p, g.lch) {\n         \
     \       g.lch = self;\n            } else if std::ptr::eq(p, g.rch) {\n      \
     \          g.rch = self;\n            }\n        }\n    }\n}\n"
-  dependsOn: []
+  dependsOn:
+  - crates/algebraic/algebraic/src/lib.rs
   isVerificationFile: false
   path: crates/data-structure/splay-tree-internal/src/lib.rs
-  requiredBy: []
-  timestamp: '1970-01-01 00:00:00+00:00'
+  requiredBy:
+  - crates/data-structure/splay-tree/src/lib.rs
+  - crates/data-structure/link-cut-tree/src/lib.rs
+  timestamp: '2024-04-21 23:45:22+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: crates/data-structure/splay-tree-internal/src/lib.rs

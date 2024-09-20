@@ -1,6 +1,9 @@
 ---
 data:
-  _extendedDependsOn: []
+  _extendedDependsOn:
+  - icon: ':heavy_check_mark:'
+    path: crates/string/wildcard-pattern-matching/src/lib.rs
+    title: crates/string/wildcard-pattern-matching/src/lib.rs
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
@@ -21,11 +24,12 @@ data:
     \n#[proconio::fastout]\nfn main() {\n    input! {\n        s: Bytes,\n       \
     \ t: Bytes,\n    }\n    let res = wildcard_pattern_matching(&s, &t, b'*');\n \
     \   println!(\"{}\", res.iter().map(|&f| f as u8).join(\"\"));\n}\n"
-  dependsOn: []
+  dependsOn:
+  - crates/string/wildcard-pattern-matching/src/lib.rs
   isVerificationFile: true
   path: verify/wildcard_pattern_matching/src/main.rs
   requiredBy: []
-  timestamp: '1970-01-01 00:00:00+00:00'
+  timestamp: '2024-05-09 10:04:53+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/wildcard_pattern_matching/src/main.rs

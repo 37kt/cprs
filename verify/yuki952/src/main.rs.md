@@ -1,6 +1,9 @@
 ---
 data:
-  _extendedDependsOn: []
+  _extendedDependsOn:
+  - icon: ':heavy_check_mark:'
+    path: crates/algorithm/monotone-minima/src/lib.rs
+    title: crates/algorithm/monotone-minima/src/lib.rs
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
@@ -29,11 +32,12 @@ data:
     \ + 2];\n        for i in k..=n + 1 {\n            dpn[i] = f(i, mn[i]);\n   \
     \     }\n        dp = dpn;\n        res[n - k] = dp[n + 1];\n    }\n    for i\
     \ in 0..n {\n        println!(\"{}\", res[i]);\n    }\n}\n"
-  dependsOn: []
+  dependsOn:
+  - crates/algorithm/monotone-minima/src/lib.rs
   isVerificationFile: true
   path: verify/yuki952/src/main.rs
   requiredBy: []
-  timestamp: '1970-01-01 00:00:00+00:00'
+  timestamp: '2024-04-08 15:33:16+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/yuki952/src/main.rs

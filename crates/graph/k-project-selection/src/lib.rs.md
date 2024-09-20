@@ -1,6 +1,9 @@
 ---
 data:
-  _extendedDependsOn: []
+  _extendedDependsOn:
+  - icon: ':warning:'
+    path: crates/graph/project-selection/src/lib.rs
+    title: crates/graph/project-selection/src/lib.rs
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
@@ -57,11 +60,12 @@ data:
     \    (res, g)\n    }\n\n    pub fn max_profit(&mut self) -> (i64, Vec<usize>)\
     \ {\n        let (mut res, f) = self.min_cost();\n        res = -res;\n      \
     \  (res, f)\n    }\n}\n"
-  dependsOn: []
+  dependsOn:
+  - crates/graph/project-selection/src/lib.rs
   isVerificationFile: false
   path: crates/graph/k-project-selection/src/lib.rs
   requiredBy: []
-  timestamp: '1970-01-01 00:00:00+00:00'
+  timestamp: '2024-04-23 13:31:46+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: crates/graph/k-project-selection/src/lib.rs

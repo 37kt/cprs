@@ -1,6 +1,15 @@
 ---
 data:
-  _extendedDependsOn: []
+  _extendedDependsOn:
+  - icon: ':heavy_check_mark:'
+    path: crates/graph/graph/src/lib.rs
+    title: crates/graph/graph/src/lib.rs
+  - icon: ':heavy_check_mark:'
+    path: crates/graph/range-edge-graph/src/lib.rs
+    title: crates/graph/range-edge-graph/src/lib.rs
+  - icon: ':heavy_check_mark:'
+    path: crates/macros/chminmax/src/lib.rs
+    title: crates/macros/chminmax/src/lib.rs
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
@@ -36,11 +45,14 @@ data:
     \ dfs(rev[i], &h, &mut res, &bs);\n        if r >= INF {\n            println!(\"\
     BAN\");\n        } else {\n            println!(\"{r}\");\n        }\n    }\n\
     }\n"
-  dependsOn: []
+  dependsOn:
+  - crates/graph/graph/src/lib.rs
+  - crates/graph/range-edge-graph/src/lib.rs
+  - crates/macros/chminmax/src/lib.rs
   isVerificationFile: true
   path: verify/yuki1014/src/main.rs
   requiredBy: []
-  timestamp: '1970-01-01 00:00:00+00:00'
+  timestamp: '2024-04-10 09:38:39+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/yuki1014/src/main.rs

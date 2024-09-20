@@ -1,6 +1,9 @@
 ---
 data:
-  _extendedDependsOn: []
+  _extendedDependsOn:
+  - icon: ':heavy_check_mark:'
+    path: crates/math/two-satisfiability/src/lib.rs
+    title: crates/math/two-satisfiability/src/lib.rs
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
@@ -28,11 +31,12 @@ data:
     \    if !res[i] {\n                print!(\"-\");\n            }\n           \
     \ print!(\"{} \", i + 1);\n        }\n        println!(\"0\");\n    } else {\n\
     \        println!(\"s UNSATISFIABLE\");\n    }\n}\n"
-  dependsOn: []
+  dependsOn:
+  - crates/math/two-satisfiability/src/lib.rs
   isVerificationFile: true
   path: verify/two_sat/src/main.rs
   requiredBy: []
-  timestamp: '1970-01-01 00:00:00+00:00'
+  timestamp: '2024-04-07 08:56:09+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/two_sat/src/main.rs

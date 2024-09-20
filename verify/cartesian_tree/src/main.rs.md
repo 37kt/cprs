@@ -1,6 +1,9 @@
 ---
 data:
-  _extendedDependsOn: []
+  _extendedDependsOn:
+  - icon: ':heavy_check_mark:'
+    path: crates/tree/cartesian-tree/src/lib.rs
+    title: crates/tree/cartesian-tree/src/lib.rs
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
@@ -22,11 +25,12 @@ data:
     \    let p = cartesian_tree(&a);\n    println!(\n        \"{}\",\n        p.into_iter()\n\
     \            .enumerate()\n            .map(|(i, x)| if x == !0 { i } else { x\
     \ })\n            .join(\" \")\n    );\n}\n"
-  dependsOn: []
+  dependsOn:
+  - crates/tree/cartesian-tree/src/lib.rs
   isVerificationFile: true
   path: verify/cartesian_tree/src/main.rs
   requiredBy: []
-  timestamp: '1970-01-01 00:00:00+00:00'
+  timestamp: '2024-03-14 16:40:29+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/cartesian_tree/src/main.rs

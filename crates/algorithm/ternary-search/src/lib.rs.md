@@ -46,7 +46,7 @@ data:
   isVerificationFile: false
   path: crates/algorithm/ternary-search/src/lib.rs
   requiredBy: []
-  timestamp: '1970-01-01 00:00:00+00:00'
+  timestamp: '2024-08-15 16:42:08+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: crates/algorithm/ternary-search/src/lib.rs

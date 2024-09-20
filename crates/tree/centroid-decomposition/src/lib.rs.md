@@ -1,11 +1,17 @@
 ---
 data:
-  _extendedDependsOn: []
+  _extendedDependsOn:
+  - icon: ':heavy_check_mark:'
+    path: crates/graph/graph/src/lib.rs
+    title: crates/graph/graph/src/lib.rs
   _extendedRequiredBy: []
-  _extendedVerifiedWith: []
+  _extendedVerifiedWith:
+  - icon: ':heavy_check_mark:'
+    path: verify/frequency_table_of_tree_distance/src/main.rs
+    title: verify/frequency_table_of_tree_distance/src/main.rs
   _isVerificationFailed: false
   _pathExtension: rs
-  _verificationStatusIcon: ':warning:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.12.6/x64/lib/python3.12/site-packages/onlinejudge_verify/documentation/build.py\"\
@@ -54,13 +60,15 @@ data:
     \ f: &mut impl FnMut(&[usize], &[usize], usize)) {\n    let n = g.len();\n   \
     \ let mut conv = vec![!0; n];\n    dfs3(0, g, &(0..n).collect::<Vec<_>>(), &mut\
     \ conv, f);\n}\n"
-  dependsOn: []
+  dependsOn:
+  - crates/graph/graph/src/lib.rs
   isVerificationFile: false
   path: crates/tree/centroid-decomposition/src/lib.rs
   requiredBy: []
-  timestamp: '1970-01-01 00:00:00+00:00'
-  verificationStatus: LIBRARY_NO_TESTS
-  verifiedWith: []
+  timestamp: '2024-09-20 10:29:02+09:00'
+  verificationStatus: LIBRARY_ALL_AC
+  verifiedWith:
+  - verify/frequency_table_of_tree_distance/src/main.rs
 documentation_of: crates/tree/centroid-decomposition/src/lib.rs
 layout: document
 redirect_from:

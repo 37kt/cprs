@@ -1,6 +1,9 @@
 ---
 data:
-  _extendedDependsOn: []
+  _extendedDependsOn:
+  - icon: ':heavy_check_mark:'
+    path: crates/graph/graph/src/lib.rs
+    title: crates/graph/graph/src/lib.rs
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
@@ -23,11 +26,12 @@ data:
     \   if i == n - 1 {\n                        return None;\n                  \
     \  }\n                    dist[*u] = dist[v].clone() + w.clone();\n          \
     \      }\n            }\n        }\n    }\n    Some(dist)\n}\n"
-  dependsOn: []
+  dependsOn:
+  - crates/graph/graph/src/lib.rs
   isVerificationFile: false
   path: crates/graph/bellman-ford/src/lib.rs
   requiredBy: []
-  timestamp: '1970-01-01 00:00:00+00:00'
+  timestamp: '2024-04-10 09:38:39+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: crates/graph/bellman-ford/src/lib.rs

@@ -23,7 +23,7 @@ data:
   isVerificationFile: false
   path: crates/math/euler-phi/src/lib.rs
   requiredBy: []
-  timestamp: '1970-01-01 00:00:00+00:00'
+  timestamp: '2023-12-24 10:25:28+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: crates/math/euler-phi/src/lib.rs

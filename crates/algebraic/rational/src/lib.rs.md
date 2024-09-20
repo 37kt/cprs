@@ -1,11 +1,23 @@
 ---
 data:
-  _extendedDependsOn: []
-  _extendedRequiredBy: []
-  _extendedVerifiedWith: []
+  _extendedDependsOn:
+  - icon: ':heavy_check_mark:'
+    path: crates/algebraic/algebraic/src/lib.rs
+    title: crates/algebraic/algebraic/src/lib.rs
+  _extendedRequiredBy:
+  - icon: ':heavy_check_mark:'
+    path: crates/math/stern-brocot-tree/src/lib.rs
+    title: crates/math/stern-brocot-tree/src/lib.rs
+  _extendedVerifiedWith:
+  - icon: ':heavy_check_mark:'
+    path: verify/rational_approximation/src/main.rs
+    title: verify/rational_approximation/src/main.rs
+  - icon: ':heavy_check_mark:'
+    path: verify/stern_brocot_tree/src/main.rs
+    title: verify/stern_brocot_tree/src/main.rs
   _isVerificationFailed: false
   _pathExtension: rs
-  _verificationStatusIcon: ':warning:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.12.6/x64/lib/python3.12/site-packages/onlinejudge_verify/documentation/build.py\"\
@@ -106,13 +118,17 @@ data:
     \ }\n}\n\nimpl<T> One for Rational<T>\nwhere\n    T: ZTrait,\n{\n    fn one()\
     \ -> Self {\n        Self::from(T::one())\n    }\n\n    fn is_one(&self) -> bool\
     \ {\n        self.num == T::one() && self.den == T::one()\n    }\n}\n"
-  dependsOn: []
+  dependsOn:
+  - crates/algebraic/algebraic/src/lib.rs
   isVerificationFile: false
   path: crates/algebraic/rational/src/lib.rs
-  requiredBy: []
-  timestamp: '1970-01-01 00:00:00+00:00'
-  verificationStatus: LIBRARY_NO_TESTS
-  verifiedWith: []
+  requiredBy:
+  - crates/math/stern-brocot-tree/src/lib.rs
+  timestamp: '2024-03-21 11:10:47+09:00'
+  verificationStatus: LIBRARY_ALL_AC
+  verifiedWith:
+  - verify/rational_approximation/src/main.rs
+  - verify/stern_brocot_tree/src/main.rs
 documentation_of: crates/algebraic/rational/src/lib.rs
 layout: document
 redirect_from:

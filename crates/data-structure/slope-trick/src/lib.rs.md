@@ -67,7 +67,7 @@ data:
   isVerificationFile: false
   path: crates/data-structure/slope-trick/src/lib.rs
   requiredBy: []
-  timestamp: '1970-01-01 00:00:00+00:00'
+  timestamp: '2023-05-09 19:59:15+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: crates/data-structure/slope-trick/src/lib.rs

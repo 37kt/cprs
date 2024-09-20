@@ -41,7 +41,7 @@ data:
   isVerificationFile: false
   path: crates/data-structure/rollback-union-find/src/lib.rs
   requiredBy: []
-  timestamp: '1970-01-01 00:00:00+00:00'
+  timestamp: '2024-05-09 13:55:09+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: crates/data-structure/rollback-union-find/src/lib.rs

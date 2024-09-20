@@ -51,7 +51,7 @@ data:
   isVerificationFile: false
   path: crates/data-structure/top2/src/lib.rs
   requiredBy: []
-  timestamp: '1970-01-01 00:00:00+00:00'
+  timestamp: '2024-03-18 00:43:38+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: crates/data-structure/top2/src/lib.rs

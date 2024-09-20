@@ -1,6 +1,9 @@
 ---
 data:
-  _extendedDependsOn: []
+  _extendedDependsOn:
+  - icon: ':heavy_check_mark:'
+    path: crates/data-structure/wavelet-matrix/src/lib.rs
+    title: crates/data-structure/wavelet-matrix/src/lib.rs
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
@@ -22,11 +25,12 @@ data:
     \ n],\n    }\n    let wm = WaveletMatrix::new(a);\n    for _ in 0..q {\n     \
     \   input! {\n            l: usize,\n            r: usize,\n            k: usize,\n\
     \        }\n        println!(\"{}\", wm.kth_smallest(l..r, k));\n    }\n}\n"
-  dependsOn: []
+  dependsOn:
+  - crates/data-structure/wavelet-matrix/src/lib.rs
   isVerificationFile: true
   path: verify/range_kth_smallest/src/main.rs
   requiredBy: []
-  timestamp: '1970-01-01 00:00:00+00:00'
+  timestamp: '2023-04-22 21:59:33+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/range_kth_smallest/src/main.rs

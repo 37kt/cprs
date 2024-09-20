@@ -1,6 +1,12 @@
 ---
 data:
-  _extendedDependsOn: []
+  _extendedDependsOn:
+  - icon: ':heavy_check_mark:'
+    path: crates/algebraic/algebraic/src/lib.rs
+    title: crates/algebraic/algebraic/src/lib.rs
+  - icon: ':heavy_check_mark:'
+    path: crates/data-structure/vertex-add-range-contour-sum/src/lib.rs
+    title: crates/data-structure/vertex-add-range-contour-sum/src/lib.rs
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
@@ -27,11 +33,13 @@ data:
     \ {\n            input! {\n                l: usize,\n                r: usize,\n\
     \            }\n            println!(\"{}\", rcq.prod(p, l, r));\n        }\n\
     \    }\n}\n"
-  dependsOn: []
+  dependsOn:
+  - crates/algebraic/algebraic/src/lib.rs
+  - crates/data-structure/vertex-add-range-contour-sum/src/lib.rs
   isVerificationFile: true
   path: verify/vertex_add_range_contour_sum_on_tree/src/main.rs
   requiredBy: []
-  timestamp: '1970-01-01 00:00:00+00:00'
+  timestamp: '2024-06-28 10:31:31+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/vertex_add_range_contour_sum_on_tree/src/main.rs

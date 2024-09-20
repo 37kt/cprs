@@ -1,6 +1,9 @@
 ---
 data:
-  _extendedDependsOn: []
+  _extendedDependsOn:
+  - icon: ':heavy_check_mark:'
+    path: crates/math/fast-factorize/src/lib.rs
+    title: crates/math/fast-factorize/src/lib.rs
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
@@ -22,11 +25,12 @@ data:
     \     input! {\n            a: u64,\n        }\n        let x = factorize(a);\n\
     \        print!(\"{}\", x.len());\n        for x in x {\n            print!(\"\
     \ {}\", x);\n        }\n        println!();\n    }\n}\n"
-  dependsOn: []
+  dependsOn:
+  - crates/math/fast-factorize/src/lib.rs
   isVerificationFile: true
   path: verify/factorize/src/main.rs
   requiredBy: []
-  timestamp: '1970-01-01 00:00:00+00:00'
+  timestamp: '2023-06-13 17:07:21+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/factorize/src/main.rs

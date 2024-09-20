@@ -1,6 +1,12 @@
 ---
 data:
-  _extendedDependsOn: []
+  _extendedDependsOn:
+  - icon: ':heavy_check_mark:'
+    path: crates/number-theory/modint/src/lib.rs
+    title: crates/number-theory/modint/src/lib.rs
+  - icon: ':heavy_check_mark:'
+    path: crates/polynomial/berlekamp-massey/src/lib.rs
+    title: crates/polynomial/berlekamp-massey/src/lib.rs
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
@@ -22,11 +28,13 @@ data:
     \ {\n        n: usize,\n        a: [Mint; n],\n    }\n    let c = berlekamp_massey(&a);\n\
     \    println!(\"{}\", c.len() - 1);\n    for i in 1..c.len() {\n        print!(\"\
     {} \", -c[i]);\n    }\n    println!();\n}\n"
-  dependsOn: []
+  dependsOn:
+  - crates/number-theory/modint/src/lib.rs
+  - crates/polynomial/berlekamp-massey/src/lib.rs
   isVerificationFile: true
   path: verify/find_linear_recurrence/src/main.rs
   requiredBy: []
-  timestamp: '1970-01-01 00:00:00+00:00'
+  timestamp: '2024-06-13 08:47:29+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/find_linear_recurrence/src/main.rs

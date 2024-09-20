@@ -1,6 +1,9 @@
 ---
 data:
-  _extendedDependsOn: []
+  _extendedDependsOn:
+  - icon: ':heavy_check_mark:'
+    path: crates/algebraic/algebraic/src/lib.rs
+    title: crates/algebraic/algebraic/src/lib.rs
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
@@ -39,11 +42,12 @@ data:
     \ {\n            res[self.leader(x)].push(x);\n        }\n        res.into_iter().filter(|g|\
     \ g.len() > 0).collect()\n    }\n\n    pub fn sum(&mut self, x: usize) -> M::S\
     \ {\n        let x = self.leader(x);\n        self.sum[x].clone()\n    }\n}\n"
-  dependsOn: []
+  dependsOn:
+  - crates/algebraic/algebraic/src/lib.rs
   isVerificationFile: false
   path: crates/data-structure/union-find-component-sum/src/lib.rs
   requiredBy: []
-  timestamp: '1970-01-01 00:00:00+00:00'
+  timestamp: '2024-05-09 13:55:09+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: crates/data-structure/union-find-component-sum/src/lib.rs

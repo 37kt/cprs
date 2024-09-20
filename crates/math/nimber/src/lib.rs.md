@@ -1,11 +1,17 @@
 ---
 data:
   _extendedDependsOn: []
-  _extendedRequiredBy: []
-  _extendedVerifiedWith: []
+  _extendedRequiredBy:
+  - icon: ':heavy_check_mark:'
+    path: crates/string/rolling-hash/src/lib.rs
+    title: crates/string/rolling-hash/src/lib.rs
+  _extendedVerifiedWith:
+  - icon: ':heavy_check_mark:'
+    path: verify/nim_product_64/src/main.rs
+    title: verify/nim_product_64/src/main.rs
   _isVerificationFailed: false
   _pathExtension: rs
-  _verificationStatusIcon: ':warning:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.12.6/x64/lib/python3.12/site-packages/onlinejudge_verify/documentation/build.py\"\
@@ -78,10 +84,12 @@ data:
   dependsOn: []
   isVerificationFile: false
   path: crates/math/nimber/src/lib.rs
-  requiredBy: []
-  timestamp: '1970-01-01 00:00:00+00:00'
-  verificationStatus: LIBRARY_NO_TESTS
-  verifiedWith: []
+  requiredBy:
+  - crates/string/rolling-hash/src/lib.rs
+  timestamp: '2023-05-19 16:25:08+09:00'
+  verificationStatus: LIBRARY_ALL_AC
+  verifiedWith:
+  - verify/nim_product_64/src/main.rs
 documentation_of: crates/math/nimber/src/lib.rs
 layout: document
 redirect_from:

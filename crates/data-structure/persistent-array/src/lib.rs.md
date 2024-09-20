@@ -1,7 +1,10 @@
 ---
 data:
   _extendedDependsOn: []
-  _extendedRequiredBy: []
+  _extendedRequiredBy:
+  - icon: ':heavy_check_mark:'
+    path: crates/data-structure/persistent-union-find/src/lib.rs
+    title: crates/data-structure/persistent-union-find/src/lib.rs
   _extendedVerifiedWith: []
   _isVerificationFailed: false
   _pathExtension: rs
@@ -34,8 +37,9 @@ data:
   dependsOn: []
   isVerificationFile: false
   path: crates/data-structure/persistent-array/src/lib.rs
-  requiredBy: []
-  timestamp: '1970-01-01 00:00:00+00:00'
+  requiredBy:
+  - crates/data-structure/persistent-union-find/src/lib.rs
+  timestamp: '2024-04-08 11:43:23+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: crates/data-structure/persistent-array/src/lib.rs

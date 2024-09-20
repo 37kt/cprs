@@ -1,6 +1,9 @@
 ---
 data:
-  _extendedDependsOn: []
+  _extendedDependsOn:
+  - icon: ':heavy_check_mark:'
+    path: crates/algorithm/min-plus-convolution/src/lib.rs
+    title: crates/algorithm/min-plus-convolution/src/lib.rs
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
@@ -22,11 +25,12 @@ data:
     \    n: usize,\n        m: usize,\n        a: [i64; n],\n        b: [i64; m],\n\
     \    }\n    let c = min_plus_convolution_convex_convex(&a, &b);\n    println!(\"\
     {}\", c.iter().join(\" \"));\n}\n"
-  dependsOn: []
+  dependsOn:
+  - crates/algorithm/min-plus-convolution/src/lib.rs
   isVerificationFile: true
   path: verify/min_plus_convolution_convex_convex/src/main.rs
   requiredBy: []
-  timestamp: '1970-01-01 00:00:00+00:00'
+  timestamp: '2024-04-07 09:46:12+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/min_plus_convolution_convex_convex/src/main.rs

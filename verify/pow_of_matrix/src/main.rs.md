@@ -1,6 +1,12 @@
 ---
 data:
-  _extendedDependsOn: []
+  _extendedDependsOn:
+  - icon: ':heavy_check_mark:'
+    path: crates/math/matrix/src/lib.rs
+    title: crates/math/matrix/src/lib.rs
+  - icon: ':heavy_check_mark:'
+    path: crates/number-theory/modint/src/lib.rs
+    title: crates/number-theory/modint/src/lib.rs
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
@@ -22,11 +28,13 @@ data:
     \ {\n        n: usize,\n        k: usize,\n        a: [[Mint; n]; n],\n    }\n\
     \    let a = Matrix::<Mint>::from(a);\n    let b = a.pow(k);\n    for i in 0..n\
     \ {\n        println!(\"{}\", b[i].iter().join(\" \"));\n    }\n}\n"
-  dependsOn: []
+  dependsOn:
+  - crates/math/matrix/src/lib.rs
+  - crates/number-theory/modint/src/lib.rs
   isVerificationFile: true
   path: verify/pow_of_matrix/src/main.rs
   requiredBy: []
-  timestamp: '1970-01-01 00:00:00+00:00'
+  timestamp: '2024-06-13 08:47:29+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/pow_of_matrix/src/main.rs

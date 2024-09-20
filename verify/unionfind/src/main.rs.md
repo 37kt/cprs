@@ -1,6 +1,9 @@
 ---
 data:
-  _extendedDependsOn: []
+  _extendedDependsOn:
+  - icon: ':heavy_check_mark:'
+    path: crates/data-structure/union-find/src/lib.rs
+    title: crates/data-structure/union-find/src/lib.rs
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
@@ -23,11 +26,12 @@ data:
     \     t: usize,\n            u: usize,\n            v: usize,\n        }\n   \
     \     if t == 0 {\n            uf.merge(u, v);\n        } else {\n           \
     \ println!(\"{}\", uf.same(u, v) as i64);\n        }\n    }\n}\n"
-  dependsOn: []
+  dependsOn:
+  - crates/data-structure/union-find/src/lib.rs
   isVerificationFile: true
   path: verify/unionfind/src/main.rs
   requiredBy: []
-  timestamp: '1970-01-01 00:00:00+00:00'
+  timestamp: '2024-05-09 13:55:09+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/unionfind/src/main.rs

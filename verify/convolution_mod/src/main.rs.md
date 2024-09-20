@@ -1,6 +1,12 @@
 ---
 data:
-  _extendedDependsOn: []
+  _extendedDependsOn:
+  - icon: ':heavy_check_mark:'
+    path: crates/convolution/convolution-ntt-friendly/src/lib.rs
+    title: crates/convolution/convolution-ntt-friendly/src/lib.rs
+  - icon: ':heavy_check_mark:'
+    path: crates/number-theory/modint/src/lib.rs
+    title: crates/number-theory/modint/src/lib.rs
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
@@ -22,11 +28,13 @@ data:
     fn main() {\n    input! {\n        n: usize,\n        m: usize,\n        mut a:\
     \ [Mint; n],\n        mut b: [Mint; m],\n    }\n    let c = convolution_ntt_friendly(a,\
     \ b);\n    println!(\"{}\", c.iter().join(\" \"));\n}\n"
-  dependsOn: []
+  dependsOn:
+  - crates/convolution/convolution-ntt-friendly/src/lib.rs
+  - crates/number-theory/modint/src/lib.rs
   isVerificationFile: true
   path: verify/convolution_mod/src/main.rs
   requiredBy: []
-  timestamp: '1970-01-01 00:00:00+00:00'
+  timestamp: '2024-06-13 08:47:29+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/convolution_mod/src/main.rs

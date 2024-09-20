@@ -1,6 +1,12 @@
 ---
 data:
-  _extendedDependsOn: []
+  _extendedDependsOn:
+  - icon: ':heavy_check_mark:'
+    path: crates/number-theory/modint/src/lib.rs
+    title: crates/number-theory/modint/src/lib.rs
+  - icon: ':heavy_check_mark:'
+    path: crates/polynomial/formal-power-series/src/lib.rs
+    title: crates/polynomial/formal-power-series/src/lib.rs
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
@@ -22,11 +28,13 @@ data:
     fn main() {\n    input! {\n        n: usize,\n        c: Mint,\n        a: [Mint;\
     \ n],\n    }\n    let f: FPS = a.into();\n    let f = f.taylor_shift(c);\n   \
     \ println!(\"{}\", f);\n}\n"
-  dependsOn: []
+  dependsOn:
+  - crates/number-theory/modint/src/lib.rs
+  - crates/polynomial/formal-power-series/src/lib.rs
   isVerificationFile: true
   path: verify/polynomial_taylor_shift/src/main.rs
   requiredBy: []
-  timestamp: '1970-01-01 00:00:00+00:00'
+  timestamp: '2024-06-13 08:47:29+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/polynomial_taylor_shift/src/main.rs

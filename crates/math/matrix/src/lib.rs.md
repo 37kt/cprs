@@ -1,11 +1,32 @@
 ---
 data:
-  _extendedDependsOn: []
-  _extendedRequiredBy: []
-  _extendedVerifiedWith: []
+  _extendedDependsOn:
+  - icon: ':heavy_check_mark:'
+    path: crates/algebraic/algebraic/src/lib.rs
+    title: crates/algebraic/algebraic/src/lib.rs
+  _extendedRequiredBy:
+  - icon: ':heavy_check_mark:'
+    path: crates/graph/count-spanning-tree-directed/src/lib.rs
+    title: crates/graph/count-spanning-tree-directed/src/lib.rs
+  - icon: ':heavy_check_mark:'
+    path: crates/graph/count-spanning-tree-undirected/src/lib.rs
+    title: crates/graph/count-spanning-tree-undirected/src/lib.rs
+  _extendedVerifiedWith:
+  - icon: ':heavy_check_mark:'
+    path: verify/inverse_matrix/src/main.rs
+    title: verify/inverse_matrix/src/main.rs
+  - icon: ':heavy_check_mark:'
+    path: verify/matrix_det/src/main.rs
+    title: verify/matrix_det/src/main.rs
+  - icon: ':heavy_check_mark:'
+    path: verify/matrix_product/src/main.rs
+    title: verify/matrix_product/src/main.rs
+  - icon: ':heavy_check_mark:'
+    path: verify/pow_of_matrix/src/main.rs
+    title: verify/pow_of_matrix/src/main.rs
   _isVerificationFailed: false
   _pathExtension: rs
-  _verificationStatusIcon: ':warning:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.12.6/x64/lib/python3.12/site-packages/onlinejudge_verify/documentation/build.py\"\
@@ -133,13 +154,20 @@ data:
     where\n    T: Zero + Clone + Add<Output = T> + Mul<Output = T>,\n{\n    type Output\
     \ = Matrix<T>;\n    fn mul(self, rhs: Self) -> Self::Output {\n        let mut\
     \ a = self.clone();\n        a *= rhs;\n        a\n    }\n}\n"
-  dependsOn: []
+  dependsOn:
+  - crates/algebraic/algebraic/src/lib.rs
   isVerificationFile: false
   path: crates/math/matrix/src/lib.rs
-  requiredBy: []
-  timestamp: '1970-01-01 00:00:00+00:00'
-  verificationStatus: LIBRARY_NO_TESTS
-  verifiedWith: []
+  requiredBy:
+  - crates/graph/count-spanning-tree-directed/src/lib.rs
+  - crates/graph/count-spanning-tree-undirected/src/lib.rs
+  timestamp: '2024-06-13 08:47:29+09:00'
+  verificationStatus: LIBRARY_ALL_AC
+  verifiedWith:
+  - verify/pow_of_matrix/src/main.rs
+  - verify/matrix_product/src/main.rs
+  - verify/matrix_det/src/main.rs
+  - verify/inverse_matrix/src/main.rs
 documentation_of: crates/math/matrix/src/lib.rs
 layout: document
 redirect_from:

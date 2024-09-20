@@ -1,6 +1,9 @@
 ---
 data:
-  _extendedDependsOn: []
+  _extendedDependsOn:
+  - icon: ':heavy_check_mark:'
+    path: crates/number-theory/modint/src/lib.rs
+    title: crates/number-theory/modint/src/lib.rs
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
@@ -22,11 +25,12 @@ data:
     \     input! {\n            y: u32,\n            p: u32,\n        }\n        Mint::set_modulus(p);\n\
     \        if let Some(res) = Mint::new(y).sqrt() {\n            println!(\"{}\"\
     , res);\n        } else {\n            println!(\"-1\");\n        }\n    }\n}\n"
-  dependsOn: []
+  dependsOn:
+  - crates/number-theory/modint/src/lib.rs
   isVerificationFile: true
   path: verify/sqrt_mod/src/main.rs
   requiredBy: []
-  timestamp: '1970-01-01 00:00:00+00:00'
+  timestamp: '2024-06-13 08:47:29+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/sqrt_mod/src/main.rs

@@ -1,6 +1,9 @@
 ---
 data:
-  _extendedDependsOn: []
+  _extendedDependsOn:
+  - icon: ':heavy_check_mark:'
+    path: crates/string/rolling-hash/src/lib.rs
+    title: crates/string/rolling-hash/src/lib.rs
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
@@ -21,11 +24,12 @@ data:
     \n#[proconio::fastout]\nfn main() {\n    input! {\n        s: Bytes,\n    }\n\
     \    let rh = RollingHashModInt61::new(&s);\n    let mut res = (0..s.len()).sorted_by(|i,\
     \ j| rh.compare(i.., &rh, j..));\n    println!(\"{}\", res.join(\" \"));\n}\n"
-  dependsOn: []
+  dependsOn:
+  - crates/string/rolling-hash/src/lib.rs
   isVerificationFile: true
   path: verify/suffixarray_rolling_hash/src/main.rs
   requiredBy: []
-  timestamp: '1970-01-01 00:00:00+00:00'
+  timestamp: '2024-04-08 11:12:42+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/suffixarray_rolling_hash/src/main.rs

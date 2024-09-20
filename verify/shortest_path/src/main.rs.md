@@ -1,6 +1,12 @@
 ---
 data:
-  _extendedDependsOn: []
+  _extendedDependsOn:
+  - icon: ':heavy_check_mark:'
+    path: crates/graph/dijkstra/src/lib.rs
+    title: crates/graph/dijkstra/src/lib.rs
+  - icon: ':heavy_check_mark:'
+    path: crates/graph/graph/src/lib.rs
+    title: crates/graph/graph/src/lib.rs
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
@@ -25,11 +31,13 @@ data:
     \ println!(\"{} {}\", dijkstra_result.dist[t], path.len() - 1);\n        for i\
     \ in 0..path.len() - 1 {\n            println!(\"{} {}\", path[i], path[i + 1]);\n\
     \        }\n    } else {\n        println!(\"-1\");\n    }\n}\n"
-  dependsOn: []
+  dependsOn:
+  - crates/graph/dijkstra/src/lib.rs
+  - crates/graph/graph/src/lib.rs
   isVerificationFile: true
   path: verify/shortest_path/src/main.rs
   requiredBy: []
-  timestamp: '1970-01-01 00:00:00+00:00'
+  timestamp: '2024-05-13 10:35:48+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/shortest_path/src/main.rs

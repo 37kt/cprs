@@ -1,6 +1,12 @@
 ---
 data:
-  _extendedDependsOn: []
+  _extendedDependsOn:
+  - icon: ':heavy_check_mark:'
+    path: crates/graph/graph/src/lib.rs
+    title: crates/graph/graph/src/lib.rs
+  - icon: ':heavy_check_mark:'
+    path: crates/graph/strongly-connected-components/src/lib.rs
+    title: crates/graph/strongly-connected-components/src/lib.rs
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
@@ -23,11 +29,13 @@ data:
     \ &ab);\n    let h = strongly_connected_components(&g);\n    println!(\"{}\",\
     \ h.len());\n    for i in 0..h.len() {\n        let vs = h.vertex(i);\n      \
     \  println!(\"{} {}\", vs.len(), vs.iter().join(\" \"));\n    }\n}\n"
-  dependsOn: []
+  dependsOn:
+  - crates/graph/graph/src/lib.rs
+  - crates/graph/strongly-connected-components/src/lib.rs
   isVerificationFile: true
   path: verify/scc/src/main.rs
   requiredBy: []
-  timestamp: '1970-01-01 00:00:00+00:00'
+  timestamp: '2024-04-10 09:38:39+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/scc/src/main.rs

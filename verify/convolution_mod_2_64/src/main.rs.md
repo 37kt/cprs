@@ -1,6 +1,9 @@
 ---
 data:
-  _extendedDependsOn: []
+  _extendedDependsOn:
+  - icon: ':heavy_check_mark:'
+    path: crates/convolution/convolution-u64/src/lib.rs
+    title: crates/convolution/convolution-u64/src/lib.rs
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
@@ -22,11 +25,12 @@ data:
     \ m: usize,\n        mut a: [u64; n],\n        mut b: [u64; m],\n    }\n    let\
     \ c = convolution_u64(&a, &b);\n    println!(\"{}\", c.iter().join(\" \"));\n\
     }\n"
-  dependsOn: []
+  dependsOn:
+  - crates/convolution/convolution-u64/src/lib.rs
   isVerificationFile: true
   path: verify/convolution_mod_2_64/src/main.rs
   requiredBy: []
-  timestamp: '1970-01-01 00:00:00+00:00'
+  timestamp: '2024-03-21 10:13:16+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/convolution_mod_2_64/src/main.rs

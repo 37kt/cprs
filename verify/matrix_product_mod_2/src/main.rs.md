@@ -1,6 +1,9 @@
 ---
 data:
-  _extendedDependsOn: []
+  _extendedDependsOn:
+  - icon: ':heavy_check_mark:'
+    path: crates/math/matrix-mod2/src/lib.rs
+    title: crates/math/matrix-mod2/src/lib.rs
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
@@ -25,11 +28,12 @@ data:
     \            }\n        }\n    }\n    for i in 0..m {\n        for j in 0..k {\n\
     \            if t[i][j] == b'1' {\n                b.set(i, j, true);\n      \
     \      }\n        }\n    }\n    let c = &a * &b;\n    print!(\"{}\", c);\n}\n"
-  dependsOn: []
+  dependsOn:
+  - crates/math/matrix-mod2/src/lib.rs
   isVerificationFile: true
   path: verify/matrix_product_mod_2/src/main.rs
   requiredBy: []
-  timestamp: '1970-01-01 00:00:00+00:00'
+  timestamp: '2024-03-21 13:40:37+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/matrix_product_mod_2/src/main.rs

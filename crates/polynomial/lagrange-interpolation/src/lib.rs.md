@@ -1,6 +1,12 @@
 ---
 data:
-  _extendedDependsOn: []
+  _extendedDependsOn:
+  - icon: ':heavy_check_mark:'
+    path: crates/number-theory/combination/src/lib.rs
+    title: crates/number-theory/combination/src/lib.rs
+  - icon: ':heavy_check_mark:'
+    path: crates/number-theory/modint/src/lib.rs
+    title: crates/number-theory/modint/src/lib.rs
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
@@ -24,11 +30,13 @@ data:
     \ * dp[i] * pd[i] * comb.fact_inv(i) * comb.fact_inv(n - i);\n        if (n -\
     \ i) & 1 == 1 {\n            res -= tmp;\n        } else {\n            res +=\
     \ tmp;\n        }\n    }\n    res\n}\n"
-  dependsOn: []
+  dependsOn:
+  - crates/number-theory/combination/src/lib.rs
+  - crates/number-theory/modint/src/lib.rs
   isVerificationFile: false
   path: crates/polynomial/lagrange-interpolation/src/lib.rs
   requiredBy: []
-  timestamp: '1970-01-01 00:00:00+00:00'
+  timestamp: '2024-06-13 08:47:29+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: crates/polynomial/lagrange-interpolation/src/lib.rs

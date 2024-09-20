@@ -1,6 +1,12 @@
 ---
 data:
-  _extendedDependsOn: []
+  _extendedDependsOn:
+  - icon: ':heavy_check_mark:'
+    path: crates/graph/count-spanning-tree-directed/src/lib.rs
+    title: crates/graph/count-spanning-tree-directed/src/lib.rs
+  - icon: ':heavy_check_mark:'
+    path: crates/number-theory/modint/src/lib.rs
+    title: crates/number-theory/modint/src/lib.rs
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
@@ -23,11 +29,13 @@ data:
     \ usize); m],\n    }\n    let mut g = vec![vec![0; n]; n];\n    for &(u, v) in\
     \ &uv {\n        g[u][v] += 1;\n    }\n    let res: Mint = count_spanning_tree_directed(&g,\
     \ r);\n    println!(\"{}\", res);\n}\n"
-  dependsOn: []
+  dependsOn:
+  - crates/graph/count-spanning-tree-directed/src/lib.rs
+  - crates/number-theory/modint/src/lib.rs
   isVerificationFile: true
   path: verify/count_spanning_tree_directed/src/main.rs
   requiredBy: []
-  timestamp: '1970-01-01 00:00:00+00:00'
+  timestamp: '2024-06-13 08:47:29+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/count_spanning_tree_directed/src/main.rs

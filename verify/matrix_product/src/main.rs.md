@@ -1,6 +1,12 @@
 ---
 data:
-  _extendedDependsOn: []
+  _extendedDependsOn:
+  - icon: ':heavy_check_mark:'
+    path: crates/math/matrix/src/lib.rs
+    title: crates/math/matrix/src/lib.rs
+  - icon: ':heavy_check_mark:'
+    path: crates/number-theory/modint/src/lib.rs
+    title: crates/number-theory/modint/src/lib.rs
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
@@ -23,11 +29,13 @@ data:
     \ m]; n],\n        b: [[Mint; k]; m],\n    }\n    let a = Matrix::<Mint>::from(a);\n\
     \    let b = Matrix::<Mint>::from(b);\n    let c = &a * &b;\n    for i in 0..n\
     \ {\n        println!(\"{}\", c[i].iter().join(\" \"));\n    }\n}\n"
-  dependsOn: []
+  dependsOn:
+  - crates/math/matrix/src/lib.rs
+  - crates/number-theory/modint/src/lib.rs
   isVerificationFile: true
   path: verify/matrix_product/src/main.rs
   requiredBy: []
-  timestamp: '1970-01-01 00:00:00+00:00'
+  timestamp: '2024-06-13 08:47:29+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/matrix_product/src/main.rs

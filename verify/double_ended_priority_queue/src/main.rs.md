@@ -1,6 +1,9 @@
 ---
 data:
-  _extendedDependsOn: []
+  _extendedDependsOn:
+  - icon: ':heavy_check_mark:'
+    path: crates/data-structure/interval-heap/src/lib.rs
+    title: crates/data-structure/interval-heap/src/lib.rs
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
@@ -25,11 +28,12 @@ data:
     \        } else if t == 1 {\n            println!(\"{}\", pq.pop_min().unwrap());\n\
     \        } else {\n            println!(\"{}\", pq.pop_max().unwrap());\n    \
     \    }\n    }\n}\n"
-  dependsOn: []
+  dependsOn:
+  - crates/data-structure/interval-heap/src/lib.rs
   isVerificationFile: true
   path: verify/double_ended_priority_queue/src/main.rs
   requiredBy: []
-  timestamp: '1970-01-01 00:00:00+00:00'
+  timestamp: '2024-04-08 11:43:23+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/double_ended_priority_queue/src/main.rs

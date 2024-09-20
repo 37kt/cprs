@@ -1,7 +1,13 @@
 ---
 data:
   _extendedDependsOn: []
-  _extendedRequiredBy: []
+  _extendedRequiredBy:
+  - icon: ':heavy_check_mark:'
+    path: crates/string/rolling-hash/src/lib.rs
+    title: crates/string/rolling-hash/src/lib.rs
+  - icon: ':heavy_check_mark:'
+    path: crates/string/wildcard-pattern-matching/src/lib.rs
+    title: crates/string/wildcard-pattern-matching/src/lib.rs
   _extendedVerifiedWith: []
   _isVerificationFailed: false
   _pathExtension: rs
@@ -29,8 +35,10 @@ data:
   dependsOn: []
   isVerificationFile: false
   path: crates/misc/random/src/lib.rs
-  requiredBy: []
-  timestamp: '1970-01-01 00:00:00+00:00'
+  requiredBy:
+  - crates/string/rolling-hash/src/lib.rs
+  - crates/string/wildcard-pattern-matching/src/lib.rs
+  timestamp: '2023-05-20 14:50:51+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: crates/misc/random/src/lib.rs

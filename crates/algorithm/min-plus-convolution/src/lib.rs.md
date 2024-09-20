@@ -1,11 +1,20 @@
 ---
 data:
-  _extendedDependsOn: []
+  _extendedDependsOn:
+  - icon: ':heavy_check_mark:'
+    path: crates/algorithm/monotone-minima/src/lib.rs
+    title: crates/algorithm/monotone-minima/src/lib.rs
   _extendedRequiredBy: []
-  _extendedVerifiedWith: []
+  _extendedVerifiedWith:
+  - icon: ':heavy_check_mark:'
+    path: verify/min_plus_convolution_convex_arbitrary/src/main.rs
+    title: verify/min_plus_convolution_convex_arbitrary/src/main.rs
+  - icon: ':heavy_check_mark:'
+    path: verify/min_plus_convolution_convex_convex/src/main.rs
+    title: verify/min_plus_convolution_convex_convex/src/main.rs
   _isVerificationFailed: false
   _pathExtension: rs
-  _verificationStatusIcon: ':warning:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.12.6/x64/lib/python3.12/site-packages/onlinejudge_verify/documentation/build.py\"\
@@ -32,13 +41,16 @@ data:
     \ 1 {\n        if j == m - 1 || (i != n - 1 && a[i + 1] + b[j] < a[i] + b[j +\
     \ 1]) {\n            i += 1;\n        } else {\n            j += 1;\n        }\n\
     \        c[k] = a[i] + b[j];\n    }\n    c\n}\n"
-  dependsOn: []
+  dependsOn:
+  - crates/algorithm/monotone-minima/src/lib.rs
   isVerificationFile: false
   path: crates/algorithm/min-plus-convolution/src/lib.rs
   requiredBy: []
-  timestamp: '1970-01-01 00:00:00+00:00'
-  verificationStatus: LIBRARY_NO_TESTS
-  verifiedWith: []
+  timestamp: '2024-04-07 09:46:12+09:00'
+  verificationStatus: LIBRARY_ALL_AC
+  verifiedWith:
+  - verify/min_plus_convolution_convex_convex/src/main.rs
+  - verify/min_plus_convolution_convex_arbitrary/src/main.rs
 documentation_of: crates/algorithm/min-plus-convolution/src/lib.rs
 layout: document
 redirect_from:
