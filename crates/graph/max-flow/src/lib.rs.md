@@ -15,11 +15,11 @@ data:
   attributes:
     links:
     - https://atcoder.jp/contests/abc225/tasks/abc225_g
-  bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.12.6/x64/lib/python3.12/site-packages/onlinejudge_verify/documentation/build.py\"\
+  bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.12.7/x64/lib/python3.12/site-packages/onlinejudge_verify/documentation/build.py\"\
     , line 71, in _render_source_code_stat\n    bundled_code = language.bundle(stat.path,\
     \ basedir=basedir, options={'include_paths': [basedir]}).decode()\n          \
     \         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\
-    \  File \"/opt/hostedtoolcache/Python/3.12.6/x64/lib/python3.12/site-packages/onlinejudge_verify/languages/rust.py\"\
+    \  File \"/opt/hostedtoolcache/Python/3.12.7/x64/lib/python3.12/site-packages/onlinejudge_verify/languages/rust.py\"\
     , line 288, in bundle\n    raise NotImplementedError\nNotImplementedError\n"
   code: "// verify: https://atcoder.jp/contests/abc225/tasks/abc225_g\n\nuse std::collections::VecDeque;\n\
     \npub type FlowType = i64;\nconst INF: FlowType = std::i64::MAX / 2;\n\n/// dinic\u6CD5\
@@ -82,8 +82,8 @@ data:
   isVerificationFile: false
   path: crates/graph/max-flow/src/lib.rs
   requiredBy:
-  - crates/graph/project-selection/src/lib.rs
   - crates/graph/max-flow-lower-bound/src/lib.rs
+  - crates/graph/project-selection/src/lib.rs
   timestamp: '2023-04-27 21:13:38+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []

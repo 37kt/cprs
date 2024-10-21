@@ -152,11 +152,11 @@ data:
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
-  bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.12.6/x64/lib/python3.12/site-packages/onlinejudge_verify/documentation/build.py\"\
+  bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.12.7/x64/lib/python3.12/site-packages/onlinejudge_verify/documentation/build.py\"\
     , line 71, in _render_source_code_stat\n    bundled_code = language.bundle(stat.path,\
     \ basedir=basedir, options={'include_paths': [basedir]}).decode()\n          \
     \         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\
-    \  File \"/opt/hostedtoolcache/Python/3.12.6/x64/lib/python3.12/site-packages/onlinejudge_verify/languages/rust.py\"\
+    \  File \"/opt/hostedtoolcache/Python/3.12.7/x64/lib/python3.12/site-packages/onlinejudge_verify/languages/rust.py\"\
     , line 288, in bundle\n    raise NotImplementedError\nNotImplementedError\n"
   code: "pub trait Algebra {\n    type S;\n}\n\npub trait Act: Algebra {\n    type\
     \ X;\n    fn act(f: &Self::S, x: &Self::X) -> Self::X;\n}\n\npub trait Monoid:\
@@ -194,57 +194,57 @@ data:
   isVerificationFile: false
   path: crates/algebraic/algebraic/src/lib.rs
   requiredBy:
-  - crates/data-structure/union-find-component-sum/src/lib.rs
-  - crates/data-structure/vertex-add-range-contour-sum/src/lib.rs
-  - crates/data-structure/splay-tree/src/lib.rs
-  - crates/data-structure/splay-tree-internal/src/lib.rs
-  - crates/data-structure/lazy-segment-tree/src/lib.rs
-  - crates/data-structure/link-cut-tree/src/lib.rs
-  - crates/data-structure/tree-query/src/lib.rs
-  - crates/data-structure/range-tree/src/lib.rs
-  - crates/data-structure/dual-segment-tree/src/lib.rs
-  - crates/data-structure/rollback-union-find-component-sum/src/lib.rs
-  - crates/data-structure/sliding-window-aggregation/src/lib.rs
-  - crates/data-structure/dual-range-tree/src/lib.rs
-  - crates/data-structure/disjoint-sparse-table/src/lib.rs
-  - crates/data-structure/segment-tree-on-wavelet-matrix/src/lib.rs
-  - crates/data-structure/vertex-get-range-contour-add/src/lib.rs
-  - crates/data-structure/fenwick-tree/src/lib.rs
-  - crates/data-structure/segment-tree/src/lib.rs
-  - crates/string/suffix-array/src/lib.rs
-  - crates/math/stern-brocot-tree/src/lib.rs
-  - crates/math/discrete-logarithm/src/lib.rs
-  - crates/math/matrix/src/lib.rs
-  - crates/math/modint61/src/lib.rs
-  - crates/math/montgomery-modint/src/lib.rs
-  - crates/number-theory/modint/src/lib.rs
-  - crates/tree/re-rooting-dp/src/lib.rs
   - crates/algebraic/rational/src/lib.rs
+  - crates/math/montgomery-modint/src/lib.rs
+  - crates/math/modint61/src/lib.rs
+  - crates/math/stern-brocot-tree/src/lib.rs
+  - crates/math/matrix/src/lib.rs
+  - crates/math/discrete-logarithm/src/lib.rs
+  - crates/data-structure/dual-segment-tree/src/lib.rs
+  - crates/data-structure/fenwick-tree/src/lib.rs
+  - crates/data-structure/vertex-get-range-contour-add/src/lib.rs
+  - crates/data-structure/lazy-segment-tree/src/lib.rs
+  - crates/data-structure/segment-tree/src/lib.rs
+  - crates/data-structure/union-find-component-sum/src/lib.rs
+  - crates/data-structure/splay-tree/src/lib.rs
+  - crates/data-structure/dual-range-tree/src/lib.rs
+  - crates/data-structure/link-cut-tree/src/lib.rs
+  - crates/data-structure/rollback-union-find-component-sum/src/lib.rs
+  - crates/data-structure/segment-tree-on-wavelet-matrix/src/lib.rs
+  - crates/data-structure/vertex-add-range-contour-sum/src/lib.rs
+  - crates/data-structure/range-tree/src/lib.rs
+  - crates/data-structure/sliding-window-aggregation/src/lib.rs
+  - crates/data-structure/disjoint-sparse-table/src/lib.rs
+  - crates/data-structure/tree-query/src/lib.rs
+  - crates/data-structure/splay-tree-internal/src/lib.rs
+  - crates/number-theory/modint/src/lib.rs
+  - crates/string/suffix-array/src/lib.rs
+  - crates/tree/re-rooting-dp/src/lib.rs
   timestamp: '2024-03-18 01:19:47+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/discrete_logarithm_mod/src/main.rs
-  - verify/queue_operate_all_composite/src/main.rs
-  - verify/range_reverse_range_sum/src/main.rs
-  - verify/vertex_set_path_composite/src/main.rs
+  - verify/dynamic_graph_vertex_add_component_sum/src/main.rs
   - verify/vertex_add_path_sum/src/main.rs
-  - verify/vertex_add_range_contour_sum_on_tree/src/main.rs
-  - verify/point_add_range_sum/src/main.rs
+  - verify/rectangle_add_point_get/src/main.rs
+  - verify/point_add_rectangle_sum/src/main.rs
+  - verify/discrete_logarithm_mod/src/main.rs
   - verify/dynamic_tree_vertex_set_path_composite/src/main.rs
+  - verify/queue_operate_all_composite/src/main.rs
+  - verify/deque_operate_all_composite/src/main.rs
   - verify/vertex_add_subtree_sum/src/main.rs
   - verify/point_add_rectangle_sum_2/src/main.rs
-  - verify/static_range_inversions_query/src/main.rs
-  - verify/staticrmq/src/main.rs
+  - verify/vertex_add_range_contour_sum_on_tree/src/main.rs
+  - verify/range_reverse_range_sum/src/main.rs
   - verify/vertex_get_range_contour_add_on_tree/src/main.rs
   - verify/dynamic_tree_vertex_add_path_sum/src/main.rs
-  - verify/rectangle_add_point_get/src/main.rs
+  - verify/static_range_inversions_query/src/main.rs
   - verify/tree_path_composite_sum/src/main.rs
-  - verify/point_add_rectangle_sum/src/main.rs
-  - verify/deque_operate_all_composite/src/main.rs
-  - verify/range_affine_point_get/src/main.rs
+  - verify/vertex_set_path_composite/src/main.rs
+  - verify/staticrmq/src/main.rs
   - verify/range_affine_range_sum/src/main.rs
-  - verify/dynamic_graph_vertex_add_component_sum/src/main.rs
   - verify/dynamic_sequence_range_affine_range_sum/src/main.rs
+  - verify/point_add_range_sum/src/main.rs
+  - verify/range_affine_point_get/src/main.rs
 documentation_of: crates/algebraic/algebraic/src/lib.rs
 layout: document
 redirect_from:

@@ -29,11 +29,11 @@ data:
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
-  bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.12.6/x64/lib/python3.12/site-packages/onlinejudge_verify/documentation/build.py\"\
+  bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.12.7/x64/lib/python3.12/site-packages/onlinejudge_verify/documentation/build.py\"\
     , line 71, in _render_source_code_stat\n    bundled_code = language.bundle(stat.path,\
     \ basedir=basedir, options={'include_paths': [basedir]}).decode()\n          \
     \         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\
-    \  File \"/opt/hostedtoolcache/Python/3.12.6/x64/lib/python3.12/site-packages/onlinejudge_verify/languages/rust.py\"\
+    \  File \"/opt/hostedtoolcache/Python/3.12.7/x64/lib/python3.12/site-packages/onlinejudge_verify/languages/rust.py\"\
     , line 288, in bundle\n    raise NotImplementedError\nNotImplementedError\n"
   code: "use std::{\n    fmt::{Debug, Display},\n    ops::{Add, AddAssign, Div, DivAssign,\
     \ Index, IndexMut, Mul, MulAssign, Neg, Sub, SubAssign},\n};\n\nuse algebraic::{One,\
@@ -159,15 +159,15 @@ data:
   isVerificationFile: false
   path: crates/math/matrix/src/lib.rs
   requiredBy:
-  - crates/graph/count-spanning-tree-directed/src/lib.rs
   - crates/graph/count-spanning-tree-undirected/src/lib.rs
+  - crates/graph/count-spanning-tree-directed/src/lib.rs
   timestamp: '2024-06-13 08:47:29+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/pow_of_matrix/src/main.rs
-  - verify/matrix_product/src/main.rs
-  - verify/matrix_det/src/main.rs
   - verify/inverse_matrix/src/main.rs
+  - verify/matrix_det/src/main.rs
+  - verify/matrix_product/src/main.rs
+  - verify/pow_of_matrix/src/main.rs
 documentation_of: crates/math/matrix/src/lib.rs
 layout: document
 redirect_from:
