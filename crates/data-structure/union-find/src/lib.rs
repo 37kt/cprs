@@ -1,12 +1,12 @@
 use std::{cell::RefCell, mem::swap};
 
 #[derive(Clone)]
-pub struct UnionFind {
+pub struct UnionFind<const UNION_BY_SIZE: bool = true> {
     par: RefCell<Vec<i32>>,
     cnt: usize,
 }
 
-impl UnionFind {
+impl<const UNION_BY_SIZE: bool> UnionFind<UNION_BY_SIZE> {
     pub fn new(n: usize) -> Self {
         Self {
             par: RefCell::new(vec![-1; n]),
@@ -26,7 +26,7 @@ impl UnionFind {
         }
         self.cnt -= 1;
         let mut par = self.par.borrow_mut();
-        if -par[x] < -par[y] {
+        if UNION_BY_SIZE && -par[x] < -par[y] {
             swap(&mut x, &mut y);
         }
         par[x] += par[y];

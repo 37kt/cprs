@@ -1,13 +1,13 @@
 use std::mem::swap;
 
 #[derive(Clone)]
-pub struct RollbackUnionFind {
+pub struct RollbackUnionFind<const UNION_BY_SIZE: bool = true> {
     par: Vec<i32>,
     his: Vec<(usize, i32)>,
     cnt: usize,
 }
 
-impl RollbackUnionFind {
+impl<const UNION_BY_SIZE: bool> RollbackUnionFind<UNION_BY_SIZE> {
     pub fn new(n: usize) -> Self {
         Self {
             par: vec![-1; n],
@@ -33,7 +33,7 @@ impl RollbackUnionFind {
             return false;
         }
         self.cnt -= 1;
-        if -self.par[x] < -self.par[y] {
+        if UNION_BY_SIZE && -self.par[x] < -self.par[y] {
             swap(&mut x, &mut y);
         }
         self.par[x] += self.par[y];

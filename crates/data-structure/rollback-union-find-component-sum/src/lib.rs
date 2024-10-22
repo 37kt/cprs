@@ -3,7 +3,7 @@ use std::mem::swap;
 use algebraic::Monoid;
 
 #[derive(Clone)]
-pub struct RollbackUnionFindComponentSum<M>
+pub struct RollbackUnionFindComponentSum<M, const UNION_BY_SIZE: bool = true>
 where
     M: Monoid,
     M::S: Clone,
@@ -14,7 +14,7 @@ where
     cnt: usize,
 }
 
-impl<M> RollbackUnionFindComponentSum<M>
+impl<M, const UNION_BY_SIZE: bool> RollbackUnionFindComponentSum<M, UNION_BY_SIZE>
 where
     M: Monoid,
     M::S: Clone,
@@ -45,7 +45,7 @@ where
             return false;
         }
         self.cnt -= 1;
-        if -self.par[x] < -self.par[y] {
+        if UNION_BY_SIZE && -self.par[x] < -self.par[y] {
             swap(&mut x, &mut y);
         }
         self.par[x] += self.par[y];

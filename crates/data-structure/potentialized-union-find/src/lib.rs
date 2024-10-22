@@ -4,7 +4,7 @@ use std::{
 };
 
 #[derive(Clone)]
-pub struct PotentializedUnionFind<T>
+pub struct PotentializedUnionFind<T, const UNION_BY_SIZE: bool = true>
 where
     T: Clone + Default + Add<Output = T> + Sub<Output = T> + Neg<Output = T> + Eq,
 {
@@ -12,7 +12,7 @@ where
     pot: Vec<T>,
 }
 
-impl<T> PotentializedUnionFind<T>
+impl<T, const UNION_BY_SIZE: bool> PotentializedUnionFind<T, UNION_BY_SIZE>
 where
     T: Clone + Default + Add<Output = T> + Sub<Output = T> + Neg<Output = T> + Eq,
 {
@@ -36,7 +36,7 @@ where
         if x == y {
             return w == T::default();
         }
-        if -self.par[x] > -self.par[y] {
+        if UNION_BY_SIZE && -self.par[x] > -self.par[y] {
             swap(&mut x, &mut y);
             w = -w;
         }
