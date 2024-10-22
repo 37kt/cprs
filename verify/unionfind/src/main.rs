@@ -9,7 +9,7 @@ fn main() {
         n: usize,
         q: usize,
     }
-    let mut uf = UnionFind::new(n);
+    let mut uf = UnionFind::<true>::new(n);
     for _ in 0..q {
         input! {
             t: usize,
