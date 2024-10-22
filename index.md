@@ -551,6 +551,11 @@ data:
     - icon: ':heavy_check_mark:'
       path: crates/tree/static-top-tree-dp/src/lib.rs
       title: crates/tree/static-top-tree-dp/src/lib.rs
+  - name: crates/tree/zero-one-on-tree/src
+    pages:
+    - icon: ':warning:'
+      path: crates/tree/zero-one-on-tree/src/lib.rs
+      title: crates/tree/zero-one-on-tree/src/lib.rs
   verificationCategories:
   - name: verify/aplusb/src
     pages:

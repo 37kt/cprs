@@ -80,6 +80,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: crates/tree/re-rooting-dp/src/lib.rs
     title: crates/tree/re-rooting-dp/src/lib.rs
+  - icon: ':warning:'
+    path: crates/tree/zero-one-on-tree/src/lib.rs
+    title: crates/tree/zero-one-on-tree/src/lib.rs
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: verify/deque_operate_all_composite/src/main.rs
@@ -220,6 +223,7 @@ data:
   - crates/number-theory/modint/src/lib.rs
   - crates/string/suffix-array/src/lib.rs
   - crates/tree/re-rooting-dp/src/lib.rs
+  - crates/tree/zero-one-on-tree/src/lib.rs
   timestamp: '2024-03-18 01:19:47+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
