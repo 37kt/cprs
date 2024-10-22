@@ -22,16 +22,16 @@ data:
   code: "// verification-helper: PROBLEM https://judge.yosupo.jp/problem/unionfind\n\
     \nuse proconio::input;\nuse union_find::UnionFind;\n\n#[proconio::fastout]\nfn\
     \ main() {\n    input! {\n        n: usize,\n        q: usize,\n    }\n    let\
-    \ mut uf = UnionFind::new(n);\n    for _ in 0..q {\n        input! {\n       \
-    \     t: usize,\n            u: usize,\n            v: usize,\n        }\n   \
-    \     if t == 0 {\n            uf.merge(u, v);\n        } else {\n           \
-    \ println!(\"{}\", uf.same(u, v) as i64);\n        }\n    }\n}\n"
+    \ mut uf = UnionFind::<true>::new(n);\n    for _ in 0..q {\n        input! {\n\
+    \            t: usize,\n            u: usize,\n            v: usize,\n       \
+    \ }\n        if t == 0 {\n            uf.merge(u, v);\n        } else {\n    \
+    \        println!(\"{}\", uf.same(u, v) as i64);\n        }\n    }\n}\n"
   dependsOn:
   - crates/data-structure/union-find/src/lib.rs
   isVerificationFile: true
   path: verify/unionfind/src/main.rs
   requiredBy: []
-  timestamp: '2024-05-09 13:55:09+09:00'
+  timestamp: '2024-10-22 11:08:25+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/unionfind/src/main.rs

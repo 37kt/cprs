@@ -54,7 +54,7 @@ data:
   isVerificationFile: false
   path: crates/data-structure/range-union-find/src/lib.rs
   requiredBy: []
-  timestamp: '2024-06-13 09:46:47+09:00'
+  timestamp: '2024-10-22 10:00:24+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/range_parallel_unionfind/src/main.rs

@@ -53,7 +53,7 @@ data:
   isVerificationFile: true
   path: verify/dynamic_graph_vertex_add_component_sum/src/main.rs
   requiredBy: []
-  timestamp: '2024-05-09 13:55:09+09:00'
+  timestamp: '2024-10-22 10:00:24+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/dynamic_graph_vertex_add_component_sum/src/main.rs
