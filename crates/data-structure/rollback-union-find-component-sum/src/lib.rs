@@ -19,7 +19,8 @@ where
     M: Monoid,
     M::S: Clone,
 {
-    pub fn new(n: usize, a: &[M::S]) -> Self {
+    pub fn new(a: &[M::S]) -> Self {
+        let n = a.len();
         Self {
             par: vec![-1; n],
             sum: a.to_vec(),

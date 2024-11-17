@@ -57,7 +57,7 @@ fn main() {
         }
     }
     let mut dc = OfflineDynamicConnectivity::new(UF {
-        uf: RollbackUnionFindComponentSum::new(n + q, &a),
+        uf: RollbackUnionFindComponentSum::new(&a),
     });
     for i in 0..q {
         let (t, u, v) = qs[i];

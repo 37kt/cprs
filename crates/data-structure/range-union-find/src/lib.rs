@@ -4,7 +4,7 @@ use union_find::UnionFind;
 
 pub struct RangeUnionFind {
     n: usize,
-    uf: Vec<UnionFind>,
+    uf: Vec<UnionFind<true>>,
 }
 
 impl RangeUnionFind {

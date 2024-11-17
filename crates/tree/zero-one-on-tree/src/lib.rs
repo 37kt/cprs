@@ -17,7 +17,7 @@ pub fn zero_one_on_tree(g: &Graph<ZeroOne, ()>) -> usize {
     dfs(0, g, &mut par);
     let mut res = 0;
     let a: Vec<_> = (0..n).map(|i| *g.vertex(i)).collect();
-    let mut uf = UnionFindComponentSum::<ZeroOneMonoid, false>::new(n, &a);
+    let mut uf = UnionFindComponentSum::<ZeroOneMonoid, false>::new(&a);
     let mut pq = BinaryHeap::new();
     for v in 1..n {
         pq.push((a[v], v));

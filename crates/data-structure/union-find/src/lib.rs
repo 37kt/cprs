@@ -1,7 +1,7 @@
 use std::{cell::RefCell, mem::swap};
 
 #[derive(Clone)]
-pub struct UnionFind<const UNION_BY_SIZE: bool = true> {
+pub struct UnionFind<const UNION_BY_SIZE: bool> {
     par: RefCell<Vec<i32>>,
     cnt: usize,
 }
