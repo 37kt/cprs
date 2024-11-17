@@ -41,11 +41,11 @@ data:
     \          a[n + i] = v;\n            }\n        } else {\n            input!\
     \ {\n                v: usize,\n            }\n            qs.push((t, v, 0));\n\
     \        }\n    }\n    let mut dc = OfflineDynamicConnectivity::new(UF {\n   \
-    \     uf: RollbackUnionFindComponentSum::new(n + q, &a),\n    });\n    for i in\
-    \ 0..q {\n        let (t, u, v) = qs[i];\n        match t {\n            0 =>\
-    \ dc.add_edge(u, v),\n            1 => dc.remove_edge(u, v),\n            2 =>\
-    \ dc.add_edge(u, n + i),\n            3 => dc.get(u),\n            _ => unreachable!(),\n\
-    \        }\n    }\n    dc.run();\n}\n"
+    \     uf: RollbackUnionFindComponentSum::new(&a),\n    });\n    for i in 0..q\
+    \ {\n        let (t, u, v) = qs[i];\n        match t {\n            0 => dc.add_edge(u,\
+    \ v),\n            1 => dc.remove_edge(u, v),\n            2 => dc.add_edge(u,\
+    \ n + i),\n            3 => dc.get(u),\n            _ => unreachable!(),\n   \
+    \     }\n    }\n    dc.run();\n}\n"
   dependsOn:
   - crates/algebraic/algebraic/src/lib.rs
   - crates/algorithm/offline-dynamic-connectivity/src/lib.rs
@@ -53,7 +53,7 @@ data:
   isVerificationFile: true
   path: verify/dynamic_graph_vertex_add_component_sum/src/main.rs
   requiredBy: []
-  timestamp: '2024-10-22 10:00:24+09:00'
+  timestamp: '2024-11-17 16:38:04+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/dynamic_graph_vertex_add_component_sum/src/main.rs
