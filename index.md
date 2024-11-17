@@ -236,6 +236,11 @@ data:
     - icon: ':warning:'
       path: crates/data-structure/splay-tree-internal/src/lib.rs
       title: crates/data-structure/splay-tree-internal/src/lib.rs
+  - name: crates/data-structure/static-range-inversions-query/src
+    pages:
+    - icon: ':heavy_check_mark:'
+      path: crates/data-structure/static-range-inversions-query/src/lib.rs
+      title: crates/data-structure/static-range-inversions-query/src/lib.rs
   - name: crates/data-structure/top2/src
     pages:
     - icon: ':warning:'
@@ -932,6 +937,11 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/static_range_inversions_query/src/main.rs
       title: verify/static_range_inversions_query/src/main.rs
+  - name: verify/static_range_inversions_query_2/src
+    pages:
+    - icon: ':heavy_check_mark:'
+      path: verify/static_range_inversions_query_2/src/main.rs
+      title: verify/static_range_inversions_query_2/src/main.rs
   - name: verify/static_range_sum/src
     pages:
     - icon: ':heavy_check_mark:'

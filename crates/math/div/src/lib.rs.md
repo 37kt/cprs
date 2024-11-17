@@ -1,7 +1,10 @@
 ---
 data:
   _extendedDependsOn: []
-  _extendedRequiredBy: []
+  _extendedRequiredBy:
+  - icon: ':heavy_check_mark:'
+    path: crates/data-structure/static-range-inversions-query/src/lib.rs
+    title: crates/data-structure/static-range-inversions-query/src/lib.rs
   _extendedVerifiedWith: []
   _isVerificationFailed: false
   _pathExtension: rs
@@ -44,7 +47,8 @@ data:
   dependsOn: []
   isVerificationFile: false
   path: crates/math/div/src/lib.rs
-  requiredBy: []
+  requiredBy:
+  - crates/data-structure/static-range-inversions-query/src/lib.rs
   timestamp: '2024-08-15 14:31:02+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
