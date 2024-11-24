@@ -115,14 +115,14 @@ impl SlopeTrick {
     pub fn merge(&mut self, mut other: Self) {
         if self.lq.len() + self.rq.len() < other.lq.len() + other.rq.len() {
             swap(self, &mut other);
-            while let Some((x, c)) = other.lq.pop() {
-                self.add_a_minus_x(x, c);
-            }
-            while let Some(Reverse((x, c))) = other.rq.pop() {
-                self.add_x_minus_a(x, c);
-            }
-            self.add_a(other.min_y);
         }
+        while let Some((x, c)) = other.lq.pop() {
+            self.add_a_minus_x(x, c);
+        }
+        while let Some(Reverse((x, c))) = other.rq.pop() {
+            self.add_x_minus_a(x, c);
+        }
+        self.add_a(other.min_y);
     }
 
     fn push_l(&mut self, x: i64, c: i64) {
