@@ -52,22 +52,22 @@ data:
     \ \u9006\u7D2F\u7A4Dmin\n    pub fn chmin_left(&mut self) {\n        self.lq.clear();\n\
     \    }\n\n    pub fn merge(&mut self, mut other: Self) {\n        if self.lq.len()\
     \ + self.rq.len() < other.lq.len() + other.rq.len() {\n            swap(self,\
-    \ &mut other);\n            while let Some((x, c)) = other.lq.pop() {\n      \
-    \          self.add_a_minus_x(x, c);\n            }\n            while let Some(Reverse((x,\
-    \ c))) = other.rq.pop() {\n                self.add_x_minus_a(x, c);\n       \
-    \     }\n            self.add_a(other.min_y);\n        }\n    }\n\n    fn push_l(&mut\
-    \ self, x: i64, c: i64) {\n        self.lq.push((x - self.add_l, c));\n    }\n\
-    \n    fn push_r(&mut self, x: i64, c: i64) {\n        self.rq.push(Reverse((x\
-    \ - self.add_r, c)));\n    }\n\n    fn get_l(&self) -> Option<(i64, i64)> {\n\
-    \        self.lq.peek().map(|&(x, c)| (x + self.add_l, c))\n    }\n\n    fn get_r(&self)\
-    \ -> Option<(i64, i64)> {\n        self.rq.peek().map(|&Reverse((x, c))| (x +\
-    \ self.add_r, c))\n    }\n\n    fn pop_l(&mut self) {\n        self.lq.pop();\n\
-    \    }\n\n    fn pop_r(&mut self) {\n        self.rq.pop();\n    }\n}\n"
+    \ &mut other);\n        }\n        while let Some((x, c)) = other.lq.pop() {\n\
+    \            self.add_a_minus_x(x, c);\n        }\n        while let Some(Reverse((x,\
+    \ c))) = other.rq.pop() {\n            self.add_x_minus_a(x, c);\n        }\n\
+    \        self.add_a(other.min_y);\n    }\n\n    fn push_l(&mut self, x: i64, c:\
+    \ i64) {\n        self.lq.push((x - self.add_l, c));\n    }\n\n    fn push_r(&mut\
+    \ self, x: i64, c: i64) {\n        self.rq.push(Reverse((x - self.add_r, c)));\n\
+    \    }\n\n    fn get_l(&self) -> Option<(i64, i64)> {\n        self.lq.peek().map(|&(x,\
+    \ c)| (x + self.add_l, c))\n    }\n\n    fn get_r(&self) -> Option<(i64, i64)>\
+    \ {\n        self.rq.peek().map(|&Reverse((x, c))| (x + self.add_r, c))\n    }\n\
+    \n    fn pop_l(&mut self) {\n        self.lq.pop();\n    }\n\n    fn pop_r(&mut\
+    \ self) {\n        self.rq.pop();\n    }\n}\n"
   dependsOn: []
   isVerificationFile: false
   path: crates/data-structure/slope-trick/src/lib.rs
   requiredBy: []
-  timestamp: '2023-05-09 19:59:15+09:00'
+  timestamp: '2024-11-25 08:41:50+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: crates/data-structure/slope-trick/src/lib.rs
