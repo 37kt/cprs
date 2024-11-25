@@ -38,7 +38,7 @@ data:
   isVerificationFile: true
   path: verify/shift_of_sampling_points_of_polynomial/src/main.rs
   requiredBy: []
-  timestamp: '2024-06-13 08:47:29+09:00'
+  timestamp: '2024-11-25 09:47:32+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/shift_of_sampling_points_of_polynomial/src/main.rs

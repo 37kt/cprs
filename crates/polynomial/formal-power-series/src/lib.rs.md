@@ -72,8 +72,8 @@ data:
     \  ShrAssign, Sub, SubAssign,\n    },\n};\n\n#[derive(Default, Clone, PartialEq,\
     \ Eq)]\n#[repr(transparent)]\npub struct FormalPowerSeries<const P: u32>(pub Vec<StaticModInt<P>>);\n\
     \npub type FormalPowerSeries998244353 = FormalPowerSeries<998_244_353>;\npub type\
-    \ FormalPowerSeries1000000007 = FormalPowerSeries<1_000_000_007>;\n\n#[macro_export]\n\
-    macro_rules! fps {\n    ($($x:expr), *) => (\n        $crate::FormalPowerSeries(vec![$(modint::StaticModInt::from($x)),\
+    \ FormalPowerSeries1000000007 = FormalPowerSeries<1_000_000_007>;\n\n/// fps![]\n\
+    #[macro_export]\nmacro_rules! fps {\n    ($($x:expr), *) => (\n        $crate::FormalPowerSeries(vec![$(modint::StaticModInt::from($x)),\
     \ *])\n    );\n    ($x:expr; $n:expr) => (\n        $crate::FormalPowerSeries(vec![modint::StaticModInt::from($x);\
     \ $n])\n    );\n}\n\nimpl<const P: u32> FormalPowerSeries<P> {\n    pub fn shrink(&mut\
     \ self) {\n        while self.last() == Some(&0.into()) {\n            self.pop();\n\
@@ -362,7 +362,7 @@ data:
   - crates/polynomial/polynomial-interpolation/src/lib.rs
   - crates/polynomial/shift-of-sampling-points/src/lib.rs
   - crates/polynomial/bostan-mori/src/lib.rs
-  timestamp: '2024-06-13 08:47:29+09:00'
+  timestamp: '2024-11-25 09:47:32+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/kth_term_of_linearly_recurrent_sequence/src/main.rs

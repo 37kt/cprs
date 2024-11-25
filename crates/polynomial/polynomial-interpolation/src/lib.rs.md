@@ -41,7 +41,7 @@ data:
   isVerificationFile: false
   path: crates/polynomial/polynomial-interpolation/src/lib.rs
   requiredBy: []
-  timestamp: '2024-06-13 08:47:29+09:00'
+  timestamp: '2024-11-25 09:47:32+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/polynomial_interpolation/src/main.rs
