@@ -18,6 +18,7 @@ pub struct FormalPowerSeries<const P: u32>(pub Vec<StaticModInt<P>>);
 pub type FormalPowerSeries998244353 = FormalPowerSeries<998_244_353>;
 pub type FormalPowerSeries1000000007 = FormalPowerSeries<1_000_000_007>;
 
+/// fps![]
 #[macro_export]
 macro_rules! fps {
     ($($x:expr), *) => (
