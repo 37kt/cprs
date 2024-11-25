@@ -386,6 +386,11 @@ data:
     - icon: ':heavy_check_mark:'
       path: crates/macros/chminmax/src/lib.rs
       title: crates/macros/chminmax/src/lib.rs
+  - name: crates/macros/mvec/src
+    pages:
+    - icon: ':warning:'
+      path: crates/macros/mvec/src/lib.rs
+      title: crates/macros/mvec/src/lib.rs
   - name: crates/macros/yes/src
     pages:
     - icon: ':warning:'
