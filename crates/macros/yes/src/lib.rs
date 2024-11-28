@@ -25,3 +25,17 @@ macro_rules! takahashi {
         }
     }};
 }
+
+#[macro_export]
+macro_rules! alice {
+    () => {{
+        println!("Alice");
+    }};
+    ($a:expr) => {{
+        if $a {
+            println!("Alice");
+        } else {
+            println!("Bob");
+        }
+    }};
+}
