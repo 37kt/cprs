@@ -19,12 +19,15 @@ data:
     );\n        } else {\n            println!(\"No\");\n        }\n    }};\n}\n\n\
     #[macro_export]\nmacro_rules! takahashi {\n    () => {{\n        println!(\"Takahashi\"\
     );\n    }};\n    ($a:expr) => {{\n        if $a {\n            println!(\"Takahashi\"\
-    );\n        } else {\n            println!(\"Aoki\");\n        }\n    }};\n}\n"
+    );\n        } else {\n            println!(\"Aoki\");\n        }\n    }};\n}\n\
+    \n#[macro_export]\nmacro_rules! alice {\n    () => {{\n        println!(\"Alice\"\
+    );\n    }};\n    ($a:expr) => {{\n        if $a {\n            println!(\"Alice\"\
+    );\n        } else {\n            println!(\"Bob\");\n        }\n    }};\n}\n"
   dependsOn: []
   isVerificationFile: false
   path: crates/macros/yes/src/lib.rs
   requiredBy: []
-  timestamp: '2024-11-25 09:58:21+09:00'
+  timestamp: '2024-11-29 08:41:41+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: crates/macros/yes/src/lib.rs
