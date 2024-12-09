@@ -7,6 +7,9 @@ where
 {
     let n = a.len();
     let m = b.len();
+    if n == 0 || m == 0 {
+        return vec![];
+    }
     let cmp = |i: usize, j: usize, k: usize| {
         if i < k {
             false
@@ -36,6 +39,9 @@ where
 {
     let n = a.len();
     let m = b.len();
+    if n == 0 || m == 0 {
+        return vec![];
+    }
     let mut c = vec![a[0] + b[0]; n + m - 1];
     let mut i = 0;
     let mut j = 0;
