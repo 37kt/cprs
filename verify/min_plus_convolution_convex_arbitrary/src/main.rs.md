@@ -30,7 +30,7 @@ data:
   isVerificationFile: true
   path: verify/min_plus_convolution_convex_arbitrary/src/main.rs
   requiredBy: []
-  timestamp: '2024-04-07 09:46:12+09:00'
+  timestamp: '2024-12-09 01:33:46+00:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/min_plus_convolution_convex_arbitrary/src/main.rs
