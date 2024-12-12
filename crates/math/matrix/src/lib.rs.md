@@ -74,9 +74,13 @@ data:
     \      let mut a = Self {\n            n: self.m,\n            m: self.n,\n  \
     \          v: self.v.clone(),\n        };\n        for i in 0..self.n {\n    \
     \        for j in 0..self.m {\n                a[j][i] = self[i][j].clone();\n\
-    \            }\n        }\n        a\n    }\n}\n\nimpl<T> Matrix<T>\nwhere\n \
-    \   T: Zero + Clone,\n{\n    pub fn zeros(n: usize, m: usize) -> Self {\n    \
-    \    Self {\n            n,\n            m,\n            v: vec![T::zero(); n\
+    \            }\n        }\n        a\n    }\n\n    pub fn swap_row(&mut self,\
+    \ i: usize, j: usize) {\n        for k in 0..self.m {\n            self.v.swap(i\
+    \ * self.m + k, j * self.m + k);\n        }\n    }\n\n    pub fn swap_col(&mut\
+    \ self, i: usize, j: usize) {\n        for k in 0..self.n {\n            self.v.swap(i\
+    \ + k * self.m, j + k * self.m);\n        }\n    }\n}\n\nimpl<T> Matrix<T>\nwhere\n\
+    \    T: Zero + Clone,\n{\n    pub fn zeros(n: usize, m: usize) -> Self {\n   \
+    \     Self {\n            n,\n            m,\n            v: vec![T::zero(); n\
     \ * m].into_boxed_slice(),\n        }\n    }\n}\n\nimpl<T> Matrix<T>\nwhere\n\
     \    T: Zero + One + Clone,\n{\n    pub fn e(n: usize) -> Self {\n        let\
     \ mut a = Self::zeros(n, n);\n        for i in 0..n {\n            a[i][i] = T::one();\n\
@@ -88,22 +92,22 @@ data:
     \            k >>= 1;\n        }\n        b\n    }\n}\n\nimpl<T> Matrix<T>\nwhere\n\
     \    T: Zero\n        + One\n        + Clone\n        + Eq\n        + Neg<Output\
     \ = T>\n        + Add<Output = T>\n        + Sub<Output = T>\n        + Mul<Output\
-    \ = T>\n        + Div<Output = T>,\n{\n    // (\u6383\u51FA\u3057\u5F8C\u306E\u884C\
-    \u5217, rank, det(\u6B63\u65B9\u884C\u5217\u306E\u5834\u5408))\n    pub fn gauss_elimination(&self)\
-    \ -> (Self, usize, Option<T>) {\n        let mut a = self.clone();\n        let\
-    \ mut rank = 0;\n        let mut det = T::one();\n        let one = T::one();\n\
-    \        let zero = T::zero();\n        for j in 0..self.m {\n            if let\
-    \ Some(i) = (rank..self.n).position(|i| a[i][j] != zero) {\n                let\
-    \ i = i + rank;\n                if rank < i {\n                    det = -det;\n\
-    \                    let (x, y) = a.v.split_at_mut(i * self.m);\n            \
-    \        x[rank * self.m..(rank + 1) * self.m].swap_with_slice(&mut y[0..self.m]);\n\
-    \                }\n                det = det * a[rank][j].clone();\n        \
-    \        if a[rank][j] != one {\n                    let coef = one.clone() /\
-    \ a[rank][j].clone();\n                    for k in j..self.m {\n            \
-    \            a[rank][k] = a[rank][k].clone() * coef.clone();\n               \
-    \     }\n                }\n                for i in 0..self.n {\n           \
-    \         if i == rank {\n                        continue;\n                \
-    \    }\n                    if a[i][j] != zero {\n                        let\
+    \ = T>\n        + Div<Output = T>,\n{\n    /// (\u6383\u51FA\u3057\u5F8C\u306E\
+    \u884C\u5217, rank, det(\u6B63\u65B9\u884C\u5217\u306E\u5834\u5408))\n    pub\
+    \ fn gauss_elimination(&self) -> (Self, usize, Option<T>) {\n        let mut a\
+    \ = self.clone();\n        let mut rank = 0;\n        let mut det = T::one();\n\
+    \        let one = T::one();\n        let zero = T::zero();\n        for j in\
+    \ 0..self.m {\n            if let Some(i) = (rank..self.n).position(|i| a[i][j]\
+    \ != zero) {\n                let i = i + rank;\n                if rank < i {\n\
+    \                    det = -det;\n                    let (x, y) = a.v.split_at_mut(i\
+    \ * self.m);\n                    x[rank * self.m..(rank + 1) * self.m].swap_with_slice(&mut\
+    \ y[0..self.m]);\n                }\n                det = det * a[rank][j].clone();\n\
+    \                if a[rank][j] != one {\n                    let coef = one.clone()\
+    \ / a[rank][j].clone();\n                    for k in j..self.m {\n          \
+    \              a[rank][k] = a[rank][k].clone() * coef.clone();\n             \
+    \       }\n                }\n                for i in 0..self.n {\n         \
+    \           if i == rank {\n                        continue;\n              \
+    \      }\n                    if a[i][j] != zero {\n                        let\
     \ coef = a[i][j].clone() / a[rank][j].clone();\n                        for k\
     \ in j..self.m {\n                            a[i][k] = a[i][k].clone() - a[rank][k].clone()\
     \ * coef.clone();\n                        }\n                    }\n        \
@@ -153,7 +157,14 @@ data:
     \        a -= rhs;\n        a\n    }\n}\n\nimpl<T> Mul<Self> for &Matrix<T>\n\
     where\n    T: Zero + Clone + Add<Output = T> + Mul<Output = T>,\n{\n    type Output\
     \ = Matrix<T>;\n    fn mul(self, rhs: Self) -> Self::Output {\n        let mut\
-    \ a = self.clone();\n        a *= rhs;\n        a\n    }\n}\n"
+    \ a = self.clone();\n        a *= rhs;\n        a\n    }\n}\n\nimpl<T> Mul<T>\
+    \ for &Matrix<T>\nwhere\n    T: Zero + Clone + Mul<Output = T>,\n{\n    type Output\
+    \ = Matrix<T>;\n    fn mul(self, rhs: T) -> Self::Output {\n        let mut a\
+    \ = self.clone();\n        a *= rhs;\n        a\n    }\n}\n\nimpl<T> Div<T> for\
+    \ &Matrix<T>\nwhere\n    T: Zero + One + Clone + Mul<Output = T> + Div<Output\
+    \ = T>,\n{\n    type Output = Matrix<T>;\n    fn div(self, rhs: T) -> Self::Output\
+    \ {\n        let mut a = self.clone();\n        a /= rhs;\n        a\n    }\n\
+    }\n"
   dependsOn:
   - crates/algebraic/algebraic/src/lib.rs
   isVerificationFile: false
@@ -161,7 +172,7 @@ data:
   requiredBy:
   - crates/graph/count-spanning-tree-undirected/src/lib.rs
   - crates/graph/count-spanning-tree-directed/src/lib.rs
-  timestamp: '2024-06-13 08:47:29+09:00'
+  timestamp: '2024-12-12 04:49:04+00:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/inverse_matrix/src/main.rs
