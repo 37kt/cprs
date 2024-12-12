@@ -139,6 +139,18 @@ where
         }
         a
     }
+
+    pub fn swap_row(&mut self, i: usize, j: usize) {
+        for k in 0..self.m {
+            self.v.swap(i * self.m + k, j * self.m + k);
+        }
+    }
+
+    pub fn swap_col(&mut self, i: usize, j: usize) {
+        for k in 0..self.n {
+            self.v.swap(i + k * self.m, j + k * self.m);
+        }
+    }
 }
 
 impl<T> Matrix<T>
@@ -198,7 +210,7 @@ where
         + Mul<Output = T>
         + Div<Output = T>,
 {
-    // (掃出し後の行列, rank, det(正方行列の場合))
+    /// (掃出し後の行列, rank, det(正方行列の場合))
     pub fn gauss_elimination(&self) -> (Self, usize, Option<T>) {
         let mut a = self.clone();
         let mut rank = 0;
@@ -386,6 +398,30 @@ where
     fn mul(self, rhs: Self) -> Self::Output {
         let mut a = self.clone();
         a *= rhs;
+        a
+    }
+}
+
+impl<T> Mul<T> for &Matrix<T>
+where
+    T: Zero + Clone + Mul<Output = T>,
+{
+    type Output = Matrix<T>;
+    fn mul(self, rhs: T) -> Self::Output {
+        let mut a = self.clone();
+        a *= rhs;
+        a
+    }
+}
+
+impl<T> Div<T> for &Matrix<T>
+where
+    T: Zero + One + Clone + Mul<Output = T> + Div<Output = T>,
+{
+    type Output = Matrix<T>;
+    fn div(self, rhs: T) -> Self::Output {
+        let mut a = self.clone();
+        a /= rhs;
         a
     }
 }
