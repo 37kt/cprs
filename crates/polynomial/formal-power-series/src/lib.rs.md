@@ -12,6 +12,9 @@ data:
     title: crates/number-theory/modint/src/lib.rs
   _extendedRequiredBy:
   - icon: ':heavy_check_mark:'
+    path: crates/number-theory/stirling-first-fixed-k/src/lib.rs
+    title: crates/number-theory/stirling-first-fixed-k/src/lib.rs
+  - icon: ':heavy_check_mark:'
     path: crates/number-theory/stirling-first/src/lib.rs
     title: crates/number-theory/stirling-first/src/lib.rs
   - icon: ':heavy_check_mark:'
@@ -362,6 +365,7 @@ data:
   isVerificationFile: false
   path: crates/polynomial/formal-power-series/src/lib.rs
   requiredBy:
+  - crates/number-theory/stirling-first-fixed-k/src/lib.rs
   - crates/number-theory/stirling-first/src/lib.rs
   - crates/polynomial/polynomial-interpolation/src/lib.rs
   - crates/polynomial/shift-of-sampling-points/src/lib.rs

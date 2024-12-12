@@ -486,6 +486,11 @@ data:
     - icon: ':heavy_check_mark:'
       path: crates/number-theory/stirling-first/src/lib.rs
       title: crates/number-theory/stirling-first/src/lib.rs
+  - name: crates/number-theory/stirling-first-fixed-k/src
+    pages:
+    - icon: ':heavy_check_mark:'
+      path: crates/number-theory/stirling-first-fixed-k/src/lib.rs
+      title: crates/number-theory/stirling-first-fixed-k/src/lib.rs
   - name: crates/polynomial/berlekamp-massey/src
     pages:
     - icon: ':heavy_check_mark:'
@@ -982,6 +987,11 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/stirling_number_of_the_first_kind/src/main.rs
       title: verify/stirling_number_of_the_first_kind/src/main.rs
+  - name: verify/stirling_number_of_the_first_kind_fixed_k/src
+    pages:
+    - icon: ':heavy_check_mark:'
+      path: verify/stirling_number_of_the_first_kind_fixed_k/src/main.rs
+      title: verify/stirling_number_of_the_first_kind_fixed_k/src/main.rs
   - name: verify/subset_convolution/src
     pages:
     - icon: ':heavy_check_mark:'
