@@ -10,7 +10,7 @@ where
         if i1 >= n {
             break;
         }
-        let x = if k % 2 == 0 { (-1).into() } else { 1.into() };
+        let x = if k % 2 == 1 { (-1).into() } else { 1.into() };
         if i1 < n {
             res[i1] = x;
         }
