@@ -481,6 +481,11 @@ data:
     - icon: ':heavy_check_mark:'
       path: crates/number-theory/modint/src/lib.rs
       title: crates/number-theory/modint/src/lib.rs
+  - name: crates/number-theory/stirling-first/src
+    pages:
+    - icon: ':heavy_check_mark:'
+      path: crates/number-theory/stirling-first/src/lib.rs
+      title: crates/number-theory/stirling-first/src/lib.rs
   - name: crates/polynomial/berlekamp-massey/src
     pages:
     - icon: ':heavy_check_mark:'
@@ -972,6 +977,11 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/stern_brocot_tree/src/main.rs
       title: verify/stern_brocot_tree/src/main.rs
+  - name: verify/stirling_number_of_the_first_kind/src
+    pages:
+    - icon: ':heavy_check_mark:'
+      path: verify/stirling_number_of_the_first_kind/src/main.rs
+      title: verify/stirling_number_of_the_first_kind/src/main.rs
   - name: verify/subset_convolution/src
     pages:
     - icon: ':heavy_check_mark:'
