@@ -45,6 +45,7 @@
 "verify/multipoint_evaluation/src/main.rs": "2024-11-25 09:47:32 +0900",
 "verify/nim_product_64/src/main.rs": "2023-05-19 16:25:08 +0900",
 "verify/number_of_substrings/src/main.rs": "2023-06-13 17:07:21 +0900",
+"verify/partition_function/src/main.rs": "2024-12-12 07:56:32 +0000",
 "verify/persistent_unionfind/src/main.rs": "2023-05-08 17:12:04 +0900",
 "verify/point_add_range_sum/src/main.rs": "2024-03-18 01:19:47 +0900",
 "verify/point_add_rectangle_sum/src/main.rs": "2024-03-18 01:19:47 +0900",
