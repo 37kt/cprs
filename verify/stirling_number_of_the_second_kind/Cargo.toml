@@ -1,0 +1,11 @@
+[package]
+name = "stirling_number_of_the_second_kind"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+modint = { path = "../../crates/number-theory/modint" }
+stirling-second = { path = "../../crates/number-theory/stirling-second" }
+proconio = { version = "=0.3.6", features = ["derive"] }

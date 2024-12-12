@@ -1,0 +1,16 @@
+[package]
+name = "stirling-second-fixed-k"
+version = "0.1.0"
+edition = "2021"
+license = "CC0-1.0"
+publish = false
+
+[lib]
+name = "stirling_second_fixed_k"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+modint = { path = "../../number-theory/modint" }
+combination = { path = "../../number-theory/combination" }
+formal-power-series = { path = "../../polynomial/formal-power-series" }
