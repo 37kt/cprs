@@ -481,6 +481,11 @@ data:
     - icon: ':heavy_check_mark:'
       path: crates/number-theory/modint/src/lib.rs
       title: crates/number-theory/modint/src/lib.rs
+  - name: crates/number-theory/pentagonal-number-theorem/src
+    pages:
+    - icon: ':warning:'
+      path: crates/number-theory/pentagonal-number-theorem/src/lib.rs
+      title: crates/number-theory/pentagonal-number-theorem/src/lib.rs
   - name: crates/number-theory/stirling-first/src
     pages:
     - icon: ':heavy_check_mark:'
