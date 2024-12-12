@@ -8,6 +8,12 @@ data:
   - icon: ':heavy_check_mark:'
     path: crates/number-theory/stirling-first-fixed-k/src/lib.rs
     title: crates/number-theory/stirling-first-fixed-k/src/lib.rs
+  - icon: ':heavy_check_mark:'
+    path: crates/number-theory/stirling-second-fixed-k/src/lib.rs
+    title: crates/number-theory/stirling-second-fixed-k/src/lib.rs
+  - icon: ':heavy_check_mark:'
+    path: crates/number-theory/stirling-second/src/lib.rs
+    title: crates/number-theory/stirling-second/src/lib.rs
   - icon: ':warning:'
     path: crates/polynomial/lagrange-interpolation/src/lib.rs
     title: crates/polynomial/lagrange-interpolation/src/lib.rs
@@ -60,7 +66,9 @@ data:
   isVerificationFile: false
   path: crates/number-theory/combination/src/lib.rs
   requiredBy:
+  - crates/number-theory/stirling-second-fixed-k/src/lib.rs
   - crates/number-theory/stirling-first-fixed-k/src/lib.rs
+  - crates/number-theory/stirling-second/src/lib.rs
   - crates/polynomial/lagrange-interpolation/src/lib.rs
   timestamp: '2024-06-13 08:47:29+09:00'
   verificationStatus: LIBRARY_ALL_AC

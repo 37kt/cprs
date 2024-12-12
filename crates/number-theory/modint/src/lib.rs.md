@@ -33,6 +33,12 @@ data:
     path: crates/number-theory/stirling-first/src/lib.rs
     title: crates/number-theory/stirling-first/src/lib.rs
   - icon: ':heavy_check_mark:'
+    path: crates/number-theory/stirling-second-fixed-k/src/lib.rs
+    title: crates/number-theory/stirling-second-fixed-k/src/lib.rs
+  - icon: ':heavy_check_mark:'
+    path: crates/number-theory/stirling-second/src/lib.rs
+    title: crates/number-theory/stirling-second/src/lib.rs
+  - icon: ':heavy_check_mark:'
     path: crates/polynomial/berlekamp-massey/src/lib.rs
     title: crates/polynomial/berlekamp-massey/src/lib.rs
   - icon: ':heavy_check_mark:'
@@ -141,6 +147,12 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/stirling_number_of_the_first_kind_fixed_k/src/main.rs
     title: verify/stirling_number_of_the_first_kind_fixed_k/src/main.rs
+  - icon: ':heavy_check_mark:'
+    path: verify/stirling_number_of_the_second_kind/src/main.rs
+    title: verify/stirling_number_of_the_second_kind/src/main.rs
+  - icon: ':heavy_check_mark:'
+    path: verify/stirling_number_of_the_second_kind_fixed_k/src/main.rs
+    title: verify/stirling_number_of_the_second_kind_fixed_k/src/main.rs
   - icon: ':heavy_check_mark:'
     path: verify/subset_convolution/src/main.rs
     title: verify/subset_convolution/src/main.rs
@@ -433,9 +445,11 @@ data:
   isVerificationFile: false
   path: crates/number-theory/modint/src/lib.rs
   requiredBy:
+  - crates/number-theory/stirling-second-fixed-k/src/lib.rs
   - crates/number-theory/stirling-first-fixed-k/src/lib.rs
   - crates/number-theory/stirling-first/src/lib.rs
   - crates/number-theory/combination/src/lib.rs
+  - crates/number-theory/stirling-second/src/lib.rs
   - crates/convolution/convolution-ntt-friendly/src/lib.rs
   - crates/convolution/convolution-naive/src/lib.rs
   - crates/convolution/convolution-u64/src/lib.rs
@@ -472,8 +486,10 @@ data:
   - verify/sqrt_mod/src/main.rs
   - verify/exp_of_formal_power_series/src/main.rs
   - verify/convolution_mod_1000000007/src/main.rs
+  - verify/stirling_number_of_the_second_kind_fixed_k/src/main.rs
   - verify/tree_path_composite_sum/src/main.rs
   - verify/range_parallel_unionfind/src/main.rs
+  - verify/stirling_number_of_the_second_kind/src/main.rs
   - verify/matrix_product/src/main.rs
   - verify/polynomial_interpolation/src/main.rs
   - verify/stirling_number_of_the_first_kind_fixed_k/src/main.rs
