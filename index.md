@@ -481,6 +481,11 @@ data:
     - icon: ':heavy_check_mark:'
       path: crates/number-theory/modint/src/lib.rs
       title: crates/number-theory/modint/src/lib.rs
+  - name: crates/number-theory/partition/src
+    pages:
+    - icon: ':heavy_check_mark:'
+      path: crates/number-theory/partition/src/lib.rs
+      title: crates/number-theory/partition/src/lib.rs
   - name: crates/number-theory/pentagonal-number-theorem/src
     pages:
     - icon: ':warning:'
@@ -827,6 +832,11 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/number_of_substrings/src/main.rs
       title: verify/number_of_substrings/src/main.rs
+  - name: verify/partition_function/src
+    pages:
+    - icon: ':heavy_check_mark:'
+      path: verify/partition_function/src/main.rs
+      title: verify/partition_function/src/main.rs
   - name: verify/persistent_unionfind/src
     pages:
     - icon: ':heavy_check_mark:'
