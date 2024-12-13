@@ -6,6 +6,9 @@ data:
     title: crates/number-theory/modint/src/lib.rs
   _extendedRequiredBy:
   - icon: ':heavy_check_mark:'
+    path: crates/number-theory/q-binomial/src/lib.rs
+    title: crates/number-theory/q-binomial/src/lib.rs
+  - icon: ':heavy_check_mark:'
     path: crates/number-theory/stirling-first-fixed-k/src/lib.rs
     title: crates/number-theory/stirling-first-fixed-k/src/lib.rs
   - icon: ':heavy_check_mark:'
@@ -26,11 +29,11 @@ data:
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
-  bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.12.7/x64/lib/python3.12/site-packages/onlinejudge_verify/documentation/build.py\"\
+  bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.12.8/x64/lib/python3.12/site-packages/onlinejudge_verify/documentation/build.py\"\
     , line 71, in _render_source_code_stat\n    bundled_code = language.bundle(stat.path,\
     \ basedir=basedir, options={'include_paths': [basedir]}).decode()\n          \
     \         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\
-    \  File \"/opt/hostedtoolcache/Python/3.12.7/x64/lib/python3.12/site-packages/onlinejudge_verify/languages/rust.py\"\
+    \  File \"/opt/hostedtoolcache/Python/3.12.8/x64/lib/python3.12/site-packages/onlinejudge_verify/languages/rust.py\"\
     , line 288, in bundle\n    raise NotImplementedError\nNotImplementedError\n"
   code: "use std::cell::RefCell;\n\nuse modint::ModInt;\n\npub struct Combination<M:\
     \ ModInt> {\n    inv: RefCell<Vec<M>>,\n    fact: RefCell<Vec<M>>,\n    fact_inv:\
@@ -68,6 +71,7 @@ data:
   requiredBy:
   - crates/number-theory/stirling-second-fixed-k/src/lib.rs
   - crates/number-theory/stirling-first-fixed-k/src/lib.rs
+  - crates/number-theory/q-binomial/src/lib.rs
   - crates/number-theory/stirling-second/src/lib.rs
   - crates/polynomial/lagrange-interpolation/src/lib.rs
   timestamp: '2024-06-13 08:47:29+09:00'

@@ -27,6 +27,9 @@ data:
     path: crates/number-theory/combination/src/lib.rs
     title: crates/number-theory/combination/src/lib.rs
   - icon: ':heavy_check_mark:'
+    path: crates/number-theory/q-binomial/src/lib.rs
+    title: crates/number-theory/q-binomial/src/lib.rs
+  - icon: ':heavy_check_mark:'
     path: crates/number-theory/stirling-first-fixed-k/src/lib.rs
     title: crates/number-theory/stirling-first-fixed-k/src/lib.rs
   - icon: ':heavy_check_mark:'
@@ -124,6 +127,9 @@ data:
     path: verify/pow_of_matrix/src/main.rs
     title: verify/pow_of_matrix/src/main.rs
   - icon: ':heavy_check_mark:'
+    path: verify/q_binomial_coefficient_prime_mod/src/main.rs
+    title: verify/q_binomial_coefficient_prime_mod/src/main.rs
+  - icon: ':heavy_check_mark:'
     path: verify/range_affine_point_get/src/main.rs
     title: verify/range_affine_point_get/src/main.rs
   - icon: ':heavy_check_mark:'
@@ -165,11 +171,11 @@ data:
   attributes:
     links:
     - https://rsk0315.hatenablog.com/entry/2023/04/29/043512
-  bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.12.7/x64/lib/python3.12/site-packages/onlinejudge_verify/documentation/build.py\"\
+  bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.12.8/x64/lib/python3.12/site-packages/onlinejudge_verify/documentation/build.py\"\
     , line 71, in _render_source_code_stat\n    bundled_code = language.bundle(stat.path,\
     \ basedir=basedir, options={'include_paths': [basedir]}).decode()\n          \
     \         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\
-    \  File \"/opt/hostedtoolcache/Python/3.12.7/x64/lib/python3.12/site-packages/onlinejudge_verify/languages/rust.py\"\
+    \  File \"/opt/hostedtoolcache/Python/3.12.8/x64/lib/python3.12/site-packages/onlinejudge_verify/languages/rust.py\"\
     , line 288, in bundle\n    raise NotImplementedError\nNotImplementedError\n"
   code: "use std::{\n    fmt,\n    hash::Hash,\n    iter::{Product, Sum},\n    num::ParseIntError,\n\
     \    ops::{Add, AddAssign, Div, DivAssign, Mul, MulAssign, Neg, Sub, SubAssign},\n\
@@ -447,6 +453,7 @@ data:
   requiredBy:
   - crates/number-theory/stirling-second-fixed-k/src/lib.rs
   - crates/number-theory/stirling-first-fixed-k/src/lib.rs
+  - crates/number-theory/q-binomial/src/lib.rs
   - crates/number-theory/stirling-first/src/lib.rs
   - crates/number-theory/combination/src/lib.rs
   - crates/number-theory/stirling-second/src/lib.rs
@@ -477,6 +484,7 @@ data:
   - verify/polynomial_taylor_shift/src/main.rs
   - verify/log_of_formal_power_series/src/main.rs
   - verify/point_set_tree_path_composite_sum_fixed_root/src/main.rs
+  - verify/q_binomial_coefficient_prime_mod/src/main.rs
   - verify/inv_of_formal_power_series/src/main.rs
   - verify/subset_convolution/src/main.rs
   - verify/find_linear_recurrence/src/main.rs

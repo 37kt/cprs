@@ -491,6 +491,11 @@ data:
     - icon: ':warning:'
       path: crates/number-theory/pentagonal-number-theorem/src/lib.rs
       title: crates/number-theory/pentagonal-number-theorem/src/lib.rs
+  - name: crates/number-theory/q-binomial/src
+    pages:
+    - icon: ':heavy_check_mark:'
+      path: crates/number-theory/q-binomial/src/lib.rs
+      title: crates/number-theory/q-binomial/src/lib.rs
   - name: crates/number-theory/stirling-first/src
     pages:
     - icon: ':heavy_check_mark:'
@@ -892,6 +897,11 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/primality_test/src/main.rs
       title: verify/primality_test/src/main.rs
+  - name: verify/q_binomial_coefficient_prime_mod/src
+    pages:
+    - icon: ':heavy_check_mark:'
+      path: verify/q_binomial_coefficient_prime_mod/src/main.rs
+      title: verify/q_binomial_coefficient_prime_mod/src/main.rs
   - name: verify/queue_operate_all_composite/src
     pages:
     - icon: ':heavy_check_mark:'
