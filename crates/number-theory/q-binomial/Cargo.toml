@@ -1,0 +1,15 @@
+[package]
+name = "q-binomial"
+version = "0.1.0"
+edition = "2021"
+license = "CC0-1.0"
+publish = false
+
+[lib]
+name = "q_binomial"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+modint = { path = "../../number-theory/modint" }
+combination = { path = "../../number-theory/combination" }
