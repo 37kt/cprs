@@ -29,18 +29,20 @@ pub trait Mo {
 
     fn query(&self) -> Self::Output;
 
+    fn initial_position(&self) -> (usize, usize) {
+        (0, 0)
+    }
+
     fn solve(&mut self, qs: &[(usize, usize)]) -> Vec<Self::Output> {
-        let n = qs.iter().map(|&(_, r)| r).max().unwrap();
+        let n = qs.iter().map(|&(l, r)| l.max(r)).max().unwrap();
         let q = qs.len();
-        let w = n / n.max(1).min((q.max(1) as f64).sqrt().round() as usize);
+        let w = 1.max((n as f64 / 1.0f64.max((q as f64 * 2.0 / 3.0).sqrt())).round() as usize);
         let mut ord = (0..q).collect::<Vec<_>>();
-        ord.sort_by_key(|&i| {
+        ord.sort_unstable_by_key(|&i| {
             let (l, r) = qs[i];
             (l / w, if (l / w) & 1 == 0 { r } else { !r })
         });
-        let mut l = 0;
-        let mut r = 0;
-
+        let (mut l, mut r) = self.initial_position();
         let mut res = vec![Default::default(); q];
         for i in ord {
             let (ll, rr) = qs[i];
