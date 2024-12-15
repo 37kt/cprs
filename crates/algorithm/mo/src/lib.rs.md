@@ -27,17 +27,18 @@ data:
     \ self, i: usize) {\n        self.add(i);\n    }\n\n    fn remove_left(&mut self,\
     \ i: usize) {\n        self.remove(i);\n    }\n\n    fn remove_right(&mut self,\
     \ i: usize) {\n        self.remove(i);\n    }\n\n    fn query(&self) -> Self::Output;\n\
-    \n    fn solve(&mut self, qs: &[(usize, usize)]) -> Vec<Self::Output> {\n    \
-    \    let n = qs.iter().map(|&(_, r)| r).max().unwrap();\n        let q = qs.len();\n\
-    \        let w = n / n.max(1).min((q.max(1) as f64).sqrt().round() as usize);\n\
-    \        let mut ord = (0..q).collect::<Vec<_>>();\n        ord.sort_by_key(|&i|\
+    \n    fn initial_position(&self) -> (usize, usize) {\n        (0, 0)\n    }\n\n\
+    \    fn solve(&mut self, qs: &[(usize, usize)]) -> Vec<Self::Output> {\n     \
+    \   let n = qs.iter().map(|&(l, r)| l.max(r)).max().unwrap();\n        let q =\
+    \ qs.len();\n        let w = 1.max((n as f64 / 1.0f64.max((q as f64 * 2.0 / 3.0).sqrt())).round()\
+    \ as usize);\n        let mut ord = (0..q).collect::<Vec<_>>();\n        ord.sort_unstable_by_key(|&i|\
     \ {\n            let (l, r) = qs[i];\n            (l / w, if (l / w) & 1 == 0\
-    \ { r } else { !r })\n        });\n        let mut l = 0;\n        let mut r =\
-    \ 0;\n\n        let mut res = vec![Default::default(); q];\n        for i in ord\
-    \ {\n            let (ll, rr) = qs[i];\n            while l > ll {\n         \
-    \       l -= 1;\n                self.add_left(l);\n            }\n          \
-    \  while r < rr {\n                self.add_right(r);\n                r += 1;\n\
-    \            }\n            while l < ll {\n                self.remove_left(l);\n\
+    \ { r } else { !r })\n        });\n        let (mut l, mut r) = self.initial_position();\n\
+    \        let mut res = vec![Default::default(); q];\n        for i in ord {\n\
+    \            let (ll, rr) = qs[i];\n            while l > ll {\n             \
+    \   l -= 1;\n                self.add_left(l);\n            }\n            while\
+    \ r < rr {\n                self.add_right(r);\n                r += 1;\n    \
+    \        }\n            while l < ll {\n                self.remove_left(l);\n\
     \                l += 1;\n            }\n            while r > rr {\n        \
     \        r -= 1;\n                self.remove_right(r);\n            }\n     \
     \       res[i] = self.query();\n        }\n        res\n    }\n}\n"
@@ -45,7 +46,7 @@ data:
   isVerificationFile: false
   path: crates/algorithm/mo/src/lib.rs
   requiredBy: []
-  timestamp: '2023-04-20 08:15:08+09:00'
+  timestamp: '2024-12-15 01:26:42+00:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/static_range_sum/src/main.rs
