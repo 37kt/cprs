@@ -57,6 +57,7 @@
 "verify/pow_of_matrix/src/main.rs": "2024-12-12 04:49:04 +0000",
 "verify/predecessor_problem/src/main.rs": "2023-05-13 18:34:42 +0900",
 "verify/primality_test/src/main.rs": "2023-06-13 17:24:28 +0900",
+"verify/q_binomial_coefficient_prime_mod/src/main.rs": "2024-12-13 02:56:33 +0000",
 "verify/queue_operate_all_composite/src/main.rs": "2024-03-18 01:19:47 +0900",
 "verify/range_affine_point_get/src/main.rs": "2024-06-28 10:31:31 +0900",
 "verify/range_affine_range_sum/src/main.rs": "2024-03-18 01:19:47 +0900",
