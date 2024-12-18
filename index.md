@@ -178,7 +178,7 @@ data:
       title: crates/data-structure/potentialized-union-find/src/lib.rs
   - name: crates/data-structure/quotients-array/src
     pages:
-    - icon: ':warning:'
+    - icon: ':heavy_check_mark:'
       path: crates/data-structure/quotients-array/src/lib.rs
       title: crates/data-structure/quotients-array/src/lib.rs
   - name: crates/data-structure/range-contour-query/src
@@ -426,6 +426,11 @@ data:
     - icon: ':heavy_check_mark:'
       path: crates/math/floor-sum/src/lib.rs
       title: crates/math/floor-sum/src/lib.rs
+  - name: crates/math/lucy-dp/src
+    pages:
+    - icon: ':heavy_check_mark:'
+      path: crates/math/lucy-dp/src/lib.rs
+      title: crates/math/lucy-dp/src/lib.rs
   - name: crates/math/matrix/src
     pages:
     - icon: ':heavy_check_mark:'
@@ -436,6 +441,11 @@ data:
     - icon: ':heavy_check_mark:'
       path: crates/math/matrix-mod2/src/lib.rs
       title: crates/math/matrix-mod2/src/lib.rs
+  - name: crates/math/min_25-sieve/src
+    pages:
+    - icon: ':heavy_check_mark:'
+      path: crates/math/min_25-sieve/src/lib.rs
+      title: crates/math/min_25-sieve/src/lib.rs
   - name: crates/math/modint61/src
     pages:
     - icon: ':heavy_check_mark:'
@@ -1072,6 +1082,11 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/sum_of_floor_of_linear/src/main.rs
       title: verify/sum_of_floor_of_linear/src/main.rs
+  - name: verify/sum_of_multiplicative_function/src
+    pages:
+    - icon: ':heavy_check_mark:'
+      path: verify/sum_of_multiplicative_function/src/main.rs
+      title: verify/sum_of_multiplicative_function/src/main.rs
   - name: verify/tree_path_composite_sum/src
     pages:
     - icon: ':heavy_check_mark:'

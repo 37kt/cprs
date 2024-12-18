@@ -4,11 +4,20 @@ data:
   - icon: ':heavy_check_mark:'
     path: crates/number-theory/quotients/src/lib.rs
     title: crates/number-theory/quotients/src/lib.rs
-  _extendedRequiredBy: []
-  _extendedVerifiedWith: []
+  _extendedRequiredBy:
+  - icon: ':heavy_check_mark:'
+    path: crates/math/lucy-dp/src/lib.rs
+    title: crates/math/lucy-dp/src/lib.rs
+  - icon: ':heavy_check_mark:'
+    path: crates/math/min_25-sieve/src/lib.rs
+    title: crates/math/min_25-sieve/src/lib.rs
+  _extendedVerifiedWith:
+  - icon: ':heavy_check_mark:'
+    path: verify/sum_of_multiplicative_function/src/main.rs
+    title: verify/sum_of_multiplicative_function/src/main.rs
   _isVerificationFailed: false
   _pathExtension: rs
-  _verificationStatusIcon: ':warning:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.12.8/x64/lib/python3.12/site-packages/onlinejudge_verify/documentation/build.py\"\
@@ -45,10 +54,13 @@ data:
   - crates/number-theory/quotients/src/lib.rs
   isVerificationFile: false
   path: crates/data-structure/quotients-array/src/lib.rs
-  requiredBy: []
+  requiredBy:
+  - crates/math/lucy-dp/src/lib.rs
+  - crates/math/min_25-sieve/src/lib.rs
   timestamp: '2024-12-18 03:30:26+00:00'
-  verificationStatus: LIBRARY_NO_TESTS
-  verifiedWith: []
+  verificationStatus: LIBRARY_ALL_AC
+  verifiedWith:
+  - verify/sum_of_multiplicative_function/src/main.rs
 documentation_of: crates/data-structure/quotients-array/src/lib.rs
 layout: document
 redirect_from:

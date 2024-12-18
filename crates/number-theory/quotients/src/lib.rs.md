@@ -2,7 +2,7 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy:
-  - icon: ':warning:'
+  - icon: ':heavy_check_mark:'
     path: crates/data-structure/quotients-array/src/lib.rs
     title: crates/data-structure/quotients-array/src/lib.rs
   _extendedVerifiedWith:

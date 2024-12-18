@@ -63,6 +63,9 @@ data:
     path: crates/math/matrix/src/lib.rs
     title: crates/math/matrix/src/lib.rs
   - icon: ':heavy_check_mark:'
+    path: crates/math/min_25-sieve/src/lib.rs
+    title: crates/math/min_25-sieve/src/lib.rs
+  - icon: ':heavy_check_mark:'
     path: crates/math/modint61/src/lib.rs
     title: crates/math/modint61/src/lib.rs
   - icon: ':warning:'
@@ -198,6 +201,7 @@ data:
   path: crates/algebraic/algebraic/src/lib.rs
   requiredBy:
   - crates/string/suffix-array/src/lib.rs
+  - crates/math/min_25-sieve/src/lib.rs
   - crates/math/modint61/src/lib.rs
   - crates/math/stern-brocot-tree/src/lib.rs
   - crates/math/montgomery-modint/src/lib.rs

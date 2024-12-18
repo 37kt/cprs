@@ -1,7 +1,13 @@
 ---
 data:
   _extendedDependsOn: []
-  _extendedRequiredBy: []
+  _extendedRequiredBy:
+  - icon: ':heavy_check_mark:'
+    path: crates/math/lucy-dp/src/lib.rs
+    title: crates/math/lucy-dp/src/lib.rs
+  - icon: ':heavy_check_mark:'
+    path: crates/math/min_25-sieve/src/lib.rs
+    title: crates/math/min_25-sieve/src/lib.rs
   _extendedVerifiedWith: []
   _isVerificationFailed: false
   _pathExtension: rs
@@ -51,7 +57,9 @@ data:
   dependsOn: []
   isVerificationFile: false
   path: crates/math/prime-sieve/src/lib.rs
-  requiredBy: []
+  requiredBy:
+  - crates/math/lucy-dp/src/lib.rs
+  - crates/math/min_25-sieve/src/lib.rs
   timestamp: '2023-11-07 11:26:18+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []

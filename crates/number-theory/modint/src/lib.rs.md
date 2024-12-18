@@ -163,6 +163,9 @@ data:
     path: verify/subset_convolution/src/main.rs
     title: verify/subset_convolution/src/main.rs
   - icon: ':heavy_check_mark:'
+    path: verify/sum_of_multiplicative_function/src/main.rs
+    title: verify/sum_of_multiplicative_function/src/main.rs
+  - icon: ':heavy_check_mark:'
     path: verify/tree_path_composite_sum/src/main.rs
     title: verify/tree_path_composite_sum/src/main.rs
   _isVerificationFailed: false
@@ -474,6 +477,7 @@ data:
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/log_of_formal_power_series/src/main.rs
+  - verify/sum_of_multiplicative_function/src/main.rs
   - verify/polynomial_interpolation/src/main.rs
   - verify/stirling_number_of_the_first_kind/src/main.rs
   - verify/find_linear_recurrence/src/main.rs
