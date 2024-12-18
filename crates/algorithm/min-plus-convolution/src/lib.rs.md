@@ -51,8 +51,8 @@ data:
   timestamp: '2024-12-09 01:33:46+00:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/min_plus_convolution_convex_arbitrary/src/main.rs
   - verify/min_plus_convolution_convex_convex/src/main.rs
+  - verify/min_plus_convolution_convex_arbitrary/src/main.rs
 documentation_of: crates/algorithm/min-plus-convolution/src/lib.rs
 layout: document
 redirect_from:

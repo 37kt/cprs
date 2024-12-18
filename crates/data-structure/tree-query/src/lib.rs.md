@@ -91,8 +91,8 @@ data:
   timestamp: '2024-06-28 10:31:31+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/vertex_add_path_sum/src/main.rs
   - verify/vertex_add_subtree_sum/src/main.rs
+  - verify/vertex_add_path_sum/src/main.rs
   - verify/vertex_set_path_composite/src/main.rs
 documentation_of: crates/data-structure/tree-query/src/lib.rs
 layout: document

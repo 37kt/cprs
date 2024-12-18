@@ -106,8 +106,8 @@ data:
   timestamp: '2024-03-18 01:19:47+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/vertex_add_path_sum/src/main.rs
   - verify/vertex_add_subtree_sum/src/main.rs
+  - verify/vertex_add_path_sum/src/main.rs
   - verify/vertex_set_path_composite/src/main.rs
   - verify/point_add_range_sum/src/main.rs
 documentation_of: crates/data-structure/segment-tree/src/lib.rs

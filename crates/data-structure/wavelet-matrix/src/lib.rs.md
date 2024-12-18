@@ -99,8 +99,8 @@ data:
   timestamp: '2023-04-22 21:59:33+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/static_range_frequency/src/main.rs
   - verify/range_kth_smallest/src/main.rs
+  - verify/static_range_frequency/src/main.rs
 documentation_of: crates/data-structure/wavelet-matrix/src/lib.rs
 layout: document
 redirect_from:

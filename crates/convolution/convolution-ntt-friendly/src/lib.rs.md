@@ -131,8 +131,8 @@ data:
   isVerificationFile: false
   path: crates/convolution/convolution-ntt-friendly/src/lib.rs
   requiredBy:
-  - crates/convolution/convolution-u64/src/lib.rs
   - crates/convolution/convolution-arbitrary-mod/src/lib.rs
+  - crates/convolution/convolution-u64/src/lib.rs
   - crates/string/wildcard-pattern-matching/src/lib.rs
   - crates/polynomial/formal-power-series/src/lib.rs
   - crates/polynomial/bostan-mori/src/lib.rs

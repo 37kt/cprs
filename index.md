@@ -176,6 +176,11 @@ data:
     - icon: ':warning:'
       path: crates/data-structure/potentialized-union-find/src/lib.rs
       title: crates/data-structure/potentialized-union-find/src/lib.rs
+  - name: crates/data-structure/quotients-array/src
+    pages:
+    - icon: ':warning:'
+      path: crates/data-structure/quotients-array/src/lib.rs
+      title: crates/data-structure/quotients-array/src/lib.rs
   - name: crates/data-structure/range-contour-query/src
     pages:
     - icon: ':warning:'
@@ -496,6 +501,11 @@ data:
     - icon: ':heavy_check_mark:'
       path: crates/number-theory/q-binomial/src/lib.rs
       title: crates/number-theory/q-binomial/src/lib.rs
+  - name: crates/number-theory/quotients/src
+    pages:
+    - icon: ':heavy_check_mark:'
+      path: crates/number-theory/quotients/src/lib.rs
+      title: crates/number-theory/quotients/src/lib.rs
   - name: crates/number-theory/stirling-first/src
     pages:
     - icon: ':heavy_check_mark:'
@@ -717,6 +727,11 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/enumerate_palindromes/src/main.rs
       title: verify/enumerate_palindromes/src/main.rs
+  - name: verify/enumerate_quotients/src
+    pages:
+    - icon: ':heavy_check_mark:'
+      path: verify/enumerate_quotients/src/main.rs
+      title: verify/enumerate_quotients/src/main.rs
   - name: verify/exp_of_formal_power_series/src
     pages:
     - icon: ':heavy_check_mark:'
