@@ -1,12 +1,12 @@
 use std::{
     mem::swap,
-    ops::{Add, Neg, Sub},
+    ops::{Add, Neg},
 };
 
 #[derive(Clone)]
 pub struct PotentializedUnionFind<T, const UNION_BY_SIZE: bool = true>
 where
-    T: Clone + Default + Add<Output = T> + Sub<Output = T> + Neg<Output = T> + Eq,
+    T: Clone + Default + Add<Output = T> + Neg<Output = T> + Eq,
 {
     par: Vec<i32>,
     pot: Vec<T>,
@@ -14,7 +14,7 @@ where
 
 impl<T, const UNION_BY_SIZE: bool> PotentializedUnionFind<T, UNION_BY_SIZE>
 where
-    T: Clone + Default + Add<Output = T> + Sub<Output = T> + Neg<Output = T> + Eq,
+    T: Clone + Default + Add<Output = T> + Neg<Output = T> + Eq,
 {
     pub fn new(n: usize) -> Self {
         Self {
@@ -30,19 +30,19 @@ where
     /// 入力: P(x) = P(y) + w
     /// 出力: 整合性があるか
     pub fn merge(&mut self, x: usize, y: usize, mut w: T) -> bool {
-        w = w + self.potential(y) - self.potential(x);
+        w = self.potential(x) + -w + -self.potential(y);
         let mut x = self.leader(x);
         let mut y = self.leader(y);
         if x == y {
             return w == T::default();
         }
-        if UNION_BY_SIZE && -self.par[x] > -self.par[y] {
+        if UNION_BY_SIZE && -self.par[x] < -self.par[y] {
             swap(&mut x, &mut y);
             w = -w;
         }
-        self.par[y] += self.par[x];
-        self.par[x] = y as i32;
-        self.pot[x] = w;
+        self.par[x] += self.par[y];
+        self.par[y] = x as i32;
+        self.pot[y] = w;
         true
     }
 
@@ -51,7 +51,7 @@ where
             x
         } else {
             let r = self.leader(self.par[x] as usize);
-            self.pot[x] = self.pot[x].clone() + self.pot[self.par[x] as usize].clone();
+            self.pot[x] = self.pot[self.par[x] as usize].clone() + self.pot[x].clone();
             self.par[x] = r as i32;
             r
         }
@@ -66,16 +66,16 @@ where
         -self.par[x] as usize
     }
 
-    /// P(x) - P(leader(x))
+    /// -P(leader(x)) + P(x)
     pub fn potential(&mut self, x: usize) -> T {
         self.leader(x);
         self.pot[x].clone()
     }
 
-    /// P(x) - P(y)
+    /// -P(y) + P(x)
     pub fn diff(&mut self, x: usize, y: usize) -> Option<T> {
         if self.same(x, y) {
-            Some(self.potential(x) - self.potential(y))
+            Some(-self.potential(y) + self.potential(x))
         } else {
             None
         }
