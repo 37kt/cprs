@@ -173,7 +173,7 @@ data:
       title: crates/data-structure/persistent-union-find/src/lib.rs
   - name: crates/data-structure/potentialized-union-find/src
     pages:
-    - icon: ':warning:'
+    - icon: ':heavy_check_mark:'
       path: crates/data-structure/potentialized-union-find/src/lib.rs
       title: crates/data-structure/potentialized-union-find/src/lib.rs
   - name: crates/data-structure/quotients-array/src
@@ -1107,6 +1107,11 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/unionfind/src/main.rs
       title: verify/unionfind/src/main.rs
+  - name: verify/unionfind_with_potential_non_commutative_group/src
+    pages:
+    - icon: ':heavy_check_mark:'
+      path: verify/unionfind_with_potential_non_commutative_group/src/main.rs
+      title: verify/unionfind_with_potential_non_commutative_group/src/main.rs
   - name: verify/vertex_add_path_sum/src
     pages:
     - icon: ':heavy_check_mark:'
