@@ -486,6 +486,11 @@ data:
     - icon: ':warning:'
       path: crates/misc/random/src/lib.rs
       title: crates/misc/random/src/lib.rs
+  - name: crates/misc/recurse/src
+    pages:
+    - icon: ':warning:'
+      path: crates/misc/recurse/src/lib.rs
+      title: crates/misc/recurse/src/lib.rs
   - name: crates/number-theory/combination/src
     pages:
     - icon: ':heavy_check_mark:'
