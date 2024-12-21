@@ -1,25 +1,42 @@
-pub struct RecurseImpl<'a, Arg, Ret>(&'a mut dyn FnMut(&mut RecurseImpl<'a, Arg, Ret>, Arg) -> Ret);
+use std::{cell::UnsafeCell, marker::PhantomData};
+
+pub struct RecurseImpl<'a, Arg, Ret>(
+    UnsafeCell<&'a mut dyn FnMut(&mut RecurseImpl<'a, Arg, Ret>, Arg) -> Ret>,
+);
 
 impl<'a, Arg, Ret> RecurseImpl<'a, Arg, Ret> {
     pub fn call(&mut self, arg: Arg) -> Ret {
-        let f: &mut dyn FnMut(&mut RecurseImpl<'a, Arg, Ret>, Arg) -> Ret =
-            unsafe { &mut *(&mut *self.0 as *mut _) };
+        let f = unsafe { &mut *self.0.get() };
         f(self, arg)
     }
 }
 
-pub struct Recurse<'a, 'b, Arg, Ret>(
-    Box<dyn FnMut(&mut RecurseImpl<'a, Arg, Ret>, Arg) -> Ret + 'b>,
-);
+pub struct Recurse<'a, Arg, Ret, F>(
+    UnsafeCell<F>,
+    PhantomData<&'a ()>,
+    PhantomData<Arg>,
+    PhantomData<Ret>,
+)
+where
+    F: FnMut(&mut RecurseImpl<'a, Arg, Ret>, Arg) -> Ret;
 
-impl<'a, 'b: 'a, Arg, Ret> Recurse<'a, 'b, Arg, Ret> {
-    pub fn new(f: impl FnMut(&mut RecurseImpl<'a, Arg, Ret>, Arg) -> Ret + 'b) -> Self {
-        Self(Box::new(f))
+impl<'a, Arg, Ret, F> Recurse<'a, Arg, Ret, F>
+where
+    F: FnMut(&mut RecurseImpl<'a, Arg, Ret>, Arg) -> Ret,
+{
+    pub fn new(f: F) -> Self {
+        Self(UnsafeCell::new(f), PhantomData, PhantomData, PhantomData)
     }
+}
 
+impl<'a, Arg: 'a, Ret: 'a, F> Recurse<'a, Arg, Ret, F>
+where
+    F: FnMut(&mut RecurseImpl<'a, Arg, Ret>, Arg) -> Ret + 'a,
+{
     pub fn call(&mut self, arg: Arg) -> Ret {
-        let f = unsafe { &mut *(&mut *self.0 as *mut _) };
-        RecurseImpl(f).call(arg)
+        let f = unsafe { &mut *self.0.get() };
+        let g = unsafe { &mut *self.0.get() };
+        f(&mut RecurseImpl(UnsafeCell::new(g)), arg)
     }
 }
 
@@ -29,7 +46,17 @@ mod tests {
 
     #[test]
     fn test() {
-        let mut f = Recurse::new(|f, n| if n == 0 { 1 } else { n * f.call(n - 1) });
-        assert_eq!(f.call(10), 10 * 9 * 8 * 7 * 6 * 5 * 4 * 3 * 2 * 1);
+        let mut s = 0;
+        let mut f = Recurse::new(|f, n| {
+            if n < 0 {
+            } else if n <= 1 {
+                s += 1;
+            } else {
+                f.call(n - 1);
+                f.call(n - 2);
+            }
+        });
+        f.call(10);
+        assert_eq!(s, 89);
     }
 }
