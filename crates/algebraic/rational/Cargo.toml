@@ -11,4 +11,5 @@ name = "rational"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-algebraic = { package = "algebraic", path = "../../algebraic/algebraic" }
+algebraic = { path = "../../algebraic/algebraic" }
+div = { path = "../../math/div" }

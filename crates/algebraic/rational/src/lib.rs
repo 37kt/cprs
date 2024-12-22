@@ -1,6 +1,8 @@
 use std::{
     fmt::{Debug, Display},
-    ops::{Add, AddAssign, Div, DivAssign, Mul, MulAssign, Neg, Rem, RemAssign, Sub, SubAssign},
+    ops::{
+        Add, AddAssign, BitXor, Div, DivAssign, Mul, MulAssign, Neg, Rem, RemAssign, Sub, SubAssign,
+    },
     sync::atomic::{AtomicBool, Ordering::SeqCst},
 };
 
@@ -22,6 +24,7 @@ pub trait ZTrait:
     + Div<Output = Self>
     + Neg<Output = Self>
     + Rem<Output = Self>
+    + BitXor<Output = Self>
     + AddAssign
     + SubAssign
     + MulAssign
@@ -39,11 +42,25 @@ pub trait ZTrait:
             *self
         }
     }
+
+    fn to_f64(&self) -> f64;
 }
 
-impl ZTrait for i32 {}
-impl ZTrait for i64 {}
-impl ZTrait for i128 {}
+impl ZTrait for i32 {
+    fn to_f64(&self) -> f64 {
+        *self as f64
+    }
+}
+impl ZTrait for i64 {
+    fn to_f64(&self) -> f64 {
+        *self as f64
+    }
+}
+impl ZTrait for i128 {
+    fn to_f64(&self) -> f64 {
+        *self as f64
+    }
+}
 
 #[derive(Clone, Copy)]
 pub struct Rational<T>
@@ -199,6 +216,18 @@ where
         let g = gcd(self.num, self.den);
         self.num /= g;
         self.den /= g;
+    }
+
+    pub fn to_f64(&self) -> f64 {
+        self.num.to_f64() / self.den.to_f64()
+    }
+
+    pub fn floor(&self) -> T {
+        div::div_floor(self.num, self.den)
+    }
+
+    pub fn ceil(&self) -> T {
+        div::div_ceil(self.num, self.den)
     }
 }
 
