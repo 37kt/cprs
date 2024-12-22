@@ -67,7 +67,7 @@ data:
   isVerificationFile: true
   path: verify/stern_brocot_tree/src/main.rs
   requiredBy: []
-  timestamp: '2024-03-21 11:10:47+09:00'
+  timestamp: '2024-12-22 00:14:04+00:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/stern_brocot_tree/src/main.rs

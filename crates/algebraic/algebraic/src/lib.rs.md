@@ -59,6 +59,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: crates/math/discrete-logarithm/src/lib.rs
     title: crates/math/discrete-logarithm/src/lib.rs
+  - icon: ':warning:'
+    path: crates/math/div/src/lib.rs
+    title: crates/math/div/src/lib.rs
   - icon: ':heavy_check_mark:'
     path: crates/math/matrix/src/lib.rs
     title: crates/math/matrix/src/lib.rs
@@ -206,6 +209,7 @@ data:
   - crates/math/stern-brocot-tree/src/lib.rs
   - crates/math/montgomery-modint/src/lib.rs
   - crates/math/matrix/src/lib.rs
+  - crates/math/div/src/lib.rs
   - crates/math/discrete-logarithm/src/lib.rs
   - crates/algebraic/rational/src/lib.rs
   - crates/number-theory/modint/src/lib.rs

@@ -4,6 +4,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: crates/algebraic/algebraic/src/lib.rs
     title: crates/algebraic/algebraic/src/lib.rs
+  - icon: ':warning:'
+    path: crates/math/div/src/lib.rs
+    title: crates/math/div/src/lib.rs
   _extendedRequiredBy:
   - icon: ':heavy_check_mark:'
     path: crates/math/stern-brocot-tree/src/lib.rs
@@ -26,18 +29,22 @@ data:
     \         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\
     \  File \"/opt/hostedtoolcache/Python/3.12.8/x64/lib/python3.12/site-packages/onlinejudge_verify/languages/rust.py\"\
     , line 288, in bundle\n    raise NotImplementedError\nNotImplementedError\n"
-  code: "use std::{\n    fmt::{Debug, Display},\n    ops::{Add, AddAssign, Div, DivAssign,\
-    \ Mul, MulAssign, Neg, Rem, RemAssign, Sub, SubAssign},\n    sync::atomic::{AtomicBool,\
-    \ Ordering::SeqCst},\n};\n\nuse algebraic::{One, Zero};\n\nstatic AUTO_REDUCE:\
-    \ AtomicBool = AtomicBool::new(true);\n\npub trait ZTrait:\n    Copy\n    + PartialEq\n\
-    \    + PartialOrd\n    + Eq\n    + Ord\n    + Zero\n    + One\n    + Add<Output\
-    \ = Self>\n    + Sub<Output = Self>\n    + Mul<Output = Self>\n    + Div<Output\
-    \ = Self>\n    + Neg<Output = Self>\n    + Rem<Output = Self>\n    + AddAssign\n\
-    \    + SubAssign\n    + MulAssign\n    + DivAssign\n    + RemAssign\n    + Debug\n\
+  code: "use std::{\n    fmt::{Debug, Display},\n    ops::{\n        Add, AddAssign,\
+    \ BitXor, Div, DivAssign, Mul, MulAssign, Neg, Rem, RemAssign, Sub, SubAssign,\n\
+    \    },\n    sync::atomic::{AtomicBool, Ordering::SeqCst},\n};\n\nuse algebraic::{One,\
+    \ Zero};\n\nstatic AUTO_REDUCE: AtomicBool = AtomicBool::new(true);\n\npub trait\
+    \ ZTrait:\n    Copy\n    + PartialEq\n    + PartialOrd\n    + Eq\n    + Ord\n\
+    \    + Zero\n    + One\n    + Add<Output = Self>\n    + Sub<Output = Self>\n \
+    \   + Mul<Output = Self>\n    + Div<Output = Self>\n    + Neg<Output = Self>\n\
+    \    + Rem<Output = Self>\n    + BitXor<Output = Self>\n    + AddAssign\n    +\
+    \ SubAssign\n    + MulAssign\n    + DivAssign\n    + RemAssign\n    + Debug\n\
     \    + Display\n    + std::iter::Sum\n    + From<i32>\n{\n    fn abs(&self) ->\
     \ Self {\n        if *self < Self::zero() {\n            -*self\n        } else\
-    \ {\n            *self\n        }\n    }\n}\n\nimpl ZTrait for i32 {}\nimpl ZTrait\
-    \ for i64 {}\nimpl ZTrait for i128 {}\n\n#[derive(Clone, Copy)]\npub struct Rational<T>\n\
+    \ {\n            *self\n        }\n    }\n\n    fn to_f64(&self) -> f64;\n}\n\n\
+    impl ZTrait for i32 {\n    fn to_f64(&self) -> f64 {\n        *self as f64\n \
+    \   }\n}\nimpl ZTrait for i64 {\n    fn to_f64(&self) -> f64 {\n        *self\
+    \ as f64\n    }\n}\nimpl ZTrait for i128 {\n    fn to_f64(&self) -> f64 {\n  \
+    \      *self as f64\n    }\n}\n\n#[derive(Clone, Copy)]\npub struct Rational<T>\n\
     where\n    T: ZTrait,\n{\n    pub num: T,\n    pub den: T,\n}\n\nfn gcd<T: ZTrait>(mut\
     \ a: T, mut b: T) -> T {\n    a = a.abs();\n    b = b.abs();\n    while b != T::zero()\
     \ {\n        a %= b;\n        std::mem::swap(&mut a, &mut b);\n    }\n    a\n\
@@ -75,25 +82,28 @@ data:
     \      }\n        if self.num == T::zero() {\n            self.den = T::one();\n\
     \        }\n        if AUTO_REDUCE.load(SeqCst) {\n            self.reduce();\n\
     \        }\n    }\n\n    pub fn reduce(&mut self) {\n        let g = gcd(self.num,\
-    \ self.den);\n        self.num /= g;\n        self.den /= g;\n    }\n}\n\nimpl<T>\
-    \ Neg for Rational<T>\nwhere\n    T: ZTrait,\n{\n    type Output = Self;\n   \
-    \ fn neg(self) -> Self::Output {\n        Self {\n            num: -self.num,\n\
-    \            den: self.den,\n        }\n    }\n}\n\nimpl<T> Neg for &Rational<T>\n\
-    where\n    T: ZTrait,\n{\n    type Output = Rational<T>;\n    fn neg(self) ->\
-    \ Self::Output {\n        Rational {\n            num: -self.num,\n          \
-    \  den: self.den,\n        }\n    }\n}\n\nimpl<T> AddAssign<Self> for Rational<T>\n\
-    where\n    T: ZTrait,\n{\n    fn add_assign(&mut self, rhs: Self) {\n        self.num\
-    \ = self.num * rhs.den + rhs.num * self.den;\n        self.den *= rhs.den;\n \
-    \       self.normalize();\n    }\n}\n\nimpl<T> SubAssign<Self> for Rational<T>\n\
-    where\n    T: ZTrait,\n{\n    fn sub_assign(&mut self, rhs: Self) {\n        *self\
-    \ += -rhs;\n    }\n}\n\nimpl<T> MulAssign<Self> for Rational<T>\nwhere\n    T:\
-    \ ZTrait,\n{\n    fn mul_assign(&mut self, rhs: Self) {\n        self.num *= rhs.num;\n\
-    \        self.den *= rhs.den;\n        self.normalize();\n    }\n}\n\nimpl<T>\
-    \ DivAssign<Self> for Rational<T>\nwhere\n    T: ZTrait,\n{\n    fn div_assign(&mut\
-    \ self, rhs: Self) {\n        self.num *= rhs.den;\n        self.den *= rhs.num;\n\
-    \        self.normalize();\n    }\n}\n\nmacro_rules! impl_ops {\n    ($(\n   \
-    \     $trait:ident,\n        $trait_assign:ident,\n        $fn:ident,\n      \
-    \  $fn_assign:ident,\n    )*) => {$(\n        impl<T> $trait_assign<&Rational<T>>\
+    \ self.den);\n        self.num /= g;\n        self.den /= g;\n    }\n\n    pub\
+    \ fn to_f64(&self) -> f64 {\n        self.num.to_f64() / self.den.to_f64()\n \
+    \   }\n\n    pub fn floor(&self) -> T {\n        div::div_floor(self.num, self.den)\n\
+    \    }\n\n    pub fn ceil(&self) -> T {\n        div::div_ceil(self.num, self.den)\n\
+    \    }\n}\n\nimpl<T> Neg for Rational<T>\nwhere\n    T: ZTrait,\n{\n    type Output\
+    \ = Self;\n    fn neg(self) -> Self::Output {\n        Self {\n            num:\
+    \ -self.num,\n            den: self.den,\n        }\n    }\n}\n\nimpl<T> Neg for\
+    \ &Rational<T>\nwhere\n    T: ZTrait,\n{\n    type Output = Rational<T>;\n   \
+    \ fn neg(self) -> Self::Output {\n        Rational {\n            num: -self.num,\n\
+    \            den: self.den,\n        }\n    }\n}\n\nimpl<T> AddAssign<Self> for\
+    \ Rational<T>\nwhere\n    T: ZTrait,\n{\n    fn add_assign(&mut self, rhs: Self)\
+    \ {\n        self.num = self.num * rhs.den + rhs.num * self.den;\n        self.den\
+    \ *= rhs.den;\n        self.normalize();\n    }\n}\n\nimpl<T> SubAssign<Self>\
+    \ for Rational<T>\nwhere\n    T: ZTrait,\n{\n    fn sub_assign(&mut self, rhs:\
+    \ Self) {\n        *self += -rhs;\n    }\n}\n\nimpl<T> MulAssign<Self> for Rational<T>\n\
+    where\n    T: ZTrait,\n{\n    fn mul_assign(&mut self, rhs: Self) {\n        self.num\
+    \ *= rhs.num;\n        self.den *= rhs.den;\n        self.normalize();\n    }\n\
+    }\n\nimpl<T> DivAssign<Self> for Rational<T>\nwhere\n    T: ZTrait,\n{\n    fn\
+    \ div_assign(&mut self, rhs: Self) {\n        self.num *= rhs.den;\n        self.den\
+    \ *= rhs.num;\n        self.normalize();\n    }\n}\n\nmacro_rules! impl_ops {\n\
+    \    ($(\n        $trait:ident,\n        $trait_assign:ident,\n        $fn:ident,\n\
+    \        $fn_assign:ident,\n    )*) => {$(\n        impl<T> $trait_assign<&Rational<T>>\
     \ for Rational<T>\n        where\n            T: ZTrait,\n        {\n        \
     \    fn $fn_assign(&mut self, rhs: &Rational<T>) {\n                self.$fn_assign(*rhs);\n\
     \            }\n        }\n        impl<T, U: Into<Rational<T>>> $trait<U> for\
@@ -120,11 +130,12 @@ data:
     \ {\n        self.num == T::one() && self.den == T::one()\n    }\n}\n"
   dependsOn:
   - crates/algebraic/algebraic/src/lib.rs
+  - crates/math/div/src/lib.rs
   isVerificationFile: false
   path: crates/algebraic/rational/src/lib.rs
   requiredBy:
   - crates/math/stern-brocot-tree/src/lib.rs
-  timestamp: '2024-03-21 11:10:47+09:00'
+  timestamp: '2024-12-22 00:14:04+00:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/stern_brocot_tree/src/main.rs
