@@ -328,12 +328,12 @@ impl<const P: u32> StaticModInt<P> {
     }
 
     #[inline]
-    pub fn raw(val: u32) -> Self {
+    pub const fn raw(val: u32) -> Self {
         Self(val)
     }
 
     #[inline]
-    pub fn val(self) -> u32 {
+    pub const fn val(self) -> u32 {
         self.0
     }
 

@@ -12,6 +12,41 @@ type Fp3 = StaticModInt<M3>;
 type Fp4 = StaticModInt<M4>;
 type Fp5 = StaticModInt<M5>;
 
+const fn pow(x: u32, mut n: u32, m: u32) -> u32 {
+    if m == 1 {
+        return 0;
+    }
+    let mut r = 1u64;
+    let mut y = (x % m) as u64;
+    while n != 0 {
+        if n & 1 != 0 {
+            r = r * y % m as u64;
+        }
+        y = y * y % m as u64;
+        n >>= 1;
+    }
+    r as u32
+}
+
+const fn inv(x: u32, m: u32) -> u32 {
+    pow(x, m - 2, m)
+}
+
+const M1INV_FP2: Fp2 = Fp2::raw(inv(M1, M2));
+const M1INV_FP3: Fp3 = Fp3::raw(inv(M1, M3));
+const M1INV_FP4: Fp4 = Fp4::raw(inv(M1, M4));
+const M1INV_FP5: Fp5 = Fp5::raw(inv(M1, M5));
+const M2INV_FP3: Fp3 = Fp3::raw(inv(M2, M3));
+const M2INV_FP4: Fp4 = Fp4::raw(inv(M2, M4));
+const M2INV_FP5: Fp5 = Fp5::raw(inv(M2, M5));
+const M3INV_FP4: Fp4 = Fp4::raw(inv(M3, M4));
+const M3INV_FP5: Fp5 = Fp5::raw(inv(M3, M5));
+const M4INV_FP5: Fp5 = Fp5::raw(inv(M4, M5));
+const P_M1: u64 = M1 as u64;
+const P_M1M2: u64 = P_M1.wrapping_mul(M2 as u64);
+const P_M1M2M3: u64 = P_M1M2.wrapping_mul(M3 as u64);
+const P_M1M2M3M4: u64 = P_M1M2M3.wrapping_mul(M4 as u64);
+
 pub fn convolution_u64(a: &[u64], b: &[u64]) -> Vec<u64> {
     if a.is_empty() || b.is_empty() {
         return vec![];
@@ -38,43 +73,21 @@ pub fn convolution_u64(a: &[u64], b: &[u64]) -> Vec<u64> {
         .zip(a5.iter())
         .map(|((((&e1, &e2), &e3), &e4), &e5)| {
             let x1 = e1;
-            let x2 = (e2 - Fp2::new(x1.val())) * Fp2::new(Fp1::modulus()).inv();
-            let x3 = ((e3 - Fp3::new(x1.val())) * Fp3::new(Fp1::modulus()).inv()
-                - Fp3::new(x2.val()))
-                * Fp3::new(Fp2::modulus()).inv();
-            let x4 = (((e4 - Fp4::new(x1.val())) * Fp4::new(Fp1::modulus()).inv()
-                - Fp4::new(x2.val()))
-                * Fp4::new(Fp2::modulus()).inv()
-                - Fp4::new(x3.val()))
-                * Fp4::new(Fp3::modulus()).inv();
-            let x5 = ((((e5 - Fp5::new(x1.val())) * Fp5::new(Fp1::modulus()).inv()
-                - Fp5::new(x2.val()))
-                * Fp5::new(Fp2::modulus()).inv()
-                - Fp5::new(x3.val()))
-                * Fp5::new(Fp3::modulus()).inv()
-                - Fp5::new(x4.val()))
-                * Fp5::new(Fp4::modulus()).inv();
+            let x2 = (e2 - Fp2::raw(x1.val())) * M1INV_FP2;
+            let x3 = ((e3 - Fp3::raw(x1.val())) * M1INV_FP3 - Fp3::raw(x2.val())) * M2INV_FP3;
+            let x4 = (((e4 - Fp4::raw(x1.val())) * M1INV_FP4 - Fp4::raw(x2.val())) * M2INV_FP4
+                - Fp4::raw(x3.val()))
+                * M3INV_FP4;
+            let x5 = ((((e5 - Fp5::raw(x1.val())) * M1INV_FP5 - Fp5::raw(x2.val())) * M2INV_FP5
+                - Fp5::raw(x3.val()))
+                * M3INV_FP5
+                - Fp5::raw(x4.val()))
+                * M4INV_FP5;
             (x1.val() as u64)
-                .wrapping_add((x2.val() as u64).wrapping_mul(Fp1::modulus() as u64))
-                .wrapping_add(
-                    (x3.val() as u64)
-                        .wrapping_mul((Fp1::modulus() as u64).wrapping_mul(Fp2::modulus() as u64)),
-                )
-                .wrapping_add(
-                    (x4.val() as u64).wrapping_mul(
-                        (Fp1::modulus() as u64)
-                            .wrapping_mul(Fp2::modulus() as u64)
-                            .wrapping_mul(Fp3::modulus() as u64),
-                    ),
-                )
-                .wrapping_add(
-                    (x5.val() as u64).wrapping_mul(
-                        (Fp1::modulus() as u64)
-                            .wrapping_mul(Fp2::modulus() as u64)
-                            .wrapping_mul(Fp3::modulus() as u64)
-                            .wrapping_mul(Fp4::modulus() as u64),
-                    ),
-                )
+                .wrapping_add((x2.val() as u64).wrapping_mul(P_M1))
+                .wrapping_add((x3.val() as u64).wrapping_mul(P_M1M2))
+                .wrapping_add((x4.val() as u64).wrapping_mul(P_M1M2M3))
+                .wrapping_add((x5.val() as u64).wrapping_mul(P_M1M2M3M4))
         })
         .collect()
 }
