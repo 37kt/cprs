@@ -44,7 +44,7 @@ data:
   isVerificationFile: false
   path: crates/number-theory/stirling-second/src/lib.rs
   requiredBy: []
-  timestamp: '2024-12-12 06:25:27+00:00'
+  timestamp: '2024-12-23 05:51:44+00:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/stirling_number_of_the_second_kind/src/main.rs

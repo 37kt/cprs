@@ -36,7 +36,7 @@ data:
   isVerificationFile: true
   path: verify/division_of_polynomials/src/main.rs
   requiredBy: []
-  timestamp: '2024-11-25 09:47:32+09:00'
+  timestamp: '2024-12-23 05:51:44+00:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/division_of_polynomials/src/main.rs

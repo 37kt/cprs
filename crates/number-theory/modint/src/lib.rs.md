@@ -277,11 +277,11 @@ data:
     \    }\n\n    fn sqrt(self) -> Option<Self> {\n        self.sqrt()\n    }\n}\n\
     \nimpl<const P: u32> StaticModInt<P> {\n    #[inline]\n    pub fn new<T: Into<StaticModInt<P>>>(x:\
     \ T) -> Self {\n        x.into()\n    }\n\n    #[inline(always)]\n    pub fn modulus()\
-    \ -> u32 {\n        P\n    }\n\n    #[inline]\n    pub fn raw(val: u32) -> Self\
-    \ {\n        Self(val)\n    }\n\n    #[inline]\n    pub fn val(self) -> u32 {\n\
-    \        self.0\n    }\n\n    #[inline]\n    pub fn inv(self) -> Self {\n    \
-    \    assert_ne!(self.0, 0);\n        self.pow(P as usize - 2)\n    }\n\n    pub\
-    \ fn pow(mut self, mut k: usize) -> Self {\n        let mut res = Self::from(1);\n\
+    \ -> u32 {\n        P\n    }\n\n    #[inline]\n    pub const fn raw(val: u32)\
+    \ -> Self {\n        Self(val)\n    }\n\n    #[inline]\n    pub const fn val(self)\
+    \ -> u32 {\n        self.0\n    }\n\n    #[inline]\n    pub fn inv(self) -> Self\
+    \ {\n        assert_ne!(self.0, 0);\n        self.pow(P as usize - 2)\n    }\n\
+    \n    pub fn pow(mut self, mut k: usize) -> Self {\n        let mut res = Self::from(1);\n\
     \        while k != 0 {\n            if k & 1 != 0 {\n                res *= self;\n\
     \            }\n            k >>= 1;\n            self *= self;\n        }\n \
     \       res\n    }\n\n    pub fn sqrt(self) -> Option<Self> {\n        let p =\
@@ -476,7 +476,7 @@ data:
   - crates/number-theory/combination/src/lib.rs
   - crates/graph/count-spanning-tree-undirected/src/lib.rs
   - crates/graph/count-spanning-tree-directed/src/lib.rs
-  timestamp: '2024-06-13 08:47:29+09:00'
+  timestamp: '2024-12-23 05:51:44+00:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/log_of_formal_power_series/src/main.rs

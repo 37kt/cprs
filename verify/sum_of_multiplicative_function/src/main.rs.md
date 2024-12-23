@@ -49,7 +49,7 @@ data:
   isVerificationFile: true
   path: verify/sum_of_multiplicative_function/src/main.rs
   requiredBy: []
-  timestamp: '2024-12-18 07:02:19+00:00'
+  timestamp: '2024-12-23 05:51:44+00:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/sum_of_multiplicative_function/src/main.rs

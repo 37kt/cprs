@@ -38,7 +38,7 @@ data:
   isVerificationFile: true
   path: verify/convolution_mod_1000000007/src/main.rs
   requiredBy: []
-  timestamp: '2024-06-13 08:47:29+09:00'
+  timestamp: '2024-12-23 06:13:02+00:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/convolution_mod_1000000007/src/main.rs

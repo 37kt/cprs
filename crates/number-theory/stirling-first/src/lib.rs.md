@@ -43,7 +43,7 @@ data:
   isVerificationFile: false
   path: crates/number-theory/stirling-first/src/lib.rs
   requiredBy: []
-  timestamp: '2024-12-12 05:23:15+00:00'
+  timestamp: '2024-12-23 05:51:44+00:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/stirling_number_of_the_first_kind/src/main.rs

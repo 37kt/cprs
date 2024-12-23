@@ -32,7 +32,14 @@ data:
   code: "use convolution_naive::convolution_naive;\nuse convolution_ntt_friendly::convolution_ntt_friendly;\n\
     use modint::{ModInt, StaticModInt};\n\nconst M1: u32 = 167_772_161;\nconst M2:\
     \ u32 = 469_762_049;\nconst M3: u32 = 754_974_721;\ntype Fp1 = StaticModInt<M1>;\n\
-    type Fp2 = StaticModInt<M2>;\ntype Fp3 = StaticModInt<M3>;\n\npub fn convolution_arbitrary_mod<T:\
+    type Fp2 = StaticModInt<M2>;\ntype Fp3 = StaticModInt<M3>;\n\nconst fn pow(x:\
+    \ u32, mut n: u32, m: u32) -> u32 {\n    if m == 1 {\n        return 0;\n    }\n\
+    \    let mut r = 1u64;\n    let mut y = (x % m) as u64;\n    while n != 0 {\n\
+    \        if n & 1 != 0 {\n            r = r * y % m as u64;\n        }\n     \
+    \   y = y * y % m as u64;\n        n >>= 1;\n    }\n    r as u32\n}\n\nconst fn\
+    \ inv(x: u32, m: u32) -> u32 {\n    pow(x, m - 2, m)\n}\n\nconst M1INV_FP2: Fp2\
+    \ = Fp2::raw(inv(M1, M2));\nconst M1INV_FP3: Fp3 = Fp3::raw(inv(M1, M3));\nconst\
+    \ M2INV_FP3: Fp3 = Fp3::raw(inv(M2, M3));\n\npub fn convolution_arbitrary_mod<T:\
     \ ModInt>(a: &[T], b: &[T]) -> Vec<T> {\n    if a.len().min(b.len()) < 60 {\n\
     \        return convolution_naive(a, b);\n    }\n    let a1 = a.iter().map(|&x|\
     \ Fp1::new(x.val())).collect::<Vec<_>>();\n    let a2 = a.iter().map(|&x| Fp2::new(x.val())).collect::<Vec<_>>();\n\
@@ -41,14 +48,12 @@ data:
     \ b.iter().map(|&x| Fp2::new(x.val())).collect::<Vec<_>>();\n    let b3 = b.iter().map(|&x|\
     \ Fp3::new(x.val())).collect::<Vec<_>>();\n    let a1 = convolution_ntt_friendly(a1,\
     \ b1);\n    let a2 = convolution_ntt_friendly(a2, b2);\n    let a3 = convolution_ntt_friendly(a3,\
-    \ b3);\n    a1.iter()\n        .zip(a2.iter())\n        .zip(a3.iter())\n    \
-    \    .map(|((&e1, &e2), &e3)| {\n            let x1 = e1;\n            let x2\
-    \ = (e2 - Fp2::new(x1.val())) * Fp2::new(Fp1::modulus()).inv();\n            let\
-    \ x3 = ((e3 - Fp3::new(x1.val())) * Fp3::new(Fp1::modulus()).inv()\n         \
-    \       - Fp3::new(x2.val()))\n                * Fp3::new(Fp2::modulus()).inv();\n\
-    \            T::from(x1.val())\n                + T::from(x2.val()) * T::from(Fp1::modulus())\n\
-    \                + T::from(x3.val()) * T::from(Fp1::modulus()) * T::from(Fp2::modulus())\n\
-    \        })\n        .collect()\n}\n"
+    \ b3);\n    let m1 = T::from(Fp1::modulus());\n    let m1m2 = m1 * T::from(Fp2::modulus());\n\
+    \    a1.iter()\n        .zip(a2.iter())\n        .zip(a3.iter())\n        .map(|((&e1,\
+    \ &e2), &e3)| {\n            let x1 = e1;\n            let x2 = (e2 - Fp2::raw(x1.val()))\
+    \ * M1INV_FP2;\n            let x3 = ((e3 - Fp3::raw(x1.val())) * M1INV_FP3 -\
+    \ Fp3::raw(x2.val())) * M2INV_FP3;\n            T::from(x1.val()) + T::from(x2.val())\
+    \ * m1 + T::from(x3.val()) * m1m2\n        })\n        .collect()\n}\n"
   dependsOn:
   - crates/convolution/convolution-naive/src/lib.rs
   - crates/convolution/convolution-ntt-friendly/src/lib.rs
@@ -57,7 +62,7 @@ data:
   path: crates/convolution/convolution-arbitrary-mod/src/lib.rs
   requiredBy:
   - crates/polynomial/formal-power-series/src/lib.rs
-  timestamp: '2024-06-13 08:47:29+09:00'
+  timestamp: '2024-12-23 06:13:02+00:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/convolution_mod_1000000007/src/main.rs

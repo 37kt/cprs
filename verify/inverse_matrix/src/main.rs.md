@@ -34,7 +34,7 @@ data:
   isVerificationFile: true
   path: verify/inverse_matrix/src/main.rs
   requiredBy: []
-  timestamp: '2024-12-12 04:49:04+00:00'
+  timestamp: '2024-12-23 05:51:44+00:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/inverse_matrix/src/main.rs
