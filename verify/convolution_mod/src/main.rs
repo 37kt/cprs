@@ -1,11 +1,10 @@
 // verification-helper: PROBLEM https://judge.yosupo.jp/problem/convolution_mod
 
 use convolution_ntt_friendly::convolution_ntt_friendly;
-use itertools::Itertools;
 use modint::ModInt998244353 as Mint;
-use proconio::input;
+use proconio::{fastout, input};
 
-#[proconio::fastout]
+#[fastout]
 fn main() {
     input! {
         n: usize,
@@ -14,5 +13,12 @@ fn main() {
         mut b: [Mint; m],
     }
     let c = convolution_ntt_friendly(a, b);
-    println!("{}", c.iter().join(" "));
+    for i in 0..c.len() {
+        print!("{}", c[i]);
+        if i < c.len() - 1 {
+            print!(" ");
+        } else {
+            println!();
+        }
+    }
 }

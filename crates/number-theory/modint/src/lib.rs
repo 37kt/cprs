@@ -323,7 +323,7 @@ impl<const P: u32> StaticModInt<P> {
     }
 
     #[inline(always)]
-    pub fn modulus() -> u32 {
+    pub const fn modulus() -> u32 {
         P
     }
 
@@ -743,7 +743,7 @@ macro_rules! impl_ops {
         impl<const P: u32, T: Into<StaticModInt<P>>> $trait<T> for StaticModInt<P> {
             type Output = StaticModInt<P>;
             fn $fn(mut self, rhs: T) -> Self::Output {
-                self.$fn_assign(rhs.into());
+                self.$fn_assign(rhs);
                 self
             }
         }
@@ -756,7 +756,7 @@ macro_rules! impl_ops {
         impl<const P: u32, T: Into<StaticModInt<P>>> $trait<T> for &StaticModInt<P> {
             type Output = StaticModInt<P>;
             fn $fn(self, rhs: T) -> Self::Output {
-                (*self).$fn(rhs.into())
+                (*self).$fn(rhs)
             }
         }
         impl<const P: u32> $trait<&StaticModInt<P>> for &StaticModInt<P> {
@@ -773,7 +773,7 @@ macro_rules! impl_ops {
         impl<T: Into<DynamicModInt>> $trait<T> for DynamicModInt {
             type Output = DynamicModInt;
             fn $fn(mut self, rhs: T) -> Self::Output {
-                self.$fn_assign(rhs.into());
+                self.$fn_assign(rhs);
                 self
             }
         }
@@ -786,7 +786,7 @@ macro_rules! impl_ops {
         impl<T: Into<DynamicModInt>> $trait<T> for &DynamicModInt {
             type Output = DynamicModInt;
             fn $fn(self, rhs: T) -> Self::Output {
-                (*self).$fn(rhs.into())
+                (*self).$fn(rhs)
             }
         }
         impl $trait<&DynamicModInt> for &DynamicModInt {
