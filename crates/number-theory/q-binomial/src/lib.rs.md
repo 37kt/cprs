@@ -65,7 +65,7 @@ data:
   isVerificationFile: false
   path: crates/number-theory/q-binomial/src/lib.rs
   requiredBy: []
-  timestamp: '2024-12-23 05:51:44+00:00'
+  timestamp: '2024-12-24 03:04:37+00:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/q_binomial_coefficient_prime_mod/src/main.rs

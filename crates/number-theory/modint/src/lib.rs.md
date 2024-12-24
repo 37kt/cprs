@@ -276,33 +276,33 @@ data:
     \        self.inv()\n    }\n\n    fn pow(self, k: usize) -> Self {\n        self.pow(k)\n\
     \    }\n\n    fn sqrt(self) -> Option<Self> {\n        self.sqrt()\n    }\n}\n\
     \nimpl<const P: u32> StaticModInt<P> {\n    #[inline]\n    pub fn new<T: Into<StaticModInt<P>>>(x:\
-    \ T) -> Self {\n        x.into()\n    }\n\n    #[inline(always)]\n    pub fn modulus()\
-    \ -> u32 {\n        P\n    }\n\n    #[inline]\n    pub const fn raw(val: u32)\
-    \ -> Self {\n        Self(val)\n    }\n\n    #[inline]\n    pub const fn val(self)\
-    \ -> u32 {\n        self.0\n    }\n\n    #[inline]\n    pub fn inv(self) -> Self\
-    \ {\n        assert_ne!(self.0, 0);\n        self.pow(P as usize - 2)\n    }\n\
-    \n    pub fn pow(mut self, mut k: usize) -> Self {\n        let mut res = Self::from(1);\n\
-    \        while k != 0 {\n            if k & 1 != 0 {\n                res *= self;\n\
-    \            }\n            k >>= 1;\n            self *= self;\n        }\n \
-    \       res\n    }\n\n    pub fn sqrt(self) -> Option<Self> {\n        let p =\
-    \ Self::modulus() as usize;\n        if self.val() < 2 {\n            return Some(self);\n\
-    \        } else if self.pow(p - 1 >> 1).val() != 1 {\n            return None;\n\
-    \        }\n        let mut b = Self::from(1);\n        while b.pow((p - 1 >>\
-    \ 1) as usize).val() == 1 {\n            b += 1;\n        }\n        let mut e\
-    \ = (p - 1).trailing_zeros() as usize;\n        let m = (p - 1) >> e;\n      \
-    \  let mut x = self.pow(m - 1 >> 1);\n        let mut y = self * x * x;\n    \
-    \    x *= self;\n        let mut z = b.pow(m);\n        while y.val() != 1 {\n\
-    \            let mut j = 0;\n            let mut t = y;\n            while t.val()\
-    \ != 1 {\n                j += 1;\n                t *= t;\n            }\n  \
-    \          z = z.pow(1 << e - j - 1);\n            x *= z;\n            z *= z;\n\
-    \            y *= z;\n            e = j;\n        }\n        Some(x)\n    }\n\
-    }\n\nimpl ModInt for DynamicModInt {\n    #[inline(always)]\n    fn modulus()\
-    \ -> u32 {\n        BARRETT.modulus()\n    }\n\n    #[inline]\n    fn raw(val:\
-    \ u32) -> Self {\n        Self(val)\n    }\n\n    #[inline]\n    fn val(self)\
-    \ -> u32 {\n        self.0\n    }\n\n    #[inline]\n    fn inv(self) -> Self {\n\
-    \        self.inv()\n    }\n\n    fn pow(self, k: usize) -> Self {\n        self.pow(k)\n\
-    \    }\n\n    fn sqrt(self) -> Option<Self> {\n        self.sqrt()\n    }\n}\n\
-    \nimpl DynamicModInt {\n    #[inline]\n    pub fn new<T: Into<DynamicModInt>>(x:\
+    \ T) -> Self {\n        x.into()\n    }\n\n    #[inline(always)]\n    pub const\
+    \ fn modulus() -> u32 {\n        P\n    }\n\n    #[inline]\n    pub const fn raw(val:\
+    \ u32) -> Self {\n        Self(val)\n    }\n\n    #[inline]\n    pub const fn\
+    \ val(self) -> u32 {\n        self.0\n    }\n\n    #[inline]\n    pub fn inv(self)\
+    \ -> Self {\n        assert_ne!(self.0, 0);\n        self.pow(P as usize - 2)\n\
+    \    }\n\n    pub fn pow(mut self, mut k: usize) -> Self {\n        let mut res\
+    \ = Self::from(1);\n        while k != 0 {\n            if k & 1 != 0 {\n    \
+    \            res *= self;\n            }\n            k >>= 1;\n            self\
+    \ *= self;\n        }\n        res\n    }\n\n    pub fn sqrt(self) -> Option<Self>\
+    \ {\n        let p = Self::modulus() as usize;\n        if self.val() < 2 {\n\
+    \            return Some(self);\n        } else if self.pow(p - 1 >> 1).val()\
+    \ != 1 {\n            return None;\n        }\n        let mut b = Self::from(1);\n\
+    \        while b.pow((p - 1 >> 1) as usize).val() == 1 {\n            b += 1;\n\
+    \        }\n        let mut e = (p - 1).trailing_zeros() as usize;\n        let\
+    \ m = (p - 1) >> e;\n        let mut x = self.pow(m - 1 >> 1);\n        let mut\
+    \ y = self * x * x;\n        x *= self;\n        let mut z = b.pow(m);\n     \
+    \   while y.val() != 1 {\n            let mut j = 0;\n            let mut t =\
+    \ y;\n            while t.val() != 1 {\n                j += 1;\n            \
+    \    t *= t;\n            }\n            z = z.pow(1 << e - j - 1);\n        \
+    \    x *= z;\n            z *= z;\n            y *= z;\n            e = j;\n \
+    \       }\n        Some(x)\n    }\n}\n\nimpl ModInt for DynamicModInt {\n    #[inline(always)]\n\
+    \    fn modulus() -> u32 {\n        BARRETT.modulus()\n    }\n\n    #[inline]\n\
+    \    fn raw(val: u32) -> Self {\n        Self(val)\n    }\n\n    #[inline]\n \
+    \   fn val(self) -> u32 {\n        self.0\n    }\n\n    #[inline]\n    fn inv(self)\
+    \ -> Self {\n        self.inv()\n    }\n\n    fn pow(self, k: usize) -> Self {\n\
+    \        self.pow(k)\n    }\n\n    fn sqrt(self) -> Option<Self> {\n        self.sqrt()\n\
+    \    }\n}\n\nimpl DynamicModInt {\n    #[inline]\n    pub fn new<T: Into<DynamicModInt>>(x:\
     \ T) -> Self {\n        x.into()\n    }\n\n    #[inline(always)]\n    pub fn modulus()\
     \ -> u32 {\n        BARRETT.modulus()\n    }\n\n    #[inline]\n    pub fn raw(val:\
     \ u32) -> Self {\n        Self(val)\n    }\n\n    #[inline]\n    pub fn val(self)\
@@ -403,13 +403,13 @@ data:
     \ $fn_assign(&mut self, rhs: &StaticModInt<P>) {\n                self.$fn_assign(*rhs);\n\
     \            }\n        }\n        impl<const P: u32, T: Into<StaticModInt<P>>>\
     \ $trait<T> for StaticModInt<P> {\n            type Output = StaticModInt<P>;\n\
-    \            fn $fn(mut self, rhs: T) -> Self::Output {\n                self.$fn_assign(rhs.into());\n\
+    \            fn $fn(mut self, rhs: T) -> Self::Output {\n                self.$fn_assign(rhs);\n\
     \                self\n            }\n        }\n        impl<const P: u32> $trait<&StaticModInt<P>>\
     \ for StaticModInt<P> {\n            type Output = StaticModInt<P>;\n        \
     \    fn $fn(self, rhs: &StaticModInt<P>) -> Self::Output {\n                self.$fn(*rhs)\n\
     \            }\n        }\n        impl<const P: u32, T: Into<StaticModInt<P>>>\
     \ $trait<T> for &StaticModInt<P> {\n            type Output = StaticModInt<P>;\n\
-    \            fn $fn(self, rhs: T) -> Self::Output {\n                (*self).$fn(rhs.into())\n\
+    \            fn $fn(self, rhs: T) -> Self::Output {\n                (*self).$fn(rhs)\n\
     \            }\n        }\n        impl<const P: u32> $trait<&StaticModInt<P>>\
     \ for &StaticModInt<P> {\n            type Output = StaticModInt<P>;\n       \
     \     fn $fn(self, rhs: &StaticModInt<P>) -> Self::Output {\n                (*self).$fn(*rhs)\n\
@@ -417,15 +417,15 @@ data:
     \ {\n            fn $fn_assign(&mut self, rhs: &DynamicModInt) {\n           \
     \     self.$fn_assign(*rhs);\n            }\n        }\n        impl<T: Into<DynamicModInt>>\
     \ $trait<T> for DynamicModInt {\n            type Output = DynamicModInt;\n  \
-    \          fn $fn(mut self, rhs: T) -> Self::Output {\n                self.$fn_assign(rhs.into());\n\
+    \          fn $fn(mut self, rhs: T) -> Self::Output {\n                self.$fn_assign(rhs);\n\
     \                self\n            }\n        }\n        impl $trait<&DynamicModInt>\
     \ for DynamicModInt {\n            type Output = DynamicModInt;\n            fn\
     \ $fn(self, rhs: &DynamicModInt) -> Self::Output {\n                self.$fn(*rhs)\n\
     \            }\n        }\n        impl<T: Into<DynamicModInt>> $trait<T> for\
     \ &DynamicModInt {\n            type Output = DynamicModInt;\n            fn $fn(self,\
-    \ rhs: T) -> Self::Output {\n                (*self).$fn(rhs.into())\n       \
-    \     }\n        }\n        impl $trait<&DynamicModInt> for &DynamicModInt {\n\
-    \            type Output = DynamicModInt;\n            fn $fn(self, rhs: &DynamicModInt)\
+    \ rhs: T) -> Self::Output {\n                (*self).$fn(rhs)\n            }\n\
+    \        }\n        impl $trait<&DynamicModInt> for &DynamicModInt {\n       \
+    \     type Output = DynamicModInt;\n            fn $fn(self, rhs: &DynamicModInt)\
     \ -> Self::Output {\n                (*self).$fn(*rhs)\n            }\n      \
     \  }\n    )*};\n}\n\nimpl_ops! {\n    Add, AddAssign, add, add_assign,\n    Sub,\
     \ SubAssign, sub, sub_assign,\n    Mul, MulAssign, mul, mul_assign,\n    Div,\
@@ -476,7 +476,7 @@ data:
   - crates/number-theory/combination/src/lib.rs
   - crates/graph/count-spanning-tree-undirected/src/lib.rs
   - crates/graph/count-spanning-tree-directed/src/lib.rs
-  timestamp: '2024-12-23 05:51:44+00:00'
+  timestamp: '2024-12-24 03:04:37+00:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/log_of_formal_power_series/src/main.rs

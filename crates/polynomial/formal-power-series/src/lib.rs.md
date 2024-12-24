@@ -382,7 +382,7 @@ data:
   - crates/number-theory/stirling-first/src/lib.rs
   - crates/number-theory/stirling-second-fixed-k/src/lib.rs
   - crates/number-theory/stirling-second/src/lib.rs
-  timestamp: '2024-12-23 06:13:02+00:00'
+  timestamp: '2024-12-24 03:04:37+00:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/log_of_formal_power_series/src/main.rs

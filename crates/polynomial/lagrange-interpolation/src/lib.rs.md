@@ -36,7 +36,7 @@ data:
   isVerificationFile: false
   path: crates/polynomial/lagrange-interpolation/src/lib.rs
   requiredBy: []
-  timestamp: '2024-12-23 05:51:44+00:00'
+  timestamp: '2024-12-24 03:04:37+00:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: crates/polynomial/lagrange-interpolation/src/lib.rs

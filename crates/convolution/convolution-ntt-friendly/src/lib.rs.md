@@ -44,74 +44,65 @@ data:
   code: "use convolution_naive::convolution_naive;\nuse modint::StaticModInt;\n\n\
     pub fn ntt<const P: u32>(a: &mut [StaticModInt<P>]) {\n    assert!(StaticModInt::<P>::IS_NTT_FRIENDLY);\n\
     \    let n = a.len();\n    assert_eq!(n.count_ones(), 1);\n    let h = n.trailing_zeros()\
-    \ as usize;\n\n    let mut len = 0;\n    while len < h {\n        if h - len ==\
-    \ 1 {\n            let p = 1 << h - len - 1;\n            let mut rot = StaticModInt::raw(1);\n\
-    \            for s in 0..1 << len {\n                let offset = s << h - len;\n\
-    \                for i in 0..p {\n                    let l = a[i + offset];\n\
-    \                    let r = a[i + offset + p] * rot;\n                    a[i\
-    \ + offset] = l + r;\n                    a[i + offset + p] = l - r;\n       \
-    \         }\n                if s + 1 != 1 << len {\n                    rot *=\n\
-    \                        StaticModInt::raw(StaticModInt::<P>::RATE2[(!s).trailing_zeros()\
-    \ as usize]);\n                }\n            }\n            len += 1;\n     \
-    \   } else {\n            let p = 1 << h - len - 2;\n            let mut rot =\
-    \ StaticModInt::<P>::raw(1);\n            let imag = StaticModInt::<P>::raw(StaticModInt::<P>::ROOT[2]);\n\
-    \            for s in 0..1 << len {\n                let rot2 = rot * rot;\n \
-    \               let rot3 = rot2 * rot;\n                let offset = s << h -\
-    \ len;\n                for i in 0..p {\n                    let mod2 = (StaticModInt::<P>::modulus()\
-    \ as u64).pow(2);\n                    let a0 = a[i + offset].val() as u64;\n\
-    \                    let a1 = a[i + offset + p].val() as u64 * rot.val() as u64;\n\
-    \                    let a2 = a[i + offset + p * 2].val() as u64 * rot2.val()\
-    \ as u64;\n                    let a3 = a[i + offset + p * 3].val() as u64 * rot3.val()\
-    \ as u64;\n                    let a1na3imag =\n                        StaticModInt::<P>::from(a1\
-    \ + mod2 - a3).val() as u64 * imag.val() as u64;\n                    let na2\
-    \ = mod2 - a2;\n                    a[i + offset] = StaticModInt::from(a0 + a2\
-    \ + a1 + a3);\n                    a[i + offset + p] = StaticModInt::from(a0 +\
-    \ a2 + (mod2 * 2 - (a1 + a3)));\n                    a[i + offset + p * 2] = StaticModInt::from(a0\
-    \ + na2 + a1na3imag);\n                    a[i + offset + p * 3] = StaticModInt::from(a0\
-    \ + na2 + mod2 - a1na3imag);\n                }\n                if s + 1 != 1\
-    \ << len {\n                    rot *=\n                        StaticModInt::raw(StaticModInt::<P>::RATE3[(!s).trailing_zeros()\
-    \ as usize]);\n                }\n            }\n            len += 2;\n     \
-    \   }\n    }\n}\n\npub fn ntt_inv<const P: u32>(a: &mut [StaticModInt<P>]) {\n\
-    \    assert!(StaticModInt::<P>::IS_NTT_FRIENDLY);\n    let n = a.len();\n    assert_eq!(n.count_ones(),\
-    \ 1);\n    let h = n.trailing_zeros() as usize;\n\n    let mut len = h;\n    while\
-    \ len > 0 {\n        if len == 1 {\n            let p = 1 << h - len;\n      \
-    \      let mut irot = StaticModInt::<P>::raw(1);\n            for s in 0..1 <<\
-    \ len - 1 {\n                let offset = s << h - len + 1;\n                for\
-    \ i in 0..p {\n                    let l = a[i + offset];\n                  \
-    \  let r = a[i + offset + p];\n                    a[i + offset] = l + r;\n  \
-    \                  a[i + offset + p] = StaticModInt::<P>::from(\n            \
-    \            (StaticModInt::<P>::modulus() + l.val() - r.val()) as u64\n     \
-    \                       * irot.val() as u64,\n                    );\n       \
-    \         }\n                if s + 1 != 1 << len - 1 {\n                    irot\
-    \ *= StaticModInt::<P>::raw(\n                        StaticModInt::<P>::IRATE2[(!s).trailing_zeros()\
-    \ as usize],\n                    );\n                }\n            }\n     \
-    \       len -= 1;\n        } else {\n            let p = 1 << h - len;\n     \
-    \       let mut irot = StaticModInt::<P>::raw(1);\n            let iimag = StaticModInt::<P>::raw(StaticModInt::<P>::IROOT[2]);\n\
-    \            for s in 0..1 << len - 2 {\n                let irot2 = irot * irot;\n\
-    \                let irot3 = irot2 * irot;\n                let offset = s <<\
-    \ h - len + 2;\n                for i in 0..p {\n                    let a0 =\
-    \ a[i + offset].val() as u64;\n                    let a1 = a[i + offset + p].val()\
-    \ as u64;\n                    let a2 = a[i + offset + p * 2].val() as u64;\n\
-    \                    let a3 = a[i + offset + p * 3].val() as u64;\n          \
-    \          let a2na3iimag = StaticModInt::<P>::from(\n                       \
-    \ (StaticModInt::<P>::modulus() as u64 + a2 - a3) * iimag.val() as u64,\n    \
-    \                )\n                    .val() as u64;\n                    a[i\
-    \ + offset] = StaticModInt::<P>::from(a0 + a1 + a2 + a3);\n                  \
-    \  a[i + offset + p] = StaticModInt::<P>::from(\n                        (a0 +\
-    \ (StaticModInt::<P>::modulus() as u64 - a1) + a2na3iimag)\n                 \
-    \           * irot.val() as u64,\n                    );\n                   \
-    \ a[i + offset + p * 2] = StaticModInt::<P>::from(\n                        (a0\
-    \ + a1\n                            + (StaticModInt::<P>::modulus() as u64 - a2)\n\
-    \                            + (StaticModInt::<P>::modulus() as u64 - a3))\n \
-    \                           * irot2.val() as u64,\n                    );\n  \
-    \                  a[i + offset + p * 3] = StaticModInt::<P>::from(\n        \
-    \                (a0 + (StaticModInt::<P>::modulus() as u64 - a1)\n          \
-    \                  + (StaticModInt::<P>::modulus() as u64 - a2na3iimag))\n   \
-    \                         * irot3.val() as u64,\n                    );\n    \
-    \            }\n                if s + 1 != 1 << len - 2 {\n                 \
-    \   irot *= StaticModInt::<P>::raw(\n                        StaticModInt::<P>::IRATE3[(!s).trailing_zeros()\
-    \ as usize],\n                    );\n                }\n            }\n     \
-    \       len -= 2;\n        }\n    }\n\n    let inv_n = StaticModInt::<P>::new(n).inv();\n\
+    \ as usize;\n\n    let mut len = 0;\n    if (h - len) % 2 == 1 {\n        let\
+    \ p = 1 << h - len - 1;\n        let mut rot = StaticModInt::raw(1);\n       \
+    \ for (s, b) in a.chunks_exact_mut(p * 2).enumerate() {\n            let (b0,\
+    \ b1) = b.split_at_mut(p);\n            for (x, y) in b0.iter_mut().zip(b1.iter_mut())\
+    \ {\n                let l = *x;\n                let r = *y * rot;\n        \
+    \        *x = l + r;\n                *y = l - r;\n            }\n           \
+    \ rot *= StaticModInt::raw(StaticModInt::<P>::RATE2[(!s).trailing_zeros() as usize]);\n\
+    \        }\n        len += 1;\n    }\n    let mod2 = (P as u64) * (P as u64);\n\
+    \    while len < h {\n        let p = 1 << h - len - 2;\n        let mut rot =\
+    \ StaticModInt::<P>::raw(1);\n        let imag = StaticModInt::<P>::raw(StaticModInt::<P>::ROOT[2]);\n\
+    \        for (s, b) in a.chunks_exact_mut(p * 4).enumerate() {\n            let\
+    \ rot2 = rot * rot;\n            let rot3 = rot2 * rot;\n            let (b0,\
+    \ b1) = b.split_at_mut(p);\n            let (b1, b2) = b1.split_at_mut(p);\n \
+    \           let (b2, b3) = b2.split_at_mut(p);\n            for (((x, y), z),\
+    \ w) in b0\n                .iter_mut()\n                .zip(b1.iter_mut())\n\
+    \                .zip(b2.iter_mut())\n                .zip(b3.iter_mut())\n  \
+    \          {\n                let a0 = x.val() as u64;\n                let a1\
+    \ = y.val() as u64 * rot.val() as u64;\n                let a2 = z.val() as u64\
+    \ * rot2.val() as u64;\n                let a3 = w.val() as u64 * rot3.val() as\
+    \ u64;\n                let a1na3imag =\n                    StaticModInt::<P>::from(a1\
+    \ + mod2 - a3).val() as u64 * imag.val() as u64;\n                let na2 = mod2\
+    \ - a2;\n                *x = StaticModInt::from(a0 + a2 + a1 + a3);\n       \
+    \         *y = StaticModInt::from(a0 + a2 + (mod2 * 2 - (a1 + a3)));\n       \
+    \         *z = StaticModInt::from(a0 + na2 + a1na3imag);\n                *w =\
+    \ StaticModInt::from(a0 + na2 + mod2 - a1na3imag);\n            }\n          \
+    \  rot *= StaticModInt::raw(StaticModInt::<P>::RATE3[(!s).trailing_zeros() as\
+    \ usize]);\n        }\n        len += 2;\n    }\n}\n\npub fn ntt_inv<const P:\
+    \ u32>(a: &mut [StaticModInt<P>]) {\n    assert!(StaticModInt::<P>::IS_NTT_FRIENDLY);\n\
+    \    let n = a.len();\n    assert_eq!(n.count_ones(), 1);\n    let h = n.trailing_zeros()\
+    \ as usize;\n\n    let mut len = h;\n    if len % 2 == 1 {\n        let p = 1\
+    \ << h - len;\n        let mut irot = StaticModInt::<P>::raw(1);\n        for\
+    \ (s, b) in a.chunks_exact_mut(p * 2).enumerate() {\n            let (b0, b1)\
+    \ = b.split_at_mut(p);\n            for (x, y) in b0.iter_mut().zip(b1.iter_mut())\
+    \ {\n                let l = *x;\n                let r = *y;\n              \
+    \  *x = l + r;\n                *y = StaticModInt::<P>::from((P + l.val() - r.val())\
+    \ as u64 * irot.val() as u64);\n            }\n            irot *=\n         \
+    \       StaticModInt::<P>::raw(StaticModInt::<P>::IRATE2[(!s).trailing_zeros()\
+    \ as usize]);\n        }\n        len -= 1;\n    }\n    while len > 0 {\n    \
+    \    let p = 1 << h - len;\n        let mut irot = StaticModInt::<P>::raw(1);\n\
+    \        let iimag = StaticModInt::<P>::raw(StaticModInt::<P>::IROOT[2]);\n  \
+    \      for (s, b) in a.chunks_exact_mut(p * 4).enumerate() {\n            let\
+    \ irot2 = irot * irot;\n            let irot3 = irot2 * irot;\n            let\
+    \ (b0, b1) = b.split_at_mut(p);\n            let (b1, b2) = b1.split_at_mut(p);\n\
+    \            let (b2, b3) = b2.split_at_mut(p);\n            for (((x, y), z),\
+    \ w) in b0\n                .iter_mut()\n                .zip(b1.iter_mut())\n\
+    \                .zip(b2.iter_mut())\n                .zip(b3.iter_mut())\n  \
+    \          {\n                let a0 = x.val() as u64;\n                let a1\
+    \ = y.val() as u64;\n                let a2 = z.val() as u64;\n              \
+    \  let a3 = w.val() as u64;\n                let a2na3iimag =\n              \
+    \      StaticModInt::<P>::from((P as u64 + a2 - a3) * iimag.val() as u64).val()\
+    \ as u64;\n                *x = StaticModInt::<P>::from(a0 + a1 + a2 + a3);\n\
+    \                *y = StaticModInt::<P>::from(\n                    (a0 + (P as\
+    \ u64 - a1) + a2na3iimag) * irot.val() as u64,\n                );\n         \
+    \       *z = StaticModInt::<P>::from(\n                    (a0 + a1 + (P as u64\
+    \ - a2) + (P as u64 - a3)) * irot2.val() as u64,\n                );\n       \
+    \         *w = StaticModInt::<P>::from(\n                    (a0 + (P as u64 -\
+    \ a1) + (P as u64 - a2na3iimag)) * irot3.val() as u64,\n                );\n \
+    \           }\n            irot *=\n                StaticModInt::<P>::raw(StaticModInt::<P>::IRATE3[(!s).trailing_zeros()\
+    \ as usize]);\n        }\n        len -= 2;\n    }\n\n    let inv_n = StaticModInt::<P>::new(n).inv();\n\
     \    for x in a.iter_mut() {\n        *x *= inv_n;\n    }\n}\n\npub fn ntt_doubling<const\
     \ P: u32>(a: &mut Vec<StaticModInt<P>>) {\n    let n = a.len();\n    a.append(&mut\
     \ a.clone());\n    ntt_inv(&mut a[n..]);\n    let mut r = StaticModInt::new(1);\n\
@@ -136,7 +127,7 @@ data:
   - crates/string/wildcard-pattern-matching/src/lib.rs
   - crates/polynomial/formal-power-series/src/lib.rs
   - crates/polynomial/bostan-mori/src/lib.rs
-  timestamp: '2024-12-23 05:51:44+00:00'
+  timestamp: '2024-12-24 03:04:37+00:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/convolution_mod/src/main.rs

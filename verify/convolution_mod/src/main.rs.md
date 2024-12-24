@@ -23,18 +23,20 @@ data:
     \  File \"/opt/hostedtoolcache/Python/3.12.8/x64/lib/python3.12/site-packages/onlinejudge_verify/languages/rust.py\"\
     , line 288, in bundle\n    raise NotImplementedError\nNotImplementedError\n"
   code: "// verification-helper: PROBLEM https://judge.yosupo.jp/problem/convolution_mod\n\
-    \nuse convolution_ntt_friendly::convolution_ntt_friendly;\nuse itertools::Itertools;\n\
-    use modint::ModInt998244353 as Mint;\nuse proconio::input;\n\n#[proconio::fastout]\n\
-    fn main() {\n    input! {\n        n: usize,\n        m: usize,\n        mut a:\
-    \ [Mint; n],\n        mut b: [Mint; m],\n    }\n    let c = convolution_ntt_friendly(a,\
-    \ b);\n    println!(\"{}\", c.iter().join(\" \"));\n}\n"
+    \nuse convolution_ntt_friendly::convolution_ntt_friendly;\nuse modint::ModInt998244353\
+    \ as Mint;\nuse proconio::{fastout, input};\n\n#[fastout]\nfn main() {\n    input!\
+    \ {\n        n: usize,\n        m: usize,\n        mut a: [Mint; n],\n       \
+    \ mut b: [Mint; m],\n    }\n    let c = convolution_ntt_friendly(a, b);\n    for\
+    \ i in 0..c.len() {\n        print!(\"{}\", c[i]);\n        if i < c.len() - 1\
+    \ {\n            print!(\" \");\n        } else {\n            println!();\n \
+    \       }\n    }\n}\n"
   dependsOn:
   - crates/convolution/convolution-ntt-friendly/src/lib.rs
   - crates/number-theory/modint/src/lib.rs
   isVerificationFile: true
   path: verify/convolution_mod/src/main.rs
   requiredBy: []
-  timestamp: '2024-12-23 05:51:44+00:00'
+  timestamp: '2024-12-24 03:04:37+00:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/convolution_mod/src/main.rs

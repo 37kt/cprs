@@ -26,8 +26,11 @@ data:
   code: "use modint::ModInt;\n\npub fn convolution_naive<T: ModInt>(a: &[T], b: &[T])\
     \ -> Vec<T> {\n    let n = a.len();\n    let m = b.len();\n    if n == 0 || m\
     \ == 0 {\n        return vec![];\n    }\n    let l = n + m - 1;\n    let mut c\
-    \ = vec![0.into(); l];\n    for i in 0..n {\n        for j in 0..m {\n       \
-    \     c[i + j] += a[i] * b[j];\n        }\n    }\n    c\n}\n"
+    \ = vec![0.into(); l];\n    if n > m {\n        for i in 0..n {\n            for\
+    \ j in 0..m {\n                c[i + j] += a[i] * b[j];\n            }\n     \
+    \   }\n    } else {\n        for j in 0..m {\n            for i in 0..n {\n  \
+    \              c[i + j] += a[i] * b[j];\n            }\n        }\n    }\n   \
+    \ c\n}\n"
   dependsOn:
   - crates/number-theory/modint/src/lib.rs
   isVerificationFile: false
@@ -35,7 +38,7 @@ data:
   requiredBy:
   - crates/convolution/convolution-arbitrary-mod/src/lib.rs
   - crates/convolution/convolution-ntt-friendly/src/lib.rs
-  timestamp: '2024-12-23 05:51:44+00:00'
+  timestamp: '2024-12-24 03:04:37+00:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: crates/convolution/convolution-naive/src/lib.rs
