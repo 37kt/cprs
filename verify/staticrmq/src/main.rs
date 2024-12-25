@@ -20,6 +20,6 @@ fn main() {
             l: usize,
             r: usize,
         }
-        println!("{}", spt.prod(l, r));
+        println!("{}", spt.prod(l..r));
     }
 }

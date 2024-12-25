@@ -1,5 +1,8 @@
+use std::ops::{Bound, RangeBounds};
+
 use algebraic::Monoid;
 
+/// 静的モノイド列の区間クエリを処理する
 pub struct DisjointSparseTable<M>
 where
     M: Monoid,
@@ -13,6 +16,7 @@ where
     M: Monoid,
     M::S: Clone,
 {
+    /// Disjoint Sparse Table を構築する
     pub fn new(a: &[M::S]) -> Self {
         let n = a.len() + 2;
         let h = 64 - (n - 1).leading_zeros() as usize;
@@ -32,19 +36,41 @@ where
         Self { t }
     }
 
-    pub fn size(&self) -> usize {
+    /// a の長さを取得する
+    pub fn len(&self) -> usize {
         self.t[0].len() - 2
     }
 
+    /// a\[k\] を取得する
     pub fn get(&self, k: usize) -> M::S {
-        assert!(k < self.size());
-        self.prod(k, k + 1)
+        assert!(k < self.len());
+        self.prod(k..k + 1)
     }
 
-    pub fn prod(&self, l: usize, r: usize) -> M::S {
-        assert!(l <= r && r <= self.size());
+    /// a\[range\] の総積を取得する
+    pub fn prod(&self, range: impl RangeBounds<usize>) -> M::S {
+        let (l, r) = self.range_to_pair(range);
+        assert!(l <= r && r <= self.len());
         let r = r + 1;
         let s = &self.t[63 - (l ^ r).leading_zeros() as usize];
         M::op(&s[l], &s[r])
+    }
+
+    fn range_to_pair<R>(&self, range: R) -> (usize, usize)
+    where
+        R: RangeBounds<usize>,
+    {
+        let n = self.len();
+        let l = match range.start_bound() {
+            Bound::Included(&l) => l,
+            Bound::Excluded(&l) => l + 1,
+            Bound::Unbounded => 0,
+        };
+        let r = match range.end_bound() {
+            Bound::Included(&r) => (r + 1).min(n),
+            Bound::Excluded(&r) => r.min(n),
+            Bound::Unbounded => n,
+        };
+        (l, r)
     }
 }

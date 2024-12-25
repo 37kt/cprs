@@ -1,5 +1,6 @@
 use std::{fmt::Debug, mem::swap};
 
+/// Double-ended priority queue.
 #[derive(Clone)]
 pub struct IntervalHeap<T: Clone + Ord>(Vec<T>);
 
@@ -9,6 +10,11 @@ impl<T: Clone + Ord + Debug> Debug for IntervalHeap<T> {
     }
 }
 
+/// Vec から IntervalHeap を構築する。
+///
+/// # 計算量
+///
+/// O(N)
 impl<T: Clone + Ord> From<Vec<T>> for IntervalHeap<T> {
     fn from(value: Vec<T>) -> Self {
         let mut a = Self(value);
@@ -18,24 +24,49 @@ impl<T: Clone + Ord> From<Vec<T>> for IntervalHeap<T> {
 }
 
 impl<T: Clone + Ord> IntervalHeap<T> {
+    /// 空の IntervalHeap を構築する。
+    ///
+    /// # 計算量
+    ///
+    /// O(1)
     pub fn new() -> Self {
         Self(vec![])
     }
 
+    /// 要素数を取得する。
+    ///
+    /// # 計算量
+    ///
+    /// O(1)
     pub fn len(&self) -> usize {
         self.0.len()
     }
 
+    /// 空かどうかを判定する。
+    ///
+    /// # 計算量
+    ///
+    /// O(1)
     pub fn is_empty(&self) -> bool {
         self.0.is_empty()
     }
 
+    /// 要素を追加する。
+    ///
+    /// # 計算量
+    ///
+    /// O(log N)
     pub fn push(&mut self, x: T) {
         let k = self.len();
         self.0.push(x);
         self.up(k, 1);
     }
 
+    /// 2 つの IntervalHeap をマージする。
+    ///
+    /// # 計算量
+    ///
+    /// O(N)
     pub fn append(&mut self, other: &mut Self) {
         if self.len() < other.len() {
             swap(self, other);
@@ -47,10 +78,20 @@ impl<T: Clone + Ord> IntervalHeap<T> {
         }
     }
 
+    /// 要素を全て削除する。
+    ///
+    /// # 計算量
+    ///
+    /// O(N)
     pub fn clear(&mut self) {
         self.0.clear();
     }
 
+    /// 最小値を取得する。
+    ///
+    /// # 計算量
+    ///
+    /// O(1)
     pub fn peek_min(&self) -> Option<&T> {
         if self.is_empty() {
             None
@@ -61,6 +102,11 @@ impl<T: Clone + Ord> IntervalHeap<T> {
         }
     }
 
+    /// 最大値を取得する。
+    ///
+    /// # 計算量
+    ///
+    /// O(1)
     pub fn peek_max(&self) -> Option<&T> {
         if self.is_empty() {
             None
@@ -69,6 +115,11 @@ impl<T: Clone + Ord> IntervalHeap<T> {
         }
     }
 
+    /// 最小値を削除する。
+    ///
+    /// # 計算量
+    ///
+    /// O(log N)
     pub fn pop_min(&mut self) -> Option<T> {
         if self.is_empty() {
             None
@@ -84,6 +135,11 @@ impl<T: Clone + Ord> IntervalHeap<T> {
         }
     }
 
+    /// 最大値を削除する。
+    ///
+    /// # 計算量
+    ///
+    /// O(log N)
     pub fn pop_max(&mut self) -> Option<T> {
         if self.is_empty() {
             None

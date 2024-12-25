@@ -2,6 +2,16 @@ use std::ops::{Bound, RangeBounds};
 
 use algebraic::Monoid;
 
+/// 双対セグメント木
+///
+/// 動的な作用素の列を管理するデータ構造。
+///
+/// # 計算量
+///
+/// - 構築: O(n)
+/// - apply_range: O(log n)
+/// - apply: O(log n)
+/// - get: O(log n)
 #[derive(Clone)]
 pub struct DualSegmentTree<M>
 where
@@ -17,6 +27,7 @@ where
     M: Monoid,
     M::S: Clone,
 {
+    /// 単位元で初期化した双対セグメント木を構築する。
     pub fn new(n: usize) -> Self {
         Self {
             n,
@@ -24,6 +35,7 @@ where
         }
     }
 
+    /// a\[range\] に作用素 f を適用する。
     pub fn apply_range(&mut self, range: impl RangeBounds<usize>, f: M::S) {
         let mut l = match range.start_bound() {
             Bound::Excluded(&l) => l + 1,
@@ -55,11 +67,13 @@ where
         }
     }
 
+    /// a\[k\] に作用素 f を適用する。
     pub fn apply(&mut self, k: usize, f: M::S) {
         assert!(k < self.n);
         self.apply_range(k..=k, f);
     }
 
+    /// a\[k\] を取得する。
     pub fn get(&self, mut k: usize) -> M::S {
         assert!(k < self.n);
         k += self.n;
@@ -93,6 +107,7 @@ where
     M: Monoid,
     M::S: Clone,
 {
+    /// Vec から双対セグメント木を構築する。
     fn from(mut a: Vec<M::S>) -> Self {
         let n = a.len();
         let mut v = vec![M::e(); n];

@@ -102,7 +102,7 @@ where
                 self.spt
                     .replace(Some(DisjointSparseTable::<M>::new(&self.lcp)));
             }
-            self.spt.borrow().as_ref().unwrap().prod(i, j)
+            self.spt.borrow().as_ref().unwrap().prod(i..j)
         }
     }
 }

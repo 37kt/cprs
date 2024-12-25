@@ -1,5 +1,6 @@
 use std::ops::{Add, Bound, Neg, RangeBounds, Sub};
 
+/// 二次元累積和
 pub struct CumulativeSum2D<T>
 where
     T: Clone + Default + Add<T, Output = T> + Sub<T, Output = T>,
@@ -12,6 +13,7 @@ impl<T> CumulativeSum2D<T>
 where
     T: Clone + Default + Add<T, Output = T> + Sub<T, Output = T>,
 {
+    /// 二次元配列をすべて 0 で初期化する
     pub fn new(h: usize, w: usize) -> Self {
         Self {
             v: vec![vec![T::default(); w + 1]; h + 1],
@@ -19,10 +21,12 @@ where
         }
     }
 
+    /// 内部表現を取得する
     pub fn inner(&self) -> &Vec<Vec<T>> {
         &self.v
     }
 
+    /// a[i][j] += x
     pub fn add(&mut self, i: usize, j: usize, x: T) {
         assert!(!self.built);
         let i = i + 1;
@@ -33,6 +37,7 @@ where
         self.v[i][j] = self.v[i][j].clone() + x.clone();
     }
 
+    /// 累積和を計算する
     pub fn build(&mut self) {
         assert!(!self.built);
         for i in 0..self.v.len() - 1 {
@@ -48,6 +53,7 @@ where
         self.built = true;
     }
 
+    /// 矩形領域の和を求める
     pub fn sum<RI, RJ>(&self, i: RI, j: RJ) -> T
     where
         RI: RangeBounds<usize>,
@@ -66,6 +72,7 @@ impl<T> CumulativeSum2D<T>
 where
     T: Clone + Default + Add<T, Output = T> + Sub<T, Output = T> + Neg<Output = T>,
 {
+    /// 矩形領域に加算する
     pub fn imos_add<RI, RJ>(&mut self, i: RI, j: RJ, x: T)
     where
         RI: RangeBounds<usize>,
@@ -80,6 +87,7 @@ where
         self.v[ei][ej] = self.v[ei][ej].clone() + x;
     }
 
+    /// 1 点の値を取得する
     pub fn imos_get(&self, i: usize, j: usize) -> T {
         assert!(self.built);
         self.v[i][j].clone()
@@ -90,6 +98,7 @@ impl<T> From<Vec<Vec<T>>> for CumulativeSum2D<T>
 where
     T: Clone + Default + Add<T, Output = T> + Sub<T, Output = T>,
 {
+    /// 二次元配列で初期化する
     fn from(mut v: Vec<Vec<T>>) -> Self {
         assert!(v.iter().all(|x| x.len() == v[0].len()));
         for x in v.iter_mut() {

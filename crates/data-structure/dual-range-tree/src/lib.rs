@@ -3,6 +3,18 @@ use std::ops::{Bound, RangeBounds};
 use algebraic::Monoid;
 use dual_segment_tree::DualSegmentTree;
 
+/// 双対 Range Tree
+///
+/// 2 次元平面上に配置されている作用素を管理するデータ構造。
+///
+/// # 計算量
+///
+/// - 構築: O(n log n)
+/// - get: O(log n)
+/// - apply: O(log n)
+/// - apply_range: O(log n)
+///
+/// ここで、n は管理する点の数。
 pub struct DualRangeTree<I, M>
 where
     I: Ord + Copy,
@@ -21,6 +33,11 @@ where
     M: Monoid,
     M::S: Clone,
 {
+    /// 双対 Range Tree を構築する。
+    ///
+    /// # 引数
+    ///
+    /// * `ps` - get クエリの引数として与えられる点の集合
     pub fn new(mut ps: Vec<(I, I)>) -> Self {
         ps.sort();
         ps.dedup();
@@ -38,6 +55,19 @@ where
         Self { n, seg, ps, ys }
     }
 
+    /// 座標 (x, y) に配置されている作用素を取得する。
+    ///
+    /// # 引数
+    ///
+    /// * `(x, y)` - 取得したい作用素の座標
+    ///
+    /// # パニック
+    ///
+    /// 指定された座標が構築時に与えられた点集合に含まれていない場合、パニックする。
+    ///
+    /// # 計算量
+    ///
+    /// O(log^2 n)
     pub fn get(&self, (x, y): (I, I)) -> M::S {
         let i = self.ps.partition_point(|&p| p < (x, y));
         assert!(self.ps[i] == (x, y));
@@ -51,6 +81,20 @@ where
         res
     }
 
+    /// 座標 (x, y) に配置されている作用素に f を合成する。
+    ///
+    /// # 引数
+    ///
+    /// * `(x, y)` - 作用素を適用する座標
+    /// * `f` - 適用する作用素
+    ///
+    /// # パニック
+    ///
+    /// 指定された座標が構築時に与えられた点集合に含まれていない場合、パニックする。
+    ///
+    /// # 計算量
+    ///
+    /// O(log^2 n)
     pub fn apply(&mut self, (x, y): (I, I), f: M::S) {
         let mut i = self.ps.partition_point(|&p| p < (x, y));
         assert!(self.ps[i] == (x, y));
@@ -62,6 +106,17 @@ where
         }
     }
 
+    /// x ∈ range_x かつ y ∈ range_y を満たす座標 (x, y) に配置されている作用素に f を合成する。
+    ///
+    /// # 引数
+    ///
+    /// * `range_x` - x 座標の範囲
+    /// * `range_y` - y 座標の範囲
+    /// * `f` - 適用する作用素
+    ///
+    /// # 計算量
+    ///
+    /// O(log^2 n)
     pub fn apply_range(
         &mut self,
         range_x: impl RangeBounds<I>,
@@ -113,6 +168,16 @@ where
     }
 }
 
+/// 2つのソート済み配列をマージする。
+///
+/// # 引数
+///
+/// * `a` - ソート済み配列
+/// * `b` - ソート済み配列
+///
+/// # 戻り値
+///
+/// マージされたソート済み配列
 fn merge<T>(a: &[T], b: &[T]) -> Vec<T>
 where
     T: Ord + Copy,
