@@ -1,41 +1,30 @@
+use algebraic::{One, Zero};
 use std::ops::{Add, Div, Sub};
 
-pub trait Zero {
-    fn zero() -> Self;
-    fn is_zero(&self) -> bool;
-}
-
-pub trait One {
-    fn one() -> Self;
-    fn is_one(&self) -> bool;
-}
-
-macro_rules! impl_zero_one {
-    ($($t:ty)*) => {
-        $(
-            impl $crate::Zero for $t {
-                fn zero() -> Self {
-                    0
-                }
-                fn is_zero(&self) -> bool {
-                    *self == 0
-                }
-            }
-            impl $crate::One for $t {
-                fn one() -> Self {
-                    1
-                }
-                fn is_one(&self) -> bool {
-                    *self == 1
-                }
-            }
-        )*
-    };
-}
-
-impl_zero_one!(usize u8 u16 u32 u64 u128 isize i8 i16 i32 i64 i128);
-
-/// [l..r] で最小値をとる x と f(x) を返す
+/// 区間上の凸関数の最小値を三分探索で求める
+///
+/// # 概要
+/// - 区間 `[l..r]` 上で下に凸な関数 `f` の最小値を求める
+/// - 関数の最小値を取る位置 `x` と、その値 `f(x)` を返す
+///
+/// # 引数
+/// - `l`: 探索区間の左端
+/// - `r`: 探索区間の右端
+/// - `f`: 目的関数（下に凸である必要がある）
+///
+/// # 型パラメータ
+/// - `I`: 座標の型（整数型を想定）
+/// - `T`: 関数値の型
+///
+/// # 戻り値
+/// - `(x, f(x))`: 最小値を取る位置とその値
+///
+/// # 制約
+/// - `l <= r` であること
+/// - `f` は区間 `[l..r]` で下に凸であること
+///
+/// # 計算量
+/// - O(log(r - l))
 pub fn ternary_search<I, T>(mut l: I, mut r: I, mut f: impl FnMut(I) -> T) -> (I, T)
 where
     I: Copy + Add<Output = I> + Sub<Output = I> + Div<Output = I> + Zero + One + PartialOrd,
@@ -67,7 +56,26 @@ where
     (i, mn)
 }
 
-/// [l..r] で最小値をとる x と f(x) を返す
+/// 実数区間上の凸関数の最小値を三分探索で求める
+///
+/// # 概要
+/// - 区間 `[l..r]` で下に凸な関数 `f` の最小値を求める
+/// - 関数の最小値を取る位置 `x` と、その値 `f(x)` を返す
+///
+/// # 引数
+/// - `l`: 探索区間の左端（実数）
+/// - `r`: 探索区間の右端（実数）
+/// - `f`: 目的関数（下に凸である必要がある）
+///
+/// # 型パラメータ
+/// - `T`: 関数値の型
+///
+/// # 戻り値
+/// - `(x, f(x))`: 最小値を取る位置とその値
+///
+/// # 実装詳細
+/// - 100回の反復で十分な精度を得られる
+/// - 精度は約 2^(-100) ≈ 10^(-30)
 pub fn ternary_search_f64<T>(mut l: f64, mut r: f64, mut f: impl FnMut(f64) -> T) -> (f64, T)
 where
     T: Copy + PartialOrd,

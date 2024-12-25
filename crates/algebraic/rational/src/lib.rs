@@ -62,6 +62,7 @@ impl ZTrait for i128 {
     }
 }
 
+/// 有理数
 #[derive(Clone, Copy)]
 pub struct Rational<T>
 where
@@ -160,28 +161,34 @@ impl<T> Rational<T>
 where
     T: ZTrait,
 {
+    /// 自動約分を有効にするかどうかを設定
     pub fn set_auto_reduce(auto_reduce: bool) {
         AUTO_REDUCE.store(auto_reduce, SeqCst);
     }
 
+    /// 約分や正規化を行い有理数を作成
     pub fn new(num: T, den: T) -> Self {
         let mut res = Self { num, den };
         res.normalize();
         res
     }
 
+    /// 約分や正規化を行わずに有理数を作成
     pub fn raw(num: T, den: T) -> Self {
         Self { num, den }
     }
 
+    /// 分子を取得
     pub fn num(&self) -> T {
         self.num
     }
 
+    /// 分母を取得
     pub fn den(&self) -> T {
         self.den
     }
 
+    /// 絶対値を取得
     pub fn abs(&self) -> Self {
         Self {
             num: self.num.abs(),
@@ -189,6 +196,9 @@ where
         }
     }
 
+    /// 正規化  
+    /// 符号を分子に移動し、分母を正にする  
+    /// 自動約分が有効なら約分も行う
     pub fn normalize(&mut self) {
         assert!(self.num != T::zero() || self.den != T::zero());
         if self.den == T::zero() {
@@ -212,20 +222,24 @@ where
         }
     }
 
+    /// 約分
     pub fn reduce(&mut self) {
         let g = gcd(self.num, self.den);
         self.num /= g;
         self.den /= g;
     }
 
+    /// f64 に変換
     pub fn to_f64(&self) -> f64 {
         self.num.to_f64() / self.den.to_f64()
     }
 
+    /// 切り捨て
     pub fn floor(&self) -> T {
         div::div_floor(self.num, self.den)
     }
 
+    /// 切り上げ
     pub fn ceil(&self) -> T {
         div::div_ceil(self.num, self.den)
     }

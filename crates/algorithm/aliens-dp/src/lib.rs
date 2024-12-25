@@ -1,3 +1,11 @@
+/// Aliens DP (凸関数)
+///
+/// 凸関数 `f` の `f(x)` を求める。
+///
+/// # 概要
+/// - `g(p) := f(x) + px` となる関数 `g` を用いて `f(x)` を計算する
+/// - `p_lb ≤ p ≤ p_ub` の範囲で探索を行う
+/// - 探索範囲は問題ごとに適切に設定する必要がある
 pub fn aliens_dp_convex(x: usize, p_lb: i64, p_ub: i64, g: impl Fn(i64) -> i64) -> i64 {
     let x = x as i64;
     assert!(p_lb < p_ub);
@@ -15,6 +23,14 @@ pub fn aliens_dp_convex(x: usize, p_lb: i64, p_ub: i64, g: impl Fn(i64) -> i64) 
     g(r) - r * x
 }
 
+/// Aliens DP (凹関数)
+///
+/// 凹関数 `f` の `f(x)` を求める。
+///
+/// # 概要
+/// - `g(p) := f(x) - px` となる関数 `g` を用いて `f(x)` を計算する
+/// - `p_lb ≤ p ≤ p_ub` の範囲で探索を行う
+/// - 探索範囲は問題ごとに適切に設定する必要がある
 pub fn aliens_dp_concave(x: usize, p_lb: i64, p_ub: i64, g: impl Fn(i64) -> i64) -> i64 {
     let x = x as i64;
     assert!(p_lb < p_ub);

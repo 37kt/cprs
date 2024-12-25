@@ -26,6 +26,13 @@ pub trait One {
     fn is_one(&self) -> bool;
 }
 
+/// 代数型の定義  
+/// algebra!(代数型名, 型)  
+/// # Example
+/// ```
+/// use algebraic::algebra;
+/// algebra!(M, i32);
+/// ```
 #[macro_export]
 macro_rules! algebra {
     ($ident:ident, $ty:ty) => {
@@ -37,6 +44,14 @@ macro_rules! algebra {
     };
 }
 
+/// 代数型に作用を定義  
+/// act!(代数型名, 作用先の型, 作用)  
+/// # Example
+/// ```
+/// use algebraic::{act, algebra};
+/// algebra!(F, i32);
+/// act!(F, i32, |&f: &i32, &x: &i32| f * x);
+/// ```
 #[macro_export]
 macro_rules! act {
     ($ident:ident, $tar:ty, $act:expr) => {
@@ -50,6 +65,14 @@ macro_rules! act {
     };
 }
 
+/// モノイドの定義  
+/// monoid!(代数型名, 単位元, 演算)  
+/// # Example
+/// ```
+/// use algebraic::{algebra, monoid};
+/// algebra!(M, i32);
+/// monoid!(M, 1, |&x: &i32, &y: &i32| x * y);
+/// ```
 #[macro_export]
 macro_rules! monoid {
     ($ident:ident, $e:expr, $op:expr) => {
@@ -66,6 +89,14 @@ macro_rules! monoid {
     };
 }
 
+/// 群の定義  
+/// group!(代数型名, 単位元, 演算, 逆元)  
+/// # Example
+/// ```
+/// use algebraic::{algebra, group};
+/// algebra!(G, i32);
+/// group!(G, 1, |&x: &i32, &y: &i32| x + y, |&x: &i32| -x);
+/// ```
 #[macro_export]
 macro_rules! group {
     ($ident:ident, $e:expr, $op:expr, $inv:expr) => {

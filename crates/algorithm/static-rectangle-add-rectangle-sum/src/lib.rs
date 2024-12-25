@@ -3,6 +3,21 @@ use std::{
     ops::{Add, Mul, Neg, Sub},
 };
 
+/// 二次元平面上の矩形領域に対する加算・和クエリを処理する
+///
+/// # 概要
+/// - すべての矩形加算クエリを処理した後、すべての矩形和クエリを処理する
+///
+/// # 引数
+/// - `add`: 加算クエリの配列 `(xl, xr, yl, yr, w)`
+///   - 領域 `[xl, xr) × [yl, yr)` のすべての要素に `w` を加算
+/// - `sum`: 和クエリの配列 `(xl, xr, yl, yr)`
+///   - 領域 `[xl, xr) × [yl, yr)` の要素の総和を計算
+///
+/// # 計算量
+/// - O(N log N + Q log N)
+///   - N: 加算クエリの数
+///   - Q: 和クエリの数
 pub fn static_rectangle_add_rectangle_sum<I, T>(
     add: &[(I, I, I, I, T)],
     sum: &[(I, I, I, I)],
