@@ -28,14 +28,14 @@ data:
     \ *x.min(y));\n\n#[proconio::fastout]\nfn main() {\n    input! {\n        n: usize,\n\
     \        q: usize,\n        a: [i64; n],\n    }\n    let spt = DisjointSparseTable::<M>::new(&a);\n\
     \    for _ in 0..q {\n        input! {\n            l: usize,\n            r:\
-    \ usize,\n        }\n        println!(\"{}\", spt.prod(l, r));\n    }\n}\n"
+    \ usize,\n        }\n        println!(\"{}\", spt.prod(l..r));\n    }\n}\n"
   dependsOn:
   - crates/algebraic/algebraic/src/lib.rs
   - crates/data-structure/disjoint-sparse-table/src/lib.rs
   isVerificationFile: true
   path: verify/staticrmq/src/main.rs
   requiredBy: []
-  timestamp: '2024-12-25 03:34:39+00:00'
+  timestamp: '2024-12-25 08:18:46+00:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/staticrmq/src/main.rs

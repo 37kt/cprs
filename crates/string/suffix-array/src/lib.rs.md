@@ -60,7 +60,7 @@ data:
     \            if i > j {\n                swap(&mut i, &mut j);\n            }\n\
     \            if self.spt.borrow().is_none() {\n                self.spt\n    \
     \                .replace(Some(DisjointSparseTable::<M>::new(&self.lcp)));\n \
-    \           }\n            self.spt.borrow().as_ref().unwrap().prod(i, j)\n  \
+    \           }\n            self.spt.borrow().as_ref().unwrap().prod(i..j)\n  \
     \      }\n    }\n}\n\nalgebra!(M, usize);\nmonoid!(M, !0, |x: &usize, y: &usize|\
     \ *x.min(y));\n\nfn sa_naive(s: &[usize]) -> Vec<usize> {\n    let n = s.len();\n\
     \    let mut sa: Vec<usize> = (0..n).collect();\n    sa.sort_by(|&(mut l), &(mut\
@@ -140,7 +140,7 @@ data:
   isVerificationFile: false
   path: crates/string/suffix-array/src/lib.rs
   requiredBy: []
-  timestamp: '2024-12-25 03:34:39+00:00'
+  timestamp: '2024-12-25 08:18:46+00:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/suffixarray/src/main.rs

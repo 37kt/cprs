@@ -124,7 +124,7 @@ data:
   requiredBy:
   - crates/data-structure/vertex-get-range-contour-add/src/lib.rs
   - crates/data-structure/vertex-add-range-contour-sum/src/lib.rs
-  timestamp: '2024-06-28 10:31:31+09:00'
+  timestamp: '2024-12-25 08:18:46+00:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: crates/data-structure/range-contour-query/src/lib.rs
