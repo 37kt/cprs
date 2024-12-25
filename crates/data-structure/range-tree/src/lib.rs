@@ -3,6 +3,18 @@ use std::ops::{Bound, RangeBounds};
 use algebraic::Monoid;
 use segment_tree::SegmentTree;
 
+/// Range Tree
+///
+/// 2 次元平面上に配置されている要素を管理するデータ構造。
+///
+/// # 計算量
+///
+/// - 構築: O(n log n)
+/// - get: O(log n)
+/// - apply: O(log n)
+/// - apply_range: O(log n)
+///
+/// ここで、n は管理する点の数。
 pub struct RangeTree<I, M>
 where
     I: Ord + Copy,
@@ -21,6 +33,11 @@ where
     M: Monoid,
     M::S: Clone,
 {
+    /// Range Tree を構築する。
+    ///
+    /// # 引数
+    ///
+    /// * `ps` - get クエリの引数として与えられる点の集合
     pub fn new(mut ps: Vec<(I, I)>) -> Self {
         ps.sort();
         ps.dedup();
@@ -38,12 +55,35 @@ where
         Self { n, seg, ps, ys }
     }
 
+    /// 点 (x, y) に対応する要素を取得する。
+    ///
+    /// # 引数
+    ///
+    /// * `(x, y)` - 取得したい要素の座標
+    ///
+    /// # パニック
+    ///
+    /// 指定された座標が構築時に与えられた点集合に含まれていない場合、パニックする。
+    ///
+    /// # 計算量
+    ///
+    /// O(log n)
     pub fn get(&self, (x, y): (I, I)) -> M::S {
         let i = self.ps.partition_point(|&p| p < (x, y));
         assert!(self.ps[i] == (x, y));
         self.seg[self.n + i].get(0)
     }
 
+    /// 点 (x, y) に対応する要素に v を加算する。
+    ///
+    /// # 引数
+    ///
+    /// * `(x, y)` - 加算する要素の座標
+    /// * `v` - 加算する要素
+    ///
+    /// # 計算量
+    ///
+    /// O(log n)
     pub fn add(&mut self, (x, y): (I, I), v: M::S) {
         let mut i = self.ps.partition_point(|&p| p < (x, y));
         assert!(self.ps[i] == (x, y));
@@ -56,6 +96,16 @@ where
         }
     }
 
+    /// x ∈ range_x かつ y ∈ range_y を満たす座標 (x, y) に配置されている要素の総積を取得する。
+    ///
+    /// # 引数
+    ///
+    /// * `range_x` - x 座標の範囲
+    /// * `range_y` - y 座標の範囲
+    ///
+    /// # 計算量
+    ///
+    /// O(log^2 n)
     pub fn prod(&self, range_x: impl RangeBounds<I>, range_y: impl RangeBounds<I>) -> M::S {
         let mut l = match range_x.start_bound() {
             Bound::Unbounded => 0,

@@ -31,10 +31,16 @@ where
     seg: Vec<Option<Line<T>>>,
 }
 
+/// 1 次関数集合を管理する。
 impl<T> LiChaoTree<T>
 where
     T: Copy + Add<Output = T> + Mul<Output = T> + Ord + Default,
 {
+    /// 初期化する。
+    ///
+    /// # 引数
+    ///
+    /// - `xs`: クエリで与えられる x 座標の集合
     pub fn new(mut xs: Vec<T>) -> Self {
         xs.sort();
         xs.dedup();
@@ -52,10 +58,29 @@ where
         }
     }
 
+    /// 1 次関数 `ax + b` を追加する。
+    ///
+    /// # 引数
+    ///
+    /// - `(a, b)`: 1 次関数の係数
+    ///
+    /// # 計算量
+    ///
+    /// O(log N)
     pub fn add_line(&mut self, (a, b): (T, T)) {
         self.update(Line(a, b), 0, self.sz, 1);
     }
 
+    /// 区間 `range` に 1 次関数 `ax + b` を追加する。
+    ///
+    /// # 引数
+    ///
+    /// - `range`: 区間
+    /// - `(a, b)`: 1 次関数の係数
+    ///
+    /// # 計算量
+    ///
+    /// O(log N)
     pub fn add_segment(&mut self, range: impl RangeBounds<T>, (a, b): (T, T)) {
         let mut l = match range.start_bound() {
             Bound::Unbounded => 0,
@@ -82,6 +107,20 @@ where
         }
     }
 
+    /// 座標 `x` における最小値を求める。
+    ///
+    /// # 引数
+    ///
+    /// - `x`: 座標
+    ///
+    /// # 戻り値
+    ///
+    /// - `Some(y)`: 最小値
+    /// - `None`: 最小値が存在しない
+    ///
+    /// # 計算量
+    ///
+    /// O(log N)
     pub fn min(&self, x: T) -> Option<T> {
         let k = self.xs[0..self.n].binary_search(&x).unwrap();
         self.min_(x, k + self.sz)

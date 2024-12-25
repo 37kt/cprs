@@ -1,12 +1,14 @@
 use std::rc::Rc;
 
+/// 永続配列
 #[derive(Clone)]
-pub struct PersistentArray<T: Clone, const M: usize> {
+pub struct PersistentArray<T: Clone, const M: usize = 8> {
     val: Option<Rc<T>>,
     ch: Option<Box<[Rc<Self>]>>,
 }
 
 impl<T: Clone, const M: usize> From<Vec<T>> for PersistentArray<T, M> {
+    /// Vec から永続配列を構築する。
     fn from(v: Vec<T>) -> Self {
         let mut res = Self::new();
         for (i, x) in v.into_iter().enumerate() {
@@ -17,6 +19,7 @@ impl<T: Clone, const M: usize> From<Vec<T>> for PersistentArray<T, M> {
 }
 
 impl<T: Clone, const M: usize> PersistentArray<T, M> {
+    /// 空の永続配列を構築する。
     pub fn new() -> Self {
         Self {
             val: None,
@@ -24,6 +27,7 @@ impl<T: Clone, const M: usize> PersistentArray<T, M> {
         }
     }
 
+    /// a\[i\] を x に更新する。
     pub fn set(&self, i: usize, x: T) -> Self {
         let mut v = self.clone();
         if i == 0 {
@@ -39,6 +43,7 @@ impl<T: Clone, const M: usize> PersistentArray<T, M> {
         }
     }
 
+    /// a\[i\] を取得する。
     pub fn get(&self, i: usize) -> Option<&T> {
         if i == 0 {
             self.val.as_ref().map(|v| v.as_ref())

@@ -6,6 +6,9 @@ use std::{
 use graph::Graph;
 use heavy_light_decomposition::HeavyLightDecomposition;
 
+/// 木の等高線クエリ  
+/// seq\[v\] は、重心分解の過程を表す木の部分木 v に含まれる頂点を、元の木における BFS 順に並べたものである。  
+/// 各 seq\[v\] について Segment Tree を構築することで、 1 点更新区間取得クエリもしくは区間更新 1 点取得クエリを処理できる。
 #[derive(Clone)]
 pub struct RangeContourQuery {
     n: usize,
@@ -25,6 +28,7 @@ pub struct RangeContourQuery {
 }
 
 impl RangeContourQuery {
+    /// 木の等高線クエリを構築する。
     pub fn new(g: &Graph<(), ()>) -> Self {
         let mut h = vec![vec![]; g.len()];
         for v in 0..g.len() {
@@ -191,10 +195,14 @@ impl RangeContourQuery {
         c
     }
 
+    /// seq に含まれる 頂点 v の index を取得する。
     pub fn point(&self, v: usize) -> Vec<(usize, usize)> {
         self.pos[v].clone()
     }
 
+    /// 頂点 v からの距離が l 以上 r 未満である頂点を列挙する。  
+    /// 出力: (v_i, l_i, r_i) のタプルの列  
+    /// seq\[v_i\]\[l_i..r_i\] は、重複なくこれを列挙している。
     pub fn range(&self, mut v: usize, l: usize, r: usize) -> Vec<(usize, usize, usize)> {
         let mut res = vec![];
         if l >= r {

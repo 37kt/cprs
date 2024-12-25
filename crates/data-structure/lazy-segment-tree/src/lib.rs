@@ -2,6 +2,8 @@ use std::ops::{Bound, RangeBounds};
 
 use algebraic::{Act, Monoid};
 
+/// 遅延セグメント木。
+/// 区間作用、区間積取得ができる。
 #[derive(Clone)]
 pub struct LazySegmentTree<M, F>
 where
@@ -22,6 +24,15 @@ where
     F: Act<X = M::S> + Monoid,
     F::S: Clone,
 {
+    /// Vec で初期化する。
+    ///
+    /// # 引数
+    ///
+    /// - `a`: 初期値
+    ///
+    /// # 計算量
+    ///
+    /// O(N)
     fn from(mut a: Vec<M::S>) -> Self {
         let n = a.len();
         let mut v = vec![M::e(); n];
@@ -42,6 +53,11 @@ where
     F: Act<X = M::S> + Monoid,
     F::S: Clone,
 {
+    /// a\[k\] を x に更新する。
+    ///
+    /// # 計算量
+    ///
+    /// O(log N)
     pub fn set(&mut self, k: usize, x: M::S) {
         assert!(k < self.n);
         let k = k + self.n;
@@ -55,6 +71,11 @@ where
         }
     }
 
+    /// a\[k\] を取得する。
+    ///
+    /// # 計算量
+    ///
+    /// O(log N)
     pub fn get(&mut self, mut k: usize) -> M::S {
         assert!(k < self.n);
         k += self.n;
@@ -65,6 +86,11 @@ where
         self.v[k].clone()
     }
 
+    /// a\[range\] の総積を取得する。
+    ///
+    /// # 計算量
+    ///
+    /// O(log N)
     pub fn prod<R>(&mut self, range: R) -> M::S
     where
         R: RangeBounds<usize>,
@@ -115,6 +141,11 @@ where
         M::op(&sl, &sr)
     }
 
+    /// a\[k\] に f を左から作用させる。
+    ///
+    /// # 計算量
+    ///
+    /// O(log N)
     pub fn apply(&mut self, k: usize, f: F::S) {
         assert!(k < self.n);
         let k = k + self.n;
@@ -128,6 +159,11 @@ where
         }
     }
 
+    /// a\[range\] に f を左から作用させる。
+    ///
+    /// # 計算量
+    ///
+    /// O(log N)
     pub fn apply_range<R>(&mut self, range: R, f: F::S)
     where
         R: RangeBounds<usize>,
@@ -184,7 +220,20 @@ where
         }
     }
 
-    /// ！未検証！
+    /// l を左端とする区間のうち、条件を満たす最大の区間の右端を取得する。
+    ///
+    /// # 引数
+    ///
+    /// - `l`: 左端
+    /// - `pred`: a\[range\] が条件を満たすかを判定する関数
+    ///
+    /// # 戻り値
+    ///
+    /// - 条件を満たす最大の区間の右端
+    ///
+    /// # 計算量
+    ///
+    /// O(log N)
     pub fn max_right<P>(&mut self, mut l: usize, pred: P) -> usize
     where
         P: Fn(&M::S) -> bool,
@@ -221,7 +270,16 @@ where
         }
     }
 
-    /// ！未検証！
+    /// r を右端とする区間のうち、条件を満たす最小の区間の左端を取得する。
+    ///
+    /// # 引数
+    ///
+    /// - `r`: 右端
+    /// - `pred`: a\[range\] が条件を満たすかを判定する関数
+    ///
+    /// # 計算量
+    ///
+    /// O(log N)
     pub fn min_left<P>(&mut self, mut r: usize, pred: P) -> usize
     where
         P: Fn(&M::S) -> bool,
@@ -261,10 +319,12 @@ where
         }
     }
 
+    /// 子ノードの値を親ノードに反映させる。
     fn update(&mut self, k: usize) {
         self.v[k] = M::op(&self.v[k * 2], &self.v[k * 2 + 1]);
     }
 
+    /// ノードに作用させる。子への作用は遅延させる。
     fn all_apply(&mut self, k: usize, f: F::S) {
         self.v[k] = F::act(&f, &self.v[k]);
         if k < self.n {
@@ -272,12 +332,15 @@ where
         }
     }
 
+    /// 遅延させていた作用を子ノードに反映させる。
     fn push(&mut self, k: usize) {
         self.all_apply(k * 2, self.lz[k].clone());
         self.all_apply(k * 2 + 1, self.lz[k].clone());
         self.lz[k] = F::e();
     }
 
+    /// セグ木のサイズを 2 冪にしていない都合上、無効なノードもある。  
+    /// 有効なノードかどうかを判定する。
     #[inline]
     fn is_good_node(&self, k: usize) -> bool {
         if k >= self.n {
