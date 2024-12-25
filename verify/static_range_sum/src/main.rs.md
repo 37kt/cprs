@@ -34,7 +34,7 @@ data:
   isVerificationFile: true
   path: verify/static_range_sum/src/main.rs
   requiredBy: []
-  timestamp: '2024-12-15 01:26:42+00:00'
+  timestamp: '2024-12-25 03:34:39+00:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/static_range_sum/src/main.rs

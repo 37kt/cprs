@@ -5,6 +5,12 @@ data:
   - icon: ':heavy_check_mark:'
     path: crates/algebraic/rational/src/lib.rs
     title: crates/algebraic/rational/src/lib.rs
+  - icon: ':warning:'
+    path: crates/algorithm/binary-search/src/lib.rs
+    title: crates/algorithm/binary-search/src/lib.rs
+  - icon: ':warning:'
+    path: crates/algorithm/ternary-search/src/lib.rs
+    title: crates/algorithm/ternary-search/src/lib.rs
   - icon: ':heavy_check_mark:'
     path: crates/data-structure/disjoint-sparse-table/src/lib.rs
     title: crates/data-structure/disjoint-sparse-table/src/lib.rs
@@ -172,33 +178,46 @@ data:
     \ Algebra {\n    fn e() -> Self::S;\n    fn op(x: &Self::S, y: &Self::S) -> Self::S;\n\
     }\n\npub trait Group: Monoid {\n    fn inv(x: &Self::S) -> Self::S;\n}\n\npub\
     \ trait Zero {\n    fn zero() -> Self;\n    fn is_zero(&self) -> bool;\n}\n\n\
-    pub trait One {\n    fn one() -> Self;\n    fn is_one(&self) -> bool;\n}\n\n#[macro_export]\n\
-    macro_rules! algebra {\n    ($ident:ident, $ty:ty) => {\n        #[derive(Clone)]\n\
-    \        enum $ident {}\n        impl $crate::Algebra for $ident {\n         \
-    \   type S = $ty;\n        }\n    };\n}\n\n#[macro_export]\nmacro_rules! act {\n\
-    \    ($ident:ident, $tar:ty, $act:expr) => {\n        impl $crate::Act for $ident\
-    \ {\n            type X = $tar;\n            #[inline]\n            fn act(f:\
-    \ &Self::S, x: &Self::X) -> Self::X {\n                $act(f, x)\n          \
-    \  }\n        }\n    };\n}\n\n#[macro_export]\nmacro_rules! monoid {\n    ($ident:ident,\
-    \ $e:expr, $op:expr) => {\n        impl $crate::Monoid for $ident {\n        \
-    \    #[inline]\n            fn e() -> Self::S {\n                $e\n        \
-    \    }\n            #[inline]\n            fn op(x: &Self::S, y: &Self::S) ->\
-    \ Self::S {\n                $op(x, y)\n            }\n        }\n    };\n}\n\n\
-    #[macro_export]\nmacro_rules! group {\n    ($ident:ident, $e:expr, $op:expr, $inv:expr)\
-    \ => {\n        impl $crate::Monoid for $ident {\n            #[inline]\n    \
-    \        fn e() -> Self::S {\n                $e\n            }\n            #[inline]\n\
-    \            fn op(x: &Self::S, y: &Self::S) -> Self::S {\n                $op(x,\
-    \ y)\n            }\n        }\n        impl $crate::Group for $ident {\n    \
-    \        #[inline]\n            fn inv(x: &Self::S) -> Self::S {\n           \
-    \     $inv(x)\n            }\n        }\n    };\n}\n\nmacro_rules! impl_zero_one\
-    \ {\n    ($($t:ty)*) => {\n        $(\n            impl $crate::Zero for $t {\n\
-    \                fn zero() -> Self {\n                    0\n                }\n\
-    \                fn is_zero(&self) -> bool {\n                    *self == 0\n\
-    \                }\n            }\n            impl $crate::One for $t {\n   \
-    \             fn one() -> Self {\n                    1\n                }\n \
-    \               fn is_one(&self) -> bool {\n                    *self == 1\n \
-    \               }\n            }\n        )*\n    };\n}\n\nimpl_zero_one!(usize\
-    \ u8 u16 u32 u64 u128 isize i8 i16 i32 i64 i128);\n"
+    pub trait One {\n    fn one() -> Self;\n    fn is_one(&self) -> bool;\n}\n\n///\
+    \ \u4EE3\u6570\u578B\u306E\u5B9A\u7FA9  \n/// algebra!(\u4EE3\u6570\u578B\u540D\
+    , \u578B)  \n/// # Example\n/// ```\n/// use algebraic::algebra;\n/// algebra!(M,\
+    \ i32);\n/// ```\n#[macro_export]\nmacro_rules! algebra {\n    ($ident:ident,\
+    \ $ty:ty) => {\n        #[derive(Clone)]\n        enum $ident {}\n        impl\
+    \ $crate::Algebra for $ident {\n            type S = $ty;\n        }\n    };\n\
+    }\n\n/// \u4EE3\u6570\u578B\u306B\u4F5C\u7528\u3092\u5B9A\u7FA9  \n/// act!(\u4EE3\
+    \u6570\u578B\u540D, \u4F5C\u7528\u5148\u306E\u578B, \u4F5C\u7528)  \n/// # Example\n\
+    /// ```\n/// use algebraic::{act, algebra};\n/// algebra!(F, i32);\n/// act!(F,\
+    \ i32, |&f: &i32, &x: &i32| f * x);\n/// ```\n#[macro_export]\nmacro_rules! act\
+    \ {\n    ($ident:ident, $tar:ty, $act:expr) => {\n        impl $crate::Act for\
+    \ $ident {\n            type X = $tar;\n            #[inline]\n            fn\
+    \ act(f: &Self::S, x: &Self::X) -> Self::X {\n                $act(f, x)\n   \
+    \         }\n        }\n    };\n}\n\n/// \u30E2\u30CE\u30A4\u30C9\u306E\u5B9A\u7FA9\
+    \  \n/// monoid!(\u4EE3\u6570\u578B\u540D, \u5358\u4F4D\u5143, \u6F14\u7B97) \
+    \ \n/// # Example\n/// ```\n/// use algebraic::{algebra, monoid};\n/// algebra!(M,\
+    \ i32);\n/// monoid!(M, 1, |&x: &i32, &y: &i32| x * y);\n/// ```\n#[macro_export]\n\
+    macro_rules! monoid {\n    ($ident:ident, $e:expr, $op:expr) => {\n        impl\
+    \ $crate::Monoid for $ident {\n            #[inline]\n            fn e() -> Self::S\
+    \ {\n                $e\n            }\n            #[inline]\n            fn\
+    \ op(x: &Self::S, y: &Self::S) -> Self::S {\n                $op(x, y)\n     \
+    \       }\n        }\n    };\n}\n\n/// \u7FA4\u306E\u5B9A\u7FA9  \n/// group!(\u4EE3\
+    \u6570\u578B\u540D, \u5358\u4F4D\u5143, \u6F14\u7B97, \u9006\u5143)  \n/// # Example\n\
+    /// ```\n/// use algebraic::{algebra, group};\n/// algebra!(G, i32);\n/// group!(G,\
+    \ 1, |&x: &i32, &y: &i32| x + y, |&x: &i32| -x);\n/// ```\n#[macro_export]\nmacro_rules!\
+    \ group {\n    ($ident:ident, $e:expr, $op:expr, $inv:expr) => {\n        impl\
+    \ $crate::Monoid for $ident {\n            #[inline]\n            fn e() -> Self::S\
+    \ {\n                $e\n            }\n            #[inline]\n            fn\
+    \ op(x: &Self::S, y: &Self::S) -> Self::S {\n                $op(x, y)\n     \
+    \       }\n        }\n        impl $crate::Group for $ident {\n            #[inline]\n\
+    \            fn inv(x: &Self::S) -> Self::S {\n                $inv(x)\n     \
+    \       }\n        }\n    };\n}\n\nmacro_rules! impl_zero_one {\n    ($($t:ty)*)\
+    \ => {\n        $(\n            impl $crate::Zero for $t {\n                fn\
+    \ zero() -> Self {\n                    0\n                }\n               \
+    \ fn is_zero(&self) -> bool {\n                    *self == 0\n              \
+    \  }\n            }\n            impl $crate::One for $t {\n                fn\
+    \ one() -> Self {\n                    1\n                }\n                fn\
+    \ is_one(&self) -> bool {\n                    *self == 1\n                }\n\
+    \            }\n        )*\n    };\n}\n\nimpl_zero_one!(usize u8 u16 u32 u64 u128\
+    \ isize i8 i16 i32 i64 i128);\n"
   dependsOn: []
   isVerificationFile: false
   path: crates/algebraic/algebraic/src/lib.rs
@@ -211,6 +230,8 @@ data:
   - crates/math/matrix/src/lib.rs
   - crates/math/div/src/lib.rs
   - crates/math/discrete-logarithm/src/lib.rs
+  - crates/algorithm/ternary-search/src/lib.rs
+  - crates/algorithm/binary-search/src/lib.rs
   - crates/algebraic/rational/src/lib.rs
   - crates/number-theory/modint/src/lib.rs
   - crates/tree/re-rooting-dp/src/lib.rs
@@ -232,7 +253,7 @@ data:
   - crates/data-structure/splay-tree-internal/src/lib.rs
   - crates/data-structure/range-tree/src/lib.rs
   - crates/data-structure/tree-query/src/lib.rs
-  timestamp: '2024-03-18 01:19:47+09:00'
+  timestamp: '2024-12-25 03:34:39+00:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/vertex_add_subtree_sum/src/main.rs

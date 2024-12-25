@@ -52,7 +52,7 @@ data:
   path: crates/data-structure/union-find-component-sum/src/lib.rs
   requiredBy:
   - crates/tree/zero-one-on-tree/src/lib.rs
-  timestamp: '2024-11-17 16:38:04+09:00'
+  timestamp: '2024-12-25 03:34:39+00:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: crates/data-structure/union-find-component-sum/src/lib.rs

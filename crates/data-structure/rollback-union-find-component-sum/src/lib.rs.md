@@ -55,7 +55,7 @@ data:
   isVerificationFile: false
   path: crates/data-structure/rollback-union-find-component-sum/src/lib.rs
   requiredBy: []
-  timestamp: '2024-11-17 16:38:04+09:00'
+  timestamp: '2024-12-25 03:34:39+00:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/dynamic_graph_vertex_add_component_sum/src/main.rs

@@ -44,7 +44,7 @@ data:
   isVerificationFile: true
   path: verify/dynamic_tree_vertex_add_path_sum/src/main.rs
   requiredBy: []
-  timestamp: '2024-04-21 23:45:22+09:00'
+  timestamp: '2024-12-25 03:34:39+00:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/dynamic_tree_vertex_add_path_sum/src/main.rs

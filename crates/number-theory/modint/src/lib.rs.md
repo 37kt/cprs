@@ -476,7 +476,7 @@ data:
   - crates/number-theory/combination/src/lib.rs
   - crates/graph/count-spanning-tree-undirected/src/lib.rs
   - crates/graph/count-spanning-tree-directed/src/lib.rs
-  timestamp: '2024-12-24 03:04:37+00:00'
+  timestamp: '2024-12-25 03:34:39+00:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/log_of_formal_power_series/src/main.rs
