@@ -39,7 +39,17 @@ data:
     \   y = y * y % m as u64;\n        n >>= 1;\n    }\n    r as u32\n}\n\nconst fn\
     \ inv(x: u32, m: u32) -> u32 {\n    pow(x, m - 2, m)\n}\n\nconst M1INV_FP2: Fp2\
     \ = Fp2::raw(inv(M1, M2));\nconst M1INV_FP3: Fp3 = Fp3::raw(inv(M1, M3));\nconst\
-    \ M2INV_FP3: Fp3 = Fp3::raw(inv(M2, M3));\n\npub fn convolution_arbitrary_mod<T:\
+    \ M2INV_FP3: Fp3 = Fp3::raw(inv(M2, M3));\n\n/// \u4EFB\u610F\u306E\u6CD5\u306B\
+    \u5BFE\u3059\u308B\u7573\u307F\u8FBC\u307F\u3092\u8A08\u7B97\u3059\u308B\n///\n\
+    /// # \u6982\u8981\n/// 2\u3064\u306E\u914D\u5217 `a`, `b` \u306B\u5BFE\u3057\u3001\
+    \u4EFB\u610F\u306E\u6CD5\u3067\u306E\u7573\u307F\u8FBC\u307F\u3092\u8A08\u7B97\
+    \u3059\u308B\u3002  \n/// \u5185\u90E8\u3067\u306F Chinese Remainder Theorem (CRT)\
+    \ \u3092\u7528\u3044\u30663\u3064\u306E\u7D20\u6570\u6CD5\u3067\u306E\u7573\u307F\
+    \u8FBC\u307F\u304B\u3089\u5FA9\u5143\u3059\u308B\u3002\n///\n/// # \u5F15\u6570\
+    \n/// - `a`: 1\u3064\u76EE\u306E\u914D\u5217\n/// - `b`: 2\u3064\u76EE\u306E\u914D\
+    \u5217\n///\n/// # \u623B\u308A\u5024\n/// - \u7573\u307F\u8FBC\u307F\u306E\u7D50\
+    \u679C\uFF08\u9577\u3055\u306F `a.len() + b.len() - 1`\uFF09\n///\n/// # \u8A08\
+    \u7B97\u91CF\n/// - O(N log N)\n///   - N: max(a.len(), b.len())\npub fn convolution_arbitrary_mod<T:\
     \ ModInt>(a: &[T], b: &[T]) -> Vec<T> {\n    if a.len().min(b.len()) < 60 {\n\
     \        return convolution_naive(a, b);\n    }\n    let a1 = a.iter().map(|&x|\
     \ Fp1::new(x.val())).collect::<Vec<_>>();\n    let a2 = a.iter().map(|&x| Fp2::new(x.val())).collect::<Vec<_>>();\n\
@@ -62,7 +72,7 @@ data:
   path: crates/convolution/convolution-arbitrary-mod/src/lib.rs
   requiredBy:
   - crates/polynomial/formal-power-series/src/lib.rs
-  timestamp: '2024-12-24 03:04:37+00:00'
+  timestamp: '2024-12-25 07:02:27+00:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/convolution_mod_1000000007/src/main.rs

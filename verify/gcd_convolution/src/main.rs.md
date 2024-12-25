@@ -31,7 +31,7 @@ data:
   isVerificationFile: true
   path: verify/gcd_convolution/src/main.rs
   requiredBy: []
-  timestamp: '2023-05-06 16:57:25+09:00'
+  timestamp: '2024-12-25 07:02:27+00:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/gcd_convolution/src/main.rs

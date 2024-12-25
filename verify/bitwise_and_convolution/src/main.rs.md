@@ -21,16 +21,17 @@ data:
     , line 288, in bundle\n    raise NotImplementedError\nNotImplementedError\n"
   code: "// verification-helper: PROBLEM https://judge.yosupo.jp/problem/bitwise_and_convolution\n\
     \nuse ac_library::ModInt998244353 as Mint;\nuse and_convolution::and_convolution;\n\
-    use itertools::Itertools;\nuse proconio::input;\n\n#[proconio::fastout]\nfn main()\
-    \ {\n    input! {\n        n: usize,\n        a: [Mint; 1 << n],\n        b: [Mint;\
-    \ 1 << n],\n    }\n    let c = and_convolution(a, b);\n    println!(\"{}\", c.iter().join(\"\
-    \ \"));\n}\n"
+    use proconio::{fastout, input};\n\n#[fastout]\nfn main() {\n    input! {\n   \
+    \     n: usize,\n        a: [Mint; 1 << n],\n        b: [Mint; 1 << n],\n    }\n\
+    \    let c = and_convolution(a, b);\n    for i in 0..1 << n {\n        print!(\"\
+    {}\", c[i]);\n        if i < 1 << n - 1 {\n            print!(\" \");\n      \
+    \  } else {\n            println!();\n        }\n    }\n}\n"
   dependsOn:
   - crates/convolution/and-convolution/src/lib.rs
   isVerificationFile: true
   path: verify/bitwise_and_convolution/src/main.rs
   requiredBy: []
-  timestamp: '2023-05-06 16:57:25+09:00'
+  timestamp: '2024-12-25 07:02:27+00:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/bitwise_and_convolution/src/main.rs

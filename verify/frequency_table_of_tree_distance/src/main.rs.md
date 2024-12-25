@@ -49,7 +49,7 @@ data:
   isVerificationFile: true
   path: verify/frequency_table_of_tree_distance/src/main.rs
   requiredBy: []
-  timestamp: '2024-12-23 05:51:44+00:00'
+  timestamp: '2024-12-25 07:02:27+00:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/frequency_table_of_tree_distance/src/main.rs

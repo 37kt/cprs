@@ -17,27 +17,46 @@ data:
     \         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\
     \  File \"/opt/hostedtoolcache/Python/3.12.8/x64/lib/python3.12/site-packages/onlinejudge_verify/languages/rust.py\"\
     , line 288, in bundle\n    raise NotImplementedError\nNotImplementedError\n"
-  code: "use std::ops::{Add, MulAssign, Sub};\n\npub fn divisor_zeta<T>(a: &mut [T])\n\
-    where\n    T: Clone + Add<Output = T>,\n{\n    let n = a.len() - 1;\n    let mut\
-    \ is_prime = vec![true; n + 1];\n    for p in 2..=n {\n        if is_prime[p]\
-    \ {\n            for q in (p * 2..=n).step_by(p) {\n                is_prime[q]\
-    \ = false;\n            }\n            for i in 1..=n / p {\n                a[i\
-    \ * p] = a[i * p].clone() + a[i].clone();\n            }\n        }\n    }\n}\n\
-    \npub fn divisor_moebius<T>(a: &mut [T])\nwhere\n    T: Clone + Sub<Output = T>,\n\
-    {\n    let n = a.len() - 1;\n    let mut is_prime = vec![true; n + 1];\n    for\
-    \ p in 2..=n {\n        if is_prime[p] {\n            for q in (p * 2..=n).step_by(p)\
+  code: "use std::ops::{Add, Mul, Sub};\n\n/// \u7D04\u6570\u30BC\u30FC\u30BF\u5909\
+    \u63DB\n///\n/// # \u6982\u8981\n/// - i \u306E\u7D04\u6570 j \u306B\u3064\u3044\
+    \u3066\u306E f\\[j\\] \u306E\u7DCF\u548C\u3092\u8A08\u7B97\n///\n/// # \u5F15\u6570\
+    \n/// - `f`: \u5165\u529B\u914D\u5217\n///\n/// # \u8A08\u7B97\u5F0F\n/// g\\\
+    [i\\] = \u03A3_{j | i} f\\[j\\]\n///\n/// # \u8A08\u7B97\u91CF\n/// - O(n log\
+    \ log n)\n///   - n: \u914D\u5217\u306E\u9577\u3055\npub fn divisor_zeta<T>(f:\
+    \ &mut [T])\nwhere\n    T: Clone + Add<Output = T>,\n{\n    let n = f.len() -\
+    \ 1;\n    let mut is_prime = vec![true; n + 1];\n    for p in 2..=n {\n      \
+    \  if is_prime[p] {\n            for q in (p * 2..=n).step_by(p) {\n         \
+    \       is_prime[q] = false;\n            }\n            for i in 1..=n / p {\n\
+    \                f[i * p] = f[i * p].clone() + f[i].clone();\n            }\n\
+    \        }\n    }\n}\n\n/// \u7D04\u6570\u30E1\u30D3\u30A6\u30B9\u5909\u63DB\n\
+    ///\n/// # \u6982\u8981\n/// - \u7D04\u6570\u30BC\u30FC\u30BF\u5909\u63DB\u306E\
+    \u9006\u5909\u63DB\n///\n/// # \u5F15\u6570\n/// - `g`: \u5165\u529B\u914D\u5217\
+    \n///\n/// # \u8A08\u7B97\u5F0F\n/// g\\[i\\] = \u03A3_{j | i} f\\[j\\]\n///\n\
+    /// # \u8A08\u7B97\u91CF\n/// - O(n log log n)\n///   - n: \u914D\u5217\u306E\u9577\
+    \u3055\npub fn divisor_moebius<T>(g: &mut [T])\nwhere\n    T: Clone + Sub<Output\
+    \ = T>,\n{\n    let n = g.len() - 1;\n    let mut is_prime = vec![true; n + 1];\n\
+    \    for p in 2..=n {\n        if is_prime[p] {\n            for q in (p * 2..=n).step_by(p)\
     \ {\n                is_prime[q] = false;\n            }\n            for i in\
-    \ (1..=n / p).rev() {\n                a[i * p] = a[i * p].clone() - a[i].clone();\n\
-    \            }\n        }\n    }\n}\n\npub fn lcm_convolution<T>(mut a: Vec<T>,\
-    \ mut b: Vec<T>) -> Vec<T>\nwhere\n    T: Clone + Add<Output = T> + Sub<Output\
-    \ = T> + MulAssign,\n{\n    assert_eq!(a.len(), b.len());\n    divisor_zeta(&mut\
-    \ a);\n    divisor_zeta(&mut b);\n    for i in 1..a.len() {\n        a[i] *= b[i].clone();\n\
-    \    }\n    divisor_moebius(&mut a);\n    a\n}\n"
+    \ (1..=n / p).rev() {\n                g[i * p] = g[i * p].clone() - g[i].clone();\n\
+    \            }\n        }\n    }\n}\n\n/// LCM \u7573\u307F\u8FBC\u307F\n///\n\
+    /// # \u6982\u8981\n/// - 2\u3064\u306E\u914D\u5217 `a`, `b` \u306B\u5BFE\u3057\
+    \u3001\u4EE5\u4E0B\u306E\u5F0F\u3067\u5B9A\u7FA9\u3055\u308C\u308B\u7573\u307F\
+    \u8FBC\u307F\u3092\u8A08\u7B97\u3059\u308B\uFF1A\n/// ```text\n/// res[k] = \u03A3\
+    _{k | k=lcm(i, j)} (a[i] * b[j])\n/// ```\n///\n/// # \u5F15\u6570\n/// - `a`:\
+    \ 1\u3064\u76EE\u306E\u914D\u5217\n/// - `b`: 2\u3064\u76EE\u306E\u914D\u5217\n\
+    ///\n/// # \u623B\u308A\u5024\n/// - LCM \u7573\u307F\u8FBC\u307F\u306E\u7D50\u679C\
+    \uFF08\u9577\u3055\u306F `a.len() + b.len() - 1`\uFF09\n///\n/// # \u8A08\u7B97\
+    \u91CF\n/// - O(N log log N)\n///   - N: max(a.len(), b.len())\npub fn lcm_convolution<T>(mut\
+    \ a: Vec<T>, mut b: Vec<T>) -> Vec<T>\nwhere\n    T: Clone + Add<Output = T> +\
+    \ Sub<Output = T> + Mul<Output = T>,\n{\n    assert_eq!(a.len(), b.len());\n \
+    \   divisor_zeta(&mut a);\n    divisor_zeta(&mut b);\n    a = a\n        .into_iter()\n\
+    \        .zip(b.into_iter())\n        .map(|(x, y)| x * y)\n        .collect();\n\
+    \    divisor_moebius(&mut a);\n    a\n}\n"
   dependsOn: []
   isVerificationFile: false
   path: crates/convolution/lcm-convolution/src/lib.rs
   requiredBy: []
-  timestamp: '2023-05-06 16:57:25+09:00'
+  timestamp: '2024-12-25 07:02:27+00:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/lcm_convolution/src/main.rs

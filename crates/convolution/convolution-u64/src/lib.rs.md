@@ -44,25 +44,35 @@ data:
     \ M5));\nconst M4INV_FP5: Fp5 = Fp5::raw(inv(M4, M5));\nconst P_M1: u64 = M1 as\
     \ u64;\nconst P_M1M2: u64 = P_M1.wrapping_mul(M2 as u64);\nconst P_M1M2M3: u64\
     \ = P_M1M2.wrapping_mul(M3 as u64);\nconst P_M1M2M3M4: u64 = P_M1M2M3.wrapping_mul(M4\
-    \ as u64);\n\npub fn convolution_u64(a: &[u64], b: &[u64]) -> Vec<u64> {\n   \
-    \ if a.is_empty() || b.is_empty() {\n        return vec![];\n    }\n    let a1\
-    \ = a.iter().map(|&x| Fp1::new(x)).collect::<Vec<_>>();\n    let a2 = a.iter().map(|&x|\
-    \ Fp2::new(x)).collect::<Vec<_>>();\n    let a3 = a.iter().map(|&x| Fp3::new(x)).collect::<Vec<_>>();\n\
-    \    let a4 = a.iter().map(|&x| Fp4::new(x)).collect::<Vec<_>>();\n    let a5\
-    \ = a.iter().map(|&x| Fp5::new(x)).collect::<Vec<_>>();\n    let b1 = b.iter().map(|&x|\
-    \ Fp1::new(x)).collect::<Vec<_>>();\n    let b2 = b.iter().map(|&x| Fp2::new(x)).collect::<Vec<_>>();\n\
-    \    let b3 = b.iter().map(|&x| Fp3::new(x)).collect::<Vec<_>>();\n    let b4\
-    \ = b.iter().map(|&x| Fp4::new(x)).collect::<Vec<_>>();\n    let b5 = b.iter().map(|&x|\
-    \ Fp5::new(x)).collect::<Vec<_>>();\n    let a1 = convolution_ntt_friendly(a1,\
-    \ b1);\n    let a2 = convolution_ntt_friendly(a2, b2);\n    let a3 = convolution_ntt_friendly(a3,\
-    \ b3);\n    let a4 = convolution_ntt_friendly(a4, b4);\n    let a5 = convolution_ntt_friendly(a5,\
-    \ b5);\n    a1.iter()\n        .zip(a2.iter())\n        .zip(a3.iter())\n    \
-    \    .zip(a4.iter())\n        .zip(a5.iter())\n        .map(|((((&e1, &e2), &e3),\
-    \ &e4), &e5)| {\n            let x1 = e1;\n            let x2 = (e2 - Fp2::raw(x1.val()))\
-    \ * M1INV_FP2;\n            let x3 = ((e3 - Fp3::raw(x1.val())) * M1INV_FP3 -\
-    \ Fp3::raw(x2.val())) * M2INV_FP3;\n            let x4 = (((e4 - Fp4::raw(x1.val()))\
-    \ * M1INV_FP4 - Fp4::raw(x2.val())) * M2INV_FP4\n                - Fp4::raw(x3.val()))\n\
-    \                * M3INV_FP4;\n            let x5 = ((((e5 - Fp5::raw(x1.val()))\
+    \ as u64);\n\n/// u64 \u306B\u5BFE\u3059\u308B\u7573\u307F\u8FBC\u307F\u3092\u8A08\
+    \u7B97\u3059\u308B\n///\n/// # \u6982\u8981\n/// 2\u3064\u306E\u914D\u5217 `a`,\
+    \ `b` \u306B\u5BFE\u3057\u3001u64 \u3067\u306E\u7573\u307F\u8FBC\u307F\u3092\u8A08\
+    \u7B97\u3059\u308B\u3002  \n/// \u5185\u90E8\u3067\u306F Chinese Remainder Theorem\
+    \ (CRT) \u3092\u7528\u3044\u30665\u3064\u306E\u7D20\u6570\u6CD5\u3067\u306E\u7573\
+    \u307F\u8FBC\u307F\u304B\u3089\u5FA9\u5143\u3059\u308B\u3002\n///\n/// # \u5F15\
+    \u6570\n/// - `a`: 1\u3064\u76EE\u306E\u914D\u5217\n/// - `b`: 2\u3064\u76EE\u306E\
+    \u914D\u5217\n///\n/// # \u623B\u308A\u5024\n/// - \u7573\u307F\u8FBC\u307F\u306E\
+    \u7D50\u679C\uFF08\u9577\u3055\u306F `a.len() + b.len() - 1`\uFF09\n///\n/// #\
+    \ \u8A08\u7B97\u91CF\n/// - O(N log N)\n///   - N: max(a.len(), b.len())\npub\
+    \ fn convolution_u64(a: &[u64], b: &[u64]) -> Vec<u64> {\n    if a.is_empty()\
+    \ || b.is_empty() {\n        return vec![];\n    }\n    let a1 = a.iter().map(|&x|\
+    \ Fp1::new(x)).collect::<Vec<_>>();\n    let a2 = a.iter().map(|&x| Fp2::new(x)).collect::<Vec<_>>();\n\
+    \    let a3 = a.iter().map(|&x| Fp3::new(x)).collect::<Vec<_>>();\n    let a4\
+    \ = a.iter().map(|&x| Fp4::new(x)).collect::<Vec<_>>();\n    let a5 = a.iter().map(|&x|\
+    \ Fp5::new(x)).collect::<Vec<_>>();\n    let b1 = b.iter().map(|&x| Fp1::new(x)).collect::<Vec<_>>();\n\
+    \    let b2 = b.iter().map(|&x| Fp2::new(x)).collect::<Vec<_>>();\n    let b3\
+    \ = b.iter().map(|&x| Fp3::new(x)).collect::<Vec<_>>();\n    let b4 = b.iter().map(|&x|\
+    \ Fp4::new(x)).collect::<Vec<_>>();\n    let b5 = b.iter().map(|&x| Fp5::new(x)).collect::<Vec<_>>();\n\
+    \    let a1 = convolution_ntt_friendly(a1, b1);\n    let a2 = convolution_ntt_friendly(a2,\
+    \ b2);\n    let a3 = convolution_ntt_friendly(a3, b3);\n    let a4 = convolution_ntt_friendly(a4,\
+    \ b4);\n    let a5 = convolution_ntt_friendly(a5, b5);\n    a1.iter()\n      \
+    \  .zip(a2.iter())\n        .zip(a3.iter())\n        .zip(a4.iter())\n       \
+    \ .zip(a5.iter())\n        .map(|((((&e1, &e2), &e3), &e4), &e5)| {\n        \
+    \    let x1 = e1;\n            let x2 = (e2 - Fp2::raw(x1.val())) * M1INV_FP2;\n\
+    \            let x3 = ((e3 - Fp3::raw(x1.val())) * M1INV_FP3 - Fp3::raw(x2.val()))\
+    \ * M2INV_FP3;\n            let x4 = (((e4 - Fp4::raw(x1.val())) * M1INV_FP4 -\
+    \ Fp4::raw(x2.val())) * M2INV_FP4\n                - Fp4::raw(x3.val()))\n   \
+    \             * M3INV_FP4;\n            let x5 = ((((e5 - Fp5::raw(x1.val()))\
     \ * M1INV_FP5 - Fp5::raw(x2.val())) * M2INV_FP5\n                - Fp5::raw(x3.val()))\n\
     \                * M3INV_FP5\n                - Fp5::raw(x4.val()))\n        \
     \        * M4INV_FP5;\n            (x1.val() as u64)\n                .wrapping_add((x2.val()\
@@ -76,7 +86,7 @@ data:
   isVerificationFile: false
   path: crates/convolution/convolution-u64/src/lib.rs
   requiredBy: []
-  timestamp: '2024-12-24 03:04:37+00:00'
+  timestamp: '2024-12-25 07:02:27+00:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/convolution_mod_2_64/src/main.rs
