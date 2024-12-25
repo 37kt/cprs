@@ -15,7 +15,7 @@ where
         let w = 1 << i;
         for p in (0..n).step_by(w * 2) {
             for s in p..p + w {
-                let t = s | 1 << i;
+                let t = s | w;
                 for d in 0..=logn {
                     b[t][d] = b[t][d] + b[s][d];
                 }
@@ -25,10 +25,11 @@ where
     b
 }
 
-pub fn ranked_moebius<T>(mut a: Vec<[T; 21]>) -> Vec<T>
+pub fn ranked_moebius<T>(a: &[[T; 21]]) -> Vec<T>
 where
     T: Default + Copy + Add<Output = T> + Sub<Output = T> + Mul<Output = T>,
 {
+    let mut a = a.to_vec();
     let n = a.len();
     let logn = 63 - n.leading_zeros() as usize;
     assert_eq!(1 << logn, n);
@@ -36,7 +37,7 @@ where
         let w = 1 << i;
         for p in (0..n).step_by(w * 2) {
             for s in p..p + w {
-                let t = s | 1 << i;
+                let t = s | w;
                 for d in 0..=logn {
                     a[t][d] = a[t][d] - a[s][d];
                 }
@@ -49,6 +50,20 @@ where
         .collect()
 }
 
+/// Subset Convolution
+///
+/// # 概要
+/// - 2つの配列 `a`, `b` に対し、以下の式で定義される畳み込みを計算する：
+/// ```text
+/// res[s] = Σ_{t⊆s} (a[t] * b[s\t])
+/// ```
+///
+/// # 引数
+/// - `a`: 1つ目の配列
+/// - `b`: 2つ目の配列
+///
+/// # 戻り値
+/// - Subset Convolution の結果
 pub fn subset_convolution<T>(a: &[T], b: &[T]) -> Vec<T>
 where
     T: Default + Copy + Add<Output = T> + Sub<Output = T> + Mul<Output = T>,
@@ -66,5 +81,5 @@ where
             f[d] = x;
         }
     }
-    ranked_moebius(ra)
+    ranked_moebius(&ra)
 }

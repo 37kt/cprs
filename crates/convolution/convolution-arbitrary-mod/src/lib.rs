@@ -33,6 +33,22 @@ const M1INV_FP2: Fp2 = Fp2::raw(inv(M1, M2));
 const M1INV_FP3: Fp3 = Fp3::raw(inv(M1, M3));
 const M2INV_FP3: Fp3 = Fp3::raw(inv(M2, M3));
 
+/// 任意の法に対する畳み込みを計算する
+///
+/// # 概要
+/// 2つの配列 `a`, `b` に対し、任意の法での畳み込みを計算する。  
+/// 内部では Chinese Remainder Theorem (CRT) を用いて3つの素数法での畳み込みから復元する。
+///
+/// # 引数
+/// - `a`: 1つ目の配列
+/// - `b`: 2つ目の配列
+///
+/// # 戻り値
+/// - 畳み込みの結果（長さは `a.len() + b.len() - 1`）
+///
+/// # 計算量
+/// - O(N log N)
+///   - N: max(a.len(), b.len())
 pub fn convolution_arbitrary_mod<T: ModInt>(a: &[T], b: &[T]) -> Vec<T> {
     if a.len().min(b.len()) < 60 {
         return convolution_naive(a, b);

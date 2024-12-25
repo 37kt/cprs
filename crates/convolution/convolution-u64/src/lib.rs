@@ -47,6 +47,22 @@ const P_M1M2: u64 = P_M1.wrapping_mul(M2 as u64);
 const P_M1M2M3: u64 = P_M1M2.wrapping_mul(M3 as u64);
 const P_M1M2M3M4: u64 = P_M1M2M3.wrapping_mul(M4 as u64);
 
+/// u64 に対する畳み込みを計算する
+///
+/// # 概要
+/// 2つの配列 `a`, `b` に対し、u64 での畳み込みを計算する。  
+/// 内部では Chinese Remainder Theorem (CRT) を用いて5つの素数法での畳み込みから復元する。
+///
+/// # 引数
+/// - `a`: 1つ目の配列
+/// - `b`: 2つ目の配列
+///
+/// # 戻り値
+/// - 畳み込みの結果（長さは `a.len() + b.len() - 1`）
+///
+/// # 計算量
+/// - O(N log N)
+///   - N: max(a.len(), b.len())
 pub fn convolution_u64(a: &[u64], b: &[u64]) -> Vec<u64> {
     if a.is_empty() || b.is_empty() {
         return vec![];

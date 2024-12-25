@@ -1,6 +1,17 @@
 use convolution_naive::convolution_naive;
 use modint::StaticModInt;
 
+/// 数論変換 (Number Theoretic Transform)
+///
+/// # 引数
+/// - `a`: 入力配列。長さは2の冪乗である必要がある
+///
+/// # 計算量
+/// - O(N log N)
+///   - N: 配列の長さ
+///
+/// # 注意
+/// - 法は NTT-friendly (P-1 の素因数に 2 を多く含む) である必要がある
 pub fn ntt<const P: u32>(a: &mut [StaticModInt<P>]) {
     assert!(StaticModInt::<P>::IS_NTT_FRIENDLY);
     let n = a.len();
@@ -58,6 +69,18 @@ pub fn ntt<const P: u32>(a: &mut [StaticModInt<P>]) {
     }
 }
 
+/// 数論変換の逆変換
+/// 最後に配列長 N で割る
+///
+/// # 引数
+/// - `a`: 入力配列。長さは2の冪乗である必要がある
+///
+/// # 計算量
+/// - O(N log N)
+///   - N: 配列の長さ
+///
+/// # 注意
+/// - 法は NTT-friendly (P-1 の素因数に 2 を多く含む) である必要がある
 pub fn ntt_inv<const P: u32>(a: &mut [StaticModInt<P>]) {
     assert!(StaticModInt::<P>::IS_NTT_FRIENDLY);
     let n = a.len();
@@ -126,6 +149,7 @@ pub fn ntt_inv<const P: u32>(a: &mut [StaticModInt<P>]) {
     }
 }
 
+/// 長さ n の DFT を長さ 2n の DFT に変換する
 pub fn ntt_doubling<const P: u32>(a: &mut Vec<StaticModInt<P>>) {
     let n = a.len();
     a.append(&mut a.clone());
@@ -139,6 +163,27 @@ pub fn ntt_doubling<const P: u32>(a: &mut Vec<StaticModInt<P>>) {
     ntt(&mut a[n..]);
 }
 
+/// 配列の畳み込み
+///
+/// # 概要
+/// 2つの配列 `a`, `b` に対し、以下の式で定義される畳み込みを計算する：
+/// ```text
+/// res[k] = Σ_{i + j = k} (a[i] * b[j])
+/// ```
+///
+/// # 引数
+/// - `a`: 入力配列
+/// - `b`: 入力配列
+///
+/// # 戻り値
+/// - 畳み込みの結果
+///
+/// # 計算量
+/// - O(N log N)
+///   - N: 配列の長さ
+///
+/// # 注意
+/// - 法は NTT-friendly (P-1 の素因数に 2 を多く含む) である必要がある
 pub fn convolution_ntt_friendly<const P: u32>(
     mut a: Vec<StaticModInt<P>>,
     mut b: Vec<StaticModInt<P>>,

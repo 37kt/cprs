@@ -1,5 +1,17 @@
 use std::ops::{Add, Div, DivAssign, MulAssign, Sub};
 
+/// 高速アダマール変換
+///
+/// # 概要
+/// - 配列 `a` に対し、以下の式で定義される変換を計算する：
+/// ```text
+/// a[i] = Σ_{j=0}^{n-1} a[j] * (-1)^{popcount(i&j)}
+/// ```
+/// - 逆変換のあとに n で割る
+///
+/// # 引数
+/// - `a`: 入力配列
+/// - `inv`: 逆変換の場合は `true`
 pub fn hadamard<T>(a: &mut [T], inv: bool)
 where
     T: Clone
@@ -40,6 +52,14 @@ where
     }
 }
 
+/// XOR 畳み込み
+///
+/// # 概要
+/// - 2つの配列 `a`, `b` に対し、以下の式で定義される畳み込みを計算する：
+/// ```text
+/// res[k] = Σ_{k=i^j} (a[i] * b[j])
+/// ```
+/// - 計算量は O(N log N)
 pub fn xor_convolution<T>(mut a: Vec<T>, mut b: Vec<T>) -> Vec<T>
 where
     T: Clone
