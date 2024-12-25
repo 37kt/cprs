@@ -33,7 +33,7 @@ data:
   isVerificationFile: true
   path: verify/persistent_unionfind/src/main.rs
   requiredBy: []
-  timestamp: '2023-05-08 17:12:04+09:00'
+  timestamp: '2024-12-25 10:01:29+00:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/persistent_unionfind/src/main.rs

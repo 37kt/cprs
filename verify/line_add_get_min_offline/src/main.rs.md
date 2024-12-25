@@ -38,7 +38,7 @@ data:
   isVerificationFile: true
   path: verify/line_add_get_min_offline/src/main.rs
   requiredBy: []
-  timestamp: '2023-05-16 16:25:17+09:00'
+  timestamp: '2024-12-25 10:01:29+00:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/line_add_get_min_offline/src/main.rs
