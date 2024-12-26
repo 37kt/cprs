@@ -57,8 +57,9 @@ data:
   - verify/biconnected_components/src/main.rs
 documentation_of: crates/graph/extended-block-cut-tree/src/lib.rs
 layout: document
-redirect_from:
-- /library/crates/graph/extended-block-cut-tree/src/lib.rs
-- /library/crates/graph/extended-block-cut-tree/src/lib.rs.html
-title: crates/graph/extended-block-cut-tree/src/lib.rs
+title: "\u62E1\u5F35\u3000Block-Cut Tree"
 ---
+
+## 拡張 Block-Cut Tree
+
+![extended-block-cut-tree](./ebct.jpg)
