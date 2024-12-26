@@ -18,100 +18,126 @@ data:
     \  File \"/opt/hostedtoolcache/Python/3.12.8/x64/lib/python3.12/site-packages/onlinejudge_verify/languages/rust.py\"\
     , line 288, in bundle\n    raise NotImplementedError\nNotImplementedError\n"
   code: "use std::ops::{Bound, RangeBounds};\n\ntype T = i64;\nconst INF: T = std::i64::MAX\
-    \ / 2;\n\n#[derive(Clone)]\npub struct SegtreeBeats {\n    n: usize,\n    max_v:\
-    \ Vec<T>,\n    smax_v: Vec<T>,\n    max_c: Vec<T>,\n    min_v: Vec<T>,\n    smin_v:\
-    \ Vec<T>,\n    min_c: Vec<T>,\n    sum: Vec<T>,\n    len: Vec<T>,\n    ladd: Vec<T>,\n\
-    \    lval: Vec<T>,\n}\n\nimpl From<&[T]> for SegtreeBeats {\n    fn from(a: &[T])\
-    \ -> Self {\n        let mut n = 1;\n        while n < a.len() {\n           \
-    \ n *= 2;\n        }\n\n        let mut max_v = vec![0; n * 2];\n        let mut\
-    \ smax_v = vec![0; n * 2];\n        let mut max_c = vec![0; n * 2];\n        let\
-    \ mut min_v = vec![0; n * 2];\n        let mut smin_v = vec![0; n * 2];\n    \
-    \    let mut min_c = vec![0; n * 2];\n        let mut sum = vec![0; n * 2];\n\
-    \        let mut len = vec![0; n * 2];\n        let ladd = vec![0; n * 2];\n \
-    \       let lval = vec![INF; n * 2];\n\n        len[0] = n as i64;\n        for\
-    \ i in 0..n - 1 {\n            len[i * 2 + 1] = len[i] / 2;\n            len[i\
-    \ * 2 + 2] = len[i] / 2;\n        }\n\n        for i in 0..a.len() {\n       \
-    \     max_v[n - 1 + i] = a[i];\n            min_v[n - 1 + i] = a[i];\n       \
-    \     sum[n - 1 + i] = a[i];\n            smax_v[n - 1 + i] = -INF;\n        \
-    \    smin_v[n - 1 + i] = INF;\n            max_c[n - 1 + i] = 1;\n           \
-    \ min_c[n - 1 + i] = 1;\n        }\n\n        for i in a.len()..n {\n        \
-    \    max_v[n - 1 + i] = -INF;\n            smax_v[n - 1 + i] = -INF;\n       \
-    \     min_v[n - 1 + i] = INF;\n            smin_v[n - 1 + i] = INF;\n        }\n\
-    \n        let mut seg = SegtreeBeats {\n            n,\n            max_v,\n \
-    \           smax_v,\n            max_c,\n            min_v,\n            smin_v,\n\
-    \            min_c,\n            sum,\n            len,\n            ladd,\n \
-    \           lval,\n        };\n\n        for i in (0..n - 1).rev() {\n       \
-    \     seg.update(i);\n        }\n\n        seg\n    }\n}\n\nimpl SegtreeBeats\
-    \ {\n    pub fn new(n: usize) -> Self {\n        Self::from(vec![0; n].as_slice())\n\
-    \    }\n\n    pub fn chmin<R>(&mut self, range: R, x: T)\n    where\n        R:\
-    \ RangeBounds<usize>,\n    {\n        let (a, b) = self.range_to_pair(range);\n\
-    \        self.chmin_(x, a, b, 0, 0, self.n);\n    }\n\n    pub fn chmax<R>(&mut\
-    \ self, range: R, x: T)\n    where\n        R: RangeBounds<usize>,\n    {\n  \
-    \      let (a, b) = self.range_to_pair(range);\n        self.chmax_(x, a, b, 0,\
-    \ 0, self.n);\n    }\n\n    pub fn add<R>(&mut self, range: R, x: T)\n    where\n\
-    \        R: RangeBounds<usize>,\n    {\n        let (a, b) = self.range_to_pair(range);\n\
-    \        self.add_(x, a, b, 0, 0, self.n);\n    }\n\n    pub fn set<R>(&mut self,\
-    \ range: R, x: T)\n    where\n        R: RangeBounds<usize>,\n    {\n        let\
-    \ (a, b) = self.range_to_pair(range);\n        self.set_(x, a, b, 0, 0, self.n);\n\
-    \    }\n\n    pub fn max<R>(&mut self, range: R) -> T\n    where\n        R: RangeBounds<usize>,\n\
+    \ / 2;\n\n/// Segment Tree Beats!\n/// \u533A\u9593\u52A0\u7B97\u3001\u533A\u9593\
+    chmin\u3001\u533A\u9593chmax\u3001\u533A\u9593\u6700\u5927\u5024\u3001\u533A\u9593\
+    \u6700\u5C0F\u5024\u3001\u533A\u9593\u548C\n#[derive(Clone)]\npub struct SegtreeBeats\
+    \ {\n    n: usize,\n    max_v: Vec<T>,\n    smax_v: Vec<T>,\n    max_c: Vec<T>,\n\
+    \    min_v: Vec<T>,\n    smin_v: Vec<T>,\n    min_c: Vec<T>,\n    sum: Vec<T>,\n\
+    \    len: Vec<T>,\n    ladd: Vec<T>,\n    lval: Vec<T>,\n}\n\nimpl From<&[T]>\
+    \ for SegtreeBeats {\n    /// \u9577\u3055 n \u306E\u5217\u3092 a \u3067\u521D\
+    \u671F\u5316\u3059\u308B\u3002\n    ///\n    /// # \u5F15\u6570\n    ///\n   \
+    \ /// - `a`: \u521D\u671F\u5316\u3059\u308B\u5217\n    ///\n    /// # \u8A08\u7B97\
+    \u91CF\n    ///\n    /// O(N)\n    fn from(a: &[T]) -> Self {\n        let mut\
+    \ n = 1;\n        while n < a.len() {\n            n *= 2;\n        }\n\n    \
+    \    let mut max_v = vec![0; n * 2];\n        let mut smax_v = vec![0; n * 2];\n\
+    \        let mut max_c = vec![0; n * 2];\n        let mut min_v = vec![0; n *\
+    \ 2];\n        let mut smin_v = vec![0; n * 2];\n        let mut min_c = vec![0;\
+    \ n * 2];\n        let mut sum = vec![0; n * 2];\n        let mut len = vec![0;\
+    \ n * 2];\n        let ladd = vec![0; n * 2];\n        let lval = vec![INF; n\
+    \ * 2];\n\n        len[0] = n as i64;\n        for i in 0..n - 1 {\n         \
+    \   len[i * 2 + 1] = len[i] / 2;\n            len[i * 2 + 2] = len[i] / 2;\n \
+    \       }\n\n        for i in 0..a.len() {\n            max_v[n - 1 + i] = a[i];\n\
+    \            min_v[n - 1 + i] = a[i];\n            sum[n - 1 + i] = a[i];\n  \
+    \          smax_v[n - 1 + i] = -INF;\n            smin_v[n - 1 + i] = INF;\n \
+    \           max_c[n - 1 + i] = 1;\n            min_c[n - 1 + i] = 1;\n       \
+    \ }\n\n        for i in a.len()..n {\n            max_v[n - 1 + i] = -INF;\n \
+    \           smax_v[n - 1 + i] = -INF;\n            min_v[n - 1 + i] = INF;\n \
+    \           smin_v[n - 1 + i] = INF;\n        }\n\n        let mut seg = SegtreeBeats\
+    \ {\n            n,\n            max_v,\n            smax_v,\n            max_c,\n\
+    \            min_v,\n            smin_v,\n            min_c,\n            sum,\n\
+    \            len,\n            ladd,\n            lval,\n        };\n\n      \
+    \  for i in (0..n - 1).rev() {\n            seg.update(i);\n        }\n\n    \
+    \    seg\n    }\n}\n\nimpl SegtreeBeats {\n    /// \u9577\u3055 n \u306E\u5217\
+    \u3092 0 \u3067\u521D\u671F\u5316\u3059\u308B\u3002\n    ///\n    /// # \u5F15\
+    \u6570\n    ///\n    /// - `n`: \u5217\u306E\u9577\u3055\n    ///\n    /// # \u8A08\
+    \u7B97\u91CF\n    ///\n    /// O(N)\n    pub fn new(n: usize) -> Self {\n    \
+    \    Self::from(vec![0; n].as_slice())\n    }\n\n    /// \u533A\u9593 chmin\n\
+    \    ///\n    /// # \u5F15\u6570\n    ///\n    /// - `range`: \u533A\u9593\n \
+    \   /// - `x`: \u66F4\u65B0\u3059\u308B\u5024\n    ///\n    /// # \u8A08\u7B97\
+    \u91CF\n    ///\n    /// O(log N)\n    pub fn chmin<R>(&mut self, range: R, x:\
+    \ T)\n    where\n        R: RangeBounds<usize>,\n    {\n        let (a, b) = self.range_to_pair(range);\n\
+    \        self.chmin_(x, a, b, 0, 0, self.n);\n    }\n\n    /// \u533A\u9593 chmax\n\
+    \    ///\n    /// # \u5F15\u6570\n    ///\n    /// - `range`: \u533A\u9593\n \
+    \   /// - `x`: \u66F4\u65B0\u3059\u308B\u5024\n    ///\n    /// # \u8A08\u7B97\
+    \u91CF\n    ///\n    /// O(log N)\n    pub fn chmax<R>(&mut self, range: R, x:\
+    \ T)\n    where\n        R: RangeBounds<usize>,\n    {\n        let (a, b) = self.range_to_pair(range);\n\
+    \        self.chmax_(x, a, b, 0, 0, self.n);\n    }\n\n    /// \u533A\u9593\u52A0\
+    \u7B97\n    ///\n    /// # \u5F15\u6570\n    ///\n    /// - `range`: \u533A\u9593\
+    \n    /// - `x`: \u52A0\u7B97\u3059\u308B\u5024\n    ///\n    /// # \u8A08\u7B97\
+    \u91CF\n    ///\n    /// O(log N)\n    pub fn add<R>(&mut self, range: R, x: T)\n\
+    \    where\n        R: RangeBounds<usize>,\n    {\n        let (a, b) = self.range_to_pair(range);\n\
+    \        self.add_(x, a, b, 0, 0, self.n);\n    }\n\n    /// \u533A\u9593\u66F4\
+    \u65B0\n    ///\n    /// # \u5F15\u6570\n    ///\n    /// - `range`: \u533A\u9593\
+    \n    /// - `x`: \u66F4\u65B0\u3059\u308B\u5024\n    ///\n    /// # \u8A08\u7B97\
+    \u91CF\n    ///\n    /// O(log N)\n    pub fn set<R>(&mut self, range: R, x: T)\n\
+    \    where\n        R: RangeBounds<usize>,\n    {\n        let (a, b) = self.range_to_pair(range);\n\
+    \        self.set_(x, a, b, 0, 0, self.n);\n    }\n\n    /// \u533A\u9593\u6700\
+    \u5927\u5024\n    ///\n    /// # \u5F15\u6570\n    ///\n    /// - `range`: \u533A\
+    \u9593\n    ///\n    /// # \u8A08\u7B97\u91CF\n    ///\n    /// O(log N)\n   \
+    \ pub fn max<R>(&mut self, range: R) -> T\n    where\n        R: RangeBounds<usize>,\n\
     \    {\n        let (a, b) = self.range_to_pair(range);\n        self.max_(a,\
-    \ b, 0, 0, self.n)\n    }\n\n    pub fn min<R>(&mut self, range: R) -> T\n   \
-    \ where\n        R: RangeBounds<usize>,\n    {\n        let (a, b) = self.range_to_pair(range);\n\
-    \        self.min_(a, b, 0, 0, self.n)\n    }\n\n    pub fn sum<R>(&mut self,\
-    \ range: R) -> T\n    where\n        R: RangeBounds<usize>,\n    {\n        let\
-    \ (a, b) = self.range_to_pair(range);\n        self.sum_(a, b, 0, 0, self.n)\n\
-    \    }\n\n    fn update_node_max(&mut self, k: usize, x: T) {\n        self.sum[k]\
-    \ += (x - self.max_v[k]) * self.max_c[k];\n\n        if self.max_v[k] == self.min_v[k]\
-    \ {\n            self.max_v[k] = x;\n            self.min_v[k] = x;\n        }\
-    \ else if self.max_v[k] == self.smin_v[k] {\n            self.max_v[k] = x;\n\
-    \            self.smin_v[k] = x;\n        } else {\n            self.max_v[k]\
-    \ = x;\n        }\n\n        if self.lval[k] != INF && x < self.lval[k] {\n  \
-    \          self.lval[k] = x;\n        }\n    }\n\n    fn update_node_min(&mut\
-    \ self, k: usize, x: T) {\n        self.sum[k] += (x - self.min_v[k]) * self.min_c[k];\n\
+    \ b, 0, 0, self.n)\n    }\n\n    /// \u533A\u9593\u6700\u5C0F\u5024\n    ///\n\
+    \    /// # \u5F15\u6570\n    ///\n    /// - `range`: \u533A\u9593\n    ///\n \
+    \   /// # \u8A08\u7B97\u91CF\n    ///\n    /// O(log N)\n    pub fn min<R>(&mut\
+    \ self, range: R) -> T\n    where\n        R: RangeBounds<usize>,\n    {\n   \
+    \     let (a, b) = self.range_to_pair(range);\n        self.min_(a, b, 0, 0, self.n)\n\
+    \    }\n\n    /// \u533A\u9593\u548C\n    ///\n    /// # \u5F15\u6570\n    ///\n\
+    \    /// - `range`: \u533A\u9593\n    ///\n    /// # \u8A08\u7B97\u91CF\n    ///\n\
+    \    /// O(log N)\n    pub fn sum<R>(&mut self, range: R) -> T\n    where\n  \
+    \      R: RangeBounds<usize>,\n    {\n        let (a, b) = self.range_to_pair(range);\n\
+    \        self.sum_(a, b, 0, 0, self.n)\n    }\n\n    fn update_node_max(&mut self,\
+    \ k: usize, x: T) {\n        self.sum[k] += (x - self.max_v[k]) * self.max_c[k];\n\
     \n        if self.max_v[k] == self.min_v[k] {\n            self.max_v[k] = x;\n\
-    \            self.min_v[k] = x;\n        } else if self.smax_v[k] == self.min_v[k]\
-    \ {\n            self.min_v[k] = x;\n            self.smax_v[k] = x;\n       \
-    \ } else {\n            self.min_v[k] = x;\n        }\n\n        if self.lval[k]\
-    \ != INF && self.lval[k] < x {\n            self.lval[k] = x;\n        }\n   \
-    \ }\n\n    fn add_all(&mut self, k: usize, x: T) {\n        self.max_v[k] += x;\n\
-    \        if self.smax_v[k] != -INF {\n            self.smax_v[k] += x;\n     \
-    \   }\n        self.min_v[k] += x;\n        if self.smin_v[k] != INF {\n     \
-    \       self.smin_v[k] += x;\n        }\n\n        self.sum[k] += self.len[k]\
-    \ * x;\n        if self.lval[k] != INF {\n            self.lval[k] += x;\n   \
-    \     } else {\n            self.ladd[k] += x;\n        }\n    }\n\n    fn set_all(&mut\
-    \ self, k: usize, x: T) {\n        self.max_v[k] = x;\n        self.smax_v[k]\
-    \ = -INF;\n        self.min_v[k] = x;\n        self.smin_v[k] = INF;\n       \
-    \ self.max_c[k] = self.len[k];\n        self.min_c[k] = self.len[k];\n\n     \
-    \   self.sum[k] = x * self.len[k];\n        self.lval[k] = x;\n        self.ladd[k]\
-    \ = 0;\n    }\n\n    fn push(&mut self, k: usize) {\n        if self.n - 1 <=\
-    \ k {\n            return;\n        }\n\n        if self.lval[k] != INF {\n  \
-    \          self.set_all(k * 2 + 1, self.lval[k]);\n            self.set_all(k\
-    \ * 2 + 2, self.lval[k]);\n            self.lval[k] = INF;\n            return;\n\
-    \        }\n\n        if self.ladd[k] != 0 {\n            self.add_all(k * 2 +\
-    \ 1, self.ladd[k]);\n            self.add_all(k * 2 + 2, self.ladd[k]);\n    \
-    \        self.ladd[k] = 0;\n        }\n\n        if self.max_v[k] < self.max_v[k\
-    \ * 2 + 1] {\n            self.update_node_max(k * 2 + 1, self.max_v[k]);\n  \
-    \      }\n        if self.min_v[k * 2 + 1] < self.min_v[k] {\n            self.update_node_min(k\
-    \ * 2 + 1, self.min_v[k]);\n        }\n\n        if self.max_v[k] < self.max_v[k\
-    \ * 2 + 2] {\n            self.update_node_max(k * 2 + 2, self.max_v[k]);\n  \
-    \      }\n        if self.min_v[k * 2 + 2] < self.min_v[k] {\n            self.update_node_min(k\
-    \ * 2 + 2, self.min_v[k]);\n        }\n    }\n\n    fn update(&mut self, k: usize)\
-    \ {\n        self.sum[k] = self.sum[k * 2 + 1] + self.sum[k * 2 + 2];\n\n    \
-    \    if self.max_v[k * 2 + 1] < self.max_v[k * 2 + 2] {\n            self.max_v[k]\
-    \ = self.max_v[k * 2 + 2];\n            self.max_c[k] = self.max_c[k * 2 + 2];\n\
-    \            self.smax_v[k] = self.max_v[k * 2 + 1].max(self.smax_v[k * 2 + 2]);\n\
-    \        } else if self.max_v[k * 2 + 1] > self.max_v[k * 2 + 2] {\n         \
-    \   self.max_v[k] = self.max_v[k * 2 + 1];\n            self.max_c[k] = self.max_c[k\
-    \ * 2 + 1];\n            self.smax_v[k] = self.smax_v[k * 2 + 1].max(self.max_v[k\
-    \ * 2 + 2]);\n        } else {\n            self.max_v[k] = self.max_v[k * 2 +\
-    \ 1];\n            self.max_c[k] = self.max_c[k * 2 + 1] + self.max_c[k * 2 +\
-    \ 2];\n            self.smax_v[k] = self.smax_v[k * 2 + 1].max(self.smax_v[k *\
-    \ 2 + 2]);\n        }\n\n        if self.min_v[k * 2 + 1] < self.min_v[k * 2 +\
-    \ 2] {\n            self.min_v[k] = self.min_v[k * 2 + 1];\n            self.min_c[k]\
-    \ = self.min_c[k * 2 + 1];\n            self.smin_v[k] = self.smin_v[k * 2 + 1].min(self.min_v[k\
-    \ * 2 + 2]);\n        } else if self.min_v[k * 2 + 1] > self.min_v[k * 2 + 2]\
-    \ {\n            self.min_v[k] = self.min_v[k * 2 + 2];\n            self.min_c[k]\
-    \ = self.min_c[k * 2 + 2];\n            self.smin_v[k] = self.min_v[k * 2 + 1].min(self.smin_v[k\
+    \            self.min_v[k] = x;\n        } else if self.max_v[k] == self.smin_v[k]\
+    \ {\n            self.max_v[k] = x;\n            self.smin_v[k] = x;\n       \
+    \ } else {\n            self.max_v[k] = x;\n        }\n\n        if self.lval[k]\
+    \ != INF && x < self.lval[k] {\n            self.lval[k] = x;\n        }\n   \
+    \ }\n\n    fn update_node_min(&mut self, k: usize, x: T) {\n        self.sum[k]\
+    \ += (x - self.min_v[k]) * self.min_c[k];\n\n        if self.max_v[k] == self.min_v[k]\
+    \ {\n            self.max_v[k] = x;\n            self.min_v[k] = x;\n        }\
+    \ else if self.smax_v[k] == self.min_v[k] {\n            self.min_v[k] = x;\n\
+    \            self.smax_v[k] = x;\n        } else {\n            self.min_v[k]\
+    \ = x;\n        }\n\n        if self.lval[k] != INF && self.lval[k] < x {\n  \
+    \          self.lval[k] = x;\n        }\n    }\n\n    fn add_all(&mut self, k:\
+    \ usize, x: T) {\n        self.max_v[k] += x;\n        if self.smax_v[k] != -INF\
+    \ {\n            self.smax_v[k] += x;\n        }\n        self.min_v[k] += x;\n\
+    \        if self.smin_v[k] != INF {\n            self.smin_v[k] += x;\n      \
+    \  }\n\n        self.sum[k] += self.len[k] * x;\n        if self.lval[k] != INF\
+    \ {\n            self.lval[k] += x;\n        } else {\n            self.ladd[k]\
+    \ += x;\n        }\n    }\n\n    fn set_all(&mut self, k: usize, x: T) {\n   \
+    \     self.max_v[k] = x;\n        self.smax_v[k] = -INF;\n        self.min_v[k]\
+    \ = x;\n        self.smin_v[k] = INF;\n        self.max_c[k] = self.len[k];\n\
+    \        self.min_c[k] = self.len[k];\n\n        self.sum[k] = x * self.len[k];\n\
+    \        self.lval[k] = x;\n        self.ladd[k] = 0;\n    }\n\n    fn push(&mut\
+    \ self, k: usize) {\n        if self.n - 1 <= k {\n            return;\n     \
+    \   }\n\n        if self.lval[k] != INF {\n            self.set_all(k * 2 + 1,\
+    \ self.lval[k]);\n            self.set_all(k * 2 + 2, self.lval[k]);\n       \
+    \     self.lval[k] = INF;\n            return;\n        }\n\n        if self.ladd[k]\
+    \ != 0 {\n            self.add_all(k * 2 + 1, self.ladd[k]);\n            self.add_all(k\
+    \ * 2 + 2, self.ladd[k]);\n            self.ladd[k] = 0;\n        }\n\n      \
+    \  if self.max_v[k] < self.max_v[k * 2 + 1] {\n            self.update_node_max(k\
+    \ * 2 + 1, self.max_v[k]);\n        }\n        if self.min_v[k * 2 + 1] < self.min_v[k]\
+    \ {\n            self.update_node_min(k * 2 + 1, self.min_v[k]);\n        }\n\n\
+    \        if self.max_v[k] < self.max_v[k * 2 + 2] {\n            self.update_node_max(k\
+    \ * 2 + 2, self.max_v[k]);\n        }\n        if self.min_v[k * 2 + 2] < self.min_v[k]\
+    \ {\n            self.update_node_min(k * 2 + 2, self.min_v[k]);\n        }\n\
+    \    }\n\n    fn update(&mut self, k: usize) {\n        self.sum[k] = self.sum[k\
+    \ * 2 + 1] + self.sum[k * 2 + 2];\n\n        if self.max_v[k * 2 + 1] < self.max_v[k\
+    \ * 2 + 2] {\n            self.max_v[k] = self.max_v[k * 2 + 2];\n           \
+    \ self.max_c[k] = self.max_c[k * 2 + 2];\n            self.smax_v[k] = self.max_v[k\
+    \ * 2 + 1].max(self.smax_v[k * 2 + 2]);\n        } else if self.max_v[k * 2 +\
+    \ 1] > self.max_v[k * 2 + 2] {\n            self.max_v[k] = self.max_v[k * 2 +\
+    \ 1];\n            self.max_c[k] = self.max_c[k * 2 + 1];\n            self.smax_v[k]\
+    \ = self.smax_v[k * 2 + 1].max(self.max_v[k * 2 + 2]);\n        } else {\n   \
+    \         self.max_v[k] = self.max_v[k * 2 + 1];\n            self.max_c[k] =\
+    \ self.max_c[k * 2 + 1] + self.max_c[k * 2 + 2];\n            self.smax_v[k] =\
+    \ self.smax_v[k * 2 + 1].max(self.smax_v[k * 2 + 2]);\n        }\n\n        if\
+    \ self.min_v[k * 2 + 1] < self.min_v[k * 2 + 2] {\n            self.min_v[k] =\
+    \ self.min_v[k * 2 + 1];\n            self.min_c[k] = self.min_c[k * 2 + 1];\n\
+    \            self.smin_v[k] = self.smin_v[k * 2 + 1].min(self.min_v[k * 2 + 2]);\n\
+    \        } else if self.min_v[k * 2 + 1] > self.min_v[k * 2 + 2] {\n         \
+    \   self.min_v[k] = self.min_v[k * 2 + 2];\n            self.min_c[k] = self.min_c[k\
+    \ * 2 + 2];\n            self.smin_v[k] = self.min_v[k * 2 + 1].min(self.smin_v[k\
     \ * 2 + 2]);\n        } else {\n            self.min_v[k] = self.min_v[k * 2 +\
     \ 1];\n            self.min_c[k] = self.min_c[k * 2 + 1] + self.min_c[k * 2 +\
     \ 2];\n            self.smin_v[k] = self.smin_v[k * 2 + 1].min(self.smin_v[k *\
@@ -164,7 +190,7 @@ data:
   isVerificationFile: false
   path: crates/data-structure/segtree-beats/src/lib.rs
   requiredBy: []
-  timestamp: '2023-04-21 11:20:46+09:00'
+  timestamp: '2024-12-26 06:54:01+00:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/range_chmin_chmax_add_range_sum/src/main.rs

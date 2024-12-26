@@ -22,7 +22,9 @@ data:
     , line 288, in bundle\n    raise NotImplementedError\nNotImplementedError\n"
   code: "use std::{cmp::Reverse, collections::BinaryHeap, ops::Add};\n\nuse graph::Graph;\n\
     \npub struct DijkstraResult<T>\nwhere\n    T: Clone + Ord + Add<Output = T> +\
-    \ Default,\n{\n    pub dist: Vec<T>,\n    pub prev: Vec<usize>,\n}\n\npub fn dijkstra<V,\
+    \ Default,\n{\n    pub dist: Vec<T>,\n    pub prev: Vec<usize>,\n}\n\n/// \u30C0\
+    \u30A4\u30AF\u30B9\u30C8\u30E9\u6CD5  \n/// \u59CB\u70B9\u96C6\u5408\u304B\u3089\
+    \u306E\u6700\u77ED\u8DDD\u96E2\u3092\u6C42\u3081\u308B\u3002\npub fn dijkstra<V,\
     \ T>(g: &Graph<V, T>, starts: &[usize], inf: T) -> DijkstraResult<T>\nwhere\n\
     \    V: Clone,\n    T: Clone + Ord + Add<Output = T> + Default,\n{\n    assert!(starts.len()\
     \ > 0);\n    let mut dist = vec![inf.clone(); g.len()];\n    let mut prev = vec![!0;\
@@ -35,17 +37,20 @@ data:
     \             prev[*u] = v;\n                pq.push(Reverse((dist[*u].clone(),\
     \ *u)));\n            }\n        }\n    }\n    DijkstraResult { dist, prev }\n\
     }\n\nimpl<T> DijkstraResult<T>\nwhere\n    T: Clone + Ord + Add<Output = T> +\
-    \ Default,\n{\n    pub fn path(&self, mut v: usize) -> Option<Vec<usize>> {\n\
-    \        if self.dist[v].clone() != T::default() && self.prev[v] == !0 {\n   \
-    \         return None;\n        }\n        let mut path = vec![];\n        while\
-    \ v != !0 {\n            path.push(v);\n            v = self.prev[v];\n      \
-    \  }\n        path.reverse();\n        Some(path)\n    }\n}\n"
+    \ Default,\n{\n    /// \u7D42\u70B9 v \u307E\u3067\u306E\u6700\u77ED\u7D4C\u8DEF\
+    \u3092\u6C42\u3081\u308B\u3002\n    /// \u7D42\u70B9\u306B\u5230\u9054\u3067\u304D\
+    \u306A\u3044\u5834\u5408\u306F None \u3092\u8FD4\u3059\u3002\n    pub fn path(&self,\
+    \ mut v: usize) -> Option<Vec<usize>> {\n        if self.dist[v].clone() != T::default()\
+    \ && self.prev[v] == !0 {\n            return None;\n        }\n        let mut\
+    \ path = vec![];\n        while v != !0 {\n            path.push(v);\n       \
+    \     v = self.prev[v];\n        }\n        path.reverse();\n        Some(path)\n\
+    \    }\n}\n"
   dependsOn:
   - crates/graph/graph/src/lib.rs
   isVerificationFile: false
   path: crates/graph/dijkstra/src/lib.rs
   requiredBy: []
-  timestamp: '2024-05-13 10:35:48+09:00'
+  timestamp: '2024-12-26 06:54:01+00:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/shortest_path/src/main.rs

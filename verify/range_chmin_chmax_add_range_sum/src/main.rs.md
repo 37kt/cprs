@@ -36,7 +36,7 @@ data:
   isVerificationFile: true
   path: verify/range_chmin_chmax_add_range_sum/src/main.rs
   requiredBy: []
-  timestamp: '2023-04-21 11:20:46+09:00'
+  timestamp: '2024-12-26 06:54:01+00:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/range_chmin_chmax_add_range_sum/src/main.rs

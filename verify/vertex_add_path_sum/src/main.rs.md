@@ -49,7 +49,7 @@ data:
   isVerificationFile: true
   path: verify/vertex_add_path_sum/src/main.rs
   requiredBy: []
-  timestamp: '2024-12-25 08:18:46+00:00'
+  timestamp: '2024-12-26 06:54:01+00:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/vertex_add_path_sum/src/main.rs

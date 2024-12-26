@@ -23,7 +23,8 @@ data:
     \         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\
     \  File \"/opt/hostedtoolcache/Python/3.12.8/x64/lib/python3.12/site-packages/onlinejudge_verify/languages/rust.py\"\
     , line 288, in bundle\n    raise NotImplementedError\nNotImplementedError\n"
-  code: "use matrix::Matrix;\nuse modint::ModInt;\n\n/// g[i][j] = (i, j) \u306E\u672C\
+  code: "use matrix::Matrix;\nuse modint::ModInt;\n\n/// \u7121\u5411\u5168\u57DF\u6728\
+    \u306E\u500B\u6570\u3092\u6570\u3048\u308B\u3002\n/// g[i][j] = (i, j) \u306E\u672C\
     \u6570\npub fn count_spanning_tree_undirected<M>(g: &[Vec<usize>]) -> M\nwhere\n\
     \    M: ModInt,\n{\n    let n = g.len();\n    assert!(g.iter().all(|v| v.len()\
     \ == n));\n\n    let mut a = Matrix::<M>::from(vec![vec![M::default(); n - 1];\
@@ -39,7 +40,7 @@ data:
   isVerificationFile: false
   path: crates/graph/count-spanning-tree-undirected/src/lib.rs
   requiredBy: []
-  timestamp: '2024-12-24 03:04:37+00:00'
+  timestamp: '2024-12-26 06:54:01+00:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/count_spanning_tree_undirected/src/main.rs

@@ -31,7 +31,7 @@ data:
   isVerificationFile: true
   path: verify/static_range_inversions_query_2/src/main.rs
   requiredBy: []
-  timestamp: '2024-11-17 18:56:30+09:00'
+  timestamp: '2024-12-26 06:54:01+00:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/static_range_inversions_query_2/src/main.rs

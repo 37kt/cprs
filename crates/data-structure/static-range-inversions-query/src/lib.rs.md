@@ -21,14 +21,17 @@ data:
     \  File \"/opt/hostedtoolcache/Python/3.12.8/x64/lib/python3.12/site-packages/onlinejudge_verify/languages/rust.py\"\
     , line 288, in bundle\n    raise NotImplementedError\nNotImplementedError\n"
   code: "use std::{\n    cmp::Ordering,\n    ops::{Bound, RangeBounds},\n};\n\nuse\
-    \ div::{div_ceil, div_floor};\n\n#[derive(Clone)]\npub struct StaticRangeInversionsQuery<T>\n\
+    \ div::{div_ceil, div_floor};\n\n/// \u9759\u7684\u306A\u5217\u306E\u533A\u9593\
+    \u8EE2\u5012\u6570\u30AF\u30A8\u30EA\n\n#[derive(Clone)]\npub struct StaticRangeInversionsQuery<T>\n\
     where\n    T: Copy + PartialOrd,\n{\n    n: usize,\n    block_size: usize,\n \
     \   block_num: usize,\n    sorted: Vec<Vec<(T, usize)>>,\n    inv: Vec<Vec<usize>>,\n\
     \    inv_rev: Vec<Vec<usize>>,\n}\n\nimpl<T> StaticRangeInversionsQuery<T>\nwhere\n\
-    \    T: Copy + PartialOrd + Ord + Default,\n{\n    pub fn new(a: &[T]) -> Self\
-    \ {\n        let n = a.len();\n        let block_size = 1.max((n as f64).sqrt().ceil()\
-    \ as usize * 2);\n        let block_num = 1.max(div_ceil(n, block_size));\n  \
-    \      let mut a = a.to_vec();\n        let max = a.iter().max().copied().unwrap_or_else(T::default);\n\
+    \    T: Copy + PartialOrd + Ord + Default,\n{\n    /// \u9759\u7684\u306A\u5217\
+    \u306E\u533A\u9593\u8EE2\u5012\u6570\u30AF\u30A8\u30EA\u3092\u69CB\u7BC9\u3059\
+    \u308B\u3002\n    ///\n    /// # \u8A08\u7B97\u91CF\n    ///\n    /// O(n \u221A\
+    n)\n    pub fn new(a: &[T]) -> Self {\n        let n = a.len();\n        let block_size\
+    \ = 1.max((n as f64).sqrt().ceil() as usize * 2);\n        let block_num = 1.max(div_ceil(n,\
+    \ block_size));\n        let mut a = a.to_vec();\n        let max = a.iter().max().copied().unwrap_or_else(T::default);\n\
     \        a.extend(std::iter::repeat(max).take(block_num * block_size - a.len()));\n\
     \n        let mut sorted = vec![vec![]; block_num];\n        for block_i in 0..block_num\
     \ {\n            let l = block_i * block_size;\n            let r = (block_i +\
@@ -39,7 +42,9 @@ data:
     \            block_num,\n            sorted,\n            inv: vec![],\n     \
     \       inv_rev: vec![],\n        };\n\n        res.inv = res.build(&a, |x, y|\
     \ x.cmp(y));\n        a.reverse();\n        res.inv_rev = res.build(&a, |x, y|\
-    \ y.cmp(x));\n        res.inv_rev.reverse();\n        res\n    }\n\n    pub fn\
+    \ y.cmp(x));\n        res.inv_rev.reverse();\n        res\n    }\n\n    /// \u533A\
+    \u9593 range \u306E\u8EE2\u5012\u6570\u3092\u53D6\u5F97\u3059\u308B\u3002\n  \
+    \  ///\n    /// # \u8A08\u7B97\u91CF\n    ///\n    /// O(\u221An)\n    pub fn\
     \ inversions(&self, range: impl RangeBounds<usize>) -> usize {\n        let (l,\
     \ r) = self.range_to_pair(range);\n        assert!(l <= r && r <= self.n);\n\n\
     \        let bl = div_floor(l, self.block_size);\n        let br = div_ceil(r,\
@@ -100,7 +105,7 @@ data:
   isVerificationFile: false
   path: crates/data-structure/static-range-inversions-query/src/lib.rs
   requiredBy: []
-  timestamp: '2024-12-22 00:14:04+00:00'
+  timestamp: '2024-12-26 06:54:01+00:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/static_range_inversions_query_2/src/main.rs

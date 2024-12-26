@@ -39,7 +39,7 @@ data:
   isVerificationFile: true
   path: verify/predecessor_problem/src/main.rs
   requiredBy: []
-  timestamp: '2023-05-13 18:34:42+09:00'
+  timestamp: '2024-12-26 06:54:01+00:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/predecessor_problem/src/main.rs

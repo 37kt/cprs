@@ -21,10 +21,13 @@ data:
     \  File \"/opt/hostedtoolcache/Python/3.12.8/x64/lib/python3.12/site-packages/onlinejudge_verify/languages/rust.py\"\
     , line 288, in bundle\n    raise NotImplementedError\nNotImplementedError\n"
   code: "use std::ops::{Bound, RangeBounds};\n\nconst W: usize = 64;\n\n#[derive(Clone)]\n\
-    struct BitVector {\n    bit: Vec<usize>,\n    sum: Vec<usize>,\n}\n\npub struct\
-    \ WaveletMatrix {\n    n: usize,\n    mat: Vec<BitVector>,\n    mid: Vec<usize>,\n\
-    }\n\nimpl WaveletMatrix {\n    pub fn new(mut a: Vec<usize>) -> Self {\n     \
-    \   let n = a.len();\n        let max = a.iter().max().max(Some(&2)).unwrap();\n\
+    struct BitVector {\n    bit: Vec<usize>,\n    sum: Vec<usize>,\n}\n\n/// \u30A6\
+    \u30A7\u30FC\u30D6\u30EC\u30C3\u30C8\u884C\u5217  \n/// \u975E\u8CA0\u6574\u6570\
+    \u5217\u306B\u5BFE\u3059\u308B\u69D8\u3005\u306A\u30AF\u30A8\u30EA\u3092\u51E6\
+    \u7406\u3059\u308B\u3002\npub struct WaveletMatrix {\n    n: usize,\n    mat:\
+    \ Vec<BitVector>,\n    mid: Vec<usize>,\n}\n\nimpl WaveletMatrix {\n    /// \u975E\
+    \u8CA0\u6574\u6570\u5217 a \u3067\u521D\u671F\u5316\n    pub fn new(mut a: Vec<usize>)\
+    \ -> Self {\n        let n = a.len();\n        let max = a.iter().max().max(Some(&2)).unwrap();\n\
     \        let m = 64 - max.leading_zeros() as usize;\n        let mut mat = vec![BitVector::new(n\
     \ + 1); m];\n        let mut mid = vec![0; m];\n        for d in (0..m).rev()\
     \ {\n            let mut l = vec![];\n            let mut r = vec![];\n      \
@@ -33,32 +36,43 @@ data:
     \ else {\n                    l.push(a[i]);\n                }\n            }\n\
     \            mid[d] = l.len();\n            mat[d].build();\n            a = l;\n\
     \            a.append(&mut r);\n        }\n        Self { n, mat, mid }\n    }\n\
-    \n    pub fn access(&self, mut k: usize) -> usize {\n        let mut res = 0;\n\
-    \        for d in (0..self.mat.len()).rev() {\n            let f = self.mat[d].access(k);\n\
-    \            if f {\n                res |= 1 << d;\n                k = self.mat[d].rank1(k)\
-    \ + self.mid[d];\n            } else {\n                k = self.mat[d].rank0(k);\n\
-    \            }\n        }\n        res\n    }\n\n    pub fn kth_smallest<R: RangeBounds<usize>>(&self,\
-    \ range: R, mut k: usize) -> usize {\n        let (mut l, mut r) = range_to_pair(range,\
-    \ self.n);\n        assert!(k < r - l);\n        let mut res = 0;\n        for\
-    \ d in (0..self.mat.len()).rev() {\n            let cnt = self.mat[d].rank0(r)\
-    \ - self.mat[d].rank0(l);\n            if cnt <= k {\n                res |= 1\
-    \ << d;\n                k -= cnt;\n                let (ll, rr) = self.succ1(l..r,\
-    \ d);\n                l = ll;\n                r = rr;\n            } else {\n\
-    \                let (ll, rr) = self.succ0(l..r, d);\n                l = ll;\n\
-    \                r = rr;\n            }\n        }\n        res\n    }\n\n   \
-    \ pub fn kth_largest<R: RangeBounds<usize>>(&self, range: R, k: usize) -> usize\
-    \ {\n        let (l, r) = range_to_pair(range, self.n);\n        self.kth_smallest(l..r,\
-    \ r - l - k - 1)\n    }\n\n    pub fn range_freq<IR, VR>(&self, index_range: IR,\
+    \n    /// a\\[k\\] \u3092\u53D6\u5F97\n    pub fn access(&self, mut k: usize)\
+    \ -> usize {\n        let mut res = 0;\n        for d in (0..self.mat.len()).rev()\
+    \ {\n            let f = self.mat[d].access(k);\n            if f {\n        \
+    \        res |= 1 << d;\n                k = self.mat[d].rank1(k) + self.mid[d];\n\
+    \            } else {\n                k = self.mat[d].rank0(k);\n           \
+    \ }\n        }\n        res\n    }\n\n    /// a\\[range\\] \u306E\u3046\u3061\
+    \ k \u756A\u76EE\u306B\u5C0F\u3055\u3044\u5024\u3092\u53D6\u5F97\n    pub fn kth_smallest<R:\
+    \ RangeBounds<usize>>(&self, range: R, mut k: usize) -> usize {\n        let (mut\
+    \ l, mut r) = range_to_pair(range, self.n);\n        assert!(k < r - l);\n   \
+    \     let mut res = 0;\n        for d in (0..self.mat.len()).rev() {\n       \
+    \     let cnt = self.mat[d].rank0(r) - self.mat[d].rank0(l);\n            if cnt\
+    \ <= k {\n                res |= 1 << d;\n                k -= cnt;\n        \
+    \        let (ll, rr) = self.succ1(l..r, d);\n                l = ll;\n      \
+    \          r = rr;\n            } else {\n                let (ll, rr) = self.succ0(l..r,\
+    \ d);\n                l = ll;\n                r = rr;\n            }\n     \
+    \   }\n        res\n    }\n\n    /// a\\[range\\] \u306E\u3046\u3061 k \u756A\u76EE\
+    \u306B\u5927\u304D\u3044\u5024\u3092\u53D6\u5F97\n    pub fn kth_largest<R: RangeBounds<usize>>(&self,\
+    \ range: R, k: usize) -> usize {\n        let (l, r) = range_to_pair(range, self.n);\n\
+    \        self.kth_smallest(l..r, r - l - k - 1)\n    }\n\n    /// a\\[index_range\\\
+    ] \u306E\u3046\u3061 value_range \u306B\u542B\u307E\u308C\u308B\u5024\u306E\u500B\
+    \u6570\u3092\u53D6\u5F97\n    pub fn range_freq<IR, VR>(&self, index_range: IR,\
     \ value_range: VR) -> usize\n    where\n        IR: RangeBounds<usize>,\n    \
     \    VR: RangeBounds<usize>,\n    {\n        let (il, ir) = range_to_pair(index_range,\
     \ self.n);\n        let (vl, vr) = range_to_pair(value_range, 1 << self.mat.len());\n\
     \        self.range_freq_(il, ir, vr) - self.range_freq_(il, ir, vl)\n    }\n\n\
-    \    pub fn prev_value<R: RangeBounds<usize>>(&self, range: R, upper: usize) ->\
-    \ Option<usize> {\n        let (l, r) = range_to_pair(range, self.n);\n      \
-    \  let cnt = self.range_freq_(l, r, upper);\n        if cnt == 0 {\n         \
-    \   None\n        } else {\n            Some(self.kth_smallest(l..r, cnt - 1))\n\
-    \        }\n    }\n\n    pub fn next_value<R: RangeBounds<usize>>(&self, range:\
-    \ R, lower: usize) -> Option<usize> {\n        let (l, r) = range_to_pair(range,\
+    \    /// a\\[index_range\\] \u306E\u3046\u3061\u3001 upper \u672A\u6E80\u306E\u5024\
+    \u306E\u3046\u3061\u6700\u5927\u306E\u3082\u306E\u3092\u53D6\u5F97  \n    ///\
+    \ \u5B58\u5728\u3057\u306A\u3044\u5834\u5408\u306F None \u3092\u8FD4\u3059\u3002\
+    \n    pub fn prev_value<R: RangeBounds<usize>>(&self, range: R, upper: usize)\
+    \ -> Option<usize> {\n        let (l, r) = range_to_pair(range, self.n);\n   \
+    \     let cnt = self.range_freq_(l, r, upper);\n        if cnt == 0 {\n      \
+    \      None\n        } else {\n            Some(self.kth_smallest(l..r, cnt -\
+    \ 1))\n        }\n    }\n\n    /// a\\[index_range\\] \u306E\u3046\u3061\u3001\
+    \ lower \u4EE5\u4E0A\u306E\u5024\u306E\u3046\u3061\u6700\u5C0F\u306E\u3082\u306E\
+    \u3092\u53D6\u5F97  \n    /// \u5B58\u5728\u3057\u306A\u3044\u5834\u5408\u306F\
+    \ None \u3092\u8FD4\u3059\u3002\n    pub fn next_value<R: RangeBounds<usize>>(&self,\
+    \ range: R, lower: usize) -> Option<usize> {\n        let (l, r) = range_to_pair(range,\
     \ self.n);\n        let cnt = self.range_freq_(l, r, lower);\n        if cnt ==\
     \ r - l {\n            None\n        } else {\n            Some(self.kth_smallest(l..r,\
     \ cnt))\n        }\n    }\n\n    fn succ1<R: RangeBounds<usize>>(&self, range:\
@@ -96,7 +110,7 @@ data:
   isVerificationFile: false
   path: crates/data-structure/wavelet-matrix/src/lib.rs
   requiredBy: []
-  timestamp: '2023-04-22 21:59:33+09:00'
+  timestamp: '2024-12-26 06:54:01+00:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/range_kth_smallest/src/main.rs
