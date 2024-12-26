@@ -3,7 +3,7 @@ data:
   _extendedDependsOn:
   - icon: ':heavy_check_mark:'
     path: crates/graph/extended-block-cut-tree/src/lib.rs
-    title: "\u62E1\u5F35\u3000Block-Cut Tree"
+    title: "\u62E1\u5F35 Block-Cut Tree"
   - icon: ':heavy_check_mark:'
     path: crates/graph/graph/src/lib.rs
     title: crates/graph/graph/src/lib.rs

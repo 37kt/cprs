@@ -31,7 +31,7 @@ data:
     title: crates/graph/dijkstra/src/lib.rs
   - icon: ':heavy_check_mark:'
     path: crates/graph/extended-block-cut-tree/src/lib.rs
-    title: "\u62E1\u5F35\u3000Block-Cut Tree"
+    title: "\u62E1\u5F35 Block-Cut Tree"
   - icon: ':warning:'
     path: crates/graph/low-link/src/lib.rs
     title: crates/graph/low-link/src/lib.rs
