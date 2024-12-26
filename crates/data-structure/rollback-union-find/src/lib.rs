@@ -1,5 +1,6 @@
 use std::mem::swap;
 
+/// ロールバック可能なUnionFind
 #[derive(Clone)]
 pub struct RollbackUnionFind<const UNION_BY_SIZE: bool = true> {
     par: Vec<i32>,
@@ -8,6 +9,7 @@ pub struct RollbackUnionFind<const UNION_BY_SIZE: bool = true> {
 }
 
 impl<const UNION_BY_SIZE: bool> RollbackUnionFind<UNION_BY_SIZE> {
+    /// 初期化
     pub fn new(n: usize) -> Self {
         Self {
             par: vec![-1; n],
@@ -16,14 +18,18 @@ impl<const UNION_BY_SIZE: bool> RollbackUnionFind<UNION_BY_SIZE> {
         }
     }
 
+    /// 頂点数を取得
     pub fn len(&self) -> usize {
         self.par.len()
     }
 
+    /// 連結成分の数を取得
     pub fn count(&self) -> usize {
         self.cnt
     }
 
+    /// x と y をマージする。
+    /// x と y が同じ連結成分に属していない場合 true を返す。
     pub fn merge(&mut self, x: usize, y: usize) -> bool {
         let mut x = self.leader(x);
         let mut y = self.leader(y);
@@ -41,6 +47,7 @@ impl<const UNION_BY_SIZE: bool> RollbackUnionFind<UNION_BY_SIZE> {
         true
     }
 
+    /// 頂点 x が含まれる連結成分のリーダーを取得
     pub fn leader(&self, mut x: usize) -> usize {
         while self.par[x] >= 0 {
             x = self.par[x] as usize;
@@ -48,14 +55,17 @@ impl<const UNION_BY_SIZE: bool> RollbackUnionFind<UNION_BY_SIZE> {
         x
     }
 
+    /// x と y が同じ連結成分に属しているかを判定
     pub fn same(&self, x: usize, y: usize) -> bool {
         self.leader(x) == self.leader(y)
     }
 
+    /// x が含まれる連結成分の頂点数を取得
     pub fn size(&self, x: usize) -> usize {
         -self.par[self.leader(x)] as usize
     }
 
+    /// 直前の merge をロールバックする
     pub fn undo(&mut self) {
         for _ in 0..2 {
             let (x, par) = self.his.pop().unwrap();
@@ -66,6 +76,7 @@ impl<const UNION_BY_SIZE: bool> RollbackUnionFind<UNION_BY_SIZE> {
         }
     }
 
+    /// 連結成分のリストを取得
     pub fn groups(&self) -> Vec<Vec<usize>> {
         let mut res = vec![vec![]; self.len()];
         for x in 0..self.len() {

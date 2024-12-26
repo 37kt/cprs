@@ -3,6 +3,8 @@ use std::mem::swap;
 use algebraic::Monoid;
 use segment_tree::SegmentTree;
 
+/// ウェーブレット行列にセグメント木を載せたもの  
+/// 矩形範囲の総積を取得できる。
 pub struct SegmentTreeOnWaveletMatrix<I, M>
 where
     I: Ord + Copy,
@@ -24,6 +26,15 @@ where
     M: Monoid,
     M::S: Clone,
 {
+    /// 2 次元座標上の点にある要素を単位元で初期化する。
+    ///
+    /// # 引数
+    ///
+    /// - `ps`: クエリの引数として与えられる点の集合
+    ///
+    /// # 計算量
+    ///
+    /// TODO
     pub fn new(mut ps: Vec<(I, I)>) -> Self {
         ps.sort();
         ps.dedup();
@@ -67,6 +78,16 @@ where
         }
     }
 
+    /// 点 (x, y) に対応する要素を v に更新する。
+    ///
+    /// # 引数
+    ///
+    /// - `(x, y)`: 点
+    /// - `v`: 更新する値
+    ///
+    /// # 計算量
+    ///
+    /// TODO
     pub fn set(&mut self, (x, y): (I, I), v: M::S) {
         let mut i = self.ps.binary_search(&(x, y)).unwrap();
         for h in (0..self.lg).rev() {
@@ -80,6 +101,16 @@ where
         }
     }
 
+    /// 点 (x, y) に対応する要素に v を加算する。
+    ///
+    /// # 引数
+    ///
+    /// - `(x, y)`: 点
+    /// - `v`: 加算する値
+    ///
+    /// # 計算量
+    ///
+    /// TODO
     pub fn add(&mut self, (x, y): (I, I), v: M::S) {
         let mut i = self.ps.binary_search(&(x, y)).unwrap();
         for h in (0..self.lg).rev() {
@@ -94,6 +125,16 @@ where
         }
     }
 
+    /// 矩形範囲の総積を取得する。
+    ///
+    /// # 引数
+    ///
+    /// - `range_x`: x 座標の範囲
+    /// - `range_y`: y 座標の範囲
+    ///
+    /// # 計算量
+    ///
+    /// TODO
     pub fn prod(
         &self,
         range_x: impl std::ops::RangeBounds<I>,

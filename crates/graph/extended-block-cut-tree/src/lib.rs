@@ -1,5 +1,6 @@
 use graph::Graph;
 
+/// 拡張 Block-Cut Tree  
 pub fn extended_block_cut_tree(g: &Graph<(), ()>) -> Graph<(), ()> {
     let n = g.len();
     let mut next = vec![!0; n];

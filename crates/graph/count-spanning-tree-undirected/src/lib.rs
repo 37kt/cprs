@@ -1,6 +1,7 @@
 use matrix::Matrix;
 use modint::ModInt;
 
+/// 無向全域木の個数を数える。
 /// g[i][j] = (i, j) の本数
 pub fn count_spanning_tree_undirected<M>(g: &[Vec<usize>]) -> M
 where

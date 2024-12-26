@@ -5,6 +5,8 @@ use std::{
 
 use div::{div_ceil, div_floor};
 
+/// 静的な列の区間転倒数クエリ
+
 #[derive(Clone)]
 pub struct StaticRangeInversionsQuery<T>
 where
@@ -22,6 +24,11 @@ impl<T> StaticRangeInversionsQuery<T>
 where
     T: Copy + PartialOrd + Ord + Default,
 {
+    /// 静的な列の区間転倒数クエリを構築する。
+    ///
+    /// # 計算量
+    ///
+    /// O(n √n)
     pub fn new(a: &[T]) -> Self {
         let n = a.len();
         let block_size = 1.max((n as f64).sqrt().ceil() as usize * 2);
@@ -59,6 +66,11 @@ where
         res
     }
 
+    /// 区間 range の転倒数を取得する。
+    ///
+    /// # 計算量
+    ///
+    /// O(√n)
     pub fn inversions(&self, range: impl RangeBounds<usize>) -> usize {
         let (l, r) = self.range_to_pair(range);
         assert!(l <= r && r <= self.n);

@@ -1,3 +1,5 @@
+/// 64-ary tree set  
+/// 非負整数の集合を扱う。
 #[derive(Clone)]
 pub struct WAryTreeSet {
     m: usize,
@@ -5,6 +7,7 @@ pub struct WAryTreeSet {
 }
 
 impl WAryTreeSet {
+    /// 空の集合で初期化
     pub fn new(mut n: usize) -> Self {
         let mut v = vec![];
         let mut l = 1;
@@ -19,10 +22,13 @@ impl WAryTreeSet {
         }
     }
 
+    /// 集合に x が含まれているかを判定
     pub fn contains(&self, x: usize) -> bool {
         self.v[self.m - 1][x >> 6] & 1 << (x & 63) != 0
     }
 
+    /// 集合に x を追加  
+    /// すでに含まれている場合は false を返す。
     pub fn insert(&mut self, mut x: usize) -> bool {
         if self.contains(x) {
             false
@@ -35,6 +41,8 @@ impl WAryTreeSet {
         }
     }
 
+    /// 集合から x を削除  
+    /// 含まれていない場合は false を返す。
     pub fn remove(&mut self, mut x: usize) -> bool {
         if !self.contains(x) {
             false
@@ -49,6 +57,8 @@ impl WAryTreeSet {
         }
     }
 
+    /// 集合の最小値を取得  
+    /// 空の場合は None を返す。
     pub fn min(&self) -> Option<usize> {
         (self.v[0][0] != 0).then(|| {
             self.v
@@ -57,6 +67,8 @@ impl WAryTreeSet {
         })
     }
 
+    /// 集合の最大値を取得  
+    /// 空の場合は None を返す。
     pub fn max(&self) -> Option<usize> {
         (self.v[0][0] != 0).then(|| {
             self.v
@@ -65,6 +77,8 @@ impl WAryTreeSet {
         })
     }
 
+    /// x 以上の要素のうち最小のものを取得  
+    /// 存在しない場合は None を返す。
     pub fn next(&self, mut x: usize) -> Option<usize> {
         for i in (0..self.m).rev() {
             let mask = if i + 1 == self.m {
@@ -85,6 +99,8 @@ impl WAryTreeSet {
         None
     }
 
+    /// x 以下の要素のうち最大のものを取得  
+    /// 存在しない場合は None を返す。
     pub fn prev(&self, mut x: usize) -> Option<usize> {
         for i in (0..self.m).rev() {
             let mask = if i + 1 == self.m {

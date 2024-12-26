@@ -6,6 +6,7 @@ use std::{
 use algebraic::{Act, Monoid};
 use splay_tree_internal::SplayTreeNode;
 
+/// 動的配列
 pub struct SplayTree<M, F>(*mut SplayTreeNode<M, F>)
 where
     M: Monoid,
@@ -48,34 +49,41 @@ where
         }
     }
 
+    /// a[k] を val で更新する。
     pub fn set(&mut self, k: usize, val: M::S) {
         self.0 = SplayTreeNode::access(unsafe { self.0.as_mut() }.unwrap(), k);
         unsafe { self.0.as_mut() }.unwrap().val = val;
         SplayTreeNode::update(self.0);
     }
 
+    /// a[k] を取得する。
     pub fn get(&mut self, k: usize) -> &M::S {
         self.0 = SplayTreeNode::access(unsafe { self.0.as_mut() }.unwrap(), k);
         &unsafe { self.0.as_ref() }.unwrap().val
     }
 
+    /// k 番目に val を挿入する。
     pub fn insert(&mut self, k: usize, val: M::S) {
         SplayTreeNode::insert(&mut self.0, k, val);
     }
 
+    /// k 番目の要素を削除する。
     pub fn remove(&mut self, k: usize) -> M::S {
         SplayTreeNode::remove(&mut self.0, k)
     }
 
+    /// 2 つの列を結合する。
     pub fn merge(&mut self, r: Self) {
         self.0 = SplayTreeNode::merge(self.0, r.0);
     }
 
+    /// 2 つの列に分割する。
     pub fn split(self, k: usize) -> (Self, Self) {
         let (x, y) = SplayTreeNode::split(self.0, k);
         (Self(x), Self(y))
     }
 
+    /// 区間 range に作用素 f を適用する。
     pub fn apply(&mut self, range: impl RangeBounds<usize>, f: F::S) {
         let (l, r) = self.range_to_pair(range);
         if l == r {
@@ -87,6 +95,7 @@ where
         self.0 = SplayTreeNode::merge(x, SplayTreeNode::merge(y, z));
     }
 
+    /// 区間 range を反転する。
     pub fn reverse(&mut self, range: impl RangeBounds<usize>) {
         let (l, r) = self.range_to_pair(range);
         if l == r {
@@ -98,6 +107,7 @@ where
         self.0 = SplayTreeNode::merge(x, SplayTreeNode::merge(y, z));
     }
 
+    /// 区間 range の総積を取得する。
     pub fn prod(&mut self, range: impl RangeBounds<usize>) -> M::S {
         let (l, r) = self.range_to_pair(range);
         let (x, y) = SplayTreeNode::split(self.0, l);

@@ -2,6 +2,13 @@ use std::ops::{Bound, RangeBounds};
 
 use algebraic::Monoid;
 
+/// セグメント木
+///
+/// # 計算量
+///
+/// - 構築: O(N)
+/// - 1点更新: O(log N)
+/// - 区間取得: O(log N)
 #[derive(Clone)]
 pub struct SegmentTree<M>
 where
@@ -17,6 +24,11 @@ where
     M: Monoid,
     M::S: Clone,
 {
+    /// 長さ n の列を単位元で初期化する。
+    ///
+    /// # 計算量
+    ///
+    /// O(N)
     pub fn new(n: usize) -> Self {
         Self {
             n,
@@ -24,6 +36,11 @@ where
         }
     }
 
+    /// a\[k\] を x に更新する。
+    ///
+    /// # 計算量
+    ///
+    /// O(log N)
     pub fn set(&mut self, mut k: usize, x: M::S) {
         k += self.n;
         self.v[k] = x;
@@ -33,11 +50,21 @@ where
         }
     }
 
+    /// a\[k\] を取得する。
+    ///
+    /// # 計算量
+    ///
+    /// O(1)
     pub fn get(&self, k: usize) -> M::S {
         assert!(k < self.n);
         self.v[k + self.n].clone()
     }
 
+    /// a\[range\] の総積を取得する。
+    ///
+    /// # 計算量
+    ///
+    /// O(log N)
     pub fn prod<R>(&self, range: R) -> M::S
     where
         R: RangeBounds<usize>,
@@ -73,6 +100,20 @@ where
         M::op(&sl, &sr)
     }
 
+    /// l を左端とする区間のうち、条件を満たす最大の区間の右端を取得する。
+    ///
+    /// # 引数
+    ///
+    /// - `l`: 左端
+    /// - `pred`: a\[range\] が条件を満たすかを判定する関数
+    ///
+    /// # 戻り値
+    ///
+    /// - 条件を満たす最大の区間の右端
+    ///
+    /// # 計算量
+    ///
+    /// O(log N)
     pub fn max_right<P>(&self, mut l: usize, pred: P) -> usize
     where
         P: Fn(&M::S) -> bool,
@@ -104,6 +145,16 @@ where
         }
     }
 
+    /// r を右端とする区間のうち、条件を満たす最小の区間の左端を取得する。
+    ///
+    /// # 引数
+    ///
+    /// - `r`: 右端
+    /// - `pred`: a\[range\] が条件を満たすかを判定する関数
+    ///
+    /// # 計算量
+    ///
+    /// O(log N)
     pub fn min_left<P>(&self, mut r: usize, pred: P) -> usize
     where
         P: Fn(&M::S) -> bool,
@@ -138,6 +189,8 @@ where
         }
     }
 
+    /// セグ木のサイズを 2 冪にしていない都合上、無効なノードもある。  
+    /// 有効なノードかどうかを判定する。
     #[inline]
     fn is_good_node(&self, k: usize) -> bool {
         if k >= self.n {
@@ -154,6 +207,11 @@ where
     M: Monoid,
     M::S: Clone,
 {
+    /// 列を Vec で初期化する。
+    ///
+    /// # 計算量
+    ///
+    /// O(N)
     fn from(mut a: Vec<M::S>) -> Self {
         let n = a.len();
         let mut v = vec![M::e(); n];

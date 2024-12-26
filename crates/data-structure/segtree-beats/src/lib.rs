@@ -3,6 +3,8 @@ use std::ops::{Bound, RangeBounds};
 type T = i64;
 const INF: T = std::i64::MAX / 2;
 
+/// Segment Tree Beats!
+/// 区間加算、区間chmin、区間chmax、区間最大値、区間最小値、区間和
 #[derive(Clone)]
 pub struct SegtreeBeats {
     n: usize,
@@ -19,6 +21,15 @@ pub struct SegtreeBeats {
 }
 
 impl From<&[T]> for SegtreeBeats {
+    /// 長さ n の列を a で初期化する。
+    ///
+    /// # 引数
+    ///
+    /// - `a`: 初期化する列
+    ///
+    /// # 計算量
+    ///
+    /// O(N)
     fn from(a: &[T]) -> Self {
         let mut n = 1;
         while n < a.len() {
@@ -82,10 +93,29 @@ impl From<&[T]> for SegtreeBeats {
 }
 
 impl SegtreeBeats {
+    /// 長さ n の列を 0 で初期化する。
+    ///
+    /// # 引数
+    ///
+    /// - `n`: 列の長さ
+    ///
+    /// # 計算量
+    ///
+    /// O(N)
     pub fn new(n: usize) -> Self {
         Self::from(vec![0; n].as_slice())
     }
 
+    /// 区間 chmin
+    ///
+    /// # 引数
+    ///
+    /// - `range`: 区間
+    /// - `x`: 更新する値
+    ///
+    /// # 計算量
+    ///
+    /// O(log N)
     pub fn chmin<R>(&mut self, range: R, x: T)
     where
         R: RangeBounds<usize>,
@@ -94,6 +124,16 @@ impl SegtreeBeats {
         self.chmin_(x, a, b, 0, 0, self.n);
     }
 
+    /// 区間 chmax
+    ///
+    /// # 引数
+    ///
+    /// - `range`: 区間
+    /// - `x`: 更新する値
+    ///
+    /// # 計算量
+    ///
+    /// O(log N)
     pub fn chmax<R>(&mut self, range: R, x: T)
     where
         R: RangeBounds<usize>,
@@ -102,6 +142,16 @@ impl SegtreeBeats {
         self.chmax_(x, a, b, 0, 0, self.n);
     }
 
+    /// 区間加算
+    ///
+    /// # 引数
+    ///
+    /// - `range`: 区間
+    /// - `x`: 加算する値
+    ///
+    /// # 計算量
+    ///
+    /// O(log N)
     pub fn add<R>(&mut self, range: R, x: T)
     where
         R: RangeBounds<usize>,
@@ -110,6 +160,16 @@ impl SegtreeBeats {
         self.add_(x, a, b, 0, 0, self.n);
     }
 
+    /// 区間更新
+    ///
+    /// # 引数
+    ///
+    /// - `range`: 区間
+    /// - `x`: 更新する値
+    ///
+    /// # 計算量
+    ///
+    /// O(log N)
     pub fn set<R>(&mut self, range: R, x: T)
     where
         R: RangeBounds<usize>,
@@ -118,6 +178,15 @@ impl SegtreeBeats {
         self.set_(x, a, b, 0, 0, self.n);
     }
 
+    /// 区間最大値
+    ///
+    /// # 引数
+    ///
+    /// - `range`: 区間
+    ///
+    /// # 計算量
+    ///
+    /// O(log N)
     pub fn max<R>(&mut self, range: R) -> T
     where
         R: RangeBounds<usize>,
@@ -126,6 +195,15 @@ impl SegtreeBeats {
         self.max_(a, b, 0, 0, self.n)
     }
 
+    /// 区間最小値
+    ///
+    /// # 引数
+    ///
+    /// - `range`: 区間
+    ///
+    /// # 計算量
+    ///
+    /// O(log N)
     pub fn min<R>(&mut self, range: R) -> T
     where
         R: RangeBounds<usize>,
@@ -134,6 +212,15 @@ impl SegtreeBeats {
         self.min_(a, b, 0, 0, self.n)
     }
 
+    /// 区間和
+    ///
+    /// # 引数
+    ///
+    /// - `range`: 区間
+    ///
+    /// # 計算量
+    ///
+    /// O(log N)
     pub fn sum<R>(&mut self, range: R) -> T
     where
         R: RangeBounds<usize>,

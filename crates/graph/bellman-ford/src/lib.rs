@@ -2,6 +2,9 @@ use std::ops::Add;
 
 use graph::Graph;
 
+/// ベルマンフォード法  
+/// 始点集合からの最短距離を求める。  
+/// 負の閉路が存在する場合は None を返す。
 pub fn bellman_ford<T>(g: &Graph<(), T>, starts: &[usize], inf: T) -> Option<Vec<T>>
 where
     T: Clone + PartialOrd + Add<Output = T> + Default,

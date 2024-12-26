@@ -4,6 +4,8 @@ use graph::Graph;
 
 const INF: usize = 1 << 60;
 
+/// 補グラフ上の最短距離を求める。  
+/// start から到達できない場合は 2^60 を返す。
 pub fn complement_graph_bfs(g: &Graph<(), ()>, start: usize) -> Vec<usize> {
     let n = g.len();
     let mut dist = vec![INF; n];

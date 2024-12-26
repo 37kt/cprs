@@ -2,12 +2,14 @@ use std::ops::{Bound, RangeBounds};
 
 use union_find::UnionFind;
 
+/// 区間辺UnionFind
 pub struct RangeUnionFind {
     n: usize,
     uf: Vec<UnionFind<true>>,
 }
 
 impl RangeUnionFind {
+    /// 初期化
     pub fn new(n: usize) -> Self {
         let mut log = 1;
         while 1 << log < n {
@@ -17,14 +19,18 @@ impl RangeUnionFind {
         Self { n, uf }
     }
 
+    /// 頂点 x が含まれる連結成分のリーダーを取得
     pub fn leader(&self, x: usize) -> usize {
         self.uf[0].leader(x)
     }
 
+    /// 頂点 x が含まれる連結成分の頂点数を取得
     pub fn size(&self, x: usize) -> usize {
         self.uf[0].size(x)
     }
 
+    /// xs[i] と ys[i] をマージする。
+    /// 新たにマージに使用した辺を返す。
     pub fn merge_range(
         &mut self,
         xs: impl RangeBounds<usize>,
@@ -43,6 +49,8 @@ impl RangeUnionFind {
         res
     }
 
+    /// x と y をマージする。
+    /// 新たにマージに使用した辺を返す。
     pub fn merge(&mut self, x: usize, y: usize) -> Option<(usize, usize)> {
         self.merge_range(x..x + 1, y..y + 1).pop()
     }

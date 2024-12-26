@@ -3,6 +3,7 @@ use graph::Graph;
 // Reference:
 // https://tjkendev.github.io/procon-library/cpp/graph/auxiliary_tree.html
 
+/// 指定された頂点たちの最小共通祖先関係を保って木を圧縮してできる補助的な木
 pub struct CompressedTree {
     fs: Vec<usize>,
     ls: Vec<usize>,
@@ -13,6 +14,16 @@ pub struct CompressedTree {
 }
 
 impl CompressedTree {
+    /// 木 g から、圧縮木を構築する前準備をする。
+    ///
+    /// # 入力
+    ///
+    /// - `g`: 木
+    ///   - ただし、頂点 0 を根とする
+    ///
+    /// # 計算量
+    ///
+    /// O(N log N)
     pub fn new(g: &Graph<(), ()>) -> Self {
         let n = g.len();
         let mut c = Self {
@@ -48,6 +59,20 @@ impl CompressedTree {
         c
     }
 
+    /// 圧縮木を構築する。
+    ///
+    /// # 入力
+    ///
+    /// - `vs`: g の頂点の部分集合
+    ///
+    /// # 出力
+    ///
+    /// - `h`: vs に含まれる頂点同士の最小共通祖先関係を失わないように圧縮した木
+    /// - `idx`: h の頂点に対応する g の頂点の index
+    ///
+    /// # 計算量
+    ///
+    /// O(|vs|)
     pub fn build(&mut self, vs: &[usize]) -> (Graph<(), ()>, Vec<usize>) {
         let mut vs = vs.to_vec();
         vs.sort_by_key(|&v| self.fs[v]);

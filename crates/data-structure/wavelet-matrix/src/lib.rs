@@ -8,6 +8,8 @@ struct BitVector {
     sum: Vec<usize>,
 }
 
+/// ウェーブレット行列  
+/// 非負整数列に対する様々なクエリを処理する。
 pub struct WaveletMatrix {
     n: usize,
     mat: Vec<BitVector>,
@@ -15,6 +17,7 @@ pub struct WaveletMatrix {
 }
 
 impl WaveletMatrix {
+    /// 非負整数列 a で初期化
     pub fn new(mut a: Vec<usize>) -> Self {
         let n = a.len();
         let max = a.iter().max().max(Some(&2)).unwrap();
@@ -40,6 +43,7 @@ impl WaveletMatrix {
         Self { n, mat, mid }
     }
 
+    /// a\[k\] を取得
     pub fn access(&self, mut k: usize) -> usize {
         let mut res = 0;
         for d in (0..self.mat.len()).rev() {
@@ -54,6 +58,7 @@ impl WaveletMatrix {
         res
     }
 
+    /// a\[range\] のうち k 番目に小さい値を取得
     pub fn kth_smallest<R: RangeBounds<usize>>(&self, range: R, mut k: usize) -> usize {
         let (mut l, mut r) = range_to_pair(range, self.n);
         assert!(k < r - l);
@@ -75,11 +80,13 @@ impl WaveletMatrix {
         res
     }
 
+    /// a\[range\] のうち k 番目に大きい値を取得
     pub fn kth_largest<R: RangeBounds<usize>>(&self, range: R, k: usize) -> usize {
         let (l, r) = range_to_pair(range, self.n);
         self.kth_smallest(l..r, r - l - k - 1)
     }
 
+    /// a\[index_range\] のうち value_range に含まれる値の個数を取得
     pub fn range_freq<IR, VR>(&self, index_range: IR, value_range: VR) -> usize
     where
         IR: RangeBounds<usize>,
@@ -90,6 +97,8 @@ impl WaveletMatrix {
         self.range_freq_(il, ir, vr) - self.range_freq_(il, ir, vl)
     }
 
+    /// a\[index_range\] のうち、 upper 未満の値のうち最大のものを取得  
+    /// 存在しない場合は None を返す。
     pub fn prev_value<R: RangeBounds<usize>>(&self, range: R, upper: usize) -> Option<usize> {
         let (l, r) = range_to_pair(range, self.n);
         let cnt = self.range_freq_(l, r, upper);
@@ -100,6 +109,8 @@ impl WaveletMatrix {
         }
     }
 
+    /// a\[index_range\] のうち、 lower 以上の値のうち最小のものを取得  
+    /// 存在しない場合は None を返す。
     pub fn next_value<R: RangeBounds<usize>>(&self, range: R, lower: usize) -> Option<usize> {
         let (l, r) = range_to_pair(range, self.n);
         let cnt = self.range_freq_(l, r, lower);

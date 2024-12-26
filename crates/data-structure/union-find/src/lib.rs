@@ -1,5 +1,6 @@
 use std::{cell::RefCell, mem::swap};
 
+/// Union Find
 #[derive(Clone)]
 pub struct UnionFind<const UNION_BY_SIZE: bool> {
     par: RefCell<Vec<i32>>,
@@ -7,6 +8,7 @@ pub struct UnionFind<const UNION_BY_SIZE: bool> {
 }
 
 impl<const UNION_BY_SIZE: bool> UnionFind<UNION_BY_SIZE> {
+    /// 頂点 n 個と 0 本の辺で初期化する。
     pub fn new(n: usize) -> Self {
         Self {
             par: RefCell::new(vec![-1; n]),
@@ -14,10 +16,13 @@ impl<const UNION_BY_SIZE: bool> UnionFind<UNION_BY_SIZE> {
         }
     }
 
+    /// 頂点数を取得する。
     pub fn len(&self) -> usize {
         self.par.borrow().len()
     }
 
+    /// 頂点 x と y を結合する。  
+    /// すでに同じグループに属している場合は false を返す。
     pub fn merge(&mut self, x: usize, y: usize) -> bool {
         let mut x = self.leader(x);
         let mut y = self.leader(y);
@@ -34,6 +39,7 @@ impl<const UNION_BY_SIZE: bool> UnionFind<UNION_BY_SIZE> {
         true
     }
 
+    /// 頂点 x が属する連結成分のリーダーを取得する。
     pub fn leader(&self, x: usize) -> usize {
         let mut v = x;
         let mut par = self.par.borrow_mut();
@@ -49,19 +55,23 @@ impl<const UNION_BY_SIZE: bool> UnionFind<UNION_BY_SIZE> {
         u
     }
 
+    /// 頂点 x と y が同じ連結成分に属しているかを判定する。
     pub fn same(&self, x: usize, y: usize) -> bool {
         self.leader(x) == self.leader(y)
     }
 
+    /// 頂点 x が属する連結成分のサイズを取得する。
     pub fn size(&self, x: usize) -> usize {
         let x = self.leader(x);
         -self.par.borrow()[x] as usize
     }
 
+    /// 連結成分の個数を取得する。
     pub fn count(&self) -> usize {
         self.cnt
     }
 
+    /// 連結成分を取得する。
     pub fn groups(&self) -> Vec<Vec<usize>> {
         let mut res = vec![vec![]; self.len()];
         for x in 0..self.len() {

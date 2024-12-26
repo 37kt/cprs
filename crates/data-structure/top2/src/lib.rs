@@ -5,6 +5,7 @@ enum Inner<K, V> {
     Two([(K, V); 2]),
 }
 
+/// キーが異なる上位高々 2 つの要素を管理する。
 #[derive(Clone, Copy)]
 pub struct Top2<K, V>
 where
@@ -19,6 +20,7 @@ where
     K: Eq + Copy,
     V: Ord + Copy,
 {
+    /// 要素 0 個で初期化する。
     pub fn new() -> Self {
         Top2 {
             inner: Inner::Empty,
@@ -71,7 +73,7 @@ where
     }
 
     /// key 以外の最大値を取得する
-    pub fn get(&self, key: K) -> Option<V> {
+    pub fn get_other(&self, key: K) -> Option<V> {
         match self.inner {
             Inner::Empty => None,
             Inner::One(k, v) => {
@@ -89,5 +91,24 @@ where
                 }
             }
         }
+    }
+
+    /// 保持しているすべての要素を取得する。
+    pub fn get_all(&self) -> Vec<(K, V)> {
+        match self.inner {
+            Inner::Empty => vec![],
+            Inner::One(k, v) => vec![(k, v)],
+            Inner::Two([(k1, v1), (k2, v2)]) => vec![(k1, v1), (k2, v2)],
+        }
+    }
+}
+
+impl<K, V> Default for Top2<K, V>
+where
+    K: Eq + Copy,
+    V: Ord + Copy,
+{
+    fn default() -> Self {
+        Self::new()
     }
 }

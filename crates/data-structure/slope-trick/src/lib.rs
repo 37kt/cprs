@@ -2,6 +2,7 @@
 
 use std::{cmp::Reverse, collections::BinaryHeap, mem::swap};
 
+/// 区分線形凸関数を扱う。
 pub struct SlopeTrick {
     add_l: i64,
     add_r: i64,
@@ -11,6 +12,7 @@ pub struct SlopeTrick {
 }
 
 impl SlopeTrick {
+    /// 区分線形凸関数を f(x) = 0 で初期化する。
     pub fn new() -> Self {
         Self {
             add_l: 0,
@@ -21,7 +23,11 @@ impl SlopeTrick {
         }
     }
 
-    /// (min, argmin)
+    /// 最小値とその時の x を取得する。
+    ///
+    /// # 計算量
+    ///
+    /// O(1)
     pub fn min(&self) -> (i64, i64) {
         (
             self.min_y,
@@ -29,24 +35,41 @@ impl SlopeTrick {
         )
     }
 
+    /// f(x) <- f(x) + a
+    ///
+    /// # 計算量
+    ///
+    /// O(1)
     pub fn add_a(&mut self, a: i64) {
         self.min_y += a;
     }
 
     /// f(x) <- f(x - a)
+    ///
+    /// # 計算量
+    ///
+    /// O(1)
     pub fn shift(&mut self, a: i64) {
         self.add_l += a;
         self.add_r += a;
     }
 
     /// f(x) <- min f(y) (x-b <= y <= x-a)
+    ///
+    /// # 計算量
+    ///
+    /// O(1)
     pub fn slide_min(&mut self, a: i64, b: i64) {
         assert!(a <= b);
         self.add_l += a;
         self.add_r += b;
     }
 
-    /// add (x-a).max(0)
+    /// f(x) <- f(x) + (x-a).max(0)
+    ///
+    /// # 計算量
+    ///
+    /// O(log n)
     pub fn add_x_minus_a(&mut self, a: i64, c: i64) {
         let mut used = 0;
         while used < c && !self.lq.is_empty() {
@@ -71,7 +94,11 @@ impl SlopeTrick {
         }
     }
 
-    /// add (a-x).max(0)
+    /// f(x) <- f(x) + (a-x).max(0)
+    ///
+    /// # 計算量
+    ///
+    /// O(log n)
     pub fn add_a_minus_x(&mut self, a: i64, c: i64) {
         let mut used = 0;
         while used < c && !self.rq.is_empty() {
@@ -96,22 +123,39 @@ impl SlopeTrick {
         }
     }
 
-    /// add |x-a|
+    /// f(x) <- f(x) + |x-a|
+    ///
+    /// # 計算量
+    ///
+    /// O(log n)
     pub fn add_abs_x_minus_a(&mut self, a: i64, c: i64) {
         self.add_x_minus_a(a, c);
         self.add_a_minus_x(a, c);
     }
 
-    /// 累積min
+    /// 右方向に累積minをとる。
+    ///
+    /// # 計算量
+    ///
+    /// O(1)
     pub fn chmin_right(&mut self) {
         self.rq.clear();
     }
 
-    /// 逆累積min
+    /// 左方向に累積minをとる。
+    ///
+    /// # 計算量
+    ///
+    /// O(1)
     pub fn chmin_left(&mut self) {
         self.lq.clear();
     }
 
+    /// 2つの区分線形凸関数をマージする。
+    ///
+    /// # 計算量
+    ///
+    /// O(n)
     pub fn merge(&mut self, mut other: Self) {
         if self.lq.len() + self.rq.len() < other.lq.len() + other.rq.len() {
             swap(self, &mut other);
