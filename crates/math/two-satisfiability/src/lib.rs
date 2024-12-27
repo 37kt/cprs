@@ -1,31 +1,37 @@
 use graph::Graph;
 use strongly_connected_components::strongly_connected_components;
 
+/// 2-SAT
 pub struct TwoSatisfiability {
     n: usize,
     es: Vec<(usize, usize)>,
 }
 
 impl TwoSatisfiability {
+    /// n 個の変数を持つ 2-SAT を初期化する
     pub fn new(n: usize) -> Self {
         Self { n, es: vec![] }
     }
 
-    pub fn set(&mut self, x: usize) {
-        if x < self.n {
-            self.es.push((self.id(!x), self.id(x)));
-        } else {
-            self.es.push((self.id(x), self.id(!x)));
-        }
+    /// 条件 x_i = f を追加する
+    pub fn set(&mut self, i: usize, f: bool) {
+        self.es.push((self.id(i, !f), self.id(i, f)));
     }
 
-    pub fn add(&mut self, x: usize, y: usize) {
-        self.es.push((self.id(!x), self.id(y)));
-        self.es.push((self.id(!y), self.id(x)));
+    /// 条件 x_i = f -> x_j = g を追加する
+    pub fn if_then(&mut self, i: usize, f: bool, j: usize, g: bool) {
+        self.or(i, !f, j, g);
     }
 
-    pub fn if_then(&mut self, x: usize, y: usize) {
-        self.add(!x, y);
+    /// 条件 x_i = f ∨ x_j = g を追加する
+    pub fn or(&mut self, i: usize, f: bool, j: usize, g: bool) {
+        self.es.push((self.id(i, !f), self.id(j, g)));
+        self.es.push((self.id(j, !g), self.id(i, f)));
+    }
+
+    /// 条件 ￢(x_i = f ∧ x_j = g) を追加する
+    pub fn nand(&mut self, i: usize, f: bool, j: usize, g: bool) {
+        self.or(i, !f, j, !g);
     }
 
     pub fn solve(&self) -> Option<Vec<bool>> {
@@ -41,12 +47,12 @@ impl TwoSatisfiability {
         Some(res)
     }
 
-    fn id(&self, x: usize) -> usize {
-        assert!(x < self.n || !x < self.n);
-        if x < self.n {
-            x
+    fn id(&self, i: usize, f: bool) -> usize {
+        assert!(i < self.n);
+        if f {
+            i
         } else {
-            !x + self.n
+            i + self.n
         }
     }
 }

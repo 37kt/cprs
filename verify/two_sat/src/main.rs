@@ -1,9 +1,9 @@
 // verification-helper: PROBLEM https://judge.yosupo.jp/problem/two_sat
 
-use proconio::input;
+use proconio::{fastout, input};
 use two_satisfiability::TwoSatisfiability;
 
-#[proconio::fastout]
+#[fastout]
 fn main() {
     input! {
         _: String,
@@ -14,13 +14,21 @@ fn main() {
     let mut ts = TwoSatisfiability::new(n);
     for _ in 0..m {
         input! {
-            a: i64,
-            b: i64,
+            i: i64,
+            j: i64,
             _: i64,
         }
-        let a = if a < 0 { a } else { a - 1 } as usize;
-        let b = if b < 0 { b } else { b - 1 } as usize;
-        ts.add(a, b);
+        let (i, f) = if i < 0 {
+            ((-i - 1) as usize, false)
+        } else {
+            ((i - 1) as usize, true)
+        };
+        let (j, g) = if j < 0 {
+            ((-j - 1) as usize, false)
+        } else {
+            ((j - 1) as usize, true)
+        };
+        ts.or(i, f, j, g);
     }
     if let Some(res) = ts.solve() {
         println!("s SATISFIABLE");
