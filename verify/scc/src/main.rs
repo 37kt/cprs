@@ -13,10 +13,9 @@ fn main() {
         ab: [(usize, usize); m]
     }
     let g = Graph::from_unweighted_directed_edges(n, &ab);
-    let h = strongly_connected_components(&g);
-    println!("{}", h.len());
-    for i in 0..h.len() {
-        let vs = h.vertex(i);
-        println!("{} {}", vs.len(), vs.iter().join(" "));
+    let (groups, _) = strongly_connected_components(&g);
+    println!("{}", groups.len());
+    for g in groups {
+        println!("{} {}", g.len(), g.iter().join(" "));
     }
 }
