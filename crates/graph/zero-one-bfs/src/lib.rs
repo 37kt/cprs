@@ -10,6 +10,14 @@ where
     pub prev: Vec<usize>,
 }
 
+/// 0-1 BFS  
+/// 辺の重みが 0 か 1 のグラフ上で、始点から各頂点への最短距離を求める
+///
+/// # 戻り値
+///
+/// ZeroOneBFSResult
+/// - dist: 始点から各頂点への最短距離
+/// - prev: 始点から各頂点への最短経路における前の頂点
 pub fn zero_one_bfs<V, T>(g: &Graph<V, T>, starts: &[usize], inf: T) -> ZeroOneBFSResult<T>
 where
     V: Clone,
@@ -50,6 +58,8 @@ impl<T> ZeroOneBFSResult<T>
 where
     T: Clone + Ord + Add<Output = T> + Default,
 {
+    /// 始点から頂点 v への最短経路を求める  
+    /// 経路が存在しない場合は None を返す
     pub fn path(&self, mut v: usize) -> Option<Vec<usize>> {
         if self.dist[v].clone() != T::default() && self.prev[v] == !0 {
             return None;

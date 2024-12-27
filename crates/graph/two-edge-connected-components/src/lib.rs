@@ -27,6 +27,14 @@ fn dfs(
     }
 }
 
+/// 二辺連結成分分解をする  
+/// 橋を除いたときの連結成分を求める
+///
+/// # 戻り値
+///
+/// (groups, comp)
+/// - groups: 二辺連結成分のグループ
+/// - comp: 各頂点が属する二辺連結成分の番号
 pub fn two_edge_connected_components(g: &Graph<(), ()>) -> (Vec<Vec<usize>>, Vec<usize>) {
     let n = g.len();
     let m = g.edges_count();

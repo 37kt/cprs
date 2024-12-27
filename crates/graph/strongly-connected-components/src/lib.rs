@@ -1,8 +1,15 @@
 use graph::Graph;
 
-/// 強連結成分分解をし、縮約後のグラフを返す。
-/// 縮約後の頂点の値には、強連結成分に属する頂点番号が格納される。
-pub fn strongly_connected_components<V, E>(g: &Graph<V, E>) -> Graph<Vec<usize>, E>
+/// 強連結成分分解をする  
+///
+/// # 戻り値
+///
+/// (groups, comp)
+/// - groups: 強連結成分のグループ
+/// - comp: 各頂点が属する強連結成分の番号
+///
+/// グループはトポロジカル順序に並んでいる
+pub fn strongly_connected_components<V, E>(g: &Graph<V, E>) -> (Vec<Vec<usize>>, Vec<usize>)
 where
     V: Clone,
     E: Clone,
@@ -26,17 +33,7 @@ where
         scc.comp[v] = scc.m - 1 - scc.comp[v];
         groups[scc.comp[v]].push(v);
     }
-    let mut edges = vec![];
-    for v in 0..n {
-        for (u, w) in &g[v] {
-            let a = scc.comp[v];
-            let b = scc.comp[*u];
-            if a != b {
-                edges.push((a, b, w.clone()));
-            }
-        }
-    }
-    Graph::from_vertices_and_directed_edges(&groups, &edges)
+    (groups, scc.comp)
 }
 
 impl Scc {

@@ -3,6 +3,7 @@
 
 use max_flow::{FlowType, MaxFlow};
 
+/// 流量の下限も指定されている場合の最大流を求める
 pub struct MaxFlowLowerBound {
     n: usize,
     mf: MaxFlow,
@@ -10,6 +11,7 @@ pub struct MaxFlowLowerBound {
 }
 
 impl MaxFlowLowerBound {
+    /// 頂点数 n で初期化する
     pub fn new(n: usize) -> Self {
         Self {
             n,
@@ -18,7 +20,7 @@ impl MaxFlowLowerBound {
         }
     }
 
-    // from->to に流量制約 [lower, upper] の辺を張る
+    /// from->to に流量制約 \[lower, upper\] の辺を張る
     pub fn add_edge(&mut self, from: usize, to: usize, lower: FlowType, upper: FlowType) {
         assert!(from != to);
         assert!(0 <= lower && lower <= upper);
@@ -30,6 +32,8 @@ impl MaxFlowLowerBound {
         self.sum_lower += lower;
     }
 
+    /// s->t への最大流を求める  
+    /// 流量の制約を満たすフローが存在しない場合は None を返す
     pub fn max_flow(&mut self, s: usize, t: usize) -> Option<FlowType> {
         let ss = self.n;
         let tt = self.n + 1;

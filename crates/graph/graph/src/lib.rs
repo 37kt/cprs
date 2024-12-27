@@ -1,5 +1,6 @@
 use std::ops::Index;
 
+/// 隣接リスト
 #[derive(Clone)]
 pub struct Graph<V, E>
 where
@@ -13,16 +14,21 @@ where
     edges_count: usize,
 }
 
+/// グリッドグラフの 4 近傍  
+/// 上, 左, 下, 右
 pub const GRID_NEIGHBOURS_4: &[(usize, usize)] = &[(!0, 0), (0, !0), (1, 0), (0, 1)];
+
+/// グリッドグラフの 8 近傍  
+/// 上, 左, 下, 右, 左上, 左下, 右下, 右上
 pub const GRID_NEIGHBOURS_8: &[(usize, usize)] = &[
     (!0, 0),
     (0, !0),
     (1, 0),
     (0, 1),
     (!0, !0),
-    (!0, 1),
     (1, !0),
     (1, 1),
+    (!0, 1),
 ];
 
 impl<V, E> Graph<V, E>
@@ -30,6 +36,7 @@ where
     V: Clone,
     E: Clone,
 {
+    /// 頂点重みと重み付き有向辺からグラフを構築する
     pub fn from_vertices_and_directed_edges(vertices: &[V], edges: &[(usize, usize, E)]) -> Self {
         if edges.is_empty() {
             return Self {
@@ -68,6 +75,7 @@ where
         }
     }
 
+    /// 頂点重みと重み付き無向辺からグラフを構築する
     pub fn from_vertices_and_undirected_edges(vertices: &[V], edges: &[(usize, usize, E)]) -> Self {
         if edges.is_empty() {
             return Self {
@@ -122,29 +130,41 @@ where
         }
     }
 
+    /// 頂点数を返す
     pub fn len(&self) -> usize {
         self.vertices.len()
     }
 
+    /// 辺数を返す
     pub fn edges_count(&self) -> usize {
         self.edges_count
     }
 
+    /// 頂点重みを返す
     pub fn vertex(&self, v: usize) -> &V {
         &self.vertices[v]
     }
 
+    /// 頂点 v から出る辺を返す  
+    /// g\[v\] と同じ
     pub fn edges(&self, v: usize) -> &[(usize, E)] {
         let l = self.pos[v];
         let r = self.pos[v + 1];
         &self.edges[l..r]
     }
 
+    /// 頂点 v の i 番目の辺の id を返す  
     pub fn edge_id(&self, v: usize, i: usize) -> usize {
         self.edge_id[self.pos[v] + i]
     }
 
-    /// (i, j) -> i * w + j
+    /// グリッドからグラフを構築する
+    ///
+    /// # 引数
+    ///
+    /// * `grid` - グリッド
+    /// * `neighbours` - 近傍
+    /// * `cost` - grid の値から重みを計算する関数
     pub fn from_grid(
         grid: &Vec<Vec<V>>,
         neighbours: &[(usize, usize)],
@@ -190,10 +210,12 @@ impl<E> Graph<(), E>
 where
     E: Clone,
 {
+    /// 重み付き有向辺からグラフを構築する
     pub fn from_directed_edges(n: usize, edges: &[(usize, usize, E)]) -> Self {
         Self::from_vertices_and_directed_edges(&vec![(); n], edges)
     }
 
+    /// 重み付き無向辺からグラフを構築する
     pub fn from_undirected_edges(n: usize, edges: &[(usize, usize, E)]) -> Self {
         Self::from_vertices_and_undirected_edges(&vec![(); n], edges)
     }
@@ -203,6 +225,7 @@ impl<V> Graph<V, ()>
 where
     V: Clone,
 {
+    /// 頂点重みと重みなし有向辺からグラフを構築する
     pub fn from_vertices_and_unweighted_directed_edges(
         vertices: &[V],
         edges: &[(usize, usize)],
@@ -213,6 +236,7 @@ where
         )
     }
 
+    /// 頂点重みと重みなし無向辺からグラフを構築する
     pub fn from_vertices_and_unweighted_undirected_edges(
         vertices: &[V],
         edges: &[(usize, usize)],
@@ -225,6 +249,7 @@ where
 }
 
 impl Graph<(), ()> {
+    /// 重みなし有向辺からグラフを構築する
     pub fn from_unweighted_directed_edges(n: usize, edges: &[(usize, usize)]) -> Self {
         Self::from_directed_edges(
             n,
@@ -232,6 +257,7 @@ impl Graph<(), ()> {
         )
     }
 
+    /// 重みなし無向辺からグラフを構築する
     pub fn from_unweighted_undirected_edges(n: usize, edges: &[(usize, usize)]) -> Self {
         Self::from_undirected_edges(
             n,

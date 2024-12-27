@@ -24,6 +24,7 @@ pub struct Edge {
 }
 
 impl MaxFlow {
+    /// 頂点数 n で初期化する
     pub fn new(n: usize) -> Self {
         Self {
             n,
@@ -35,6 +36,7 @@ impl MaxFlow {
         }
     }
 
+    /// 頂点 from から頂点 to に容量 cap の辺を追加する
     pub fn add_edge(&mut self, from: usize, to: usize, cap: FlowType) -> usize {
         assert!(from != to);
         assert!(from < self.n);
@@ -50,6 +52,7 @@ impl MaxFlow {
         m / 2
     }
 
+    /// 頂点 s から頂点 t への最大流を求める
     pub fn max_flow(&mut self, s: usize, t: usize) -> FlowType {
         assert!(s != t);
         let max_cap = self.edges.iter().map(|e| e.cap).max().unwrap_or(0);
@@ -67,6 +70,8 @@ impl MaxFlow {
         flow
     }
 
+    /// 頂点 s から到達可能な頂点の集合を求める  
+    /// max_flow の後に呼び出すこと
     pub fn min_cut(&self, s: usize) -> Vec<bool> {
         let mut vis = vec![false; self.n];
         let mut q = VecDeque::new();
@@ -86,6 +91,8 @@ impl MaxFlow {
         vis
     }
 
+    /// 辺の情報を取得する  
+    /// max_flow の後に呼び出すこと
     pub fn edges(&self) -> Vec<Edge> {
         (0..self.edges.len())
             .step_by(2)

@@ -7,6 +7,16 @@ type Cost3 = [Cost2; 2];
 const S: usize = !0;
 const T: usize = !1;
 
+/// Project Selection Problem  
+///
+/// # 概要
+/// n 個のアイテムについて 0 か 1 を選ぶ。  
+///
+/// - アイテム i について選択肢 x を選ぶとコストがかかる
+/// - アイテム i, j についてそれぞれ選択肢 x, y を選ぶとコストがかかる
+/// - アイテム i, j, k についてそれぞれ選択肢 x, y, z を選ぶとコストがかかる
+///
+/// といった条件がある。このときの最小コストとそれを達成する選択肢の組を求める。
 #[derive(Clone)]
 pub struct ProjectSelection {
     n_item: usize,
@@ -27,49 +37,59 @@ impl ProjectSelection {
         }
     }
 
+    /// 選択肢の選び方に依存しないコストを追加する
     pub fn add_cost(&mut self, cost: i64) {
         self.cost0 += cost;
     }
 
+    /// 選択肢の選び方に依存しない利益を追加する
     pub fn add_profit(&mut self, profit: i64) {
         self.add_cost(-profit);
     }
 
-    pub fn add_cost_single(&mut self, i: usize, cost: Cost1) {
+    /// アイテム i について選択肢 j を選ぶとコスト cost\[j\] かかるという条件を追加する
+    pub fn add_cost_1item(&mut self, i: usize, cost: Cost1) {
         self.cost1[i][0] += cost[0];
         self.cost1[i][1] += cost[1];
     }
 
-    pub fn add_profit_single(&mut self, i: usize, profit: Cost1) {
-        self.add_cost_single(i, [-profit[0], -profit[1]]);
+    /// アイテム i について選択肢 j を選ぶと利益 profit\[j\] が得られるという条件を追加する
+    pub fn add_profit_1item(&mut self, i: usize, profit: Cost1) {
+        self.add_cost_1item(i, [-profit[0], -profit[1]]);
     }
 
-    pub fn add_cost_single_0(&mut self, i: usize, cost: i64) {
-        self.add_cost_single(i, [cost, 0]);
+    /// アイテム i について選択肢 0 を選ぶとコスト cost かかるという条件を追加する
+    pub fn add_cost_1item_0(&mut self, i: usize, cost: i64) {
+        self.add_cost_1item(i, [cost, 0]);
     }
 
-    pub fn add_profit_single_0(&mut self, i: usize, profit: i64) {
-        self.add_profit_single(i, [profit, 0]);
+    /// アイテム i について選択肢 0 を選ぶと利益 profit が得られるという条件を追加する
+    pub fn add_profit_1item_0(&mut self, i: usize, profit: i64) {
+        self.add_profit_1item(i, [profit, 0]);
     }
 
-    pub fn add_cost_single_1(&mut self, i: usize, cost: i64) {
-        self.add_cost_single(i, [0, cost]);
+    /// アイテム i について選択肢 1 を選ぶとコスト cost かかるという条件を追加する
+    pub fn add_cost_1item_1(&mut self, i: usize, cost: i64) {
+        self.add_cost_1item(i, [0, cost]);
     }
 
-    pub fn add_profit_single_1(&mut self, i: usize, profit: i64) {
-        self.add_profit_single(i, [0, profit]);
+    /// アイテム i について選択肢 1 を選ぶと利益 profit が得られるという条件を追加する
+    pub fn add_profit_1item_1(&mut self, i: usize, profit: i64) {
+        self.add_profit_1item(i, [0, profit]);
     }
 
-    pub fn add_cost_double(&mut self, i: usize, j: usize, cost: Cost2) {
+    /// アイテム i, j についてそれぞれ選択肢 x, y を選ぶとコスト cost\[x\]\[y\] かかるという条件を追加する
+    pub fn add_cost_2items(&mut self, i: usize, j: usize, cost: Cost2) {
         assert!(i != j);
         self.add_cost(cost[0][0]);
-        self.add_cost_single_1(i, cost[1][0] - cost[0][0]);
-        self.add_cost_single_1(j, cost[1][1] - cost[1][0]);
-        self.add_cost_double_01(i, j, (cost[0][1] + cost[1][0]) - (cost[0][0] + cost[1][1]));
+        self.add_cost_1item_1(i, cost[1][0] - cost[0][0]);
+        self.add_cost_1item_1(j, cost[1][1] - cost[1][0]);
+        self.add_cost_2items_01(i, j, (cost[0][1] + cost[1][0]) - (cost[0][0] + cost[1][1]));
     }
 
-    pub fn add_profit_double(&mut self, i: usize, j: usize, profit: Cost2) {
-        self.add_cost_double(
+    /// アイテム i, j についてそれぞれ選択肢 x, y を選ぶと利益 profit\[x\]\[y\] が得られるという条件を追加する
+    pub fn add_profit_2items(&mut self, i: usize, j: usize, profit: Cost2) {
+        self.add_cost_2items(
             i,
             j,
             [
@@ -79,32 +99,39 @@ impl ProjectSelection {
         );
     }
 
-    pub fn add_cost_double_01(&mut self, i: usize, j: usize, cost: i64) {
+    /// アイテム i, j についてそれぞれ選択肢 0, 1 を選ぶとコスト cost かかるという条件を追加する
+    pub fn add_cost_2items_01(&mut self, i: usize, j: usize, cost: i64) {
         assert!(i != j);
         self.add_edge(i, j, cost);
     }
 
-    pub fn add_cost_double_10(&mut self, i: usize, j: usize, cost: i64) {
-        self.add_cost_double_01(j, i, cost);
+    /// アイテム i, j についてそれぞれ選択肢 1, 0 を選ぶとコスト cost かかるという条件を追加する
+    pub fn add_cost_2items_10(&mut self, i: usize, j: usize, cost: i64) {
+        self.add_cost_2items_01(j, i, cost);
     }
 
-    pub fn add_cost_double_not_same(&mut self, i: usize, j: usize, cost: i64) {
-        self.add_cost_double(i, j, [[0, cost], [cost, 0]]);
+    /// アイテム i, j について異なる選択肢を選ぶとコスト cost かかるという条件を追加する
+    pub fn add_cost_2items_not_same(&mut self, i: usize, j: usize, cost: i64) {
+        self.add_cost_2items(i, j, [[0, cost], [cost, 0]]);
     }
 
-    pub fn add_profit_double_00(&mut self, i: usize, j: usize, profit: i64) {
-        self.add_profit_double(i, j, [[profit, 0], [0, 0]]);
+    /// アイテム i, j についてどちらも選択肢 0 を選ぶと利益 profit が得られるという条件を追加する
+    pub fn add_profit_2items_00(&mut self, i: usize, j: usize, profit: i64) {
+        self.add_profit_2items(i, j, [[profit, 0], [0, 0]]);
     }
 
-    pub fn add_profit_double_11(&mut self, i: usize, j: usize, profit: i64) {
-        self.add_profit_double(i, j, [[0, 0], [0, profit]]);
+    /// アイテム i, j についてどちらも選択肢 1 を選ぶと利益 profit が得られるという条件を追加する
+    pub fn add_profit_2items_11(&mut self, i: usize, j: usize, profit: i64) {
+        self.add_profit_2items(i, j, [[0, 0], [0, profit]]);
     }
 
-    pub fn add_profit_double_same(&mut self, i: usize, j: usize, profit: i64) {
-        self.add_profit_double(i, j, [[profit, 0], [0, profit]]);
+    /// アイテム i, j について同じ選択肢を選ぶと利益 profit が得られるという条件を追加する
+    pub fn add_profit_2items_same(&mut self, i: usize, j: usize, profit: i64) {
+        self.add_profit_2items(i, j, [[profit, 0], [0, profit]]);
     }
 
-    pub fn add_cost_triple(&mut self, i: usize, j: usize, k: usize, cost: Cost3) {
+    /// アイテム i, j, k についてそれぞれ選択肢 x, y, z を選ぶとコスト cost\[x\]\[y\]\[z\] かかるという条件を追加する
+    pub fn add_cost_3items(&mut self, i: usize, j: usize, k: usize, cost: Cost3) {
         assert!(i != j && j != k && k != i);
         let a = cost[0][0][0];
         let b = cost[0][0][1];
@@ -123,12 +150,12 @@ impl ProjectSelection {
             let p23 = (b + c) - (a + d);
             let p31 = (b + e) - (a + f);
             self.add_cost(a);
-            self.add_cost_single_1(i, p1);
-            self.add_cost_single_1(j, p2);
-            self.add_cost_single_1(k, p3);
-            self.add_cost_double_01(i, j, p12);
-            self.add_cost_double_01(j, k, p23);
-            self.add_cost_double_01(k, i, p31);
+            self.add_cost_1item_1(i, p1);
+            self.add_cost_1item_1(j, p2);
+            self.add_cost_1item_1(k, p3);
+            self.add_cost_2items_01(i, j, p12);
+            self.add_cost_2items_01(j, k, p23);
+            self.add_cost_2items_01(k, i, p31);
             self.add_profit_all_1(&[i, j, k], p);
         } else {
             let p1 = c - g;
@@ -138,18 +165,19 @@ impl ProjectSelection {
             let p32 = (f + g) - (e + h);
             let p13 = (d + g) - (c + h);
             self.add_cost(h);
-            self.add_cost_single_0(i, p1);
-            self.add_cost_single_0(j, p2);
-            self.add_cost_single_0(k, p3);
-            self.add_cost_double_10(i, j, p21);
-            self.add_cost_double_10(j, k, p32);
-            self.add_cost_double_10(k, i, p13);
+            self.add_cost_1item_0(i, p1);
+            self.add_cost_1item_0(j, p2);
+            self.add_cost_1item_0(k, p3);
+            self.add_cost_2items_10(i, j, p21);
+            self.add_cost_2items_10(j, k, p32);
+            self.add_cost_2items_10(k, i, p13);
             self.add_profit_all_0(&[i, j, k], -p);
         }
     }
 
-    pub fn add_profit_triple(&mut self, i: usize, j: usize, k: usize, profit: Cost3) {
-        self.add_cost_triple(
+    /// アイテム i, j, k についてそれぞれ選択肢 x, y, z を選ぶと利益 profit\[x\]\[y\]\[z\] が得られるという条件を追加する
+    pub fn add_profit_3items(&mut self, i: usize, j: usize, k: usize, profit: Cost3) {
+        self.add_cost_3items(
             i,
             j,
             k,
@@ -166,6 +194,7 @@ impl ProjectSelection {
         );
     }
 
+    /// アイテム is についてすべて選択肢 0 を選ぶと利益 profit が得られるという条件を追加する
     pub fn add_profit_all_0(&mut self, is: &[usize], profit: i64) {
         let n = is.len();
         let mut is = is.to_vec();
@@ -176,9 +205,9 @@ impl ProjectSelection {
         if is.len() == 0 {
             self.add_profit(profit);
         } else if is.len() == 1 {
-            self.add_profit_single_0(is[0], profit);
+            self.add_profit_1item_0(is[0], profit);
         } else if is.len() == 2 {
-            self.add_profit_double_00(is[0], is[1], profit);
+            self.add_profit_2items_00(is[0], is[1], profit);
         } else {
             self.add_profit(profit);
             let aux = self.n_item + self.n_aux;
@@ -190,6 +219,7 @@ impl ProjectSelection {
         }
     }
 
+    /// アイテム is についてすべて選択肢 1 を選ぶと利益 profit が得られるという条件を追加する
     pub fn add_profit_all_1(&mut self, is: &[usize], profit: i64) {
         let n = is.len();
         let mut is = is.to_vec();
@@ -200,9 +230,9 @@ impl ProjectSelection {
         if is.len() == 0 {
             self.add_profit(profit);
         } else if is.len() == 1 {
-            self.add_profit_single_1(is[0], profit);
+            self.add_profit_1item_1(is[0], profit);
         } else if is.len() == 2 {
-            self.add_profit_double_11(is[0], is[1], profit);
+            self.add_profit_2items_11(is[0], is[1], profit);
         } else {
             self.add_profit(profit);
             let aux = self.n_item + self.n_aux;
@@ -214,17 +244,20 @@ impl ProjectSelection {
         }
     }
 
+    /// アイテム is についてどれか 1 つでも選択肢 0 を選ぶとコスト cost かかるという条件を追加する
     pub fn add_cost_any_0(&mut self, is: &[usize], cost: i64) {
         self.add_cost(cost);
         self.add_profit_all_1(is, cost);
     }
 
+    /// アイテム is についてどれか 1 つでも選択肢 1 を選ぶとコスト cost かかるという条件を追加する
     pub fn add_cost_any_1(&mut self, is: &[usize], cost: i64) {
         self.add_cost(cost);
         self.add_profit_all_0(is, cost);
     }
 
-    pub fn min_cost(&mut self) -> (i64, Vec<bool>) {
+    /// 最小コストとそれを達成する選択肢の組を求める
+    pub fn min_cost(&mut self) -> (i64, Vec<usize>) {
         let mut g = MaxFlow::new(self.n_item + self.n_aux + 2);
         let s = self.n_item + self.n_aux;
         let t = s + 1;
@@ -257,16 +290,15 @@ impl ProjectSelection {
         let res = self.cost0 + g.max_flow(s, t);
         let mut cut = g.min_cut(s);
         cut.truncate(self.n_item);
-        for i in 0..self.n_item {
-            cut[i] = !cut[i];
-        }
-        (res, cut)
+        let choice = cut.iter().map(|&b| !b as usize).collect();
+        (res, choice)
     }
 
-    pub fn max_profit(&mut self) -> (i64, Vec<bool>) {
-        let (mut res, cut) = self.min_cost();
+    /// 最大利益とそれを達成する選択肢の組を求める
+    pub fn max_profit(&mut self) -> (i64, Vec<usize>) {
+        let (mut res, choice) = self.min_cost();
         res = -res;
-        (res, cut)
+        (res, choice)
     }
 
     fn add_edge(&mut self, i: usize, j: usize, cost: i64) {

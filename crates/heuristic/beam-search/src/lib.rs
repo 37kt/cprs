@@ -7,34 +7,52 @@ use std::{
     hash::{BuildHasherDefault, Hasher},
 };
 
+/// 状態を表す構造体に実装する関数
 pub trait State
 where
     Self: Clone,
 {
+    /// 現在のターン数を返す
     fn turn(&self) -> usize;
+
+    /// 現在のスコアを返す
     fn score(&self) -> i32;
+
+    /// 現在の状態のハッシュ値を返す
     fn hash(&self) -> u64;
+
+    /// 現在の状態が最終状態として有効かどうかを返す
     fn is_valid(&self) -> bool;
 }
 
+/// 状態を変化させる操作を表す構造体に実装する関数
 pub trait Action
 where
     Self: Clone + Sized,
 {
     type S: State;
 
+    /// 状態を変化させる
     fn apply(&self, state: &mut Self::S);
+
+    /// 状態を元に戻す
     fn revert(&self, state: &mut Self::S);
+
+    /// この操作によって消費されるターン数を返す
     fn comsumed_turns(&self) -> usize {
         1
     }
+
+    /// 状態に対して可能な操作を列挙する
     fn enumerate_actions(state: &Self::S, actions: &mut Vec<Self>);
 }
 
+/// ビーム幅を管理する構造体に実装する関数
 pub trait WidthManager {
     fn beam_width(&self, turn: usize, elapsed: f64) -> usize;
 }
 
+/// ビーム幅を固定する
 pub struct FixedWidthManager {
     width: usize,
 }
@@ -88,6 +106,13 @@ where
     A: Action<S = S>,
     W: WidthManager,
 {
+    /// ソルバーを構築する
+    ///
+    /// # 引数
+    ///
+    /// - `state`: 初期状態
+    /// - `turn`: 最大ターン数
+    /// - `width_manager`: ビーム幅を管理するひと
     pub fn new(state: S, turn: usize, width_manager: W) -> Self {
         const MAX_NODES: usize = 1 << 20;
         let nodes = vec![
@@ -276,6 +301,13 @@ where
         res
     }
 
+    /// ビームサーチを行う
+    ///
+    /// # 戻り値
+    ///
+    /// (actions, score)
+    /// - actions: 最適な操作の列
+    /// - score: 最適な操作のスコア
     pub fn solve(&mut self) -> (Vec<A>, i32) {
         let start = std::time::Instant::now();
         let mut cands: Vec<Vec<Candidate<A>>> =

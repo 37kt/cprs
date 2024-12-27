@@ -2,6 +2,7 @@ use std::ops::RangeBounds;
 
 use graph::Graph;
 
+/// 区間から区間に辺を張るテクニック  
 pub struct RangeEdgeGraph<E>
 where
     E: Clone + Default,
@@ -15,6 +16,7 @@ impl<E> RangeEdgeGraph<E>
 where
     E: Clone + Default,
 {
+    /// 頂点数 n で初期化する
     pub fn new(n: usize) -> Self {
         let mut s = Self {
             n,
@@ -32,6 +34,7 @@ where
         s
     }
 
+    /// 頂点集合 u から頂点集合 v に重み w の辺を張る
     pub fn add_edge(&mut self, u: impl RangeBounds<usize>, v: impl RangeBounds<usize>, w: E) {
         let (mut l1, mut r1) = range_to_pair(u, self.n);
         let (mut l2, mut r2) = range_to_pair(v, self.n);
@@ -70,6 +73,8 @@ where
         }
     }
 
+    /// 超頂点を用いてグラフを構築する  
+    /// 元の頂点番号とこのグラフの頂点番号は対応している
     pub fn build(&self) -> Graph<(), E> {
         Graph::from_directed_edges(self.m, &self.es)
     }

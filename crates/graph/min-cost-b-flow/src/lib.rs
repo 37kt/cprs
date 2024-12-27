@@ -16,6 +16,7 @@ pub struct Edge {
     pub flow: i64,
 }
 
+/// 最小費用 b-flow を求める
 pub struct MinCostBFlow {
     n: usize,
     edges: Vec<Edge_>,
@@ -32,6 +33,7 @@ pub struct MinCostBFlow {
 }
 
 impl MinCostBFlow {
+    /// 頂点数 0 で初期化する
     pub fn new() -> Self {
         Self {
             n: 0,
@@ -49,6 +51,8 @@ impl MinCostBFlow {
         }
     }
 
+    /// 頂点を追加する  
+    /// 追加された頂点の番号を返す
     pub fn add_vertex(&mut self) -> usize {
         self.n += 1;
         self.head.push(!0);
@@ -56,6 +60,8 @@ impl MinCostBFlow {
         self.n - 1
     }
 
+    /// 頂点をまとめて追加する  
+    /// 追加された頂点の番号を返す
     pub fn add_vertices(&mut self, size: usize) -> Vec<usize> {
         self.n += size;
         self.head.append(&mut vec![!0; size]);
@@ -63,6 +69,8 @@ impl MinCostBFlow {
         (self.n - size..self.n).collect()
     }
 
+    /// from->to に流量制約 [lower, upper] 、コスト cost の辺を張る  
+    /// 追加された辺の番号を返す
     pub fn add_edge(&mut self, from: usize, to: usize, lower: i64, upper: i64, cost: i64) -> usize {
         assert!(lower <= upper);
         assert!(from < self.n);
@@ -87,14 +95,17 @@ impl MinCostBFlow {
         m / 2
     }
 
+    /// 頂点 v に湧き出し amount を追加する
     pub fn add_supply(&mut self, v: usize, amount: i64) {
         self.b[v] += amount;
     }
 
+    /// 頂点 v に吸い込み amount を追加する
     pub fn add_demand(&mut self, v: usize, amount: i64) {
         self.b[v] -= amount;
     }
 
+    /// 辺の情報を取得する
     pub fn get_edge(&self, e: usize) -> Edge {
         assert!(e <= self.edges.len() / 2);
         let e = e * 2;
@@ -109,12 +120,19 @@ impl MinCostBFlow {
         }
     }
 
+    /// 辺の情報をまとめて取得する
     pub fn get_edges(&self) -> Vec<Edge> {
         (0..self.edges.len() / 2)
             .map(|e| self.get_edge(e))
             .collect()
     }
 
+    /// 最小費用 b-flow を求める  
+    ///
+    /// # 戻り値
+    ///
+    /// - Ok(最小費用): 最小費用
+    /// - Err(最小費用): 流量の制約を満たすフローが存在しない
     pub fn min_cost_b_flow(&mut self) -> Result<i64, i64> {
         self.potential.resize(self.n, 0);
         for u in 0..self.n {
@@ -161,7 +179,12 @@ impl MinCostBFlow {
         }
     }
 
-    /// (コスト, 流量)
+    /// s-t 間の最小費用最大流を求める
+    ///
+    /// # 戻り値
+    ///
+    /// - Ok(最小費用, 流量): 最小費用最大流
+    /// - Err(最小費用, 0): 流量の制約を満たすフローが存在しない
     pub fn min_cost_flow(&mut self, s: usize, t: usize) -> Result<(i64, i64), (i64, i64)> {
         assert!(s != t);
         let mut inf_flow = self.b[s].abs();
@@ -202,6 +225,7 @@ impl MinCostBFlow {
         Ok((mf_value, self.b[t]))
     }
 
+    /// 最小費用 b-flow の最小費用を i128 で返す
     pub fn get_result_value_i128(&mut self) -> i128 {
         let mut value = 0;
         for e in &self.edges {
@@ -210,6 +234,7 @@ impl MinCostBFlow {
         value / 2
     }
 
+    /// 各頂点のポテンシャルを求める
     pub fn get_potential(&mut self) -> Vec<i64> {
         self.potential = vec![0; self.n];
         for _ in 0..self.n {
@@ -268,18 +293,8 @@ impl MinCostBFlow {
     fn dual(&mut self, delta: i64) -> bool {
         self.dist = vec![UNREACHABLE; self.n];
         self.parent = vec![!0; self.n];
-        // self.excess_vs.retain(|v| self.b[*v] >= delta);
-        for i in (0..self.excess_vs.len()).rev() {
-            if self.b[self.excess_vs[i]] < delta {
-                self.excess_vs.swap_remove(i);
-            }
-        }
-        // self.deficit_vs.retain(|v| self.b[*v] <= -delta);
-        for i in (0..self.deficit_vs.len()).rev() {
-            if self.b[self.deficit_vs[i]] > -delta {
-                self.deficit_vs.swap_remove(i);
-            }
-        }
+        self.excess_vs.retain(|v| self.b[*v] >= delta);
+        self.deficit_vs.retain(|v| self.b[*v] <= -delta);
         for &v in &self.excess_vs {
             self.dist[v] = 0;
             self.pq.push(Reverse((0, v)));
