@@ -2,6 +2,9 @@
 data:
   _extendedDependsOn:
   - icon: ':heavy_check_mark:'
+    path: crates/algebraic/algebraic/src/lib.rs
+    title: crates/algebraic/algebraic/src/lib.rs
+  - icon: ':heavy_check_mark:'
     path: crates/convolution/and-convolution/src/lib.rs
     title: crates/convolution/and-convolution/src/lib.rs
   _extendedRequiredBy: []
@@ -27,6 +30,7 @@ data:
     {}\", c[i]);\n        if i < 1 << n - 1 {\n            print!(\" \");\n      \
     \  } else {\n            println!();\n        }\n    }\n}\n"
   dependsOn:
+  - crates/algebraic/algebraic/src/lib.rs
   - crates/convolution/and-convolution/src/lib.rs
   isVerificationFile: true
   path: verify/bitwise_and_convolution/src/main.rs

@@ -1,6 +1,9 @@
 ---
 data:
-  _extendedDependsOn: []
+  _extendedDependsOn:
+  - icon: ':warning:'
+    path: crates/data-structure/rollback-union-find/src/lib.rs
+    title: crates/data-structure/rollback-union-find/src/lib.rs
   _extendedRequiredBy: []
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
@@ -67,11 +70,12 @@ data:
     \ self.ri < self.reads.len() && self.reads[self.ri].0 == k - self.segsz {\n  \
     \                  self.uf.get(self.reads[self.ri].1.clone());\n             \
     \       self.ri += 1;\n                }\n            }\n        }\n    }\n}\n"
-  dependsOn: []
+  dependsOn:
+  - crates/data-structure/rollback-union-find/src/lib.rs
   isVerificationFile: false
   path: crates/algorithm/offline-dynamic-connectivity/src/lib.rs
   requiredBy: []
-  timestamp: '2024-05-09 13:55:09+09:00'
+  timestamp: '2024-12-26 06:54:01+00:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/dynamic_graph_vertex_add_component_sum/src/main.rs

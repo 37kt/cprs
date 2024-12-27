@@ -60,4 +60,4 @@ layout: document
 title: "\u62E1\u5F35 Block-Cut Tree"
 ---
 
-![extended-block-cut-tree](/docs/graph/extended-block-cut-tree/ebct.jpg)
+![extended-block-cut-tree](//docs/graph/extended-block-cut-tree/ebct.jpg)

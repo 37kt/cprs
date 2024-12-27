@@ -97,6 +97,12 @@ data:
     title: crates/tree/zero-one-on-tree/src/lib.rs
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
+    path: verify/bitwise_and_convolution/src/main.rs
+    title: verify/bitwise_and_convolution/src/main.rs
+  - icon: ':heavy_check_mark:'
+    path: verify/bitwise_xor_convolution/src/main.rs
+    title: verify/bitwise_xor_convolution/src/main.rs
+  - icon: ':heavy_check_mark:'
     path: verify/deque_operate_all_composite/src/main.rs
     title: verify/deque_operate_all_composite/src/main.rs
   - icon: ':heavy_check_mark:'
@@ -114,6 +120,12 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/dynamic_tree_vertex_set_path_composite/src/main.rs
     title: verify/dynamic_tree_vertex_set_path_composite/src/main.rs
+  - icon: ':heavy_check_mark:'
+    path: verify/gcd_convolution/src/main.rs
+    title: verify/gcd_convolution/src/main.rs
+  - icon: ':heavy_check_mark:'
+    path: verify/lcm_convolution/src/main.rs
+    title: verify/lcm_convolution/src/main.rs
   - icon: ':heavy_check_mark:'
     path: verify/point_add_range_sum/src/main.rs
     title: verify/point_add_range_sum/src/main.rs
@@ -257,8 +269,10 @@ data:
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/vertex_add_subtree_sum/src/main.rs
+  - verify/bitwise_and_convolution/src/main.rs
   - verify/vertex_add_path_sum/src/main.rs
   - verify/range_affine_range_sum/src/main.rs
+  - verify/bitwise_xor_convolution/src/main.rs
   - verify/vertex_set_path_composite/src/main.rs
   - verify/point_add_rectangle_sum_2/src/main.rs
   - verify/dynamic_tree_vertex_add_path_sum/src/main.rs
@@ -275,7 +289,9 @@ data:
   - verify/dynamic_sequence_range_affine_range_sum/src/main.rs
   - verify/static_range_inversions_query/src/main.rs
   - verify/vertex_get_range_contour_add_on_tree/src/main.rs
+  - verify/gcd_convolution/src/main.rs
   - verify/dynamic_tree_vertex_set_path_composite/src/main.rs
+  - verify/lcm_convolution/src/main.rs
   - verify/range_reverse_range_sum/src/main.rs
   - verify/queue_operate_all_composite/src/main.rs
 documentation_of: crates/algebraic/algebraic/src/lib.rs

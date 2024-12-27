@@ -2,6 +2,9 @@
 data:
   _extendedDependsOn:
   - icon: ':heavy_check_mark:'
+    path: crates/algebraic/algebraic/src/lib.rs
+    title: crates/algebraic/algebraic/src/lib.rs
+  - icon: ':heavy_check_mark:'
     path: crates/convolution/gcd-convolution/src/lib.rs
     title: crates/convolution/gcd-convolution/src/lib.rs
   _extendedRequiredBy: []
@@ -27,6 +30,7 @@ data:
     \    let c = gcd_convolution(a, b);\n    println!(\"{}\", c[1..].iter().join(\"\
     \ \"));\n}\n"
   dependsOn:
+  - crates/algebraic/algebraic/src/lib.rs
   - crates/convolution/gcd-convolution/src/lib.rs
   isVerificationFile: true
   path: verify/gcd_convolution/src/main.rs

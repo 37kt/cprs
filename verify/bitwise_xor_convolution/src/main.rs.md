@@ -2,6 +2,9 @@
 data:
   _extendedDependsOn:
   - icon: ':heavy_check_mark:'
+    path: crates/algebraic/algebraic/src/lib.rs
+    title: crates/algebraic/algebraic/src/lib.rs
+  - icon: ':heavy_check_mark:'
     path: crates/convolution/xor-convolution/src/lib.rs
     title: crates/convolution/xor-convolution/src/lib.rs
   _extendedRequiredBy: []
@@ -26,6 +29,7 @@ data:
     \ 1 << n],\n    }\n    let c = xor_convolution(a, b);\n    println!(\"{}\", c.iter().join(\"\
     \ \"));\n}\n"
   dependsOn:
+  - crates/algebraic/algebraic/src/lib.rs
   - crates/convolution/xor-convolution/src/lib.rs
   isVerificationFile: true
   path: verify/bitwise_xor_convolution/src/main.rs
