@@ -19,10 +19,16 @@ data:
     , line 288, in bundle\n    raise NotImplementedError\nNotImplementedError\n"
   code: "use std::{collections::VecDeque, ops::Add};\n\nuse graph::Graph;\n\npub struct\
     \ ZeroOneBFSResult<T>\nwhere\n    T: Clone + Ord + Add<Output = T> + Default,\n\
-    {\n    pub dist: Vec<T>,\n    pub prev: Vec<usize>,\n}\n\npub fn zero_one_bfs<V,\
-    \ T>(g: &Graph<V, T>, starts: &[usize], inf: T) -> ZeroOneBFSResult<T>\nwhere\n\
-    \    V: Clone,\n    T: Clone + Ord + Add<Output = T> + Default + From<u8>,\n{\n\
-    \    assert!(starts.len() > 0);\n    let zero = T::from(0);\n    let one = T::from(1);\n\
+    {\n    pub dist: Vec<T>,\n    pub prev: Vec<usize>,\n}\n\n/// 0-1 BFS  \n/// \u8FBA\
+    \u306E\u91CD\u307F\u304C 0 \u304B 1 \u306E\u30B0\u30E9\u30D5\u4E0A\u3067\u3001\
+    \u59CB\u70B9\u304B\u3089\u5404\u9802\u70B9\u3078\u306E\u6700\u77ED\u8DDD\u96E2\
+    \u3092\u6C42\u3081\u308B\n///\n/// # \u623B\u308A\u5024\n///\n/// ZeroOneBFSResult\n\
+    /// - dist: \u59CB\u70B9\u304B\u3089\u5404\u9802\u70B9\u3078\u306E\u6700\u77ED\
+    \u8DDD\u96E2\n/// - prev: \u59CB\u70B9\u304B\u3089\u5404\u9802\u70B9\u3078\u306E\
+    \u6700\u77ED\u7D4C\u8DEF\u306B\u304A\u3051\u308B\u524D\u306E\u9802\u70B9\npub\
+    \ fn zero_one_bfs<V, T>(g: &Graph<V, T>, starts: &[usize], inf: T) -> ZeroOneBFSResult<T>\n\
+    where\n    V: Clone,\n    T: Clone + Ord + Add<Output = T> + Default + From<u8>,\n\
+    {\n    assert!(starts.len() > 0);\n    let zero = T::from(0);\n    let one = T::from(1);\n\
     \    let mut dist = vec![inf.clone(); g.len()];\n    let mut prev = vec![!0; g.len()];\n\
     \    let mut dq = VecDeque::new();\n    for &s in starts {\n        dist[s] =\
     \ T::default();\n        dq.push_back((zero.clone(), s));\n    }\n    while let\
@@ -34,17 +40,20 @@ data:
     \ *u));\n                } else {\n                    dq.push_back((t.clone(),\
     \ *u));\n                }\n            }\n        }\n    }\n    ZeroOneBFSResult\
     \ { dist, prev }\n}\n\nimpl<T> ZeroOneBFSResult<T>\nwhere\n    T: Clone + Ord\
-    \ + Add<Output = T> + Default,\n{\n    pub fn path(&self, mut v: usize) -> Option<Vec<usize>>\
-    \ {\n        if self.dist[v].clone() != T::default() && self.prev[v] == !0 {\n\
-    \            return None;\n        }\n        let mut path = vec![];\n       \
-    \ while v != !0 {\n            path.push(v);\n            v = self.prev[v];\n\
-    \        }\n        path.reverse();\n        Some(path)\n    }\n}\n"
+    \ + Add<Output = T> + Default,\n{\n    /// \u59CB\u70B9\u304B\u3089\u9802\u70B9\
+    \ v \u3078\u306E\u6700\u77ED\u7D4C\u8DEF\u3092\u6C42\u3081\u308B  \n    /// \u7D4C\
+    \u8DEF\u304C\u5B58\u5728\u3057\u306A\u3044\u5834\u5408\u306F None \u3092\u8FD4\
+    \u3059\n    pub fn path(&self, mut v: usize) -> Option<Vec<usize>> {\n       \
+    \ if self.dist[v].clone() != T::default() && self.prev[v] == !0 {\n          \
+    \  return None;\n        }\n        let mut path = vec![];\n        while v !=\
+    \ !0 {\n            path.push(v);\n            v = self.prev[v];\n        }\n\
+    \        path.reverse();\n        Some(path)\n    }\n}\n"
   dependsOn:
   - crates/graph/graph/src/lib.rs
   isVerificationFile: false
   path: crates/graph/zero-one-bfs/src/lib.rs
   requiredBy: []
-  timestamp: '2024-05-13 10:35:48+09:00'
+  timestamp: '2024-12-27 03:53:35+00:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: crates/graph/zero-one-bfs/src/lib.rs

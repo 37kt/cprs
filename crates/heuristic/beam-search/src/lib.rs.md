@@ -18,32 +18,50 @@ data:
   code: "// rhoo\u3055\u3093\u306E\u8A18\u4E8B\u3092\u53C2\u8003\u306B\u3055\u305B\
     \u3066\u3044\u305F\u3060\u304D\u307E\u3057\u305F\n// https://qiita.com/rhoo/items/2f647e32f6ff2c6ee056\n\
     \nuse std::{\n    cmp::Reverse,\n    collections::{HashMap, HashSet},\n    hash::{BuildHasherDefault,\
-    \ Hasher},\n};\n\npub trait State\nwhere\n    Self: Clone,\n{\n    fn turn(&self)\
-    \ -> usize;\n    fn score(&self) -> i32;\n    fn hash(&self) -> u64;\n    fn is_valid(&self)\
-    \ -> bool;\n}\n\npub trait Action\nwhere\n    Self: Clone + Sized,\n{\n    type\
-    \ S: State;\n\n    fn apply(&self, state: &mut Self::S);\n    fn revert(&self,\
-    \ state: &mut Self::S);\n    fn comsumed_turns(&self) -> usize {\n        1\n\
-    \    }\n    fn enumerate_actions(state: &Self::S, actions: &mut Vec<Self>);\n\
-    }\n\npub trait WidthManager {\n    fn beam_width(&self, turn: usize, elapsed:\
-    \ f64) -> usize;\n}\n\npub struct FixedWidthManager {\n    width: usize,\n}\n\n\
-    impl FixedWidthManager {\n    pub fn new(width: usize) -> Self {\n        Self\
-    \ { width }\n    }\n}\n\nimpl WidthManager for FixedWidthManager {\n    fn beam_width(&self,\
-    \ _: usize, _: f64) -> usize {\n        self.width\n    }\n}\n\n#[derive(Clone,\
-    \ Default)]\nstruct Node<A: Action> {\n    action: Option<A>,\n    parent: u32,\n\
-    \    child: u32,\n    prev: u32,\n    next: u32,\n    refs: u32,\n    valid: u32,\n\
-    }\n\n#[derive(Clone)]\nstruct Candidate<A: Action> {\n    action: A,\n    parent:\
-    \ u32,\n    score: i32,\n    hash: u64,\n    valid: bool,\n}\n\npub struct BeamSearch<S:\
-    \ State, A: Action, W: WidthManager> {\n    state: S,\n    nodes: Vec<Node<A>>,\n\
-    \    que: Vec<u32>,\n    cur_node: usize,\n    free: Vec<u32>,\n    at: u32,\n\
-    \    max_turn: usize,\n    width_manager: W,\n}\n\nimpl<S, A, W> BeamSearch<S,\
-    \ A, W>\nwhere\n    S: State,\n    A: Action<S = S>,\n    W: WidthManager,\n{\n\
-    \    pub fn new(state: S, turn: usize, width_manager: W) -> Self {\n        const\
-    \ MAX_NODES: usize = 1 << 20;\n        let nodes = vec![\n            Node {\n\
-    \                action: None,\n                parent: !0,\n                child:\
-    \ !0,\n                prev: !0,\n                next: !0,\n                refs:\
-    \ 0,\n                valid: 0,\n            };\n            MAX_NODES\n     \
-    \   ];\n        let free = (1..MAX_NODES as u32).rev().collect();\n\n        Self\
-    \ {\n            state,\n            nodes,\n            que: Vec::with_capacity(MAX_NODES),\n\
+    \ Hasher},\n};\n\n/// \u72B6\u614B\u3092\u8868\u3059\u69CB\u9020\u4F53\u306B\u5B9F\
+    \u88C5\u3059\u308B\u95A2\u6570\npub trait State\nwhere\n    Self: Clone,\n{\n\
+    \    /// \u73FE\u5728\u306E\u30BF\u30FC\u30F3\u6570\u3092\u8FD4\u3059\n    fn\
+    \ turn(&self) -> usize;\n\n    /// \u73FE\u5728\u306E\u30B9\u30B3\u30A2\u3092\u8FD4\
+    \u3059\n    fn score(&self) -> i32;\n\n    /// \u73FE\u5728\u306E\u72B6\u614B\u306E\
+    \u30CF\u30C3\u30B7\u30E5\u5024\u3092\u8FD4\u3059\n    fn hash(&self) -> u64;\n\
+    \n    /// \u73FE\u5728\u306E\u72B6\u614B\u304C\u6700\u7D42\u72B6\u614B\u3068\u3057\
+    \u3066\u6709\u52B9\u304B\u3069\u3046\u304B\u3092\u8FD4\u3059\n    fn is_valid(&self)\
+    \ -> bool;\n}\n\n/// \u72B6\u614B\u3092\u5909\u5316\u3055\u305B\u308B\u64CD\u4F5C\
+    \u3092\u8868\u3059\u69CB\u9020\u4F53\u306B\u5B9F\u88C5\u3059\u308B\u95A2\u6570\
+    \npub trait Action\nwhere\n    Self: Clone + Sized,\n{\n    type S: State;\n\n\
+    \    /// \u72B6\u614B\u3092\u5909\u5316\u3055\u305B\u308B\n    fn apply(&self,\
+    \ state: &mut Self::S);\n\n    /// \u72B6\u614B\u3092\u5143\u306B\u623B\u3059\n\
+    \    fn revert(&self, state: &mut Self::S);\n\n    /// \u3053\u306E\u64CD\u4F5C\
+    \u306B\u3088\u3063\u3066\u6D88\u8CBB\u3055\u308C\u308B\u30BF\u30FC\u30F3\u6570\
+    \u3092\u8FD4\u3059\n    fn comsumed_turns(&self) -> usize {\n        1\n    }\n\
+    \n    /// \u72B6\u614B\u306B\u5BFE\u3057\u3066\u53EF\u80FD\u306A\u64CD\u4F5C\u3092\
+    \u5217\u6319\u3059\u308B\n    fn enumerate_actions(state: &Self::S, actions: &mut\
+    \ Vec<Self>);\n}\n\n/// \u30D3\u30FC\u30E0\u5E45\u3092\u7BA1\u7406\u3059\u308B\
+    \u69CB\u9020\u4F53\u306B\u5B9F\u88C5\u3059\u308B\u95A2\u6570\npub trait WidthManager\
+    \ {\n    fn beam_width(&self, turn: usize, elapsed: f64) -> usize;\n}\n\n/// \u30D3\
+    \u30FC\u30E0\u5E45\u3092\u56FA\u5B9A\u3059\u308B\npub struct FixedWidthManager\
+    \ {\n    width: usize,\n}\n\nimpl FixedWidthManager {\n    pub fn new(width: usize)\
+    \ -> Self {\n        Self { width }\n    }\n}\n\nimpl WidthManager for FixedWidthManager\
+    \ {\n    fn beam_width(&self, _: usize, _: f64) -> usize {\n        self.width\n\
+    \    }\n}\n\n#[derive(Clone, Default)]\nstruct Node<A: Action> {\n    action:\
+    \ Option<A>,\n    parent: u32,\n    child: u32,\n    prev: u32,\n    next: u32,\n\
+    \    refs: u32,\n    valid: u32,\n}\n\n#[derive(Clone)]\nstruct Candidate<A: Action>\
+    \ {\n    action: A,\n    parent: u32,\n    score: i32,\n    hash: u64,\n    valid:\
+    \ bool,\n}\n\npub struct BeamSearch<S: State, A: Action, W: WidthManager> {\n\
+    \    state: S,\n    nodes: Vec<Node<A>>,\n    que: Vec<u32>,\n    cur_node: usize,\n\
+    \    free: Vec<u32>,\n    at: u32,\n    max_turn: usize,\n    width_manager: W,\n\
+    }\n\nimpl<S, A, W> BeamSearch<S, A, W>\nwhere\n    S: State,\n    A: Action<S\
+    \ = S>,\n    W: WidthManager,\n{\n    /// \u30BD\u30EB\u30D0\u30FC\u3092\u69CB\
+    \u7BC9\u3059\u308B\n    ///\n    /// # \u5F15\u6570\n    ///\n    /// - `state`:\
+    \ \u521D\u671F\u72B6\u614B\n    /// - `turn`: \u6700\u5927\u30BF\u30FC\u30F3\u6570\
+    \n    /// - `width_manager`: \u30D3\u30FC\u30E0\u5E45\u3092\u7BA1\u7406\u3059\u308B\
+    \u3072\u3068\n    pub fn new(state: S, turn: usize, width_manager: W) -> Self\
+    \ {\n        const MAX_NODES: usize = 1 << 20;\n        let nodes = vec![\n  \
+    \          Node {\n                action: None,\n                parent: !0,\n\
+    \                child: !0,\n                prev: !0,\n                next:\
+    \ !0,\n                refs: 0,\n                valid: 0,\n            };\n \
+    \           MAX_NODES\n        ];\n        let free = (1..MAX_NODES as u32).rev().collect();\n\
+    \n        Self {\n            state,\n            nodes,\n            que: Vec::with_capacity(MAX_NODES),\n\
     \            cur_node: 0,\n            free,\n            at: 0,\n           \
     \ width_manager,\n            max_turn: turn,\n        }\n    }\n\n    fn add_node(&mut\
     \ self, cand: Candidate<A>) {\n        let next = self.nodes[cand.parent as usize].child;\n\
@@ -107,30 +125,34 @@ data:
     \ {\n                action: action.clone(),\n                parent: idx as u32,\n\
     \                score: self.state.score(),\n                hash: self.state.hash(),\n\
     \                valid: self.state.is_valid(),\n            });\n            action.revert(&mut\
-    \ self.state);\n            res += 1;\n        }\n        res\n    }\n\n    pub\
-    \ fn solve(&mut self) -> (Vec<A>, i32) {\n        let start = std::time::Instant::now();\n\
-    \        let mut cands: Vec<Vec<Candidate<A>>> =\n            (0..=self.max_turn).map(|_|\
-    \ vec![]).collect::<Vec<_>>();\n        let mut set = NopHashSet::default();\n\
-    \        // let mut best = None;\n        for t in 0..self.max_turn {\n      \
-    \      let w = self\n                .width_manager\n                .beam_width(t,\
-    \ start.elapsed().as_secs_f64());\n            if t != 0 {\n                let\
-    \ cands = &mut cands[t];\n                if cands.len() > w * 2 {\n         \
-    \           cands.select_nth_unstable_by_key(w * 2, |c| Reverse(c.score));\n \
-    \                   cands.truncate(w * 2);\n                }\n\n            \
-    \    cands.sort_unstable_by_key(|c| Reverse(c.score));\n                set.clear();\n\
-    \                let mut total = 0;\n                // self.update(cands.iter().map(|c|\
-    \ {\n                //     let f = total < w && set.insert(c.hash);\n       \
-    \         //     total += f as usize;\n                //     if f && best\n \
-    \               //         .as_ref()\n                //         .map_or(std::i32::MIN,\
-    \ |b: &Candidate<A>| b.score)\n                //         < c.score\n        \
-    \        //         && c.valid\n                //     {\n                // \
-    \        best = Some(c.clone());\n                //     }\n                //\
-    \     (c.clone(), f)\n                // }));\n                self.update(cands.iter().map(|c|\
-    \ {\n                    let f = total < w && set.insert(c.hash);\n          \
-    \          total += f as usize;\n                    (c.clone(), f)\n        \
-    \        }));\n            }\n            // if t < self.max_turn {\n        \
-    \    if t == 0 || cands[t].len() != 0 {\n                self.enum_cands(t, &mut\
-    \ cands);\n            }\n            // }\n        }\n\n        let best = cands[self.max_turn]\n\
+    \ self.state);\n            res += 1;\n        }\n        res\n    }\n\n    ///\
+    \ \u30D3\u30FC\u30E0\u30B5\u30FC\u30C1\u3092\u884C\u3046\n    ///\n    /// # \u623B\
+    \u308A\u5024\n    ///\n    /// (actions, score)\n    /// - actions: \u6700\u9069\
+    \u306A\u64CD\u4F5C\u306E\u5217\n    /// - score: \u6700\u9069\u306A\u64CD\u4F5C\
+    \u306E\u30B9\u30B3\u30A2\n    pub fn solve(&mut self) -> (Vec<A>, i32) {\n   \
+    \     let start = std::time::Instant::now();\n        let mut cands: Vec<Vec<Candidate<A>>>\
+    \ =\n            (0..=self.max_turn).map(|_| vec![]).collect::<Vec<_>>();\n  \
+    \      let mut set = NopHashSet::default();\n        // let mut best = None;\n\
+    \        for t in 0..self.max_turn {\n            let w = self\n             \
+    \   .width_manager\n                .beam_width(t, start.elapsed().as_secs_f64());\n\
+    \            if t != 0 {\n                let cands = &mut cands[t];\n       \
+    \         if cands.len() > w * 2 {\n                    cands.select_nth_unstable_by_key(w\
+    \ * 2, |c| Reverse(c.score));\n                    cands.truncate(w * 2);\n  \
+    \              }\n\n                cands.sort_unstable_by_key(|c| Reverse(c.score));\n\
+    \                set.clear();\n                let mut total = 0;\n          \
+    \      // self.update(cands.iter().map(|c| {\n                //     let f = total\
+    \ < w && set.insert(c.hash);\n                //     total += f as usize;\n  \
+    \              //     if f && best\n                //         .as_ref()\n   \
+    \             //         .map_or(std::i32::MIN, |b: &Candidate<A>| b.score)\n\
+    \                //         < c.score\n                //         && c.valid\n\
+    \                //     {\n                //         best = Some(c.clone());\n\
+    \                //     }\n                //     (c.clone(), f)\n           \
+    \     // }));\n                self.update(cands.iter().map(|c| {\n          \
+    \          let f = total < w && set.insert(c.hash);\n                    total\
+    \ += f as usize;\n                    (c.clone(), f)\n                }));\n \
+    \           }\n            // if t < self.max_turn {\n            if t == 0 ||\
+    \ cands[t].len() != 0 {\n                self.enum_cands(t, &mut cands);\n   \
+    \         }\n            // }\n        }\n\n        let best = cands[self.max_turn]\n\
     \            .iter()\n            .filter(|c| c.valid)\n            .max_by_key(|c|\
     \ c.score)\n            .cloned()\n            .unwrap();\n        let mut res\
     \ = vec![];\n        let mut idx = best.parent;\n        loop {\n            let\
@@ -148,7 +170,7 @@ data:
   isVerificationFile: false
   path: crates/heuristic/beam-search/src/lib.rs
   requiredBy: []
-  timestamp: '2024-06-19 10:50:00+09:00'
+  timestamp: '2024-12-27 03:53:35+00:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: crates/heuristic/beam-search/src/lib.rs

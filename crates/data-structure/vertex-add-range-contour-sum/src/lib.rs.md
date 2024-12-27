@@ -62,7 +62,7 @@ data:
   isVerificationFile: false
   path: crates/data-structure/vertex-add-range-contour-sum/src/lib.rs
   requiredBy: []
-  timestamp: '2024-12-26 06:54:01+00:00'
+  timestamp: '2024-12-27 03:53:35+00:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/vertex_add_range_contour_sum_on_tree/src/main.rs

@@ -65,7 +65,7 @@ data:
   isVerificationFile: false
   path: crates/tree/centroid-decomposition/src/lib.rs
   requiredBy: []
-  timestamp: '2024-09-20 10:29:02+09:00'
+  timestamp: '2024-12-27 03:53:35+00:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/frequency_table_of_tree_distance/src/main.rs

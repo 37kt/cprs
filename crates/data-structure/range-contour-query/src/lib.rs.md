@@ -139,7 +139,7 @@ data:
   requiredBy:
   - crates/data-structure/vertex-get-range-contour-add/src/lib.rs
   - crates/data-structure/vertex-add-range-contour-sum/src/lib.rs
-  timestamp: '2024-12-25 10:01:29+00:00'
+  timestamp: '2024-12-27 03:53:35+00:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: crates/data-structure/range-contour-query/src/lib.rs

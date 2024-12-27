@@ -75,7 +75,7 @@ data:
   isVerificationFile: false
   path: crates/graph/compressed-tree/src/lib.rs
   requiredBy: []
-  timestamp: '2024-12-26 06:54:01+00:00'
+  timestamp: '2024-12-27 03:53:35+00:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: crates/graph/compressed-tree/src/lib.rs

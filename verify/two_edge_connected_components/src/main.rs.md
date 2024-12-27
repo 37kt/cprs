@@ -35,7 +35,7 @@ data:
   isVerificationFile: true
   path: verify/two_edge_connected_components/src/main.rs
   requiredBy: []
-  timestamp: '2024-04-10 09:38:39+09:00'
+  timestamp: '2024-12-27 03:53:35+00:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/two_edge_connected_components/src/main.rs

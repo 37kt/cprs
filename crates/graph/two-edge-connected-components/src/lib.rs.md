@@ -27,25 +27,30 @@ data:
     \ used[e] {\n            continue;\n        }\n        if par[u] != !1 {\n   \
     \         imos[v] += 1;\n            imos[u] -= 1;\n            used[e] = true;\n\
     \        } else {\n            used[e] = true;\n            par[u] = v;\n    \
-    \        dfs(u, g, ord, par, imos, used);\n        }\n    }\n}\n\npub fn two_edge_connected_components(g:\
-    \ &Graph<(), ()>) -> (Vec<Vec<usize>>, Vec<usize>) {\n    let n = g.len();\n \
-    \   let m = g.edges_count();\n    let mut ord = vec![];\n    let mut par = vec![!1;\
-    \ n];\n    let mut imos = vec![0; n];\n    let mut used = vec![false; m];\n  \
-    \  for v in 0..n {\n        if par[v] == !1 {\n            par[v] = !0;\n    \
-    \        dfs(v, g, &mut ord, &mut par, &mut imos, &mut used);\n        }\n   \
-    \ }\n    for &v in ord.iter().rev() {\n        if par[v] != !0 {\n           \
-    \ imos[par[v]] += imos[v];\n        }\n    }\n    let mut comp = vec![!0; n];\n\
-    \    let mut comp_cnt = 0;\n    for &v in &ord {\n        if imos[v] == 0 {\n\
-    \            comp[v] = comp_cnt;\n            comp_cnt += 1;\n        } else {\n\
-    \            comp[v] = comp[par[v]];\n        }\n    }\n    let mut groups = vec![vec![];\
-    \ comp_cnt];\n    for v in 0..n {\n        groups[comp[v]].push(v);\n    }\n \
-    \   (groups, comp)\n}\n"
+    \        dfs(u, g, ord, par, imos, used);\n        }\n    }\n}\n\n/// \u4E8C\u8FBA\
+    \u9023\u7D50\u6210\u5206\u5206\u89E3\u3092\u3059\u308B  \n/// \u6A4B\u3092\u9664\
+    \u3044\u305F\u3068\u304D\u306E\u9023\u7D50\u6210\u5206\u3092\u6C42\u3081\u308B\
+    \n///\n/// # \u623B\u308A\u5024\n///\n/// (groups, comp)\n/// - groups: \u4E8C\
+    \u8FBA\u9023\u7D50\u6210\u5206\u306E\u30B0\u30EB\u30FC\u30D7\n/// - comp: \u5404\
+    \u9802\u70B9\u304C\u5C5E\u3059\u308B\u4E8C\u8FBA\u9023\u7D50\u6210\u5206\u306E\
+    \u756A\u53F7\npub fn two_edge_connected_components(g: &Graph<(), ()>) -> (Vec<Vec<usize>>,\
+    \ Vec<usize>) {\n    let n = g.len();\n    let m = g.edges_count();\n    let mut\
+    \ ord = vec![];\n    let mut par = vec![!1; n];\n    let mut imos = vec![0; n];\n\
+    \    let mut used = vec![false; m];\n    for v in 0..n {\n        if par[v] ==\
+    \ !1 {\n            par[v] = !0;\n            dfs(v, g, &mut ord, &mut par, &mut\
+    \ imos, &mut used);\n        }\n    }\n    for &v in ord.iter().rev() {\n    \
+    \    if par[v] != !0 {\n            imos[par[v]] += imos[v];\n        }\n    }\n\
+    \    let mut comp = vec![!0; n];\n    let mut comp_cnt = 0;\n    for &v in &ord\
+    \ {\n        if imos[v] == 0 {\n            comp[v] = comp_cnt;\n            comp_cnt\
+    \ += 1;\n        } else {\n            comp[v] = comp[par[v]];\n        }\n  \
+    \  }\n    let mut groups = vec![vec![]; comp_cnt];\n    for v in 0..n {\n    \
+    \    groups[comp[v]].push(v);\n    }\n    (groups, comp)\n}\n"
   dependsOn:
   - crates/graph/graph/src/lib.rs
   isVerificationFile: false
   path: crates/graph/two-edge-connected-components/src/lib.rs
   requiredBy: []
-  timestamp: '2024-04-10 09:38:39+09:00'
+  timestamp: '2024-12-27 03:53:35+00:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/two_edge_connected_components/src/main.rs

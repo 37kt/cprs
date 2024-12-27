@@ -50,7 +50,7 @@ data:
   isVerificationFile: true
   path: verify/vertex_add_subtree_sum/src/main.rs
   requiredBy: []
-  timestamp: '2024-12-26 06:54:01+00:00'
+  timestamp: '2024-12-27 03:53:35+00:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/vertex_add_subtree_sum/src/main.rs

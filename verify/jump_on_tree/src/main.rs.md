@@ -37,7 +37,7 @@ data:
   isVerificationFile: true
   path: verify/jump_on_tree/src/main.rs
   requiredBy: []
-  timestamp: '2024-12-25 08:18:46+00:00'
+  timestamp: '2024-12-27 03:53:35+00:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/jump_on_tree/src/main.rs

@@ -151,7 +151,7 @@ data:
   - crates/tree/static-top-tree-dp/src/lib.rs
   - crates/data-structure/range-contour-query/src/lib.rs
   - crates/data-structure/tree-query/src/lib.rs
-  timestamp: '2024-12-25 08:18:46+00:00'
+  timestamp: '2024-12-27 03:53:35+00:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/lca/src/main.rs

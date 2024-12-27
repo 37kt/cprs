@@ -36,7 +36,7 @@ data:
   isVerificationFile: true
   path: verify/two_sat/src/main.rs
   requiredBy: []
-  timestamp: '2024-04-07 08:56:09+09:00'
+  timestamp: '2024-12-27 03:53:35+00:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/two_sat/src/main.rs
