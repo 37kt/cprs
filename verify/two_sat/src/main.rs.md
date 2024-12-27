@@ -20,23 +20,25 @@ data:
     \  File \"/opt/hostedtoolcache/Python/3.12.8/x64/lib/python3.12/site-packages/onlinejudge_verify/languages/rust.py\"\
     , line 288, in bundle\n    raise NotImplementedError\nNotImplementedError\n"
   code: "// verification-helper: PROBLEM https://judge.yosupo.jp/problem/two_sat\n\
-    \nuse proconio::input;\nuse two_satisfiability::TwoSatisfiability;\n\n#[proconio::fastout]\n\
-    fn main() {\n    input! {\n        _: String,\n        _: String,\n        n:\
-    \ usize,\n        m: usize,\n    }\n    let mut ts = TwoSatisfiability::new(n);\n\
-    \    for _ in 0..m {\n        input! {\n            a: i64,\n            b: i64,\n\
-    \            _: i64,\n        }\n        let a = if a < 0 { a } else { a - 1 }\
-    \ as usize;\n        let b = if b < 0 { b } else { b - 1 } as usize;\n       \
-    \ ts.add(a, b);\n    }\n    if let Some(res) = ts.solve() {\n        println!(\"\
-    s SATISFIABLE\");\n        print!(\"v \");\n        for i in 0..n {\n        \
-    \    if !res[i] {\n                print!(\"-\");\n            }\n           \
-    \ print!(\"{} \", i + 1);\n        }\n        println!(\"0\");\n    } else {\n\
-    \        println!(\"s UNSATISFIABLE\");\n    }\n}\n"
+    \nuse proconio::{fastout, input};\nuse two_satisfiability::TwoSatisfiability;\n\
+    \n#[fastout]\nfn main() {\n    input! {\n        _: String,\n        _: String,\n\
+    \        n: usize,\n        m: usize,\n    }\n    let mut ts = TwoSatisfiability::new(n);\n\
+    \    for _ in 0..m {\n        input! {\n            i: i64,\n            j: i64,\n\
+    \            _: i64,\n        }\n        let (i, f) = if i < 0 {\n           \
+    \ ((-i - 1) as usize, false)\n        } else {\n            ((i - 1) as usize,\
+    \ true)\n        };\n        let (j, g) = if j < 0 {\n            ((-j - 1) as\
+    \ usize, false)\n        } else {\n            ((j - 1) as usize, true)\n    \
+    \    };\n        ts.or(i, f, j, g);\n    }\n    if let Some(res) = ts.solve()\
+    \ {\n        println!(\"s SATISFIABLE\");\n        print!(\"v \");\n        for\
+    \ i in 0..n {\n            if !res[i] {\n                print!(\"-\");\n    \
+    \        }\n            print!(\"{} \", i + 1);\n        }\n        println!(\"\
+    0\");\n    } else {\n        println!(\"s UNSATISFIABLE\");\n    }\n}\n"
   dependsOn:
   - crates/math/two-satisfiability/src/lib.rs
   isVerificationFile: true
   path: verify/two_sat/src/main.rs
   requiredBy: []
-  timestamp: '2024-12-27 03:53:35+00:00'
+  timestamp: '2024-12-27 04:46:01+00:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/two_sat/src/main.rs
