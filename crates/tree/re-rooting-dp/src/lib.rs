@@ -1,6 +1,7 @@
 use algebraic::{Act, Monoid};
 use graph::Graph;
 
+/// 全方位木 dp
 pub struct ReRootingDP<S>
 where
     S: Clone,
@@ -15,6 +16,7 @@ impl<T> ReRootingDP<T>
 where
     T: Clone,
 {
+    /// 全方位木 dp を実行する
     pub fn build<M, V, E>(g: &Graph<V::S, E::S>) -> Self
     where
         M: Monoid<S = T>,
@@ -99,20 +101,28 @@ where
         Self { par, dp, dpl, dph }
     }
 
+    /// `v` を根としたときの `dp[v]` の値を返す
     pub fn prod(&self, v: usize) -> T {
         self.dp[v].clone()
     }
 
+    /// `p` を根としたときの `dp[v]` の値を返す  
+    /// `p` = `!0` のときは `v` を根としたときの `dp[v]` の値を返す  
+    /// `v` と `p` は直接辺で結ばれている必要がある
     pub fn prod_subtree(&self, v: usize, p: usize) -> T {
         if p == !0 {
             self.dp[v].clone()
         } else if self.par[v] == p {
             self.dpl[v].clone()
-        } else {
+        } else if self.par[p] == v {
             self.dph[p].clone()
+        } else {
+            panic!("v and p are not connected by an edge");
         }
     }
 
+    /// 0 を根としたときの `v` の親を返す  
+    /// `v` が根のときは `!0` を返す
     pub fn par(&self, v: usize) -> usize {
         self.par[v]
     }

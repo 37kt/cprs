@@ -1,3 +1,6 @@
+/// Cartesian Tree  
+/// `par` を返す。
+/// `par[i]` は `i` の親を表す。
 pub fn cartesian_tree<T>(a: &[T]) -> Vec<usize>
 where
     T: Ord,

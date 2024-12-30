@@ -10,10 +10,12 @@ use std::{
 
 use algebraic::{One, Zero};
 
+/// コンパイル時に法を指定した ModInt
 #[derive(Clone, Copy, Default, PartialEq, Eq, Hash)]
 #[repr(transparent)]
 pub struct StaticModInt<const P: u32>(u32);
 
+/// 実行時に法を指定できる ModInt
 #[derive(Clone, Copy, Default, PartialEq, Eq, Hash)]
 #[repr(transparent)]
 pub struct DynamicModInt(u32);

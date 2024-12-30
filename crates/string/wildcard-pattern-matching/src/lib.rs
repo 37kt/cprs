@@ -2,6 +2,8 @@ use convolution_ntt_friendly::convolution_ntt_friendly;
 use modint::ModInt998244353 as Mint;
 use random::Pcg64Fast;
 
+/// ワイルドカードパターンマッチング  
+/// `res[i]` は `s[i..i+m]` が `t` とマッチするかどうかを表す。
 pub fn wildcard_pattern_matching<T>(s: &[T], t: &[T], wildcard: T) -> Vec<bool>
 where
     T: Copy + Eq + Into<Mint>,

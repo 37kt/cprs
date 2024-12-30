@@ -9,6 +9,7 @@ struct BitSet {
     v: Vec<u64>,
 }
 
+/// 行列 (mod 2)
 #[derive(Clone)]
 pub struct MatrixMod2 {
     n: usize,

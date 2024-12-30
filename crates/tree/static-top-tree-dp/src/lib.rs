@@ -10,6 +10,8 @@ enum Type {
     AddVertex,
 }
 
+/// Static Top Tree (Fixed root)  
+/// 0 を根としている
 pub struct StaticTopTree {
     stt_root: usize,
     par: Vec<usize>,
@@ -23,6 +25,7 @@ pub struct StaticTopTree {
 }
 
 impl StaticTopTree {
+    /// 0 を根とする Static Top Tree を構築する
     pub fn new<V: Clone, E: Clone>(g: &Graph<V, E>) -> Self {
         let n = g.len();
         let mut s = Self {
@@ -50,6 +53,7 @@ impl StaticTopTree {
         s
     }
 
+    /// 頂点数を返す
     pub fn len(&self) -> usize {
         self.cnt
     }
@@ -185,16 +189,26 @@ impl<Path, Point> Data<Path, Point> {
     }
 }
 
+/// 木 dp の各種演算を定義する  
 pub trait TreeDPOperator {
     type Path: Clone;
     type Point: Clone;
     type V: Clone;
     type E: Clone;
 
+    /// 頂点 v のみからなる Path Cluster を生成する
     fn vertex(v: &Self::V) -> Self::Path;
+
+    /// 2 つの Path Cluster を Heavy Edge で繋いで 1 つの Path Cluster にする
     fn compress(p: &Self::Path, c: &Self::Path, e: &Self::E) -> Self::Path;
+
+    /// 2 つの Point Cluster の virtual な根を合体させて 1 つの Point Cluster にする
     fn rake(l: &Self::Point, r: &Self::Point) -> Self::Point;
+
+    /// Path Cluster の根と virtual な頂点を Light Edge で繋いで Point Cluster にする
     fn add_edge(d: &Self::Path, e: &Self::E) -> Self::Point;
+
+    /// Point Cluster の根の virtual な頂点を v に置き換えて Path Cluster にする
     fn add_vertex(d: &Self::Point, v: &Self::V) -> Self::Path;
 }
 
@@ -207,6 +221,7 @@ pub struct StaticTopTreeDP<O: TreeDPOperator> {
 }
 
 impl<O: TreeDPOperator> StaticTopTreeDP<O> {
+    /// 0 を根とする Static Top Tree を構築する
     pub fn new(g: &Graph<O::V, O::E>) -> Self {
         let stt = StaticTopTree::new(g);
         let mut sum = vec![Data::Path(O::vertex(&g.vertex(0))); stt.len()];
@@ -235,10 +250,12 @@ impl<O: TreeDPOperator> StaticTopTreeDP<O> {
         s
     }
 
+    /// 0 を根としたときの dp の値を返す
     pub fn prod(&self) -> O::Path {
         self.sum[self.stt.stt_root].unwrap_path().clone()
     }
 
+    /// 頂点 v の値を x に更新する
     pub fn set_vertex(&mut self, mut v: usize, x: O::V) {
         self.vertex[v] = x.clone();
         while v != !0 {
@@ -247,6 +264,7 @@ impl<O: TreeDPOperator> StaticTopTreeDP<O> {
         }
     }
 
+    /// 辺 e の値を x に更新する
     pub fn set_edge(&mut self, e: usize, x: O::E) {
         self.edge[e] = x.clone();
         let mut v = self.stt.child[e];

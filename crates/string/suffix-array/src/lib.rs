@@ -11,6 +11,7 @@ const THRESHOLD_NAIVE: usize = 10;
 const THRESHOLD_DOUBLING: usize = 40;
 const THRESHOLD_COMPRESS: usize = 16777216;
 
+/// 接尾辞配列
 #[allow(dead_code)]
 pub struct SuffixArray<'a, T>
 where
@@ -28,6 +29,7 @@ impl<'a, T> SuffixArray<'a, T>
 where
     T: Copy + Ord + Add<T, Output = T> + Sub<T, Output = T> + Into<usize>,
 {
+    /// 接尾辞配列を構築する。
     pub fn build(s: &'a [T]) -> Self {
         let n = s.len();
         if n == 0 {
@@ -74,18 +76,22 @@ where
         }
     }
 
+    /// 接尾辞配列を返す。
     pub fn suffix_array(&self) -> &[usize] {
         &self.sa
     }
 
+    /// `rank[i]` は `s[i..]` が接尾辞配列の何番目にあるかを表す。
     pub fn rank(&self) -> &[usize] {
         &self.rank
     }
 
+    /// lcp_array[i] は `s[sa[i]..]` と `s[sa[i + 1]..]` の最長共通接頭辞の長さを表す。
     pub fn lcp_array(&self) -> &[usize] {
         &self.lcp
     }
 
+    /// `s[i..]` と `s[j..]` の最長共通接頭辞の長さを返す。
     pub fn lcp(&self, i: usize, j: usize) -> usize {
         assert!(i <= self.n && j <= self.n);
         if i == self.n || j == self.n {

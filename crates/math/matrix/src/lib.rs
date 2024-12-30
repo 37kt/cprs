@@ -5,6 +5,7 @@ use std::{
 
 use algebraic::{One, Zero};
 
+/// 行列
 #[derive(Clone)]
 pub struct Matrix<T>
 where

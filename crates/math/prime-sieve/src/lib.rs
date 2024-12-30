@@ -3,7 +3,9 @@ pub struct PrimeSieve {
     div: Vec<usize>,
 }
 
+/// エラトステネスの篩 (osa_k 法)
 impl PrimeSieve {
+    /// n 以下の正整数について最小の素因数を計算
     pub fn new(n: usize) -> Self {
         let n = n.max(2);
         let mut div = (0..=n).collect::<Vec<_>>();
@@ -28,10 +30,17 @@ impl PrimeSieve {
         Self { primes, div }
     }
 
+    /// 素数判定  
+    ///
+    /// # 計算量
+    ///  - O(1)  (x <= n)
+    ///  - O(φ(√x)) (x > n)
     pub fn is_prime(&self, x: usize) -> bool {
         let n = self.primes.len() - 1;
         assert!(x <= n * n);
-        if x <= n {
+        if x == 0 {
+            false
+        } else if x <= n {
             self.div[x] == x
         } else {
             for &p in &self.primes {
@@ -46,6 +55,8 @@ impl PrimeSieve {
         }
     }
 
+    /// 素因数分解  
+    /// (素因数, 指数) のペアを昇順に列挙
     pub fn factorize(&self, x: usize) -> Vec<(usize, usize)> {
         let mut res = Vec::<(usize, usize)>::new();
         let n = self.div.len() - 1;
@@ -78,6 +89,7 @@ impl PrimeSieve {
         res
     }
 
+    /// 約数を昇順に列挙
     pub fn divisors(&self, x: usize) -> Vec<usize> {
         let mut res = vec![1];
         for (p, k) in self.factorize(x) {
@@ -89,15 +101,17 @@ impl PrimeSieve {
                 }
             }
         }
-        res.sort();
+        res.sort_unstable();
         res
     }
 
+    /// n 以下の素数を昇順に列挙
     pub fn primes(&self) -> Vec<usize> {
         self.primes.clone()
     }
 
-    pub fn min_divisor(&self, x: usize) -> usize {
+    /// x の最小の素因数
+    pub fn min_factor(&self, x: usize) -> usize {
         self.div[x]
     }
 }

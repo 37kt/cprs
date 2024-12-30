@@ -1,3 +1,4 @@
+/// 五角数定理
 pub fn pentagonal_number_theorem<T>(n: usize) -> Vec<T>
 where
     T: Copy + From<i8>,

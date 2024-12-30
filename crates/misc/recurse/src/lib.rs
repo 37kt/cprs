@@ -11,6 +11,8 @@ impl<'a, Arg, Ret> RecurseImpl<'a, Arg, Ret> {
     }
 }
 
+/// クロージャで再帰する  
+/// 危険！ 絶対使うな！！！
 pub struct Recurse<'a, Arg, Ret, F>(
     UnsafeCell<F>,
     PhantomData<&'a ()>,

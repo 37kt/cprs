@@ -11,6 +11,7 @@ use union_find_component_sum::UnionFindComponentSum;
 algebra!(ZeroOneMonoid, ZeroOne);
 monoid!(ZeroOneMonoid, ZeroOne::new(0, 0), |a, b| a + b);
 
+/// 01 on Tree
 pub fn zero_one_on_tree(g: &Graph<ZeroOne, ()>) -> usize {
     let n = g.len();
     let mut par = vec![!0; n];

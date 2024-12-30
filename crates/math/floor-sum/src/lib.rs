@@ -8,6 +8,7 @@ fn safe_mod(mut x: i64, m: i64) -> i64 {
     x
 }
 
+/// Σ_{i=0}^{n-1} floor((a*i+b)/m)
 pub fn floor_sum_unsigned(mut n: u64, mut m: u64, mut a: u64, mut b: u64) -> u64 {
     if n == 0 {
         return 0;
@@ -34,6 +35,7 @@ pub fn floor_sum_unsigned(mut n: u64, mut m: u64, mut a: u64, mut b: u64) -> u64
     res
 }
 
+/// Σ_{i=0}^{n-1} floor((a*i+b)/m)
 pub fn floor_sum(n: u64, m: u64, mut a: i64, mut b: i64) -> i64 {
     let n = n as i64;
     let m = m as i64;

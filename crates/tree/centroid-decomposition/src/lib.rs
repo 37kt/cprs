@@ -104,13 +104,15 @@ fn dfs3(
     dfs3(0, &gr, &idx_r, conv, f);
 }
 
-/// f: (idx, par, m)
-/// par[0] を根とする部分木がトポロジカル順序で渡される
-/// idx: 頂点番号
-/// par: 親の頂点番号
-/// idx[..m] が赤，idx[m..] が青
-pub fn centroid_decomposition(g: &Graph<(), ()>, f: &mut impl FnMut(&[usize], &[usize], usize)) {
+/// 重心分解  
+/// `f: fn f(idx: &[usize], par: &[usize], m: usize)`  
+/// `par[0]` を根とする部分木がトポロジカル順序で渡される  
+/// `idx`: 頂点番号  
+/// `par`: 親の頂点番号  
+/// `idx[..m]` が赤，`idx[m..]` が青  
+/// `f` 内で、`idx[..m]` と `idx[m..]` 間のパスについて計算する
+pub fn centroid_decomposition(g: &Graph<(), ()>, mut f: impl FnMut(&[usize], &[usize], usize)) {
     let n = g.len();
     let mut conv = vec![!0; n];
-    dfs3(0, g, &(0..n).collect::<Vec<_>>(), &mut conv, f);
+    dfs3(0, g, &(0..n).collect::<Vec<_>>(), &mut conv, &mut f);
 }

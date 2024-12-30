@@ -1,3 +1,5 @@
+/// オイラーのトーシェント関数  
+/// φ(0), φ(1), ..., φ(n) を列挙
 pub fn euler_phi(n: usize) -> Vec<usize> {
     let mut p = vec![0; n + 1];
     for i in 0..=n {

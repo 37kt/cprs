@@ -1,3 +1,5 @@
+/// ランレングス圧縮  
+/// (値, 出現回数) のペアの Vec を返す。
 pub fn run_length_encoding<T>(a: &[T]) -> Vec<(T, usize)>
 where
     T: Clone + Eq,

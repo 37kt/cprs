@@ -1,5 +1,6 @@
 use rational::{Rational, ZTrait};
 
+/// Stern-Brocot Tree のノード
 pub struct SternBrocotTreeNode<T>
 where
     T: ZTrait,
@@ -28,6 +29,7 @@ impl<T> SternBrocotTreeNode<T>
 where
     T: ZTrait,
 {
+    /// 正有理数 x に対応する Stern-Brocot Tree のノード
     pub fn new(mut x: Rational<T>) -> Self {
         assert!(x.num > T::zero() && x.den > T::zero());
         x.reduce();
@@ -58,10 +60,14 @@ where
         n
     }
 
+    /// ノードの深さ
     pub fn depth(&self) -> T {
         self.seq.iter().map(|&x| x.abs()).sum::<T>()
     }
 
+    /// 子ノードへの移動  
+    /// d < 0 のとき、左の子に -d 回進む。  
+    /// d > 0 のとき、右の子に d 回進む。
     pub fn go_child(&mut self, d: T) {
         if d == T::zero() {
             return;
@@ -88,6 +94,7 @@ where
         }
     }
 
+    /// 親ノードに d 回移動する
     pub fn go_parent(&mut self, mut d: T) -> bool {
         assert!(d >= T::zero());
         if d == T::zero() {
@@ -127,6 +134,7 @@ where
         true
     }
 
+    /// 2 つのノードの LCA
     pub fn lca(&self, other: &SternBrocotTreeNode<T>) -> SternBrocotTreeNode<T> {
         let mut res = SternBrocotTreeNode::default();
         for (&x, &y) in self.seq.iter().zip(&other.seq) {
@@ -145,22 +153,28 @@ where
         res
     }
 
+    /// ノードに対応する開区間の左端
     pub fn lower_bound(&self) -> Rational<T> {
         self.l
     }
 
+    /// ノードに対応する開区間の右端
     pub fn upper_bound(&self) -> Rational<T> {
         self.r
     }
 
+    /// ノードに対応する有理数
     pub fn val(&self) -> Rational<T> {
         self.m
     }
 
+    /// ノードへのパス
     pub fn path(&self) -> Vec<T> {
         self.seq.clone()
     }
 
+    /// 非負有理数上の二分探索  
+    /// 分母・分子が lim 以下で f(l) != f(r) となるような最大の l と最小の r を求める
     pub fn binary_search(f: impl Fn(Rational<T>) -> bool, lim: T) -> (Rational<T>, Rational<T>) {
         let mut l = Rational::new(T::zero(), T::one());
         let mut r = Rational::new(T::one(), T::zero());

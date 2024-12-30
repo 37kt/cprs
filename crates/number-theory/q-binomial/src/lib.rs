@@ -3,6 +3,7 @@ use std::cell::RefCell;
 use combination::Combination;
 use modint::ModInt;
 
+/// q-類似
 pub struct QBinomial<M: ModInt> {
     q: M,
     num: RefCell<Vec<M>>,

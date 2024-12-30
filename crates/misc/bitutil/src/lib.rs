@@ -1,3 +1,4 @@
+/// ビットで表現された集合 s の部分集合を昇順に列挙
 pub fn bit_subsets(s: usize) -> impl Iterator<Item = usize> {
     let mut x = 0;
     std::iter::from_fn(move || {

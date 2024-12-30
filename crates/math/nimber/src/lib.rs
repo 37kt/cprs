@@ -6,6 +6,7 @@ use std::{
     str::FromStr,
 };
 
+/// ニム数
 #[derive(Clone, Copy, PartialEq, Eq, Hash, Default)]
 pub struct Nimber(usize);
 

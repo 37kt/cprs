@@ -84,6 +84,8 @@ where
     }
 }
 
+/// ローリングハッシュ  
+/// TODO: すごく使いづらいので、いつか直す
 #[derive(Clone)]
 pub struct RollingHash<'a, C, H>
 where

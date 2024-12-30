@@ -1,3 +1,5 @@
+/// z-algorithm  
+/// `z[i]` は `s[i..]` と `s` の最長共通接頭辞の長さを表す。
 pub fn z_algorithm<T>(s: &[T]) -> Vec<usize>
 where
     T: Eq,

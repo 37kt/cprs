@@ -6,6 +6,7 @@ use std::{
 
 use montgomery_modint::MontgomeryModInt;
 
+/// 素数判定
 pub fn is_prime(n: impl TryInto<u64, Error = impl Debug>) -> bool {
     let n: u64 = n.try_into().unwrap();
     if n & 1 == 0 {
@@ -19,6 +20,8 @@ pub fn is_prime(n: impl TryInto<u64, Error = impl Debug>) -> bool {
     }
 }
 
+/// 素因数分解  
+/// 素因数を昇順に列挙
 pub fn factorize<N, E, F>(n: N) -> Vec<N>
 where
     N: TryInto<u64, Error = E> + TryFrom<u64, Error = F> + Ord + Copy,
@@ -27,10 +30,12 @@ where
 {
     let n = n.try_into().unwrap();
     let mut f = factorize_(n);
-    f.sort();
+    f.sort_unstable();
     f.into_iter().map(|x| x.try_into().unwrap()).collect()
 }
 
+/// 素因数分解  
+/// (素因数, 指数) のペアを列挙
 pub fn factor_count<N, E, F>(n: N) -> Vec<(N, usize)>
 where
     N: TryInto<u64, Error = E> + TryFrom<u64, Error = F> + Ord + Copy,
@@ -52,6 +57,7 @@ where
     r
 }
 
+/// 約数を昇順に列挙
 pub fn divisors<N, E, F>(n: N) -> Vec<N>
 where
     N: TryInto<u64, Error = E> + TryFrom<u64, Error = F> + Ord + Copy,
@@ -73,7 +79,7 @@ where
             }
         }
     }
-    r.sort();
+    r.sort_unstable();
     r.into_iter().map(|x| x.try_into().unwrap()).collect()
 }
 
