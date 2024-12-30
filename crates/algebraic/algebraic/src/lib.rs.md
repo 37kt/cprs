@@ -106,9 +106,6 @@ data:
     path: verify/deque_operate_all_composite/src/main.rs
     title: verify/deque_operate_all_composite/src/main.rs
   - icon: ':heavy_check_mark:'
-    path: verify/discrete_logarithm_mod/src/main.rs
-    title: verify/discrete_logarithm_mod/src/main.rs
-  - icon: ':heavy_check_mark:'
     path: verify/dynamic_graph_vertex_add_component_sum/src/main.rs
     title: verify/dynamic_graph_vertex_add_component_sum/src/main.rs
   - icon: ':heavy_check_mark:'
@@ -283,7 +280,6 @@ data:
   - verify/staticrmq/src/main.rs
   - verify/deque_operate_all_composite/src/main.rs
   - verify/point_add_range_sum/src/main.rs
-  - verify/discrete_logarithm_mod/src/main.rs
   - verify/rectangle_add_point_get/src/main.rs
   - verify/vertex_add_range_contour_sum_on_tree/src/main.rs
   - verify/dynamic_sequence_range_affine_range_sum/src/main.rs

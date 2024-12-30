@@ -82,6 +82,9 @@ data:
     path: verify/count_spanning_tree_undirected/src/main.rs
     title: verify/count_spanning_tree_undirected/src/main.rs
   - icon: ':heavy_check_mark:'
+    path: verify/discrete_logarithm_mod/src/main.rs
+    title: verify/discrete_logarithm_mod/src/main.rs
+  - icon: ':heavy_check_mark:'
     path: verify/division_of_polynomials/src/main.rs
     title: verify/division_of_polynomials/src/main.rs
   - icon: ':heavy_check_mark:'
@@ -502,6 +505,7 @@ data:
   - verify/division_of_polynomials/src/main.rs
   - verify/count_spanning_tree_directed/src/main.rs
   - verify/pow_of_formal_power_series/src/main.rs
+  - verify/discrete_logarithm_mod/src/main.rs
   - verify/sqrt_of_formal_power_series/src/main.rs
   - verify/point_set_tree_path_composite_sum_fixed_root/src/main.rs
   - verify/static_rectangle_add_rectangle_sum/src/main.rs
