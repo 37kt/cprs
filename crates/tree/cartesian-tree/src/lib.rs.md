@@ -17,18 +17,19 @@ data:
     \         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\
     \  File \"/opt/hostedtoolcache/Python/3.12.8/x64/lib/python3.12/site-packages/onlinejudge_verify/languages/rust.py\"\
     , line 288, in bundle\n    raise NotImplementedError\nNotImplementedError\n"
-  code: "pub fn cartesian_tree<T>(a: &[T]) -> Vec<usize>\nwhere\n    T: Ord,\n{\n\
-    \    let n = a.len();\n    let mut par = vec![!0; n];\n    let mut st = vec![];\n\
-    \    for i in 0..n {\n        let mut l = !0;\n        while !st.is_empty() &&\
-    \ a[*st.last().unwrap()] >= a[i] {\n            l = st.pop().unwrap();\n     \
-    \   }\n        if !st.is_empty() {\n            par[i] = st[st.len() - 1];\n \
-    \       }\n        if l != !0 {\n            par[l] = i;\n        }\n        st.push(i);\n\
-    \    }\n    par\n}\n"
+  code: "/// Cartesian Tree  \n/// `par` \u3092\u8FD4\u3059\u3002\n/// `par[i]` \u306F\
+    \ `i` \u306E\u89AA\u3092\u8868\u3059\u3002\npub fn cartesian_tree<T>(a: &[T])\
+    \ -> Vec<usize>\nwhere\n    T: Ord,\n{\n    let n = a.len();\n    let mut par\
+    \ = vec![!0; n];\n    let mut st = vec![];\n    for i in 0..n {\n        let mut\
+    \ l = !0;\n        while !st.is_empty() && a[*st.last().unwrap()] >= a[i] {\n\
+    \            l = st.pop().unwrap();\n        }\n        if !st.is_empty() {\n\
+    \            par[i] = st[st.len() - 1];\n        }\n        if l != !0 {\n   \
+    \         par[l] = i;\n        }\n        st.push(i);\n    }\n    par\n}\n"
   dependsOn: []
   isVerificationFile: false
   path: crates/tree/cartesian-tree/src/lib.rs
   requiredBy: []
-  timestamp: '2024-03-14 16:40:29+09:00'
+  timestamp: '2024-12-30 09:13:10+00:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/cartesian_tree/src/main.rs

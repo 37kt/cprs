@@ -22,21 +22,21 @@ data:
     , line 288, in bundle\n    raise NotImplementedError\nNotImplementedError\n"
   code: "use std::{\n    fmt::{Debug, Display},\n    ops::{BitAnd, BitAndAssign, BitOr,\
     \ BitOrAssign, BitXor, BitXorAssign, Mul, MulAssign},\n};\n\n#[derive(Clone)]\n\
-    struct BitSet {\n    n: usize,\n    v: Vec<u64>,\n}\n\n#[derive(Clone)]\npub struct\
-    \ MatrixMod2 {\n    n: usize,\n    m: usize,\n    v: Vec<BitSet>,\n}\n\nimpl BitSet\
-    \ {\n    fn new(n: usize) -> Self {\n        let m = (n + 63) / 64;\n        BitSet\
-    \ { n, v: vec![0; m] }\n    }\n\n    fn set(&mut self, i: usize, f: bool) {\n\
-    \        assert!(i < self.n);\n        let (a, b) = (i / 64, i % 64);\n      \
-    \  if f {\n            self.v[a] |= 1 << b;\n        } else {\n            self.v[a]\
-    \ &= !(1 << b);\n        }\n    }\n\n    fn get(&self, i: usize) -> bool {\n \
-    \       assert!(i < self.n);\n        let (a, b) = (i / 64, i % 64);\n       \
-    \ (self.v[a] >> b) & 1 == 1\n    }\n}\n\nimpl PartialEq for BitSet {\n    fn eq(&self,\
-    \ other: &Self) -> bool {\n        assert_eq!(self.n, other.n);\n        self.v\
-    \ == other.v\n    }\n}\n\nimpl Eq for BitSet {}\n\nimpl BitOrAssign<&BitSet> for\
-    \ BitSet {\n    fn bitor_assign(&mut self, other: &Self) {\n        assert_eq!(self.n,\
-    \ other.n);\n        for (a, &b) in self.v.iter_mut().zip(&other.v) {\n      \
-    \      *a |= b;\n        }\n    }\n}\n\nimpl BitAndAssign<&BitSet> for BitSet\
-    \ {\n    fn bitand_assign(&mut self, other: &Self) {\n        assert_eq!(self.n,\
+    struct BitSet {\n    n: usize,\n    v: Vec<u64>,\n}\n\n/// \u884C\u5217 (mod 2)\n\
+    #[derive(Clone)]\npub struct MatrixMod2 {\n    n: usize,\n    m: usize,\n    v:\
+    \ Vec<BitSet>,\n}\n\nimpl BitSet {\n    fn new(n: usize) -> Self {\n        let\
+    \ m = (n + 63) / 64;\n        BitSet { n, v: vec![0; m] }\n    }\n\n    fn set(&mut\
+    \ self, i: usize, f: bool) {\n        assert!(i < self.n);\n        let (a, b)\
+    \ = (i / 64, i % 64);\n        if f {\n            self.v[a] |= 1 << b;\n    \
+    \    } else {\n            self.v[a] &= !(1 << b);\n        }\n    }\n\n    fn\
+    \ get(&self, i: usize) -> bool {\n        assert!(i < self.n);\n        let (a,\
+    \ b) = (i / 64, i % 64);\n        (self.v[a] >> b) & 1 == 1\n    }\n}\n\nimpl\
+    \ PartialEq for BitSet {\n    fn eq(&self, other: &Self) -> bool {\n        assert_eq!(self.n,\
+    \ other.n);\n        self.v == other.v\n    }\n}\n\nimpl Eq for BitSet {}\n\n\
+    impl BitOrAssign<&BitSet> for BitSet {\n    fn bitor_assign(&mut self, other:\
+    \ &Self) {\n        assert_eq!(self.n, other.n);\n        for (a, &b) in self.v.iter_mut().zip(&other.v)\
+    \ {\n            *a |= b;\n        }\n    }\n}\n\nimpl BitAndAssign<&BitSet> for\
+    \ BitSet {\n    fn bitand_assign(&mut self, other: &Self) {\n        assert_eq!(self.n,\
     \ other.n);\n        for (a, &b) in self.v.iter_mut().zip(&other.v) {\n      \
     \      *a &= b;\n        }\n    }\n}\n\nimpl BitXorAssign<&BitSet> for BitSet\
     \ {\n    fn bitxor_assign(&mut self, other: &Self) {\n        assert_eq!(self.n,\
@@ -117,7 +117,7 @@ data:
   isVerificationFile: false
   path: crates/math/matrix-mod2/src/lib.rs
   requiredBy: []
-  timestamp: '2024-03-21 13:40:37+09:00'
+  timestamp: '2024-12-30 09:13:10+00:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/matrix_det_mod_2/src/main.rs

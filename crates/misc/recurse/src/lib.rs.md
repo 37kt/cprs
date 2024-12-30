@@ -18,11 +18,13 @@ data:
     \ Arg, Ret>(\n    UnsafeCell<&'a mut dyn FnMut(&mut RecurseImpl<'a, Arg, Ret>,\
     \ Arg) -> Ret>,\n);\n\nimpl<'a, Arg, Ret> RecurseImpl<'a, Arg, Ret> {\n    pub\
     \ fn call(&mut self, arg: Arg) -> Ret {\n        let f = unsafe { &mut *self.0.get()\
-    \ };\n        f(self, arg)\n    }\n}\n\npub struct Recurse<'a, Arg, Ret, F>(\n\
-    \    UnsafeCell<F>,\n    PhantomData<&'a ()>,\n    PhantomData<Arg>,\n    PhantomData<Ret>,\n\
-    )\nwhere\n    F: FnMut(&mut RecurseImpl<'a, Arg, Ret>, Arg) -> Ret;\n\nimpl<'a,\
-    \ Arg, Ret, F> Recurse<'a, Arg, Ret, F>\nwhere\n    F: FnMut(&mut RecurseImpl<'a,\
-    \ Arg, Ret>, Arg) -> Ret,\n{\n    pub fn new(f: F) -> Self {\n        Self(UnsafeCell::new(f),\
+    \ };\n        f(self, arg)\n    }\n}\n\n/// \u30AF\u30ED\u30FC\u30B8\u30E3\u3067\
+    \u518D\u5E30\u3059\u308B  \n/// \u5371\u967A\uFF01 \u7D76\u5BFE\u4F7F\u3046\u306A\
+    \uFF01\uFF01\uFF01\npub struct Recurse<'a, Arg, Ret, F>(\n    UnsafeCell<F>,\n\
+    \    PhantomData<&'a ()>,\n    PhantomData<Arg>,\n    PhantomData<Ret>,\n)\nwhere\n\
+    \    F: FnMut(&mut RecurseImpl<'a, Arg, Ret>, Arg) -> Ret;\n\nimpl<'a, Arg, Ret,\
+    \ F> Recurse<'a, Arg, Ret, F>\nwhere\n    F: FnMut(&mut RecurseImpl<'a, Arg, Ret>,\
+    \ Arg) -> Ret,\n{\n    pub fn new(f: F) -> Self {\n        Self(UnsafeCell::new(f),\
     \ PhantomData, PhantomData, PhantomData)\n    }\n}\n\nimpl<'a, Arg: 'a, Ret: 'a,\
     \ F> Recurse<'a, Arg, Ret, F>\nwhere\n    F: FnMut(&mut RecurseImpl<'a, Arg, Ret>,\
     \ Arg) -> Ret + 'a,\n{\n    pub fn call(&mut self, arg: Arg) -> Ret {\n      \
@@ -37,7 +39,7 @@ data:
   isVerificationFile: false
   path: crates/misc/recurse/src/lib.rs
   requiredBy: []
-  timestamp: '2024-12-21 11:33:20+00:00'
+  timestamp: '2024-12-30 09:13:10+00:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: crates/misc/recurse/src/lib.rs

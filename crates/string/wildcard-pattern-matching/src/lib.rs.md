@@ -27,9 +27,12 @@ data:
     \  File \"/opt/hostedtoolcache/Python/3.12.8/x64/lib/python3.12/site-packages/onlinejudge_verify/languages/rust.py\"\
     , line 288, in bundle\n    raise NotImplementedError\nNotImplementedError\n"
   code: "use convolution_ntt_friendly::convolution_ntt_friendly;\nuse modint::ModInt998244353\
-    \ as Mint;\nuse random::Pcg64Fast;\n\npub fn wildcard_pattern_matching<T>(s: &[T],\
-    \ t: &[T], wildcard: T) -> Vec<bool>\nwhere\n    T: Copy + Eq + Into<Mint>,\n\
-    {\n    let n = s.len();\n    let m = t.len();\n    assert!(n >= m);\n    let mut\
+    \ as Mint;\nuse random::Pcg64Fast;\n\n/// \u30EF\u30A4\u30EB\u30C9\u30AB\u30FC\
+    \u30C9\u30D1\u30BF\u30FC\u30F3\u30DE\u30C3\u30C1\u30F3\u30B0  \n/// `res[i]` \u306F\
+    \ `s[i..i+m]` \u304C `t` \u3068\u30DE\u30C3\u30C1\u3059\u308B\u304B\u3069\u3046\
+    \u304B\u3092\u8868\u3059\u3002\npub fn wildcard_pattern_matching<T>(s: &[T], t:\
+    \ &[T], wildcard: T) -> Vec<bool>\nwhere\n    T: Copy + Eq + Into<Mint>,\n{\n\
+    \    let n = s.len();\n    let m = t.len();\n    assert!(n >= m);\n    let mut\
     \ rng = Pcg64Fast::default();\n    let r = Mint::new(rng.u64());\n    let a1:\
     \ Vec<_> = s\n        .iter()\n        .map(|&x| if x == wildcard { Mint::new(0)\
     \ } else { r + x })\n        .collect();\n    let a2: Vec<_> = a1.iter().map(|&x|\
@@ -48,7 +51,7 @@ data:
   isVerificationFile: false
   path: crates/string/wildcard-pattern-matching/src/lib.rs
   requiredBy: []
-  timestamp: '2024-12-25 07:02:27+00:00'
+  timestamp: '2024-12-30 09:13:10+00:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/wildcard_pattern_matching/src/main.rs

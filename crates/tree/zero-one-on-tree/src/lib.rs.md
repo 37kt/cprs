@@ -26,40 +26,40 @@ data:
   code: "use std::{\n    cmp::Ordering,\n    collections::BinaryHeap,\n    ops::{Add,\
     \ AddAssign},\n};\n\nuse algebraic::{algebra, monoid};\nuse graph::Graph;\nuse\
     \ union_find_component_sum::UnionFindComponentSum;\n\nalgebra!(ZeroOneMonoid,\
-    \ ZeroOne);\nmonoid!(ZeroOneMonoid, ZeroOne::new(0, 0), |a, b| a + b);\n\npub\
-    \ fn zero_one_on_tree(g: &Graph<ZeroOne, ()>) -> usize {\n    let n = g.len();\n\
-    \    let mut par = vec![!0; n];\n    dfs(0, g, &mut par);\n    let mut res = 0;\n\
-    \    let a: Vec<_> = (0..n).map(|i| *g.vertex(i)).collect();\n    let mut uf =\
-    \ UnionFindComponentSum::<ZeroOneMonoid, false>::new(&a);\n    let mut pq = BinaryHeap::new();\n\
-    \    for v in 1..n {\n        pq.push((a[v], v));\n    }\n    while let Some((x,\
-    \ v)) = pq.pop() {\n        if uf.sum(v) != x {\n            continue;\n     \
-    \   }\n        let p = uf.leader(par[v]);\n        res += uf.sum(p).s1 * uf.sum(v).s0;\n\
-    \        uf.merge(p, v);\n        if !uf.same(0, p) {\n            pq.push((uf.sum(p),\
-    \ p));\n        }\n    }\n    res\n}\n\nfn dfs(v: usize, g: &Graph<ZeroOne, ()>,\
-    \ p: &mut [usize]) {\n    for &(u, _) in &g[v] {\n        if u == p[v] {\n   \
-    \         continue;\n        }\n        p[u] = v;\n        dfs(u, g, p);\n   \
-    \ }\n}\n\n#[derive(Clone, Copy, PartialEq, Eq)]\npub struct ZeroOne {\n    s0:\
-    \ usize,\n    s1: usize,\n}\n\nimpl ZeroOne {\n    pub fn new(s0: usize, s1: usize)\
-    \ -> Self {\n        Self { s0, s1 }\n    }\n}\n\nimpl Ord for ZeroOne {\n   \
-    \ fn cmp(&self, other: &Self) -> Ordering {\n        (self.s0 * other.s1).cmp(&(other.s0\
-    \ * self.s1))\n    }\n}\n\nimpl PartialOrd for ZeroOne {\n    fn partial_cmp(&self,\
-    \ other: &Self) -> Option<Ordering> {\n        Some(self.cmp(other))\n    }\n\
-    }\n\nimpl Add for ZeroOne {\n    type Output = Self;\n\n    fn add(self, other:\
-    \ Self) -> Self {\n        Self {\n            s0: self.s0 + other.s0,\n     \
-    \       s1: self.s1 + other.s1,\n        }\n    }\n}\n\nimpl Add for &ZeroOne\
-    \ {\n    type Output = ZeroOne;\n\n    fn add(self, other: Self) -> ZeroOne {\n\
-    \        ZeroOne {\n            s0: self.s0 + other.s0,\n            s1: self.s1\
-    \ + other.s1,\n        }\n    }\n}\n\nimpl Add<&ZeroOne> for ZeroOne {\n    type\
-    \ Output = ZeroOne;\n\n    fn add(self, other: &Self) -> ZeroOne {\n        ZeroOne\
-    \ {\n            s0: self.s0 + other.s0,\n            s1: self.s1 + other.s1,\n\
-    \        }\n    }\n}\n\nimpl Add<ZeroOne> for &ZeroOne {\n    type Output = ZeroOne;\n\
-    \n    fn add(self, other: ZeroOne) -> ZeroOne {\n        ZeroOne {\n         \
-    \   s0: self.s0 + other.s0,\n            s1: self.s1 + other.s1,\n        }\n\
-    \    }\n}\n\nimpl AddAssign for ZeroOne {\n    fn add_assign(&mut self, other:\
-    \ Self) {\n        self.s0 += other.s0;\n        self.s1 += other.s1;\n    }\n\
-    }\n\nimpl AddAssign<&ZeroOne> for ZeroOne {\n    fn add_assign(&mut self, other:\
-    \ &Self) {\n        self.s0 += other.s0;\n        self.s1 += other.s1;\n    }\n\
-    }\n"
+    \ ZeroOne);\nmonoid!(ZeroOneMonoid, ZeroOne::new(0, 0), |a, b| a + b);\n\n///\
+    \ 01 on Tree\npub fn zero_one_on_tree(g: &Graph<ZeroOne, ()>) -> usize {\n   \
+    \ let n = g.len();\n    let mut par = vec![!0; n];\n    dfs(0, g, &mut par);\n\
+    \    let mut res = 0;\n    let a: Vec<_> = (0..n).map(|i| *g.vertex(i)).collect();\n\
+    \    let mut uf = UnionFindComponentSum::<ZeroOneMonoid, false>::new(&a);\n  \
+    \  let mut pq = BinaryHeap::new();\n    for v in 1..n {\n        pq.push((a[v],\
+    \ v));\n    }\n    while let Some((x, v)) = pq.pop() {\n        if uf.sum(v) !=\
+    \ x {\n            continue;\n        }\n        let p = uf.leader(par[v]);\n\
+    \        res += uf.sum(p).s1 * uf.sum(v).s0;\n        uf.merge(p, v);\n      \
+    \  if !uf.same(0, p) {\n            pq.push((uf.sum(p), p));\n        }\n    }\n\
+    \    res\n}\n\nfn dfs(v: usize, g: &Graph<ZeroOne, ()>, p: &mut [usize]) {\n \
+    \   for &(u, _) in &g[v] {\n        if u == p[v] {\n            continue;\n  \
+    \      }\n        p[u] = v;\n        dfs(u, g, p);\n    }\n}\n\n#[derive(Clone,\
+    \ Copy, PartialEq, Eq)]\npub struct ZeroOne {\n    s0: usize,\n    s1: usize,\n\
+    }\n\nimpl ZeroOne {\n    pub fn new(s0: usize, s1: usize) -> Self {\n        Self\
+    \ { s0, s1 }\n    }\n}\n\nimpl Ord for ZeroOne {\n    fn cmp(&self, other: &Self)\
+    \ -> Ordering {\n        (self.s0 * other.s1).cmp(&(other.s0 * self.s1))\n   \
+    \ }\n}\n\nimpl PartialOrd for ZeroOne {\n    fn partial_cmp(&self, other: &Self)\
+    \ -> Option<Ordering> {\n        Some(self.cmp(other))\n    }\n}\n\nimpl Add for\
+    \ ZeroOne {\n    type Output = Self;\n\n    fn add(self, other: Self) -> Self\
+    \ {\n        Self {\n            s0: self.s0 + other.s0,\n            s1: self.s1\
+    \ + other.s1,\n        }\n    }\n}\n\nimpl Add for &ZeroOne {\n    type Output\
+    \ = ZeroOne;\n\n    fn add(self, other: Self) -> ZeroOne {\n        ZeroOne {\n\
+    \            s0: self.s0 + other.s0,\n            s1: self.s1 + other.s1,\n  \
+    \      }\n    }\n}\n\nimpl Add<&ZeroOne> for ZeroOne {\n    type Output = ZeroOne;\n\
+    \n    fn add(self, other: &Self) -> ZeroOne {\n        ZeroOne {\n           \
+    \ s0: self.s0 + other.s0,\n            s1: self.s1 + other.s1,\n        }\n  \
+    \  }\n}\n\nimpl Add<ZeroOne> for &ZeroOne {\n    type Output = ZeroOne;\n\n  \
+    \  fn add(self, other: ZeroOne) -> ZeroOne {\n        ZeroOne {\n            s0:\
+    \ self.s0 + other.s0,\n            s1: self.s1 + other.s1,\n        }\n    }\n\
+    }\n\nimpl AddAssign for ZeroOne {\n    fn add_assign(&mut self, other: Self) {\n\
+    \        self.s0 += other.s0;\n        self.s1 += other.s1;\n    }\n}\n\nimpl\
+    \ AddAssign<&ZeroOne> for ZeroOne {\n    fn add_assign(&mut self, other: &Self)\
+    \ {\n        self.s0 += other.s0;\n        self.s1 += other.s1;\n    }\n}\n"
   dependsOn:
   - crates/algebraic/algebraic/src/lib.rs
   - crates/data-structure/union-find-component-sum/src/lib.rs
@@ -67,7 +67,7 @@ data:
   isVerificationFile: false
   path: crates/tree/zero-one-on-tree/src/lib.rs
   requiredBy: []
-  timestamp: '2024-12-27 03:53:35+00:00'
+  timestamp: '2024-12-30 09:13:10+00:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: crates/tree/zero-one-on-tree/src/lib.rs

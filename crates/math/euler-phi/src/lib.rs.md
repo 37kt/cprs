@@ -14,16 +14,18 @@ data:
     \         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\
     \  File \"/opt/hostedtoolcache/Python/3.12.8/x64/lib/python3.12/site-packages/onlinejudge_verify/languages/rust.py\"\
     , line 288, in bundle\n    raise NotImplementedError\nNotImplementedError\n"
-  code: "pub fn euler_phi(n: usize) -> Vec<usize> {\n    let mut p = vec![0; n + 1];\n\
-    \    for i in 0..=n {\n        p[i] = i;\n    }\n    for i in 2..=n {\n      \
-    \  if p[i] != i {\n            continue;\n        }\n        for j in (i..=n).step_by(i)\
+  code: "/// \u30AA\u30A4\u30E9\u30FC\u306E\u30C8\u30FC\u30B7\u30A7\u30F3\u30C8\u95A2\
+    \u6570  \n/// \u03C6(0), \u03C6(1), ..., \u03C6(n) \u3092\u5217\u6319\npub fn\
+    \ euler_phi(n: usize) -> Vec<usize> {\n    let mut p = vec![0; n + 1];\n    for\
+    \ i in 0..=n {\n        p[i] = i;\n    }\n    for i in 2..=n {\n        if p[i]\
+    \ != i {\n            continue;\n        }\n        for j in (i..=n).step_by(i)\
     \ {\n            p[j] /= i;\n            p[j] *= i - 1;\n        }\n    }\n  \
     \  p\n}\n"
   dependsOn: []
   isVerificationFile: false
   path: crates/math/euler-phi/src/lib.rs
   requiredBy: []
-  timestamp: '2023-12-24 10:25:28+09:00'
+  timestamp: '2024-12-30 09:13:10+00:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: crates/math/euler-phi/src/lib.rs

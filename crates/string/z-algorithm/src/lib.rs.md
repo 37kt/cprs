@@ -17,18 +17,20 @@ data:
     \         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\
     \  File \"/opt/hostedtoolcache/Python/3.12.8/x64/lib/python3.12/site-packages/onlinejudge_verify/languages/rust.py\"\
     , line 288, in bundle\n    raise NotImplementedError\nNotImplementedError\n"
-  code: "pub fn z_algorithm<T>(s: &[T]) -> Vec<usize>\nwhere\n    T: Eq,\n{\n    let\
-    \ n = s.len();\n    if n == 0 {\n        return vec![];\n    }\n    let mut z\
-    \ = vec![0; n];\n    let mut j = 0;\n    for i in 1..n {\n        let mut k =\
-    \ if j + z[j] <= i {\n            0\n        } else {\n            z[i - j].min(j\
-    \ + z[j] - i)\n        };\n        while i + k < n && s[k] == s[i + k] {\n   \
-    \         k += 1;\n        }\n        z[i] = k;\n        if j + z[j] < i + z[i]\
-    \ {\n            j = i;\n        }\n    }\n    z[0] = n;\n    z\n}\n"
+  code: "/// z-algorithm  \n/// `z[i]` \u306F `s[i..]` \u3068 `s` \u306E\u6700\u9577\
+    \u5171\u901A\u63A5\u982D\u8F9E\u306E\u9577\u3055\u3092\u8868\u3059\u3002\npub\
+    \ fn z_algorithm<T>(s: &[T]) -> Vec<usize>\nwhere\n    T: Eq,\n{\n    let n =\
+    \ s.len();\n    if n == 0 {\n        return vec![];\n    }\n    let mut z = vec![0;\
+    \ n];\n    let mut j = 0;\n    for i in 1..n {\n        let mut k = if j + z[j]\
+    \ <= i {\n            0\n        } else {\n            z[i - j].min(j + z[j] -\
+    \ i)\n        };\n        while i + k < n && s[k] == s[i + k] {\n            k\
+    \ += 1;\n        }\n        z[i] = k;\n        if j + z[j] < i + z[i] {\n    \
+    \        j = i;\n        }\n    }\n    z[0] = n;\n    z\n}\n"
   dependsOn: []
   isVerificationFile: false
   path: crates/string/z-algorithm/src/lib.rs
   requiredBy: []
-  timestamp: '2024-03-11 09:14:28+09:00'
+  timestamp: '2024-12-30 09:13:10+00:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/zalgorithm/src/main.rs

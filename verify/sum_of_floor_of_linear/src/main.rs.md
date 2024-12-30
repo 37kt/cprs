@@ -30,7 +30,7 @@ data:
   isVerificationFile: true
   path: verify/sum_of_floor_of_linear/src/main.rs
   requiredBy: []
-  timestamp: '2024-10-22 08:19:06+09:00'
+  timestamp: '2024-12-30 09:13:10+00:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/sum_of_floor_of_linear/src/main.rs

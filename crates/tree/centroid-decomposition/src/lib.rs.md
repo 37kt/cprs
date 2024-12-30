@@ -52,20 +52,22 @@ data:
     \    idx.append(&mut idx_r.clone());\n    let mut par = vec![];\n    par.append(&mut\
     \ par_l);\n    par.append(&mut par_r);\n    f(&idx, &par, idx_l.len());\n    idx_l.insert(0,\
     \ pre_idx[c]);\n    idx_r.insert(0, pre_idx[c]);\n    dfs3(0, &gl, &idx_l, conv,\
-    \ f);\n    dfs3(0, &gr, &idx_r, conv, f);\n}\n\n/// f: (idx, par, m)\n/// par[0]\
-    \ \u3092\u6839\u3068\u3059\u308B\u90E8\u5206\u6728\u304C\u30C8\u30DD\u30ED\u30B8\
-    \u30AB\u30EB\u9806\u5E8F\u3067\u6E21\u3055\u308C\u308B\n/// idx: \u9802\u70B9\u756A\
-    \u53F7\n/// par: \u89AA\u306E\u9802\u70B9\u756A\u53F7\n/// idx[..m] \u304C\u8D64\
-    \uFF0Cidx[m..] \u304C\u9752\npub fn centroid_decomposition(g: &Graph<(), ()>,\
-    \ f: &mut impl FnMut(&[usize], &[usize], usize)) {\n    let n = g.len();\n   \
-    \ let mut conv = vec![!0; n];\n    dfs3(0, g, &(0..n).collect::<Vec<_>>(), &mut\
-    \ conv, f);\n}\n"
+    \ f);\n    dfs3(0, &gr, &idx_r, conv, f);\n}\n\n/// \u91CD\u5FC3\u5206\u89E3 \
+    \ \n/// `f: fn f(idx: &[usize], par: &[usize], m: usize)`  \n/// `par[0]` \u3092\
+    \u6839\u3068\u3059\u308B\u90E8\u5206\u6728\u304C\u30C8\u30DD\u30ED\u30B8\u30AB\
+    \u30EB\u9806\u5E8F\u3067\u6E21\u3055\u308C\u308B  \n/// `idx`: \u9802\u70B9\u756A\
+    \u53F7  \n/// `par`: \u89AA\u306E\u9802\u70B9\u756A\u53F7  \n/// `idx[..m]` \u304C\
+    \u8D64\uFF0C`idx[m..]` \u304C\u9752  \n/// `f` \u5185\u3067\u3001`idx[..m]` \u3068\
+    \ `idx[m..]` \u9593\u306E\u30D1\u30B9\u306B\u3064\u3044\u3066\u8A08\u7B97\u3059\
+    \u308B\npub fn centroid_decomposition(g: &Graph<(), ()>, mut f: impl FnMut(&[usize],\
+    \ &[usize], usize)) {\n    let n = g.len();\n    let mut conv = vec![!0; n];\n\
+    \    dfs3(0, g, &(0..n).collect::<Vec<_>>(), &mut conv, &mut f);\n}\n"
   dependsOn:
   - crates/graph/graph/src/lib.rs
   isVerificationFile: false
   path: crates/tree/centroid-decomposition/src/lib.rs
   requiredBy: []
-  timestamp: '2024-12-27 03:53:35+00:00'
+  timestamp: '2024-12-30 09:13:10+00:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/frequency_table_of_tree_distance/src/main.rs

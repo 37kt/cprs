@@ -29,7 +29,7 @@ data:
   isVerificationFile: true
   path: verify/primality_test/src/main.rs
   requiredBy: []
-  timestamp: '2023-06-13 17:24:28+09:00'
+  timestamp: '2024-12-30 09:13:10+00:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/primality_test/src/main.rs

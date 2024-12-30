@@ -33,7 +33,7 @@ data:
   isVerificationFile: true
   path: verify/matrix_product_mod_2/src/main.rs
   requiredBy: []
-  timestamp: '2024-03-21 13:40:37+09:00'
+  timestamp: '2024-12-30 09:13:10+00:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/matrix_product_mod_2/src/main.rs

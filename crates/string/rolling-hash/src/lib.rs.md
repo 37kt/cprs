@@ -54,11 +54,13 @@ data:
     \ = H>,\n{\n    pub fn val(&self) -> H {\n        self.hash\n    }\n\n    pub\
     \ fn concat(&self, other: Self) -> Self {\n        Self {\n            hash: self.hash\
     \ * other.pow + other.hash,\n            pow: self.pow * other.pow,\n        }\n\
-    \    }\n}\n\n#[derive(Clone)]\npub struct RollingHash<'a, C, H>\nwhere\n    C:\
-    \ Copy + Eq + Into<H>,\n    H: Copy + Eq + Add<Output = H> + Mul<Output = H> +\
-    \ Neg<Output = H>,\n    GenBaseImpl<H>: GenBase<H = H>,\n{\n    s: &'a [C],\n\
-    \    hs: Box<[H]>,\n    pw: Box<[H]>,\n}\n\nimpl<'a, C, H> RollingHash<'a, C,\
-    \ H>\nwhere\n    C: Copy + Eq + Into<H>,\n    H: Copy + Eq + From<u64> + Add<Output\
+    \    }\n}\n\n/// \u30ED\u30FC\u30EA\u30F3\u30B0\u30CF\u30C3\u30B7\u30E5  \n///\
+    \ TODO: \u3059\u3054\u304F\u4F7F\u3044\u3065\u3089\u3044\u306E\u3067\u3001\u3044\
+    \u3064\u304B\u76F4\u3059\n#[derive(Clone)]\npub struct RollingHash<'a, C, H>\n\
+    where\n    C: Copy + Eq + Into<H>,\n    H: Copy + Eq + Add<Output = H> + Mul<Output\
+    \ = H> + Neg<Output = H>,\n    GenBaseImpl<H>: GenBase<H = H>,\n{\n    s: &'a\
+    \ [C],\n    hs: Box<[H]>,\n    pw: Box<[H]>,\n}\n\nimpl<'a, C, H> RollingHash<'a,\
+    \ C, H>\nwhere\n    C: Copy + Eq + Into<H>,\n    H: Copy + Eq + From<u64> + Add<Output\
     \ = H> + Mul<Output = H> + Neg<Output = H>,\n    GenBaseImpl<H>: GenBase<H = H>,\n\
     {\n    pub fn new(s: &'a [C]) -> Self {\n        let n = s.len();\n        let\
     \ base = GenBaseImpl::<H>::base();\n        let mut hs = vec![H::from(0); n +\
@@ -102,7 +104,7 @@ data:
   isVerificationFile: false
   path: crates/string/rolling-hash/src/lib.rs
   requiredBy: []
-  timestamp: '2024-04-08 11:12:42+09:00'
+  timestamp: '2024-12-30 09:13:10+00:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/suffixarray_rolling_hash/src/main.rs

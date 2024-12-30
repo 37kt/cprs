@@ -40,7 +40,7 @@ data:
   isVerificationFile: false
   path: crates/graph/count-spanning-tree-directed/src/lib.rs
   requiredBy: []
-  timestamp: '2024-12-24 03:04:37+00:00'
+  timestamp: '2024-12-30 09:13:10+00:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/count_spanning_tree_directed/src/main.rs

@@ -25,20 +25,20 @@ data:
     , line 288, in bundle\n    raise NotImplementedError\nNotImplementedError\n"
   code: "use formal_power_series::fps;\nuse modint::StaticModInt;\n\n/// f(0), f(1),\
     \ ..., f(n-1) \u304B\u3089 f(c+i), f(c+1+i), ..., f(c+m-1) \u3092\u6C42\u3081\u308B\
-    \npub fn shift_of_sampling_points<const P: u32>(\n    ys: &[StaticModInt<P>],\n\
+    \npub fn shift_of_sampling_points<const P: u32>(\n    y: &[StaticModInt<P>],\n\
     \    c: StaticModInt<P>,\n    m: usize,\n) -> Vec<StaticModInt<P>> {\n    let\
-    \ c = c.val() as usize;\n    let n = ys.len();\n    if c < n {\n        let mut\
-    \ res = ys[c..].to_vec();\n        res.truncate(m);\n        if n < c + m {\n\
-    \            let mut suf = shift_of_sampling_points(ys, n.into(), m - res.len());\n\
+    \ c = c.val() as usize;\n    let n = y.len();\n    if c < n {\n        let mut\
+    \ res = y[c..].to_vec();\n        res.truncate(m);\n        if n < c + m {\n \
+    \           let mut suf = shift_of_sampling_points(y, n.into(), m - res.len());\n\
     \            res.append(&mut suf);\n        }\n        return res;\n    }\n\n\
-    \    if c + m > P as usize {\n        let mut pre = shift_of_sampling_points(ys,\
-    \ c.into(), P as usize - c);\n        let mut suf = shift_of_sampling_points(ys,\
+    \    if c + m > P as usize {\n        let mut pre = shift_of_sampling_points(y,\
+    \ c.into(), P as usize - c);\n        let mut suf = shift_of_sampling_points(y,\
     \ 0.into(), m - pre.len());\n        pre.append(&mut suf);\n        return pre;\n\
     \    }\n\n    let mut fact_inv = vec![StaticModInt::new(1); n];\n    let mut d\
     \ = fps![1; n];\n    for i in 2..n {\n        fact_inv[n - 1] *= i;\n    }\n \
     \   fact_inv[n - 1] = fact_inv[n - 1].inv();\n    for i in (1..n).rev() {\n  \
     \      fact_inv[i - 1] = fact_inv[i] * i;\n    }\n    for i in 0..n {\n      \
-    \  d[i] = fact_inv[i] * fact_inv[n - 1 - i] * ys[i];\n        if (n - 1 - i) &\
+    \  d[i] = fact_inv[i] * fact_inv[n - 1 - i] * y[i];\n        if (n - 1 - i) &\
     \ 1 != 0 {\n            d[i] = -d[i];\n        }\n    }\n\n    let mut h = fps![0;\
     \ m + n - 1];\n    for i in 0..m + n - 1 {\n        h[i] = StaticModInt::new(c\
     \ + 1 + i - n).inv();\n    }\n\n    let dh = d * &h;\n\n    let mut res = fps![0;\
@@ -51,7 +51,7 @@ data:
   isVerificationFile: false
   path: crates/polynomial/shift-of-sampling-points/src/lib.rs
   requiredBy: []
-  timestamp: '2024-12-24 03:04:37+00:00'
+  timestamp: '2024-12-30 09:13:10+00:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/shift_of_sampling_points_of_polynomial/src/main.rs

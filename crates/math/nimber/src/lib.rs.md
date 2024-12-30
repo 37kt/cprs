@@ -22,31 +22,32 @@ data:
     , line 288, in bundle\n    raise NotImplementedError\nNotImplementedError\n"
   code: "use std::{\n    convert::TryInto,\n    fmt::{Debug, Display},\n    mem::swap,\n\
     \    ops::{Add, AddAssign, Mul, MulAssign, Neg, Sub, SubAssign},\n    str::FromStr,\n\
-    };\n\n#[derive(Clone, Copy, PartialEq, Eq, Hash, Default)]\npub struct Nimber(usize);\n\
-    \nimpl FromStr for Nimber {\n    type Err = <usize as FromStr>::Err;\n    fn from_str(s:\
-    \ &str) -> Result<Self, Self::Err> {\n        Ok(Nimber(s.parse::<usize>()?))\n\
-    \    }\n}\n\nimpl<T, E> From<T> for Nimber\nwhere\n    T: TryInto<usize, Error\
-    \ = E>,\n    E: Debug,\n{\n    fn from(x: T) -> Self {\n        Nimber(x.try_into().unwrap())\n\
-    \    }\n}\n\nimpl Nimber {\n    pub fn new<T, E>(x: T) -> Self\n    where\n  \
-    \      T: TryInto<usize, Error = E>,\n        E: Debug,\n    {\n        Self::from(x)\n\
-    \    }\n\n    pub fn val(&self) -> usize {\n        self.0\n    }\n}\n\nimpl Display\
-    \ for Nimber {\n    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result\
-    \ {\n        write!(f, \"{}\", self.0)\n    }\n}\n\nimpl Debug for Nimber {\n\
+    };\n\n/// \u30CB\u30E0\u6570\n#[derive(Clone, Copy, PartialEq, Eq, Hash, Default)]\n\
+    pub struct Nimber(usize);\n\nimpl FromStr for Nimber {\n    type Err = <usize\
+    \ as FromStr>::Err;\n    fn from_str(s: &str) -> Result<Self, Self::Err> {\n \
+    \       Ok(Nimber(s.parse::<usize>()?))\n    }\n}\n\nimpl<T, E> From<T> for Nimber\n\
+    where\n    T: TryInto<usize, Error = E>,\n    E: Debug,\n{\n    fn from(x: T)\
+    \ -> Self {\n        Nimber(x.try_into().unwrap())\n    }\n}\n\nimpl Nimber {\n\
+    \    pub fn new<T, E>(x: T) -> Self\n    where\n        T: TryInto<usize, Error\
+    \ = E>,\n        E: Debug,\n    {\n        Self::from(x)\n    }\n\n    pub fn\
+    \ val(&self) -> usize {\n        self.0\n    }\n}\n\nimpl Display for Nimber {\n\
     \    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {\n  \
-    \      write!(f, \"{}\", self.0)\n    }\n}\n\nimpl Neg for Nimber {\n    type\
-    \ Output = Self;\n    fn neg(self) -> Self::Output {\n        self\n    }\n}\n\
-    \nimpl Neg for &Nimber {\n    type Output = Nimber;\n    fn neg(self) -> Self::Output\
-    \ {\n        *self\n    }\n}\n\nimpl AddAssign for Nimber {\n    fn add_assign(&mut\
-    \ self, rhs: Self) {\n        self.0 ^= rhs.0;\n    }\n}\n\nimpl SubAssign for\
-    \ Nimber {\n    fn sub_assign(&mut self, rhs: Self) {\n        self.0 ^= rhs.0;\n\
-    \    }\n}\n\nimpl MulAssign for Nimber {\n    fn mul_assign(&mut self, rhs: Self)\
-    \ {\n        PRECALC.with(|precalc| {\n            SMALL.with(|small| {\n    \
-    \            let mut res = 0;\n                for d in 0..8 {\n             \
-    \       for e in 0..8 {\n                        res ^= precalc[d][e][small[self.0\
-    \ >> d * 8 & 255][rhs.0 >> e * 8 & 255]];\n                    }\n           \
-    \     }\n                self.0 = res;\n            })\n        })\n    }\n}\n\
-    \nmacro_rules! impl_ops {\n    ($(\n        $trait:ident,\n        $trait_assign:ident,\n\
-    \        $fn:ident,\n        $fn_assign:ident,\n    )*) => {$(\n        impl $trait_assign<&Nimber>\
+    \      write!(f, \"{}\", self.0)\n    }\n}\n\nimpl Debug for Nimber {\n    fn\
+    \ fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {\n        write!(f,\
+    \ \"{}\", self.0)\n    }\n}\n\nimpl Neg for Nimber {\n    type Output = Self;\n\
+    \    fn neg(self) -> Self::Output {\n        self\n    }\n}\n\nimpl Neg for &Nimber\
+    \ {\n    type Output = Nimber;\n    fn neg(self) -> Self::Output {\n        *self\n\
+    \    }\n}\n\nimpl AddAssign for Nimber {\n    fn add_assign(&mut self, rhs: Self)\
+    \ {\n        self.0 ^= rhs.0;\n    }\n}\n\nimpl SubAssign for Nimber {\n    fn\
+    \ sub_assign(&mut self, rhs: Self) {\n        self.0 ^= rhs.0;\n    }\n}\n\nimpl\
+    \ MulAssign for Nimber {\n    fn mul_assign(&mut self, rhs: Self) {\n        PRECALC.with(|precalc|\
+    \ {\n            SMALL.with(|small| {\n                let mut res = 0;\n    \
+    \            for d in 0..8 {\n                    for e in 0..8 {\n          \
+    \              res ^= precalc[d][e][small[self.0 >> d * 8 & 255][rhs.0 >> e *\
+    \ 8 & 255]];\n                    }\n                }\n                self.0\
+    \ = res;\n            })\n        })\n    }\n}\n\nmacro_rules! impl_ops {\n  \
+    \  ($(\n        $trait:ident,\n        $trait_assign:ident,\n        $fn:ident,\n\
+    \        $fn_assign:ident,\n    )*) => {$(\n        impl $trait_assign<&Nimber>\
     \ for Nimber {\n            fn $fn_assign(&mut self, rhs: &Nimber) {\n       \
     \         self.$fn_assign(*rhs);\n            }\n        }\n        impl $trait<&Nimber>\
     \ for Nimber {\n            type Output = Nimber;\n            fn $fn(mut self,\
@@ -86,7 +87,7 @@ data:
   path: crates/math/nimber/src/lib.rs
   requiredBy:
   - crates/string/rolling-hash/src/lib.rs
-  timestamp: '2023-05-19 16:25:08+09:00'
+  timestamp: '2024-12-30 09:13:10+00:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/nim_product_64/src/main.rs

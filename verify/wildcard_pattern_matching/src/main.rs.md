@@ -29,7 +29,7 @@ data:
   isVerificationFile: true
   path: verify/wildcard_pattern_matching/src/main.rs
   requiredBy: []
-  timestamp: '2024-05-09 10:04:53+09:00'
+  timestamp: '2024-12-30 09:13:10+00:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/wildcard_pattern_matching/src/main.rs

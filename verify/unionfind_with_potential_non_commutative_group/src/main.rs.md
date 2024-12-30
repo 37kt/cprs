@@ -53,7 +53,7 @@ data:
   isVerificationFile: true
   path: verify/unionfind_with_potential_non_commutative_group/src/main.rs
   requiredBy: []
-  timestamp: '2024-12-25 10:01:29+00:00'
+  timestamp: '2024-12-30 09:13:10+00:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/unionfind_with_potential_non_commutative_group/src/main.rs

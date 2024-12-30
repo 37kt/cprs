@@ -189,123 +189,126 @@ data:
   code: "use std::{\n    fmt,\n    hash::Hash,\n    iter::{Product, Sum},\n    num::ParseIntError,\n\
     \    ops::{Add, AddAssign, Div, DivAssign, Mul, MulAssign, Neg, Sub, SubAssign},\n\
     \    str::FromStr,\n    sync::atomic::{self, AtomicU32, AtomicU64},\n};\n\nuse\
-    \ algebraic::{One, Zero};\n\n#[derive(Clone, Copy, Default, PartialEq, Eq, Hash)]\n\
-    #[repr(transparent)]\npub struct StaticModInt<const P: u32>(u32);\n\n#[derive(Clone,\
-    \ Copy, Default, PartialEq, Eq, Hash)]\n#[repr(transparent)]\npub struct DynamicModInt(u32);\n\
-    \npub type ModInt998244353 = StaticModInt<998_244_353>;\npub type ModInt1000000007\
-    \ = StaticModInt<1_000_000_007>;\n\npub trait ModInt:\n    Default\n    + Zero\n\
-    \    + One\n    + FromStr\n    + From<i8>\n    + From<i16>\n    + From<i32>\n\
-    \    + From<i64>\n    + From<i128>\n    + From<isize>\n    + From<u8>\n    + From<u16>\n\
-    \    + From<u32>\n    + From<u64>\n    + From<u128>\n    + From<usize>\n    +\
-    \ Copy\n    + Eq\n    + Hash\n    + fmt::Display\n    + fmt::Debug\n    + Neg<Output\
-    \ = Self>\n    + Add<Output = Self>\n    + Sub<Output = Self>\n    + Mul<Output\
-    \ = Self>\n    + Div<Output = Self>\n    + AddAssign\n    + SubAssign\n    + MulAssign\n\
-    \    + DivAssign\n{\n    fn modulus() -> u32;\n    fn raw(val: u32) -> Self;\n\
-    \    fn val(self) -> u32;\n    fn inv(self) -> Self;\n    fn pow(self, k: usize)\
-    \ -> Self;\n    fn sqrt(self) -> Option<Self>;\n}\n\nconst fn mul(x: u32, y: u32,\
-    \ m: u32) -> u32 {\n    (x as u64 * y as u64 % m as u64) as u32\n}\n\nconst fn\
-    \ pow(x: u32, mut n: u32, m: u32) -> u32 {\n    if m == 1 {\n        return 0;\n\
-    \    }\n    let mut r = 1u64;\n    let mut y = (x % m) as u64;\n    while n !=\
-    \ 0 {\n        if n & 1 != 0 {\n            r = r * y % m as u64;\n        }\n\
-    \        y = y * y % m as u64;\n        n >>= 1;\n    }\n    r as u32\n}\n\nconst\
-    \ fn is_prime(n: u32) -> bool {\n    match n {\n        _ if n <= 1 => return\
-    \ false,\n        2 | 7 | 61 => return true,\n        _ if n & 1 == 0 => return\
-    \ false,\n        _ => {}\n    }\n    let mut d = n - 1;\n    while d & 1 == 0\
-    \ {\n        d >>= 1;\n    }\n    let a = [2, 7, 61];\n    let mut i = 0;\n  \
-    \  while i < 3 {\n        let mut t = d;\n        let mut y = pow(a[i], t, n);\n\
-    \        while t != n - 1 && y != 1 && y != n - 1 {\n            y = (y as u64\
-    \ * y as u64 % n as u64) as u32;\n            t <<= 1;\n        }\n        if\
-    \ y != n - 1 && t & 1 == 0 {\n            return false;\n        }\n        i\
-    \ += 1;\n    }\n    true\n}\n\nconst fn extgcd(mut a: u32, b: u32) -> (u32, u32)\
-    \ {\n    a = a % b;\n    if a == 0 {\n        return (b, 0);\n    }\n\n    let\
-    \ mut s = b as i64;\n    let mut t = a as i64;\n    let mut m0 = 0;\n    let mut\
-    \ m1 = 1;\n    while t != 0 {\n        let u = s / t;\n        s -= t * u;\n \
-    \       m0 -= m1 * u;\n        let tmp = s;\n        s = t;\n        t = tmp;\n\
-    \        let tmp = m0;\n        m0 = m1;\n        m1 = tmp;\n    }\n    if m0\
-    \ < 0 {\n        m0 += b as i64 / s;\n    }\n    (s as u32, m0 as u32)\n}\n\n\
-    const fn primitive_root(m: u32) -> u32 {\n    match m {\n        2 => return 1,\n\
-    \        167_772_161 => return 3,\n        469_762_049 => return 3,\n        754_974_721\
-    \ => return 11,\n        998_244_353 => return 3,\n        _ => {}\n    }\n  \
-    \  let mut divs = [0; 20];\n    divs[0] = 2;\n    let mut cnt = 1;\n    let mut\
-    \ x = (m - 1) / 2;\n    while x % 2 == 0 {\n        x /= 2;\n    }\n    let mut\
-    \ i = 3;\n    while i < std::u32::MAX {\n        if i as u64 * i as u64 > x as\
-    \ u64 {\n            break;\n        }\n        if x % i == 0 {\n            divs[cnt]\
-    \ = i;\n            cnt += 1;\n            while x % i == 0 {\n              \
-    \  x /= i;\n            }\n        }\n        i += 2;\n    }\n    if x > 1 {\n\
-    \        divs[cnt] = x;\n        cnt += 1;\n    }\n    let mut g = 2;\n    loop\
-    \ {\n        let mut i = 0;\n        while i < cnt {\n            if pow(g, (m\
-    \ - 1) / divs[i], m) == 1 {\n                break;\n            }\n         \
-    \   i += 1;\n        }\n        if i == cnt {\n            break g;\n        }\n\
-    \        g += 1;\n    }\n}\n\nconst fn ntt_info(\n    m: u32,\n) -> (\n    u32,\n\
-    \    usize,\n    [u32; 30],\n    [u32; 30],\n    [u32; 30],\n    [u32; 30],\n\
-    \    [u32; 30],\n    [u32; 30],\n) {\n    let g = primitive_root(m);\n    let\
-    \ rank2 = (m - 1).trailing_zeros() as usize;\n    let mut root = [0; 30];\n  \
-    \  let mut iroot = [0; 30];\n    let mut rate2 = [0; 30];\n    let mut irate2\
-    \ = [0; 30];\n    let mut rate3 = [0; 30];\n    let mut irate3 = [0; 30];\n\n\
-    \    root[rank2] = pow(g, (m - 1) >> rank2, m);\n    iroot[rank2] = extgcd(root[rank2],\
-    \ m).1;\n    let mut i = rank2;\n    while i > 0 {\n        i -= 1;\n        root[i]\
-    \ = mul(root[i + 1], root[i + 1], m);\n        iroot[i] = mul(iroot[i + 1], iroot[i\
-    \ + 1], m);\n    }\n\n    let mut prod = 1;\n    let mut iprod = 1;\n    let mut\
-    \ i = 0;\n    while i + 2 <= rank2 {\n        rate2[i] = mul(root[i + 2], prod,\
-    \ m);\n        irate2[i] = mul(iroot[i + 2], iprod, m);\n        prod = mul(prod,\
-    \ iroot[i + 2], m);\n        iprod = mul(iprod, root[i + 2], m);\n        i +=\
-    \ 1;\n    }\n\n    let mut prod = 1;\n    let mut iprod = 1;\n    let mut i =\
-    \ 0;\n    while i + 3 <= rank2 {\n        rate3[i] = mul(root[i + 3], prod, m);\n\
-    \        irate3[i] = mul(iroot[i + 3], iprod, m);\n        prod = mul(prod, iroot[i\
-    \ + 3], m);\n        iprod = mul(iprod, root[i + 3], m);\n        i += 1;\n  \
-    \  }\n\n    (g, rank2, root, iroot, rate2, irate2, rate3, irate3)\n}\n\n// reference:\
-    \ https://rsk0315.hatenablog.com/entry/2023/04/29/043512\nfn rat_convert(x: u64,\
-    \ m: u64, d: u64) -> Option<(u64, u64)> {\n    let n = m / (2 * d);\n    if x\
-    \ < n && 1 < d {\n        return Some((x, 1));\n    }\n\n    let mut l = (0, 1);\n\
-    \    let mut r = (1, 0);\n    loop {\n        let num = l.0 + r.0;\n        let\
-    \ den = l.1 + r.1;\n\n        let (i, q) = match (num * m).cmp(&(den * x)) {\n\
-    \            std::cmp::Ordering::Less => {\n                // num/den < x/m\n\
-    \                // k = max {k: m (l.0 * k * r.0) < x (l.1 + k * r.1)}\n     \
-    \           // k = max {k: k (m r.0 - x r.1) < x l.1 - m l.0}\n              \
-    \  let k = (x * l.1 - m * l.0 - 1) / (m * r.0 - x * r.1);\n                l.0\
-    \ += k * r.0;\n                l.1 += k * r.1;\n                l\n          \
-    \  }\n            std::cmp::Ordering::Equal => return None,\n            std::cmp::Ordering::Greater\
-    \ => {\n                // num/den > x/m\n                // k = max {k: m (k\
-    \ l.0 + r.0) > x (k l.1 + r.1)}\n                // k = max {k: m r.0 - x r.1\
-    \ > k (x l.1 - m l.0)}\n                let k = (m * r.0 - x * r.1 - 1) / (x *\
-    \ l.1 - m * l.0);\n                r.0 += k * l.0;\n                r.1 += k *\
-    \ l.1;\n                r\n            }\n        };\n\n        if q * x < i *\
-    \ m {\n            continue;\n        }\n        let p = q * x - i * m;\n    \
-    \    if p < n && q < d {\n            return Some((p, q));\n        }\n    }\n\
-    }\n\nimpl<const P: u32> ModInt for StaticModInt<P> {\n    #[inline(always)]\n\
-    \    fn modulus() -> u32 {\n        P\n    }\n\n    #[inline]\n    fn raw(val:\
+    \ algebraic::{One, Zero};\n\n/// \u30B3\u30F3\u30D1\u30A4\u30EB\u6642\u306B\u6CD5\
+    \u3092\u6307\u5B9A\u3057\u305F ModInt\n#[derive(Clone, Copy, Default, PartialEq,\
+    \ Eq, Hash)]\n#[repr(transparent)]\npub struct StaticModInt<const P: u32>(u32);\n\
+    \n/// \u5B9F\u884C\u6642\u306B\u6CD5\u3092\u6307\u5B9A\u3067\u304D\u308B ModInt\n\
+    #[derive(Clone, Copy, Default, PartialEq, Eq, Hash)]\n#[repr(transparent)]\npub\
+    \ struct DynamicModInt(u32);\n\npub type ModInt998244353 = StaticModInt<998_244_353>;\n\
+    pub type ModInt1000000007 = StaticModInt<1_000_000_007>;\n\npub trait ModInt:\n\
+    \    Default\n    + Zero\n    + One\n    + FromStr\n    + From<i8>\n    + From<i16>\n\
+    \    + From<i32>\n    + From<i64>\n    + From<i128>\n    + From<isize>\n    +\
+    \ From<u8>\n    + From<u16>\n    + From<u32>\n    + From<u64>\n    + From<u128>\n\
+    \    + From<usize>\n    + Copy\n    + Eq\n    + Hash\n    + fmt::Display\n   \
+    \ + fmt::Debug\n    + Neg<Output = Self>\n    + Add<Output = Self>\n    + Sub<Output\
+    \ = Self>\n    + Mul<Output = Self>\n    + Div<Output = Self>\n    + AddAssign\n\
+    \    + SubAssign\n    + MulAssign\n    + DivAssign\n{\n    fn modulus() -> u32;\n\
+    \    fn raw(val: u32) -> Self;\n    fn val(self) -> u32;\n    fn inv(self) ->\
+    \ Self;\n    fn pow(self, k: usize) -> Self;\n    fn sqrt(self) -> Option<Self>;\n\
+    }\n\nconst fn mul(x: u32, y: u32, m: u32) -> u32 {\n    (x as u64 * y as u64 %\
+    \ m as u64) as u32\n}\n\nconst fn pow(x: u32, mut n: u32, m: u32) -> u32 {\n \
+    \   if m == 1 {\n        return 0;\n    }\n    let mut r = 1u64;\n    let mut\
+    \ y = (x % m) as u64;\n    while n != 0 {\n        if n & 1 != 0 {\n         \
+    \   r = r * y % m as u64;\n        }\n        y = y * y % m as u64;\n        n\
+    \ >>= 1;\n    }\n    r as u32\n}\n\nconst fn is_prime(n: u32) -> bool {\n    match\
+    \ n {\n        _ if n <= 1 => return false,\n        2 | 7 | 61 => return true,\n\
+    \        _ if n & 1 == 0 => return false,\n        _ => {}\n    }\n    let mut\
+    \ d = n - 1;\n    while d & 1 == 0 {\n        d >>= 1;\n    }\n    let a = [2,\
+    \ 7, 61];\n    let mut i = 0;\n    while i < 3 {\n        let mut t = d;\n   \
+    \     let mut y = pow(a[i], t, n);\n        while t != n - 1 && y != 1 && y !=\
+    \ n - 1 {\n            y = (y as u64 * y as u64 % n as u64) as u32;\n        \
+    \    t <<= 1;\n        }\n        if y != n - 1 && t & 1 == 0 {\n            return\
+    \ false;\n        }\n        i += 1;\n    }\n    true\n}\n\nconst fn extgcd(mut\
+    \ a: u32, b: u32) -> (u32, u32) {\n    a = a % b;\n    if a == 0 {\n        return\
+    \ (b, 0);\n    }\n\n    let mut s = b as i64;\n    let mut t = a as i64;\n   \
+    \ let mut m0 = 0;\n    let mut m1 = 1;\n    while t != 0 {\n        let u = s\
+    \ / t;\n        s -= t * u;\n        m0 -= m1 * u;\n        let tmp = s;\n   \
+    \     s = t;\n        t = tmp;\n        let tmp = m0;\n        m0 = m1;\n    \
+    \    m1 = tmp;\n    }\n    if m0 < 0 {\n        m0 += b as i64 / s;\n    }\n \
+    \   (s as u32, m0 as u32)\n}\n\nconst fn primitive_root(m: u32) -> u32 {\n   \
+    \ match m {\n        2 => return 1,\n        167_772_161 => return 3,\n      \
+    \  469_762_049 => return 3,\n        754_974_721 => return 11,\n        998_244_353\
+    \ => return 3,\n        _ => {}\n    }\n    let mut divs = [0; 20];\n    divs[0]\
+    \ = 2;\n    let mut cnt = 1;\n    let mut x = (m - 1) / 2;\n    while x % 2 ==\
+    \ 0 {\n        x /= 2;\n    }\n    let mut i = 3;\n    while i < std::u32::MAX\
+    \ {\n        if i as u64 * i as u64 > x as u64 {\n            break;\n       \
+    \ }\n        if x % i == 0 {\n            divs[cnt] = i;\n            cnt += 1;\n\
+    \            while x % i == 0 {\n                x /= i;\n            }\n    \
+    \    }\n        i += 2;\n    }\n    if x > 1 {\n        divs[cnt] = x;\n     \
+    \   cnt += 1;\n    }\n    let mut g = 2;\n    loop {\n        let mut i = 0;\n\
+    \        while i < cnt {\n            if pow(g, (m - 1) / divs[i], m) == 1 {\n\
+    \                break;\n            }\n            i += 1;\n        }\n     \
+    \   if i == cnt {\n            break g;\n        }\n        g += 1;\n    }\n}\n\
+    \nconst fn ntt_info(\n    m: u32,\n) -> (\n    u32,\n    usize,\n    [u32; 30],\n\
+    \    [u32; 30],\n    [u32; 30],\n    [u32; 30],\n    [u32; 30],\n    [u32; 30],\n\
+    ) {\n    let g = primitive_root(m);\n    let rank2 = (m - 1).trailing_zeros()\
+    \ as usize;\n    let mut root = [0; 30];\n    let mut iroot = [0; 30];\n    let\
+    \ mut rate2 = [0; 30];\n    let mut irate2 = [0; 30];\n    let mut rate3 = [0;\
+    \ 30];\n    let mut irate3 = [0; 30];\n\n    root[rank2] = pow(g, (m - 1) >> rank2,\
+    \ m);\n    iroot[rank2] = extgcd(root[rank2], m).1;\n    let mut i = rank2;\n\
+    \    while i > 0 {\n        i -= 1;\n        root[i] = mul(root[i + 1], root[i\
+    \ + 1], m);\n        iroot[i] = mul(iroot[i + 1], iroot[i + 1], m);\n    }\n\n\
+    \    let mut prod = 1;\n    let mut iprod = 1;\n    let mut i = 0;\n    while\
+    \ i + 2 <= rank2 {\n        rate2[i] = mul(root[i + 2], prod, m);\n        irate2[i]\
+    \ = mul(iroot[i + 2], iprod, m);\n        prod = mul(prod, iroot[i + 2], m);\n\
+    \        iprod = mul(iprod, root[i + 2], m);\n        i += 1;\n    }\n\n    let\
+    \ mut prod = 1;\n    let mut iprod = 1;\n    let mut i = 0;\n    while i + 3 <=\
+    \ rank2 {\n        rate3[i] = mul(root[i + 3], prod, m);\n        irate3[i] =\
+    \ mul(iroot[i + 3], iprod, m);\n        prod = mul(prod, iroot[i + 3], m);\n \
+    \       iprod = mul(iprod, root[i + 3], m);\n        i += 1;\n    }\n\n    (g,\
+    \ rank2, root, iroot, rate2, irate2, rate3, irate3)\n}\n\n// reference: https://rsk0315.hatenablog.com/entry/2023/04/29/043512\n\
+    fn rat_convert(x: u64, m: u64, d: u64) -> Option<(u64, u64)> {\n    let n = m\
+    \ / (2 * d);\n    if x < n && 1 < d {\n        return Some((x, 1));\n    }\n\n\
+    \    let mut l = (0, 1);\n    let mut r = (1, 0);\n    loop {\n        let num\
+    \ = l.0 + r.0;\n        let den = l.1 + r.1;\n\n        let (i, q) = match (num\
+    \ * m).cmp(&(den * x)) {\n            std::cmp::Ordering::Less => {\n        \
+    \        // num/den < x/m\n                // k = max {k: m (l.0 * k * r.0) <\
+    \ x (l.1 + k * r.1)}\n                // k = max {k: k (m r.0 - x r.1) < x l.1\
+    \ - m l.0}\n                let k = (x * l.1 - m * l.0 - 1) / (m * r.0 - x * r.1);\n\
+    \                l.0 += k * r.0;\n                l.1 += k * r.1;\n          \
+    \      l\n            }\n            std::cmp::Ordering::Equal => return None,\n\
+    \            std::cmp::Ordering::Greater => {\n                // num/den > x/m\n\
+    \                // k = max {k: m (k l.0 + r.0) > x (k l.1 + r.1)}\n         \
+    \       // k = max {k: m r.0 - x r.1 > k (x l.1 - m l.0)}\n                let\
+    \ k = (m * r.0 - x * r.1 - 1) / (x * l.1 - m * l.0);\n                r.0 += k\
+    \ * l.0;\n                r.1 += k * l.1;\n                r\n            }\n\
+    \        };\n\n        if q * x < i * m {\n            continue;\n        }\n\
+    \        let p = q * x - i * m;\n        if p < n && q < d {\n            return\
+    \ Some((p, q));\n        }\n    }\n}\n\nimpl<const P: u32> ModInt for StaticModInt<P>\
+    \ {\n    #[inline(always)]\n    fn modulus() -> u32 {\n        P\n    }\n\n  \
+    \  #[inline]\n    fn raw(val: u32) -> Self {\n        Self(val)\n    }\n\n   \
+    \ #[inline]\n    fn val(self) -> u32 {\n        self.0\n    }\n\n    #[inline]\n\
+    \    fn inv(self) -> Self {\n        self.inv()\n    }\n\n    fn pow(self, k:\
+    \ usize) -> Self {\n        self.pow(k)\n    }\n\n    fn sqrt(self) -> Option<Self>\
+    \ {\n        self.sqrt()\n    }\n}\n\nimpl<const P: u32> StaticModInt<P> {\n \
+    \   #[inline]\n    pub fn new<T: Into<StaticModInt<P>>>(x: T) -> Self {\n    \
+    \    x.into()\n    }\n\n    #[inline(always)]\n    pub const fn modulus() -> u32\
+    \ {\n        P\n    }\n\n    #[inline]\n    pub const fn raw(val: u32) -> Self\
+    \ {\n        Self(val)\n    }\n\n    #[inline]\n    pub const fn val(self) ->\
+    \ u32 {\n        self.0\n    }\n\n    #[inline]\n    pub fn inv(self) -> Self\
+    \ {\n        assert_ne!(self.0, 0);\n        self.pow(P as usize - 2)\n    }\n\
+    \n    pub fn pow(mut self, mut k: usize) -> Self {\n        let mut res = Self::from(1);\n\
+    \        while k != 0 {\n            if k & 1 != 0 {\n                res *= self;\n\
+    \            }\n            k >>= 1;\n            self *= self;\n        }\n \
+    \       res\n    }\n\n    pub fn sqrt(self) -> Option<Self> {\n        let p =\
+    \ Self::modulus() as usize;\n        if self.val() < 2 {\n            return Some(self);\n\
+    \        } else if self.pow(p - 1 >> 1).val() != 1 {\n            return None;\n\
+    \        }\n        let mut b = Self::from(1);\n        while b.pow((p - 1 >>\
+    \ 1) as usize).val() == 1 {\n            b += 1;\n        }\n        let mut e\
+    \ = (p - 1).trailing_zeros() as usize;\n        let m = (p - 1) >> e;\n      \
+    \  let mut x = self.pow(m - 1 >> 1);\n        let mut y = self * x * x;\n    \
+    \    x *= self;\n        let mut z = b.pow(m);\n        while y.val() != 1 {\n\
+    \            let mut j = 0;\n            let mut t = y;\n            while t.val()\
+    \ != 1 {\n                j += 1;\n                t *= t;\n            }\n  \
+    \          z = z.pow(1 << e - j - 1);\n            x *= z;\n            z *= z;\n\
+    \            y *= z;\n            e = j;\n        }\n        Some(x)\n    }\n\
+    }\n\nimpl ModInt for DynamicModInt {\n    #[inline(always)]\n    fn modulus()\
+    \ -> u32 {\n        BARRETT.modulus()\n    }\n\n    #[inline]\n    fn raw(val:\
     \ u32) -> Self {\n        Self(val)\n    }\n\n    #[inline]\n    fn val(self)\
     \ -> u32 {\n        self.0\n    }\n\n    #[inline]\n    fn inv(self) -> Self {\n\
     \        self.inv()\n    }\n\n    fn pow(self, k: usize) -> Self {\n        self.pow(k)\n\
     \    }\n\n    fn sqrt(self) -> Option<Self> {\n        self.sqrt()\n    }\n}\n\
-    \nimpl<const P: u32> StaticModInt<P> {\n    #[inline]\n    pub fn new<T: Into<StaticModInt<P>>>(x:\
-    \ T) -> Self {\n        x.into()\n    }\n\n    #[inline(always)]\n    pub const\
-    \ fn modulus() -> u32 {\n        P\n    }\n\n    #[inline]\n    pub const fn raw(val:\
-    \ u32) -> Self {\n        Self(val)\n    }\n\n    #[inline]\n    pub const fn\
-    \ val(self) -> u32 {\n        self.0\n    }\n\n    #[inline]\n    pub fn inv(self)\
-    \ -> Self {\n        assert_ne!(self.0, 0);\n        self.pow(P as usize - 2)\n\
-    \    }\n\n    pub fn pow(mut self, mut k: usize) -> Self {\n        let mut res\
-    \ = Self::from(1);\n        while k != 0 {\n            if k & 1 != 0 {\n    \
-    \            res *= self;\n            }\n            k >>= 1;\n            self\
-    \ *= self;\n        }\n        res\n    }\n\n    pub fn sqrt(self) -> Option<Self>\
-    \ {\n        let p = Self::modulus() as usize;\n        if self.val() < 2 {\n\
-    \            return Some(self);\n        } else if self.pow(p - 1 >> 1).val()\
-    \ != 1 {\n            return None;\n        }\n        let mut b = Self::from(1);\n\
-    \        while b.pow((p - 1 >> 1) as usize).val() == 1 {\n            b += 1;\n\
-    \        }\n        let mut e = (p - 1).trailing_zeros() as usize;\n        let\
-    \ m = (p - 1) >> e;\n        let mut x = self.pow(m - 1 >> 1);\n        let mut\
-    \ y = self * x * x;\n        x *= self;\n        let mut z = b.pow(m);\n     \
-    \   while y.val() != 1 {\n            let mut j = 0;\n            let mut t =\
-    \ y;\n            while t.val() != 1 {\n                j += 1;\n            \
-    \    t *= t;\n            }\n            z = z.pow(1 << e - j - 1);\n        \
-    \    x *= z;\n            z *= z;\n            y *= z;\n            e = j;\n \
-    \       }\n        Some(x)\n    }\n}\n\nimpl ModInt for DynamicModInt {\n    #[inline(always)]\n\
-    \    fn modulus() -> u32 {\n        BARRETT.modulus()\n    }\n\n    #[inline]\n\
-    \    fn raw(val: u32) -> Self {\n        Self(val)\n    }\n\n    #[inline]\n \
-    \   fn val(self) -> u32 {\n        self.0\n    }\n\n    #[inline]\n    fn inv(self)\
-    \ -> Self {\n        self.inv()\n    }\n\n    fn pow(self, k: usize) -> Self {\n\
-    \        self.pow(k)\n    }\n\n    fn sqrt(self) -> Option<Self> {\n        self.sqrt()\n\
-    \    }\n}\n\nimpl DynamicModInt {\n    #[inline]\n    pub fn new<T: Into<DynamicModInt>>(x:\
+    \nimpl DynamicModInt {\n    #[inline]\n    pub fn new<T: Into<DynamicModInt>>(x:\
     \ T) -> Self {\n        x.into()\n    }\n\n    #[inline(always)]\n    pub fn modulus()\
     \ -> u32 {\n        BARRETT.modulus()\n    }\n\n    #[inline]\n    pub fn raw(val:\
     \ u32) -> Self {\n        Self(val)\n    }\n\n    #[inline]\n    pub fn val(self)\
@@ -479,7 +482,7 @@ data:
   - crates/number-theory/combination/src/lib.rs
   - crates/graph/count-spanning-tree-undirected/src/lib.rs
   - crates/graph/count-spanning-tree-directed/src/lib.rs
-  timestamp: '2024-12-25 03:34:39+00:00'
+  timestamp: '2024-12-30 09:13:10+00:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/log_of_formal_power_series/src/main.rs

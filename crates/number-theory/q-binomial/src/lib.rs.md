@@ -24,8 +24,8 @@ data:
     \  File \"/opt/hostedtoolcache/Python/3.12.8/x64/lib/python3.12/site-packages/onlinejudge_verify/languages/rust.py\"\
     , line 288, in bundle\n    raise NotImplementedError\nNotImplementedError\n"
   code: "use std::cell::RefCell;\n\nuse combination::Combination;\nuse modint::ModInt;\n\
-    \npub struct QBinomial<M: ModInt> {\n    q: M,\n    num: RefCell<Vec<M>>,\n  \
-    \  inv: RefCell<Vec<M>>,\n    fact: RefCell<Vec<M>>,\n    fact_inv: RefCell<Vec<M>>,\n\
+    \n/// q-\u985E\u4F3C\npub struct QBinomial<M: ModInt> {\n    q: M,\n    num: RefCell<Vec<M>>,\n\
+    \    inv: RefCell<Vec<M>>,\n    fact: RefCell<Vec<M>>,\n    fact_inv: RefCell<Vec<M>>,\n\
     \    comb: Combination<M>,\n}\n\nimpl<M: ModInt> QBinomial<M> {\n    pub fn new(q:\
     \ M) -> Self {\n        Self {\n            q,\n            num: RefCell::new(vec![M::from(0),\
     \ M::from(1)]),\n            inv: RefCell::new(vec![M::from(0), M::from(1)]),\n\
@@ -65,7 +65,7 @@ data:
   isVerificationFile: false
   path: crates/number-theory/q-binomial/src/lib.rs
   requiredBy: []
-  timestamp: '2024-12-24 03:04:37+00:00'
+  timestamp: '2024-12-30 09:13:10+00:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/q_binomial_coefficient_prime_mod/src/main.rs

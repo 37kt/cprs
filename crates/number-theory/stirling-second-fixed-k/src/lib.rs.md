@@ -43,7 +43,7 @@ data:
   isVerificationFile: false
   path: crates/number-theory/stirling-second-fixed-k/src/lib.rs
   requiredBy: []
-  timestamp: '2024-12-24 03:04:37+00:00'
+  timestamp: '2024-12-30 09:13:10+00:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/stirling_number_of_the_second_kind_fixed_k/src/main.rs

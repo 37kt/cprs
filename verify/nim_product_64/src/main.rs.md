@@ -29,7 +29,7 @@ data:
   isVerificationFile: true
   path: verify/nim_product_64/src/main.rs
   requiredBy: []
-  timestamp: '2023-05-19 16:25:08+09:00'
+  timestamp: '2024-12-30 09:13:10+00:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/nim_product_64/src/main.rs

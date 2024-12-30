@@ -68,7 +68,7 @@ data:
   isVerificationFile: false
   path: crates/polynomial/bostan-mori/src/lib.rs
   requiredBy: []
-  timestamp: '2024-12-25 07:02:27+00:00'
+  timestamp: '2024-12-30 09:13:10+00:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/kth_term_of_linearly_recurrent_sequence/src/main.rs

@@ -29,7 +29,7 @@ data:
   isVerificationFile: true
   path: verify/suffixarray_rolling_hash/src/main.rs
   requiredBy: []
-  timestamp: '2024-04-08 11:12:42+09:00'
+  timestamp: '2024-12-30 09:13:10+00:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/suffixarray_rolling_hash/src/main.rs

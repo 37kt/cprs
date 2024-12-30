@@ -45,7 +45,7 @@ data:
   isVerificationFile: true
   path: verify/range_affine_point_get/src/main.rs
   requiredBy: []
-  timestamp: '2024-12-25 08:18:46+00:00'
+  timestamp: '2024-12-30 09:13:10+00:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/range_affine_point_get/src/main.rs

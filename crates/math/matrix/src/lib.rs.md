@@ -37,11 +37,11 @@ data:
     , line 288, in bundle\n    raise NotImplementedError\nNotImplementedError\n"
   code: "use std::{\n    fmt::{Debug, Display},\n    ops::{Add, AddAssign, Div, DivAssign,\
     \ Index, IndexMut, Mul, MulAssign, Neg, Sub, SubAssign},\n};\n\nuse algebraic::{One,\
-    \ Zero};\n\n#[derive(Clone)]\npub struct Matrix<T>\nwhere\n    T: Clone,\n{\n\
-    \    n: usize,\n    m: usize,\n    v: Box<[T]>,\n}\n\nimpl<T> From<Vec<Vec<T>>>\
-    \ for Matrix<T>\nwhere\n    T: Clone,\n{\n    fn from(v: Vec<Vec<T>>) -> Self\
-    \ {\n        let n = v.len();\n        if n == 0 {\n            return Self {\n\
-    \                n: 0,\n                m: 0,\n                v: vec![].into_boxed_slice(),\n\
+    \ Zero};\n\n/// \u884C\u5217\n#[derive(Clone)]\npub struct Matrix<T>\nwhere\n\
+    \    T: Clone,\n{\n    n: usize,\n    m: usize,\n    v: Box<[T]>,\n}\n\nimpl<T>\
+    \ From<Vec<Vec<T>>> for Matrix<T>\nwhere\n    T: Clone,\n{\n    fn from(v: Vec<Vec<T>>)\
+    \ -> Self {\n        let n = v.len();\n        if n == 0 {\n            return\
+    \ Self {\n                n: 0,\n                m: 0,\n                v: vec![].into_boxed_slice(),\n\
     \            };\n        }\n        let m = v[0].len();\n        assert!(v.iter().all(|x|\
     \ x.len() == m));\n        Self {\n            n,\n            m,\n          \
     \  v: v.into_iter()\n                .flatten()\n                .collect::<Vec<_>>()\n\
@@ -172,7 +172,7 @@ data:
   requiredBy:
   - crates/graph/count-spanning-tree-undirected/src/lib.rs
   - crates/graph/count-spanning-tree-directed/src/lib.rs
-  timestamp: '2024-12-25 03:34:39+00:00'
+  timestamp: '2024-12-30 09:13:10+00:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/matrix_det/src/main.rs

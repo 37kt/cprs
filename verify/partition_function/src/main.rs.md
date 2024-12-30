@@ -28,7 +28,7 @@ data:
   isVerificationFile: true
   path: verify/partition_function/src/main.rs
   requiredBy: []
-  timestamp: '2024-12-12 07:56:32+00:00'
+  timestamp: '2024-12-30 09:13:10+00:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/partition_function/src/main.rs

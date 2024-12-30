@@ -29,12 +29,13 @@ data:
   code: "use std::{\n    cell::RefCell,\n    mem::swap,\n    ops::{Add, Sub},\n};\n\
     \nuse algebraic::{algebra, monoid};\nuse disjoint_sparse_table::DisjointSparseTable;\n\
     \nconst THRESHOLD_NAIVE: usize = 10;\nconst THRESHOLD_DOUBLING: usize = 40;\n\
-    const THRESHOLD_COMPRESS: usize = 16777216;\n\n#[allow(dead_code)]\npub struct\
-    \ SuffixArray<'a, T>\nwhere\n    T: Copy + Ord + Add<T> + Sub<T> + Into<usize>,\n\
-    {\n    s: &'a [T],\n    n: usize,\n    sa: Vec<usize>,\n    rank: Vec<usize>,\n\
-    \    lcp: Vec<usize>,\n    spt: RefCell<Option<DisjointSparseTable<M>>>,\n}\n\n\
-    impl<'a, T> SuffixArray<'a, T>\nwhere\n    T: Copy + Ord + Add<T, Output = T>\
-    \ + Sub<T, Output = T> + Into<usize>,\n{\n    pub fn build(s: &'a [T]) -> Self\
+    const THRESHOLD_COMPRESS: usize = 16777216;\n\n/// \u63A5\u5C3E\u8F9E\u914D\u5217\
+    \n#[allow(dead_code)]\npub struct SuffixArray<'a, T>\nwhere\n    T: Copy + Ord\
+    \ + Add<T> + Sub<T> + Into<usize>,\n{\n    s: &'a [T],\n    n: usize,\n    sa:\
+    \ Vec<usize>,\n    rank: Vec<usize>,\n    lcp: Vec<usize>,\n    spt: RefCell<Option<DisjointSparseTable<M>>>,\n\
+    }\n\nimpl<'a, T> SuffixArray<'a, T>\nwhere\n    T: Copy + Ord + Add<T, Output\
+    \ = T> + Sub<T, Output = T> + Into<usize>,\n{\n    /// \u63A5\u5C3E\u8F9E\u914D\
+    \u5217\u3092\u69CB\u7BC9\u3059\u308B\u3002\n    pub fn build(s: &'a [T]) -> Self\
     \ {\n        let n = s.len();\n        if n == 0 {\n            return Self {\n\
     \                s,\n                n,\n                sa: vec![],\n       \
     \         rank: vec![],\n                lcp: vec![],\n                spt: RefCell::new(None),\n\
@@ -50,18 +51,24 @@ data:
     \        for i in 0..n {\n            rank[sa[i]] = i;\n        }\n        let\
     \ lcp = lcp_array(&t, &sa, &rank);\n        Self {\n            s,\n         \
     \   n,\n            sa,\n            rank,\n            lcp,\n            spt:\
-    \ RefCell::new(None),\n        }\n    }\n\n    pub fn suffix_array(&self) -> &[usize]\
-    \ {\n        &self.sa\n    }\n\n    pub fn rank(&self) -> &[usize] {\n       \
-    \ &self.rank\n    }\n\n    pub fn lcp_array(&self) -> &[usize] {\n        &self.lcp\n\
-    \    }\n\n    pub fn lcp(&self, i: usize, j: usize) -> usize {\n        assert!(i\
-    \ <= self.n && j <= self.n);\n        if i == self.n || j == self.n {\n      \
-    \      0\n        } else if i == j {\n            self.n - i\n        } else {\n\
-    \            let mut i = self.rank[i];\n            let mut j = self.rank[j];\n\
-    \            if i > j {\n                swap(&mut i, &mut j);\n            }\n\
-    \            if self.spt.borrow().is_none() {\n                self.spt\n    \
-    \                .replace(Some(DisjointSparseTable::<M>::new(&self.lcp)));\n \
-    \           }\n            self.spt.borrow().as_ref().unwrap().prod(i..j)\n  \
-    \      }\n    }\n}\n\nalgebra!(M, usize);\nmonoid!(M, !0, |x: &usize, y: &usize|\
+    \ RefCell::new(None),\n        }\n    }\n\n    /// \u63A5\u5C3E\u8F9E\u914D\u5217\
+    \u3092\u8FD4\u3059\u3002\n    pub fn suffix_array(&self) -> &[usize] {\n     \
+    \   &self.sa\n    }\n\n    /// `rank[i]` \u306F `s[i..]` \u304C\u63A5\u5C3E\u8F9E\
+    \u914D\u5217\u306E\u4F55\u756A\u76EE\u306B\u3042\u308B\u304B\u3092\u8868\u3059\
+    \u3002\n    pub fn rank(&self) -> &[usize] {\n        &self.rank\n    }\n\n  \
+    \  /// lcp_array[i] \u306F `s[sa[i]..]` \u3068 `s[sa[i + 1]..]` \u306E\u6700\u9577\
+    \u5171\u901A\u63A5\u982D\u8F9E\u306E\u9577\u3055\u3092\u8868\u3059\u3002\n   \
+    \ pub fn lcp_array(&self) -> &[usize] {\n        &self.lcp\n    }\n\n    /// `s[i..]`\
+    \ \u3068 `s[j..]` \u306E\u6700\u9577\u5171\u901A\u63A5\u982D\u8F9E\u306E\u9577\
+    \u3055\u3092\u8FD4\u3059\u3002\n    pub fn lcp(&self, i: usize, j: usize) -> usize\
+    \ {\n        assert!(i <= self.n && j <= self.n);\n        if i == self.n || j\
+    \ == self.n {\n            0\n        } else if i == j {\n            self.n -\
+    \ i\n        } else {\n            let mut i = self.rank[i];\n            let\
+    \ mut j = self.rank[j];\n            if i > j {\n                swap(&mut i,\
+    \ &mut j);\n            }\n            if self.spt.borrow().is_none() {\n    \
+    \            self.spt\n                    .replace(Some(DisjointSparseTable::<M>::new(&self.lcp)));\n\
+    \            }\n            self.spt.borrow().as_ref().unwrap().prod(i..j)\n \
+    \       }\n    }\n}\n\nalgebra!(M, usize);\nmonoid!(M, !0, |x: &usize, y: &usize|\
     \ *x.min(y));\n\nfn sa_naive(s: &[usize]) -> Vec<usize> {\n    let n = s.len();\n\
     \    let mut sa: Vec<usize> = (0..n).collect();\n    sa.sort_by(|&(mut l), &(mut\
     \ r)| {\n        if l == r {\n            return std::cmp::Ordering::Equal;\n\
@@ -140,7 +147,7 @@ data:
   isVerificationFile: false
   path: crates/string/suffix-array/src/lib.rs
   requiredBy: []
-  timestamp: '2024-12-25 08:18:46+00:00'
+  timestamp: '2024-12-30 09:13:10+00:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/suffixarray/src/main.rs

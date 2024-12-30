@@ -37,7 +37,7 @@ data:
   isVerificationFile: true
   path: verify/range_parallel_unionfind/src/main.rs
   requiredBy: []
-  timestamp: '2024-12-26 06:54:01+00:00'
+  timestamp: '2024-12-30 09:13:10+00:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/range_parallel_unionfind/src/main.rs

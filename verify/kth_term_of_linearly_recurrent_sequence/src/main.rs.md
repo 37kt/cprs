@@ -40,7 +40,7 @@ data:
   isVerificationFile: true
   path: verify/kth_term_of_linearly_recurrent_sequence/src/main.rs
   requiredBy: []
-  timestamp: '2024-12-24 03:04:37+00:00'
+  timestamp: '2024-12-30 09:13:10+00:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/kth_term_of_linearly_recurrent_sequence/src/main.rs
