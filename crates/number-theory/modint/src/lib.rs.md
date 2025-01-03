@@ -172,6 +172,9 @@ data:
     path: verify/tree_path_composite_sum/src/main.rs
     title: verify/tree_path_composite_sum/src/main.rs
   - icon: ':heavy_check_mark:'
+    path: verify/trie_yuki1269/src/main.rs
+    title: verify/trie_yuki1269/src/main.rs
+  - icon: ':heavy_check_mark:'
     path: verify/unionfind_with_potential_non_commutative_group/src/main.rs
     title: verify/unionfind_with_potential_non_commutative_group/src/main.rs
   _isVerificationFailed: false
@@ -502,6 +505,7 @@ data:
   - verify/sqrt_mod/src/main.rs
   - verify/exp_of_formal_power_series/src/main.rs
   - verify/range_affine_point_get/src/main.rs
+  - verify/trie_yuki1269/src/main.rs
   - verify/kth_term_of_linearly_recurrent_sequence/src/main.rs
   - verify/stirling_number_of_the_first_kind_fixed_k/src/main.rs
   - verify/inverse_matrix/src/main.rs

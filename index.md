@@ -596,6 +596,11 @@ data:
     - icon: ':heavy_check_mark:'
       path: crates/string/suffix-array/src/lib.rs
       title: crates/string/suffix-array/src/lib.rs
+  - name: crates/string/trie/src
+    pages:
+    - icon: ':heavy_check_mark:'
+      path: crates/string/trie/src/lib.rs
+      title: crates/string/trie/src/lib.rs
   - name: crates/string/wildcard-pattern-matching/src
     pages:
     - icon: ':heavy_check_mark:'
@@ -1097,6 +1102,11 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/tree_path_composite_sum/src/main.rs
       title: verify/tree_path_composite_sum/src/main.rs
+  - name: verify/trie_yuki1269/src
+    pages:
+    - icon: ':heavy_check_mark:'
+      path: verify/trie_yuki1269/src/main.rs
+      title: verify/trie_yuki1269/src/main.rs
   - name: verify/two_edge_connected_components/src
     pages:
     - icon: ':heavy_check_mark:'
