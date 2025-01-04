@@ -1,4 +1,4 @@
-// verification-helper: PROBLEM https://judge.yosupo.jp/problem/ordered_set
+// verification-helper: PROBLEM https://judge.yosupo.jp/problem/set_xor_min
 
 use binary_trie::BinaryTrie;
 use proconio::fastout;
