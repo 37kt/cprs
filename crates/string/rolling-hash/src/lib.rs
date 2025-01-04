@@ -19,6 +19,7 @@ fn base() -> ModInt61 {
     BASE.with(|base| *base)
 }
 
+/// ローリングハッシュ
 pub struct RollingHash {
     pow: RefCell<Vec<ModInt61>>,
 }
@@ -34,6 +35,7 @@ impl RollingHash {
         base()
     }
 
+    /// 配列 `s` の部分列のハッシュを求めるためのテーブルを構築
     pub fn build_table<'a, 'b, T>(&'a self, s: &'b [T]) -> RollingHashTable<'a, 'b, T>
     where
         T: Clone + Into<ModInt61>,
@@ -46,6 +48,7 @@ impl RollingHash {
         RollingHashTable { rh: self, s, hash }
     }
 
+    /// 配列 `s` のハッシュを求める
     pub fn hash<T>(s: &[T]) -> RollingHashedSequence
     where
         T: Clone + Into<ModInt61>,
@@ -75,10 +78,12 @@ pub struct RollingHashTable<'a, 'b, T> {
 }
 
 impl<'a, 'b, T> RollingHashTable<'a, 'b, T> {
+    /// 配列の長さを返す
     pub fn len(&self) -> usize {
         self.s.len()
     }
 
+    /// 配列の部分列のハッシュを求める
     pub fn get(&self, index: impl RangeBounds<usize>) -> RollingHashedSequence {
         let (l, r) = range_to_pair(index, self.s.len());
         RollingHashedSequence {
@@ -88,6 +93,7 @@ impl<'a, 'b, T> RollingHashTable<'a, 'b, T> {
         }
     }
 
+    /// 2 つの配列の最長共通接頭辞の長さを求める
     pub fn lcp(
         &self,
         index1: impl RangeBounds<usize>,
@@ -110,6 +116,7 @@ impl<'a, 'b, T> RollingHashTable<'a, 'b, T> {
         ok
     }
 
+    /// 2 つの配列の辞書順比較
     pub fn compare(
         &self,
         index1: impl RangeBounds<usize>,
@@ -136,6 +143,7 @@ impl<'a, 'b, T> RollingHashTable<'a, 'b, T> {
     }
 }
 
+/// ハッシュ化された数列
 #[derive(Clone, Copy, PartialEq, Eq, Hash)]
 pub struct RollingHashedSequence {
     hash: ModInt61,
@@ -154,6 +162,7 @@ impl Default for RollingHashedSequence {
 }
 
 impl RollingHashedSequence {
+    /// 配列 `s` のハッシュを求める
     pub fn from_slice<T>(s: &[T]) -> Self
     where
         T: Clone + Into<ModInt61>,
@@ -169,14 +178,17 @@ impl RollingHashedSequence {
         }
     }
 
+    /// ハッシュを返す
     pub fn hash(self) -> ModInt61 {
         self.hash
     }
 
+    /// 配列の長さを返す
     pub fn len(self) -> usize {
         self.len
     }
 
+    /// 2 つのハッシュ化された数列を連結
     pub fn concat(self, other: Self) -> Self {
         Self {
             hash: self.hash * other.pow + other.hash,
@@ -185,6 +197,7 @@ impl RollingHashedSequence {
         }
     }
 
+    /// ハッシュ化された数列を `n` 回繰り返す
     pub fn repeat(self, n: usize) -> Self {
         RollingHashMonoid::pow(&self, n)
     }
