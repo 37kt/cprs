@@ -141,7 +141,7 @@ data:
   requiredBy:
   - crates/data-structure/splay-tree/src/lib.rs
   - crates/data-structure/link-cut-tree/src/lib.rs
-  timestamp: '2024-12-25 03:34:39+00:00'
+  timestamp: '2025-01-04 02:49:00+00:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: crates/data-structure/splay-tree-internal/src/lib.rs

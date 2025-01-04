@@ -44,7 +44,7 @@ data:
   isVerificationFile: false
   path: crates/math/discrete-logarithm/src/lib.rs
   requiredBy: []
-  timestamp: '2024-12-30 07:03:29+00:00'
+  timestamp: '2025-01-04 02:49:00+00:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/discrete_logarithm_mod/src/main.rs

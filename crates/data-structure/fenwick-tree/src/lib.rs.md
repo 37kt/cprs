@@ -53,7 +53,7 @@ data:
   isVerificationFile: false
   path: crates/data-structure/fenwick-tree/src/lib.rs
   requiredBy: []
-  timestamp: '2024-12-25 08:18:46+00:00'
+  timestamp: '2025-01-04 02:49:00+00:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/static_range_inversions_query/src/main.rs

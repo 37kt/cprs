@@ -58,7 +58,7 @@ data:
   path: crates/data-structure/disjoint-sparse-table/src/lib.rs
   requiredBy:
   - crates/string/suffix-array/src/lib.rs
-  timestamp: '2024-12-25 08:18:46+00:00'
+  timestamp: '2025-01-04 02:49:00+00:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/staticrmq/src/main.rs

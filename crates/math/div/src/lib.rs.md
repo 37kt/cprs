@@ -48,7 +48,7 @@ data:
   requiredBy:
   - crates/algebraic/rational/src/lib.rs
   - crates/data-structure/static-range-inversions-query/src/lib.rs
-  timestamp: '2024-12-25 03:34:39+00:00'
+  timestamp: '2025-01-04 02:49:00+00:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: crates/math/div/src/lib.rs

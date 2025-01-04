@@ -20,16 +20,17 @@ data:
     \  File \"/opt/hostedtoolcache/Python/3.12.8/x64/lib/python3.12/site-packages/onlinejudge_verify/languages/rust.py\"\
     , line 288, in bundle\n    raise NotImplementedError\nNotImplementedError\n"
   code: "// verification-helper: PROBLEM https://judge.yosupo.jp/problem/suffixarray\n\
-    \nuse itertools::Itertools;\nuse proconio::{input, marker::Bytes};\nuse rolling_hash::RollingHashModInt61;\n\
+    \nuse itertools::Itertools;\nuse proconio::{input, marker::Bytes};\nuse rolling_hash::RollingHash;\n\
     \n#[proconio::fastout]\nfn main() {\n    input! {\n        s: Bytes,\n    }\n\
-    \    let rh = RollingHashModInt61::new(&s);\n    let mut res = (0..s.len()).sorted_by(|i,\
-    \ j| rh.compare(i.., &rh, j..));\n    println!(\"{}\", res.join(\" \"));\n}\n"
+    \    let rh = RollingHash::new();\n    let rhs = rh.build_table(&s);\n    let\
+    \ mut res = (0..s.len()).sorted_by(|i, j| rhs.compare(i.., &rhs, j..));\n    println!(\"\
+    {}\", res.join(\" \"));\n}\n"
   dependsOn:
   - crates/string/rolling-hash/src/lib.rs
   isVerificationFile: true
   path: verify/suffixarray_rolling_hash/src/main.rs
   requiredBy: []
-  timestamp: '2024-12-30 09:13:10+00:00'
+  timestamp: '2025-01-04 02:49:00+00:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/suffixarray_rolling_hash/src/main.rs

@@ -104,7 +104,7 @@ data:
   isVerificationFile: false
   path: crates/data-structure/link-cut-tree/src/lib.rs
   requiredBy: []
-  timestamp: '2024-12-25 10:01:29+00:00'
+  timestamp: '2025-01-04 02:49:00+00:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/dynamic_tree_vertex_add_path_sum/src/main.rs

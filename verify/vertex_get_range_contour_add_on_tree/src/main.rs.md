@@ -38,7 +38,7 @@ data:
   isVerificationFile: true
   path: verify/vertex_get_range_contour_add_on_tree/src/main.rs
   requiredBy: []
-  timestamp: '2024-12-26 06:54:01+00:00'
+  timestamp: '2025-01-04 02:49:00+00:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/vertex_get_range_contour_add_on_tree/src/main.rs

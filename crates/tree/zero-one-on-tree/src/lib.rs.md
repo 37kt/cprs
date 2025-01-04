@@ -67,7 +67,7 @@ data:
   isVerificationFile: false
   path: crates/tree/zero-one-on-tree/src/lib.rs
   requiredBy: []
-  timestamp: '2024-12-30 09:13:10+00:00'
+  timestamp: '2025-01-04 02:49:00+00:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: crates/tree/zero-one-on-tree/src/lib.rs

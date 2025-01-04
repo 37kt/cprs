@@ -23,18 +23,18 @@ data:
     \  File \"/opt/hostedtoolcache/Python/3.12.8/x64/lib/python3.12/site-packages/onlinejudge_verify/languages/rust.py\"\
     , line 288, in bundle\n    raise NotImplementedError\nNotImplementedError\n"
   code: "// verification-helper: PROBLEM https://judge.yosupo.jp/problem/zalgorithm\n\
-    \nuse itertools::Itertools;\nuse proconio::{input, marker::Bytes};\nuse rolling_hash::RollingHashModInt61;\n\
+    \nuse itertools::Itertools;\nuse proconio::{input, marker::Bytes};\nuse rolling_hash::RollingHash;\n\
     \n#[proconio::fastout]\nfn main() {\n    input! {\n        s: Bytes,\n    }\n\
-    \    let rh = RollingHashModInt61::new(&s);\n    let res = (0..s.len()).map(|i|\
-    \ rh.lcp(.., &rh, i..)).collect_vec();\n    println!(\"{}\", res.iter().join(\"\
-    \ \"));\n}\n"
+    \    let rh = RollingHash::new();\n    let rhs = rh.build_table(&s);\n    let\
+    \ res = (0..s.len()).map(|i| rhs.lcp(.., &rhs, i..)).collect_vec();\n    println!(\"\
+    {}\", res.iter().join(\" \"));\n}\n"
   dependsOn:
   - crates/math/modint61/src/lib.rs
   - crates/string/rolling-hash/src/lib.rs
   isVerificationFile: true
   path: verify/zalgorithm_rolling_hash/src/main.rs
   requiredBy: []
-  timestamp: '2024-12-30 09:13:10+00:00'
+  timestamp: '2025-01-04 02:49:00+00:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/zalgorithm_rolling_hash/src/main.rs
