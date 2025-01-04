@@ -90,7 +90,7 @@
 "verify/stirling_number_of_the_second_kind_fixed_k/src/main.rs": "2024-12-30 09:13:10 +0000",
 "verify/subset_convolution/src/main.rs": "2024-12-30 09:13:10 +0000",
 "verify/suffixarray/src/main.rs": "2024-12-30 09:13:10 +0000",
-"verify/suffixarray_rolling_hash/src/main.rs": "2025-01-04 02:49:00 +0000",
+"verify/suffixarray_rolling_hash/src/main.rs": "2025-01-04 07:22:45 +0000",
 "verify/sum_of_floor_of_linear/src/main.rs": "2024-12-30 09:13:10 +0000",
 "verify/sum_of_multiplicative_function/src/main.rs": "2024-12-30 09:13:10 +0000",
 "verify/tree_path_composite_sum/src/main.rs": "2025-01-04 02:49:00 +0000",
@@ -108,5 +108,5 @@
 "verify/yuki1014/src/main.rs": "2024-12-27 03:53:35 +0000",
 "verify/yuki952/src/main.rs": "2024-12-25 03:34:39 +0000",
 "verify/zalgorithm/src/main.rs": "2024-12-30 09:13:10 +0000",
-"verify/zalgorithm_rolling_hash/src/main.rs": "2025-01-04 02:49:00 +0000"
+"verify/zalgorithm_rolling_hash/src/main.rs": "2025-01-04 07:22:45 +0000"
 }
