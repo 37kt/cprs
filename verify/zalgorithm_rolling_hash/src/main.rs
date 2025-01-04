@@ -2,14 +2,15 @@
 
 use itertools::Itertools;
 use proconio::{input, marker::Bytes};
-use rolling_hash::RollingHashModInt61;
+use rolling_hash::RollingHash;
 
 #[proconio::fastout]
 fn main() {
     input! {
         s: Bytes,
     }
-    let rh = RollingHashModInt61::new(&s);
-    let res = (0..s.len()).map(|i| rh.lcp(.., &rh, i..)).collect_vec();
+    let rh = RollingHash::new();
+    let rhs = rh.build_table(&s);
+    let res = (0..s.len()).map(|i| rhs.lcp(.., &rhs, i..)).collect_vec();
     println!("{}", res.iter().join(" "));
 }

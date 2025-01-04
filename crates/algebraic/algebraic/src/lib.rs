@@ -10,6 +10,19 @@ pub trait Act: Algebra {
 pub trait Monoid: Algebra {
     fn e() -> Self::S;
     fn op(x: &Self::S, y: &Self::S) -> Self::S;
+    fn pow(x: &Self::S, e: usize) -> Self::S {
+        let mut res = Self::e();
+        let mut x = Self::op(&Self::e(), x);
+        let mut e = e;
+        while e > 0 {
+            if e & 1 == 1 {
+                res = Self::op(&res, &x);
+            }
+            x = Self::op(&x, &x);
+            e >>= 1;
+        }
+        res
+    }
 }
 
 pub trait Group: Monoid {

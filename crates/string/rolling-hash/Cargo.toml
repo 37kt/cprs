@@ -12,5 +12,5 @@ name = "rolling_hash"
 
 [dependencies]
 random = { path = "../../misc/random" }
-nimber = { path = "../../math/nimber" }
 modint61 = { path = "../../math/modint61" }
+algebraic = { path = "../../algebraic/algebraic" }

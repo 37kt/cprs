@@ -1,138 +1,90 @@
-use std::{
-    cmp::Ordering,
-    marker::PhantomData,
-    ops::{Add, Bound, Mul, Neg, RangeBounds},
-};
-
-use modint61::ModInt61;
-use nimber::Nimber;
-use random::Pcg64Fast;
-
-pub type RollingHashModInt61<'a, C> = RollingHash<'a, C, ModInt61>;
-pub type RollingHashNimber<'a, C> = RollingHash<'a, C, Nimber>;
-
-pub struct GenBaseImpl<T>(PhantomData<fn() -> T>);
-
-pub trait GenBase {
-    type H;
-    fn base() -> Self::H;
-}
-
-impl GenBase for GenBaseImpl<Nimber> {
-    type H = Nimber;
-
-    fn base() -> Nimber {
-        fn gen() -> Nimber {
-            let mut rng = Pcg64Fast::default();
-            Nimber::new(rng.u64())
+fn gen() -> ModInt61 {
+    const FACTORS: [usize; 12] = [2, 3, 5, 7, 11, 13, 31, 41, 61, 151, 331, 1321];
+    let mut rng = Pcg64Fast::default();
+    loop {
+        let x = ModInt61::new(rng.u64());
+        if FACTORS
+            .iter()
+            .all(|&f| x.pow((ModInt61::modulus() as usize - 1) / f).val() > 1)
+        {
+            return x;
         }
-
-        thread_local! {
-            static BASE: Nimber = gen();
-        }
-        BASE.with(|base| *base)
     }
 }
 
-impl GenBase for GenBaseImpl<ModInt61> {
-    type H = ModInt61;
-
-    fn base() -> ModInt61 {
-        fn gen() -> ModInt61 {
-            const FACTORS: [usize; 12] = [2, 3, 5, 7, 11, 13, 31, 41, 61, 151, 331, 1321];
-            let mut rng = Pcg64Fast::default();
-            loop {
-                let x = ModInt61::new(rng.u64());
-                if FACTORS
-                    .iter()
-                    .all(|&f| x.pow((ModInt61::modulus() as usize - 1) / f).val() > 1)
-                {
-                    return x;
-                }
-            }
-        }
-
-        thread_local! {
-            static BASE: ModInt61 = gen();
-        }
-        BASE.with(|base| *base)
+fn base() -> ModInt61 {
+    thread_local! {
+        static BASE: ModInt61 = gen();
     }
+    BASE.with(|base| *base)
 }
 
-#[derive(Hash, PartialEq, Eq, Clone, Copy)]
-pub struct Hash<H>
-where
-    H: Copy + Eq + Add<Output = H> + Mul<Output = H> + Neg<Output = H>,
-{
-    hash: H,
-    pow: H,
+pub struct RollingHash {
+    pow: RefCell<Vec<ModInt61>>,
 }
 
-impl<H> Hash<H>
-where
-    H: Copy + Eq + Add<Output = H> + Mul<Output = H> + Neg<Output = H>,
-{
-    pub fn val(&self) -> H {
-        self.hash
-    }
-
-    pub fn concat(&self, other: Self) -> Self {
+impl RollingHash {
+    pub fn new() -> Self {
         Self {
-            hash: self.hash * other.pow + other.hash,
-            pow: self.pow * other.pow,
+            pow: RefCell::new(vec![ModInt61::one(), base()]),
         }
     }
-}
 
-/// ローリングハッシュ  
-/// TODO: すごく使いづらいので、いつか直す
-#[derive(Clone)]
-pub struct RollingHash<'a, C, H>
-where
-    C: Copy + Eq + Into<H>,
-    H: Copy + Eq + Add<Output = H> + Mul<Output = H> + Neg<Output = H>,
-    GenBaseImpl<H>: GenBase<H = H>,
-{
-    s: &'a [C],
-    hs: Box<[H]>,
-    pw: Box<[H]>,
-}
+    pub fn base() -> ModInt61 {
+        base()
+    }
 
-impl<'a, C, H> RollingHash<'a, C, H>
-where
-    C: Copy + Eq + Into<H>,
-    H: Copy + Eq + From<u64> + Add<Output = H> + Mul<Output = H> + Neg<Output = H>,
-    GenBaseImpl<H>: GenBase<H = H>,
-{
-    pub fn new(s: &'a [C]) -> Self {
+    pub fn build_table<'a, 'b, T>(&'a self, s: &'b [T]) -> RollingHashTable<'a, 'b, T>
+    where
+        T: Clone + Into<ModInt61>,
+    {
         let n = s.len();
-        let base = GenBaseImpl::<H>::base();
-        let mut hs = vec![H::from(0); n + 1];
-        let mut pw = vec![H::from(1); n + 1];
+        let mut hash = vec![ModInt61::zero(); n + 1];
         for i in 0..n {
-            hs[i + 1] = hs[i] * base + s[i].into();
-            pw[i + 1] = pw[i] * base;
+            hash[i + 1] = hash[i] * self.pow(1) + s[i].clone().into();
         }
-        Self {
-            s,
-            hs: hs.into_boxed_slice(),
-            pw: pw.into_boxed_slice(),
+        RollingHashTable { rh: self, s, hash }
+    }
+
+    pub fn hash<T>(s: &[T]) -> RollingHashedSequence
+    where
+        T: Clone + Into<ModInt61>,
+    {
+        RollingHashedSequence::from_slice(s)
+    }
+
+    fn expand(&self, n: usize) {
+        let mut pow = self.pow.borrow_mut();
+        for i in pow.len()..=n {
+            let x = pow[i - 1] * base();
+            pow.push(x);
         }
     }
 
-    pub fn base(&self) -> H {
-        GenBaseImpl::<H>::base()
+    fn pow(&self, n: usize) -> ModInt61 {
+        self.expand(n);
+        self.pow.borrow()[n]
     }
+}
 
+#[derive(Clone)]
+pub struct RollingHashTable<'a, 'b, T> {
+    rh: &'a RollingHash,
+    s: &'b [T],
+    hash: Vec<ModInt61>,
+}
+
+impl<'a, 'b, T> RollingHashTable<'a, 'b, T> {
     pub fn len(&self) -> usize {
         self.s.len()
     }
 
-    pub fn get(&self, index: impl RangeBounds<usize>) -> Hash<H> {
-        let (l, r) = range_to_pair(index, self.len());
-        Hash {
-            hash: self.hs[l] * -self.pw[r - l] + self.hs[r],
-            pow: self.pw[r - l],
+    pub fn get(&self, index: impl RangeBounds<usize>) -> RollingHashedSequence {
+        let (l, r) = range_to_pair(index, self.s.len());
+        RollingHashedSequence {
+            hash: self.hash[l] * -self.rh.pow(r - l) + self.hash[r],
+            len: r - l,
+            pow: self.rh.pow(r - l),
         }
     }
 
@@ -157,20 +109,16 @@ where
         }
         ok
     }
-}
 
-impl<'a, C, H> RollingHash<'a, C, H>
-where
-    C: Copy + Eq + Into<H> + Ord,
-    H: Copy + Eq + From<u64> + Add<Output = H> + Mul<Output = H> + Neg<Output = H>,
-    GenBaseImpl<H>: GenBase<H = H>,
-{
     pub fn compare(
         &self,
         index1: impl RangeBounds<usize>,
         other: &Self,
         index2: impl RangeBounds<usize>,
-    ) -> Ordering {
+    ) -> Ordering
+    where
+        T: Ord,
+    {
         let (l1, r1) = range_to_pair(index1, self.len());
         let (l2, r2) = range_to_pair(index2, other.len());
         let n = self.lcp(l1..r1, other, l2..r2);
@@ -187,6 +135,87 @@ where
         }
     }
 }
+
+#[derive(Clone, Copy, PartialEq, Eq, Hash)]
+pub struct RollingHashedSequence {
+    hash: ModInt61,
+    len: usize,
+    pow: ModInt61,
+}
+
+impl Default for RollingHashedSequence {
+    fn default() -> Self {
+        Self {
+            hash: ModInt61::zero(),
+            len: 0,
+            pow: ModInt61::one(),
+        }
+    }
+}
+
+impl RollingHashedSequence {
+    pub fn from_slice<T>(s: &[T]) -> Self
+    where
+        T: Clone + Into<ModInt61>,
+    {
+        let mut hash = ModInt61::zero();
+        for c in s {
+            hash = hash * base() + c.clone().into();
+        }
+        Self {
+            hash,
+            len: s.len(),
+            pow: base().pow(s.len()),
+        }
+    }
+
+    pub fn hash(self) -> ModInt61 {
+        self.hash
+    }
+
+    pub fn len(self) -> usize {
+        self.len
+    }
+
+    pub fn concat(self, other: Self) -> Self {
+        Self {
+            hash: self.hash * other.pow + other.hash,
+            len: self.len.wrapping_add(other.len),
+            pow: self.pow * other.pow,
+        }
+    }
+
+    pub fn repeat(self, n: usize) -> Self {
+        RollingHashMonoid::pow(&self, n)
+    }
+}
+
+#[derive(Clone, Copy)]
+pub enum RollingHashMonoid {}
+
+impl Algebra for RollingHashMonoid {
+    type S = RollingHashedSequence;
+}
+
+impl Monoid for RollingHashMonoid {
+    fn e() -> Self::S {
+        Self::S::default()
+    }
+
+    fn op(a: &Self::S, b: &Self::S) -> Self::S {
+        a.concat(*b)
+    }
+}
+
+use std::{
+    cell::RefCell,
+    cmp::Ordering,
+    ops::{Bound, RangeBounds},
+};
+
+use algebraic::{Algebra, Monoid, One, Zero};
+use modint61::ModInt61;
+use random::Pcg64Fast;
 
 fn range_to_pair(range: impl RangeBounds<usize>, n: usize) -> (usize, usize) {
     let l = match range.start_bound() {
