@@ -101,6 +101,11 @@ data:
     - icon: ':heavy_check_mark:'
       path: crates/convolution/xor-convolution/src/lib.rs
       title: crates/convolution/xor-convolution/src/lib.rs
+  - name: crates/data-structure/binary-trie/src
+    pages:
+    - icon: ':heavy_check_mark:'
+      path: crates/data-structure/binary-trie/src/lib.rs
+      title: crates/data-structure/binary-trie/src/lib.rs
   - name: crates/data-structure/cumulative-sum-2d/src
     pages:
     - icon: ':warning:'
@@ -872,6 +877,11 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/number_of_substrings/src/main.rs
       title: verify/number_of_substrings/src/main.rs
+  - name: verify/ordered_set_binary_trie/src
+    pages:
+    - icon: ':heavy_check_mark:'
+      path: verify/ordered_set_binary_trie/src/main.rs
+      title: verify/ordered_set_binary_trie/src/main.rs
   - name: verify/partition_function/src
     pages:
     - icon: ':heavy_check_mark:'
@@ -997,6 +1007,11 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/segment_add_get_min_offline/src/main.rs
       title: verify/segment_add_get_min_offline/src/main.rs
+  - name: verify/set_xor_min/src
+    pages:
+    - icon: ':heavy_check_mark:'
+      path: verify/set_xor_min/src/main.rs
+      title: verify/set_xor_min/src/main.rs
   - name: verify/shift_of_sampling_points_of_polynomial/src
     pages:
     - icon: ':heavy_check_mark:'
