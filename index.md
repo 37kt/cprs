@@ -291,6 +291,11 @@ data:
     - icon: ':heavy_check_mark:'
       path: crates/data-structure/wavelet-matrix/src/lib.rs
       title: crates/data-structure/wavelet-matrix/src/lib.rs
+  - name: crates/dp/automaton-dp/src
+    pages:
+    - icon: ':warning:'
+      path: crates/dp/automaton-dp/src/lib.rs
+      title: crates/dp/automaton-dp/src/lib.rs
   - name: crates/graph/bellman-ford/src
     pages:
     - icon: ':warning:'
