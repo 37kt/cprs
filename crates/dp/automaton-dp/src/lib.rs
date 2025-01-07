@@ -1,4 +1,4 @@
-use std::{cmp::Ordering, collections::HashMap};
+use std::{cmp::Ordering, collections::HashMap, marker::PhantomData};
 
 pub trait DeterministicFiniteAutoMaton {
     type Symbol;
@@ -9,7 +9,8 @@ pub trait DeterministicFiniteAutoMaton {
     fn is_accepting(&self, state: &Self::State) -> bool;
 }
 
-pub struct Intersection<A0, A1>(A0, A1)
+#[derive(Clone, Copy)]
+pub struct Intersection<A0, A1>(pub A0, pub A1)
 where
     A0: DeterministicFiniteAutoMaton,
     A1: DeterministicFiniteAutoMaton<Symbol = A0::Symbol>;
@@ -39,11 +40,31 @@ where
     }
 }
 
-pub struct LessThanEqualDfa<'a, T>(&'a [T])
+impl<A0, A1> Intersection<A0, A1>
+where
+    A0: DeterministicFiniteAutoMaton,
+    A1: DeterministicFiniteAutoMaton<Symbol = A0::Symbol>,
+{
+    pub fn new(a0: A0, a1: A1) -> Self {
+        Self(a0, a1)
+    }
+}
+
+#[derive(Clone, Copy)]
+pub struct LessThanEqualDfa<'a, T>(pub &'a [T])
 where
     T: Ord;
 
-#[derive(PartialEq, Eq, Hash)]
+impl<'a, T> LessThanEqualDfa<'a, T>
+where
+    T: Ord,
+{
+    pub fn new(a: &'a [T]) -> Self {
+        Self(a)
+    }
+}
+
+#[derive(Clone, Copy, PartialEq, Eq, Hash)]
 pub struct LessThanEqualDfaState {
     i: usize,
     tight: bool,
@@ -79,11 +100,21 @@ where
     }
 }
 
-pub struct LessThanDfa<'a, T>(&'a [T])
+#[derive(Clone, Copy)]
+pub struct LessThanDfa<'a, T>(pub &'a [T])
 where
     T: Ord;
 
-#[derive(PartialEq, Eq, Hash)]
+impl<'a, T> LessThanDfa<'a, T>
+where
+    T: Ord,
+{
+    pub fn new(a: &'a [T]) -> Self {
+        Self(a)
+    }
+}
+
+#[derive(Clone, Copy, PartialEq, Eq, Hash)]
 pub struct LessThanDfaState {
     i: usize,
     tight: bool,
@@ -119,11 +150,21 @@ where
     }
 }
 
-pub struct GreaterThanEqualDfa<'a, T>(&'a [T])
+#[derive(Clone, Copy)]
+pub struct GreaterThanEqualDfa<'a, T>(pub &'a [T])
 where
     T: Ord;
 
-#[derive(PartialEq, Eq, Hash)]
+impl<'a, T> GreaterThanEqualDfa<'a, T>
+where
+    T: Ord,
+{
+    pub fn new(a: &'a [T]) -> Self {
+        Self(a)
+    }
+}
+
+#[derive(Clone, Copy, PartialEq, Eq, Hash)]
 pub struct GreaterThanEqualDfaState {
     i: usize,
     tight: bool,
@@ -159,11 +200,21 @@ where
     }
 }
 
-pub struct GreaterThanDfa<'a, T>(&'a [T])
+#[derive(Clone, Copy)]
+pub struct GreaterThanDfa<'a, T>(pub &'a [T])
 where
     T: Ord;
 
-#[derive(PartialEq, Eq, Hash)]
+impl<'a, T> GreaterThanDfa<'a, T>
+where
+    T: Ord,
+{
+    pub fn new(a: &'a [T]) -> Self {
+        Self(a)
+    }
+}
+
+#[derive(Clone, Copy, PartialEq, Eq, Hash)]
 pub struct GreaterThanDfaState {
     i: usize,
     tight: bool,
@@ -199,11 +250,21 @@ where
     }
 }
 
-pub struct ReversedLessThanEqualDfa<'a, T>(&'a [T])
+#[derive(Clone, Copy)]
+pub struct ReversedLessThanEqualDfa<'a, T>(pub &'a [T])
 where
     T: Ord;
 
-#[derive(PartialEq, Eq, Hash)]
+impl<'a, T> ReversedLessThanEqualDfa<'a, T>
+where
+    T: Ord,
+{
+    pub fn new(a: &'a [T]) -> Self {
+        Self(a)
+    }
+}
+
+#[derive(Clone, Copy, PartialEq, Eq, Hash)]
 pub struct ReversedLessThanEqualDfaState {
     i: usize,
     le: bool,
@@ -237,11 +298,21 @@ where
     }
 }
 
-pub struct ReversedLessThanDfa<'a, T>(&'a [T])
+#[derive(Clone, Copy)]
+pub struct ReversedLessThanDfa<'a, T>(pub &'a [T])
 where
     T: Ord;
 
-#[derive(PartialEq, Eq, Hash)]
+impl<'a, T> ReversedLessThanDfa<'a, T>
+where
+    T: Ord,
+{
+    pub fn new(a: &'a [T]) -> Self {
+        Self(a)
+    }
+}
+
+#[derive(Clone, Copy, PartialEq, Eq, Hash)]
 pub struct ReversedLessThanDfaState {
     i: usize,
     lt: bool,
@@ -275,11 +346,21 @@ where
     }
 }
 
-pub struct ReversedGreaterThanEqualDfa<'a, T>(&'a [T])
+#[derive(Clone, Copy)]
+pub struct ReversedGreaterThanEqualDfa<'a, T>(pub &'a [T])
 where
     T: Ord;
 
-#[derive(PartialEq, Eq, Hash)]
+impl<'a, T> ReversedGreaterThanEqualDfa<'a, T>
+where
+    T: Ord,
+{
+    pub fn new(a: &'a [T]) -> Self {
+        Self(a)
+    }
+}
+
+#[derive(Clone, Copy, PartialEq, Eq, Hash)]
 pub struct ReversedGreaterThanEqualDfaState {
     i: usize,
     ge: bool,
@@ -313,11 +394,21 @@ where
     }
 }
 
-pub struct ReversedGreaterThanDfa<'a, T>(&'a [T])
+#[derive(Clone, Copy)]
+pub struct ReversedGreaterThanDfa<'a, T>(pub &'a [T])
 where
     T: Ord;
 
-#[derive(PartialEq, Eq, Hash)]
+impl<'a, T> ReversedGreaterThanDfa<'a, T>
+where
+    T: Ord,
+{
+    pub fn new(a: &'a [T]) -> Self {
+        Self(a)
+    }
+}
+
+#[derive(Clone, Copy, PartialEq, Eq, Hash)]
 pub struct ReversedGreaterThanDfaState {
     i: usize,
     gt: bool,
@@ -348,6 +439,52 @@ where
 
     fn is_accepting(&self, state: &Self::State) -> bool {
         state.i == self.0.len() && state.gt
+    }
+}
+
+#[derive(Clone, Copy)]
+pub struct SymbolMap<A, S, F>
+where
+    A: DeterministicFiniteAutoMaton,
+    F: Fn(&S) -> A::Symbol,
+{
+    dfa: A,
+    map: F,
+    _marker: PhantomData<fn() -> S>,
+}
+
+impl<A, S, F> SymbolMap<A, S, F>
+where
+    A: DeterministicFiniteAutoMaton<Symbol = S>,
+    F: Fn(&S) -> A::Symbol,
+{
+    pub fn new(dfa: A, map: F) -> Self {
+        Self {
+            dfa,
+            map,
+            _marker: PhantomData,
+        }
+    }
+}
+
+impl<A, S, F> DeterministicFiniteAutoMaton for SymbolMap<A, S, F>
+where
+    A: DeterministicFiniteAutoMaton,
+    F: Fn(&S) -> A::Symbol,
+{
+    type Symbol = S;
+    type State = A::State;
+
+    fn initial_state(&self) -> Self::State {
+        self.dfa.initial_state()
+    }
+
+    fn transition(&self, state: &Self::State, c: &Self::Symbol) -> Option<Self::State> {
+        self.dfa.transition(state, &(self.map)(c))
+    }
+
+    fn is_accepting(&self, state: &Self::State) -> bool {
+        self.dfa.is_accepting(state)
     }
 }
 
