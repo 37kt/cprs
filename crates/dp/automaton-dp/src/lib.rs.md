@@ -32,131 +32,48 @@ data:
     \ && self.1.is_accepting(st1)\n    }\n}\n\nimpl<A0, A1> Intersection<A0, A1>\n\
     where\n    A0: DeterministicFiniteAutoMaton,\n    A1: DeterministicFiniteAutoMaton<Symbol\
     \ = A0::Symbol>,\n{\n    pub fn new(a0: A0, a1: A1) -> Self {\n        Self(a0,\
-    \ a1)\n    }\n}\n\n#[derive(Clone, Copy)]\npub struct LessThanEqualDfa<'a, T>(pub\
-    \ &'a [T])\nwhere\n    T: Ord;\n\nimpl<'a, T> LessThanEqualDfa<'a, T>\nwhere\n\
-    \    T: Ord,\n{\n    pub fn new(a: &'a [T]) -> Self {\n        Self(a)\n    }\n\
-    }\n\n#[derive(Clone, Copy, PartialEq, Eq, Hash)]\npub struct LessThanEqualDfaState\
-    \ {\n    i: usize,\n    tight: bool,\n}\n\nimpl<T> DeterministicFiniteAutoMaton\
-    \ for LessThanEqualDfa<'_, T>\nwhere\n    T: Ord,\n{\n    type Symbol = T;\n \
-    \   type State = LessThanEqualDfaState;\n\n    fn initial_state(&self) -> Self::State\
-    \ {\n        LessThanEqualDfaState { i: 0, tight: true }\n    }\n\n    fn transition(&self,\
-    \ state: &Self::State, c: &Self::Symbol) -> Option<Self::State> {\n        assert!(state.i\
-    \ < self.0.len(), \"state index out of bounds\");\n        match (state.tight,\
-    \ c.cmp(&self.0[state.i])) {\n            (false, _) => Some(false),\n       \
-    \     (true, Ordering::Less) => Some(false),\n            (true, Ordering::Equal)\
-    \ => Some(true),\n            (true, Ordering::Greater) => None,\n        }\n\
-    \        .map(|tight| Self::State {\n            i: state.i + 1,\n           \
-    \ tight,\n        })\n    }\n\n    fn is_accepting(&self, state: &Self::State)\
-    \ -> bool {\n        state.i == self.0.len()\n    }\n}\n\n#[derive(Clone, Copy)]\n\
-    pub struct LessThanDfa<'a, T>(pub &'a [T])\nwhere\n    T: Ord;\n\nimpl<'a, T>\
-    \ LessThanDfa<'a, T>\nwhere\n    T: Ord,\n{\n    pub fn new(a: &'a [T]) -> Self\
-    \ {\n        Self(a)\n    }\n}\n\n#[derive(Clone, Copy, PartialEq, Eq, Hash)]\n\
-    pub struct LessThanDfaState {\n    i: usize,\n    tight: bool,\n}\n\nimpl<T> DeterministicFiniteAutoMaton\
-    \ for LessThanDfa<'_, T>\nwhere\n    T: Ord,\n{\n    type Symbol = T;\n    type\
-    \ State = LessThanDfaState;\n\n    fn initial_state(&self) -> Self::State {\n\
-    \        LessThanDfaState { i: 0, tight: true }\n    }\n\n    fn transition(&self,\
-    \ state: &Self::State, c: &Self::Symbol) -> Option<Self::State> {\n        assert!(state.i\
-    \ < self.0.len(), \"state index out of bounds\");\n        match (state.tight,\
-    \ c.cmp(&self.0[state.i])) {\n            (false, _) => Some(false),\n       \
-    \     (true, Ordering::Less) => Some(false),\n            (true, Ordering::Equal)\
-    \ => Some(true),\n            (true, Ordering::Greater) => None,\n        }\n\
-    \        .map(|tight| Self::State {\n            i: state.i + 1,\n           \
-    \ tight,\n        })\n    }\n\n    fn is_accepting(&self, state: &Self::State)\
-    \ -> bool {\n        state.i == self.0.len() && !state.tight\n    }\n}\n\n#[derive(Clone,\
-    \ Copy)]\npub struct GreaterThanEqualDfa<'a, T>(pub &'a [T])\nwhere\n    T: Ord;\n\
-    \nimpl<'a, T> GreaterThanEqualDfa<'a, T>\nwhere\n    T: Ord,\n{\n    pub fn new(a:\
-    \ &'a [T]) -> Self {\n        Self(a)\n    }\n}\n\n#[derive(Clone, Copy, PartialEq,\
-    \ Eq, Hash)]\npub struct GreaterThanEqualDfaState {\n    i: usize,\n    tight:\
-    \ bool,\n}\n\nimpl<T> DeterministicFiniteAutoMaton for GreaterThanEqualDfa<'_,\
-    \ T>\nwhere\n    T: Ord,\n{\n    type Symbol = T;\n    type State = GreaterThanEqualDfaState;\n\
-    \n    fn initial_state(&self) -> Self::State {\n        GreaterThanEqualDfaState\
-    \ { i: 0, tight: true }\n    }\n\n    fn transition(&self, state: &Self::State,\
-    \ c: &Self::Symbol) -> Option<Self::State> {\n        assert!(state.i < self.0.len(),\
-    \ \"state index out of bounds\");\n        match (state.tight, c.cmp(&self.0[state.i]))\
-    \ {\n            (false, _) => Some(false),\n            (true, Ordering::Less)\
-    \ => None,\n            (true, Ordering::Equal) => Some(true),\n            (true,\
-    \ Ordering::Greater) => Some(false),\n        }\n        .map(|tight| Self::State\
-    \ {\n            i: state.i + 1,\n            tight,\n        })\n    }\n\n  \
-    \  fn is_accepting(&self, state: &Self::State) -> bool {\n        state.i == self.0.len()\n\
-    \    }\n}\n\n#[derive(Clone, Copy)]\npub struct GreaterThanDfa<'a, T>(pub &'a\
-    \ [T])\nwhere\n    T: Ord;\n\nimpl<'a, T> GreaterThanDfa<'a, T>\nwhere\n    T:\
-    \ Ord,\n{\n    pub fn new(a: &'a [T]) -> Self {\n        Self(a)\n    }\n}\n\n\
-    #[derive(Clone, Copy, PartialEq, Eq, Hash)]\npub struct GreaterThanDfaState {\n\
-    \    i: usize,\n    tight: bool,\n}\n\nimpl<T> DeterministicFiniteAutoMaton for\
-    \ GreaterThanDfa<'_, T>\nwhere\n    T: Ord,\n{\n    type Symbol = T;\n    type\
-    \ State = GreaterThanDfaState;\n\n    fn initial_state(&self) -> Self::State {\n\
-    \        GreaterThanDfaState { i: 0, tight: true }\n    }\n\n    fn transition(&self,\
-    \ state: &Self::State, c: &Self::Symbol) -> Option<Self::State> {\n        assert!(state.i\
-    \ < self.0.len(), \"state index out of bounds\");\n        match (state.tight,\
-    \ c.cmp(&self.0[state.i])) {\n            (false, _) => Some(false),\n       \
-    \     (true, Ordering::Less) => None,\n            (true, Ordering::Equal) =>\
-    \ Some(true),\n            (true, Ordering::Greater) => Some(false),\n       \
-    \ }\n        .map(|tight| Self::State {\n            i: state.i + 1,\n       \
-    \     tight,\n        })\n    }\n\n    fn is_accepting(&self, state: &Self::State)\
-    \ -> bool {\n        state.i == self.0.len() && !state.tight\n    }\n}\n\n#[derive(Clone,\
-    \ Copy)]\npub struct ReversedLessThanEqualDfa<'a, T>(pub &'a [T])\nwhere\n   \
-    \ T: Ord;\n\nimpl<'a, T> ReversedLessThanEqualDfa<'a, T>\nwhere\n    T: Ord,\n\
-    {\n    pub fn new(a: &'a [T]) -> Self {\n        Self(a)\n    }\n}\n\n#[derive(Clone,\
-    \ Copy, PartialEq, Eq, Hash)]\npub struct ReversedLessThanEqualDfaState {\n  \
-    \  i: usize,\n    le: bool,\n}\n\nimpl<T> DeterministicFiniteAutoMaton for ReversedLessThanEqualDfa<'_,\
-    \ T>\nwhere\n    T: Ord,\n{\n    type Symbol = T;\n    type State = ReversedLessThanEqualDfaState;\n\
-    \n    fn initial_state(&self) -> Self::State {\n        ReversedLessThanEqualDfaState\
-    \ { i: 0, le: true }\n    }\n\n    fn transition(&self, state: &Self::State, c:\
-    \ &Self::Symbol) -> Option<Self::State> {\n        assert!(state.i < self.0.len(),\
-    \ \"state index out of bounds\");\n        Some(ReversedLessThanEqualDfaState\
-    \ {\n            i: state.i + 1,\n            le: match (state.le, c.cmp(&self.0[state.i]))\
-    \ {\n                (_, Ordering::Less) => true,\n                (_, Ordering::Greater)\
-    \ => false,\n                (le, Ordering::Equal) => le,\n            },\n  \
-    \      })\n    }\n\n    fn is_accepting(&self, state: &Self::State) -> bool {\n\
-    \        state.i == self.0.len() && state.le\n    }\n}\n\n#[derive(Clone, Copy)]\n\
-    pub struct ReversedLessThanDfa<'a, T>(pub &'a [T])\nwhere\n    T: Ord;\n\nimpl<'a,\
-    \ T> ReversedLessThanDfa<'a, T>\nwhere\n    T: Ord,\n{\n    pub fn new(a: &'a\
-    \ [T]) -> Self {\n        Self(a)\n    }\n}\n\n#[derive(Clone, Copy, PartialEq,\
-    \ Eq, Hash)]\npub struct ReversedLessThanDfaState {\n    i: usize,\n    lt: bool,\n\
-    }\n\nimpl<T> DeterministicFiniteAutoMaton for ReversedLessThanDfa<'_, T>\nwhere\n\
-    \    T: Ord,\n{\n    type Symbol = T;\n    type State = ReversedLessThanDfaState;\n\
-    \n    fn initial_state(&self) -> Self::State {\n        ReversedLessThanDfaState\
-    \ { i: 0, lt: false }\n    }\n\n    fn transition(&self, state: &Self::State,\
-    \ c: &Self::Symbol) -> Option<Self::State> {\n        assert!(state.i < self.0.len(),\
-    \ \"state index out of bounds\");\n        Some(ReversedLessThanDfaState {\n \
-    \           i: state.i + 1,\n            lt: match (state.lt, c.cmp(&self.0[state.i]))\
-    \ {\n                (_, Ordering::Less) => true,\n                (_, Ordering::Greater)\
-    \ => false,\n                (lt, Ordering::Equal) => lt,\n            },\n  \
-    \      })\n    }\n\n    fn is_accepting(&self, state: &Self::State) -> bool {\n\
-    \        state.i == self.0.len() && state.lt\n    }\n}\n\n#[derive(Clone, Copy)]\n\
-    pub struct ReversedGreaterThanEqualDfa<'a, T>(pub &'a [T])\nwhere\n    T: Ord;\n\
-    \nimpl<'a, T> ReversedGreaterThanEqualDfa<'a, T>\nwhere\n    T: Ord,\n{\n    pub\
-    \ fn new(a: &'a [T]) -> Self {\n        Self(a)\n    }\n}\n\n#[derive(Clone, Copy,\
-    \ PartialEq, Eq, Hash)]\npub struct ReversedGreaterThanEqualDfaState {\n    i:\
-    \ usize,\n    ge: bool,\n}\n\nimpl<T> DeterministicFiniteAutoMaton for ReversedGreaterThanEqualDfa<'_,\
-    \ T>\nwhere\n    T: Ord,\n{\n    type Symbol = T;\n    type State = ReversedGreaterThanEqualDfaState;\n\
-    \n    fn initial_state(&self) -> Self::State {\n        ReversedGreaterThanEqualDfaState\
-    \ { i: 0, ge: true }\n    }\n\n    fn transition(&self, state: &Self::State, c:\
-    \ &Self::Symbol) -> Option<Self::State> {\n        assert!(state.i < self.0.len(),\
-    \ \"state index out of bounds\");\n        Some(ReversedGreaterThanEqualDfaState\
-    \ {\n            i: state.i + 1,\n            ge: match (state.ge, c.cmp(&self.0[state.i]))\
-    \ {\n                (_, Ordering::Less) => false,\n                (_, Ordering::Greater)\
-    \ => true,\n                (ge, Ordering::Equal) => ge,\n            },\n   \
-    \     })\n    }\n\n    fn is_accepting(&self, state: &Self::State) -> bool {\n\
-    \        state.i == self.0.len() && state.ge\n    }\n}\n\n#[derive(Clone, Copy)]\n\
-    pub struct ReversedGreaterThanDfa<'a, T>(pub &'a [T])\nwhere\n    T: Ord;\n\n\
-    impl<'a, T> ReversedGreaterThanDfa<'a, T>\nwhere\n    T: Ord,\n{\n    pub fn new(a:\
-    \ &'a [T]) -> Self {\n        Self(a)\n    }\n}\n\n#[derive(Clone, Copy, PartialEq,\
-    \ Eq, Hash)]\npub struct ReversedGreaterThanDfaState {\n    i: usize,\n    gt:\
-    \ bool,\n}\n\nimpl<T> DeterministicFiniteAutoMaton for ReversedGreaterThanDfa<'_,\
-    \ T>\nwhere\n    T: Ord,\n{\n    type Symbol = T;\n    type State = ReversedGreaterThanDfaState;\n\
-    \n    fn initial_state(&self) -> Self::State {\n        ReversedGreaterThanDfaState\
-    \ { i: 0, gt: false }\n    }\n\n    fn transition(&self, state: &Self::State,\
-    \ c: &Self::Symbol) -> Option<Self::State> {\n        assert!(state.i < self.0.len(),\
-    \ \"state index out of bounds\");\n        Some(ReversedGreaterThanDfaState {\n\
-    \            i: state.i + 1,\n            gt: match (state.gt, c.cmp(&self.0[state.i]))\
-    \ {\n                (_, Ordering::Less) => false,\n                (_, Ordering::Greater)\
-    \ => true,\n                (gt, Ordering::Equal) => gt,\n            },\n   \
-    \     })\n    }\n\n    fn is_accepting(&self, state: &Self::State) -> bool {\n\
-    \        state.i == self.0.len() && state.gt\n    }\n}\n\n#[derive(Clone, Copy)]\n\
-    pub struct SymbolMap<A, S, F>\nwhere\n    A: DeterministicFiniteAutoMaton,\n \
-    \   F: Fn(&S) -> A::Symbol,\n{\n    dfa: A,\n    map: F,\n    _marker: PhantomData<fn()\
-    \ -> S>,\n}\n\nimpl<A, S, F> SymbolMap<A, S, F>\nwhere\n    A: DeterministicFiniteAutoMaton<Symbol\
+    \ a1)\n    }\n}\n\n#[derive(Clone, Copy)]\npub struct LexicographicalDfa<'a, T>\
+    \ {\n    seq: &'a [T],\n    ord: Ordering,\n    eq: bool,\n}\n\nimpl<'a, T> DeterministicFiniteAutoMaton\
+    \ for LexicographicalDfa<'a, T>\nwhere\n    T: Ord,\n{\n    type Symbol = T;\n\
+    \    type State = (usize, bool);\n\n    fn initial_state(&self) -> Self::State\
+    \ {\n        (0, true)\n    }\n\n    fn transition(&self, state: &Self::State,\
+    \ c: &Self::Symbol) -> Option<Self::State> {\n        let &(i, tight) = state;\n\
+    \        let x = self.seq.get(i)?;\n        match (tight, c.cmp(x)) {\n      \
+    \      (true, Ordering::Equal) => Some((i + 1, true)),\n            (true, ord)\
+    \ if ord == self.ord.reverse() => None,\n            _ => Some((i + 1, false)),\n\
+    \        }\n    }\n\n    fn is_accepting(&self, state: &Self::State) -> bool {\n\
+    \        self.eq || !state.1\n    }\n}\n\nimpl<'a, T> LexicographicalDfa<'a, T>\n\
+    where\n    T: Ord,\n{\n    pub fn less_than(seq: &'a [T]) -> Self {\n        Self\
+    \ {\n            seq,\n            ord: Ordering::Less,\n            eq: false,\n\
+    \        }\n    }\n\n    pub fn less_than_equal(seq: &'a [T]) -> Self {\n    \
+    \    Self {\n            seq,\n            ord: Ordering::Less,\n            eq:\
+    \ true,\n        }\n    }\n\n    pub fn greater_than(seq: &'a [T]) -> Self {\n\
+    \        Self {\n            seq,\n            ord: Ordering::Greater,\n     \
+    \       eq: false,\n        }\n    }\n\n    pub fn greater_than_equal(seq: &'a\
+    \ [T]) -> Self {\n        Self {\n            seq,\n            ord: Ordering::Greater,\n\
+    \            eq: true,\n        }\n    }\n}\n\n#[derive(Clone, Copy)]\npub struct\
+    \ ReversedLexicographicalDfa<'a, T> {\n    seq: &'a [T],\n    ord: Ordering,\n\
+    \    eq: bool,\n}\n\nimpl<'a, T> DeterministicFiniteAutoMaton for ReversedLexicographicalDfa<'a,\
+    \ T>\nwhere\n    T: Ord,\n{\n    type Symbol = T;\n    type State = (usize, bool);\n\
+    \n    fn initial_state(&self) -> Self::State {\n        (self.seq.len(), self.eq)\n\
+    \    }\n\n    fn transition(&self, state: &Self::State, c: &Self::Symbol) -> Option<Self::State>\
+    \ {\n        let &(i, accepting) = state;\n        let i = i.checked_sub(1)?;\n\
+    \        let x = self.seq.get(i)?;\n        match c.cmp(x) {\n            Ordering::Equal\
+    \ => Some((i, accepting)),\n            ord => Some((i, ord == self.ord)),\n \
+    \       }\n    }\n\n    fn is_accepting(&self, state: &Self::State) -> bool {\n\
+    \        state.1\n    }\n}\n\nimpl<'a, T> ReversedLexicographicalDfa<'a, T>\n\
+    where\n    T: Ord,\n{\n    pub fn less_than(seq: &'a [T]) -> Self {\n        Self\
+    \ {\n            seq,\n            ord: Ordering::Less,\n            eq: false,\n\
+    \        }\n    }\n\n    pub fn less_than_equal(seq: &'a [T]) -> Self {\n    \
+    \    Self {\n            seq,\n            ord: Ordering::Less,\n            eq:\
+    \ true,\n        }\n    }\n\n    pub fn greater_than(seq: &'a [T]) -> Self {\n\
+    \        Self {\n            seq,\n            ord: Ordering::Greater,\n     \
+    \       eq: false,\n        }\n    }\n\n    pub fn greater_than_equal(seq: &'a\
+    \ [T]) -> Self {\n        Self {\n            seq,\n            ord: Ordering::Greater,\n\
+    \            eq: true,\n        }\n    }\n}\n\n#[derive(Clone, Copy)]\npub struct\
+    \ SymbolMap<A, S, F>\nwhere\n    A: DeterministicFiniteAutoMaton,\n    F: Fn(&S)\
+    \ -> A::Symbol,\n{\n    dfa: A,\n    map: F,\n    _marker: PhantomData<fn() ->\
+    \ S>,\n}\n\nimpl<A, S, F> SymbolMap<A, S, F>\nwhere\n    A: DeterministicFiniteAutoMaton<Symbol\
     \ = S>,\n    F: Fn(&S) -> A::Symbol,\n{\n    pub fn new(dfa: A, map: F) -> Self\
     \ {\n        Self {\n            dfa,\n            map,\n            _marker:\
     \ PhantomData,\n        }\n    }\n}\n\nimpl<A, S, F> DeterministicFiniteAutoMaton\
@@ -184,7 +101,7 @@ data:
   isVerificationFile: false
   path: crates/dp/automaton-dp/src/lib.rs
   requiredBy: []
-  timestamp: '2025-01-07 06:51:23+00:00'
+  timestamp: '2025-01-09 08:31:18+00:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: crates/dp/automaton-dp/src/lib.rs
