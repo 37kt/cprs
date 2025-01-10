@@ -62,6 +62,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: crates/data-structure/vertex-get-range-contour-add/src/lib.rs
     title: crates/data-structure/vertex-get-range-contour-add/src/lib.rs
+  - icon: ':warning:'
+    path: crates/dp/automaton-dp/src/lib.rs
+    title: crates/dp/automaton-dp/src/lib.rs
   - icon: ':heavy_check_mark:'
     path: crates/math/discrete-logarithm/src/lib.rs
     title: crates/math/discrete-logarithm/src/lib.rs
@@ -249,6 +252,7 @@ data:
   - crates/math/discrete-logarithm/src/lib.rs
   - crates/algorithm/ternary-search/src/lib.rs
   - crates/algorithm/binary-search/src/lib.rs
+  - crates/dp/automaton-dp/src/lib.rs
   - crates/algebraic/rational/src/lib.rs
   - crates/number-theory/modint/src/lib.rs
   - crates/tree/re-rooting-dp/src/lib.rs
