@@ -1,5 +1,7 @@
 use std::{cmp::Ordering, collections::HashMap, marker::PhantomData};
 
+use algebraic::{One, Zero};
+
 pub trait DeterministicFiniteAutoMaton {
     type Symbol;
     type State;
@@ -7,57 +9,283 @@ pub trait DeterministicFiniteAutoMaton {
     fn initial_state(&self) -> Self::State;
     fn transition(&self, state: &Self::State, c: &Self::Symbol) -> Option<Self::State>;
     fn is_accepting(&self, state: &Self::State) -> bool;
+
+    #[allow(unused_variables)]
+    fn state_to_index(&self, state: &Self::State) -> usize {
+        unimplemented!()
+    }
+
+    fn state_num(&self) -> usize {
+        unimplemented!()
+    }
+
+    fn count_accepting_hashmap<T>(
+        &self,
+        alphabet: impl Iterator<Item = Self::Symbol> + Clone,
+        len: usize,
+    ) -> T
+    where
+        Self::State: Eq + std::hash::Hash,
+        T: Zero + One + std::ops::Add<Output = T> + Clone,
+    {
+        self.dp_hashmap(
+            alphabet,
+            len,
+            |_, x| x.clone(),
+            |x, y| x.clone() + y.clone(),
+            T::zero(),
+            T::one(),
+        )
+    }
+
+    fn count_accepting_vec<T>(
+        &self,
+        alphabet: impl Iterator<Item = Self::Symbol> + Clone,
+        len: usize,
+    ) -> T
+    where
+        T: Zero + One + std::ops::Add<Output = T> + Clone,
+    {
+        self.dp_vec(
+            alphabet,
+            len,
+            |_, x| x.clone(),
+            |x, y| x.clone() + y.clone(),
+            T::zero(),
+            T::one(),
+        )
+    }
+
+    fn dp_hashmap<T>(
+        &self,
+        alphabet: impl Iterator<Item = Self::Symbol> + Clone,
+        len: usize,
+        act: impl Fn(&Self::Symbol, &T) -> T,
+        op: impl Fn(&T, &T) -> T,
+        e: T,
+        dp_initial: T,
+    ) -> T
+    where
+        Self::State: Eq + std::hash::Hash,
+        T: Clone,
+    {
+        let mut dp = HashMap::<Self::State, T>::new();
+        let mut ndp = HashMap::<Self::State, T>::new();
+        dp.insert(self.initial_state(), dp_initial);
+
+        for _ in 0..len {
+            for (st, val) in dp.drain() {
+                for c in alphabet.clone() {
+                    let Some(nst) = self.transition(&st, &c) else { continue; };
+                    let nval = act(&c, &val);
+                    ndp.entry(nst)
+                        .and_modify(|sum| *sum = op(sum, &nval))
+                        .or_insert(nval);
+                }
+            }
+            std::mem::swap(&mut dp, &mut ndp);
+        }
+
+        dp.into_iter()
+            .filter(|(st, _)| self.is_accepting(st))
+            .fold(e, |acc, (_, val)| op(&acc, &val))
+    }
+
+    fn dp_vec<T>(
+        &self,
+        alphabet: impl Iterator<Item = Self::Symbol> + Clone,
+        len: usize,
+        act: impl Fn(&Self::Symbol, &T) -> T,
+        op: impl Fn(&T, &T) -> T,
+        e: T,
+        dp_initial: T,
+    ) -> T
+    where
+        T: Clone,
+    {
+        let mut dp = (0..self.state_num()).map(|_| None).collect::<Vec<_>>();
+        dp[self.state_to_index(&self.initial_state())] = Some((self.initial_state(), dp_initial));
+
+        for _ in 0..len {
+            let mut ndp = (0..self.state_num()).map(|_| None).collect::<Vec<_>>();
+            for (st, val) in dp.into_iter().flatten() {
+                for c in alphabet.clone() {
+                    let Some(nst) = self.transition(&st, &c) else { continue; };
+                    let nval = act(&c, &val);
+                    let i = self.state_to_index(&nst);
+                    if let Some((_, sum)) = ndp[i].as_mut() {
+                        *sum = op(sum, &nval);
+                    } else {
+                        ndp[i] = Some((nst, nval));
+                    }
+                }
+            }
+            dp = ndp;
+        }
+
+        dp.into_iter()
+            .flatten()
+            .filter(|(st, _)| self.is_accepting(st))
+            .fold(e, |acc, (_, val)| op(&acc, &val))
+    }
 }
 
 #[derive(Clone, Copy)]
-pub struct Intersection<A0, A1>(pub A0, pub A1)
+pub struct NotDFA<A>
 where
-    A0: DeterministicFiniteAutoMaton,
-    A1: DeterministicFiniteAutoMaton<Symbol = A0::Symbol>;
+    A: DeterministicFiniteAutoMaton,
+{
+    dfa: A,
+}
 
-impl<A0, A1> DeterministicFiniteAutoMaton for Intersection<A0, A1>
+impl<A> DeterministicFiniteAutoMaton for NotDFA<A>
+where
+    A: DeterministicFiniteAutoMaton,
+{
+    type Symbol = A::Symbol;
+    type State = A::State;
+
+    fn initial_state(&self) -> Self::State {
+        self.dfa.initial_state()
+    }
+
+    fn transition(&self, state: &Self::State, c: &Self::Symbol) -> Option<Self::State> {
+        self.dfa.transition(state, c)
+    }
+
+    fn is_accepting(&self, state: &Self::State) -> bool {
+        !self.dfa.is_accepting(state)
+    }
+
+    fn state_to_index(&self, state: &Self::State) -> usize {
+        self.dfa.state_to_index(state)
+    }
+
+    fn state_num(&self) -> usize {
+        self.dfa.state_num()
+    }
+}
+
+#[derive(Clone, Copy)]
+pub struct OperationDFA<A0, A1, Op>
 where
     A0: DeterministicFiniteAutoMaton,
     A1: DeterministicFiniteAutoMaton<Symbol = A0::Symbol>,
+    Op: Fn(bool, bool) -> bool,
+{
+    dfa0: A0,
+    dfa1: A1,
+    op: Op,
+}
+
+impl<A0, A1, Op> DeterministicFiniteAutoMaton for OperationDFA<A0, A1, Op>
+where
+    A0: DeterministicFiniteAutoMaton,
+    A1: DeterministicFiniteAutoMaton<Symbol = A0::Symbol>,
+    Op: Fn(bool, bool) -> bool,
 {
     type Symbol = A0::Symbol;
     type State = (A0::State, A1::State);
 
     fn initial_state(&self) -> Self::State {
-        (self.0.initial_state(), self.1.initial_state())
+        (self.dfa0.initial_state(), self.dfa1.initial_state())
     }
 
     fn transition(&self, state: &Self::State, c: &Self::Symbol) -> Option<Self::State> {
         let (st0, st1) = state;
-        let st0 = self.0.transition(st0, c)?;
-        let st1 = self.1.transition(st1, c)?;
+        let st0 = self.dfa0.transition(st0, c)?;
+        let st1 = self.dfa1.transition(st1, c)?;
         Some((st0, st1))
     }
 
     fn is_accepting(&self, state: &Self::State) -> bool {
         let (st0, st1) = state;
-        self.0.is_accepting(st0) && self.1.is_accepting(st1)
+        (self.op)(self.dfa0.is_accepting(st0), self.dfa1.is_accepting(st1))
+    }
+
+    fn state_to_index(&self, state: &Self::State) -> usize {
+        let (st0, st1) = state;
+        self.dfa0.state_to_index(st0) * self.dfa1.state_num() + self.dfa1.state_to_index(st1)
+    }
+
+    fn state_num(&self) -> usize {
+        self.dfa0.state_num() * self.dfa1.state_num()
     }
 }
 
-impl<A0, A1> Intersection<A0, A1>
+impl<A0, A1, Op> OperationDFA<A0, A1, Op>
+where
+    A0: DeterministicFiniteAutoMaton,
+    A1: DeterministicFiniteAutoMaton<Symbol = A0::Symbol>,
+    Op: Fn(bool, bool) -> bool,
+{
+    pub fn new(dfa0: A0, dfa1: A1, op: Op) -> Self {
+        Self { dfa0, dfa1, op }
+    }
+}
+
+impl<A0, A1> OperationDFA<A0, A1, fn(bool, bool) -> bool>
 where
     A0: DeterministicFiniteAutoMaton,
     A1: DeterministicFiniteAutoMaton<Symbol = A0::Symbol>,
 {
-    pub fn new(a0: A0, a1: A1) -> Self {
-        Self(a0, a1)
+    pub fn or(dfa0: A0, dfa1: A1) -> Self {
+        Self {
+            dfa0,
+            dfa1,
+            op: |a, b| a || b,
+        }
+    }
+
+    pub fn and(dfa0: A0, dfa1: A1) -> Self {
+        Self {
+            dfa0,
+            dfa1,
+            op: |a, b| a && b,
+        }
+    }
+
+    pub fn xor(dfa0: A0, dfa1: A1) -> Self {
+        Self {
+            dfa0,
+            dfa1,
+            op: |a, b| a ^ b,
+        }
+    }
+
+    pub fn nand(dfa0: A0, dfa1: A1) -> Self {
+        Self {
+            dfa0,
+            dfa1,
+            op: |a, b| !(a && b),
+        }
+    }
+
+    pub fn nor(dfa0: A0, dfa1: A1) -> Self {
+        Self {
+            dfa0,
+            dfa1,
+            op: |a, b| !(a || b),
+        }
+    }
+
+    pub fn xnor(dfa0: A0, dfa1: A1) -> Self {
+        Self {
+            dfa0,
+            dfa1,
+            op: |a, b| !(a ^ b),
+        }
     }
 }
 
 #[derive(Clone, Copy)]
-pub struct LexicographicalDfa<'a, T> {
+pub struct LexicographicalDFA<'a, T> {
     seq: &'a [T],
     ord: Ordering,
     eq: bool,
 }
 
-impl<'a, T> DeterministicFiniteAutoMaton for LexicographicalDfa<'a, T>
+impl<'a, T> DeterministicFiniteAutoMaton for LexicographicalDFA<'a, T>
 where
     T: Ord,
 {
@@ -81,9 +309,17 @@ where
     fn is_accepting(&self, state: &Self::State) -> bool {
         self.eq || !state.1
     }
+
+    fn state_to_index(&self, state: &Self::State) -> usize {
+        state.1 as usize
+    }
+
+    fn state_num(&self) -> usize {
+        2
+    }
 }
 
-impl<'a, T> LexicographicalDfa<'a, T>
+impl<'a, T> LexicographicalDFA<'a, T>
 where
     T: Ord,
 {
@@ -121,13 +357,13 @@ where
 }
 
 #[derive(Clone, Copy)]
-pub struct ReversedLexicographicalDfa<'a, T> {
+pub struct ReversedLexicographicalDFA<'a, T> {
     seq: &'a [T],
     ord: Ordering,
     eq: bool,
 }
 
-impl<'a, T> DeterministicFiniteAutoMaton for ReversedLexicographicalDfa<'a, T>
+impl<'a, T> DeterministicFiniteAutoMaton for ReversedLexicographicalDFA<'a, T>
 where
     T: Ord,
 {
@@ -151,9 +387,17 @@ where
     fn is_accepting(&self, state: &Self::State) -> bool {
         state.1
     }
+
+    fn state_to_index(&self, state: &Self::State) -> usize {
+        state.1 as usize
+    }
+
+    fn state_num(&self) -> usize {
+        2
+    }
 }
 
-impl<'a, T> ReversedLexicographicalDfa<'a, T>
+impl<'a, T> ReversedLexicographicalDFA<'a, T>
 where
     T: Ord,
 {
@@ -191,7 +435,7 @@ where
 }
 
 #[derive(Clone, Copy)]
-pub struct SymbolMap<A, S, F>
+pub struct SymbolMapDFA<A, S, F>
 where
     A: DeterministicFiniteAutoMaton,
     F: Fn(&S) -> A::Symbol,
@@ -201,7 +445,7 @@ where
     _marker: PhantomData<fn() -> S>,
 }
 
-impl<A, S, F> SymbolMap<A, S, F>
+impl<A, S, F> SymbolMapDFA<A, S, F>
 where
     A: DeterministicFiniteAutoMaton<Symbol = S>,
     F: Fn(&S) -> A::Symbol,
@@ -215,7 +459,7 @@ where
     }
 }
 
-impl<A, S, F> DeterministicFiniteAutoMaton for SymbolMap<A, S, F>
+impl<A, S, F> DeterministicFiniteAutoMaton for SymbolMapDFA<A, S, F>
 where
     A: DeterministicFiniteAutoMaton,
     F: Fn(&S) -> A::Symbol,
@@ -234,41 +478,12 @@ where
     fn is_accepting(&self, state: &Self::State) -> bool {
         self.dfa.is_accepting(state)
     }
-}
 
-pub fn automaton_dp<A, T>(
-    dfa: A,
-    alphabet: impl Iterator<Item = A::Symbol> + Clone,
-    len: usize,
-    mut act: impl FnMut(&A::Symbol, &T) -> T,
-    mut op: impl FnMut(&T, &T) -> T,
-    e: T,
-    dp_initial: T,
-) -> T
-where
-    A: DeterministicFiniteAutoMaton,
-    A::State: Eq + std::hash::Hash,
-    T: Clone,
-{
-    let mut dp = HashMap::<A::State, T>::new();
-    let mut ndp = HashMap::<A::State, T>::new();
-    dp.insert(dfa.initial_state(), dp_initial);
-
-    for _ in 0..len {
-        for (st, val) in dp.drain() {
-            for c in alphabet.clone() {
-                if let Some(nst) = dfa.transition(&st, &c) {
-                    let nval = act(&c, &val);
-                    ndp.entry(nst)
-                        .and_modify(|sum| *sum = op(sum, &nval))
-                        .or_insert(nval);
-                }
-            }
-        }
-        std::mem::swap(&mut dp, &mut ndp);
+    fn state_to_index(&self, state: &Self::State) -> usize {
+        self.dfa.state_to_index(state)
     }
 
-    dp.into_iter()
-        .filter(|(st, _)| dfa.is_accepting(st))
-        .fold(e, |acc, (_, val)| op(&acc, &val))
+    fn state_num(&self) -> usize {
+        self.dfa.state_num()
+    }
 }
