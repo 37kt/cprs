@@ -1,3 +1,5 @@
+use std::marker::PhantomData;
+
 pub trait Algebra {
     type S;
 }
@@ -25,8 +27,64 @@ pub trait Monoid: Algebra {
     }
 }
 
+#[derive(Clone, Copy)]
+pub struct ReversedMonoid<M: Monoid>(PhantomData<fn() -> M>);
+
+impl<M: Monoid> Algebra for ReversedMonoid<M> {
+    type S = M::S;
+}
+
+impl<M: Monoid> Monoid for ReversedMonoid<M> {
+    fn e() -> Self::S {
+        M::e()
+    }
+
+    fn op(x: &Self::S, y: &Self::S) -> Self::S {
+        M::op(y, x)
+    }
+}
+
+impl<M: Monoid + Act> Act for ReversedMonoid<M> {
+    type X = M::X;
+
+    fn act(f: &Self::S, x: &Self::X) -> Self::X {
+        M::act(f, x)
+    }
+}
+
 pub trait Group: Monoid {
     fn inv(x: &Self::S) -> Self::S;
+}
+
+#[derive(Clone, Copy)]
+pub struct ReversedGroup<G: Group>(PhantomData<fn() -> G>);
+
+impl<G: Group> Algebra for ReversedGroup<G> {
+    type S = G::S;
+}
+
+impl<G: Group> Monoid for ReversedGroup<G> {
+    fn e() -> Self::S {
+        G::e()
+    }
+
+    fn op(x: &Self::S, y: &Self::S) -> Self::S {
+        G::op(y, x)
+    }
+}
+
+impl<G: Group> Group for ReversedGroup<G> {
+    fn inv(x: &Self::S) -> Self::S {
+        G::inv(x)
+    }
+}
+
+impl<G: Group + Act> Act for ReversedGroup<G> {
+    type X = G::X;
+
+    fn act(f: &Self::S, x: &Self::X) -> Self::X {
+        G::act(f, x)
+    }
 }
 
 pub trait Zero {
