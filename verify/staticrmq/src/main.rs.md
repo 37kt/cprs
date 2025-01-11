@@ -35,7 +35,7 @@ data:
   isVerificationFile: true
   path: verify/staticrmq/src/main.rs
   requiredBy: []
-  timestamp: '2025-01-04 02:49:00+00:00'
+  timestamp: '2025-01-11 09:03:35+00:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/staticrmq/src/main.rs

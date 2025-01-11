@@ -116,7 +116,7 @@ data:
   isVerificationFile: false
   path: crates/data-structure/segment-tree-on-wavelet-matrix/src/lib.rs
   requiredBy: []
-  timestamp: '2025-01-04 02:49:00+00:00'
+  timestamp: '2025-01-11 09:03:35+00:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/point_add_rectangle_sum_2/src/main.rs

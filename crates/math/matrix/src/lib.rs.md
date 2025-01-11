@@ -172,7 +172,7 @@ data:
   requiredBy:
   - crates/graph/count-spanning-tree-undirected/src/lib.rs
   - crates/graph/count-spanning-tree-directed/src/lib.rs
-  timestamp: '2025-01-04 02:49:00+00:00'
+  timestamp: '2025-01-11 09:03:35+00:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/matrix_det/src/main.rs

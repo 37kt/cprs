@@ -131,7 +131,7 @@ data:
   - crates/data-structure/vertex-add-range-contour-sum/src/lib.rs
   - crates/data-structure/range-tree/src/lib.rs
   - crates/data-structure/tree-query/src/lib.rs
-  timestamp: '2025-01-04 02:49:00+00:00'
+  timestamp: '2025-01-11 09:03:35+00:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/vertex_add_subtree_sum/src/main.rs

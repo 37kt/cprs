@@ -171,7 +171,7 @@ data:
   isVerificationFile: false
   path: crates/dp/automaton-dp/src/lib.rs
   requiredBy: []
-  timestamp: '2025-01-10 06:20:53+00:00'
+  timestamp: '2025-01-11 09:03:35+00:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: crates/dp/automaton-dp/src/lib.rs

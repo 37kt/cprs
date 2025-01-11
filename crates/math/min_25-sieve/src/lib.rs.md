@@ -48,7 +48,7 @@ data:
   isVerificationFile: false
   path: crates/math/min_25-sieve/src/lib.rs
   requiredBy: []
-  timestamp: '2025-01-04 02:49:00+00:00'
+  timestamp: '2025-01-11 09:03:35+00:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/sum_of_multiplicative_function/src/main.rs
