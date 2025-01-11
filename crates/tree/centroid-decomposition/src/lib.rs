@@ -1,6 +1,6 @@
-use graph::Graph;
+use graph::UndirectedGraph;
 
-fn dfs1(v: usize, p: usize, g: &Graph<(), ()>, sz: &mut [usize]) {
+fn dfs1(v: usize, p: usize, g: &UndirectedGraph<(), ()>, sz: &mut [usize]) {
     sz[v] = 1;
     for &(u, _) in &g[v] {
         if u == p {
@@ -11,7 +11,7 @@ fn dfs1(v: usize, p: usize, g: &Graph<(), ()>, sz: &mut [usize]) {
     }
 }
 
-fn dfs2(v: usize, p: usize, mid: usize, g: &Graph<(), ()>, sz: &[usize]) -> usize {
+fn dfs2(v: usize, p: usize, mid: usize, g: &UndirectedGraph<(), ()>, sz: &[usize]) -> usize {
     for &(u, _) in &g[v] {
         if u == p {
             continue;
@@ -26,7 +26,7 @@ fn dfs2(v: usize, p: usize, mid: usize, g: &Graph<(), ()>, sz: &[usize]) -> usiz
 fn dfs4(
     v: usize,
     p: usize,
-    g: &Graph<(), ()>,
+    g: &UndirectedGraph<(), ()>,
     pre_idx: &[usize],
     idx: &mut Vec<usize>,
     par: &mut Vec<usize>,
@@ -43,7 +43,7 @@ fn dfs4(
 
 fn dfs3(
     v: usize,
-    g: &Graph<(), ()>,
+    g: &UndirectedGraph<(), ()>,
     pre_idx: &[usize],
     conv: &mut [usize],
     f: &mut impl FnMut(&[usize], &[usize], usize),
@@ -89,8 +89,8 @@ fn dfs3(
         conv[idx_r[i]] = i + 1;
         es_r.push((conv[par_r[i]], i + 1));
     }
-    let gl = Graph::from_unweighted_undirected_edges(idx_l.len() + 1, &es_l);
-    let gr = Graph::from_unweighted_undirected_edges(idx_r.len() + 1, &es_r);
+    let gl = UndirectedGraph::from_unweighted_edges(idx_l.len() + 1, &es_l);
+    let gr = UndirectedGraph::from_unweighted_edges(idx_r.len() + 1, &es_r);
     let mut idx = vec![];
     idx.append(&mut idx_l.clone());
     idx.append(&mut idx_r.clone());
@@ -111,7 +111,10 @@ fn dfs3(
 /// `par`: 親の頂点番号  
 /// `idx[..m]` が赤，`idx[m..]` が青  
 /// `f` 内で、`idx[..m]` と `idx[m..]` 間のパスについて計算する
-pub fn centroid_decomposition(g: &Graph<(), ()>, mut f: impl FnMut(&[usize], &[usize], usize)) {
+pub fn centroid_decomposition(
+    g: &UndirectedGraph<(), ()>,
+    mut f: impl FnMut(&[usize], &[usize], usize),
+) {
     let n = g.len();
     let mut conv = vec![!0; n];
     dfs3(0, g, &(0..n).collect::<Vec<_>>(), &mut conv, &mut f);

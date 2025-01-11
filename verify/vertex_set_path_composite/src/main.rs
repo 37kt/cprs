@@ -2,7 +2,7 @@
 
 use ac_library::ModInt998244353 as Mint;
 use algebraic::{algebra, monoid};
-use graph::Graph;
+use graph::UndirectedGraph;
 use proconio::input;
 use tree_query::TreeQueryVertex;
 
@@ -20,7 +20,7 @@ fn main() {
         a: [(Mint, Mint); n],
         uv: [(usize, usize); n - 1],
     }
-    let g = Graph::from_vertices_and_unweighted_undirected_edges(&a, &uv);
+    let g = UndirectedGraph::from_vertices_and_unweighted_edges(&a, &uv);
     let mut tq = TreeQueryVertex::<M>::build(&g);
     for _ in 0..q {
         input! {

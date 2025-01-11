@@ -12,7 +12,11 @@ where
 
 /// ダイクストラ法  
 /// 始点集合からの最短距離を求める。
-pub fn dijkstra<V, T>(g: &Graph<V, T>, starts: &[usize], inf: T) -> DijkstraResult<T>
+pub fn dijkstra<V, T, const DIRECTED: bool>(
+    g: &Graph<V, T, DIRECTED>,
+    starts: &[usize],
+    inf: T,
+) -> DijkstraResult<T>
 where
     V: Clone,
     T: Clone + Ord + Add<Output = T> + Default,

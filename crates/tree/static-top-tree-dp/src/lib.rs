@@ -1,4 +1,4 @@
-use graph::Graph;
+use graph::UndirectedGraph;
 use heavy_light_decomposition::HeavyLightDecomposition;
 
 #[derive(Clone, Copy)]
@@ -26,7 +26,7 @@ pub struct StaticTopTree {
 
 impl StaticTopTree {
     /// 0 を根とする Static Top Tree を構築する
-    pub fn new<V: Clone, E: Clone>(g: &Graph<V, E>) -> Self {
+    pub fn new<V: Clone, E: Clone>(g: &UndirectedGraph<V, E>) -> Self {
         let n = g.len();
         let mut s = Self {
             stt_root: !0,
@@ -101,7 +101,7 @@ impl StaticTopTree {
     fn compress<V: Clone, E: Clone>(
         &mut self,
         mut i: usize,
-        g: &Graph<V, E>,
+        g: &UndirectedGraph<V, E>,
         hld: &HeavyLightDecomposition,
     ) -> (usize, usize) {
         let mut chs = vec![self.add_vertex(i, g, hld)];
@@ -115,7 +115,7 @@ impl StaticTopTree {
     fn rake<V: Clone, E: Clone>(
         &mut self,
         i: usize,
-        g: &Graph<V, E>,
+        g: &UndirectedGraph<V, E>,
         hld: &HeavyLightDecomposition,
     ) -> (usize, usize) {
         let mut chs = vec![];
@@ -135,7 +135,7 @@ impl StaticTopTree {
     fn add_edge<V: Clone, E: Clone>(
         &mut self,
         i: usize,
-        g: &Graph<V, E>,
+        g: &UndirectedGraph<V, E>,
         hld: &HeavyLightDecomposition,
     ) -> (usize, usize) {
         let (j, sj) = self.compress(i, g, hld);
@@ -147,7 +147,7 @@ impl StaticTopTree {
     fn add_vertex<V: Clone, E: Clone>(
         &mut self,
         i: usize,
-        g: &Graph<V, E>,
+        g: &UndirectedGraph<V, E>,
         hld: &HeavyLightDecomposition,
     ) -> (usize, usize) {
         let (j, sj) = self.rake(i, g, hld);
@@ -222,7 +222,7 @@ pub struct StaticTopTreeDP<O: TreeDPOperator> {
 
 impl<O: TreeDPOperator> StaticTopTreeDP<O> {
     /// 0 を根とする Static Top Tree を構築する
-    pub fn new(g: &Graph<O::V, O::E>) -> Self {
+    pub fn new(g: &UndirectedGraph<O::V, O::E>) -> Self {
         let stt = StaticTopTree::new(g);
         let mut sum = vec![Data::Path(O::vertex(&g.vertex(0))); stt.len()];
         let vertex = (0..g.len())

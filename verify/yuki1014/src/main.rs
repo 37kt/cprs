@@ -1,13 +1,13 @@
 // verification-helper: PROBLEM https://yukicoder.me/problems/no/1014
 
 use chminmax::{chmax, chmin};
-use graph::Graph;
+use graph::DirectedGraph;
 use proconio::input;
 use range_edge_graph::RangeEdgeGraph;
 
 const INF: i64 = 1 << 60;
 
-fn dfs(v: usize, g: &Graph<(), i64>, res: &mut [Option<i64>], b: &[i64]) -> i64 {
+fn dfs(v: usize, g: &DirectedGraph<(), i64>, res: &mut [Option<i64>], b: &[i64]) -> i64 {
     if let Some(res) = res[v] {
         return res;
     }

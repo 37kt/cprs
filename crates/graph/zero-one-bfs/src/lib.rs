@@ -18,7 +18,11 @@ where
 /// ZeroOneBFSResult
 /// - dist: 始点から各頂点への最短距離
 /// - prev: 始点から各頂点への最短経路における前の頂点
-pub fn zero_one_bfs<V, T>(g: &Graph<V, T>, starts: &[usize], inf: T) -> ZeroOneBFSResult<T>
+pub fn zero_one_bfs<V, T, const DIRECTED: bool>(
+    g: &Graph<V, T, DIRECTED>,
+    starts: &[usize],
+    inf: T,
+) -> ZeroOneBFSResult<T>
 where
     V: Clone,
     T: Clone + Ord + Add<Output = T> + Default + From<u8>,

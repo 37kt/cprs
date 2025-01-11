@@ -1,7 +1,7 @@
 // verification-helper: PROBLEM https://judge.yosupo.jp/problem/tree_path_composite_sum
 
 use algebraic::{act, algebra, monoid};
-use graph::Graph;
+use graph::UndirectedGraph;
 use itertools::Itertools;
 use modint::ModInt998244353 as Mint;
 use proconio::input;
@@ -26,7 +26,7 @@ fn main() {
         a: [Mint; n],
         uvw: [(usize, usize, (Mint, Mint)); n - 1],
     }
-    let g = Graph::from_vertices_and_undirected_edges(&a, &uvw);
+    let g = UndirectedGraph::from_vertices_and_edges(&a, &uvw);
     let dp = ReRootingDP::build::<M, V, E>(&g);
     println!("{}", (0..n).map(|v| dp.prod(v).1).join(" "));
 }

@@ -1,4 +1,4 @@
-use graph::Graph;
+use graph::UndirectedGraph;
 use std::mem::swap;
 
 /// 重軽分解
@@ -32,7 +32,7 @@ impl HeavyLightDecomposition {
     /// # 計算量
     ///
     /// O(n)
-    pub fn new<V, E>(g: &Graph<V, E>) -> Self
+    pub fn new<V, E>(g: &UndirectedGraph<V, E>) -> Self
     where
         V: Clone,
         E: Clone,
@@ -53,7 +53,7 @@ impl HeavyLightDecomposition {
         hld
     }
 
-    fn dfs_sz<V, E>(&mut self, g: &Graph<V, E>, v: usize)
+    fn dfs_sz<V, E>(&mut self, g: &UndirectedGraph<V, E>, v: usize)
     where
         V: Clone,
         E: Clone,
@@ -73,7 +73,7 @@ impl HeavyLightDecomposition {
         }
     }
 
-    fn dfs_hld<V, E>(&mut self, g: &Graph<V, E>, v: usize, t: &mut usize)
+    fn dfs_hld<V, E>(&mut self, g: &UndirectedGraph<V, E>, v: usize, t: &mut usize)
     where
         V: Clone,
         E: Clone,

@@ -1,6 +1,6 @@
 // verification-helper: PROBLEM https://judge.yosupo.jp/problem/jump_on_tree
 
-use graph::Graph;
+use graph::UndirectedGraph;
 use heavy_light_decomposition::HeavyLightDecomposition;
 use proconio::input;
 
@@ -11,7 +11,7 @@ fn main() {
         q: usize,
         ab: [(usize, usize); n - 1],
     }
-    let g = Graph::from_vertices_and_unweighted_undirected_edges(&vec![(); n], &ab);
+    let g = UndirectedGraph::from_vertices_and_unweighted_edges(&vec![(); n], &ab);
     let hld = HeavyLightDecomposition::new(&g);
     for _ in 0..q {
         input! {

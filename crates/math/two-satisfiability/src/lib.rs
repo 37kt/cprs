@@ -1,4 +1,4 @@
-use graph::Graph;
+use graph::DirectedGraph;
 use strongly_connected_components::strongly_connected_components;
 
 /// 2-SAT
@@ -35,7 +35,7 @@ impl TwoSatisfiability {
     }
 
     pub fn solve(&self) -> Option<Vec<bool>> {
-        let g = Graph::from_unweighted_directed_edges(self.n * 2, &self.es);
+        let g = DirectedGraph::from_unweighted_edges(self.n * 2, &self.es);
         let (_, comp) = strongly_connected_components(&g);
         let mut res = vec![false; self.n];
         for i in 0..self.n {

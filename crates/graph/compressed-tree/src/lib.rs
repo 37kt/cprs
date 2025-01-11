@@ -1,4 +1,4 @@
-use graph::Graph;
+use graph::UndirectedGraph;
 
 // Reference:
 // https://tjkendev.github.io/procon-library/cpp/graph/auxiliary_tree.html
@@ -24,7 +24,7 @@ impl CompressedTree {
     /// # 計算量
     ///
     /// O(N log N)
-    pub fn new(g: &Graph<(), ()>) -> Self {
+    pub fn new(g: &UndirectedGraph<(), ()>) -> Self {
         let n = g.len();
         let mut c = Self {
             fs: vec![0; n],
@@ -73,7 +73,7 @@ impl CompressedTree {
     /// # 計算量
     ///
     /// O(|vs|)
-    pub fn build(&mut self, vs: &[usize]) -> (Graph<(), ()>, Vec<usize>) {
+    pub fn build(&mut self, vs: &[usize]) -> (UndirectedGraph<(), ()>, Vec<usize>) {
         let mut vs = vs.to_vec();
         vs.sort_by_key(|&v| self.fs[v]);
         for i in 0..vs.len() - 1 {
@@ -97,10 +97,10 @@ impl CompressedTree {
             }
             stk.push(v);
         }
-        (Graph::from_unweighted_directed_edges(vs.len(), &es), idx)
+        (UndirectedGraph::from_unweighted_edges(vs.len(), &es), idx)
     }
 
-    fn ett_dfs(&mut self, v: usize, p: usize, d: usize, g: &Graph<(), ()>) {
+    fn ett_dfs(&mut self, v: usize, p: usize, d: usize, g: &UndirectedGraph<(), ()>) {
         let c = self.st[0].len();
         self.fs[v] = c;
         self.st[0].push(v);

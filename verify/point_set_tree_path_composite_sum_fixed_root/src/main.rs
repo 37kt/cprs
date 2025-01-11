@@ -1,6 +1,6 @@
 // verification-helper: PROBLEM https://judge.yosupo.jp/problem/point_set_tree_path_composite_sum_fixed_root
 
-use graph::Graph;
+use graph::UndirectedGraph;
 use modint::ModInt998244353 as Mint;
 use proconio::input;
 use static_top_tree_dp::{StaticTopTreeDP, TreeDPOperator};
@@ -50,7 +50,7 @@ fn main() {
         a: [Mint; n],
         uvbc: [(usize, usize, (Mint, Mint)); n - 1],
     }
-    let g = Graph::from_vertices_and_undirected_edges(&a, &uvbc);
+    let g = UndirectedGraph::from_vertices_and_edges(&a, &uvbc);
     let mut dp = StaticTopTreeDP::<Op>::new(&g);
     for _ in 0..q {
         input! {

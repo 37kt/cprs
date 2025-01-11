@@ -3,7 +3,7 @@ use std::{
     collections::{BinaryHeap, VecDeque},
 };
 
-use graph::Graph;
+use graph::UndirectedGraph;
 use heavy_light_decomposition::HeavyLightDecomposition;
 
 /// 木の等高線クエリ  
@@ -29,7 +29,7 @@ pub struct RangeContourQuery {
 
 impl RangeContourQuery {
     /// 木の等高線クエリを構築する。
-    pub fn new(g: &Graph<(), ()>) -> Self {
+    pub fn new(g: &UndirectedGraph<(), ()>) -> Self {
         let mut h = vec![vec![]; g.len()];
         for v in 0..g.len() {
             for &(u, _) in &g[v] {

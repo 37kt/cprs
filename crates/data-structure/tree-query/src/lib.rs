@@ -1,7 +1,7 @@
 use std::marker::PhantomData;
 
 use algebraic::Monoid;
-use graph::Graph;
+use graph::UndirectedGraph;
 use heavy_light_decomposition::HeavyLightDecomposition;
 use segment_tree::SegmentTree;
 
@@ -117,7 +117,7 @@ where
     /// # 計算量
     ///
     /// O(N)
-    pub fn build<E>(g: &Graph<V, E>) -> Self
+    pub fn build<E>(g: &UndirectedGraph<V, E>) -> Self
     where
         E: Clone,
     {
@@ -189,7 +189,7 @@ where
     /// # 計算量
     ///
     /// O(N)
-    pub fn build<V>(g: &Graph<V, E>) -> Self
+    pub fn build<V>(g: &UndirectedGraph<V, E>) -> Self
     where
         V: Clone,
     {

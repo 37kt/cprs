@@ -1,4 +1,4 @@
-use graph::Graph;
+use graph::DirectedGraph;
 
 /// 強連結成分分解をする  
 ///
@@ -9,7 +9,7 @@ use graph::Graph;
 /// - comp: 各頂点が属する強連結成分の番号
 ///
 /// グループはトポロジカル順序に並んでいる
-pub fn strongly_connected_components<V, E>(g: &Graph<V, E>) -> (Vec<Vec<usize>>, Vec<usize>)
+pub fn strongly_connected_components<V, E>(g: &DirectedGraph<V, E>) -> (Vec<Vec<usize>>, Vec<usize>)
 where
     V: Clone,
     E: Clone,
@@ -37,7 +37,7 @@ where
 }
 
 impl Scc {
-    fn dfs<V, E>(&mut self, v: usize, g: &Graph<V, E>)
+    fn dfs<V, E>(&mut self, v: usize, g: &DirectedGraph<V, E>)
     where
         V: Clone,
         E: Clone,

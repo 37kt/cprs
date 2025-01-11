@@ -1,6 +1,6 @@
 // verification-helper: PROBLEM https://judge.yosupo.jp/problem/scc
 
-use graph::Graph;
+use graph::DirectedGraph;
 use itertools::Itertools;
 use proconio::input;
 use strongly_connected_components::strongly_connected_components;
@@ -12,7 +12,7 @@ fn main() {
         m: usize,
         ab: [(usize, usize); m]
     }
-    let g = Graph::from_unweighted_directed_edges(n, &ab);
+    let g = DirectedGraph::from_unweighted_edges(n, &ab);
     let (groups, _) = strongly_connected_components(&g);
     println!("{}", groups.len());
     for g in groups {

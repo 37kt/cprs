@@ -1,5 +1,5 @@
 use algebraic::{Act, Monoid};
-use graph::Graph;
+use graph::UndirectedGraph;
 
 /// 全方位木 dp
 pub struct ReRootingDP<S>
@@ -17,7 +17,7 @@ where
     T: Clone,
 {
     /// 全方位木 dp を実行する
-    pub fn build<M, V, E>(g: &Graph<V::S, E::S>) -> Self
+    pub fn build<M, V, E>(g: &UndirectedGraph<V::S, E::S>) -> Self
     where
         M: Monoid<S = T>,
         M::S: Clone,

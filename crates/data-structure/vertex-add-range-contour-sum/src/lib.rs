@@ -1,5 +1,5 @@
 use algebraic::Monoid;
-use graph::Graph;
+use graph::UndirectedGraph;
 use range_contour_query::RangeContourQuery;
 use segment_tree::SegmentTree;
 
@@ -20,7 +20,7 @@ where
 {
     /// 頂点の値を a 、辺を es で初期化
     pub fn new(a: &[M::S], es: &[(usize, usize)]) -> Self {
-        let g = Graph::from_unweighted_undirected_edges(a.len(), es);
+        let g = UndirectedGraph::from_unweighted_edges(a.len(), es);
         let rcq = RangeContourQuery::new(&g);
         let seg = rcq
             .seq

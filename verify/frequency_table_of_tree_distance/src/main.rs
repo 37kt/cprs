@@ -2,7 +2,7 @@
 
 use centroid_decomposition::centroid_decomposition;
 use convolution_u64::convolution_u64;
-use graph::Graph;
+use graph::UndirectedGraph;
 use itertools::Itertools;
 use proconio::input;
 
@@ -12,7 +12,7 @@ fn main() {
         n: usize,
         uv: [(usize, usize); n - 1],
     }
-    let g = Graph::from_unweighted_undirected_edges(n, &uv);
+    let g = UndirectedGraph::from_unweighted_edges(n, &uv);
     let mut res = vec![0; n];
     let mut dist = vec![0; n];
     let mut f = |idx: &[usize], par: &[usize], m: usize| {

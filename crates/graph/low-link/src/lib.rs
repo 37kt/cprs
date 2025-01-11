@@ -1,4 +1,4 @@
-use graph::Graph;
+use graph::UndirectedGraph;
 
 /// 多重辺があるときにバグる
 pub struct LowLink {
@@ -13,7 +13,7 @@ pub struct LowLink {
 }
 
 impl LowLink {
-    pub fn new(g: &Graph<(), ()>) -> Self {
+    pub fn new(g: &UndirectedGraph<(), ()>) -> Self {
         let mut this = Self {
             vis: vec![false; g.len()],
             ord: vec![0; g.len()],
@@ -33,7 +33,7 @@ impl LowLink {
         this
     }
 
-    fn dfs(&mut self, v: usize, p: usize, g: &Graph<(), ()>) {
+    fn dfs(&mut self, v: usize, p: usize, g: &UndirectedGraph<(), ()>) {
         self.vis[v] = true;
         self.ord[v] = self.cnt;
         self.low[v] = self.cnt;

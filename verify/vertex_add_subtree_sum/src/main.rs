@@ -1,7 +1,7 @@
 // verification-helper: PROBLEM https://judge.yosupo.jp/problem/vertex_add_subtree_sum
 
 use algebraic::{algebra, monoid};
-use graph::Graph;
+use graph::UndirectedGraph;
 use proconio::input;
 use tree_query::TreeQueryVertex;
 
@@ -22,7 +22,7 @@ fn main() {
         }
         es.push((p, v));
     }
-    let g = Graph::from_vertices_and_unweighted_undirected_edges(&a, &es);
+    let g = UndirectedGraph::from_vertices_and_unweighted_edges(&a, &es);
     let mut tq = TreeQueryVertex::<M>::build(&g);
     for _ in 0..q {
         input! {

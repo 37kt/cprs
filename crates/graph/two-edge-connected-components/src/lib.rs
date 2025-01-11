@@ -1,8 +1,8 @@
-use graph::Graph;
+use graph::UndirectedGraph;
 
 fn dfs(
     v: usize,
-    g: &Graph<(), ()>,
+    g: &UndirectedGraph<(), ()>,
     ord: &mut Vec<usize>,
     par: &mut Vec<usize>,
     imos: &mut Vec<i32>,
@@ -35,7 +35,7 @@ fn dfs(
 /// (groups, comp)
 /// - groups: 二辺連結成分のグループ
 /// - comp: 各頂点が属する二辺連結成分の番号
-pub fn two_edge_connected_components(g: &Graph<(), ()>) -> (Vec<Vec<usize>>, Vec<usize>) {
+pub fn two_edge_connected_components(g: &UndirectedGraph<(), ()>) -> (Vec<Vec<usize>>, Vec<usize>) {
     let n = g.len();
     let m = g.edges_count();
     let mut ord = vec![];

@@ -1,7 +1,7 @@
-use graph::Graph;
+use graph::UndirectedGraph;
 
 /// 拡張 Block-Cut Tree  
-pub fn extended_block_cut_tree(g: &Graph<(), ()>) -> Graph<(), ()> {
+pub fn extended_block_cut_tree(g: &UndirectedGraph<(), ()>) -> UndirectedGraph<(), ()> {
     let n = g.len();
     let mut next = vec![!0; n];
     let mut d = vec![!0; n];
@@ -26,10 +26,16 @@ pub fn extended_block_cut_tree(g: &Graph<(), ()>) -> Graph<(), ()> {
             cnt += 1;
         }
     }
-    Graph::from_unweighted_undirected_edges(n + cnt, &edges)
+    UndirectedGraph::from_unweighted_edges(n + cnt, &edges)
 }
 
-fn dfs1(v: usize, g: &Graph<(), ()>, next: &mut [usize], d: &mut [usize], imos: &mut [i32]) {
+fn dfs1(
+    v: usize,
+    g: &UndirectedGraph<(), ()>,
+    next: &mut [usize],
+    d: &mut [usize],
+    imos: &mut [i32],
+) {
     for &(u, _) in &g[v] {
         if d[u] == !0 {
             d[u] = d[v] + 1;
@@ -46,7 +52,7 @@ fn dfs1(v: usize, g: &Graph<(), ()>, next: &mut [usize], d: &mut [usize], imos: 
 fn dfs2(
     v: usize,
     b: usize,
-    g: &Graph<(), ()>,
+    g: &UndirectedGraph<(), ()>,
     d: &mut [usize],
     imos: &mut [i32],
     used: &mut [bool],

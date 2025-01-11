@@ -5,14 +5,14 @@ use std::{
 };
 
 use algebraic::{algebra, monoid};
-use graph::Graph;
+use graph::UndirectedGraph;
 use union_find_component_sum::UnionFindComponentSum;
 
 algebra!(ZeroOneMonoid, ZeroOne);
 monoid!(ZeroOneMonoid, ZeroOne::new(0, 0), |a, b| a + b);
 
 /// 01 on Tree
-pub fn zero_one_on_tree(g: &Graph<ZeroOne, ()>) -> usize {
+pub fn zero_one_on_tree(g: &UndirectedGraph<ZeroOne, ()>) -> usize {
     let n = g.len();
     let mut par = vec![!0; n];
     dfs(0, g, &mut par);
@@ -37,7 +37,7 @@ pub fn zero_one_on_tree(g: &Graph<ZeroOne, ()>) -> usize {
     res
 }
 
-fn dfs(v: usize, g: &Graph<ZeroOne, ()>, p: &mut [usize]) {
+fn dfs(v: usize, g: &UndirectedGraph<ZeroOne, ()>, p: &mut [usize]) {
     for &(u, _) in &g[v] {
         if u == p[v] {
             continue;

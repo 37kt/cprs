@@ -1,6 +1,6 @@
 use std::ops::RangeBounds;
 
-use graph::Graph;
+use graph::DirectedGraph;
 
 /// 区間から区間に辺を張るテクニック  
 pub struct RangeEdgeGraph<E>
@@ -75,8 +75,8 @@ where
 
     /// 超頂点を用いてグラフを構築する  
     /// 元の頂点番号とこのグラフの頂点番号は対応している
-    pub fn build(&self) -> Graph<(), E> {
-        Graph::from_directed_edges(self.m, &self.es)
+    pub fn build(&self) -> DirectedGraph<(), E> {
+        DirectedGraph::from_edges(self.m, &self.es)
     }
 
     fn id(&self, mut v: usize) -> usize {
