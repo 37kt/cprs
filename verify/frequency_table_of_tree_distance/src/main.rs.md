@@ -27,13 +27,13 @@ data:
     , line 288, in bundle\n    raise NotImplementedError\nNotImplementedError\n"
   code: "// verification-helper: PROBLEM https://judge.yosupo.jp/problem/frequency_table_of_tree_distance\n\
     \nuse centroid_decomposition::centroid_decomposition;\nuse convolution_u64::convolution_u64;\n\
-    use graph::Graph;\nuse itertools::Itertools;\nuse proconio::input;\n\n#[proconio::fastout]\n\
-    fn main() {\n    input! {\n        n: usize,\n        uv: [(usize, usize); n -\
-    \ 1],\n    }\n    let g = Graph::from_unweighted_undirected_edges(n, &uv);\n \
-    \   let mut res = vec![0; n];\n    let mut dist = vec![0; n];\n    let mut f =\
-    \ |idx: &[usize], par: &[usize], m: usize| {\n        let n = idx.len();\n   \
-    \     let r = par[0];\n        dist[r] = 0;\n        let mut mx = 0;\n       \
-    \ for i in 0..n {\n            let v = idx[i];\n            let p = par[i];\n\
+    use graph::UndirectedGraph;\nuse itertools::Itertools;\nuse proconio::input;\n\
+    \n#[proconio::fastout]\nfn main() {\n    input! {\n        n: usize,\n       \
+    \ uv: [(usize, usize); n - 1],\n    }\n    let g = UndirectedGraph::from_unweighted_edges(n,\
+    \ &uv);\n    let mut res = vec![0; n];\n    let mut dist = vec![0; n];\n    let\
+    \ mut f = |idx: &[usize], par: &[usize], m: usize| {\n        let n = idx.len();\n\
+    \        let r = par[0];\n        dist[r] = 0;\n        let mut mx = 0;\n    \
+    \    for i in 0..n {\n            let v = idx[i];\n            let p = par[i];\n\
     \            dist[v] = dist[p] + 1;\n            mx = mx.max(dist[v]);\n     \
     \   }\n        let mut a = vec![0; mx + 1];\n        let mut b = vec![0; mx +\
     \ 1];\n        for i in 0..m {\n            let v = idx[i];\n            a[dist[v]]\
@@ -49,7 +49,7 @@ data:
   isVerificationFile: true
   path: verify/frequency_table_of_tree_distance/src/main.rs
   requiredBy: []
-  timestamp: '2024-12-30 09:13:10+00:00'
+  timestamp: '2025-01-11 07:42:28+00:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/frequency_table_of_tree_distance/src/main.rs

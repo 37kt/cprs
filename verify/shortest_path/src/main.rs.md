@@ -23,21 +23,21 @@ data:
     \  File \"/opt/hostedtoolcache/Python/3.12.8/x64/lib/python3.12/site-packages/onlinejudge_verify/languages/rust.py\"\
     , line 288, in bundle\n    raise NotImplementedError\nNotImplementedError\n"
   code: "// verification-helper: PROBLEM https://judge.yosupo.jp/problem/shortest_path\n\
-    \nuse dijkstra::dijkstra;\nuse graph::Graph;\nuse proconio::input;\n\n#[proconio::fastout]\n\
-    fn main() {\n    input! {\n        n: usize,\n        m: usize,\n        s: usize,\n\
-    \        t: usize,\n        abc: [(usize, usize, i64); m],\n    }\n    let g =\
-    \ Graph::from_directed_edges(n, &abc);\n    let dijkstra_result = dijkstra(&g,\
-    \ &[s], 1 << 60);\n    if let Some(path) = dijkstra_result.path(t) {\n       \
-    \ println!(\"{} {}\", dijkstra_result.dist[t], path.len() - 1);\n        for i\
-    \ in 0..path.len() - 1 {\n            println!(\"{} {}\", path[i], path[i + 1]);\n\
-    \        }\n    } else {\n        println!(\"-1\");\n    }\n}\n"
+    \nuse dijkstra::dijkstra;\nuse graph::DirectedGraph;\nuse proconio::input;\n\n\
+    #[proconio::fastout]\nfn main() {\n    input! {\n        n: usize,\n        m:\
+    \ usize,\n        s: usize,\n        t: usize,\n        abc: [(usize, usize, i64);\
+    \ m],\n    }\n    let g = DirectedGraph::from_edges(n, &abc);\n    let dijkstra_result\
+    \ = dijkstra(&g, &[s], 1 << 60);\n    if let Some(path) = dijkstra_result.path(t)\
+    \ {\n        println!(\"{} {}\", dijkstra_result.dist[t], path.len() - 1);\n \
+    \       for i in 0..path.len() - 1 {\n            println!(\"{} {}\", path[i],\
+    \ path[i + 1]);\n        }\n    } else {\n        println!(\"-1\");\n    }\n}\n"
   dependsOn:
   - crates/graph/dijkstra/src/lib.rs
   - crates/graph/graph/src/lib.rs
   isVerificationFile: true
   path: verify/shortest_path/src/main.rs
   requiredBy: []
-  timestamp: '2024-12-27 03:53:35+00:00'
+  timestamp: '2025-01-11 07:42:28+00:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/shortest_path/src/main.rs

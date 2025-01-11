@@ -23,11 +23,12 @@ data:
     \  File \"/opt/hostedtoolcache/Python/3.12.8/x64/lib/python3.12/site-packages/onlinejudge_verify/languages/rust.py\"\
     , line 288, in bundle\n    raise NotImplementedError\nNotImplementedError\n"
   code: "// verification-helper: PROBLEM https://judge.yosupo.jp/problem/scc\n\nuse\
-    \ graph::Graph;\nuse itertools::Itertools;\nuse proconio::input;\nuse strongly_connected_components::strongly_connected_components;\n\
-    \n#[proconio::fastout]\nfn main() {\n    input! {\n        n: usize,\n       \
-    \ m: usize,\n        ab: [(usize, usize); m]\n    }\n    let g = Graph::from_unweighted_directed_edges(n,\
-    \ &ab);\n    let (groups, _) = strongly_connected_components(&g);\n    println!(\"\
-    {}\", groups.len());\n    for g in groups {\n        println!(\"{} {}\", g.len(),\
+    \ graph::DirectedGraph;\nuse itertools::Itertools;\nuse proconio::input;\nuse\
+    \ strongly_connected_components::strongly_connected_components;\n\n#[proconio::fastout]\n\
+    fn main() {\n    input! {\n        n: usize,\n        m: usize,\n        ab: [(usize,\
+    \ usize); m]\n    }\n    let g = DirectedGraph::from_unweighted_edges(n, &ab);\n\
+    \    let (groups, _) = strongly_connected_components(&g);\n    println!(\"{}\"\
+    , groups.len());\n    for g in groups {\n        println!(\"{} {}\", g.len(),\
     \ g.iter().join(\" \"));\n    }\n}\n"
   dependsOn:
   - crates/graph/graph/src/lib.rs
@@ -35,7 +36,7 @@ data:
   isVerificationFile: true
   path: verify/scc/src/main.rs
   requiredBy: []
-  timestamp: '2024-12-27 03:56:43+00:00'
+  timestamp: '2025-01-11 07:42:28+00:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/scc/src/main.rs

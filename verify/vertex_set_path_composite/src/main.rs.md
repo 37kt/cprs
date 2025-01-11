@@ -30,11 +30,11 @@ data:
     , line 288, in bundle\n    raise NotImplementedError\nNotImplementedError\n"
   code: "// verification-helper: PROBLEM https://judge.yosupo.jp/problem/vertex_set_path_composite\n\
     \nuse ac_library::ModInt998244353 as Mint;\nuse algebraic::{algebra, monoid};\n\
-    use graph::Graph;\nuse proconio::input;\nuse tree_query::TreeQueryVertex;\n\n\
-    algebra!(M, (Mint, Mint));\nmonoid!(M, (1.into(), 0.into()), |&(a, b), &(c, d)|\
-    \ (\n    a * c,\n    b * c + d\n));\n\n#[proconio::fastout]\nfn main() {\n   \
-    \ input! {\n        n: usize,\n        q: usize,\n        a: [(Mint, Mint); n],\n\
-    \        uv: [(usize, usize); n - 1],\n    }\n    let g = Graph::from_vertices_and_unweighted_undirected_edges(&a,\
+    use graph::UndirectedGraph;\nuse proconio::input;\nuse tree_query::TreeQueryVertex;\n\
+    \nalgebra!(M, (Mint, Mint));\nmonoid!(M, (1.into(), 0.into()), |&(a, b), &(c,\
+    \ d)| (\n    a * c,\n    b * c + d\n));\n\n#[proconio::fastout]\nfn main() {\n\
+    \    input! {\n        n: usize,\n        q: usize,\n        a: [(Mint, Mint);\
+    \ n],\n        uv: [(usize, usize); n - 1],\n    }\n    let g = UndirectedGraph::from_vertices_and_unweighted_edges(&a,\
     \ &uv);\n    let mut tq = TreeQueryVertex::<M>::build(&g);\n    for _ in 0..q\
     \ {\n        input! {\n            ty: usize,\n        }\n        if ty == 0 {\n\
     \            input! {\n                p: usize,\n                c: Mint,\n \
@@ -51,7 +51,7 @@ data:
   isVerificationFile: true
   path: verify/vertex_set_path_composite/src/main.rs
   requiredBy: []
-  timestamp: '2025-01-04 02:49:00+00:00'
+  timestamp: '2025-01-11 07:42:28+00:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/vertex_set_path_composite/src/main.rs

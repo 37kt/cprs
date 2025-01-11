@@ -53,6 +53,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: crates/tree/centroid-decomposition/src/lib.rs
     title: crates/tree/centroid-decomposition/src/lib.rs
+  - icon: ':warning:'
+    path: crates/tree/heavy-light-decomposition-noya2/src/lib.rs
+    title: crates/tree/heavy-light-decomposition-noya2/src/lib.rs
   - icon: ':heavy_check_mark:'
     path: crates/tree/re-rooting-dp/src/lib.rs
     title: crates/tree/re-rooting-dp/src/lib.rs
@@ -114,44 +117,63 @@ data:
     \  File \"/opt/hostedtoolcache/Python/3.12.8/x64/lib/python3.12/site-packages/onlinejudge_verify/languages/rust.py\"\
     , line 288, in bundle\n    raise NotImplementedError\nNotImplementedError\n"
   code: "use std::ops::Index;\n\n/// \u96A3\u63A5\u30EA\u30B9\u30C8\n#[derive(Clone)]\n\
-    pub struct Graph<V, E>\nwhere\n    V: Clone,\n    E: Clone,\n{\n    vertices:\
-    \ Vec<V>,\n    edges: Vec<(usize, E)>,\n    pos: Vec<usize>,\n    edge_id: Vec<usize>,\n\
-    \    edges_count: usize,\n}\n\n/// \u30B0\u30EA\u30C3\u30C9\u30B0\u30E9\u30D5\u306E\
-    \ 4 \u8FD1\u508D  \n/// \u4E0A, \u5DE6, \u4E0B, \u53F3\npub const GRID_NEIGHBOURS_4:\
-    \ &[(usize, usize)] = &[(!0, 0), (0, !0), (1, 0), (0, 1)];\n\n/// \u30B0\u30EA\
-    \u30C3\u30C9\u30B0\u30E9\u30D5\u306E 8 \u8FD1\u508D  \n/// \u4E0A, \u5DE6, \u4E0B\
-    , \u53F3, \u5DE6\u4E0A, \u5DE6\u4E0B, \u53F3\u4E0B, \u53F3\u4E0A\npub const GRID_NEIGHBOURS_8:\
-    \ &[(usize, usize)] = &[\n    (!0, 0),\n    (0, !0),\n    (1, 0),\n    (0, 1),\n\
-    \    (!0, !0),\n    (1, !0),\n    (1, 1),\n    (!0, 1),\n];\n\nimpl<V, E> Graph<V,\
-    \ E>\nwhere\n    V: Clone,\n    E: Clone,\n{\n    /// \u9802\u70B9\u91CD\u307F\
-    \u3068\u91CD\u307F\u4ED8\u304D\u6709\u5411\u8FBA\u304B\u3089\u30B0\u30E9\u30D5\
-    \u3092\u69CB\u7BC9\u3059\u308B\n    pub fn from_vertices_and_directed_edges(vertices:\
-    \ &[V], edges: &[(usize, usize, E)]) -> Self {\n        if edges.is_empty() {\n\
-    \            return Self {\n                vertices: vertices.to_vec(),\n   \
-    \             edges: vec![],\n                pos: vec![0; vertices.len() + 1],\n\
-    \                edge_id: vec![],\n                edges_count: 0,\n         \
-    \   };\n        }\n\n        let n = vertices.len();\n        let mut pos = vec![0;\
-    \ n + 1];\n        for &(u, _, _) in edges {\n            pos[u] += 1;\n     \
-    \   }\n        for i in 1..=n {\n            pos[i] += pos[i - 1];\n        }\n\
+    pub struct Graph<V, E, const DIRECTED: bool>\nwhere\n    V: Clone,\n    E: Clone,\n\
+    {\n    vertices: Vec<V>,\n    edges: Vec<(usize, E)>,\n    pos: Vec<usize>,\n\
+    \    edge_id: Vec<usize>,\n    edges_count: usize,\n}\n\npub type DirectedGraph<V,\
+    \ E> = Graph<V, E, true>;\npub type UndirectedGraph<V, E> = Graph<V, E, false>;\n\
+    \n/// \u30B0\u30EA\u30C3\u30C9\u30B0\u30E9\u30D5\u306E 4 \u8FD1\u508D  \n/// \u4E0A\
+    , \u5DE6, \u4E0B, \u53F3\npub const GRID_NEIGHBOURS_4: [(usize, usize); 4] = [(!0,\
+    \ 0), (0, !0), (1, 0), (0, 1)];\n\n/// \u30B0\u30EA\u30C3\u30C9\u30B0\u30E9\u30D5\
+    \u306E 8 \u8FD1\u508D  \n/// \u4E0A, \u5DE6, \u4E0B, \u53F3, \u5DE6\u4E0A, \u5DE6\
+    \u4E0B, \u53F3\u4E0B, \u53F3\u4E0A\npub const GRID_NEIGHBOURS_8: [(usize, usize);\
+    \ 8] = [\n    (!0, 0),\n    (0, !0),\n    (1, 0),\n    (0, 1),\n    (!0, !0),\n\
+    \    (1, !0),\n    (1, 1),\n    (!0, 1),\n];\n\nimpl<V, E> DirectedGraph<V, E>\n\
+    where\n    V: Clone,\n    E: Clone,\n{\n    /// \u9802\u70B9\u91CD\u307F\u3068\
+    \u91CD\u307F\u4ED8\u304D\u6709\u5411\u8FBA\u304B\u3089\u30B0\u30E9\u30D5\u3092\
+    \u69CB\u7BC9\u3059\u308B\n    pub fn from_vertices_and_edges(vertices: &[V], edges:\
+    \ &[(usize, usize, E)]) -> Self {\n        if edges.is_empty() {\n           \
+    \ return Self {\n                vertices: vertices.to_vec(),\n              \
+    \  edges: vec![],\n                pos: vec![0; vertices.len() + 1],\n       \
+    \         edge_id: vec![],\n                edges_count: 0,\n            };\n\
+    \        }\n\n        let n = vertices.len();\n        let mut pos = vec![0; n\
+    \ + 1];\n        for &(u, _, _) in edges {\n            pos[u] += 1;\n       \
+    \ }\n        for i in 1..=n {\n            pos[i] += pos[i - 1];\n        }\n\
     \        let mut ord = vec![0; edges.len()];\n        for i in (0..edges.len()).rev()\
     \ {\n            let u = edges[i].0;\n            pos[u] -= 1;\n            ord[pos[u]]\
     \ = i;\n        }\n\n        Self {\n            vertices: vertices.to_vec(),\n\
     \            edge_id: ord.clone(),\n            edges: ord\n                .into_iter()\n\
     \                .map(|i| (edges[i].1, edges[i].2.clone()))\n                .collect(),\n\
     \            pos,\n            edges_count: edges.len(),\n        }\n    }\n\n\
-    \    /// \u9802\u70B9\u91CD\u307F\u3068\u91CD\u307F\u4ED8\u304D\u7121\u5411\u8FBA\
-    \u304B\u3089\u30B0\u30E9\u30D5\u3092\u69CB\u7BC9\u3059\u308B\n    pub fn from_vertices_and_undirected_edges(vertices:\
-    \ &[V], edges: &[(usize, usize, E)]) -> Self {\n        if edges.is_empty() {\n\
-    \            return Self {\n                vertices: vertices.to_vec(),\n   \
-    \             edges: vec![],\n                pos: vec![0; vertices.len() + 1],\n\
-    \                edge_id: vec![],\n                edges_count: 0,\n         \
-    \   };\n        }\n\n        let n = vertices.len();\n        let mut pos = vec![0;\
-    \ n + 1];\n        for &(u, v, _) in edges {\n            pos[u] += 1;\n     \
-    \       pos[v] += 1;\n        }\n        for i in 1..=n {\n            pos[i]\
-    \ += pos[i - 1];\n        }\n        let mut ord = vec![0; edges.len() * 2];\n\
-    \        for i in (0..edges.len() * 2).rev() {\n            if i & 1 == 0 {\n\
-    \                let u = edges[i >> 1].0;\n                pos[u] -= 1;\n    \
-    \            ord[pos[u]] = i;\n            } else {\n                let v = edges[i\
+    \    /// \u30B0\u30EA\u30C3\u30C9\u304B\u3089\u30B0\u30E9\u30D5\u3092\u69CB\u7BC9\
+    \u3059\u308B\n    ///\n    /// # \u5F15\u6570\n    ///\n    /// * `grid` - \u30B0\
+    \u30EA\u30C3\u30C9\n    /// * `neighbours` - \u8FD1\u508D\n    /// * `cost` -\
+    \ grid \u306E\u5024\u304B\u3089\u91CD\u307F\u3092\u8A08\u7B97\u3059\u308B\u95A2\
+    \u6570\n    pub fn from_grid(\n        grid: &Vec<Vec<V>>,\n        neighbours:\
+    \ &[(usize, usize)],\n        cost: impl Fn(&V, &V) -> Option<E>,\n    ) -> Self\
+    \ {\n        let h = grid.len();\n        let w = grid[0].len();\n        let\
+    \ mut edges = vec![];\n        for i in 0..h {\n            for j in 0..w {\n\
+    \                for &(di, dj) in neighbours {\n                    let ni = i.wrapping_add(di);\n\
+    \                    let nj = j.wrapping_add(dj);\n                    if ni >=\
+    \ h || nj >= w {\n                        continue;\n                    }\n \
+    \                   if let Some(c) = cost(&grid[i][j], &grid[ni][nj]) {\n    \
+    \                    edges.push((i * w + j, ni * w + nj, c));\n              \
+    \      }\n                }\n            }\n        }\n        Self::from_vertices_and_edges(\n\
+    \            &grid.into_iter().flatten().cloned().collect::<Vec<_>>(),\n     \
+    \       &edges,\n        )\n    }\n}\n\nimpl<V, E> UndirectedGraph<V, E>\nwhere\n\
+    \    V: Clone,\n    E: Clone,\n{\n    /// \u9802\u70B9\u91CD\u307F\u3068\u91CD\
+    \u307F\u4ED8\u304D\u7121\u5411\u8FBA\u304B\u3089\u30B0\u30E9\u30D5\u3092\u69CB\
+    \u7BC9\u3059\u308B\n    pub fn from_vertices_and_edges(vertices: &[V], edges:\
+    \ &[(usize, usize, E)]) -> Self {\n        if edges.is_empty() {\n           \
+    \ return Self {\n                vertices: vertices.to_vec(),\n              \
+    \  edges: vec![],\n                pos: vec![0; vertices.len() + 1],\n       \
+    \         edge_id: vec![],\n                edges_count: 0,\n            };\n\
+    \        }\n\n        let n = vertices.len();\n        let mut pos = vec![0; n\
+    \ + 1];\n        for &(u, v, _) in edges {\n            pos[u] += 1;\n       \
+    \     pos[v] += 1;\n        }\n        for i in 1..=n {\n            pos[i] +=\
+    \ pos[i - 1];\n        }\n        let mut ord = vec![0; edges.len() * 2];\n  \
+    \      for i in (0..edges.len() * 2).rev() {\n            if i & 1 == 0 {\n  \
+    \              let u = edges[i >> 1].0;\n                pos[u] -= 1;\n      \
+    \          ord[pos[u]] = i;\n            } else {\n                let v = edges[i\
     \ >> 1].1;\n                pos[v] -= 1;\n                ord[pos[v]] = i;\n \
     \           }\n        }\n\n        Self {\n            vertices: vertices.to_vec(),\n\
     \            edge_id: ord.iter().map(|&i| i / 2).collect(),\n            edges:\
@@ -161,62 +183,66 @@ data:
     \       edges[i >> 1].0\n                        },\n                        edges[i\
     \ >> 1].2.clone(),\n                    )\n                })\n              \
     \  .collect(),\n            pos,\n            edges_count: edges.len(),\n    \
-    \    }\n    }\n\n    /// \u9802\u70B9\u6570\u3092\u8FD4\u3059\n    pub fn len(&self)\
-    \ -> usize {\n        self.vertices.len()\n    }\n\n    /// \u8FBA\u6570\u3092\
-    \u8FD4\u3059\n    pub fn edges_count(&self) -> usize {\n        self.edges_count\n\
-    \    }\n\n    /// \u9802\u70B9\u91CD\u307F\u3092\u8FD4\u3059\n    pub fn vertex(&self,\
-    \ v: usize) -> &V {\n        &self.vertices[v]\n    }\n\n    /// \u9802\u70B9\
-    \ v \u304B\u3089\u51FA\u308B\u8FBA\u3092\u8FD4\u3059  \n    /// g\\[v\\] \u3068\
-    \u540C\u3058\n    pub fn edges(&self, v: usize) -> &[(usize, E)] {\n        let\
-    \ l = self.pos[v];\n        let r = self.pos[v + 1];\n        &self.edges[l..r]\n\
-    \    }\n\n    /// \u9802\u70B9 v \u306E i \u756A\u76EE\u306E\u8FBA\u306E id \u3092\
-    \u8FD4\u3059  \n    pub fn edge_id(&self, v: usize, i: usize) -> usize {\n   \
-    \     self.edge_id[self.pos[v] + i]\n    }\n\n    /// \u30B0\u30EA\u30C3\u30C9\
-    \u304B\u3089\u30B0\u30E9\u30D5\u3092\u69CB\u7BC9\u3059\u308B\n    ///\n    ///\
-    \ # \u5F15\u6570\n    ///\n    /// * `grid` - \u30B0\u30EA\u30C3\u30C9\n    ///\
-    \ * `neighbours` - \u8FD1\u508D\n    /// * `cost` - grid \u306E\u5024\u304B\u3089\
-    \u91CD\u307F\u3092\u8A08\u7B97\u3059\u308B\u95A2\u6570\n    pub fn from_grid(\n\
-    \        grid: &Vec<Vec<V>>,\n        neighbours: &[(usize, usize)],\n       \
-    \ cost: impl Fn(&V, &V) -> Option<E>,\n    ) -> Self {\n        let h = grid.len();\n\
-    \        let w = grid[0].len();\n        let mut edges = vec![];\n        for\
-    \ i in 0..h {\n            for j in 0..w {\n                for &(di, dj) in neighbours\
-    \ {\n                    let ni = i.wrapping_add(di);\n                    let\
-    \ nj = j.wrapping_add(dj);\n                    if ni >= h || nj >= w {\n    \
-    \                    continue;\n                    }\n                    if\
-    \ let Some(c) = cost(&grid[i][j], &grid[ni][nj]) {\n                        edges.push((i\
-    \ * w + j, ni * w + nj, c));\n                    }\n                }\n     \
-    \       }\n        }\n        Self::from_vertices_and_directed_edges(\n      \
-    \      &grid.into_iter().flatten().cloned().collect::<Vec<_>>(),\n           \
-    \ &edges,\n        )\n    }\n}\n\nimpl<V, E> Index<usize> for Graph<V, E>\nwhere\n\
-    \    V: Clone,\n    E: Clone,\n{\n    type Output = [(usize, E)];\n\n    fn index(&self,\
-    \ v: usize) -> &[(usize, E)] {\n        self.edges(v)\n    }\n}\n\nimpl<E> Graph<(),\
-    \ E>\nwhere\n    E: Clone,\n{\n    /// \u91CD\u307F\u4ED8\u304D\u6709\u5411\u8FBA\
-    \u304B\u3089\u30B0\u30E9\u30D5\u3092\u69CB\u7BC9\u3059\u308B\n    pub fn from_directed_edges(n:\
-    \ usize, edges: &[(usize, usize, E)]) -> Self {\n        Self::from_vertices_and_directed_edges(&vec![();\
-    \ n], edges)\n    }\n\n    /// \u91CD\u307F\u4ED8\u304D\u7121\u5411\u8FBA\u304B\
-    \u3089\u30B0\u30E9\u30D5\u3092\u69CB\u7BC9\u3059\u308B\n    pub fn from_undirected_edges(n:\
-    \ usize, edges: &[(usize, usize, E)]) -> Self {\n        Self::from_vertices_and_undirected_edges(&vec![();\
-    \ n], edges)\n    }\n}\n\nimpl<V> Graph<V, ()>\nwhere\n    V: Clone,\n{\n    ///\
-    \ \u9802\u70B9\u91CD\u307F\u3068\u91CD\u307F\u306A\u3057\u6709\u5411\u8FBA\u304B\
-    \u3089\u30B0\u30E9\u30D5\u3092\u69CB\u7BC9\u3059\u308B\n    pub fn from_vertices_and_unweighted_directed_edges(\n\
-    \        vertices: &[V],\n        edges: &[(usize, usize)],\n    ) -> Self {\n\
-    \        Self::from_vertices_and_directed_edges(\n            vertices,\n    \
-    \        &edges.iter().map(|&(u, v)| (u, v, ())).collect::<Vec<_>>(),\n      \
-    \  )\n    }\n\n    /// \u9802\u70B9\u91CD\u307F\u3068\u91CD\u307F\u306A\u3057\u7121\
-    \u5411\u8FBA\u304B\u3089\u30B0\u30E9\u30D5\u3092\u69CB\u7BC9\u3059\u308B\n   \
-    \ pub fn from_vertices_and_unweighted_undirected_edges(\n        vertices: &[V],\n\
-    \        edges: &[(usize, usize)],\n    ) -> Self {\n        Self::from_vertices_and_undirected_edges(\n\
+    \    }\n    }\n\n    /// \u30B0\u30EA\u30C3\u30C9\u304B\u3089\u30B0\u30E9\u30D5\
+    \u3092\u69CB\u7BC9\u3059\u308B\n    ///\n    /// # \u5F15\u6570\n    ///\n   \
+    \ /// * `grid` - \u30B0\u30EA\u30C3\u30C9\n    /// * `neighbours` - \u8FD1\u508D\
+    \n    /// * `cost` - grid \u306E\u5024\u304B\u3089\u91CD\u307F\u3092\u8A08\u7B97\
+    \u3059\u308B\u95A2\u6570\n    pub fn from_grid(\n        grid: &Vec<Vec<V>>,\n\
+    \        neighbours: &[(usize, usize)],\n        cost: impl Fn(&V, &V) -> Option<E>,\n\
+    \    ) -> Self {\n        let h = grid.len();\n        let w = grid[0].len();\n\
+    \        let mut edges = vec![];\n        for i in 0..h {\n            for j in\
+    \ 0..w {\n                for &(di, dj) in neighbours {\n                    let\
+    \ ni = i.wrapping_add(di);\n                    let nj = j.wrapping_add(dj);\n\
+    \                    if ni >= h || nj >= w {\n                        continue;\n\
+    \                    }\n                    let u = i * w + j;\n             \
+    \       let v = ni * w + nj;\n                    if u > v {\n               \
+    \         continue;\n                    }\n                    if let Some(c)\
+    \ = cost(&grid[i][j], &grid[ni][nj]) {\n                        edges.push((u,\
+    \ v, c));\n                    }\n                }\n            }\n        }\n\
+    \        Self::from_vertices_and_edges(\n            &grid.into_iter().flatten().cloned().collect::<Vec<_>>(),\n\
+    \            &edges,\n        )\n    }\n}\n\nimpl<V, E, const DIRECTED: bool>\
+    \ Graph<V, E, DIRECTED>\nwhere\n    V: Clone,\n    E: Clone,\n{\n    /// \u9802\
+    \u70B9\u6570\u3092\u8FD4\u3059\n    pub fn len(&self) -> usize {\n        self.vertices.len()\n\
+    \    }\n\n    /// \u8FBA\u6570\u3092\u8FD4\u3059\n    pub fn edges_count(&self)\
+    \ -> usize {\n        self.edges_count\n    }\n\n    /// \u9802\u70B9\u91CD\u307F\
+    \u3092\u8FD4\u3059\n    pub fn vertex(&self, v: usize) -> &V {\n        &self.vertices[v]\n\
+    \    }\n\n    /// \u9802\u70B9 v \u304B\u3089\u51FA\u308B\u8FBA\u3092\u8FD4\u3059\
+    \  \n    /// g\\[v\\] \u3068\u540C\u3058\n    pub fn edges(&self, v: usize) ->\
+    \ &[(usize, E)] {\n        let l = self.pos[v];\n        let r = self.pos[v +\
+    \ 1];\n        &self.edges[l..r]\n    }\n\n    /// \u9802\u70B9 v \u306E i \u756A\
+    \u76EE\u306E\u8FBA\u306E id \u3092\u8FD4\u3059  \n    pub fn edge_id(&self, v:\
+    \ usize, i: usize) -> usize {\n        self.edge_id[self.pos[v] + i]\n    }\n\
+    }\n\nimpl<V, E, const DIRECTED: bool> Index<usize> for Graph<V, E, DIRECTED>\n\
+    where\n    V: Clone,\n    E: Clone,\n{\n    type Output = [(usize, E)];\n\n  \
+    \  fn index(&self, v: usize) -> &[(usize, E)] {\n        self.edges(v)\n    }\n\
+    }\n\nimpl<V> DirectedGraph<V, ()>\nwhere\n    V: Clone,\n{\n    /// \u9802\u70B9\
+    \u91CD\u307F\u3068\u91CD\u307F\u306A\u3057\u6709\u5411\u8FBA\u304B\u3089\u30B0\
+    \u30E9\u30D5\u3092\u69CB\u7BC9\u3059\u308B\n    pub fn from_vertices_and_unweighted_edges(vertices:\
+    \ &[V], edges: &[(usize, usize)]) -> Self {\n        Self::from_vertices_and_edges(\n\
     \            vertices,\n            &edges.iter().map(|&(u, v)| (u, v, ())).collect::<Vec<_>>(),\n\
-    \        )\n    }\n}\n\nimpl Graph<(), ()> {\n    /// \u91CD\u307F\u306A\u3057\
-    \u6709\u5411\u8FBA\u304B\u3089\u30B0\u30E9\u30D5\u3092\u69CB\u7BC9\u3059\u308B\
-    \n    pub fn from_unweighted_directed_edges(n: usize, edges: &[(usize, usize)])\
-    \ -> Self {\n        Self::from_directed_edges(\n            n,\n            &edges.iter().map(|&(u,\
-    \ v)| (u, v, ())).collect::<Vec<_>>(),\n        )\n    }\n\n    /// \u91CD\u307F\
-    \u306A\u3057\u7121\u5411\u8FBA\u304B\u3089\u30B0\u30E9\u30D5\u3092\u69CB\u7BC9\
-    \u3059\u308B\n    pub fn from_unweighted_undirected_edges(n: usize, edges: &[(usize,\
-    \ usize)]) -> Self {\n        Self::from_undirected_edges(\n            n,\n \
-    \           &edges.iter().map(|&(u, v)| (u, v, ())).collect::<Vec<_>>(),\n   \
-    \     )\n    }\n}\n"
+    \        )\n    }\n}\n\nimpl<V> UndirectedGraph<V, ()>\nwhere\n    V: Clone,\n\
+    {\n    /// \u9802\u70B9\u91CD\u307F\u3068\u91CD\u307F\u306A\u3057\u7121\u5411\u8FBA\
+    \u304B\u3089\u30B0\u30E9\u30D5\u3092\u69CB\u7BC9\u3059\u308B\n    pub fn from_vertices_and_unweighted_edges(vertices:\
+    \ &[V], edges: &[(usize, usize)]) -> Self {\n        Self::from_vertices_and_edges(\n\
+    \            vertices,\n            &edges.iter().map(|&(u, v)| (u, v, ())).collect::<Vec<_>>(),\n\
+    \        )\n    }\n}\n\nimpl<E> DirectedGraph<(), E>\nwhere\n    E: Clone,\n{\n\
+    \    /// \u91CD\u307F\u4ED8\u304D\u6709\u5411\u8FBA\u304B\u3089\u30B0\u30E9\u30D5\
+    \u3092\u69CB\u7BC9\u3059\u308B\n    pub fn from_edges(n: usize, edges: &[(usize,\
+    \ usize, E)]) -> Self {\n        Self::from_vertices_and_edges(&vec![(); n], edges)\n\
+    \    }\n}\n\nimpl<E> UndirectedGraph<(), E>\nwhere\n    E: Clone,\n{\n    ///\
+    \ \u91CD\u307F\u4ED8\u304D\u7121\u5411\u8FBA\u304B\u3089\u30B0\u30E9\u30D5\u3092\
+    \u69CB\u7BC9\u3059\u308B\n    pub fn from_edges(n: usize, edges: &[(usize, usize,\
+    \ E)]) -> Self {\n        Self::from_vertices_and_edges(&vec![(); n], edges)\n\
+    \    }\n}\n\nimpl DirectedGraph<(), ()> {\n    /// \u91CD\u307F\u306A\u3057\u6709\
+    \u5411\u8FBA\u304B\u3089\u30B0\u30E9\u30D5\u3092\u69CB\u7BC9\u3059\u308B\n   \
+    \ pub fn from_unweighted_edges(n: usize, edges: &[(usize, usize)]) -> Self {\n\
+    \        Self::from_edges(\n            n,\n            &edges.iter().map(|&(u,\
+    \ v)| (u, v, ())).collect::<Vec<_>>(),\n        )\n    }\n}\n\nimpl UndirectedGraph<(),\
+    \ ()> {\n    /// \u91CD\u307F\u306A\u3057\u7121\u5411\u8FBA\u304B\u3089\u30B0\u30E9\
+    \u30D5\u3092\u69CB\u7BC9\u3059\u308B\n    pub fn from_unweighted_edges(n: usize,\
+    \ edges: &[(usize, usize)]) -> Self {\n        Self::from_edges(\n           \
+    \ n,\n            &edges.iter().map(|&(u, v)| (u, v, ())).collect::<Vec<_>>(),\n\
+    \        )\n    }\n}\n"
   dependsOn: []
   isVerificationFile: false
   path: crates/graph/graph/src/lib.rs
@@ -225,6 +251,7 @@ data:
   - crates/tree/re-rooting-dp/src/lib.rs
   - crates/tree/zero-one-on-tree/src/lib.rs
   - crates/tree/centroid-decomposition/src/lib.rs
+  - crates/tree/heavy-light-decomposition-noya2/src/lib.rs
   - crates/tree/static-top-tree-dp/src/lib.rs
   - crates/data-structure/range-contour-query/src/lib.rs
   - crates/data-structure/vertex-get-range-contour-add/src/lib.rs
@@ -241,7 +268,7 @@ data:
   - crates/graph/bellman-ford/src/lib.rs
   - crates/graph/compressed-tree/src/lib.rs
   - crates/graph/complement-graph-bfs/src/lib.rs
-  timestamp: '2024-12-27 03:53:35+00:00'
+  timestamp: '2025-01-11 07:42:28+00:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/two_edge_connected_components/src/main.rs

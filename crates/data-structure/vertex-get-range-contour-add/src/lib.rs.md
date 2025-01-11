@@ -29,14 +29,14 @@ data:
     \         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\
     \  File \"/opt/hostedtoolcache/Python/3.12.8/x64/lib/python3.12/site-packages/onlinejudge_verify/languages/rust.py\"\
     , line 288, in bundle\n    raise NotImplementedError\nNotImplementedError\n"
-  code: "use algebraic::Monoid;\nuse dual_segment_tree::DualSegmentTree;\nuse graph::Graph;\n\
+  code: "use algebraic::Monoid;\nuse dual_segment_tree::DualSegmentTree;\nuse graph::UndirectedGraph;\n\
     use range_contour_query::RangeContourQuery;\n\n/// \u7B49\u9AD8\u7DDA\u52A0\u7B97\
     \u3001\u9802\u70B9\u5024\u53D6\u5F97\u30AF\u30A8\u30EA\npub struct VertexGetRangeContourAdd<M>\n\
     where\n    M: Monoid,\n    M::S: Clone,\n{\n    rcq: RangeContourQuery,\n    seg:\
     \ Vec<DualSegmentTree<M>>,\n}\n\nimpl<M> VertexGetRangeContourAdd<M>\nwhere\n\
     \    M: Monoid,\n    M::S: Clone,\n{\n    /// \u9802\u70B9\u306E\u5024\u3092 a\
     \ \u3001\u8FBA\u3092 es \u3067\u521D\u671F\u5316\n    pub fn new(a: &[M::S], es:\
-    \ &[(usize, usize)]) -> Self {\n        let g = Graph::from_unweighted_undirected_edges(a.len(),\
+    \ &[(usize, usize)]) -> Self {\n        let g = UndirectedGraph::from_unweighted_edges(a.len(),\
     \ es);\n        let rcq = RangeContourQuery::new(&g);\n        let mut seg = rcq\n\
     \            .seq\n            .iter()\n            .map(|v| DualSegmentTree::<M>::new(v.len()))\n\
     \            .collect::<Vec<_>>();\n        for i in 0..a.len() {\n          \
@@ -59,7 +59,7 @@ data:
   isVerificationFile: false
   path: crates/data-structure/vertex-get-range-contour-add/src/lib.rs
   requiredBy: []
-  timestamp: '2025-01-04 02:49:00+00:00'
+  timestamp: '2025-01-11 07:42:28+00:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/vertex_get_range_contour_add_on_tree/src/main.rs

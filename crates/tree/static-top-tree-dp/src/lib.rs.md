@@ -23,7 +23,7 @@ data:
     \         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\
     \  File \"/opt/hostedtoolcache/Python/3.12.8/x64/lib/python3.12/site-packages/onlinejudge_verify/languages/rust.py\"\
     , line 288, in bundle\n    raise NotImplementedError\nNotImplementedError\n"
-  code: "use graph::Graph;\nuse heavy_light_decomposition::HeavyLightDecomposition;\n\
+  code: "use graph::UndirectedGraph;\nuse heavy_light_decomposition::HeavyLightDecomposition;\n\
     \n#[derive(Clone, Copy)]\nenum Type {\n    Vertex,\n    Compress,\n    Rake,\n\
     \    AddEdge,\n    AddVertex,\n}\n\n/// Static Top Tree (Fixed root)  \n/// 0\
     \ \u3092\u6839\u3068\u3057\u3066\u3044\u308B\npub struct StaticTopTree {\n   \
@@ -31,12 +31,12 @@ data:
     \    ty: Vec<Type>,\n    edge: Vec<usize>,\n    par_edge: Vec<usize>,\n    child:\
     \ Vec<usize>,\n    cnt: usize,\n}\n\nimpl StaticTopTree {\n    /// 0 \u3092\u6839\
     \u3068\u3059\u308B Static Top Tree \u3092\u69CB\u7BC9\u3059\u308B\n    pub fn\
-    \ new<V: Clone, E: Clone>(g: &Graph<V, E>) -> Self {\n        let n = g.len();\n\
-    \        let mut s = Self {\n            stt_root: !0,\n            par: vec![!0;\
-    \ n * 4],\n            lch: vec![!0; n * 4],\n            rch: vec![!0; n * 4],\n\
-    \            ty: vec![Type::Vertex; n * 4],\n            edge: vec![!0; n * 4],\n\
-    \            par_edge: vec![!0; n],\n            child: vec![!0; n - 1],\n   \
-    \         cnt: n,\n        };\n        let hld = HeavyLightDecomposition::new(g);\n\
+    \ new<V: Clone, E: Clone>(g: &UndirectedGraph<V, E>) -> Self {\n        let n\
+    \ = g.len();\n        let mut s = Self {\n            stt_root: !0,\n        \
+    \    par: vec![!0; n * 4],\n            lch: vec![!0; n * 4],\n            rch:\
+    \ vec![!0; n * 4],\n            ty: vec![Type::Vertex; n * 4],\n            edge:\
+    \ vec![!0; n * 4],\n            par_edge: vec![!0; n],\n            child: vec![!0;\
+    \ n - 1],\n            cnt: n,\n        };\n        let hld = HeavyLightDecomposition::new(g);\n\
     \        for v in 0..n {\n            for i in 0..g[v].len() {\n             \
     \   let (u, _) = g[v][i];\n                if hld.depth[v] < hld.depth[u] {\n\
     \                    s.par_edge[u] = g.edge_id(v, i);\n                    s.child[g.edge_id(v,\
@@ -58,23 +58,23 @@ data:
     \     Type::Compress => {\n                self.edge[res.0] = self.par_edge[a[m].0];\n\
     \            }\n            _ => (),\n        }\n        res\n    }\n\n    fn\
     \ compress<V: Clone, E: Clone>(\n        &mut self,\n        mut i: usize,\n \
-    \       g: &Graph<V, E>,\n        hld: &HeavyLightDecomposition,\n    ) -> (usize,\
-    \ usize) {\n        let mut chs = vec![self.add_vertex(i, g, hld)];\n        while\
-    \ hld.heavy[i] != !0 {\n            i = hld.heavy[i];\n            chs.push(self.add_vertex(i,\
-    \ g, hld));\n        }\n        self.merge(&chs, Type::Compress)\n    }\n\n  \
-    \  fn rake<V: Clone, E: Clone>(\n        &mut self,\n        i: usize,\n     \
-    \   g: &Graph<V, E>,\n        hld: &HeavyLightDecomposition,\n    ) -> (usize,\
-    \ usize) {\n        let mut chs = vec![];\n        for &(u, _) in &g[i] {\n  \
-    \          if u == hld.par[i] || u == hld.heavy[i] {\n                continue;\n\
-    \            }\n            chs.push(self.add_edge(u, g, hld));\n        }\n \
-    \       if chs.is_empty() {\n            (!0, 0)\n        } else {\n         \
-    \   self.merge(&chs, Type::Rake)\n        }\n    }\n\n    fn add_edge<V: Clone,\
-    \ E: Clone>(\n        &mut self,\n        i: usize,\n        g: &Graph<V, E>,\n\
-    \        hld: &HeavyLightDecomposition,\n    ) -> (usize, usize) {\n        let\
-    \ (j, sj) = self.compress(i, g, hld);\n        let res = (self.add(!0, j, !0,\
-    \ Type::AddEdge), sj);\n        self.edge[res.0] = self.par_edge[i];\n       \
-    \ res\n    }\n\n    fn add_vertex<V: Clone, E: Clone>(\n        &mut self,\n \
-    \       i: usize,\n        g: &Graph<V, E>,\n        hld: &HeavyLightDecomposition,\n\
+    \       g: &UndirectedGraph<V, E>,\n        hld: &HeavyLightDecomposition,\n \
+    \   ) -> (usize, usize) {\n        let mut chs = vec![self.add_vertex(i, g, hld)];\n\
+    \        while hld.heavy[i] != !0 {\n            i = hld.heavy[i];\n         \
+    \   chs.push(self.add_vertex(i, g, hld));\n        }\n        self.merge(&chs,\
+    \ Type::Compress)\n    }\n\n    fn rake<V: Clone, E: Clone>(\n        &mut self,\n\
+    \        i: usize,\n        g: &UndirectedGraph<V, E>,\n        hld: &HeavyLightDecomposition,\n\
+    \    ) -> (usize, usize) {\n        let mut chs = vec![];\n        for &(u, _)\
+    \ in &g[i] {\n            if u == hld.par[i] || u == hld.heavy[i] {\n        \
+    \        continue;\n            }\n            chs.push(self.add_edge(u, g, hld));\n\
+    \        }\n        if chs.is_empty() {\n            (!0, 0)\n        } else {\n\
+    \            self.merge(&chs, Type::Rake)\n        }\n    }\n\n    fn add_edge<V:\
+    \ Clone, E: Clone>(\n        &mut self,\n        i: usize,\n        g: &UndirectedGraph<V,\
+    \ E>,\n        hld: &HeavyLightDecomposition,\n    ) -> (usize, usize) {\n   \
+    \     let (j, sj) = self.compress(i, g, hld);\n        let res = (self.add(!0,\
+    \ j, !0, Type::AddEdge), sj);\n        self.edge[res.0] = self.par_edge[i];\n\
+    \        res\n    }\n\n    fn add_vertex<V: Clone, E: Clone>(\n        &mut self,\n\
+    \        i: usize,\n        g: &UndirectedGraph<V, E>,\n        hld: &HeavyLightDecomposition,\n\
     \    ) -> (usize, usize) {\n        let (j, sj) = self.rake(i, g, hld);\n    \
     \    (\n            self.add(\n                i,\n                j,\n      \
     \          !0,\n                if j == !0 {\n                    Type::Vertex\n\
@@ -104,9 +104,9 @@ data:
     \ O::Point>>,\n    vertex: Vec<O::V>,\n    edge: Vec<O::E>,\n    op: std::marker::PhantomData<O>,\n\
     }\n\nimpl<O: TreeDPOperator> StaticTopTreeDP<O> {\n    /// 0 \u3092\u6839\u3068\
     \u3059\u308B Static Top Tree \u3092\u69CB\u7BC9\u3059\u308B\n    pub fn new(g:\
-    \ &Graph<O::V, O::E>) -> Self {\n        let stt = StaticTopTree::new(g);\n  \
-    \      let mut sum = vec![Data::Path(O::vertex(&g.vertex(0))); stt.len()];\n \
-    \       let vertex = (0..g.len())\n            .map(|v| g.vertex(v).clone())\n\
+    \ &UndirectedGraph<O::V, O::E>) -> Self {\n        let stt = StaticTopTree::new(g);\n\
+    \        let mut sum = vec![Data::Path(O::vertex(&g.vertex(0))); stt.len()];\n\
+    \        let vertex = (0..g.len())\n            .map(|v| g.vertex(v).clone())\n\
     \            .collect::<Vec<_>>();\n        let mut edge = if g.len() == 1 {\n\
     \            vec![]\n        } else {\n            vec![g[0][0].1.clone(); g.len()\
     \ - 1]\n        };\n        for v in 0..g.len() {\n            sum[v] = Data::Path(O::vertex(&g.vertex(v)));\n\
@@ -149,7 +149,7 @@ data:
   isVerificationFile: false
   path: crates/tree/static-top-tree-dp/src/lib.rs
   requiredBy: []
-  timestamp: '2024-12-30 09:13:10+00:00'
+  timestamp: '2025-01-11 07:42:28+00:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/point_set_tree_path_composite_sum_fixed_root/src/main.rs

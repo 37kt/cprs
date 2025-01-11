@@ -23,11 +23,11 @@ data:
     \  File \"/opt/hostedtoolcache/Python/3.12.8/x64/lib/python3.12/site-packages/onlinejudge_verify/languages/rust.py\"\
     , line 288, in bundle\n    raise NotImplementedError\nNotImplementedError\n"
   code: "// verification-helper: PROBLEM https://judge.yosupo.jp/problem/lca\n\nuse\
-    \ graph::Graph;\nuse heavy_light_decomposition::HeavyLightDecomposition;\nuse\
-    \ proconio::input;\n\n#[proconio::fastout]\nfn main() {\n    input! {\n      \
-    \  n: usize,\n        q: usize,\n    }\n    let mut es = vec![];\n    for v in\
-    \ 1..n {\n        input! {\n            p: usize,\n        }\n        es.push((p,\
-    \ v));\n    }\n    let g = Graph::from_vertices_and_unweighted_undirected_edges(&vec![();\
+    \ graph::UndirectedGraph;\nuse heavy_light_decomposition::HeavyLightDecomposition;\n\
+    use proconio::input;\n\n#[proconio::fastout]\nfn main() {\n    input! {\n    \
+    \    n: usize,\n        q: usize,\n    }\n    let mut es = vec![];\n    for v\
+    \ in 1..n {\n        input! {\n            p: usize,\n        }\n        es.push((p,\
+    \ v));\n    }\n    let g = UndirectedGraph::from_vertices_and_unweighted_edges(&vec![();\
     \ n], &es);\n    let hld = HeavyLightDecomposition::new(&g);\n    for _ in 0..q\
     \ {\n        input! {\n            u: usize,\n            v: usize,\n        }\n\
     \        println!(\"{}\", hld.lca(u, v));\n    }\n}\n"
@@ -37,7 +37,7 @@ data:
   isVerificationFile: true
   path: verify/lca/src/main.rs
   requiredBy: []
-  timestamp: '2024-12-27 03:53:35+00:00'
+  timestamp: '2025-01-11 07:42:28+00:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/lca/src/main.rs

@@ -27,7 +27,7 @@ data:
     \  File \"/opt/hostedtoolcache/Python/3.12.8/x64/lib/python3.12/site-packages/onlinejudge_verify/languages/rust.py\"\
     , line 288, in bundle\n    raise NotImplementedError\nNotImplementedError\n"
   code: "use std::{\n    cmp::Reverse,\n    collections::{BinaryHeap, VecDeque},\n\
-    };\n\nuse graph::Graph;\nuse heavy_light_decomposition::HeavyLightDecomposition;\n\
+    };\n\nuse graph::UndirectedGraph;\nuse heavy_light_decomposition::HeavyLightDecomposition;\n\
     \n/// \u6728\u306E\u7B49\u9AD8\u7DDA\u30AF\u30A8\u30EA  \n/// seq\\[v\\] \u306F\
     \u3001\u91CD\u5FC3\u5206\u89E3\u306E\u904E\u7A0B\u3092\u8868\u3059\u6728\u306E\
     \u90E8\u5206\u6728 v \u306B\u542B\u307E\u308C\u308B\u9802\u70B9\u3092\u3001\u5143\
@@ -42,12 +42,12 @@ data:
     \ Vec<usize>,\n    cur: usize,\n    par: Vec<usize>,\n    ch: Vec<[usize; 2]>,\n\
     \    cv: Vec<usize>,\n    pos: Vec<Vec<(usize, usize)>>,\n    hld: HeavyLightDecomposition,\n\
     }\n\nimpl RangeContourQuery {\n    /// \u6728\u306E\u7B49\u9AD8\u7DDA\u30AF\u30A8\
-    \u30EA\u3092\u69CB\u7BC9\u3059\u308B\u3002\n    pub fn new(g: &Graph<(), ()>)\
-    \ -> Self {\n        let mut h = vec![vec![]; g.len()];\n        for v in 0..g.len()\
-    \ {\n            for &(u, _) in &g[v] {\n                h[v].push(u);\n     \
-    \       }\n        }\n\n        let n = g.len();\n        let mut rcq = Self {\n\
-    \            n,\n            sz: vec![0; n * 3],\n            ctr: vec![!0; n\
-    \ * 3],\n            seq: vec![vec![]; n * 3],\n            sep: vec![vec![];\
+    \u30EA\u3092\u69CB\u7BC9\u3059\u308B\u3002\n    pub fn new(g: &UndirectedGraph<(),\
+    \ ()>) -> Self {\n        let mut h = vec![vec![]; g.len()];\n        for v in\
+    \ 0..g.len() {\n            for &(u, _) in &g[v] {\n                h[v].push(u);\n\
+    \            }\n        }\n\n        let n = g.len();\n        let mut rcq = Self\
+    \ {\n            n,\n            sz: vec![0; n * 3],\n            ctr: vec![!0;\
+    \ n * 3],\n            seq: vec![vec![]; n * 3],\n            sep: vec![vec![];\
     \ n * 3],\n            head: vec![!0; n * 3],\n            tail: vec![!0; n *\
     \ 3],\n            link: vec![!0; n * 3],\n            cur: n,\n            par:\
     \ vec![!0; n * 3],\n            ch: vec![[!0; 2]; n * 3],\n            cv: vec![!0;\
@@ -139,7 +139,7 @@ data:
   requiredBy:
   - crates/data-structure/vertex-get-range-contour-add/src/lib.rs
   - crates/data-structure/vertex-add-range-contour-sum/src/lib.rs
-  timestamp: '2024-12-27 03:53:35+00:00'
+  timestamp: '2025-01-11 07:42:28+00:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: crates/data-structure/range-contour-query/src/lib.rs

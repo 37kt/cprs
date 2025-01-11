@@ -23,10 +23,10 @@ data:
     \  File \"/opt/hostedtoolcache/Python/3.12.8/x64/lib/python3.12/site-packages/onlinejudge_verify/languages/rust.py\"\
     , line 288, in bundle\n    raise NotImplementedError\nNotImplementedError\n"
   code: "// verification-helper: PROBLEM https://judge.yosupo.jp/problem/biconnected_components\n\
-    \nuse extended_block_cut_tree::extended_block_cut_tree;\nuse graph::Graph;\nuse\
-    \ itertools::Itertools;\nuse proconio::input;\n\n#[proconio::fastout]\nfn main()\
+    \nuse extended_block_cut_tree::extended_block_cut_tree;\nuse graph::UndirectedGraph;\n\
+    use itertools::Itertools;\nuse proconio::input;\n\n#[proconio::fastout]\nfn main()\
     \ {\n    input! {\n        n: usize,\n        m: usize,\n        ab: [(usize,\
-    \ usize); m]\n    }\n    let g = Graph::from_unweighted_undirected_edges(n, &ab);\n\
+    \ usize); m]\n    }\n    let g = UndirectedGraph::from_unweighted_edges(n, &ab);\n\
     \    let bct = extended_block_cut_tree(&g);\n    println!(\"{}\", bct.len() -\
     \ n);\n    for i in n..bct.len() {\n        println!(\n            \"{} {}\",\n\
     \            bct[i].len(),\n            bct[i].iter().map(|&(i, _)| i).join(\"\
@@ -37,7 +37,7 @@ data:
   isVerificationFile: true
   path: verify/biconnected_components/src/main.rs
   requiredBy: []
-  timestamp: '2024-12-27 03:53:35+00:00'
+  timestamp: '2025-01-11 07:42:28+00:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/biconnected_components/src/main.rs

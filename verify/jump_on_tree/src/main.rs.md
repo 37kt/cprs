@@ -23,10 +23,10 @@ data:
     \  File \"/opt/hostedtoolcache/Python/3.12.8/x64/lib/python3.12/site-packages/onlinejudge_verify/languages/rust.py\"\
     , line 288, in bundle\n    raise NotImplementedError\nNotImplementedError\n"
   code: "// verification-helper: PROBLEM https://judge.yosupo.jp/problem/jump_on_tree\n\
-    \nuse graph::Graph;\nuse heavy_light_decomposition::HeavyLightDecomposition;\n\
+    \nuse graph::UndirectedGraph;\nuse heavy_light_decomposition::HeavyLightDecomposition;\n\
     use proconio::input;\n\n#[proconio::fastout]\nfn main() {\n    input! {\n    \
     \    n: usize,\n        q: usize,\n        ab: [(usize, usize); n - 1],\n    }\n\
-    \    let g = Graph::from_vertices_and_unweighted_undirected_edges(&vec![(); n],\
+    \    let g = UndirectedGraph::from_vertices_and_unweighted_edges(&vec![(); n],\
     \ &ab);\n    let hld = HeavyLightDecomposition::new(&g);\n    for _ in 0..q {\n\
     \        input! {\n            s: usize,\n            t: usize,\n            i:\
     \ usize,\n        }\n        let v = hld.jump(s, t, i);\n        println!(\"{}\"\
@@ -37,7 +37,7 @@ data:
   isVerificationFile: true
   path: verify/jump_on_tree/src/main.rs
   requiredBy: []
-  timestamp: '2024-12-27 03:53:35+00:00'
+  timestamp: '2025-01-11 07:42:28+00:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/jump_on_tree/src/main.rs

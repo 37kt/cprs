@@ -29,14 +29,14 @@ data:
     \  File \"/opt/hostedtoolcache/Python/3.12.8/x64/lib/python3.12/site-packages/onlinejudge_verify/languages/rust.py\"\
     , line 288, in bundle\n    raise NotImplementedError\nNotImplementedError\n"
   code: "// verification-helper: PROBLEM https://judge.yosupo.jp/problem/tree_path_composite_sum\n\
-    \nuse algebraic::{act, algebra, monoid};\nuse graph::Graph;\nuse itertools::Itertools;\n\
+    \nuse algebraic::{act, algebra, monoid};\nuse graph::UndirectedGraph;\nuse itertools::Itertools;\n\
     use modint::ModInt998244353 as Mint;\nuse proconio::input;\nuse re_rooting_dp::ReRootingDP;\n\
     \nalgebra!(M, (Mint, Mint));\nmonoid!(M, (0.into(), 0.into()), |&(c1, s1), &(c2,\
     \ s2)| (\n    c1 + c2,\n    s1 + s2\n));\n\nalgebra!(V, Mint);\nact!(V, (Mint,\
     \ Mint), |&v, &(c, s)| (c + 1, s + v));\n\nalgebra!(E, (Mint, Mint));\nact!(E,\
     \ (Mint, Mint), |&(a, b), &(c, s)| (c, a * s + b * c));\n\n#[proconio::fastout]\n\
     fn main() {\n    input! {\n        n: usize,\n        a: [Mint; n],\n        uvw:\
-    \ [(usize, usize, (Mint, Mint)); n - 1],\n    }\n    let g = Graph::from_vertices_and_undirected_edges(&a,\
+    \ [(usize, usize, (Mint, Mint)); n - 1],\n    }\n    let g = UndirectedGraph::from_vertices_and_edges(&a,\
     \ &uvw);\n    let dp = ReRootingDP::build::<M, V, E>(&g);\n    println!(\"{}\"\
     , (0..n).map(|v| dp.prod(v).1).join(\" \"));\n}\n"
   dependsOn:
@@ -47,7 +47,7 @@ data:
   isVerificationFile: true
   path: verify/tree_path_composite_sum/src/main.rs
   requiredBy: []
-  timestamp: '2025-01-04 02:49:00+00:00'
+  timestamp: '2025-01-11 07:42:28+00:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/tree_path_composite_sum/src/main.rs

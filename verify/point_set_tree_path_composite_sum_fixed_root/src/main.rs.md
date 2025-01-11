@@ -26,7 +26,7 @@ data:
     \  File \"/opt/hostedtoolcache/Python/3.12.8/x64/lib/python3.12/site-packages/onlinejudge_verify/languages/rust.py\"\
     , line 288, in bundle\n    raise NotImplementedError\nNotImplementedError\n"
   code: "// verification-helper: PROBLEM https://judge.yosupo.jp/problem/point_set_tree_path_composite_sum_fixed_root\n\
-    \nuse graph::Graph;\nuse modint::ModInt998244353 as Mint;\nuse proconio::input;\n\
+    \nuse graph::UndirectedGraph;\nuse modint::ModInt998244353 as Mint;\nuse proconio::input;\n\
     use static_top_tree_dp::{StaticTopTreeDP, TreeDPOperator};\n\nenum Op {}\nimpl\
     \ TreeDPOperator for Op {\n    type Path = (Mint, Mint, Mint, Mint);\n    type\
     \ Point = (Mint, Mint);\n    type V = Mint;\n    type E = (Mint, Mint);\n\n  \
@@ -43,7 +43,7 @@ data:
     \ {\n        let &(s, n) = d;\n        (s + v, n + 1, 1.into(), 0.into())\n  \
     \  }\n}\n\n#[proconio::fastout]\nfn main() {\n    input! {\n        n: usize,\n\
     \        q: usize,\n        a: [Mint; n],\n        uvbc: [(usize, usize, (Mint,\
-    \ Mint)); n - 1],\n    }\n    let g = Graph::from_vertices_and_undirected_edges(&a,\
+    \ Mint)); n - 1],\n    }\n    let g = UndirectedGraph::from_vertices_and_edges(&a,\
     \ &uvbc);\n    let mut dp = StaticTopTreeDP::<Op>::new(&g);\n    for _ in 0..q\
     \ {\n        input! {\n            t: usize,\n        }\n        if t == 0 {\n\
     \            input! {\n                w: usize,\n                x: Mint,\n \
@@ -58,7 +58,7 @@ data:
   isVerificationFile: true
   path: verify/point_set_tree_path_composite_sum_fixed_root/src/main.rs
   requiredBy: []
-  timestamp: '2024-12-30 09:13:10+00:00'
+  timestamp: '2025-01-11 07:42:28+00:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/point_set_tree_path_composite_sum_fixed_root/src/main.rs

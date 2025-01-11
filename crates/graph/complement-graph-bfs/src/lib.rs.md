@@ -20,23 +20,23 @@ data:
   code: "use std::collections::VecDeque;\n\nuse graph::Graph;\n\nconst INF: usize\
     \ = 1 << 60;\n\n/// \u88DC\u30B0\u30E9\u30D5\u4E0A\u306E\u6700\u77ED\u8DDD\u96E2\
     \u3092\u6C42\u3081\u308B\u3002  \n/// start \u304B\u3089\u5230\u9054\u3067\u304D\
-    \u306A\u3044\u5834\u5408\u306F 2^60 \u3092\u8FD4\u3059\u3002\npub fn complement_graph_bfs(g:\
-    \ &Graph<(), ()>, start: usize) -> Vec<usize> {\n    let n = g.len();\n    let\
-    \ mut dist = vec![INF; n];\n    let mut q = VecDeque::new();\n    dist[start]\
-    \ = 0;\n    q.push_back(start);\n    let mut s = (0..start).chain(start + 1..n).collect();\n\
-    \    let mut f = vec![false; n];\n    while let Some(v) = q.pop_front() {\n  \
-    \      let mut l = vec![];\n        for &(u, _) in &g[v] {\n            f[u] =\
-    \ true;\n        }\n        for &u in &s {\n            if f[u] {\n          \
-    \      l.push(u);\n            } else {\n                dist[u] = dist[v] + 1;\n\
-    \                q.push_back(u);\n            }\n        }\n        for &(u, _)\
-    \ in &g[v] {\n            f[u] = false;\n        }\n        s = l;\n    }\n  \
-    \  dist\n}\n"
+    \u306A\u3044\u5834\u5408\u306F 2^60 \u3092\u8FD4\u3059\u3002\npub fn complement_graph_bfs<const\
+    \ DIRECTED: bool>(\n    g: &Graph<(), (), DIRECTED>,\n    start: usize,\n) ->\
+    \ Vec<usize> {\n    let n = g.len();\n    let mut dist = vec![INF; n];\n    let\
+    \ mut q = VecDeque::new();\n    dist[start] = 0;\n    q.push_back(start);\n  \
+    \  let mut s = (0..start).chain(start + 1..n).collect();\n    let mut f = vec![false;\
+    \ n];\n    while let Some(v) = q.pop_front() {\n        let mut l = vec![];\n\
+    \        for &(u, _) in &g[v] {\n            f[u] = true;\n        }\n       \
+    \ for &u in &s {\n            if f[u] {\n                l.push(u);\n        \
+    \    } else {\n                dist[u] = dist[v] + 1;\n                q.push_back(u);\n\
+    \            }\n        }\n        for &(u, _) in &g[v] {\n            f[u] =\
+    \ false;\n        }\n        s = l;\n    }\n    dist\n}\n"
   dependsOn:
   - crates/graph/graph/src/lib.rs
   isVerificationFile: false
   path: crates/graph/complement-graph-bfs/src/lib.rs
   requiredBy: []
-  timestamp: '2024-12-27 03:53:35+00:00'
+  timestamp: '2025-01-11 07:42:28+00:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: crates/graph/complement-graph-bfs/src/lib.rs

@@ -32,10 +32,10 @@ data:
     \         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\
     \  File \"/opt/hostedtoolcache/Python/3.12.8/x64/lib/python3.12/site-packages/onlinejudge_verify/languages/rust.py\"\
     , line 288, in bundle\n    raise NotImplementedError\nNotImplementedError\n"
-  code: "use graph::Graph;\nuse std::mem::swap;\n\n/// \u91CD\u8EFD\u5206\u89E3\n\
-    /// t_in[v]: Euler Tour \u306B\u304A\u3051\u308B\u90E8\u5206\u6728 v \u306E\u59CB\
-    \u70B9\n/// t_out[v]: Euler Tour \u306B\u304A\u3051\u308B\u90E8\u5206\u6728 v\
-    \ \u306E\u7D42\u70B9\n/// ord: Euler Tour \u306E\u9806\u5E8F\n/// size[v]: \u90E8\
+  code: "use graph::UndirectedGraph;\nuse std::mem::swap;\n\n/// \u91CD\u8EFD\u5206\
+    \u89E3\n/// t_in[v]: Euler Tour \u306B\u304A\u3051\u308B\u90E8\u5206\u6728 v \u306E\
+    \u59CB\u70B9\n/// t_out[v]: Euler Tour \u306B\u304A\u3051\u308B\u90E8\u5206\u6728\
+    \ v \u306E\u7D42\u70B9\n/// ord: Euler Tour \u306E\u9806\u5E8F\n/// size[v]: \u90E8\
     \u5206\u6728 v \u306E\u30B5\u30A4\u30BA\n/// heavy[v]: v \u306E heavy-edge \u306B\
     \u7E4B\u304C\u308B\u5B50\n/// head[v]: v \u3092\u542B\u3080 heavy-path \u306E\u5148\
     \u982D\n/// par[v]: v \u306E\u89AA\n/// depth[v]: v \u306E\u6DF1\u3055\n#[derive(Clone)]\n\
@@ -46,13 +46,13 @@ data:
     \u89E3\u3092\u69CB\u7BC9\u3059\u308B\u3002\n    ///\n    /// # \u5165\u529B\n\
     \    ///\n    /// - `g`: \u9023\u7D50\u7121\u5411\u30B0\u30E9\u30D5\n    ///\n\
     \    /// # \u8A08\u7B97\u91CF\n    ///\n    /// O(n)\n    pub fn new<V, E>(g:\
-    \ &Graph<V, E>) -> Self\n    where\n        V: Clone,\n        E: Clone,\n   \
-    \ {\n        let n = g.len();\n        let mut hld = HeavyLightDecomposition {\n\
-    \            t_in: vec![0; n],\n            t_out: vec![0; n],\n            ord:\
-    \ vec![],\n            size: vec![0; n],\n            heavy: vec![!0; n],\n  \
-    \          head: vec![0; n],\n            par: vec![!0; n],\n            depth:\
+    \ &UndirectedGraph<V, E>) -> Self\n    where\n        V: Clone,\n        E: Clone,\n\
+    \    {\n        let n = g.len();\n        let mut hld = HeavyLightDecomposition\
+    \ {\n            t_in: vec![0; n],\n            t_out: vec![0; n],\n         \
+    \   ord: vec![],\n            size: vec![0; n],\n            heavy: vec![!0; n],\n\
+    \            head: vec![0; n],\n            par: vec![!0; n],\n            depth:\
     \ vec![0; n],\n        };\n        hld.dfs_sz(g, 0);\n        hld.dfs_hld(g, 0,\
-    \ &mut 0);\n        hld\n    }\n\n    fn dfs_sz<V, E>(&mut self, g: &Graph<V,\
+    \ &mut 0);\n        hld\n    }\n\n    fn dfs_sz<V, E>(&mut self, g: &UndirectedGraph<V,\
     \ E>, v: usize)\n    where\n        V: Clone,\n        E: Clone,\n    {\n    \
     \    self.size[v] = 1;\n        for &(u, _) in &g[v] {\n            if u == self.par[v]\
     \ {\n                continue;\n            }\n            self.par[u] = v;\n\
@@ -60,8 +60,8 @@ data:
     \            self.size[v] += self.size[u];\n            if self.heavy[v] == !0\
     \ || self.size[u] > self.size[self.heavy[v]] {\n                self.heavy[v]\
     \ = u;\n            }\n        }\n    }\n\n    fn dfs_hld<V, E>(&mut self, g:\
-    \ &Graph<V, E>, v: usize, t: &mut usize)\n    where\n        V: Clone,\n     \
-    \   E: Clone,\n    {\n        self.t_in[v] = *t;\n        self.ord.push(v);\n\
+    \ &UndirectedGraph<V, E>, v: usize, t: &mut usize)\n    where\n        V: Clone,\n\
+    \        E: Clone,\n    {\n        self.t_in[v] = *t;\n        self.ord.push(v);\n\
     \        *t += 1;\n        if self.heavy[v] != !0 {\n            let u = self.heavy[v];\n\
     \            self.head[u] = self.head[v];\n            self.dfs_hld(g, u, t);\n\
     \        }\n        for &(u, _) in &g[v] {\n            if u == self.par[v] {\n\
@@ -151,7 +151,7 @@ data:
   - crates/tree/static-top-tree-dp/src/lib.rs
   - crates/data-structure/range-contour-query/src/lib.rs
   - crates/data-structure/tree-query/src/lib.rs
-  timestamp: '2024-12-27 03:53:35+00:00'
+  timestamp: '2025-01-11 07:42:28+00:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/lca/src/main.rs

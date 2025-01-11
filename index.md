@@ -631,6 +631,11 @@ data:
     - icon: ':heavy_check_mark:'
       path: crates/tree/centroid-decomposition/src/lib.rs
       title: crates/tree/centroid-decomposition/src/lib.rs
+  - name: crates/tree/heavy-light-decomposition-noya2/src
+    pages:
+    - icon: ':warning:'
+      path: crates/tree/heavy-light-decomposition-noya2/src/lib.rs
+      title: crates/tree/heavy-light-decomposition-noya2/src/lib.rs
   - name: crates/tree/re-rooting-dp/src
     pages:
     - icon: ':heavy_check_mark:'

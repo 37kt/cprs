@@ -26,17 +26,18 @@ data:
     /// - dist: \u59CB\u70B9\u304B\u3089\u5404\u9802\u70B9\u3078\u306E\u6700\u77ED\
     \u8DDD\u96E2\n/// - prev: \u59CB\u70B9\u304B\u3089\u5404\u9802\u70B9\u3078\u306E\
     \u6700\u77ED\u7D4C\u8DEF\u306B\u304A\u3051\u308B\u524D\u306E\u9802\u70B9\npub\
-    \ fn zero_one_bfs<V, T>(g: &Graph<V, T>, starts: &[usize], inf: T) -> ZeroOneBFSResult<T>\n\
-    where\n    V: Clone,\n    T: Clone + Ord + Add<Output = T> + Default + From<u8>,\n\
-    {\n    assert!(starts.len() > 0);\n    let zero = T::from(0);\n    let one = T::from(1);\n\
-    \    let mut dist = vec![inf.clone(); g.len()];\n    let mut prev = vec![!0; g.len()];\n\
-    \    let mut dq = VecDeque::new();\n    for &s in starts {\n        dist[s] =\
-    \ T::default();\n        dq.push_back((zero.clone(), s));\n    }\n    while let\
-    \ Some((s, v)) = dq.pop_front() {\n        if dist[v] < s {\n            continue;\n\
-    \        }\n        for (u, w) in &g[v] {\n            assert!(*w == zero || *w\
-    \ == one);\n            let t = dist[v].clone() + w.clone();\n            if dist[*u]\
-    \ > t {\n                dist[*u] = t.clone();\n                prev[*u] = v;\n\
-    \                if *w == zero {\n                    dq.push_front((t.clone(),\
+    \ fn zero_one_bfs<V, T, const DIRECTED: bool>(\n    g: &Graph<V, T, DIRECTED>,\n\
+    \    starts: &[usize],\n    inf: T,\n) -> ZeroOneBFSResult<T>\nwhere\n    V: Clone,\n\
+    \    T: Clone + Ord + Add<Output = T> + Default + From<u8>,\n{\n    assert!(starts.len()\
+    \ > 0);\n    let zero = T::from(0);\n    let one = T::from(1);\n    let mut dist\
+    \ = vec![inf.clone(); g.len()];\n    let mut prev = vec![!0; g.len()];\n    let\
+    \ mut dq = VecDeque::new();\n    for &s in starts {\n        dist[s] = T::default();\n\
+    \        dq.push_back((zero.clone(), s));\n    }\n    while let Some((s, v)) =\
+    \ dq.pop_front() {\n        if dist[v] < s {\n            continue;\n        }\n\
+    \        for (u, w) in &g[v] {\n            assert!(*w == zero || *w == one);\n\
+    \            let t = dist[v].clone() + w.clone();\n            if dist[*u] > t\
+    \ {\n                dist[*u] = t.clone();\n                prev[*u] = v;\n  \
+    \              if *w == zero {\n                    dq.push_front((t.clone(),\
     \ *u));\n                } else {\n                    dq.push_back((t.clone(),\
     \ *u));\n                }\n            }\n        }\n    }\n    ZeroOneBFSResult\
     \ { dist, prev }\n}\n\nimpl<T> ZeroOneBFSResult<T>\nwhere\n    T: Clone + Ord\
@@ -53,7 +54,7 @@ data:
   isVerificationFile: false
   path: crates/graph/zero-one-bfs/src/lib.rs
   requiredBy: []
-  timestamp: '2024-12-27 03:53:35+00:00'
+  timestamp: '2025-01-11 07:42:28+00:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: crates/graph/zero-one-bfs/src/lib.rs

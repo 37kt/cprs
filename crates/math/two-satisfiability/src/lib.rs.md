@@ -23,7 +23,7 @@ data:
     \         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\
     \  File \"/opt/hostedtoolcache/Python/3.12.8/x64/lib/python3.12/site-packages/onlinejudge_verify/languages/rust.py\"\
     , line 288, in bundle\n    raise NotImplementedError\nNotImplementedError\n"
-  code: "use graph::Graph;\nuse strongly_connected_components::strongly_connected_components;\n\
+  code: "use graph::DirectedGraph;\nuse strongly_connected_components::strongly_connected_components;\n\
     \n/// 2-SAT\npub struct TwoSatisfiability {\n    n: usize,\n    es: Vec<(usize,\
     \ usize)>,\n}\n\nimpl TwoSatisfiability {\n    /// n \u500B\u306E\u5909\u6570\u3092\
     \u6301\u3064 2-SAT \u3092\u521D\u671F\u5316\u3059\u308B\n    pub fn new(n: usize)\
@@ -38,7 +38,7 @@ data:
     \ !g), self.id(i, f)));\n    }\n\n    /// \u6761\u4EF6 \uFFE2(x_i = f \u2227 x_j\
     \ = g) \u3092\u8FFD\u52A0\u3059\u308B\n    pub fn nand(&mut self, i: usize, f:\
     \ bool, j: usize, g: bool) {\n        self.or(i, !f, j, !g);\n    }\n\n    pub\
-    \ fn solve(&self) -> Option<Vec<bool>> {\n        let g = Graph::from_unweighted_directed_edges(self.n\
+    \ fn solve(&self) -> Option<Vec<bool>> {\n        let g = DirectedGraph::from_unweighted_edges(self.n\
     \ * 2, &self.es);\n        let (_, comp) = strongly_connected_components(&g);\n\
     \        let mut res = vec![false; self.n];\n        for i in 0..self.n {\n  \
     \          if comp[i] == comp[i + self.n] {\n                return None;\n  \
@@ -52,7 +52,7 @@ data:
   isVerificationFile: false
   path: crates/math/two-satisfiability/src/lib.rs
   requiredBy: []
-  timestamp: '2024-12-27 04:46:01+00:00'
+  timestamp: '2025-01-11 07:42:28+00:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/two_sat/src/main.rs

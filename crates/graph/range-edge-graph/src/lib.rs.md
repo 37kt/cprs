@@ -20,10 +20,10 @@ data:
     \         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\
     \  File \"/opt/hostedtoolcache/Python/3.12.8/x64/lib/python3.12/site-packages/onlinejudge_verify/languages/rust.py\"\
     , line 288, in bundle\n    raise NotImplementedError\nNotImplementedError\n"
-  code: "use std::ops::RangeBounds;\n\nuse graph::Graph;\n\n/// \u533A\u9593\u304B\
-    \u3089\u533A\u9593\u306B\u8FBA\u3092\u5F35\u308B\u30C6\u30AF\u30CB\u30C3\u30AF\
-    \  \npub struct RangeEdgeGraph<E>\nwhere\n    E: Clone + Default,\n{\n    n: usize,\n\
-    \    m: usize,\n    es: Vec<(usize, usize, E)>,\n}\n\nimpl<E> RangeEdgeGraph<E>\n\
+  code: "use std::ops::RangeBounds;\n\nuse graph::DirectedGraph;\n\n/// \u533A\u9593\
+    \u304B\u3089\u533A\u9593\u306B\u8FBA\u3092\u5F35\u308B\u30C6\u30AF\u30CB\u30C3\
+    \u30AF  \npub struct RangeEdgeGraph<E>\nwhere\n    E: Clone + Default,\n{\n  \
+    \  n: usize,\n    m: usize,\n    es: Vec<(usize, usize, E)>,\n}\n\nimpl<E> RangeEdgeGraph<E>\n\
     where\n    E: Clone + Default,\n{\n    /// \u9802\u70B9\u6570 n \u3067\u521D\u671F\
     \u5316\u3059\u308B\n    pub fn new(n: usize) -> Self {\n        let mut s = Self\
     \ {\n            n,\n            m: n * 3,\n            es: vec![],\n        };\n\
@@ -52,10 +52,10 @@ data:
     \u3066\u30B0\u30E9\u30D5\u3092\u69CB\u7BC9\u3059\u308B  \n    /// \u5143\u306E\
     \u9802\u70B9\u756A\u53F7\u3068\u3053\u306E\u30B0\u30E9\u30D5\u306E\u9802\u70B9\
     \u756A\u53F7\u306F\u5BFE\u5FDC\u3057\u3066\u3044\u308B\n    pub fn build(&self)\
-    \ -> Graph<(), E> {\n        Graph::from_directed_edges(self.m, &self.es)\n  \
-    \  }\n\n    fn id(&self, mut v: usize) -> usize {\n        if self.n * 3 <= v\
-    \ {\n            v -= self.n * 2;\n        }\n        if v < self.n {\n      \
-    \      v += self.n;\n        } else if v < self.n * 2 {\n            v -= self.n;\n\
+    \ -> DirectedGraph<(), E> {\n        DirectedGraph::from_edges(self.m, &self.es)\n\
+    \    }\n\n    fn id(&self, mut v: usize) -> usize {\n        if self.n * 3 <=\
+    \ v {\n            v -= self.n * 2;\n        }\n        if v < self.n {\n    \
+    \        v += self.n;\n        } else if v < self.n * 2 {\n            v -= self.n;\n\
     \        }\n        v\n    }\n}\n\nfn range_to_pair(i: impl RangeBounds<usize>,\
     \ n: usize) -> (usize, usize) {\n    let start = match i.start_bound() {\n   \
     \     std::ops::Bound::Included(&i) => i,\n        std::ops::Bound::Excluded(&i)\
@@ -68,7 +68,7 @@ data:
   isVerificationFile: false
   path: crates/graph/range-edge-graph/src/lib.rs
   requiredBy: []
-  timestamp: '2024-12-27 03:53:35+00:00'
+  timestamp: '2025-01-11 07:42:28+00:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/yuki1014/src/main.rs

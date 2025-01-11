@@ -29,12 +29,12 @@ data:
     \  File \"/opt/hostedtoolcache/Python/3.12.8/x64/lib/python3.12/site-packages/onlinejudge_verify/languages/rust.py\"\
     , line 288, in bundle\n    raise NotImplementedError\nNotImplementedError\n"
   code: "// verification-helper: PROBLEM https://judge.yosupo.jp/problem/vertex_add_subtree_sum\n\
-    \nuse algebraic::{algebra, monoid};\nuse graph::Graph;\nuse proconio::input;\n\
+    \nuse algebraic::{algebra, monoid};\nuse graph::UndirectedGraph;\nuse proconio::input;\n\
     use tree_query::TreeQueryVertex;\n\nalgebra!(M, i64);\nmonoid!(M, 0, |x, y| x\
     \ + y);\n\n#[proconio::fastout]\nfn main() {\n    input! {\n        n: usize,\n\
     \        q: usize,\n        a: [i64; n],\n    }\n    let mut es = vec![];\n  \
     \  for v in 1..n {\n        input! {\n            p: usize,\n        }\n     \
-    \   es.push((p, v));\n    }\n    let g = Graph::from_vertices_and_unweighted_undirected_edges(&a,\
+    \   es.push((p, v));\n    }\n    let g = UndirectedGraph::from_vertices_and_unweighted_edges(&a,\
     \ &es);\n    let mut tq = TreeQueryVertex::<M>::build(&g);\n    for _ in 0..q\
     \ {\n        input! {\n            ty: usize,\n        }\n        if ty == 0 {\n\
     \            input! {\n                p: usize,\n                x: i64\n   \
@@ -50,7 +50,7 @@ data:
   isVerificationFile: true
   path: verify/vertex_add_subtree_sum/src/main.rs
   requiredBy: []
-  timestamp: '2025-01-04 02:49:00+00:00'
+  timestamp: '2025-01-11 07:42:28+00:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/vertex_add_subtree_sum/src/main.rs
