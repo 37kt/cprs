@@ -1,0 +1,12 @@
+[package]
+name = "compositional_inverse_of_formal_power_series_large"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+modint = { path = "../../crates/number-theory/modint" }
+formal-power-series = { path = "../../crates/polynomial/formal-power-series" }
+compositional-inverse = { path = "../../crates/polynomial/compositional-inverse" }
+proconio = { version = "=0.5.0", features = ["derive"] }
