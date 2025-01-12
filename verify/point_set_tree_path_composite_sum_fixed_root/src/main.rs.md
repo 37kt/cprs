@@ -26,22 +26,22 @@ data:
     \  File \"/opt/hostedtoolcache/Python/3.12.8/x64/lib/python3.12/site-packages/onlinejudge_verify/languages/rust.py\"\
     , line 288, in bundle\n    raise NotImplementedError\nNotImplementedError\n"
   code: "// verification-helper: PROBLEM https://judge.yosupo.jp/problem/point_set_tree_path_composite_sum_fixed_root\n\
-    \nuse graph::UndirectedGraph;\nuse modint::ModInt998244353 as Mint;\nuse proconio::input;\n\
-    use static_top_tree_dp::{StaticTopTreeDP, TreeDPOperator};\n\nenum Op {}\nimpl\
-    \ TreeDPOperator for Op {\n    type Path = (Mint, Mint, Mint, Mint);\n    type\
-    \ Point = (Mint, Mint);\n    type V = Mint;\n    type E = (Mint, Mint);\n\n  \
-    \  fn vertex(&v: &Self::V) -> Self::Path {\n        (v, 1.into(), 1.into(), 0.into())\n\
-    \    }\n\n    fn compress(p: &Self::Path, c: &Self::Path, e: &Self::E) -> Self::Path\
-    \ {\n        let &(ps, pn, pa, pb) = p;\n        let &(cs, cn, ca, cb) = c;\n\
-    \        let &(a, b) = e;\n        let (cs, cn, ca, cb) = (cs * a + cn * b, cn,\
-    \ ca * a, cb * a + b);\n        (ps + cs * pa + cn * pb, pn + cn, pa * ca, pa\
-    \ * cb + pb)\n    }\n\n    fn rake(l: &Self::Point, r: &Self::Point) -> Self::Point\
-    \ {\n        let &(ls, ln) = l;\n        let &(rs, rn) = r;\n        (ls + rs,\
-    \ ln + rn)\n    }\n\n    fn add_edge(d: &Self::Path, e: &Self::E) -> Self::Point\
-    \ {\n        let &(s, n, _, _) = d;\n        let &(a, b) = e;\n        (s * a\
-    \ + n * b, n)\n    }\n\n    fn add_vertex(d: &Self::Point, v: &Self::V) -> Self::Path\
-    \ {\n        let &(s, n) = d;\n        (s + v, n + 1, 1.into(), 0.into())\n  \
-    \  }\n}\n\n#[proconio::fastout]\nfn main() {\n    input! {\n        n: usize,\n\
+    \nuse graph::UndirectedGraph;\nuse modint::ModInt998244353 as Mint;\nuse proconio::fastout;\n\
+    use proconio::input;\nuse static_top_tree_dp::{StaticTopTreeDP, TreeDPOperator};\n\
+    \nenum Op {}\nimpl TreeDPOperator for Op {\n    type Path = (Mint, Mint, Mint,\
+    \ Mint);\n    type Point = (Mint, Mint);\n    type V = Mint;\n    type E = (Mint,\
+    \ Mint);\n\n    fn vertex(&v: &Self::V) -> Self::Path {\n        (v, 1.into(),\
+    \ 1.into(), 0.into())\n    }\n\n    fn compress(p: &Self::Path, c: &Self::Path,\
+    \ e: &Self::E) -> Self::Path {\n        let &(ps, pn, pa, pb) = p;\n        let\
+    \ &(cs, cn, ca, cb) = c;\n        let &(a, b) = e;\n        let (cs, cn, ca, cb)\
+    \ = (cs * a + cn * b, cn, ca * a, cb * a + b);\n        (ps + cs * pa + cn * pb,\
+    \ pn + cn, pa * ca, pa * cb + pb)\n    }\n\n    fn rake(l: &Self::Point, r: &Self::Point)\
+    \ -> Self::Point {\n        let &(ls, ln) = l;\n        let &(rs, rn) = r;\n \
+    \       (ls + rs, ln + rn)\n    }\n\n    fn add_edge(d: &Self::Path, e: &Self::E)\
+    \ -> Self::Point {\n        let &(s, n, _, _) = d;\n        let &(a, b) = e;\n\
+    \        (s * a + n * b, n)\n    }\n\n    fn add_vertex(d: &Self::Point, v: &Self::V)\
+    \ -> Self::Path {\n        let &(s, n) = d;\n        (s + v, n + 1, 1.into(),\
+    \ 0.into())\n    }\n}\n\n#[fastout]\nfn main() {\n    input! {\n        n: usize,\n\
     \        q: usize,\n        a: [Mint; n],\n        uvbc: [(usize, usize, (Mint,\
     \ Mint)); n - 1],\n    }\n    let g = UndirectedGraph::from_vertices_and_edges(&a,\
     \ &uvbc);\n    let mut dp = StaticTopTreeDP::<Op>::new(&g);\n    for _ in 0..q\
@@ -58,7 +58,7 @@ data:
   isVerificationFile: true
   path: verify/point_set_tree_path_composite_sum_fixed_root/src/main.rs
   requiredBy: []
-  timestamp: '2025-01-11 07:42:28+00:00'
+  timestamp: '2025-01-12 04:36:01+00:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/point_set_tree_path_composite_sum_fixed_root/src/main.rs

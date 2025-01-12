@@ -2,11 +2,11 @@
 data:
   _extendedDependsOn:
   - icon: ':heavy_check_mark:'
-    path: crates/data-structure/heavy-light-decomposition/src/lib.rs
-    title: crates/data-structure/heavy-light-decomposition/src/lib.rs
-  - icon: ':heavy_check_mark:'
     path: crates/graph/graph/src/lib.rs
     title: crates/graph/graph/src/lib.rs
+  - icon: ':heavy_check_mark:'
+    path: crates/tree/heavy-light-decomposition/src/lib.rs
+    title: crates/tree/heavy-light-decomposition/src/lib.rs
   _extendedRequiredBy: []
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
@@ -29,43 +29,45 @@ data:
     \ \u3092\u6839\u3068\u3057\u3066\u3044\u308B\npub struct StaticTopTree {\n   \
     \ stt_root: usize,\n    par: Vec<usize>,\n    lch: Vec<usize>,\n    rch: Vec<usize>,\n\
     \    ty: Vec<Type>,\n    edge: Vec<usize>,\n    par_edge: Vec<usize>,\n    child:\
-    \ Vec<usize>,\n    cnt: usize,\n}\n\nimpl StaticTopTree {\n    /// 0 \u3092\u6839\
-    \u3068\u3059\u308B Static Top Tree \u3092\u69CB\u7BC9\u3059\u308B\n    pub fn\
-    \ new<V: Clone, E: Clone>(g: &UndirectedGraph<V, E>) -> Self {\n        let n\
-    \ = g.len();\n        let mut s = Self {\n            stt_root: !0,\n        \
-    \    par: vec![!0; n * 4],\n            lch: vec![!0; n * 4],\n            rch:\
-    \ vec![!0; n * 4],\n            ty: vec![Type::Vertex; n * 4],\n            edge:\
-    \ vec![!0; n * 4],\n            par_edge: vec![!0; n],\n            child: vec![!0;\
-    \ n - 1],\n            cnt: n,\n        };\n        let hld = HeavyLightDecomposition::new(g);\n\
-    \        for v in 0..n {\n            for i in 0..g[v].len() {\n             \
-    \   let (u, _) = g[v][i];\n                if hld.depth[v] < hld.depth[u] {\n\
-    \                    s.par_edge[u] = g.edge_id(v, i);\n                    s.child[g.edge_id(v,\
-    \ i)] = u;\n                }\n            }\n        }\n        s.stt_root =\
-    \ s.compress(0, g, &hld).0;\n        s\n    }\n\n    /// \u9802\u70B9\u6570\u3092\
-    \u8FD4\u3059\n    pub fn len(&self) -> usize {\n        self.cnt\n    }\n\n  \
-    \  fn add(&mut self, mut k: usize, l: usize, r: usize, t: Type) -> usize {\n \
-    \       if k == !0 {\n            k = self.cnt;\n            self.cnt += 1;\n\
-    \        }\n        self.par[k] = !0;\n        self.lch[k] = l;\n        self.rch[k]\
-    \ = r;\n        self.ty[k] = t;\n        if l != !0 {\n            self.par[l]\
-    \ = k;\n        }\n        if r != !0 {\n            self.par[r] = k;\n      \
-    \  }\n        k\n    }\n\n    fn merge(&mut self, a: &[(usize, usize)], t: Type)\
-    \ -> (usize, usize) {\n        if a.len() == 1 {\n            return a[0];\n \
-    \       }\n        let mut u = a.iter().map(|&(_, s)| s).sum::<usize>();\n   \
-    \     let mut m = 0;\n        while m < a.len() && a[m].1 < u {\n            u\
-    \ -= u.min(a[m].1 * 2);\n            m += 1;\n        }\n        let (i, si) =\
-    \ self.merge(&a[..m], t);\n        let (j, sj) = self.merge(&a[m..], t);\n   \
-    \     let res = (self.add(!0, i, j, t), si + sj);\n        match t {\n       \
-    \     Type::Compress => {\n                self.edge[res.0] = self.par_edge[a[m].0];\n\
-    \            }\n            _ => (),\n        }\n        res\n    }\n\n    fn\
-    \ compress<V: Clone, E: Clone>(\n        &mut self,\n        mut i: usize,\n \
-    \       g: &UndirectedGraph<V, E>,\n        hld: &HeavyLightDecomposition,\n \
-    \   ) -> (usize, usize) {\n        let mut chs = vec![self.add_vertex(i, g, hld)];\n\
-    \        while hld.heavy[i] != !0 {\n            i = hld.heavy[i];\n         \
-    \   chs.push(self.add_vertex(i, g, hld));\n        }\n        self.merge(&chs,\
-    \ Type::Compress)\n    }\n\n    fn rake<V: Clone, E: Clone>(\n        &mut self,\n\
-    \        i: usize,\n        g: &UndirectedGraph<V, E>,\n        hld: &HeavyLightDecomposition,\n\
-    \    ) -> (usize, usize) {\n        let mut chs = vec![];\n        for &(u, _)\
-    \ in &g[i] {\n            if u == hld.par[i] || u == hld.heavy[i] {\n        \
+    \ Vec<usize>,\n    cnt: usize,\n    tour: Vec<usize>,\n}\n\nimpl StaticTopTree\
+    \ {\n    /// 0 \u3092\u6839\u3068\u3059\u308B Static Top Tree \u3092\u69CB\u7BC9\
+    \u3059\u308B\n    pub fn new<V: Clone, E: Clone>(g: &UndirectedGraph<V, E>) ->\
+    \ Self {\n        let n = g.len();\n        let mut s = Self {\n            stt_root:\
+    \ !0,\n            par: vec![!0; n * 4],\n            lch: vec![!0; n * 4],\n\
+    \            rch: vec![!0; n * 4],\n            ty: vec![Type::Vertex; n * 4],\n\
+    \            edge: vec![!0; n * 4],\n            par_edge: vec![!0; n],\n    \
+    \        child: vec![!0; n - 1],\n            cnt: n,\n            tour: vec![],\n\
+    \        };\n        let hld = HeavyLightDecomposition::new(g, 0);\n        let\
+    \ dist = hld.dist_table(0);\n        s.tour = hld.euler_tour();\n        for v\
+    \ in 0..n {\n            for i in 0..g[v].len() {\n                let (u, _)\
+    \ = g[v][i];\n                if dist[v] < dist[u] {\n                    s.par_edge[u]\
+    \ = g.edge_id(v, i);\n                    s.child[g.edge_id(v, i)] = u;\n    \
+    \            }\n            }\n        }\n        s.stt_root = s.compress(0, g,\
+    \ &hld).0;\n        s\n    }\n\n    /// \u9802\u70B9\u6570\u3092\u8FD4\u3059\n\
+    \    pub fn len(&self) -> usize {\n        self.cnt\n    }\n\n    fn add(&mut\
+    \ self, mut k: usize, l: usize, r: usize, t: Type) -> usize {\n        if k ==\
+    \ !0 {\n            k = self.cnt;\n            self.cnt += 1;\n        }\n   \
+    \     self.par[k] = !0;\n        self.lch[k] = l;\n        self.rch[k] = r;\n\
+    \        self.ty[k] = t;\n        if l != !0 {\n            self.par[l] = k;\n\
+    \        }\n        if r != !0 {\n            self.par[r] = k;\n        }\n  \
+    \      k\n    }\n\n    fn merge(&mut self, a: &[(usize, usize)], t: Type) -> (usize,\
+    \ usize) {\n        if a.len() == 1 {\n            return a[0];\n        }\n \
+    \       let mut u = a.iter().map(|&(_, s)| s).sum::<usize>();\n        let mut\
+    \ m = 0;\n        while m < a.len() && a[m].1 < u {\n            u -= u.min(a[m].1\
+    \ * 2);\n            m += 1;\n        }\n        let (i, si) = self.merge(&a[..m],\
+    \ t);\n        let (j, sj) = self.merge(&a[m..], t);\n        let res = (self.add(!0,\
+    \ i, j, t), si + sj);\n        match t {\n            Type::Compress => {\n  \
+    \              self.edge[res.0] = self.par_edge[a[m].0];\n            }\n    \
+    \        _ => (),\n        }\n        res\n    }\n\n    fn compress<V: Clone,\
+    \ E: Clone>(\n        &mut self,\n        mut i: usize,\n        g: &UndirectedGraph<V,\
+    \ E>,\n        hld: &HeavyLightDecomposition,\n    ) -> (usize, usize) {\n   \
+    \     let mut chs = vec![self.add_vertex(i, g, hld)];\n        while hld.heavy_child(i)\
+    \ != !0 {\n            i = hld.heavy_child(i);\n            chs.push(self.add_vertex(i,\
+    \ g, hld));\n        }\n        self.merge(&chs, Type::Compress)\n    }\n\n  \
+    \  fn rake<V: Clone, E: Clone>(\n        &mut self,\n        i: usize,\n     \
+    \   g: &UndirectedGraph<V, E>,\n        hld: &HeavyLightDecomposition,\n    )\
+    \ -> (usize, usize) {\n        let mut chs = vec![];\n        for &(u, _) in &g[i]\
+    \ {\n            if u == hld.parent(i) || u == hld.heavy_child(i) {\n        \
     \        continue;\n            }\n            chs.push(self.add_edge(u, g, hld));\n\
     \        }\n        if chs.is_empty() {\n            (!0, 0)\n        } else {\n\
     \            self.merge(&chs, Type::Rake)\n        }\n    }\n\n    fn add_edge<V:\
@@ -144,12 +146,12 @@ data:
     \       &self.vertex[v],\n                ));\n            }\n        }\n    }\n\
     }\n"
   dependsOn:
-  - crates/data-structure/heavy-light-decomposition/src/lib.rs
   - crates/graph/graph/src/lib.rs
+  - crates/tree/heavy-light-decomposition/src/lib.rs
   isVerificationFile: false
   path: crates/tree/static-top-tree-dp/src/lib.rs
   requiredBy: []
-  timestamp: '2025-01-11 07:42:28+00:00'
+  timestamp: '2025-01-12 04:36:01+00:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/point_set_tree_path_composite_sum_fixed_root/src/main.rs

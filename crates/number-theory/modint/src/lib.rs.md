@@ -177,6 +177,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/unionfind_with_potential_non_commutative_group/src/main.rs
     title: verify/unionfind_with_potential_non_commutative_group/src/main.rs
+  - icon: ':heavy_check_mark:'
+    path: verify/vertex_set_path_composite/src/main.rs
+    title: verify/vertex_set_path_composite/src/main.rs
   _isVerificationFailed: false
   _pathExtension: rs
   _verificationStatusIcon: ':heavy_check_mark:'
@@ -497,6 +500,7 @@ data:
   - verify/subset_convolution/src/main.rs
   - verify/inv_of_formal_power_series/src/main.rs
   - verify/count_spanning_tree_undirected/src/main.rs
+  - verify/vertex_set_path_composite/src/main.rs
   - verify/unionfind_with_potential_non_commutative_group/src/main.rs
   - verify/tree_path_composite_sum/src/main.rs
   - verify/q_binomial_coefficient_prime_mod/src/main.rs

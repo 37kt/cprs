@@ -2,11 +2,11 @@
 data:
   _extendedDependsOn:
   - icon: ':heavy_check_mark:'
-    path: crates/data-structure/heavy-light-decomposition/src/lib.rs
-    title: crates/data-structure/heavy-light-decomposition/src/lib.rs
-  - icon: ':heavy_check_mark:'
     path: crates/graph/graph/src/lib.rs
     title: crates/graph/graph/src/lib.rs
+  - icon: ':heavy_check_mark:'
+    path: crates/tree/heavy-light-decomposition/src/lib.rs
+    title: crates/tree/heavy-light-decomposition/src/lib.rs
   _extendedRequiredBy:
   - icon: ':heavy_check_mark:'
     path: crates/data-structure/vertex-add-range-contour-sum/src/lib.rs
@@ -51,9 +51,9 @@ data:
     \ n * 3],\n            head: vec![!0; n * 3],\n            tail: vec![!0; n *\
     \ 3],\n            link: vec![!0; n * 3],\n            cur: n,\n            par:\
     \ vec![!0; n * 3],\n            ch: vec![[!0; 2]; n * 3],\n            cv: vec![!0;\
-    \ n * 3],\n            pos: vec![vec![]; n],\n            hld: HeavyLightDecomposition::new(&g),\n\
-    \        };\n        for i in 0..n {\n            rcq.head[i] = i;\n         \
-    \   rcq.tail[i] = i;\n            rcq.cv[i] = i;\n        }\n        rcq.rec(0,\
+    \ n * 3],\n            pos: vec![vec![]; n],\n            hld: HeavyLightDecomposition::new(&g,\
+    \ 0),\n        };\n        for i in 0..n {\n            rcq.head[i] = i;\n   \
+    \         rcq.tail[i] = i;\n            rcq.cv[i] = i;\n        }\n        rcq.rec(0,\
     \ n, &mut h);\n        rcq.sz.truncate(rcq.cur);\n        rcq.ctr.truncate(rcq.cur);\n\
     \        rcq.seq.truncate(rcq.cur);\n        rcq.sep.truncate(rcq.cur);\n    \
     \    rcq.head.truncate(rcq.cur);\n        rcq.tail.truncate(rcq.cur);\n      \
@@ -132,14 +132,14 @@ data:
     \ l), f(u, r)));\n                }\n            }\n            v = p;\n     \
     \   }\n        res.retain(|&(_, l, r)| l < r);\n        res\n    }\n}\n"
   dependsOn:
-  - crates/data-structure/heavy-light-decomposition/src/lib.rs
   - crates/graph/graph/src/lib.rs
+  - crates/tree/heavy-light-decomposition/src/lib.rs
   isVerificationFile: false
   path: crates/data-structure/range-contour-query/src/lib.rs
   requiredBy:
   - crates/data-structure/vertex-get-range-contour-add/src/lib.rs
   - crates/data-structure/vertex-add-range-contour-sum/src/lib.rs
-  timestamp: '2025-01-11 07:42:28+00:00'
+  timestamp: '2025-01-12 04:36:01+00:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: crates/data-structure/range-contour-query/src/lib.rs

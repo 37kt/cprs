@@ -4,26 +4,11 @@ data:
   - icon: ':heavy_check_mark:'
     path: crates/graph/graph/src/lib.rs
     title: crates/graph/graph/src/lib.rs
-  _extendedRequiredBy:
-  - icon: ':warning:'
-    path: crates/data-structure/range-contour-query/src/lib.rs
-    title: crates/data-structure/range-contour-query/src/lib.rs
-  - icon: ':heavy_check_mark:'
-    path: crates/data-structure/tree-query/src/lib.rs
-    title: crates/data-structure/tree-query/src/lib.rs
-  - icon: ':heavy_check_mark:'
-    path: crates/tree/static-top-tree-dp/src/lib.rs
-    title: crates/tree/static-top-tree-dp/src/lib.rs
-  _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
-    path: verify/jump_on_tree/src/main.rs
-    title: verify/jump_on_tree/src/main.rs
-  - icon: ':heavy_check_mark:'
-    path: verify/lca/src/main.rs
-    title: verify/lca/src/main.rs
+  _extendedRequiredBy: []
+  _extendedVerifiedWith: []
   _isVerificationFailed: false
   _pathExtension: rs
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':warning:'
   attributes:
     links: []
   bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.12.8/x64/lib/python3.12/site-packages/onlinejudge_verify/documentation/build.py\"\
@@ -146,20 +131,15 @@ data:
   dependsOn:
   - crates/graph/graph/src/lib.rs
   isVerificationFile: false
-  path: crates/data-structure/heavy-light-decomposition/src/lib.rs
-  requiredBy:
-  - crates/tree/static-top-tree-dp/src/lib.rs
-  - crates/data-structure/range-contour-query/src/lib.rs
-  - crates/data-structure/tree-query/src/lib.rs
-  timestamp: '2025-01-11 07:42:28+00:00'
-  verificationStatus: LIBRARY_ALL_AC
-  verifiedWith:
-  - verify/lca/src/main.rs
-  - verify/jump_on_tree/src/main.rs
-documentation_of: crates/data-structure/heavy-light-decomposition/src/lib.rs
+  path: crates/data-structure/heavy-light-decomposition-old/src/lib.rs
+  requiredBy: []
+  timestamp: '2025-01-12 04:36:01+00:00'
+  verificationStatus: LIBRARY_NO_TESTS
+  verifiedWith: []
+documentation_of: crates/data-structure/heavy-light-decomposition-old/src/lib.rs
 layout: document
 redirect_from:
-- /library/crates/data-structure/heavy-light-decomposition/src/lib.rs
-- /library/crates/data-structure/heavy-light-decomposition/src/lib.rs.html
-title: crates/data-structure/heavy-light-decomposition/src/lib.rs
+- /library/crates/data-structure/heavy-light-decomposition-old/src/lib.rs
+- /library/crates/data-structure/heavy-light-decomposition-old/src/lib.rs.html
+title: crates/data-structure/heavy-light-decomposition-old/src/lib.rs
 ---

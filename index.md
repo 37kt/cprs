@@ -131,11 +131,11 @@ data:
     - icon: ':heavy_check_mark:'
       path: crates/data-structure/fenwick-tree/src/lib.rs
       title: crates/data-structure/fenwick-tree/src/lib.rs
-  - name: crates/data-structure/heavy-light-decomposition/src
+  - name: crates/data-structure/heavy-light-decomposition-old/src
     pages:
-    - icon: ':heavy_check_mark:'
-      path: crates/data-structure/heavy-light-decomposition/src/lib.rs
-      title: crates/data-structure/heavy-light-decomposition/src/lib.rs
+    - icon: ':warning:'
+      path: crates/data-structure/heavy-light-decomposition-old/src/lib.rs
+      title: crates/data-structure/heavy-light-decomposition-old/src/lib.rs
   - name: crates/data-structure/interval-heap/src
     pages:
     - icon: ':heavy_check_mark:'
@@ -256,11 +256,6 @@ data:
     - icon: ':warning:'
       path: crates/data-structure/top2/src/lib.rs
       title: crates/data-structure/top2/src/lib.rs
-  - name: crates/data-structure/tree-query/src
-    pages:
-    - icon: ':heavy_check_mark:'
-      path: crates/data-structure/tree-query/src/lib.rs
-      title: crates/data-structure/tree-query/src/lib.rs
   - name: crates/data-structure/union-find/src
     pages:
     - icon: ':heavy_check_mark:'
@@ -631,11 +626,11 @@ data:
     - icon: ':heavy_check_mark:'
       path: crates/tree/centroid-decomposition/src/lib.rs
       title: crates/tree/centroid-decomposition/src/lib.rs
-  - name: crates/tree/heavy-light-decomposition-noya2/src
+  - name: crates/tree/heavy-light-decomposition/src
     pages:
-    - icon: ':warning:'
-      path: crates/tree/heavy-light-decomposition-noya2/src/lib.rs
-      title: crates/tree/heavy-light-decomposition-noya2/src/lib.rs
+    - icon: ':heavy_check_mark:'
+      path: crates/tree/heavy-light-decomposition/src/lib.rs
+      title: crates/tree/heavy-light-decomposition/src/lib.rs
   - name: crates/tree/re-rooting-dp/src
     pages:
     - icon: ':heavy_check_mark:'

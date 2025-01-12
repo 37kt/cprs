@@ -2,15 +2,12 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy:
-  - icon: ':heavy_check_mark:'
-    path: crates/data-structure/heavy-light-decomposition/src/lib.rs
-    title: crates/data-structure/heavy-light-decomposition/src/lib.rs
+  - icon: ':warning:'
+    path: crates/data-structure/heavy-light-decomposition-old/src/lib.rs
+    title: crates/data-structure/heavy-light-decomposition-old/src/lib.rs
   - icon: ':warning:'
     path: crates/data-structure/range-contour-query/src/lib.rs
     title: crates/data-structure/range-contour-query/src/lib.rs
-  - icon: ':heavy_check_mark:'
-    path: crates/data-structure/tree-query/src/lib.rs
-    title: crates/data-structure/tree-query/src/lib.rs
   - icon: ':heavy_check_mark:'
     path: crates/data-structure/vertex-add-range-contour-sum/src/lib.rs
     title: crates/data-structure/vertex-add-range-contour-sum/src/lib.rs
@@ -53,9 +50,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: crates/tree/centroid-decomposition/src/lib.rs
     title: crates/tree/centroid-decomposition/src/lib.rs
-  - icon: ':warning:'
-    path: crates/tree/heavy-light-decomposition-noya2/src/lib.rs
-    title: crates/tree/heavy-light-decomposition-noya2/src/lib.rs
+  - icon: ':heavy_check_mark:'
+    path: crates/tree/heavy-light-decomposition/src/lib.rs
+    title: crates/tree/heavy-light-decomposition/src/lib.rs
   - icon: ':heavy_check_mark:'
     path: crates/tree/re-rooting-dp/src/lib.rs
     title: crates/tree/re-rooting-dp/src/lib.rs
@@ -76,9 +73,6 @@ data:
     path: verify/jump_on_tree/src/main.rs
     title: verify/jump_on_tree/src/main.rs
   - icon: ':heavy_check_mark:'
-    path: verify/lca/src/main.rs
-    title: verify/lca/src/main.rs
-  - icon: ':heavy_check_mark:'
     path: verify/point_set_tree_path_composite_sum_fixed_root/src/main.rs
     title: verify/point_set_tree_path_composite_sum_fixed_root/src/main.rs
   - icon: ':heavy_check_mark:'
@@ -96,9 +90,6 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/vertex_add_path_sum/src/main.rs
     title: verify/vertex_add_path_sum/src/main.rs
-  - icon: ':heavy_check_mark:'
-    path: verify/vertex_add_subtree_sum/src/main.rs
-    title: verify/vertex_add_subtree_sum/src/main.rs
   - icon: ':heavy_check_mark:'
     path: verify/vertex_set_path_composite/src/main.rs
     title: verify/vertex_set_path_composite/src/main.rs
@@ -249,15 +240,14 @@ data:
   requiredBy:
   - crates/math/two-satisfiability/src/lib.rs
   - crates/tree/re-rooting-dp/src/lib.rs
+  - crates/tree/heavy-light-decomposition/src/lib.rs
   - crates/tree/zero-one-on-tree/src/lib.rs
   - crates/tree/centroid-decomposition/src/lib.rs
-  - crates/tree/heavy-light-decomposition-noya2/src/lib.rs
   - crates/tree/static-top-tree-dp/src/lib.rs
   - crates/data-structure/range-contour-query/src/lib.rs
   - crates/data-structure/vertex-get-range-contour-add/src/lib.rs
-  - crates/data-structure/heavy-light-decomposition/src/lib.rs
+  - crates/data-structure/heavy-light-decomposition-old/src/lib.rs
   - crates/data-structure/vertex-add-range-contour-sum/src/lib.rs
-  - crates/data-structure/tree-query/src/lib.rs
   - crates/graph/dijkstra/src/lib.rs
   - crates/graph/range-edge-graph/src/lib.rs
   - crates/graph/zero-one-bfs/src/lib.rs
@@ -272,9 +262,7 @@ data:
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/two_edge_connected_components/src/main.rs
-  - verify/vertex_add_subtree_sum/src/main.rs
   - verify/vertex_add_path_sum/src/main.rs
-  - verify/lca/src/main.rs
   - verify/vertex_set_path_composite/src/main.rs
   - verify/scc/src/main.rs
   - verify/biconnected_components/src/main.rs
