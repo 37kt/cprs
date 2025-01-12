@@ -18,6 +18,9 @@ data:
     path: crates/polynomial/bostan-mori/src/lib.rs
     title: crates/polynomial/bostan-mori/src/lib.rs
   - icon: ':heavy_check_mark:'
+    path: crates/polynomial/composition/src/lib.rs
+    title: crates/polynomial/composition/src/lib.rs
+  - icon: ':heavy_check_mark:'
     path: crates/polynomial/compositional-inverse/src/lib.rs
     title: crates/polynomial/compositional-inverse/src/lib.rs
   - icon: ':heavy_check_mark:'
@@ -156,6 +159,7 @@ data:
   - crates/convolution/convolution-u64/src/lib.rs
   - crates/string/wildcard-pattern-matching/src/lib.rs
   - crates/polynomial/formal-power-series/src/lib.rs
+  - crates/polynomial/composition/src/lib.rs
   - crates/polynomial/power-projection/src/lib.rs
   - crates/polynomial/bostan-mori/src/lib.rs
   - crates/polynomial/compositional-inverse/src/lib.rs

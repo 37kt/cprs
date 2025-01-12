@@ -30,6 +30,9 @@ data:
     path: crates/polynomial/bostan-mori/src/lib.rs
     title: crates/polynomial/bostan-mori/src/lib.rs
   - icon: ':heavy_check_mark:'
+    path: crates/polynomial/composition/src/lib.rs
+    title: crates/polynomial/composition/src/lib.rs
+  - icon: ':heavy_check_mark:'
     path: crates/polynomial/compositional-inverse/src/lib.rs
     title: crates/polynomial/compositional-inverse/src/lib.rs
   - icon: ':heavy_check_mark:'
@@ -42,6 +45,9 @@ data:
     path: crates/polynomial/shift-of-sampling-points/src/lib.rs
     title: crates/polynomial/shift-of-sampling-points/src/lib.rs
   _extendedVerifiedWith:
+  - icon: ':heavy_check_mark:'
+    path: verify/composition_of_formal_power_series_large/src/main.rs
+    title: verify/composition_of_formal_power_series_large/src/main.rs
   - icon: ':heavy_check_mark:'
     path: verify/compositional_inverse_of_formal_power_series_large/src/main.rs
     title: verify/compositional_inverse_of_formal_power_series_large/src/main.rs
@@ -383,6 +389,7 @@ data:
   isVerificationFile: false
   path: crates/polynomial/formal-power-series/src/lib.rs
   requiredBy:
+  - crates/polynomial/composition/src/lib.rs
   - crates/polynomial/shift-of-sampling-points/src/lib.rs
   - crates/polynomial/power-projection/src/lib.rs
   - crates/polynomial/polynomial-interpolation/src/lib.rs
@@ -399,6 +406,7 @@ data:
   - verify/log_of_formal_power_series/src/main.rs
   - verify/polynomial_interpolation/src/main.rs
   - verify/inv_of_formal_power_series/src/main.rs
+  - verify/composition_of_formal_power_series_large/src/main.rs
   - verify/multipoint_evaluation/src/main.rs
   - verify/exp_of_formal_power_series/src/main.rs
   - verify/kth_term_of_linearly_recurrent_sequence/src/main.rs

@@ -556,6 +556,11 @@ data:
     - icon: ':heavy_check_mark:'
       path: crates/polynomial/bostan-mori/src/lib.rs
       title: crates/polynomial/bostan-mori/src/lib.rs
+  - name: crates/polynomial/composition/src
+    pages:
+    - icon: ':heavy_check_mark:'
+      path: crates/polynomial/composition/src/lib.rs
+      title: crates/polynomial/composition/src/lib.rs
   - name: crates/polynomial/compositional-inverse/src
     pages:
     - icon: ':heavy_check_mark:'
@@ -697,6 +702,11 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/cartesian_tree/src/main.rs
       title: verify/cartesian_tree/src/main.rs
+  - name: verify/composition_of_formal_power_series_large/src
+    pages:
+    - icon: ':heavy_check_mark:'
+      path: verify/composition_of_formal_power_series_large/src/main.rs
+      title: verify/composition_of_formal_power_series_large/src/main.rs
   - name: verify/compositional_inverse_of_formal_power_series_large/src
     pages:
     - icon: ':heavy_check_mark:'

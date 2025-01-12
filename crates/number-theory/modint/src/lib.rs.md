@@ -48,6 +48,9 @@ data:
     path: crates/polynomial/bostan-mori/src/lib.rs
     title: crates/polynomial/bostan-mori/src/lib.rs
   - icon: ':heavy_check_mark:'
+    path: crates/polynomial/composition/src/lib.rs
+    title: crates/polynomial/composition/src/lib.rs
+  - icon: ':heavy_check_mark:'
     path: crates/polynomial/compositional-inverse/src/lib.rs
     title: crates/polynomial/compositional-inverse/src/lib.rs
   - icon: ':heavy_check_mark:'
@@ -75,6 +78,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/bitwise_or_convolution/src/main.rs
     title: verify/bitwise_or_convolution/src/main.rs
+  - icon: ':heavy_check_mark:'
+    path: verify/composition_of_formal_power_series_large/src/main.rs
+    title: verify/composition_of_formal_power_series_large/src/main.rs
   - icon: ':heavy_check_mark:'
     path: verify/compositional_inverse_of_formal_power_series_large/src/main.rs
     title: verify/compositional_inverse_of_formal_power_series_large/src/main.rs
@@ -484,6 +490,7 @@ data:
   - crates/convolution/convolution-u64/src/lib.rs
   - crates/string/wildcard-pattern-matching/src/lib.rs
   - crates/polynomial/formal-power-series/src/lib.rs
+  - crates/polynomial/composition/src/lib.rs
   - crates/polynomial/shift-of-sampling-points/src/lib.rs
   - crates/polynomial/power-projection/src/lib.rs
   - crates/polynomial/polynomial-interpolation/src/lib.rs
@@ -511,6 +518,7 @@ data:
   - verify/subset_convolution/src/main.rs
   - verify/inv_of_formal_power_series/src/main.rs
   - verify/count_spanning_tree_undirected/src/main.rs
+  - verify/composition_of_formal_power_series_large/src/main.rs
   - verify/vertex_set_path_composite/src/main.rs
   - verify/unionfind_with_potential_non_commutative_group/src/main.rs
   - verify/tree_path_composite_sum/src/main.rs
