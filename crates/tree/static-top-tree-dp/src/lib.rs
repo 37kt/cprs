@@ -22,6 +22,7 @@ pub struct StaticTopTree {
     par_edge: Vec<usize>,
     child: Vec<usize>,
     cnt: usize,
+    tour: Vec<usize>,
 }
 
 impl StaticTopTree {
@@ -38,12 +39,15 @@ impl StaticTopTree {
             par_edge: vec![!0; n],
             child: vec![!0; n - 1],
             cnt: n,
+            tour: vec![],
         };
-        let hld = HeavyLightDecomposition::new(g);
+        let hld = HeavyLightDecomposition::new(g, 0);
+        let dist = hld.dist_table(0);
+        s.tour = hld.euler_tour();
         for v in 0..n {
             for i in 0..g[v].len() {
                 let (u, _) = g[v][i];
-                if hld.depth[v] < hld.depth[u] {
+                if dist[v] < dist[u] {
                     s.par_edge[u] = g.edge_id(v, i);
                     s.child[g.edge_id(v, i)] = u;
                 }
@@ -105,8 +109,8 @@ impl StaticTopTree {
         hld: &HeavyLightDecomposition,
     ) -> (usize, usize) {
         let mut chs = vec![self.add_vertex(i, g, hld)];
-        while hld.heavy[i] != !0 {
-            i = hld.heavy[i];
+        while hld.heavy_child(i) != !0 {
+            i = hld.heavy_child(i);
             chs.push(self.add_vertex(i, g, hld));
         }
         self.merge(&chs, Type::Compress)
@@ -120,7 +124,7 @@ impl StaticTopTree {
     ) -> (usize, usize) {
         let mut chs = vec![];
         for &(u, _) in &g[i] {
-            if u == hld.par[i] || u == hld.heavy[i] {
+            if u == hld.parent(i) || u == hld.heavy_child(i) {
                 continue;
             }
             chs.push(self.add_edge(u, g, hld));

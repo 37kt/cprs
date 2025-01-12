@@ -52,7 +52,7 @@ impl RangeContourQuery {
             ch: vec![[!0; 2]; n * 3],
             cv: vec![!0; n * 3],
             pos: vec![vec![]; n],
-            hld: HeavyLightDecomposition::new(&g),
+            hld: HeavyLightDecomposition::new(&g, 0),
         };
         for i in 0..n {
             rcq.head[i] = i;

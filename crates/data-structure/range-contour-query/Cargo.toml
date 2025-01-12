@@ -12,4 +12,4 @@ name = "range_contour_query"
 
 [dependencies]
 graph = { package = "graph", path = "../../graph/graph" }
-heavy-light-decomposition = { path = "../../data-structure/heavy-light-decomposition" }
+heavy-light-decomposition = { path = "../../tree/heavy-light-decomposition" }

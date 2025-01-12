@@ -2,6 +2,7 @@
 
 use graph::UndirectedGraph;
 use modint::ModInt998244353 as Mint;
+use proconio::fastout;
 use proconio::input;
 use static_top_tree_dp::{StaticTopTreeDP, TreeDPOperator};
 
@@ -42,7 +43,7 @@ impl TreeDPOperator for Op {
     }
 }
 
-#[proconio::fastout]
+#[fastout]
 fn main() {
     input! {
         n: usize,

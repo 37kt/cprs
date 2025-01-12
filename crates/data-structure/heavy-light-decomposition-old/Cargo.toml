@@ -1,12 +1,12 @@
 [package]
-name = "heavy-light-decomposition-noya2"
+name = "heavy-light-decomposition-old"
 version = "0.1.0"
 edition = "2021"
 license = "CC0-1.0"
 publish = false
 
 [lib]
-name = "heavy_light_decomposition_noya2"
+name = "heavy_light_decomposition_old"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 

@@ -1,24 +1,18 @@
 // verification-helper: PROBLEM https://judge.yosupo.jp/problem/lca
 
-use graph::UndirectedGraph;
 use heavy_light_decomposition::HeavyLightDecomposition;
+use proconio::fastout;
 use proconio::input;
 
-#[proconio::fastout]
+#[fastout]
 fn main() {
     input! {
         n: usize,
         q: usize,
+        mut p: [usize; n - 1],
     }
-    let mut es = vec![];
-    for v in 1..n {
-        input! {
-            p: usize,
-        }
-        es.push((p, v));
-    }
-    let g = UndirectedGraph::from_vertices_and_unweighted_edges(&vec![(); n], &es);
-    let hld = HeavyLightDecomposition::new(&g);
+    p.insert(0, !0);
+    let hld = HeavyLightDecomposition::from_parents(&p);
     for _ in 0..q {
         input! {
             u: usize,

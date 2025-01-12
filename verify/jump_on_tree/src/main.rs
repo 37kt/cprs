@@ -2,17 +2,18 @@
 
 use graph::UndirectedGraph;
 use heavy_light_decomposition::HeavyLightDecomposition;
+use proconio::fastout;
 use proconio::input;
 
-#[proconio::fastout]
+#[fastout]
 fn main() {
     input! {
         n: usize,
         q: usize,
         ab: [(usize, usize); n - 1],
     }
-    let g = UndirectedGraph::from_vertices_and_unweighted_edges(&vec![(); n], &ab);
-    let hld = HeavyLightDecomposition::new(&g);
+    let g = UndirectedGraph::from_unweighted_edges(n, &ab);
+    let hld = HeavyLightDecomposition::new(&g, 0);
     for _ in 0..q {
         input! {
             s: usize,

@@ -1,46 +1,47 @@
 // verification-helper: PROBLEM https://judge.yosupo.jp/problem/vertex_add_subtree_sum
 
 use algebraic::{algebra, monoid};
-use graph::UndirectedGraph;
+use heavy_light_decomposition::HeavyLightDecomposition;
+use proconio::fastout;
 use proconio::input;
-use tree_query::TreeQueryVertex;
+use segment_tree::SegmentTree;
 
 algebra!(M, i64);
 monoid!(M, 0, |x, y| x + y);
 
-#[proconio::fastout]
+#[fastout]
 fn main() {
     input! {
         n: usize,
         q: usize,
         a: [i64; n],
+        mut p: [usize; n - 1],
     }
-    let mut es = vec![];
-    for v in 1..n {
-        input! {
-            p: usize,
-        }
-        es.push((p, v));
+    p.insert(0, !0);
+    let hld = HeavyLightDecomposition::from_parents(&p);
+    let mut seg = SegmentTree::<M>::new(n);
+    for i in 0..n {
+        seg.set(hld.vertex_index(i), a[i]);
     }
-    let g = UndirectedGraph::from_vertices_and_unweighted_edges(&a, &es);
-    let mut tq = TreeQueryVertex::<M>::build(&g);
     for _ in 0..q {
         input! {
             ty: usize,
         }
         if ty == 0 {
             input! {
-                p: usize,
-                x: i64
+                v: usize,
+                x: i64,
             }
-            let t = tq.get(p);
-            tq.set(p, t + x);
+            let i = hld.vertex_index(v);
+            let y = seg.get(i) + x;
+            seg.set(i, y);
         } else {
             input! {
                 v: usize,
             }
-            let t = tq.prod_subtree(v);
-            println!("{}", t);
+            let (l, r) = hld.subtree_range(v);
+            let s = seg.prod(l..r);
+            println!("{}", s);
         }
     }
 }
