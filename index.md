@@ -556,6 +556,11 @@ data:
     - icon: ':heavy_check_mark:'
       path: crates/polynomial/bostan-mori/src/lib.rs
       title: crates/polynomial/bostan-mori/src/lib.rs
+  - name: crates/polynomial/compositional-inverse/src
+    pages:
+    - icon: ':heavy_check_mark:'
+      path: crates/polynomial/compositional-inverse/src/lib.rs
+      title: crates/polynomial/compositional-inverse/src/lib.rs
   - name: crates/polynomial/formal-power-series/src
     pages:
     - icon: ':heavy_check_mark:'
@@ -571,6 +576,11 @@ data:
     - icon: ':heavy_check_mark:'
       path: crates/polynomial/polynomial-interpolation/src/lib.rs
       title: crates/polynomial/polynomial-interpolation/src/lib.rs
+  - name: crates/polynomial/power-projection/src
+    pages:
+    - icon: ':warning:'
+      path: crates/polynomial/power-projection/src/lib.rs
+      title: crates/polynomial/power-projection/src/lib.rs
   - name: crates/polynomial/shift-of-sampling-points/src
     pages:
     - icon: ':heavy_check_mark:'
@@ -687,6 +697,11 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/cartesian_tree/src/main.rs
       title: verify/cartesian_tree/src/main.rs
+  - name: verify/compositional_inverse_of_formal_power_series_large/src
+    pages:
+    - icon: ':heavy_check_mark:'
+      path: verify/compositional_inverse_of_formal_power_series_large/src/main.rs
+      title: verify/compositional_inverse_of_formal_power_series_large/src/main.rs
   - name: verify/convolution_mod/src
     pages:
     - icon: ':heavy_check_mark:'

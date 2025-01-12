@@ -48,6 +48,9 @@ data:
     path: crates/polynomial/bostan-mori/src/lib.rs
     title: crates/polynomial/bostan-mori/src/lib.rs
   - icon: ':heavy_check_mark:'
+    path: crates/polynomial/compositional-inverse/src/lib.rs
+    title: crates/polynomial/compositional-inverse/src/lib.rs
+  - icon: ':heavy_check_mark:'
     path: crates/polynomial/formal-power-series/src/lib.rs
     title: crates/polynomial/formal-power-series/src/lib.rs
   - icon: ':warning:'
@@ -56,6 +59,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: crates/polynomial/polynomial-interpolation/src/lib.rs
     title: crates/polynomial/polynomial-interpolation/src/lib.rs
+  - icon: ':warning:'
+    path: crates/polynomial/power-projection/src/lib.rs
+    title: crates/polynomial/power-projection/src/lib.rs
   - icon: ':heavy_check_mark:'
     path: crates/polynomial/shift-of-sampling-points/src/lib.rs
     title: crates/polynomial/shift-of-sampling-points/src/lib.rs
@@ -69,6 +75,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/bitwise_or_convolution/src/main.rs
     title: verify/bitwise_or_convolution/src/main.rs
+  - icon: ':heavy_check_mark:'
+    path: verify/compositional_inverse_of_formal_power_series_large/src/main.rs
+    title: verify/compositional_inverse_of_formal_power_series_large/src/main.rs
   - icon: ':heavy_check_mark:'
     path: verify/convolution_mod/src/main.rs
     title: verify/convolution_mod/src/main.rs
@@ -476,10 +485,12 @@ data:
   - crates/string/wildcard-pattern-matching/src/lib.rs
   - crates/polynomial/formal-power-series/src/lib.rs
   - crates/polynomial/shift-of-sampling-points/src/lib.rs
+  - crates/polynomial/power-projection/src/lib.rs
   - crates/polynomial/polynomial-interpolation/src/lib.rs
   - crates/polynomial/lagrange-interpolation/src/lib.rs
   - crates/polynomial/berlekamp-massey/src/lib.rs
   - crates/polynomial/bostan-mori/src/lib.rs
+  - crates/polynomial/compositional-inverse/src/lib.rs
   - crates/number-theory/stirling-first-fixed-k/src/lib.rs
   - crates/number-theory/stirling-first/src/lib.rs
   - crates/number-theory/stirling-second-fixed-k/src/lib.rs
@@ -519,6 +530,7 @@ data:
   - verify/discrete_logarithm_mod/src/main.rs
   - verify/sqrt_of_formal_power_series/src/main.rs
   - verify/point_set_tree_path_composite_sum_fixed_root/src/main.rs
+  - verify/compositional_inverse_of_formal_power_series_large/src/main.rs
   - verify/static_rectangle_add_rectangle_sum/src/main.rs
   - verify/convolution_mod/src/main.rs
   - verify/binomial_coefficient_prime_mod/src/main.rs

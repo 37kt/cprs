@@ -30,12 +30,21 @@ data:
     path: crates/polynomial/bostan-mori/src/lib.rs
     title: crates/polynomial/bostan-mori/src/lib.rs
   - icon: ':heavy_check_mark:'
+    path: crates/polynomial/compositional-inverse/src/lib.rs
+    title: crates/polynomial/compositional-inverse/src/lib.rs
+  - icon: ':heavy_check_mark:'
     path: crates/polynomial/polynomial-interpolation/src/lib.rs
     title: crates/polynomial/polynomial-interpolation/src/lib.rs
+  - icon: ':warning:'
+    path: crates/polynomial/power-projection/src/lib.rs
+    title: crates/polynomial/power-projection/src/lib.rs
   - icon: ':heavy_check_mark:'
     path: crates/polynomial/shift-of-sampling-points/src/lib.rs
     title: crates/polynomial/shift-of-sampling-points/src/lib.rs
   _extendedVerifiedWith:
+  - icon: ':heavy_check_mark:'
+    path: verify/compositional_inverse_of_formal_power_series_large/src/main.rs
+    title: verify/compositional_inverse_of_formal_power_series_large/src/main.rs
   - icon: ':heavy_check_mark:'
     path: verify/division_of_polynomials/src/main.rs
     title: verify/division_of_polynomials/src/main.rs
@@ -375,8 +384,10 @@ data:
   path: crates/polynomial/formal-power-series/src/lib.rs
   requiredBy:
   - crates/polynomial/shift-of-sampling-points/src/lib.rs
+  - crates/polynomial/power-projection/src/lib.rs
   - crates/polynomial/polynomial-interpolation/src/lib.rs
   - crates/polynomial/bostan-mori/src/lib.rs
+  - crates/polynomial/compositional-inverse/src/lib.rs
   - crates/number-theory/stirling-first-fixed-k/src/lib.rs
   - crates/number-theory/partition/src/lib.rs
   - crates/number-theory/stirling-first/src/lib.rs
@@ -394,6 +405,7 @@ data:
   - verify/division_of_polynomials/src/main.rs
   - verify/pow_of_formal_power_series/src/main.rs
   - verify/sqrt_of_formal_power_series/src/main.rs
+  - verify/compositional_inverse_of_formal_power_series_large/src/main.rs
   - verify/shift_of_sampling_points_of_polynomial/src/main.rs
   - verify/polynomial_taylor_shift/src/main.rs
 documentation_of: crates/polynomial/formal-power-series/src/lib.rs

@@ -18,8 +18,14 @@ data:
     path: crates/polynomial/bostan-mori/src/lib.rs
     title: crates/polynomial/bostan-mori/src/lib.rs
   - icon: ':heavy_check_mark:'
+    path: crates/polynomial/compositional-inverse/src/lib.rs
+    title: crates/polynomial/compositional-inverse/src/lib.rs
+  - icon: ':heavy_check_mark:'
     path: crates/polynomial/formal-power-series/src/lib.rs
     title: crates/polynomial/formal-power-series/src/lib.rs
+  - icon: ':warning:'
+    path: crates/polynomial/power-projection/src/lib.rs
+    title: crates/polynomial/power-projection/src/lib.rs
   - icon: ':heavy_check_mark:'
     path: crates/string/wildcard-pattern-matching/src/lib.rs
     title: crates/string/wildcard-pattern-matching/src/lib.rs
@@ -150,7 +156,9 @@ data:
   - crates/convolution/convolution-u64/src/lib.rs
   - crates/string/wildcard-pattern-matching/src/lib.rs
   - crates/polynomial/formal-power-series/src/lib.rs
+  - crates/polynomial/power-projection/src/lib.rs
   - crates/polynomial/bostan-mori/src/lib.rs
+  - crates/polynomial/compositional-inverse/src/lib.rs
   timestamp: '2024-12-30 09:13:10+00:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
