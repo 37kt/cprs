@@ -69,7 +69,8 @@ fn main() {
                 y: Mint,
                 z: Mint,
             }
-            dp.set_edge(e, (y, z));
+            let (u, v, _) = uvbc[e];
+            dp.set_edge(u, v, (y, z));
         }
         println!("{}", dp.prod().0);
     }

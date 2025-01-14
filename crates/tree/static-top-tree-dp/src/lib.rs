@@ -259,8 +259,9 @@ impl<O: TreeDPOperator> StaticTopTreeDP<O> {
         }
     }
 
-    /// 辺 e の値を x に更新する
-    pub fn set_edge(&mut self, e: usize, x: O::E) {
+    /// 辺 (u, v) の値を x に更新する
+    pub fn set_edge(&mut self, u: usize, v: usize, x: O::E) {
+        let e = self.stt.hld.edge_index(u, v);
         self.edge[e] = x.clone();
         let mut v = self.stt.child[e];
         while v != !0 {

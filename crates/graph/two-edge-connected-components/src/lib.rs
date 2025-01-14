@@ -15,6 +15,7 @@ fn dfs(
     ord[v] = *t;
     low[v] = *t;
     *t += 1;
+    vs.push(v);
     let mut f = false;
     for &(u, _) in &g[v] {
         if ord[u] == !0 {
@@ -51,7 +52,7 @@ pub fn two_edge_connected_components(g: &UndirectedGraph<(), ()>) -> (CSRArray<u
     let mut vs = vec![];
     let mut t = 0;
     for v in 0..n {
-        if ord[v] == !0 {
+        if comp[v] == !0 {
             dfs(
                 v,
                 !0,

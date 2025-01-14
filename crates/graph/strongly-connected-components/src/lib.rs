@@ -39,7 +39,7 @@ where
         .enumerate()
         .map(|(v, &i)| (i, v))
         .collect::<Vec<_>>();
-    let groups = CSRArray::new(n, &groups);
+    let groups = CSRArray::new(scc.m, &groups);
 
     (groups, scc.comp)
 }
