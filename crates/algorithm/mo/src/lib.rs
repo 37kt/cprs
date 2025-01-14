@@ -51,7 +51,7 @@ pub trait Mo {
     ///
     /// # 動作
     /// - 要素 `a[i]` を追加
-    /// - または区間を `(i+1, j)` から `(i, j)` に移動
+    /// - または点を `(i+1, j)` から `(i, j)` に移動
     fn add_left(&mut self, i: usize) {
         self.add(i);
     }
@@ -60,7 +60,7 @@ pub trait Mo {
     ///
     /// # 動作
     /// - 要素 `a[i]` を追加
-    /// - または区間を `(j, i)` から `(j, i+1)` に移動
+    /// - または点を `(j, i)` から `(j, i+1)` に移動
     fn add_right(&mut self, i: usize) {
         self.add(i);
     }
@@ -69,7 +69,7 @@ pub trait Mo {
     ///
     /// # 動作
     /// - 要素 `a[i]` を削除
-    /// - または区間を `(i, j)` から `(i+1, j)` に移動
+    /// - または点を `(i, j)` から `(i+1, j)` に移動
     fn remove_left(&mut self, i: usize) {
         self.remove(i);
     }
@@ -78,7 +78,7 @@ pub trait Mo {
     ///
     /// # 動作
     /// - 要素 `a[i]` を削除
-    /// - または区間を `(j, i+1)` から `(j, i)` に移動
+    /// - または点を `(j, i+1)` から `(j, i)` に移動
     fn remove_right(&mut self, i: usize) {
         self.remove(i);
     }
