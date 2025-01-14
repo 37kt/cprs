@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: crates/number-theory/modint/src/lib.rs
     title: crates/number-theory/modint/src/lib.rs
   - icon: ':heavy_check_mark:'

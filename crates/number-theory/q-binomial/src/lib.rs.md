@@ -4,7 +4,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: crates/number-theory/combination/src/lib.rs
     title: crates/number-theory/combination/src/lib.rs
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: crates/number-theory/modint/src/lib.rs
     title: crates/number-theory/modint/src/lib.rs
   _extendedRequiredBy: []

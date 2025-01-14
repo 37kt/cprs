@@ -4,7 +4,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: crates/convolution/convolution-u64/src/lib.rs
     title: crates/convolution/convolution-u64/src/lib.rs
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: crates/graph/graph/src/lib.rs
     title: crates/graph/graph/src/lib.rs
   - icon: ':heavy_check_mark:'

@@ -4,7 +4,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: crates/graph/extended-block-cut-tree/src/lib.rs
     title: "\u62E1\u5F35 Block-Cut Tree"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: crates/graph/graph/src/lib.rs
     title: crates/graph/graph/src/lib.rs
   _extendedRequiredBy: []

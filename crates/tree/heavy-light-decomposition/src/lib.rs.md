@@ -1,14 +1,14 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: crates/graph/graph/src/lib.rs
     title: crates/graph/graph/src/lib.rs
   _extendedRequiredBy:
   - icon: ':warning:'
     path: crates/data-structure/range-contour-query/src/lib.rs
     title: crates/data-structure/range-contour-query/src/lib.rs
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: crates/tree/static-top-tree-dp/src/lib.rs
     title: crates/tree/static-top-tree-dp/src/lib.rs
   _extendedVerifiedWith:

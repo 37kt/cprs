@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: crates/graph/graph/src/lib.rs
     title: crates/graph/graph/src/lib.rs
   - icon: ':heavy_check_mark:'
@@ -9,12 +9,12 @@ data:
     title: crates/tree/heavy-light-decomposition/src/lib.rs
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/point_set_tree_path_composite_sum_fixed_root/src/main.rs
     title: verify/point_set_tree_path_composite_sum_fixed_root/src/main.rs
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: rs
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.12.8/x64/lib/python3.12/site-packages/onlinejudge_verify/documentation/build.py\"\
@@ -39,7 +39,7 @@ data:
     \        child: vec![!0; n - 1],\n            cnt: n,\n            hld: HeavyLightDecomposition::new(g,\
     \ 0),\n        };\n        let dist = s.hld.dist_table(0);\n        for v in 0..n\
     \ {\n            for &(u, _) in &g[v] {\n                let e = s.hld.edge_index(u,\
-    \ v);\n                if dist[v] < dist[u] {\n                    s.par_edge[u]\
+    \ v) - 1;\n                if dist[v] < dist[u] {\n                    s.par_edge[u]\
     \ = e;\n                    s.child[e] = u;\n                }\n            }\n\
     \        }\n        s.stt_root = s.compress(0, g).0;\n        s\n    }\n\n   \
     \ /// \u9802\u70B9\u6570\u3092\u8FD4\u3059\n    pub fn len(&self) -> usize {\n\
@@ -109,8 +109,8 @@ data:
     \            vec![]\n        } else {\n            vec![g[0][0].1.clone(); g.len()\
     \ - 1]\n        };\n        for v in 0..g.len() {\n            sum[v] = Data::Path(O::vertex(&g.vertex(v)));\n\
     \            for (u, w) in &g[v] {\n                let e = stt.hld.edge_index(v,\
-    \ *u);\n                edge[e] = w.clone();\n            }\n        }\n     \
-    \   let mut s = Self {\n            stt,\n            sum,\n            vertex,\n\
+    \ *u) - 1;\n                edge[e] = w.clone();\n            }\n        }\n \
+    \       let mut s = Self {\n            stt,\n            sum,\n            vertex,\n\
     \            edge,\n            op: std::marker::PhantomData,\n        };\n  \
     \      s.dfs(s.stt.stt_root);\n        s\n    }\n\n    /// 0 \u3092\u6839\u3068\
     \u3057\u305F\u3068\u304D\u306E dp \u306E\u5024\u3092\u8FD4\u3059\n    pub fn prod(&self)\
@@ -120,9 +120,9 @@ data:
     \ = x.clone();\n        while v != !0 {\n            self.update(v);\n       \
     \     v = self.stt.par[v];\n        }\n    }\n\n    /// \u8FBA (u, v) \u306E\u5024\
     \u3092 x \u306B\u66F4\u65B0\u3059\u308B\n    pub fn set_edge(&mut self, u: usize,\
-    \ v: usize, x: O::E) {\n        let e = self.stt.hld.edge_index(u, v);\n     \
-    \   self.edge[e] = x.clone();\n        let mut v = self.stt.child[e];\n      \
-    \  while v != !0 {\n            self.update(v);\n            v = self.stt.par[v];\n\
+    \ v: usize, x: O::E) {\n        let e = self.stt.hld.edge_index(u, v) - 1;\n \
+    \       self.edge[e] = x.clone();\n        let mut v = self.stt.child[e];\n  \
+    \      while v != !0 {\n            self.update(v);\n            v = self.stt.par[v];\n\
     \        }\n    }\n\n    fn dfs(&mut self, v: usize) {\n        if self.stt.lch[v]\
     \ != !0 {\n            self.dfs(self.stt.lch[v]);\n        }\n        if self.stt.rch[v]\
     \ != !0 {\n            self.dfs(self.stt.rch[v]);\n        }\n        self.update(v);\n\
@@ -148,8 +148,8 @@ data:
   isVerificationFile: false
   path: crates/tree/static-top-tree-dp/src/lib.rs
   requiredBy: []
-  timestamp: '2025-01-14 05:59:50+00:00'
-  verificationStatus: LIBRARY_ALL_WA
+  timestamp: '2025-01-14 06:20:21+00:00'
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/point_set_tree_path_composite_sum_fixed_root/src/main.rs
 documentation_of: crates/tree/static-top-tree-dp/src/lib.rs

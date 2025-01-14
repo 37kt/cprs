@@ -4,7 +4,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: crates/graph/count-spanning-tree-directed/src/lib.rs
     title: crates/graph/count-spanning-tree-directed/src/lib.rs
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: crates/number-theory/modint/src/lib.rs
     title: crates/number-theory/modint/src/lib.rs
   _extendedRequiredBy: []

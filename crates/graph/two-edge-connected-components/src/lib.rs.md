@@ -4,7 +4,7 @@ data:
   - icon: ':warning:'
     path: crates/data-structure/csr-array/src/lib.rs
     title: crates/data-structure/csr-array/src/lib.rs
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: crates/graph/graph/src/lib.rs
     title: crates/graph/graph/src/lib.rs
   _extendedRequiredBy: []

@@ -333,7 +333,7 @@ data:
       title: "\u62E1\u5F35 Block-Cut Tree"
   - name: crates/graph/graph/src
     pages:
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: crates/graph/graph/src/lib.rs
       title: crates/graph/graph/src/lib.rs
   - name: crates/graph/k-project-selection/src
@@ -508,7 +508,7 @@ data:
       title: crates/number-theory/combination/src/lib.rs
   - name: crates/number-theory/modint/src
     pages:
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: crates/number-theory/modint/src/lib.rs
       title: crates/number-theory/modint/src/lib.rs
   - name: crates/number-theory/partition/src
@@ -658,7 +658,7 @@ data:
       title: crates/tree/re-rooting-dp/src/lib.rs
   - name: crates/tree/static-top-tree-dp/src
     pages:
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: crates/tree/static-top-tree-dp/src/lib.rs
       title: crates/tree/static-top-tree-dp/src/lib.rs
   - name: crates/tree/zero-one-on-tree/src
@@ -944,7 +944,7 @@ data:
       title: verify/point_add_rectangle_sum_2/src/main.rs
   - name: verify/point_set_tree_path_composite_sum_fixed_root/src
     pages:
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verify/point_set_tree_path_composite_sum_fixed_root/src/main.rs
       title: verify/point_set_tree_path_composite_sum_fixed_root/src/main.rs
   - name: verify/polynomial_interpolation/src

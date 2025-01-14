@@ -1,20 +1,20 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: crates/graph/graph/src/lib.rs
     title: crates/graph/graph/src/lib.rs
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: crates/number-theory/modint/src/lib.rs
     title: crates/number-theory/modint/src/lib.rs
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: crates/tree/static-top-tree-dp/src/lib.rs
     title: crates/tree/static-top-tree-dp/src/lib.rs
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: rs
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     PROBLEM: https://judge.yosupo.jp/problem/point_set_tree_path_composite_sum_fixed_root
     links:
@@ -59,8 +59,8 @@ data:
   isVerificationFile: true
   path: verify/point_set_tree_path_composite_sum_fixed_root/src/main.rs
   requiredBy: []
-  timestamp: '2025-01-14 05:59:50+00:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2025-01-14 06:20:21+00:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/point_set_tree_path_composite_sum_fixed_root/src/main.rs
 layout: document

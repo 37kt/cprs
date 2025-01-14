@@ -10,7 +10,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: crates/math/min_25-sieve/src/lib.rs
     title: crates/math/min_25-sieve/src/lib.rs
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: crates/number-theory/modint/src/lib.rs
     title: crates/number-theory/modint/src/lib.rs
   _extendedRequiredBy: []

@@ -59,7 +59,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: crates/tree/re-rooting-dp/src/lib.rs
     title: crates/tree/re-rooting-dp/src/lib.rs
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: crates/tree/static-top-tree-dp/src/lib.rs
     title: crates/tree/static-top-tree-dp/src/lib.rs
   - icon: ':warning:'
@@ -75,7 +75,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/jump_on_tree/src/main.rs
     title: verify/jump_on_tree/src/main.rs
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/point_set_tree_path_composite_sum_fixed_root/src/main.rs
     title: verify/point_set_tree_path_composite_sum_fixed_root/src/main.rs
   - icon: ':heavy_check_mark:'
@@ -99,9 +99,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/yuki1014/src/main.rs
     title: verify/yuki1014/src/main.rs
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: rs
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.12.8/x64/lib/python3.12/site-packages/onlinejudge_verify/documentation/build.py\"\
@@ -233,7 +233,7 @@ data:
   - crates/graph/compressed-tree/src/lib.rs
   - crates/graph/complement-graph-bfs/src/lib.rs
   timestamp: '2025-01-14 05:25:42+00:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/two_edge_connected_components/src/main.rs
   - verify/vertex_add_path_sum/src/main.rs

@@ -7,10 +7,10 @@ data:
   - icon: ':heavy_check_mark:'
     path: crates/data-structure/segment-tree/src/lib.rs
     title: crates/data-structure/segment-tree/src/lib.rs
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: crates/graph/graph/src/lib.rs
     title: crates/graph/graph/src/lib.rs
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: crates/number-theory/modint/src/lib.rs
     title: crates/number-theory/modint/src/lib.rs
   - icon: ':heavy_check_mark:'
