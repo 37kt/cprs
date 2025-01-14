@@ -373,12 +373,12 @@ data:
       title: crates/graph/range-edge-graph/src/lib.rs
   - name: crates/graph/strongly-connected-components/src
     pages:
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: crates/graph/strongly-connected-components/src/lib.rs
       title: crates/graph/strongly-connected-components/src/lib.rs
   - name: crates/graph/two-edge-connected-components/src
     pages:
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: crates/graph/two-edge-connected-components/src/lib.rs
       title: crates/graph/two-edge-connected-components/src/lib.rs
   - name: crates/graph/zero-one-bfs/src
@@ -1029,7 +1029,7 @@ data:
       title: verify/rectangle_add_point_get/src/main.rs
   - name: verify/scc/src
     pages:
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verify/scc/src/main.rs
       title: verify/scc/src/main.rs
   - name: verify/segment_add_get_min/src
@@ -1159,7 +1159,7 @@ data:
       title: verify/trie_yuki1269/src/main.rs
   - name: verify/two_edge_connected_components/src
     pages:
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verify/two_edge_connected_components/src/main.rs
       title: verify/two_edge_connected_components/src/main.rs
   - name: verify/two_sat/src

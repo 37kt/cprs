@@ -49,8 +49,9 @@ data:
     \            input! {\n                w: usize,\n                x: Mint,\n \
     \           }\n            dp.set_vertex(w, x);\n        } else {\n          \
     \  input! {\n                e: usize,\n                y: Mint,\n           \
-    \     z: Mint,\n            }\n            dp.set_edge(e, (y, z));\n        }\n\
-    \        println!(\"{}\", dp.prod().0);\n    }\n}\n"
+    \     z: Mint,\n            }\n            let (u, v, _) = uvbc[e];\n        \
+    \    dp.set_edge(u, v, (y, z));\n        }\n        println!(\"{}\", dp.prod().0);\n\
+    \    }\n}\n"
   dependsOn:
   - crates/graph/graph/src/lib.rs
   - crates/number-theory/modint/src/lib.rs
@@ -58,7 +59,7 @@ data:
   isVerificationFile: true
   path: verify/point_set_tree_path_composite_sum_fixed_root/src/main.rs
   requiredBy: []
-  timestamp: '2025-01-14 05:25:42+00:00'
+  timestamp: '2025-01-14 05:59:50+00:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: verify/point_set_tree_path_composite_sum_fixed_root/src/main.rs

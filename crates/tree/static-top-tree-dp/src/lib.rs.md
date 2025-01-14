@@ -118,10 +118,11 @@ data:
     \  }\n\n    /// \u9802\u70B9 v \u306E\u5024\u3092 x \u306B\u66F4\u65B0\u3059\u308B\
     \n    pub fn set_vertex(&mut self, mut v: usize, x: O::V) {\n        self.vertex[v]\
     \ = x.clone();\n        while v != !0 {\n            self.update(v);\n       \
-    \     v = self.stt.par[v];\n        }\n    }\n\n    /// \u8FBA e \u306E\u5024\u3092\
-    \ x \u306B\u66F4\u65B0\u3059\u308B\n    pub fn set_edge(&mut self, e: usize, x:\
-    \ O::E) {\n        self.edge[e] = x.clone();\n        let mut v = self.stt.child[e];\n\
-    \        while v != !0 {\n            self.update(v);\n            v = self.stt.par[v];\n\
+    \     v = self.stt.par[v];\n        }\n    }\n\n    /// \u8FBA (u, v) \u306E\u5024\
+    \u3092 x \u306B\u66F4\u65B0\u3059\u308B\n    pub fn set_edge(&mut self, u: usize,\
+    \ v: usize, x: O::E) {\n        let e = self.stt.hld.edge_index(u, v);\n     \
+    \   self.edge[e] = x.clone();\n        let mut v = self.stt.child[e];\n      \
+    \  while v != !0 {\n            self.update(v);\n            v = self.stt.par[v];\n\
     \        }\n    }\n\n    fn dfs(&mut self, v: usize) {\n        if self.stt.lch[v]\
     \ != !0 {\n            self.dfs(self.stt.lch[v]);\n        }\n        if self.stt.rch[v]\
     \ != !0 {\n            self.dfs(self.stt.rch[v]);\n        }\n        self.update(v);\n\
@@ -147,7 +148,7 @@ data:
   isVerificationFile: false
   path: crates/tree/static-top-tree-dp/src/lib.rs
   requiredBy: []
-  timestamp: '2025-01-14 05:25:42+00:00'
+  timestamp: '2025-01-14 05:59:50+00:00'
   verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - verify/point_set_tree_path_composite_sum_fixed_root/src/main.rs

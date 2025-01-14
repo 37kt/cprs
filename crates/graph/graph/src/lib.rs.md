@@ -38,10 +38,10 @@ data:
   - icon: ':heavy_check_mark:'
     path: crates/graph/range-edge-graph/src/lib.rs
     title: crates/graph/range-edge-graph/src/lib.rs
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: crates/graph/strongly-connected-components/src/lib.rs
     title: crates/graph/strongly-connected-components/src/lib.rs
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: crates/graph/two-edge-connected-components/src/lib.rs
     title: crates/graph/two-edge-connected-components/src/lib.rs
   - icon: ':warning:'
@@ -78,7 +78,7 @@ data:
   - icon: ':x:'
     path: verify/point_set_tree_path_composite_sum_fixed_root/src/main.rs
     title: verify/point_set_tree_path_composite_sum_fixed_root/src/main.rs
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/scc/src/main.rs
     title: verify/scc/src/main.rs
   - icon: ':heavy_check_mark:'
@@ -87,7 +87,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/tree_path_composite_sum/src/main.rs
     title: verify/tree_path_composite_sum/src/main.rs
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/two_edge_connected_components/src/main.rs
     title: verify/two_edge_connected_components/src/main.rs
   - icon: ':heavy_check_mark:'

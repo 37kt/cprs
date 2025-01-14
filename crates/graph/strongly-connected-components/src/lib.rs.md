@@ -12,12 +12,12 @@ data:
     path: crates/math/two-satisfiability/src/lib.rs
     title: crates/math/two-satisfiability/src/lib.rs
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/scc/src/main.rs
     title: verify/scc/src/main.rs
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: rs
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.12.8/x64/lib/python3.12/site-packages/onlinejudge_verify/documentation/build.py\"\
@@ -40,20 +40,20 @@ data:
     \           scc.dfs(v, g);\n        }\n    }\n    for v in 0..n {\n        scc.comp[v]\
     \ = scc.m - 1 - scc.comp[v];\n    }\n\n    let groups = scc\n        .comp\n \
     \       .iter()\n        .enumerate()\n        .map(|(v, &i)| (i, v))\n      \
-    \  .collect::<Vec<_>>();\n    let groups = CSRArray::new(n, &groups);\n\n    (groups,\
-    \ scc.comp)\n}\n\nimpl Scc {\n    fn dfs<V, E>(&mut self, v: usize, g: &DirectedGraph<V,\
-    \ E>)\n    where\n        V: Clone,\n        E: Clone,\n    {\n        self.low[v]\
-    \ = self.t;\n        self.ord[v] = self.t;\n        self.t += 1;\n        self.vis.push(v);\n\
-    \        for &(u, _) in &g[v] {\n            if self.ord[u] == !0 {\n        \
-    \        self.dfs(u, g);\n                self.low[v] = self.low[v].min(self.low[u]);\n\
-    \            } else {\n                self.low[v] = self.low[v].min(self.ord[u]);\n\
-    \            }\n        }\n        if self.low[v] == self.ord[v] {\n         \
-    \   loop {\n                let u = self.vis.pop().unwrap();\n               \
-    \ self.ord[u] = g.len();\n                self.comp[u] = self.m;\n           \
-    \     if u == v {\n                    break;\n                }\n           \
-    \ }\n            self.m += 1;\n        }\n    }\n}\n\nstruct Scc {\n    comp:\
-    \ Vec<usize>,\n    low: Vec<usize>,\n    ord: Vec<usize>,\n    vis: Vec<usize>,\n\
-    \    t: usize,\n    m: usize,\n}\n"
+    \  .collect::<Vec<_>>();\n    let groups = CSRArray::new(scc.m, &groups);\n\n\
+    \    (groups, scc.comp)\n}\n\nimpl Scc {\n    fn dfs<V, E>(&mut self, v: usize,\
+    \ g: &DirectedGraph<V, E>)\n    where\n        V: Clone,\n        E: Clone,\n\
+    \    {\n        self.low[v] = self.t;\n        self.ord[v] = self.t;\n       \
+    \ self.t += 1;\n        self.vis.push(v);\n        for &(u, _) in &g[v] {\n  \
+    \          if self.ord[u] == !0 {\n                self.dfs(u, g);\n         \
+    \       self.low[v] = self.low[v].min(self.low[u]);\n            } else {\n  \
+    \              self.low[v] = self.low[v].min(self.ord[u]);\n            }\n  \
+    \      }\n        if self.low[v] == self.ord[v] {\n            loop {\n      \
+    \          let u = self.vis.pop().unwrap();\n                self.ord[u] = g.len();\n\
+    \                self.comp[u] = self.m;\n                if u == v {\n       \
+    \             break;\n                }\n            }\n            self.m +=\
+    \ 1;\n        }\n    }\n}\n\nstruct Scc {\n    comp: Vec<usize>,\n    low: Vec<usize>,\n\
+    \    ord: Vec<usize>,\n    vis: Vec<usize>,\n    t: usize,\n    m: usize,\n}\n"
   dependsOn:
   - crates/data-structure/csr-array/src/lib.rs
   - crates/graph/graph/src/lib.rs
@@ -61,8 +61,8 @@ data:
   path: crates/graph/strongly-connected-components/src/lib.rs
   requiredBy:
   - crates/math/two-satisfiability/src/lib.rs
-  timestamp: '2025-01-14 05:25:42+00:00'
-  verificationStatus: LIBRARY_ALL_WA
+  timestamp: '2025-01-14 05:59:50+00:00'
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/scc/src/main.rs
 documentation_of: crates/graph/strongly-connected-components/src/lib.rs

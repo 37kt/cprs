@@ -5,10 +5,10 @@ data:
   - icon: ':question:'
     path: crates/graph/graph/src/lib.rs
     title: crates/graph/graph/src/lib.rs
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: crates/graph/strongly-connected-components/src/lib.rs
     title: crates/graph/strongly-connected-components/src/lib.rs
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: crates/graph/two-edge-connected-components/src/lib.rs
     title: crates/graph/two-edge-connected-components/src/lib.rs
   _extendedVerifiedWith: []
