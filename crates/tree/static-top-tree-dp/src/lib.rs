@@ -44,7 +44,7 @@ impl StaticTopTree {
         let dist = s.hld.dist_table(0);
         for v in 0..n {
             for &(u, _) in &g[v] {
-                let e = s.hld.edge_index(u, v);
+                let e = s.hld.edge_index(u, v) - 1;
                 if dist[v] < dist[u] {
                     s.par_edge[u] = e;
                     s.child[e] = u;
@@ -230,7 +230,7 @@ impl<O: TreeDPOperator> StaticTopTreeDP<O> {
         for v in 0..g.len() {
             sum[v] = Data::Path(O::vertex(&g.vertex(v)));
             for (u, w) in &g[v] {
-                let e = stt.hld.edge_index(v, *u);
+                let e = stt.hld.edge_index(v, *u) - 1;
                 edge[e] = w.clone();
             }
         }
@@ -261,7 +261,7 @@ impl<O: TreeDPOperator> StaticTopTreeDP<O> {
 
     /// 辺 (u, v) の値を x に更新する
     pub fn set_edge(&mut self, u: usize, v: usize, x: O::E) {
-        let e = self.stt.hld.edge_index(u, v);
+        let e = self.stt.hld.edge_index(u, v) - 1;
         self.edge[e] = x.clone();
         let mut v = self.stt.child[e];
         while v != !0 {
