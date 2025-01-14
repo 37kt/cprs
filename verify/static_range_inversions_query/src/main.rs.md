@@ -51,7 +51,7 @@ data:
   isVerificationFile: true
   path: verify/static_range_inversions_query/src/main.rs
   requiredBy: []
-  timestamp: '2025-01-11 09:03:35+00:00'
+  timestamp: '2025-01-14 02:20:11+00:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/static_range_inversions_query/src/main.rs
