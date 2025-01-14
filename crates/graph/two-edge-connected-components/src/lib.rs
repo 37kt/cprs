@@ -1,29 +1,36 @@
+use csr_array::CSRArray;
 use graph::UndirectedGraph;
 
 fn dfs(
     v: usize,
+    p: usize,
     g: &UndirectedGraph<(), ()>,
-    ord: &mut Vec<usize>,
-    par: &mut Vec<usize>,
-    imos: &mut Vec<i32>,
-    used: &mut Vec<bool>,
+    comp: &mut [usize],
+    comp_cnt: &mut usize,
+    ord: &mut [usize],
+    low: &mut [usize],
+    vs: &mut Vec<usize>,
+    t: &mut usize,
 ) {
-    ord.push(v);
-    for i in 0..g[v].len() {
-        let u = g[v][i].0;
-        let e = g.edge_id(v, i);
-        if used[e] {
-            continue;
-        }
-        if par[u] != !1 {
-            imos[v] += 1;
-            imos[u] -= 1;
-            used[e] = true;
+    ord[v] = *t;
+    low[v] = *t;
+    *t += 1;
+    let mut f = false;
+    for &(u, _) in &g[v] {
+        if ord[u] == !0 {
+            dfs(u, v, g, comp, comp_cnt, ord, low, vs, t);
+            low[v] = low[v].min(low[u]);
+        } else if u == p && !f {
+            f = true;
         } else {
-            used[e] = true;
-            par[u] = v;
-            dfs(u, g, ord, par, imos, used);
+            low[v] = low[v].min(ord[u]);
         }
+    }
+    if ord[v] == low[v] {
+        while comp[v] == !0 {
+            comp[vs.pop().unwrap()] = *comp_cnt;
+        }
+        *comp_cnt += 1;
     }
 }
 
@@ -35,37 +42,36 @@ fn dfs(
 /// (groups, comp)
 /// - groups: 二辺連結成分のグループ
 /// - comp: 各頂点が属する二辺連結成分の番号
-pub fn two_edge_connected_components(g: &UndirectedGraph<(), ()>) -> (Vec<Vec<usize>>, Vec<usize>) {
+pub fn two_edge_connected_components(g: &UndirectedGraph<(), ()>) -> (CSRArray<usize>, Vec<usize>) {
     let n = g.len();
-    let m = g.edges_count();
-    let mut ord = vec![];
-    let mut par = vec![!1; n];
-    let mut imos = vec![0; n];
-    let mut used = vec![false; m];
-    for v in 0..n {
-        if par[v] == !1 {
-            par[v] = !0;
-            dfs(v, g, &mut ord, &mut par, &mut imos, &mut used);
-        }
-    }
-    for &v in ord.iter().rev() {
-        if par[v] != !0 {
-            imos[par[v]] += imos[v];
-        }
-    }
     let mut comp = vec![!0; n];
     let mut comp_cnt = 0;
-    for &v in &ord {
-        if imos[v] == 0 {
-            comp[v] = comp_cnt;
-            comp_cnt += 1;
-        } else {
-            comp[v] = comp[par[v]];
+    let mut ord = vec![!0; n];
+    let mut low = vec![!0; n];
+    let mut vs = vec![];
+    let mut t = 0;
+    for v in 0..n {
+        if ord[v] == !0 {
+            dfs(
+                v,
+                !0,
+                g,
+                &mut comp,
+                &mut comp_cnt,
+                &mut ord,
+                &mut low,
+                &mut vs,
+                &mut t,
+            );
         }
     }
-    let mut groups = vec![vec![]; comp_cnt];
-    for v in 0..n {
-        groups[comp[v]].push(v);
-    }
+
+    let groups = comp
+        .iter()
+        .enumerate()
+        .map(|(v, &c)| (c, v))
+        .collect::<Vec<_>>();
+    let groups = CSRArray::new(comp_cnt, &groups);
+
     (groups, comp)
 }

@@ -1,5 +1,7 @@
 use std::ops::Index;
 
+use csr_array::CSRArray;
+
 /// 隣接リスト
 #[derive(Clone)]
 pub struct Graph<V, E, const DIRECTED: bool>
@@ -8,10 +10,7 @@ where
     E: Clone,
 {
     vertices: Vec<V>,
-    edges: Vec<(usize, E)>,
-    pos: Vec<usize>,
-    edge_id: Vec<usize>,
-    edges_count: usize,
+    edges: CSRArray<(usize, E)>,
 }
 
 pub type DirectedGraph<V, E> = Graph<V, E, true>;
@@ -41,40 +40,14 @@ where
 {
     /// 頂点重みと重み付き有向辺からグラフを構築する
     pub fn from_vertices_and_edges(vertices: &[V], edges: &[(usize, usize, E)]) -> Self {
-        if edges.is_empty() {
-            return Self {
-                vertices: vertices.to_vec(),
-                edges: vec![],
-                pos: vec![0; vertices.len() + 1],
-                edge_id: vec![],
-                edges_count: 0,
-            };
-        }
-
-        let n = vertices.len();
-        let mut pos = vec![0; n + 1];
-        for &(u, _, _) in edges {
-            pos[u] += 1;
-        }
-        for i in 1..=n {
-            pos[i] += pos[i - 1];
-        }
-        let mut ord = vec![0; edges.len()];
-        for i in (0..edges.len()).rev() {
-            let u = edges[i].0;
-            pos[u] -= 1;
-            ord[pos[u]] = i;
-        }
+        let edges = edges
+            .iter()
+            .map(|(u, v, w)| (*u, (*v, w.clone())))
+            .collect::<Vec<_>>();
 
         Self {
             vertices: vertices.to_vec(),
-            edge_id: ord.clone(),
-            edges: ord
-                .into_iter()
-                .map(|i| (edges[i].1, edges[i].2.clone()))
-                .collect(),
-            pos,
-            edges_count: edges.len(),
+            edges: CSRArray::new(vertices.len(), &edges),
         }
     }
 
@@ -121,56 +94,15 @@ where
 {
     /// 頂点重みと重み付き無向辺からグラフを構築する
     pub fn from_vertices_and_edges(vertices: &[V], edges: &[(usize, usize, E)]) -> Self {
-        if edges.is_empty() {
-            return Self {
-                vertices: vertices.to_vec(),
-                edges: vec![],
-                pos: vec![0; vertices.len() + 1],
-                edge_id: vec![],
-                edges_count: 0,
-            };
-        }
-
-        let n = vertices.len();
-        let mut pos = vec![0; n + 1];
-        for &(u, v, _) in edges {
-            pos[u] += 1;
-            pos[v] += 1;
-        }
-        for i in 1..=n {
-            pos[i] += pos[i - 1];
-        }
-        let mut ord = vec![0; edges.len() * 2];
-        for i in (0..edges.len() * 2).rev() {
-            if i & 1 == 0 {
-                let u = edges[i >> 1].0;
-                pos[u] -= 1;
-                ord[pos[u]] = i;
-            } else {
-                let v = edges[i >> 1].1;
-                pos[v] -= 1;
-                ord[pos[v]] = i;
-            }
-        }
+        let edges = edges
+            .iter()
+            .map(|(u, v, w)| [(*u, (*v, w.clone())), (*v, (*u, w.clone()))])
+            .flatten()
+            .collect::<Vec<_>>();
 
         Self {
             vertices: vertices.to_vec(),
-            edge_id: ord.iter().map(|&i| i / 2).collect(),
-            edges: ord
-                .into_iter()
-                .map(|i| {
-                    (
-                        if i & 1 == 0 {
-                            edges[i >> 1].1
-                        } else {
-                            edges[i >> 1].0
-                        },
-                        edges[i >> 1].2.clone(),
-                    )
-                })
-                .collect(),
-            pos,
-            edges_count: edges.len(),
+            edges: CSRArray::new(vertices.len(), &edges),
         }
     }
 
@@ -225,11 +157,6 @@ where
         self.vertices.len()
     }
 
-    /// 辺数を返す
-    pub fn edges_count(&self) -> usize {
-        self.edges_count
-    }
-
     /// 頂点重みを返す
     pub fn vertex(&self, v: usize) -> &V {
         &self.vertices[v]
@@ -238,14 +165,7 @@ where
     /// 頂点 v から出る辺を返す  
     /// g\[v\] と同じ
     pub fn edges(&self, v: usize) -> &[(usize, E)] {
-        let l = self.pos[v];
-        let r = self.pos[v + 1];
-        &self.edges[l..r]
-    }
-
-    /// 頂点 v の i 番目の辺の id を返す  
-    pub fn edge_id(&self, v: usize, i: usize) -> usize {
-        self.edge_id[self.pos[v] + i]
+        &self.edges[v]
     }
 }
 

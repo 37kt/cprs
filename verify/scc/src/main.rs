@@ -15,7 +15,7 @@ fn main() {
     let g = DirectedGraph::from_unweighted_edges(n, &ab);
     let (groups, _) = strongly_connected_components(&g);
     println!("{}", groups.len());
-    for g in groups {
+    for g in groups.iter() {
         println!("{} {}", g.len(), g.iter().join(" "));
     }
 }

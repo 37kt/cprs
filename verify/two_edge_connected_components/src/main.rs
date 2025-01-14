@@ -15,7 +15,7 @@ fn main() {
     let g = UndirectedGraph::from_unweighted_edges(n, &ab);
     let (groups, _) = two_edge_connected_components(&g);
     println!("{}", groups.len());
-    for group in groups {
+    for group in groups.iter() {
         println!("{} {}", group.len(), group.iter().join(" "));
     }
 }

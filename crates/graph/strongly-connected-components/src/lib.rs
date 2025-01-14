@@ -1,3 +1,4 @@
+use csr_array::CSRArray;
 use graph::DirectedGraph;
 
 /// 強連結成分分解をする  
@@ -9,7 +10,7 @@ use graph::DirectedGraph;
 /// - comp: 各頂点が属する強連結成分の番号
 ///
 /// グループはトポロジカル順序に並んでいる
-pub fn strongly_connected_components<V, E>(g: &DirectedGraph<V, E>) -> (Vec<Vec<usize>>, Vec<usize>)
+pub fn strongly_connected_components<V, E>(g: &DirectedGraph<V, E>) -> (CSRArray<usize>, Vec<usize>)
 where
     V: Clone,
     E: Clone,
@@ -28,11 +29,18 @@ where
             scc.dfs(v, g);
         }
     }
-    let mut groups = vec![vec![]; scc.m];
     for v in 0..n {
         scc.comp[v] = scc.m - 1 - scc.comp[v];
-        groups[scc.comp[v]].push(v);
     }
+
+    let groups = scc
+        .comp
+        .iter()
+        .enumerate()
+        .map(|(v, &i)| (i, v))
+        .collect::<Vec<_>>();
+    let groups = CSRArray::new(n, &groups);
+
     (groups, scc.comp)
 }
 

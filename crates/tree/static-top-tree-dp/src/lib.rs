@@ -22,7 +22,7 @@ pub struct StaticTopTree {
     par_edge: Vec<usize>,
     child: Vec<usize>,
     cnt: usize,
-    tour: Vec<usize>,
+    hld: HeavyLightDecomposition,
 }
 
 impl StaticTopTree {
@@ -39,21 +39,19 @@ impl StaticTopTree {
             par_edge: vec![!0; n],
             child: vec![!0; n - 1],
             cnt: n,
-            tour: vec![],
+            hld: HeavyLightDecomposition::new(g, 0),
         };
-        let hld = HeavyLightDecomposition::new(g, 0);
-        let dist = hld.dist_table(0);
-        s.tour = hld.euler_tour();
+        let dist = s.hld.dist_table(0);
         for v in 0..n {
-            for i in 0..g[v].len() {
-                let (u, _) = g[v][i];
+            for &(u, _) in &g[v] {
+                let e = s.hld.edge_index(u, v);
                 if dist[v] < dist[u] {
-                    s.par_edge[u] = g.edge_id(v, i);
-                    s.child[g.edge_id(v, i)] = u;
+                    s.par_edge[u] = e;
+                    s.child[e] = u;
                 }
             }
         }
-        s.stt_root = s.compress(0, g, &hld).0;
+        s.stt_root = s.compress(0, g).0;
         s
     }
 
@@ -106,28 +104,22 @@ impl StaticTopTree {
         &mut self,
         mut i: usize,
         g: &UndirectedGraph<V, E>,
-        hld: &HeavyLightDecomposition,
     ) -> (usize, usize) {
-        let mut chs = vec![self.add_vertex(i, g, hld)];
-        while hld.heavy_child(i) != !0 {
-            i = hld.heavy_child(i);
-            chs.push(self.add_vertex(i, g, hld));
+        let mut chs = vec![self.add_vertex(i, g)];
+        while self.hld.heavy_child(i) != !0 {
+            i = self.hld.heavy_child(i);
+            chs.push(self.add_vertex(i, g));
         }
         self.merge(&chs, Type::Compress)
     }
 
-    fn rake<V: Clone, E: Clone>(
-        &mut self,
-        i: usize,
-        g: &UndirectedGraph<V, E>,
-        hld: &HeavyLightDecomposition,
-    ) -> (usize, usize) {
+    fn rake<V: Clone, E: Clone>(&mut self, i: usize, g: &UndirectedGraph<V, E>) -> (usize, usize) {
         let mut chs = vec![];
         for &(u, _) in &g[i] {
-            if u == hld.parent(i) || u == hld.heavy_child(i) {
+            if u == self.hld.parent(i) || u == self.hld.heavy_child(i) {
                 continue;
             }
-            chs.push(self.add_edge(u, g, hld));
+            chs.push(self.add_edge(u, g));
         }
         if chs.is_empty() {
             (!0, 0)
@@ -140,9 +132,8 @@ impl StaticTopTree {
         &mut self,
         i: usize,
         g: &UndirectedGraph<V, E>,
-        hld: &HeavyLightDecomposition,
     ) -> (usize, usize) {
-        let (j, sj) = self.compress(i, g, hld);
+        let (j, sj) = self.compress(i, g);
         let res = (self.add(!0, j, !0, Type::AddEdge), sj);
         self.edge[res.0] = self.par_edge[i];
         res
@@ -152,9 +143,8 @@ impl StaticTopTree {
         &mut self,
         i: usize,
         g: &UndirectedGraph<V, E>,
-        hld: &HeavyLightDecomposition,
     ) -> (usize, usize) {
-        let (j, sj) = self.rake(i, g, hld);
+        let (j, sj) = self.rake(i, g);
         (
             self.add(
                 i,
@@ -239,8 +229,9 @@ impl<O: TreeDPOperator> StaticTopTreeDP<O> {
         };
         for v in 0..g.len() {
             sum[v] = Data::Path(O::vertex(&g.vertex(v)));
-            for i in 0..g[v].len() {
-                edge[g.edge_id(v, i)] = g[v][i].1.clone();
+            for (u, w) in &g[v] {
+                let e = stt.hld.edge_index(v, *u);
+                edge[e] = w.clone();
             }
         }
         let mut s = Self {

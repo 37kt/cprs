@@ -1,7 +1,7 @@
 [package]
 name = "strongly-connected-components"
 version = "0.1.0"
-edition = "2018"
+edition = "2021"
 license = "CC0-1.0"
 publish = false
 
@@ -12,3 +12,4 @@ name = "strongly_connected_components"
 
 [dependencies]
 graph = { path = "../../graph/graph" }
+csr-array = { path = "../../data-structure/csr-array" }
