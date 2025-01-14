@@ -129,7 +129,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/multipoint_evaluation/src/main.rs
     title: verify/multipoint_evaluation/src/main.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/point_set_tree_path_composite_sum_fixed_root/src/main.rs
     title: verify/point_set_tree_path_composite_sum_fixed_root/src/main.rs
   - icon: ':heavy_check_mark:'
@@ -195,9 +195,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/vertex_set_path_composite/src/main.rs
     title: verify/vertex_set_path_composite/src/main.rs
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: rs
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links:
     - https://rsk0315.hatenablog.com/entry/2023/04/29/043512
@@ -507,7 +507,7 @@ data:
   - crates/graph/count-spanning-tree-undirected/src/lib.rs
   - crates/graph/count-spanning-tree-directed/src/lib.rs
   timestamp: '2025-01-11 09:03:35+00:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - verify/log_of_formal_power_series/src/main.rs
   - verify/sum_of_multiplicative_function/src/main.rs

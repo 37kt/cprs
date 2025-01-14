@@ -10,7 +10,7 @@ data:
   - icon: ':warning:'
     path: crates/data-structure/range-contour-query/src/lib.rs
     title: crates/data-structure/range-contour-query/src/lib.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: crates/graph/graph/src/lib.rs
     title: crates/graph/graph/src/lib.rs
   _extendedRequiredBy: []
@@ -59,7 +59,7 @@ data:
   isVerificationFile: false
   path: crates/data-structure/vertex-get-range-contour-add/src/lib.rs
   requiredBy: []
-  timestamp: '2025-01-12 04:36:01+00:00'
+  timestamp: '2025-01-14 05:25:42+00:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/vertex_get_range_contour_add_on_tree/src/main.rs

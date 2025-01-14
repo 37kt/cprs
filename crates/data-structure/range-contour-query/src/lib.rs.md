@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: crates/graph/graph/src/lib.rs
     title: crates/graph/graph/src/lib.rs
   - icon: ':heavy_check_mark:'
@@ -139,7 +139,7 @@ data:
   requiredBy:
   - crates/data-structure/vertex-get-range-contour-add/src/lib.rs
   - crates/data-structure/vertex-add-range-contour-sum/src/lib.rs
-  timestamp: '2025-01-12 04:36:01+00:00'
+  timestamp: '2025-01-14 05:25:42+00:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: crates/data-structure/range-contour-query/src/lib.rs

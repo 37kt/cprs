@@ -4,7 +4,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: crates/graph/extended-block-cut-tree/src/lib.rs
     title: "\u62E1\u5F35 Block-Cut Tree"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: crates/graph/graph/src/lib.rs
     title: crates/graph/graph/src/lib.rs
   _extendedRequiredBy: []
@@ -37,7 +37,7 @@ data:
   isVerificationFile: true
   path: verify/biconnected_components/src/main.rs
   requiredBy: []
-  timestamp: '2025-01-11 07:42:28+00:00'
+  timestamp: '2025-01-14 05:25:42+00:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/biconnected_components/src/main.rs

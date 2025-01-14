@@ -1,14 +1,14 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: crates/graph/graph/src/lib.rs
     title: crates/graph/graph/src/lib.rs
   _extendedRequiredBy:
   - icon: ':warning:'
     path: crates/data-structure/range-contour-query/src/lib.rs
     title: crates/data-structure/range-contour-query/src/lib.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: crates/tree/static-top-tree-dp/src/lib.rs
     title: crates/tree/static-top-tree-dp/src/lib.rs
   _extendedVerifiedWith:
@@ -188,7 +188,7 @@ data:
   requiredBy:
   - crates/tree/static-top-tree-dp/src/lib.rs
   - crates/data-structure/range-contour-query/src/lib.rs
-  timestamp: '2025-01-12 04:36:01+00:00'
+  timestamp: '2025-01-14 05:25:42+00:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/vertex_add_subtree_sum/src/main.rs

@@ -7,10 +7,10 @@ data:
   - icon: ':heavy_check_mark:'
     path: crates/data-structure/segment-tree/src/lib.rs
     title: crates/data-structure/segment-tree/src/lib.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: crates/graph/graph/src/lib.rs
     title: crates/graph/graph/src/lib.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: crates/number-theory/modint/src/lib.rs
     title: crates/number-theory/modint/src/lib.rs
   - icon: ':heavy_check_mark:'
@@ -64,7 +64,7 @@ data:
   isVerificationFile: true
   path: verify/vertex_set_path_composite/src/main.rs
   requiredBy: []
-  timestamp: '2025-01-12 04:36:01+00:00'
+  timestamp: '2025-01-14 05:25:42+00:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/vertex_set_path_composite/src/main.rs

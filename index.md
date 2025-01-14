@@ -106,6 +106,11 @@ data:
     - icon: ':heavy_check_mark:'
       path: crates/data-structure/binary-trie/src/lib.rs
       title: crates/data-structure/binary-trie/src/lib.rs
+  - name: crates/data-structure/csr-array/src
+    pages:
+    - icon: ':warning:'
+      path: crates/data-structure/csr-array/src/lib.rs
+      title: crates/data-structure/csr-array/src/lib.rs
   - name: crates/data-structure/cumulative-sum-2d/src
     pages:
     - icon: ':warning:'
@@ -328,7 +333,7 @@ data:
       title: "\u62E1\u5F35 Block-Cut Tree"
   - name: crates/graph/graph/src
     pages:
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: crates/graph/graph/src/lib.rs
       title: crates/graph/graph/src/lib.rs
   - name: crates/graph/k-project-selection/src
@@ -368,12 +373,12 @@ data:
       title: crates/graph/range-edge-graph/src/lib.rs
   - name: crates/graph/strongly-connected-components/src
     pages:
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: crates/graph/strongly-connected-components/src/lib.rs
       title: crates/graph/strongly-connected-components/src/lib.rs
   - name: crates/graph/two-edge-connected-components/src
     pages:
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: crates/graph/two-edge-connected-components/src/lib.rs
       title: crates/graph/two-edge-connected-components/src/lib.rs
   - name: crates/graph/zero-one-bfs/src
@@ -503,7 +508,7 @@ data:
       title: crates/number-theory/combination/src/lib.rs
   - name: crates/number-theory/modint/src
     pages:
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: crates/number-theory/modint/src/lib.rs
       title: crates/number-theory/modint/src/lib.rs
   - name: crates/number-theory/partition/src
@@ -653,7 +658,7 @@ data:
       title: crates/tree/re-rooting-dp/src/lib.rs
   - name: crates/tree/static-top-tree-dp/src
     pages:
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: crates/tree/static-top-tree-dp/src/lib.rs
       title: crates/tree/static-top-tree-dp/src/lib.rs
   - name: crates/tree/zero-one-on-tree/src
@@ -939,7 +944,7 @@ data:
       title: verify/point_add_rectangle_sum_2/src/main.rs
   - name: verify/point_set_tree_path_composite_sum_fixed_root/src
     pages:
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: verify/point_set_tree_path_composite_sum_fixed_root/src/main.rs
       title: verify/point_set_tree_path_composite_sum_fixed_root/src/main.rs
   - name: verify/polynomial_interpolation/src
@@ -1024,7 +1029,7 @@ data:
       title: verify/rectangle_add_point_get/src/main.rs
   - name: verify/scc/src
     pages:
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: verify/scc/src/main.rs
       title: verify/scc/src/main.rs
   - name: verify/segment_add_get_min/src
@@ -1154,7 +1159,7 @@ data:
       title: verify/trie_yuki1269/src/main.rs
   - name: verify/two_edge_connected_components/src
     pages:
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: verify/two_edge_connected_components/src/main.rs
       title: verify/two_edge_connected_components/src/main.rs
   - name: verify/two_sat/src

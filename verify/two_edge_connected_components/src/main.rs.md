@@ -1,17 +1,17 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: crates/graph/graph/src/lib.rs
     title: crates/graph/graph/src/lib.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: crates/graph/two-edge-connected-components/src/lib.rs
     title: crates/graph/two-edge-connected-components/src/lib.rs
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: rs
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     PROBLEM: https://judge.yosupo.jp/problem/two_edge_connected_components
     links:
@@ -28,16 +28,16 @@ data:
     fn main() {\n    input! {\n        n: usize,\n        m: usize,\n        ab: [(usize,\
     \ usize); m]\n    }\n    let g = UndirectedGraph::from_unweighted_edges(n, &ab);\n\
     \    let (groups, _) = two_edge_connected_components(&g);\n    println!(\"{}\"\
-    , groups.len());\n    for group in groups {\n        println!(\"{} {}\", group.len(),\
-    \ group.iter().join(\" \"));\n    }\n}\n"
+    , groups.len());\n    for group in groups.iter() {\n        println!(\"{} {}\"\
+    , group.len(), group.iter().join(\" \"));\n    }\n}\n"
   dependsOn:
   - crates/graph/graph/src/lib.rs
   - crates/graph/two-edge-connected-components/src/lib.rs
   isVerificationFile: true
   path: verify/two_edge_connected_components/src/main.rs
   requiredBy: []
-  timestamp: '2025-01-11 07:42:28+00:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2025-01-14 05:25:42+00:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: verify/two_edge_connected_components/src/main.rs
 layout: document

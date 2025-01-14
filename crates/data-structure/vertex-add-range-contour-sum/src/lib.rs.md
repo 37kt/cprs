@@ -10,7 +10,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: crates/data-structure/segment-tree/src/lib.rs
     title: crates/data-structure/segment-tree/src/lib.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: crates/graph/graph/src/lib.rs
     title: crates/graph/graph/src/lib.rs
   _extendedRequiredBy: []
@@ -62,7 +62,7 @@ data:
   isVerificationFile: false
   path: crates/data-structure/vertex-add-range-contour-sum/src/lib.rs
   requiredBy: []
-  timestamp: '2025-01-12 04:36:01+00:00'
+  timestamp: '2025-01-14 05:25:42+00:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/vertex_add_range_contour_sum_on_tree/src/main.rs

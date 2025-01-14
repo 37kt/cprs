@@ -83,7 +83,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: crates/math/stern-brocot-tree/src/lib.rs
     title: crates/math/stern-brocot-tree/src/lib.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: crates/number-theory/modint/src/lib.rs
     title: crates/number-theory/modint/src/lib.rs
   - icon: ':heavy_check_mark:'

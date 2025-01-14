@@ -4,10 +4,10 @@ data:
   - icon: ':heavy_check_mark:'
     path: crates/algebraic/algebraic/src/lib.rs
     title: crates/algebraic/algebraic/src/lib.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: crates/graph/graph/src/lib.rs
     title: crates/graph/graph/src/lib.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: crates/number-theory/modint/src/lib.rs
     title: crates/number-theory/modint/src/lib.rs
   - icon: ':heavy_check_mark:'
@@ -47,7 +47,7 @@ data:
   isVerificationFile: true
   path: verify/tree_path_composite_sum/src/main.rs
   requiredBy: []
-  timestamp: '2025-01-11 09:03:35+00:00'
+  timestamp: '2025-01-14 05:25:42+00:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/tree_path_composite_sum/src/main.rs
