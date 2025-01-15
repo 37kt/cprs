@@ -1,5 +1,6 @@
 // https://noya2ruler.github.io/noya2_Library/tree/heavy_light_decomposition.hpp
 
+use csr_array::CSRArray;
 use graph::Graph;
 
 #[derive(Clone)]
@@ -149,6 +150,10 @@ impl HeavyLightDecomposition {
             sub,
             tour,
         }
+    }
+
+    pub fn root(&self) -> usize {
+        self.root
     }
 
     pub fn len(&self) -> usize {
@@ -392,5 +397,19 @@ impl HeavyLightDecomposition {
         } else {
             !0
         }
+    }
+
+    pub fn parents(&self) -> Vec<usize> {
+        (0..self.n).map(|i| self.parent(i)).collect()
+    }
+
+    pub fn children(&self) -> CSRArray<usize> {
+        let children = self
+            .tour
+            .iter()
+            .skip(1)
+            .map(|&v| (self.parent(v as usize), v as usize))
+            .collect::<Vec<_>>();
+        CSRArray::new(self.n, &children)
     }
 }
