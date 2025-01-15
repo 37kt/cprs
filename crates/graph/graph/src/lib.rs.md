@@ -63,6 +63,9 @@ data:
     path: crates/tree/static-top-tree-dp/src/lib.rs
     title: crates/tree/static-top-tree-dp/src/lib.rs
   - icon: ':warning:'
+    path: crates/tree/static-top-tree/src/lib.rs
+    title: crates/tree/static-top-tree/src/lib.rs
+  - icon: ':warning:'
     path: crates/tree/zero-one-on-tree/src/lib.rs
     title: crates/tree/zero-one-on-tree/src/lib.rs
   _extendedVerifiedWith:
@@ -213,6 +216,7 @@ data:
   path: crates/graph/graph/src/lib.rs
   requiredBy:
   - crates/math/two-satisfiability/src/lib.rs
+  - crates/tree/static-top-tree/src/lib.rs
   - crates/tree/re-rooting-dp/src/lib.rs
   - crates/tree/heavy-light-decomposition/src/lib.rs
   - crates/tree/zero-one-on-tree/src/lib.rs

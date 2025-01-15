@@ -656,6 +656,11 @@ data:
     - icon: ':heavy_check_mark:'
       path: crates/tree/re-rooting-dp/src/lib.rs
       title: crates/tree/re-rooting-dp/src/lib.rs
+  - name: crates/tree/static-top-tree/src
+    pages:
+    - icon: ':warning:'
+      path: crates/tree/static-top-tree/src/lib.rs
+      title: crates/tree/static-top-tree/src/lib.rs
   - name: crates/tree/static-top-tree-dp/src
     pages:
     - icon: ':heavy_check_mark:'

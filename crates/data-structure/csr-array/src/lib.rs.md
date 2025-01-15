@@ -11,6 +11,12 @@ data:
   - icon: ':heavy_check_mark:'
     path: crates/graph/two-edge-connected-components/src/lib.rs
     title: crates/graph/two-edge-connected-components/src/lib.rs
+  - icon: ':heavy_check_mark:'
+    path: crates/tree/heavy-light-decomposition/src/lib.rs
+    title: crates/tree/heavy-light-decomposition/src/lib.rs
+  - icon: ':warning:'
+    path: crates/tree/static-top-tree/src/lib.rs
+    title: crates/tree/static-top-tree/src/lib.rs
   _extendedVerifiedWith: []
   _isVerificationFailed: false
   _pathExtension: rs
@@ -44,6 +50,8 @@ data:
   isVerificationFile: false
   path: crates/data-structure/csr-array/src/lib.rs
   requiredBy:
+  - crates/tree/static-top-tree/src/lib.rs
+  - crates/tree/heavy-light-decomposition/src/lib.rs
   - crates/graph/two-edge-connected-components/src/lib.rs
   - crates/graph/strongly-connected-components/src/lib.rs
   - crates/graph/graph/src/lib.rs
