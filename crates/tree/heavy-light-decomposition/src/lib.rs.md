@@ -131,38 +131,38 @@ data:
     \ as usize\n        } else {\n            self.tour[self.down[v] as usize - 1]\
     \ as usize\n        }\n    }\n\n    pub fn vertex_index(&self, v: usize) -> usize\
     \ {\n        self.down[v] as usize\n    }\n\n    pub fn edge_index(&self, u: usize,\
-    \ v: usize) -> usize {\n        self.down[u].max(self.down[v]) as usize\n    }\n\
-    \n    pub fn subtree_range(&self, v: usize) -> (usize, usize) {\n        (self.down[v]\
-    \ as usize, (self.down[v] + self.sub[v]) as usize)\n    }\n\n    pub fn is_in_subtree(&self,\
-    \ r: usize, v: usize) -> bool {\n        let (rl, rr) = self.subtree_range(r);\n\
-    \        let (vl, vr) = self.subtree_range(v);\n        rl <= vl && vr <= rr\n\
-    \    }\n\n    pub fn dist_table(&self, mut s: usize) -> Vec<usize> {\n       \
-    \ let mut dist = vec![!0; self.n];\n        dist[s] = 0;\n        while s != self.root\
-    \ {\n            dist[self.parent(s)] = dist[s] + 1;\n            s = self.parent(s);\n\
-    \        }\n        for &v in &self.tour {\n            let v = v as usize;\n\
-    \            if dist[v] == !0 {\n                dist[v] = dist[self.parent(v)]\
-    \ + 1;\n            }\n        }\n        dist\n    }\n\n    pub fn diameter(&self)\
-    \ -> (usize, usize, usize) {\n        let depth = self.dist_table(self.root);\n\
-    \        let u = depth.iter().enumerate().max_by_key(|&(_, &d)| d).unwrap().0;\n\
-    \        let dist_u = self.dist_table(u);\n        let v = dist_u\n          \
-    \  .iter()\n            .enumerate()\n            .max_by_key(|&(_, &d)| d)\n\
-    \            .unwrap()\n            .0;\n        (dist_u[v], u, v)\n    }\n\n\
-    \    pub fn path(&self, mut u: usize, mut v: usize) -> Vec<usize> {\n        let\
-    \ d = self.dist(u, v);\n        let mut path = vec![0; d + 1];\n        let mut\
-    \ front = 0;\n        let mut back = d;\n        while u != v {\n            if\
-    \ self.down[u] > self.down[v] {\n                path[front] = u;\n          \
-    \      front += 1;\n                u = self.parent(u);\n            } else {\n\
-    \                path[back] = v;\n                back -= 1;\n               \
-    \ v = self.parent(v);\n            }\n        }\n        path[front] = u;\n  \
-    \      path\n    }\n\n    /// f: (l, r, reverse)\n    pub fn path_query(\n   \
-    \     &self,\n        mut u: usize,\n        mut v: usize,\n        mut f: impl\
-    \ FnMut(usize, usize, bool),\n        vertex_query: bool,\n    ) {\n        let\
-    \ mut up_path = vec![];\n        let mut down_path = vec![];\n        while self.leader(u)\
-    \ != self.leader(v) {\n            if self.down[u] < self.down[v] {\n        \
-    \        let l = self.down[self.leader(v)] as usize;\n                let r =\
-    \ self.down[v] as usize + 1;\n                assert!(l < r);\n              \
-    \  down_path.push((l, r));\n                v = (!self.next[self.leader(v)]) as\
-    \ usize;\n            } else {\n                let l = self.down[self.leader(u)]\
+    \ v: usize) -> usize {\n        self.down[u].max(self.down[v]) as usize - 1\n\
+    \    }\n\n    pub fn subtree_range(&self, v: usize) -> (usize, usize) {\n    \
+    \    (self.down[v] as usize, (self.down[v] + self.sub[v]) as usize)\n    }\n\n\
+    \    pub fn is_in_subtree(&self, r: usize, v: usize) -> bool {\n        let (rl,\
+    \ rr) = self.subtree_range(r);\n        let (vl, vr) = self.subtree_range(v);\n\
+    \        rl <= vl && vr <= rr\n    }\n\n    pub fn dist_table(&self, mut s: usize)\
+    \ -> Vec<usize> {\n        let mut dist = vec![!0; self.n];\n        dist[s] =\
+    \ 0;\n        while s != self.root {\n            dist[self.parent(s)] = dist[s]\
+    \ + 1;\n            s = self.parent(s);\n        }\n        for &v in &self.tour\
+    \ {\n            let v = v as usize;\n            if dist[v] == !0 {\n       \
+    \         dist[v] = dist[self.parent(v)] + 1;\n            }\n        }\n    \
+    \    dist\n    }\n\n    pub fn diameter(&self) -> (usize, usize, usize) {\n  \
+    \      let depth = self.dist_table(self.root);\n        let u = depth.iter().enumerate().max_by_key(|&(_,\
+    \ &d)| d).unwrap().0;\n        let dist_u = self.dist_table(u);\n        let v\
+    \ = dist_u\n            .iter()\n            .enumerate()\n            .max_by_key(|&(_,\
+    \ &d)| d)\n            .unwrap()\n            .0;\n        (dist_u[v], u, v)\n\
+    \    }\n\n    pub fn path(&self, mut u: usize, mut v: usize) -> Vec<usize> {\n\
+    \        let d = self.dist(u, v);\n        let mut path = vec![0; d + 1];\n  \
+    \      let mut front = 0;\n        let mut back = d;\n        while u != v {\n\
+    \            if self.down[u] > self.down[v] {\n                path[front] = u;\n\
+    \                front += 1;\n                u = self.parent(u);\n          \
+    \  } else {\n                path[back] = v;\n                back -= 1;\n   \
+    \             v = self.parent(v);\n            }\n        }\n        path[front]\
+    \ = u;\n        path\n    }\n\n    /// f: (l, r, reverse)\n    pub fn path_query(\n\
+    \        &self,\n        mut u: usize,\n        mut v: usize,\n        mut f:\
+    \ impl FnMut(usize, usize, bool),\n        vertex_query: bool,\n    ) {\n    \
+    \    let mut up_path = vec![];\n        let mut down_path = vec![];\n        while\
+    \ self.leader(u) != self.leader(v) {\n            if self.down[u] < self.down[v]\
+    \ {\n                let l = self.down[self.leader(v)] as usize;\n           \
+    \     let r = self.down[v] as usize + 1;\n                assert!(l < r);\n  \
+    \              down_path.push((l, r));\n                v = (!self.next[self.leader(v)])\
+    \ as usize;\n            } else {\n                let l = self.down[self.leader(u)]\
     \ as usize;\n                let r = self.down[u] as usize + 1;\n            \
     \    assert!(l < r);\n                up_path.push((l, r));\n                u\
     \ = (!self.next[self.leader(u)]) as usize;\n            }\n        }\n       \
@@ -172,15 +172,19 @@ data:
     \            }\n        } else {\n            let du = self.down[u] as usize;\n\
     \            let dv = self.down[v] as usize;\n            if du < dv {\n     \
     \           down_path.push((du + 1, dv + 1));\n            } else {\n        \
-    \        up_path.push((dv + 1, du + 1));\n            }\n        }\n        for\
-    \ &(l, r) in &up_path {\n            f(l, r, true);\n        }\n        for &(l,\
-    \ r) in down_path.iter().rev() {\n            f(l, r, false);\n        }\n   \
-    \ }\n\n    pub fn euler_tour(&self) -> Vec<usize> {\n        self.tour.iter().map(|&u|\
-    \ u as usize).collect()\n    }\n\n    pub fn heavy_child(&self, v: usize) -> usize\
-    \ {\n        if (self.down[v] + 1) as usize >= self.n {\n            return !0;\n\
-    \        }\n        let u = self.tour[self.down[v] as usize + 1] as usize;\n \
-    \       if self.parent(u) == v {\n            u\n        } else {\n          \
-    \  !0\n        }\n    }\n}\n"
+    \        up_path.push((dv + 1, du + 1));\n            }\n        }\n\n       \
+    \ if !vertex_query {\n            for (l, r) in up_path.iter_mut() {\n       \
+    \         *l -= 1;\n                *r -= 1;\n            }\n            for (l,\
+    \ r) in down_path.iter_mut() {\n                *l -= 1;\n                *r -=\
+    \ 1;\n            }\n        }\n        for &(l, r) in &up_path {\n          \
+    \  f(l, r, true);\n        }\n        for &(l, r) in down_path.iter().rev() {\n\
+    \            f(l, r, false);\n        }\n    }\n\n    pub fn euler_tour(&self)\
+    \ -> Vec<usize> {\n        self.tour.iter().map(|&u| u as usize).collect()\n \
+    \   }\n\n    pub fn heavy_child(&self, v: usize) -> usize {\n        if (self.down[v]\
+    \ + 1) as usize >= self.n {\n            return !0;\n        }\n        let u\
+    \ = self.tour[self.down[v] as usize + 1] as usize;\n        if self.parent(u)\
+    \ == v {\n            u\n        } else {\n            !0\n        }\n    }\n\
+    }\n"
   dependsOn:
   - crates/graph/graph/src/lib.rs
   isVerificationFile: false
@@ -188,7 +192,7 @@ data:
   requiredBy:
   - crates/tree/static-top-tree-dp/src/lib.rs
   - crates/data-structure/range-contour-query/src/lib.rs
-  timestamp: '2025-01-14 05:25:42+00:00'
+  timestamp: '2025-01-15 04:45:47+00:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/vertex_add_subtree_sum/src/main.rs
