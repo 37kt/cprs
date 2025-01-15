@@ -255,7 +255,7 @@ impl HeavyLightDecomposition {
     }
 
     pub fn edge_index(&self, u: usize, v: usize) -> usize {
-        self.down[u].max(self.down[v]) as usize
+        self.down[u].max(self.down[v]) as usize - 1
     }
 
     pub fn subtree_range(&self, v: usize) -> (usize, usize) {
@@ -357,6 +357,17 @@ impl HeavyLightDecomposition {
                 down_path.push((du + 1, dv + 1));
             } else {
                 up_path.push((dv + 1, du + 1));
+            }
+        }
+
+        if !vertex_query {
+            for (l, r) in up_path.iter_mut() {
+                *l -= 1;
+                *r -= 1;
+            }
+            for (l, r) in down_path.iter_mut() {
+                *l -= 1;
+                *r -= 1;
             }
         }
         for &(l, r) in &up_path {
