@@ -9,8 +9,6 @@ pub struct StaticTopTree {
     pub par: Vec<usize>,
     pub lch: Vec<usize>,
     pub rch: Vec<usize>,
-    pub top: Vec<usize>,
-    pub bottom: Vec<usize>,
     pub is_compress: Vec<bool>,
 }
 
@@ -22,16 +20,12 @@ impl StaticTopTree {
             par: Vec::with_capacity(n * 2 - 1),
             lch: Vec::with_capacity(n * 2 - 1),
             rch: Vec::with_capacity(n * 2 - 1),
-            top: Vec::with_capacity(n * 2 - 1),
-            bottom: Vec::with_capacity(n * 2 - 1),
             is_compress: Vec::with_capacity(n * 2 - 1),
         };
-        for v in 0..n {
+        for _ in 0..n {
             stt.par.push(!0);
             stt.lch.push(!0);
             stt.rch.push(!0);
-            stt.top.push(stt.hld.parent(v));
-            stt.bottom.push(v);
             stt.is_compress.push(false);
         }
         let children = stt.hld.children();
@@ -67,7 +61,7 @@ impl StaticTopTree {
                 if v2 == v {
                     std::mem::swap(&mut v1, &mut v2);
                 }
-                let v3 = self.new_node(v1, v2, self.top[v1], self.bottom[v2], false);
+                let v3 = self.new_node(v1, v2, false);
                 if v == v1 {
                     v = v3;
                 }
@@ -96,22 +90,13 @@ impl StaticTopTree {
         stack.pop().unwrap()
     }
 
-    fn new_node(
-        &mut self,
-        lch: usize,
-        rch: usize,
-        top: usize,
-        bottom: usize,
-        is_compress: bool,
-    ) -> usize {
+    fn new_node(&mut self, lch: usize, rch: usize, is_compress: bool) -> usize {
         let v = self.par.len();
         self.par[lch] = v;
         self.par[rch] = v;
         self.par.push(!0);
         self.lch.push(lch);
         self.rch.push(rch);
-        self.top.push(top);
-        self.bottom.push(bottom);
         self.is_compress.push(is_compress);
         v
     }
@@ -119,9 +104,6 @@ impl StaticTopTree {
     fn merge(&mut self, stack: &mut Vec<(usize, usize)>) {
         let (h2, v2) = stack.pop().unwrap();
         let (h1, v1) = stack.pop().unwrap();
-        stack.push((
-            h1.max(h2) + 1,
-            self.new_node(v1, v2, self.top[v1], self.bottom[v2], true),
-        ));
+        stack.push((h1.max(h2) + 1, self.new_node(v1, v2, true)));
     }
 }

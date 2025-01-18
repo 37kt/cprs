@@ -1,5 +1,5 @@
 [package]
-name = "point_set_tree_path_composite_sum_fixed_root"
+name = "point_set_tree_path_composite_sum"
 version = "0.1.0"
 edition = "2021"
 
@@ -8,5 +8,5 @@ edition = "2021"
 [dependencies]
 proconio = { version = "=0.5.0", features = ["derive"] }
 graph = { path = "../../crates/graph/graph" }
-dynamic-tree-dp = { path = "../../crates/tree/dynamic-tree-dp" }
+dynamic-rerooting-tree-dp = { path = "../../crates/tree/dynamic-rerooting-tree-dp" }
 modint = { path = "../../crates/number-theory/modint" }

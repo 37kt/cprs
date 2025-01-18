@@ -1,7 +1,7 @@
-// verification-helper: PROBLEM https://judge.yosupo.jp/problem/point_set_tree_path_composite_sum_fixed_root
+// verification-helper: PROBLEM https://judge.yosupo.jp/problem/point_set_tree_path_composite_sum
 
-use dynamic_tree_dp::DynamicTreeDP;
-use dynamic_tree_dp::DynamicTreeDPOperator;
+use dynamic_rerooting_tree_dp::DynamicRerootingTreeDP;
+use dynamic_rerooting_tree_dp::DynamicRerootingTreeDPOperator;
 use graph::UndirectedGraph;
 use modint::ModInt998244353 as Mint;
 use proconio::fastout;
@@ -16,7 +16,7 @@ struct S {
 }
 
 enum Op {}
-impl DynamicTreeDPOperator for Op {
+impl DynamicRerootingTreeDPOperator for Op {
     type V = Mint;
     type E = (Mint, Mint);
     type X = S;
@@ -30,14 +30,22 @@ impl DynamicTreeDPOperator for Op {
         }
     }
 
-    fn single(&v: &Self::V, e: Option<&Self::E>) -> Self::X {
+    fn single(&v: &Self::V, e: Option<&Self::E>) -> (Self::X, Self::X) {
         let &(a, b) = e.unwrap_or(&(1.into(), 0.into()));
-        S {
-            a,
-            b,
-            cnt: 1.into(),
-            sum: a * v + b,
-        }
+        (
+            S {
+                a,
+                b,
+                cnt: 1.into(),
+                sum: a * v + b,
+            },
+            S {
+                a,
+                b,
+                cnt: 1.into(),
+                sum: v,
+            },
+        )
     }
 
     fn rake(&l: &Self::X, &r: &Self::X) -> Self::X {
@@ -49,6 +57,19 @@ impl DynamicTreeDPOperator for Op {
         }
     }
 
+    fn rake2(&l: &Self::X, &r: &Self::X) -> Self::X {
+        S {
+            a: l.a,
+            b: l.b,
+            cnt: l.cnt + r.cnt,
+            sum: l.sum + l.a * r.sum + l.b * r.cnt,
+        }
+    }
+
+    fn rake3(p: &Self::X, c: &Self::X) -> Self::X {
+        Self::rake(p, c)
+    }
+
     fn compress(&p: &Self::X, &c: &Self::X) -> Self::X {
         S {
             a: p.a * c.a,
@@ -56,6 +77,10 @@ impl DynamicTreeDPOperator for Op {
             cnt: p.cnt + c.cnt,
             sum: p.sum + p.a * c.sum + p.b * c.cnt,
         }
+    }
+
+    fn compress2(p: &Self::X, c: &Self::X) -> Self::X {
+        Self::compress(c, p)
     }
 }
 
@@ -68,27 +93,31 @@ fn main() {
         uvbc: [(usize, usize, (Mint, Mint)); n - 1],
     }
     let g = UndirectedGraph::from_vertices_and_edges(&a, &uvbc);
-    let mut dp = DynamicTreeDP::<Op>::new(&g, 0);
+    let mut dp = DynamicRerootingTreeDP::<Op>::new(&g, 0);
     for _ in 0..q {
         input! {
             t: usize,
         }
         if t == 0 {
             input! {
-                w: usize,
+                v: usize,
                 x: Mint,
             }
-            dp.set_vertex(w, x);
+            dp.set_vertex(v, x);
         } else {
             input! {
                 e: usize,
-                y: Mint,
-                z: Mint,
+                a: Mint,
+                b: Mint,
             }
             let (u, v, _) = uvbc[e];
-            dp.set_edge(u, v, (y, z));
+            dp.set_edge(u, v, (a, b));
         }
-        let S { sum, .. } = dp.prod();
+
+        input! {
+            r: usize,
+        }
+        let S { sum, .. } = dp.prod(r);
         println!("{}", sum);
     }
 }
