@@ -130,6 +130,9 @@ data:
     path: verify/multipoint_evaluation/src/main.rs
     title: verify/multipoint_evaluation/src/main.rs
   - icon: ':heavy_check_mark:'
+    path: verify/point_set_tree_path_composite_sum/src/main.rs
+    title: verify/point_set_tree_path_composite_sum/src/main.rs
+  - icon: ':heavy_check_mark:'
     path: verify/point_set_tree_path_composite_sum_fixed_root/src/main.rs
     title: verify/point_set_tree_path_composite_sum_fixed_root/src/main.rs
   - icon: ':heavy_check_mark:'
@@ -521,6 +524,7 @@ data:
   - verify/composition_of_formal_power_series_large/src/main.rs
   - verify/vertex_set_path_composite/src/main.rs
   - verify/unionfind_with_potential_non_commutative_group/src/main.rs
+  - verify/point_set_tree_path_composite_sum/src/main.rs
   - verify/tree_path_composite_sum/src/main.rs
   - verify/q_binomial_coefficient_prime_mod/src/main.rs
   - verify/multipoint_evaluation/src/main.rs

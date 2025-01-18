@@ -12,8 +12,11 @@ data:
     path: crates/data-structure/range-contour-query/src/lib.rs
     title: crates/data-structure/range-contour-query/src/lib.rs
   - icon: ':heavy_check_mark:'
-    path: crates/tree/static-top-tree-dp/src/lib.rs
-    title: crates/tree/static-top-tree-dp/src/lib.rs
+    path: crates/tree/dynamic-rerooting-tree-dp/src/lib.rs
+    title: crates/tree/dynamic-rerooting-tree-dp/src/lib.rs
+  - icon: ':heavy_check_mark:'
+    path: crates/tree/dynamic-tree-dp/src/lib.rs
+    title: crates/tree/dynamic-tree-dp/src/lib.rs
   - icon: ':warning:'
     path: crates/tree/static-top-tree/src/lib.rs
     title: crates/tree/static-top-tree/src/lib.rs
@@ -204,7 +207,8 @@ data:
   path: crates/tree/heavy-light-decomposition/src/lib.rs
   requiredBy:
   - crates/tree/static-top-tree/src/lib.rs
-  - crates/tree/static-top-tree-dp/src/lib.rs
+  - crates/tree/dynamic-tree-dp/src/lib.rs
+  - crates/tree/dynamic-rerooting-tree-dp/src/lib.rs
   - crates/data-structure/range-contour-query/src/lib.rs
   timestamp: '2025-01-15 06:25:46+00:00'
   verificationStatus: LIBRARY_ALL_AC

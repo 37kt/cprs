@@ -646,6 +646,16 @@ data:
     - icon: ':heavy_check_mark:'
       path: crates/tree/centroid-decomposition/src/lib.rs
       title: crates/tree/centroid-decomposition/src/lib.rs
+  - name: crates/tree/dynamic-rerooting-tree-dp/src
+    pages:
+    - icon: ':heavy_check_mark:'
+      path: crates/tree/dynamic-rerooting-tree-dp/src/lib.rs
+      title: crates/tree/dynamic-rerooting-tree-dp/src/lib.rs
+  - name: crates/tree/dynamic-tree-dp/src
+    pages:
+    - icon: ':heavy_check_mark:'
+      path: crates/tree/dynamic-tree-dp/src/lib.rs
+      title: crates/tree/dynamic-tree-dp/src/lib.rs
   - name: crates/tree/heavy-light-decomposition/src
     pages:
     - icon: ':heavy_check_mark:'
@@ -661,11 +671,6 @@ data:
     - icon: ':warning:'
       path: crates/tree/static-top-tree/src/lib.rs
       title: crates/tree/static-top-tree/src/lib.rs
-  - name: crates/tree/static-top-tree-dp/src
-    pages:
-    - icon: ':heavy_check_mark:'
-      path: crates/tree/static-top-tree-dp/src/lib.rs
-      title: crates/tree/static-top-tree-dp/src/lib.rs
   - name: crates/tree/zero-one-on-tree/src
     pages:
     - icon: ':warning:'
@@ -947,6 +952,11 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/point_add_rectangle_sum_2/src/main.rs
       title: verify/point_add_rectangle_sum_2/src/main.rs
+  - name: verify/point_set_tree_path_composite_sum/src
+    pages:
+    - icon: ':heavy_check_mark:'
+      path: verify/point_set_tree_path_composite_sum/src/main.rs
+      title: verify/point_set_tree_path_composite_sum/src/main.rs
   - name: verify/point_set_tree_path_composite_sum_fixed_root/src
     pages:
     - icon: ':heavy_check_mark:'
