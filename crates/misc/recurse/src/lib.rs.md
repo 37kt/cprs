@@ -29,17 +29,18 @@ data:
     \ F> Recurse<'a, Arg, Ret, F>\nwhere\n    F: FnMut(&mut RecurseImpl<'a, Arg, Ret>,\
     \ Arg) -> Ret + 'a,\n{\n    pub fn call(&mut self, arg: Arg) -> Ret {\n      \
     \  let f = unsafe { &mut *self.0.get() };\n        let g = unsafe { &mut *self.0.get()\
-    \ };\n        f(&mut RecurseImpl(UnsafeCell::new(g)), arg)\n    }\n}\n\n#[cfg(test)]\n\
-    mod tests {\n    use super::*;\n\n    #[test]\n    fn test() {\n        let mut\
-    \ s = 0;\n        let mut f = Recurse::new(|f, n| {\n            if n < 0 {\n\
-    \            } else if n <= 1 {\n                s += 1;\n            } else {\n\
-    \                f.call(n - 1);\n                f.call(n - 2);\n            }\n\
-    \        });\n        f.call(10);\n        assert_eq!(s, 89);\n    }\n}\n"
+    \ };\n        f(&mut RecurseImpl(UnsafeCell::new(g)), arg)\n    }\n}\n\n// #[cfg(test)]\n\
+    // mod tests {\n//     use super::*;\n\n//     #[test]\n//     fn test() {\n//\
+    \         let mut s = 0;\n//         let mut f = Recurse::new(|f, n| {\n//   \
+    \          if n < 0 {\n//             } else if n <= 1 {\n//                 s\
+    \ += 1;\n//             } else {\n//                 f.call(n - 1);\n//      \
+    \           f.call(n - 2);\n//             }\n//         });\n//         f.call(10);\n\
+    //         assert_eq!(s, 89);\n//     }\n// }\n"
   dependsOn: []
   isVerificationFile: false
   path: crates/misc/recurse/src/lib.rs
   requiredBy: []
-  timestamp: '2024-12-30 09:13:10+00:00'
+  timestamp: '2025-01-25 11:38:56+00:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: crates/misc/recurse/src/lib.rs

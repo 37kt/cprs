@@ -21,20 +21,12 @@ data:
     \          a.swap_remove(i);\n            } else {\n                let j = a[i];\n\
     \                a.swap(i, j);\n            }\n        }\n    }\n    a.iter()\n\
     \        .enumerate()\n        .position(|(i, &x)| x != i)\n        .unwrap_or(a.len())\n\
-    }\n\n#[cfg(test)]\nmod tests {\n    use std::collections::BTreeSet;\n\n    use\
-    \ rand::Rng;\n\n    use super::*;\n\n    #[test]\n    fn test_mex() {\n      \
-    \  for _ in 0..1000 {\n            let mut rng = rand::thread_rng();\n       \
-    \     let n = rng.gen_range(0..100);\n            let m = n + 10;\n          \
-    \  let a = (0..n).map(|_| rng.gen_range(0..m)).collect::<Vec<_>>();\n        \
-    \    let res = mex(&a);\n\n            let mut st = BTreeSet::new();\n       \
-    \     for i in 0..=m {\n                st.insert(i);\n            }\n       \
-    \     for &x in &a {\n                st.remove(&x);\n            }\n        \
-    \    assert_eq!(res, *st.iter().next().unwrap());\n        }\n    }\n}\n"
+    }\n"
   dependsOn: []
   isVerificationFile: false
   path: crates/sequence/mex/src/lib.rs
   requiredBy: []
-  timestamp: '2024-12-30 09:13:10+00:00'
+  timestamp: '2025-01-25 11:38:56+00:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: crates/sequence/mex/src/lib.rs

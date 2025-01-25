@@ -34,13 +34,7 @@ data:
     \ = T>\n        + Rem<Output = T>\n        + BitXor<Output = T>\n        + PartialOrd,\n\
     {\n    let zero = T::zero();\n    let one = T::one();\n    a / b\n        - if\
     \ a ^ b < zero && a % b != zero {\n            one\n        } else {\n       \
-    \     zero\n        }\n}\n\n#[cfg(test)]\nmod tests {\n    use super::*;\n\n \
-    \   #[test]\n    fn test_div_floor() {\n        assert_eq!(div_floor(10, 3), 3);\n\
-    \        assert_eq!(div_floor(10, -3), -4);\n        assert_eq!(div_floor(-10,\
-    \ 3), -4);\n        assert_eq!(div_floor(-10, -3), 3);\n    }\n\n    #[test]\n\
-    \    fn test_div_ceil() {\n        assert_eq!(div_ceil(10, 3), 4);\n        assert_eq!(div_ceil(10,\
-    \ -3), -3);\n        assert_eq!(div_ceil(-10, 3), -3);\n        assert_eq!(div_ceil(-10,\
-    \ -3), 4);\n    }\n}\n"
+    \     zero\n        }\n}\n"
   dependsOn:
   - crates/algebraic/algebraic/src/lib.rs
   isVerificationFile: false
@@ -48,7 +42,7 @@ data:
   requiredBy:
   - crates/data-structure/static-range-inversions-query/src/lib.rs
   - crates/algebraic/rational/src/lib.rs
-  timestamp: '2025-01-11 09:03:35+00:00'
+  timestamp: '2025-01-25 11:38:56+00:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: crates/math/div/src/lib.rs

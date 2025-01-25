@@ -105,7 +105,7 @@ data:
   isVerificationFile: false
   path: crates/data-structure/static-range-inversions-query/src/lib.rs
   requiredBy: []
-  timestamp: '2024-12-26 06:54:01+00:00'
+  timestamp: '2025-01-25 11:38:56+00:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/static_range_inversions_query_2/src/main.rs
