@@ -1,5 +1,4 @@
-// rhooさんの記事を参考にさせていただきました
-// https://qiita.com/rhoo/items/2f647e32f6ff2c6ee056
+// 参考: https://eijirou-kyopro.hatenablog.com/entry/2024/02/01/115639
 
 use std::{
     cmp::Reverse,
@@ -7,77 +6,27 @@ use std::{
     hash::{BuildHasherDefault, Hasher},
 };
 
-/// 状態を表す構造体に実装する関数
-pub trait State
-where
-    Self: Clone,
-{
-    /// 現在のターン数を返す
-    fn turn(&self) -> usize;
+use timer::Timer;
 
-    /// 現在のスコアを返す
-    fn score(&self) -> i32;
+pub trait State {
+    type A: Action;
 
-    /// 現在の状態のハッシュ値を返す
-    fn hash(&self) -> u64;
+    fn score(&mut self) -> i32;
+    fn hash(&mut self) -> u64;
+    fn is_valid(&mut self) -> bool;
 
-    /// 現在の状態が最終状態として有効かどうかを返す
-    fn is_valid(&self) -> bool;
+    fn enumerate_actions(&mut self) -> Vec<Self::A>;
+
+    fn apply_action(&mut self, action: &Self::A);
+    fn revert_action(&mut self, action: &Self::A);
 }
 
-/// 状態を変化させる操作を表す構造体に実装する関数
-pub trait Action
-where
-    Self: Clone + Sized,
-{
-    type S: State;
-
-    /// 状態を変化させる
-    fn apply(&self, state: &mut Self::S);
-
-    /// 状態を元に戻す
-    fn revert(&self, state: &mut Self::S);
-
-    /// この操作によって消費されるターン数を返す
-    fn comsumed_turns(&self) -> usize {
-        1
-    }
-
-    /// 状態に対して可能な操作を列挙する
-    fn enumerate_actions(state: &Self::S, actions: &mut Vec<Self>);
+pub trait Action: Clone + Default {
+    fn consumed_turns(&self) -> usize;
 }
 
-/// ビーム幅を管理する構造体に実装する関数
 pub trait WidthManager {
-    fn beam_width(&self, turn: usize, elapsed: f64) -> usize;
-}
-
-/// ビーム幅を固定する
-pub struct FixedWidthManager {
-    width: usize,
-}
-
-impl FixedWidthManager {
-    pub fn new(width: usize) -> Self {
-        Self { width }
-    }
-}
-
-impl WidthManager for FixedWidthManager {
-    fn beam_width(&self, _: usize, _: f64) -> usize {
-        self.width
-    }
-}
-
-#[derive(Clone, Default)]
-struct Node<A: Action> {
-    action: Option<A>,
-    parent: u32,
-    child: u32,
-    prev: u32,
-    next: u32,
-    refs: u32,
-    valid: u32,
+    fn width(&mut self, turn: usize, elapsed_secs: f64) -> usize;
 }
 
 #[derive(Clone)]
@@ -89,290 +38,381 @@ struct Candidate<A: Action> {
     valid: bool,
 }
 
-pub struct BeamSearch<S: State, A: Action, W: WidthManager> {
-    state: S,
-    nodes: Vec<Node<A>>,
-    que: Vec<u32>,
-    cur_node: usize,
-    free: Vec<u32>,
-    at: u32,
-    max_turn: usize,
-    width_manager: W,
+// 二重連鎖木のノード
+#[derive(Clone, Default)]
+struct Node<A: Action> {
+    action: A,
+    parent: u32,
+    child: u32, // 長男
+    left: u32,  // 兄
+    right: u32, // 弟
 }
 
-impl<S, A, W> BeamSearch<S, A, W>
-where
-    S: State,
-    A: Action<S = S>,
-    W: WidthManager,
-{
-    /// ソルバーを構築する
-    ///
-    /// # 引数
-    ///
-    /// - `state`: 初期状態
-    /// - `turn`: 最大ターン数
-    /// - `width_manager`: ビーム幅を管理するひと
-    pub fn new(state: S, turn: usize, width_manager: W) -> Self {
-        const MAX_NODES: usize = 1 << 20;
-        let nodes = vec![
-            Node {
-                action: None,
-                parent: !0,
-                child: !0,
-                prev: !0,
-                next: !0,
-                refs: 0,
-                valid: 0,
-            };
-            MAX_NODES
-        ];
-        let free = (1..MAX_NODES as u32).rev().collect();
+struct Pool<T> {
+    nodes: Vec<T>,
+    free: Vec<u32>,
+}
 
+impl<T> Pool<T> {
+    fn new(capacity: usize) -> Self {
         Self {
-            state,
-            nodes,
-            que: Vec::with_capacity(MAX_NODES),
-            cur_node: 0,
-            free,
-            at: 0,
-            width_manager,
-            max_turn: turn,
+            nodes: Vec::with_capacity(capacity),
+            free: Vec::with_capacity(capacity),
         }
     }
 
-    fn add_node(&mut self, cand: Candidate<A>) {
-        let next = self.nodes[cand.parent as usize].child;
-        let new = self.free.pop().unwrap();
-        if next != !0 {
-            self.nodes[next as usize].prev = new;
+    fn push(&mut self, node: T) -> u32 {
+        if let Some(i) = self.free.pop() {
+            self.nodes[i as usize] = node;
+            i
+        } else {
+            let i = self.nodes.len() as u32;
+            self.nodes.push(node);
+            i
         }
-        self.nodes[cand.parent as usize].child = new;
+    }
 
-        self.nodes[new as usize] = Node {
-            action: Some(cand.action),
-            parent: cand.parent,
+    fn remove(&mut self, i: u32) {
+        self.free.push(i);
+    }
+
+    fn get(&self, i: u32) -> &T {
+        &self.nodes[i as usize]
+    }
+
+    fn get_mut(&mut self, i: u32) -> &mut T {
+        &mut self.nodes[i as usize]
+    }
+}
+
+pub struct BeamSearch<S: State, W: WidthManager> {
+    max_turns: usize,
+    width_manager: W,
+
+    v: u32, // 現在のノード
+    turn: usize,
+    state: S,
+    nodes: Pool<Node<S::A>>,
+    root: u32,
+    best_valid_score: i32,
+    best_node: u32,
+    dfs_stack: Vec<u32>,
+    candidates: Vec<Vec<Candidate<S::A>>>,
+}
+
+impl<S: State, W: WidthManager> BeamSearch<S, W> {
+    pub fn new(
+        initial_state: S,
+        max_turns: usize,
+        width_manager: W,
+        nodes_capacity: usize,
+    ) -> Self {
+        let mut nodes = Pool::new(nodes_capacity);
+        let v = nodes.push(Node {
+            action: Default::default(),
+            parent: !0,
             child: !0,
-            prev: !0,
-            next,
-            refs: 0,
-            valid: 0,
-        };
-        self.retarget(new);
-    }
-
-    fn del_node(&mut self, mut idx: u32) {
-        assert_eq!(self.nodes[idx as usize].refs, 0);
-        loop {
-            self.free.push(idx);
-            let Node {
-                prev, next, parent, ..
-            } = self.nodes[idx as usize];
-            assert_ne!(parent, !0);
-            self.nodes[parent as usize].refs -= 1;
-            if prev & next == !0 && self.nodes[parent as usize].refs == 0 {
-                idx = parent;
-                continue;
-            }
-
-            if prev != !0 {
-                self.nodes[prev as usize].next = next;
-            } else {
-                self.nodes[parent as usize].child = next;
-            }
-            if next != !0 {
-                self.nodes[next as usize].prev = prev;
-            }
-
-            break;
+            left: !0,
+            right: !0,
+        });
+        Self {
+            max_turns,
+            width_manager,
+            v,
+            turn: 0,
+            state: initial_state,
+            nodes,
+            root: v,
+            best_valid_score: i32::MIN,
+            best_node: !0,
+            dfs_stack: Vec::with_capacity(nodes_capacity * 2),
+            candidates: vec![vec![]; max_turns + 1],
         }
     }
 
-    fn dfs(&mut self, turn: usize, cands: &mut Vec<Vec<Candidate<A>>>, single: bool) {
-        if self.nodes[self.cur_node].child == !0 {
-            let cnt = self.append_cands(turn, self.cur_node, cands);
-            if cnt == 0 {
-                self.que.push(self.cur_node as u32);
+    pub fn run(&mut self) -> Vec<S::A> {
+        let timer = Timer::new();
+        let mut appeared = NopHashSet::default();
+
+        for turn in 0..=self.max_turns {
+            let width = self.width_manager.width(turn, timer.elapsed_secs());
+
+            let mut ord = (0..self.candidates[turn].len() as u32).collect::<Vec<_>>();
+            if self.candidates[turn].len() > width * 2 {
+                ord.select_nth_unstable_by_key(width * 2, |&i| {
+                    Reverse(self.candidates[turn][i as usize].score)
+                });
+                ord.truncate(width * 2);
             }
-            self.nodes[self.cur_node].refs += cnt;
+            ord.sort_unstable_by_key(|&i| Reverse(self.candidates[turn][i as usize].score));
+
+            appeared.clear();
+            let mut cnt = 0;
+            for &i in &ord {
+                let i = i as usize;
+
+                // ハッシュが被ったら、1個だけ残す。
+                // 別の方針としては、消さずにペナルティを与えるとかもあるかも。
+                if appeared.insert(self.candidates[turn][i].hash) {
+                    self.add_node(self.candidates[turn][i].clone());
+                    cnt += 1;
+                    if cnt >= width {
+                        break;
+                    }
+                }
+            }
+
+            self.candidates[turn].clear();
+            self.candidates[turn].shrink_to_fit();
+
+            if turn == self.max_turns {
+                break;
+            }
+
+            self.dfs(turn);
+        }
+
+        let mut res = vec![];
+        let mut v = self.best_node;
+
+        assert!(v != !0, "解が見つかりませんでした");
+
+        loop {
+            let node = self.nodes.get(v);
+            let parent = node.parent;
+            if parent == !0 {
+                break;
+            }
+            res.push(node.action.clone());
+            v = parent;
+        }
+
+        res.reverse();
+        res
+    }
+
+    // 新しいノードを長男として追加する
+    fn add_node(&mut self, cand: Candidate<S::A>) -> u32 {
+        let parent = cand.parent;
+        let sibling = self.nodes.get(parent).child;
+        let u = self.nodes.push(Node {
+            action: cand.action,
+            parent,
+            child: !0,
+            left: !0,
+            right: sibling,
+        });
+        self.nodes.get_mut(parent).child = u;
+        if sibling != !0 {
+            self.nodes.get_mut(sibling).left = u;
+        }
+        if cand.valid && cand.score > self.best_valid_score {
+            self.best_node = u;
+            self.best_valid_score = cand.score;
+        }
+        u
+    }
+
+    // 現在のターン数が target_turn である状態たちの子の候補を列挙する。
+    // ついでに、途中で見つけた不要なノードを削除する。
+    fn dfs(&mut self, target_turn: usize) {
+        assert!(self.dfs_stack.is_empty());
+
+        self.update_root();
+        // self.v == self.root
+
+        if self.turn > target_turn {
             return;
         }
 
-        let node = self.cur_node;
-        let mut child = self.nodes[node].child;
-        let next_single = single & (self.nodes[child as usize].next == !0);
-
-        'a: loop {
-            while self.nodes[child as usize].valid != self.at {
-                child = self.nodes[child as usize].next;
-                if child == !0 {
-                    break 'a;
-                }
-            }
-
-            self.cur_node = child as usize;
-            self.nodes[child as usize]
-                .action
-                .as_ref()
-                .unwrap()
-                .apply(&mut self.state);
-            self.dfs(turn, cands, next_single);
-
-            if !next_single {
-                self.nodes[child as usize]
-                    .action
-                    .as_ref()
-                    .unwrap()
-                    .revert(&mut self.state);
-            }
-
-            child = self.nodes[child as usize].next;
-            if child == !0 {
-                break;
-            }
+        if self.turn == target_turn {
+            self.enumerate_candidates();
+            return;
         }
 
-        if !next_single {
-            self.cur_node = node;
-        }
-    }
+        let mut u = self.child(self.v);
 
-    fn enum_cands(&mut self, turn: usize, cands: &mut Vec<Vec<Candidate<A>>>) {
-        assert_eq!(self.nodes[self.cur_node].valid, self.at);
-        self.que.clear();
-        self.dfs(turn, cands, true);
-    }
-
-    fn retarget(&mut self, mut idx: u32) {
-        while self.nodes[idx as usize].valid != self.at {
-            self.nodes[idx as usize].valid = self.at;
-            if idx as usize == self.cur_node {
-                break;
+        while u != !0 {
+            let next_turn = self.turn + self.nodes.get(u).action.consumed_turns();
+            if next_turn <= target_turn {
+                self.dfs_stack.push(u);
             }
-            idx = self.nodes[idx as usize].parent;
-        }
-    }
-
-    fn update(&mut self, cands: impl Iterator<Item = (Candidate<A>, bool)>) {
-        self.at += 1;
-        for i in 0..self.que.len() {
-            self.del_node(self.que[i]);
+            u = self.right(u);
         }
 
-        for (cand, f) in cands {
-            let node = &mut self.nodes[cand.parent as usize];
-            if f {
-                self.add_node(cand)
-            } else {
-                node.refs -= 1;
-                if node.refs == 0 {
-                    self.del_node(cand.parent);
-                }
-            }
-        }
-    }
-
-    fn append_cands(&mut self, turn: usize, idx: usize, cands: &mut Vec<Vec<Candidate<A>>>) -> u32 {
-        let node = &self.nodes[idx];
-        assert_eq!(node.child, !0);
-
-        let mut res = 0;
-        let mut actions = vec![];
-        A::enumerate_actions(&self.state, &mut actions);
-        for action in actions {
-            let mut next_turn = turn + action.comsumed_turns();
-            if next_turn > self.max_turn {
+        let mut disused_nodes = vec![];
+        while let Some(u) = self.dfs_stack.pop() {
+            if u == !0 {
+                self.move_to_parent();
                 continue;
             }
-            action.apply(&mut self.state);
-            if self.state.is_valid() {
-                next_turn = self.max_turn;
+
+            self.dfs_stack.push(!0);
+            self.move_to_child(u);
+            if self.turn == target_turn {
+                assert!(!self.has_child(self.v));
+                self.enumerate_candidates();
+            } else if self.turn < target_turn {
+                let mut u = self.child(self.v);
+                if u == !0 {
+                    if self.state.score() < self.best_valid_score {
+                        disused_nodes.push(self.v);
+                    }
+                } else {
+                    while u != !0 {
+                        let next_turn = self.turn + self.nodes.get(u).action.consumed_turns();
+                        if next_turn <= target_turn {
+                            self.dfs_stack.push(u);
+                        }
+                        u = self.right(u);
+                    }
+                }
+            } else {
+                unreachable!()
             }
-            cands[next_turn].push(Candidate {
+        }
+        assert!(self.v == self.root);
+
+        for v in disused_nodes {
+            self.remove_leaf(v);
+        }
+    }
+
+    // 現在の状態の子の候補を列挙する
+    fn enumerate_candidates(&mut self) {
+        let actions = self.state.enumerate_actions();
+        for action in actions {
+            let next_turn = self.turn + action.consumed_turns();
+            if next_turn > self.max_turns {
+                continue;
+            }
+
+            // ノードを移動しているわけではないけど、score を計算するために一時的に state を変化させて、
+            // 終わったらすぐに元に戻している。
+            // apply_action 後のスコアとハッシュを apply_action せずに高速に計算できるときは、
+            // こうしなくてもいい
+            self.state.apply_action(&action);
+            self.candidates[next_turn].push(Candidate {
                 action: action.clone(),
-                parent: idx as u32,
+                parent: self.v,
                 score: self.state.score(),
                 hash: self.state.hash(),
                 valid: self.state.is_valid(),
             });
-            action.revert(&mut self.state);
-            res += 1;
+            self.state.revert_action(&action);
         }
-        res
     }
 
-    /// ビームサーチを行う
-    ///
-    /// # 戻り値
-    ///
-    /// (actions, score)
-    /// - actions: 最適な操作の列
-    /// - score: 最適な操作のスコア
-    pub fn solve(&mut self) -> (Vec<A>, i32) {
-        let start = std::time::Instant::now();
-        let mut cands: Vec<Vec<Candidate<A>>> =
-            (0..=self.max_turn).map(|_| vec![]).collect::<Vec<_>>();
-        let mut set = NopHashSet::default();
-        // let mut best = None;
-        for t in 0..self.max_turn {
-            let w = self
-                .width_manager
-                .beam_width(t, start.elapsed().as_secs_f64());
-            if t != 0 {
-                let cands = &mut cands[t];
-                if cands.len() > w * 2 {
-                    cands.select_nth_unstable_by_key(w * 2, |c| Reverse(c.score));
-                    cands.truncate(w * 2);
-                }
+    // 根の子がひとつである間、その子を根にすることを繰り返す
+    fn update_root(&mut self) {
+        assert!(self.v == self.root);
 
-                cands.sort_unstable_by_key(|c| Reverse(c.score));
-                set.clear();
-                let mut total = 0;
-                // self.update(cands.iter().map(|c| {
-                //     let f = total < w && set.insert(c.hash);
-                //     total += f as usize;
-                //     if f && best
-                //         .as_ref()
-                //         .map_or(std::i32::MIN, |b: &Candidate<A>| b.score)
-                //         < c.score
-                //         && c.valid
-                //     {
-                //         best = Some(c.clone());
-                //     }
-                //     (c.clone(), f)
-                // }));
-                self.update(cands.iter().map(|c| {
-                    let f = total < w && set.insert(c.hash);
-                    total += f as usize;
-                    (c.clone(), f)
-                }));
-            }
-            // if t < self.max_turn {
-            if t == 0 || cands[t].len() != 0 {
-                self.enum_cands(t, &mut cands);
-            }
-            // }
-        }
-
-        let best = cands[self.max_turn]
-            .iter()
-            .filter(|c| c.valid)
-            .max_by_key(|c| c.score)
-            .cloned()
-            .unwrap();
-        let mut res = vec![];
-        let mut idx = best.parent;
-        loop {
-            let Node { action, parent, .. } = &self.nodes[idx as usize];
-            if *parent == !0 {
+        while self.has_child(self.v) {
+            let child = self.child(self.v);
+            if self.has_right(child) {
                 break;
             }
-            res.push(action.as_ref().unwrap().clone());
-            idx = *parent;
+            self.move_to_first_child();
         }
-        res.reverse();
-        res.push(best.action);
-        (res, best.score)
+        self.root = self.v;
+    }
+
+    // 葉 v を削除する。その結果親が葉になる場合は、その親も削除する。これを繰り返す
+    fn remove_leaf(&mut self, mut v: u32) {
+        assert!(!self.has_child(v));
+
+        while v != self.best_node {
+            assert!(!self.has_child(v));
+
+            let parent = self.parent(v);
+            let left = self.left(v);
+            let right = self.right(v);
+            self.nodes.remove(v);
+            if left != !0 {
+                self.nodes.get_mut(left).right = right;
+                if right != !0 {
+                    self.nodes.get_mut(right).left = left;
+                }
+                return;
+            } else {
+                assert!(parent != !0, "根を削除しようとしています");
+                self.nodes.get_mut(parent).child = right;
+                if right != !0 {
+                    self.nodes.get_mut(right).left = !0;
+                    return;
+                }
+                v = parent;
+            }
+        }
+    }
+
+    #[allow(unused)]
+    fn has_parent(&self, v: u32) -> bool {
+        self.nodes.get(v).parent != !0
+    }
+
+    fn parent(&self, v: u32) -> u32 {
+        self.nodes.get(v).parent
+    }
+
+    fn has_child(&self, v: u32) -> bool {
+        self.nodes.get(v).child != !0
+    }
+
+    fn child(&self, v: u32) -> u32 {
+        self.nodes.get(v).child
+    }
+
+    #[allow(unused)]
+    fn has_left(&self, v: u32) -> bool {
+        self.nodes.get(v).left != !0
+    }
+
+    fn left(&self, v: u32) -> u32 {
+        self.nodes.get(v).left
+    }
+
+    fn has_right(&self, v: u32) -> bool {
+        self.nodes.get(v).right != !0
+    }
+
+    fn right(&self, v: u32) -> u32 {
+        self.nodes.get(v).right
+    }
+
+    // 親に移動する
+    fn move_to_parent(&mut self) {
+        let node = &self.nodes.get(self.v);
+        self.state.revert_action(&node.action);
+        self.turn -= node.action.consumed_turns();
+        self.v = node.parent;
+    }
+
+    // 長男に移動する
+    fn move_to_first_child(&mut self) {
+        let u = self.child(self.v);
+        self.move_to_child(u);
+    }
+
+    // 子である u に移動する
+    fn move_to_child(&mut self, u: u32) {
+        self.v = u;
+        let action = &self.nodes.get(self.v).action;
+        self.state.apply_action(action);
+        self.turn += action.consumed_turns();
+    }
+
+    #[allow(unused)]
+    // 弟に移動する
+    fn move_to_right(&mut self) {
+        let u = self.right(self.v);
+        self.move_to_sibling(u);
+    }
+
+    // 兄弟である u に移動する
+    fn move_to_sibling(&mut self, u: u32) {
+        self.move_to_parent();
+        self.move_to_child(u);
     }
 }
 

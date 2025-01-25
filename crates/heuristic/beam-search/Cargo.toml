@@ -11,3 +11,4 @@ name = "beam_search"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
+timer = { path = "../../heuristic/timer" }

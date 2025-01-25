@@ -1,17 +1,22 @@
-use std::time::Instant;
-
 pub struct Timer {
-    start: Instant,
+    start: f64,
 }
 
 impl Timer {
+    fn time_secs() -> f64 {
+        std::time::SystemTime::now()
+            .duration_since(std::time::UNIX_EPOCH)
+            .unwrap()
+            .as_secs_f64()
+    }
+
     pub fn new() -> Self {
         Self {
-            start: Instant::now(),
+            start: Self::time_secs(),
         }
     }
 
-    pub fn elapsed(&self) -> f64 {
-        self.start.elapsed().as_secs_f64()
+    pub fn elapsed_secs(&self) -> f64 {
+        Self::time_secs() - self.start
     }
 }
