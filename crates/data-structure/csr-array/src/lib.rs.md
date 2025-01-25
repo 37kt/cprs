@@ -50,11 +50,11 @@ data:
   isVerificationFile: false
   path: crates/data-structure/csr-array/src/lib.rs
   requiredBy:
+  - crates/graph/two-edge-connected-components/src/lib.rs
+  - crates/graph/graph/src/lib.rs
+  - crates/graph/strongly-connected-components/src/lib.rs
   - crates/tree/static-top-tree/src/lib.rs
   - crates/tree/heavy-light-decomposition/src/lib.rs
-  - crates/graph/two-edge-connected-components/src/lib.rs
-  - crates/graph/strongly-connected-components/src/lib.rs
-  - crates/graph/graph/src/lib.rs
   timestamp: '2025-01-14 05:25:42+00:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []

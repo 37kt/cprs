@@ -150,8 +150,8 @@ data:
   timestamp: '2025-01-11 09:03:35+00:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/suffixarray/src/main.rs
   - verify/number_of_substrings/src/main.rs
+  - verify/suffixarray/src/main.rs
 documentation_of: crates/string/suffix-array/src/lib.rs
 layout: document
 redirect_from:

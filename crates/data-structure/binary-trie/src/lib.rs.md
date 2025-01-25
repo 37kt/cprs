@@ -132,8 +132,8 @@ data:
   timestamp: '2025-01-04 07:13:06+00:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/ordered_set_binary_trie/src/main.rs
   - verify/set_xor_min/src/main.rs
+  - verify/ordered_set_binary_trie/src/main.rs
 documentation_of: crates/data-structure/binary-trie/src/lib.rs
 layout: document
 redirect_from:

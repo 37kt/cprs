@@ -67,8 +67,8 @@ data:
   isVerificationFile: false
   path: crates/math/prime-sieve/src/lib.rs
   requiredBy:
-  - crates/math/lucy-dp/src/lib.rs
   - crates/math/min_25-sieve/src/lib.rs
+  - crates/math/lucy-dp/src/lib.rs
   timestamp: '2024-12-30 09:13:10+00:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []

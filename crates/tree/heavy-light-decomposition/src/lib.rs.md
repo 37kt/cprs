@@ -206,18 +206,18 @@ data:
   isVerificationFile: false
   path: crates/tree/heavy-light-decomposition/src/lib.rs
   requiredBy:
+  - crates/data-structure/range-contour-query/src/lib.rs
   - crates/tree/static-top-tree/src/lib.rs
   - crates/tree/dynamic-tree-dp/src/lib.rs
   - crates/tree/dynamic-rerooting-tree-dp/src/lib.rs
-  - crates/data-structure/range-contour-query/src/lib.rs
   timestamp: '2025-01-15 06:25:46+00:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/vertex_add_subtree_sum/src/main.rs
   - verify/vertex_add_path_sum/src/main.rs
   - verify/lca/src/main.rs
-  - verify/vertex_set_path_composite/src/main.rs
   - verify/jump_on_tree/src/main.rs
+  - verify/vertex_add_subtree_sum/src/main.rs
+  - verify/vertex_set_path_composite/src/main.rs
 documentation_of: crates/tree/heavy-light-decomposition/src/lib.rs
 layout: document
 redirect_from:

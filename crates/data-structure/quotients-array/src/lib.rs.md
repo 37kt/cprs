@@ -67,8 +67,8 @@ data:
   isVerificationFile: false
   path: crates/data-structure/quotients-array/src/lib.rs
   requiredBy:
-  - crates/math/lucy-dp/src/lib.rs
   - crates/math/min_25-sieve/src/lib.rs
+  - crates/math/lucy-dp/src/lib.rs
   timestamp: '2024-12-25 10:01:29+00:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:

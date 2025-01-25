@@ -46,8 +46,8 @@ data:
   isVerificationFile: false
   path: crates/math/div/src/lib.rs
   requiredBy:
-  - crates/algebraic/rational/src/lib.rs
   - crates/data-structure/static-range-inversions-query/src/lib.rs
+  - crates/algebraic/rational/src/lib.rs
   timestamp: '2025-01-11 09:03:35+00:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []

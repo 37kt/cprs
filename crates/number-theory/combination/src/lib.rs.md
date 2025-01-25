@@ -83,10 +83,10 @@ data:
   path: crates/number-theory/combination/src/lib.rs
   requiredBy:
   - crates/polynomial/lagrange-interpolation/src/lib.rs
-  - crates/number-theory/stirling-first-fixed-k/src/lib.rs
-  - crates/number-theory/stirling-second-fixed-k/src/lib.rs
-  - crates/number-theory/stirling-second/src/lib.rs
   - crates/number-theory/q-binomial/src/lib.rs
+  - crates/number-theory/stirling-second/src/lib.rs
+  - crates/number-theory/stirling-second-fixed-k/src/lib.rs
+  - crates/number-theory/stirling-first-fixed-k/src/lib.rs
   timestamp: '2024-12-30 09:13:10+00:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:

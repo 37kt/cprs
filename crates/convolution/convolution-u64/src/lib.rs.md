@@ -89,8 +89,8 @@ data:
   timestamp: '2024-12-30 09:13:10+00:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/convolution_mod_2_64/src/main.rs
   - verify/frequency_table_of_tree_distance/src/main.rs
+  - verify/convolution_mod_2_64/src/main.rs
 documentation_of: crates/convolution/convolution-u64/src/lib.rs
 layout: document
 redirect_from:

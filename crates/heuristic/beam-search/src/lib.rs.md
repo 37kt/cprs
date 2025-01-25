@@ -1,6 +1,9 @@
 ---
 data:
-  _extendedDependsOn: []
+  _extendedDependsOn:
+  - icon: ':warning:'
+    path: crates/heuristic/timer/src/lib.rs
+    title: crates/heuristic/timer/src/lib.rs
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
@@ -8,169 +11,187 @@ data:
   _verificationStatusIcon: ':warning:'
   attributes:
     links:
-    - https://qiita.com/rhoo/items/2f647e32f6ff2c6ee056
+    - https://eijirou-kyopro.hatenablog.com/entry/2024/02/01/115639
   bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.12.8/x64/lib/python3.12/site-packages/onlinejudge_verify/documentation/build.py\"\
     , line 71, in _render_source_code_stat\n    bundled_code = language.bundle(stat.path,\
     \ basedir=basedir, options={'include_paths': [basedir]}).decode()\n          \
     \         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\
     \  File \"/opt/hostedtoolcache/Python/3.12.8/x64/lib/python3.12/site-packages/onlinejudge_verify/languages/rust.py\"\
     , line 288, in bundle\n    raise NotImplementedError\nNotImplementedError\n"
-  code: "// rhoo\u3055\u3093\u306E\u8A18\u4E8B\u3092\u53C2\u8003\u306B\u3055\u305B\
-    \u3066\u3044\u305F\u3060\u304D\u307E\u3057\u305F\n// https://qiita.com/rhoo/items/2f647e32f6ff2c6ee056\n\
+  code: "// \u53C2\u8003: https://eijirou-kyopro.hatenablog.com/entry/2024/02/01/115639\n\
     \nuse std::{\n    cmp::Reverse,\n    collections::{HashMap, HashSet},\n    hash::{BuildHasherDefault,\
-    \ Hasher},\n};\n\n/// \u72B6\u614B\u3092\u8868\u3059\u69CB\u9020\u4F53\u306B\u5B9F\
-    \u88C5\u3059\u308B\u95A2\u6570\npub trait State\nwhere\n    Self: Clone,\n{\n\
-    \    /// \u73FE\u5728\u306E\u30BF\u30FC\u30F3\u6570\u3092\u8FD4\u3059\n    fn\
-    \ turn(&self) -> usize;\n\n    /// \u73FE\u5728\u306E\u30B9\u30B3\u30A2\u3092\u8FD4\
-    \u3059\n    fn score(&self) -> i32;\n\n    /// \u73FE\u5728\u306E\u72B6\u614B\u306E\
-    \u30CF\u30C3\u30B7\u30E5\u5024\u3092\u8FD4\u3059\n    fn hash(&self) -> u64;\n\
-    \n    /// \u73FE\u5728\u306E\u72B6\u614B\u304C\u6700\u7D42\u72B6\u614B\u3068\u3057\
-    \u3066\u6709\u52B9\u304B\u3069\u3046\u304B\u3092\u8FD4\u3059\n    fn is_valid(&self)\
-    \ -> bool;\n}\n\n/// \u72B6\u614B\u3092\u5909\u5316\u3055\u305B\u308B\u64CD\u4F5C\
-    \u3092\u8868\u3059\u69CB\u9020\u4F53\u306B\u5B9F\u88C5\u3059\u308B\u95A2\u6570\
-    \npub trait Action\nwhere\n    Self: Clone + Sized,\n{\n    type S: State;\n\n\
-    \    /// \u72B6\u614B\u3092\u5909\u5316\u3055\u305B\u308B\n    fn apply(&self,\
-    \ state: &mut Self::S);\n\n    /// \u72B6\u614B\u3092\u5143\u306B\u623B\u3059\n\
-    \    fn revert(&self, state: &mut Self::S);\n\n    /// \u3053\u306E\u64CD\u4F5C\
-    \u306B\u3088\u3063\u3066\u6D88\u8CBB\u3055\u308C\u308B\u30BF\u30FC\u30F3\u6570\
-    \u3092\u8FD4\u3059\n    fn comsumed_turns(&self) -> usize {\n        1\n    }\n\
-    \n    /// \u72B6\u614B\u306B\u5BFE\u3057\u3066\u53EF\u80FD\u306A\u64CD\u4F5C\u3092\
-    \u5217\u6319\u3059\u308B\n    fn enumerate_actions(state: &Self::S, actions: &mut\
-    \ Vec<Self>);\n}\n\n/// \u30D3\u30FC\u30E0\u5E45\u3092\u7BA1\u7406\u3059\u308B\
-    \u69CB\u9020\u4F53\u306B\u5B9F\u88C5\u3059\u308B\u95A2\u6570\npub trait WidthManager\
-    \ {\n    fn beam_width(&self, turn: usize, elapsed: f64) -> usize;\n}\n\n/// \u30D3\
-    \u30FC\u30E0\u5E45\u3092\u56FA\u5B9A\u3059\u308B\npub struct FixedWidthManager\
-    \ {\n    width: usize,\n}\n\nimpl FixedWidthManager {\n    pub fn new(width: usize)\
-    \ -> Self {\n        Self { width }\n    }\n}\n\nimpl WidthManager for FixedWidthManager\
-    \ {\n    fn beam_width(&self, _: usize, _: f64) -> usize {\n        self.width\n\
-    \    }\n}\n\n#[derive(Clone, Default)]\nstruct Node<A: Action> {\n    action:\
-    \ Option<A>,\n    parent: u32,\n    child: u32,\n    prev: u32,\n    next: u32,\n\
-    \    refs: u32,\n    valid: u32,\n}\n\n#[derive(Clone)]\nstruct Candidate<A: Action>\
+    \ Hasher},\n};\n\nuse timer::Timer;\n\npub trait State {\n    type A: Action;\n\
+    \n    fn score(&mut self) -> i32;\n    fn hash(&mut self) -> u64;\n    fn is_valid(&mut\
+    \ self) -> bool;\n\n    fn enumerate_actions(&mut self) -> Vec<Self::A>;\n\n \
+    \   fn apply_action(&mut self, action: &Self::A);\n    fn revert_action(&mut self,\
+    \ action: &Self::A);\n}\n\npub trait Action: Clone + Default {\n    fn consumed_turns(&self)\
+    \ -> usize;\n}\n\npub trait WidthManager {\n    fn width(&mut self, turn: usize,\
+    \ elapsed_secs: f64) -> usize;\n}\n\n#[derive(Clone)]\nstruct Candidate<A: Action>\
     \ {\n    action: A,\n    parent: u32,\n    score: i32,\n    hash: u64,\n    valid:\
-    \ bool,\n}\n\npub struct BeamSearch<S: State, A: Action, W: WidthManager> {\n\
-    \    state: S,\n    nodes: Vec<Node<A>>,\n    que: Vec<u32>,\n    cur_node: usize,\n\
-    \    free: Vec<u32>,\n    at: u32,\n    max_turn: usize,\n    width_manager: W,\n\
-    }\n\nimpl<S, A, W> BeamSearch<S, A, W>\nwhere\n    S: State,\n    A: Action<S\
-    \ = S>,\n    W: WidthManager,\n{\n    /// \u30BD\u30EB\u30D0\u30FC\u3092\u69CB\
-    \u7BC9\u3059\u308B\n    ///\n    /// # \u5F15\u6570\n    ///\n    /// - `state`:\
-    \ \u521D\u671F\u72B6\u614B\n    /// - `turn`: \u6700\u5927\u30BF\u30FC\u30F3\u6570\
-    \n    /// - `width_manager`: \u30D3\u30FC\u30E0\u5E45\u3092\u7BA1\u7406\u3059\u308B\
-    \u3072\u3068\n    pub fn new(state: S, turn: usize, width_manager: W) -> Self\
-    \ {\n        const MAX_NODES: usize = 1 << 20;\n        let nodes = vec![\n  \
-    \          Node {\n                action: None,\n                parent: !0,\n\
-    \                child: !0,\n                prev: !0,\n                next:\
-    \ !0,\n                refs: 0,\n                valid: 0,\n            };\n \
-    \           MAX_NODES\n        ];\n        let free = (1..MAX_NODES as u32).rev().collect();\n\
-    \n        Self {\n            state,\n            nodes,\n            que: Vec::with_capacity(MAX_NODES),\n\
-    \            cur_node: 0,\n            free,\n            at: 0,\n           \
-    \ width_manager,\n            max_turn: turn,\n        }\n    }\n\n    fn add_node(&mut\
-    \ self, cand: Candidate<A>) {\n        let next = self.nodes[cand.parent as usize].child;\n\
-    \        let new = self.free.pop().unwrap();\n        if next != !0 {\n      \
-    \      self.nodes[next as usize].prev = new;\n        }\n        self.nodes[cand.parent\
-    \ as usize].child = new;\n\n        self.nodes[new as usize] = Node {\n      \
-    \      action: Some(cand.action),\n            parent: cand.parent,\n        \
-    \    child: !0,\n            prev: !0,\n            next,\n            refs: 0,\n\
-    \            valid: 0,\n        };\n        self.retarget(new);\n    }\n\n   \
-    \ fn del_node(&mut self, mut idx: u32) {\n        assert_eq!(self.nodes[idx as\
-    \ usize].refs, 0);\n        loop {\n            self.free.push(idx);\n       \
-    \     let Node {\n                prev, next, parent, ..\n            } = self.nodes[idx\
-    \ as usize];\n            assert_ne!(parent, !0);\n            self.nodes[parent\
-    \ as usize].refs -= 1;\n            if prev & next == !0 && self.nodes[parent\
-    \ as usize].refs == 0 {\n                idx = parent;\n                continue;\n\
-    \            }\n\n            if prev != !0 {\n                self.nodes[prev\
-    \ as usize].next = next;\n            } else {\n                self.nodes[parent\
-    \ as usize].child = next;\n            }\n            if next != !0 {\n      \
-    \          self.nodes[next as usize].prev = prev;\n            }\n\n         \
-    \   break;\n        }\n    }\n\n    fn dfs(&mut self, turn: usize, cands: &mut\
-    \ Vec<Vec<Candidate<A>>>, single: bool) {\n        if self.nodes[self.cur_node].child\
-    \ == !0 {\n            let cnt = self.append_cands(turn, self.cur_node, cands);\n\
-    \            if cnt == 0 {\n                self.que.push(self.cur_node as u32);\n\
-    \            }\n            self.nodes[self.cur_node].refs += cnt;\n         \
-    \   return;\n        }\n\n        let node = self.cur_node;\n        let mut child\
-    \ = self.nodes[node].child;\n        let next_single = single & (self.nodes[child\
-    \ as usize].next == !0);\n\n        'a: loop {\n            while self.nodes[child\
-    \ as usize].valid != self.at {\n                child = self.nodes[child as usize].next;\n\
-    \                if child == !0 {\n                    break 'a;\n           \
-    \     }\n            }\n\n            self.cur_node = child as usize;\n      \
-    \      self.nodes[child as usize]\n                .action\n                .as_ref()\n\
-    \                .unwrap()\n                .apply(&mut self.state);\n       \
-    \     self.dfs(turn, cands, next_single);\n\n            if !next_single {\n \
-    \               self.nodes[child as usize]\n                    .action\n    \
-    \                .as_ref()\n                    .unwrap()\n                  \
-    \  .revert(&mut self.state);\n            }\n\n            child = self.nodes[child\
-    \ as usize].next;\n            if child == !0 {\n                break;\n    \
-    \        }\n        }\n\n        if !next_single {\n            self.cur_node\
-    \ = node;\n        }\n    }\n\n    fn enum_cands(&mut self, turn: usize, cands:\
-    \ &mut Vec<Vec<Candidate<A>>>) {\n        assert_eq!(self.nodes[self.cur_node].valid,\
-    \ self.at);\n        self.que.clear();\n        self.dfs(turn, cands, true);\n\
-    \    }\n\n    fn retarget(&mut self, mut idx: u32) {\n        while self.nodes[idx\
-    \ as usize].valid != self.at {\n            self.nodes[idx as usize].valid = self.at;\n\
-    \            if idx as usize == self.cur_node {\n                break;\n    \
-    \        }\n            idx = self.nodes[idx as usize].parent;\n        }\n  \
-    \  }\n\n    fn update(&mut self, cands: impl Iterator<Item = (Candidate<A>, bool)>)\
-    \ {\n        self.at += 1;\n        for i in 0..self.que.len() {\n           \
-    \ self.del_node(self.que[i]);\n        }\n\n        for (cand, f) in cands {\n\
-    \            let node = &mut self.nodes[cand.parent as usize];\n            if\
-    \ f {\n                self.add_node(cand)\n            } else {\n           \
-    \     node.refs -= 1;\n                if node.refs == 0 {\n                 \
-    \   self.del_node(cand.parent);\n                }\n            }\n        }\n\
-    \    }\n\n    fn append_cands(&mut self, turn: usize, idx: usize, cands: &mut\
-    \ Vec<Vec<Candidate<A>>>) -> u32 {\n        let node = &self.nodes[idx];\n   \
-    \     assert_eq!(node.child, !0);\n\n        let mut res = 0;\n        let mut\
-    \ actions = vec![];\n        A::enumerate_actions(&self.state, &mut actions);\n\
-    \        for action in actions {\n            let mut next_turn = turn + action.comsumed_turns();\n\
-    \            if next_turn > self.max_turn {\n                continue;\n     \
-    \       }\n            action.apply(&mut self.state);\n            if self.state.is_valid()\
-    \ {\n                next_turn = self.max_turn;\n            }\n            cands[next_turn].push(Candidate\
-    \ {\n                action: action.clone(),\n                parent: idx as u32,\n\
+    \ bool,\n}\n\n// \u4E8C\u91CD\u9023\u9396\u6728\u306E\u30CE\u30FC\u30C9\n#[derive(Clone,\
+    \ Default)]\nstruct Node<A: Action> {\n    action: A,\n    parent: u32,\n    child:\
+    \ u32, // \u9577\u7537\n    left: u32,  // \u5144\n    right: u32, // \u5F1F\n\
+    }\n\nstruct Pool<T> {\n    nodes: Vec<T>,\n    free: Vec<u32>,\n}\n\nimpl<T> Pool<T>\
+    \ {\n    fn new(capacity: usize) -> Self {\n        Self {\n            nodes:\
+    \ Vec::with_capacity(capacity),\n            free: Vec::with_capacity(capacity),\n\
+    \        }\n    }\n\n    fn push(&mut self, node: T) -> u32 {\n        if let\
+    \ Some(i) = self.free.pop() {\n            self.nodes[i as usize] = node;\n  \
+    \          i\n        } else {\n            let i = self.nodes.len() as u32;\n\
+    \            self.nodes.push(node);\n            i\n        }\n    }\n\n    fn\
+    \ remove(&mut self, i: u32) {\n        self.free.push(i);\n    }\n\n    fn get(&self,\
+    \ i: u32) -> &T {\n        &self.nodes[i as usize]\n    }\n\n    fn get_mut(&mut\
+    \ self, i: u32) -> &mut T {\n        &mut self.nodes[i as usize]\n    }\n}\n\n\
+    pub struct BeamSearch<S: State, W: WidthManager> {\n    max_turns: usize,\n  \
+    \  width_manager: W,\n\n    v: u32, // \u73FE\u5728\u306E\u30CE\u30FC\u30C9\n\
+    \    turn: usize,\n    state: S,\n    nodes: Pool<Node<S::A>>,\n    root: u32,\n\
+    \    best_valid_score: i32,\n    best_node: u32,\n    dfs_stack: Vec<u32>,\n \
+    \   candidates: Vec<Vec<Candidate<S::A>>>,\n}\n\nimpl<S: State, W: WidthManager>\
+    \ BeamSearch<S, W> {\n    pub fn new(\n        initial_state: S,\n        max_turns:\
+    \ usize,\n        width_manager: W,\n        nodes_capacity: usize,\n    ) ->\
+    \ Self {\n        let mut nodes = Pool::new(nodes_capacity);\n        let v =\
+    \ nodes.push(Node {\n            action: Default::default(),\n            parent:\
+    \ !0,\n            child: !0,\n            left: !0,\n            right: !0,\n\
+    \        });\n        Self {\n            max_turns,\n            width_manager,\n\
+    \            v,\n            turn: 0,\n            state: initial_state,\n   \
+    \         nodes,\n            root: v,\n            best_valid_score: i32::MIN,\n\
+    \            best_node: !0,\n            dfs_stack: Vec::with_capacity(nodes_capacity\
+    \ * 2),\n            candidates: vec![vec![]; max_turns + 1],\n        }\n   \
+    \ }\n\n    pub fn run(&mut self) -> Vec<S::A> {\n        let timer = Timer::new();\n\
+    \        let mut appeared = NopHashSet::default();\n\n        for turn in 0..=self.max_turns\
+    \ {\n            let width = self.width_manager.width(turn, timer.elapsed_secs());\n\
+    \n            let mut ord = (0..self.candidates[turn].len() as u32).collect::<Vec<_>>();\n\
+    \            if self.candidates[turn].len() > width * 2 {\n                ord.select_nth_unstable_by_key(width\
+    \ * 2, |&i| {\n                    Reverse(self.candidates[turn][i as usize].score)\n\
+    \                });\n                ord.truncate(width * 2);\n            }\n\
+    \            ord.sort_unstable_by_key(|&i| Reverse(self.candidates[turn][i as\
+    \ usize].score));\n\n            appeared.clear();\n            let mut cnt =\
+    \ 0;\n            for &i in &ord {\n                let i = i as usize;\n\n  \
+    \              // \u30CF\u30C3\u30B7\u30E5\u304C\u88AB\u3063\u305F\u3089\u3001\
+    1\u500B\u3060\u3051\u6B8B\u3059\u3002\n                // \u5225\u306E\u65B9\u91DD\
+    \u3068\u3057\u3066\u306F\u3001\u6D88\u3055\u305A\u306B\u30DA\u30CA\u30EB\u30C6\
+    \u30A3\u3092\u4E0E\u3048\u308B\u3068\u304B\u3082\u3042\u308B\u304B\u3082\u3002\
+    \n                if appeared.insert(self.candidates[turn][i].hash) {\n      \
+    \              self.add_node(self.candidates[turn][i].clone());\n            \
+    \        cnt += 1;\n                    if cnt >= width {\n                  \
+    \      break;\n                    }\n                }\n            }\n\n   \
+    \         self.candidates[turn].clear();\n            self.candidates[turn].shrink_to_fit();\n\
+    \n            if turn == self.max_turns {\n                break;\n          \
+    \  }\n\n            self.dfs(turn);\n        }\n\n        let mut res = vec![];\n\
+    \        let mut v = self.best_node;\n\n        assert!(v != !0, \"\u89E3\u304C\
+    \u898B\u3064\u304B\u308A\u307E\u305B\u3093\u3067\u3057\u305F\");\n\n        loop\
+    \ {\n            let node = self.nodes.get(v);\n            let parent = node.parent;\n\
+    \            if parent == !0 {\n                break;\n            }\n      \
+    \      res.push(node.action.clone());\n            v = parent;\n        }\n\n\
+    \        res.reverse();\n        res\n    }\n\n    // \u65B0\u3057\u3044\u30CE\
+    \u30FC\u30C9\u3092\u9577\u7537\u3068\u3057\u3066\u8FFD\u52A0\u3059\u308B\n   \
+    \ fn add_node(&mut self, cand: Candidate<S::A>) -> u32 {\n        let parent =\
+    \ cand.parent;\n        let sibling = self.nodes.get(parent).child;\n        let\
+    \ u = self.nodes.push(Node {\n            action: cand.action,\n            parent,\n\
+    \            child: !0,\n            left: !0,\n            right: sibling,\n\
+    \        });\n        self.nodes.get_mut(parent).child = u;\n        if sibling\
+    \ != !0 {\n            self.nodes.get_mut(sibling).left = u;\n        }\n    \
+    \    if cand.valid && cand.score > self.best_valid_score {\n            self.best_node\
+    \ = u;\n            self.best_valid_score = cand.score;\n        }\n        u\n\
+    \    }\n\n    // \u73FE\u5728\u306E\u30BF\u30FC\u30F3\u6570\u304C target_turn\
+    \ \u3067\u3042\u308B\u72B6\u614B\u305F\u3061\u306E\u5B50\u306E\u5019\u88DC\u3092\
+    \u5217\u6319\u3059\u308B\u3002\n    // \u3064\u3044\u3067\u306B\u3001\u9014\u4E2D\
+    \u3067\u898B\u3064\u3051\u305F\u4E0D\u8981\u306A\u30CE\u30FC\u30C9\u3092\u524A\
+    \u9664\u3059\u308B\u3002\n    fn dfs(&mut self, target_turn: usize) {\n      \
+    \  assert!(self.dfs_stack.is_empty());\n\n        self.update_root();\n      \
+    \  // self.v == self.root\n\n        if self.turn > target_turn {\n          \
+    \  return;\n        }\n\n        if self.turn == target_turn {\n            self.enumerate_candidates();\n\
+    \            return;\n        }\n\n        let mut u = self.child(self.v);\n\n\
+    \        while u != !0 {\n            let next_turn = self.turn + self.nodes.get(u).action.consumed_turns();\n\
+    \            if next_turn <= target_turn {\n                self.dfs_stack.push(u);\n\
+    \            }\n            u = self.right(u);\n        }\n\n        let mut disused_nodes\
+    \ = vec![];\n        while let Some(u) = self.dfs_stack.pop() {\n            if\
+    \ u == !0 {\n                self.move_to_parent();\n                continue;\n\
+    \            }\n\n            self.dfs_stack.push(!0);\n            self.move_to_child(u);\n\
+    \            if self.turn == target_turn {\n                assert!(!self.has_child(self.v));\n\
+    \                self.enumerate_candidates();\n            } else if self.turn\
+    \ < target_turn {\n                let mut u = self.child(self.v);\n         \
+    \       if u == !0 {\n                    if self.state.score() < self.best_valid_score\
+    \ {\n                        disused_nodes.push(self.v);\n                   \
+    \ }\n                } else {\n                    while u != !0 {\n         \
+    \               let next_turn = self.turn + self.nodes.get(u).action.consumed_turns();\n\
+    \                        if next_turn <= target_turn {\n                     \
+    \       self.dfs_stack.push(u);\n                        }\n                 \
+    \       u = self.right(u);\n                    }\n                }\n       \
+    \     } else {\n                unreachable!()\n            }\n        }\n   \
+    \     assert!(self.v == self.root);\n\n        for v in disused_nodes {\n    \
+    \        self.remove_leaf(v);\n        }\n    }\n\n    // \u73FE\u5728\u306E\u72B6\
+    \u614B\u306E\u5B50\u306E\u5019\u88DC\u3092\u5217\u6319\u3059\u308B\n    fn enumerate_candidates(&mut\
+    \ self) {\n        let actions = self.state.enumerate_actions();\n        for\
+    \ action in actions {\n            let next_turn = self.turn + action.consumed_turns();\n\
+    \            if next_turn > self.max_turns {\n                continue;\n    \
+    \        }\n\n            // \u30CE\u30FC\u30C9\u3092\u79FB\u52D5\u3057\u3066\u3044\
+    \u308B\u308F\u3051\u3067\u306F\u306A\u3044\u3051\u3069\u3001score \u3092\u8A08\
+    \u7B97\u3059\u308B\u305F\u3081\u306B\u4E00\u6642\u7684\u306B state \u3092\u5909\
+    \u5316\u3055\u305B\u3066\u3001\n            // \u7D42\u308F\u3063\u305F\u3089\u3059\
+    \u3050\u306B\u5143\u306B\u623B\u3057\u3066\u3044\u308B\u3002\n            // apply_action\
+    \ \u5F8C\u306E\u30B9\u30B3\u30A2\u3068\u30CF\u30C3\u30B7\u30E5\u3092 apply_action\
+    \ \u305B\u305A\u306B\u9AD8\u901F\u306B\u8A08\u7B97\u3067\u304D\u308B\u3068\u304D\
+    \u306F\u3001\n            // \u3053\u3046\u3057\u306A\u304F\u3066\u3082\u3044\u3044\
+    \n            self.state.apply_action(&action);\n            self.candidates[next_turn].push(Candidate\
+    \ {\n                action: action.clone(),\n                parent: self.v,\n\
     \                score: self.state.score(),\n                hash: self.state.hash(),\n\
-    \                valid: self.state.is_valid(),\n            });\n            action.revert(&mut\
-    \ self.state);\n            res += 1;\n        }\n        res\n    }\n\n    ///\
-    \ \u30D3\u30FC\u30E0\u30B5\u30FC\u30C1\u3092\u884C\u3046\n    ///\n    /// # \u623B\
-    \u308A\u5024\n    ///\n    /// (actions, score)\n    /// - actions: \u6700\u9069\
-    \u306A\u64CD\u4F5C\u306E\u5217\n    /// - score: \u6700\u9069\u306A\u64CD\u4F5C\
-    \u306E\u30B9\u30B3\u30A2\n    pub fn solve(&mut self) -> (Vec<A>, i32) {\n   \
-    \     let start = std::time::Instant::now();\n        let mut cands: Vec<Vec<Candidate<A>>>\
-    \ =\n            (0..=self.max_turn).map(|_| vec![]).collect::<Vec<_>>();\n  \
-    \      let mut set = NopHashSet::default();\n        // let mut best = None;\n\
-    \        for t in 0..self.max_turn {\n            let w = self\n             \
-    \   .width_manager\n                .beam_width(t, start.elapsed().as_secs_f64());\n\
-    \            if t != 0 {\n                let cands = &mut cands[t];\n       \
-    \         if cands.len() > w * 2 {\n                    cands.select_nth_unstable_by_key(w\
-    \ * 2, |c| Reverse(c.score));\n                    cands.truncate(w * 2);\n  \
-    \              }\n\n                cands.sort_unstable_by_key(|c| Reverse(c.score));\n\
-    \                set.clear();\n                let mut total = 0;\n          \
-    \      // self.update(cands.iter().map(|c| {\n                //     let f = total\
-    \ < w && set.insert(c.hash);\n                //     total += f as usize;\n  \
-    \              //     if f && best\n                //         .as_ref()\n   \
-    \             //         .map_or(std::i32::MIN, |b: &Candidate<A>| b.score)\n\
-    \                //         < c.score\n                //         && c.valid\n\
-    \                //     {\n                //         best = Some(c.clone());\n\
-    \                //     }\n                //     (c.clone(), f)\n           \
-    \     // }));\n                self.update(cands.iter().map(|c| {\n          \
-    \          let f = total < w && set.insert(c.hash);\n                    total\
-    \ += f as usize;\n                    (c.clone(), f)\n                }));\n \
-    \           }\n            // if t < self.max_turn {\n            if t == 0 ||\
-    \ cands[t].len() != 0 {\n                self.enum_cands(t, &mut cands);\n   \
-    \         }\n            // }\n        }\n\n        let best = cands[self.max_turn]\n\
-    \            .iter()\n            .filter(|c| c.valid)\n            .max_by_key(|c|\
-    \ c.score)\n            .cloned()\n            .unwrap();\n        let mut res\
-    \ = vec![];\n        let mut idx = best.parent;\n        loop {\n            let\
-    \ Node { action, parent, .. } = &self.nodes[idx as usize];\n            if *parent\
-    \ == !0 {\n                break;\n            }\n            res.push(action.as_ref().unwrap().clone());\n\
-    \            idx = *parent;\n        }\n        res.reverse();\n        res.push(best.action);\n\
-    \        (res, best.score)\n    }\n}\n\n#[derive(Default)]\nstruct NopHasher {\n\
-    \    hash: u64,\n}\n\nimpl Hasher for NopHasher {\n    fn write(&mut self, _:\
-    \ &[u8]) {\n        unimplemented!()\n    }\n\n    #[inline]\n    fn write_u64(&mut\
+    \                valid: self.state.is_valid(),\n            });\n            self.state.revert_action(&action);\n\
+    \        }\n    }\n\n    // \u6839\u306E\u5B50\u304C\u3072\u3068\u3064\u3067\u3042\
+    \u308B\u9593\u3001\u305D\u306E\u5B50\u3092\u6839\u306B\u3059\u308B\u3053\u3068\
+    \u3092\u7E70\u308A\u8FD4\u3059\n    fn update_root(&mut self) {\n        assert!(self.v\
+    \ == self.root);\n\n        while self.has_child(self.v) {\n            let child\
+    \ = self.child(self.v);\n            if self.has_right(child) {\n            \
+    \    break;\n            }\n            self.move_to_first_child();\n        }\n\
+    \        self.root = self.v;\n    }\n\n    // \u8449 v \u3092\u524A\u9664\u3059\
+    \u308B\u3002\u305D\u306E\u7D50\u679C\u89AA\u304C\u8449\u306B\u306A\u308B\u5834\
+    \u5408\u306F\u3001\u305D\u306E\u89AA\u3082\u524A\u9664\u3059\u308B\u3002\u3053\
+    \u308C\u3092\u7E70\u308A\u8FD4\u3059\n    fn remove_leaf(&mut self, mut v: u32)\
+    \ {\n        assert!(!self.has_child(v));\n\n        while v != self.best_node\
+    \ {\n            assert!(!self.has_child(v));\n\n            let parent = self.parent(v);\n\
+    \            let left = self.left(v);\n            let right = self.right(v);\n\
+    \            self.nodes.remove(v);\n            if left != !0 {\n            \
+    \    self.nodes.get_mut(left).right = right;\n                if right != !0 {\n\
+    \                    self.nodes.get_mut(right).left = left;\n                }\n\
+    \                return;\n            } else {\n                assert!(parent\
+    \ != !0, \"\u6839\u3092\u524A\u9664\u3057\u3088\u3046\u3068\u3057\u3066\u3044\u307E\
+    \u3059\");\n                self.nodes.get_mut(parent).child = right;\n      \
+    \          if right != !0 {\n                    self.nodes.get_mut(right).left\
+    \ = !0;\n                    return;\n                }\n                v = parent;\n\
+    \            }\n        }\n    }\n\n    #[allow(unused)]\n    fn has_parent(&self,\
+    \ v: u32) -> bool {\n        self.nodes.get(v).parent != !0\n    }\n\n    fn parent(&self,\
+    \ v: u32) -> u32 {\n        self.nodes.get(v).parent\n    }\n\n    fn has_child(&self,\
+    \ v: u32) -> bool {\n        self.nodes.get(v).child != !0\n    }\n\n    fn child(&self,\
+    \ v: u32) -> u32 {\n        self.nodes.get(v).child\n    }\n\n    #[allow(unused)]\n\
+    \    fn has_left(&self, v: u32) -> bool {\n        self.nodes.get(v).left != !0\n\
+    \    }\n\n    fn left(&self, v: u32) -> u32 {\n        self.nodes.get(v).left\n\
+    \    }\n\n    fn has_right(&self, v: u32) -> bool {\n        self.nodes.get(v).right\
+    \ != !0\n    }\n\n    fn right(&self, v: u32) -> u32 {\n        self.nodes.get(v).right\n\
+    \    }\n\n    // \u89AA\u306B\u79FB\u52D5\u3059\u308B\n    fn move_to_parent(&mut\
+    \ self) {\n        let node = &self.nodes.get(self.v);\n        self.state.revert_action(&node.action);\n\
+    \        self.turn -= node.action.consumed_turns();\n        self.v = node.parent;\n\
+    \    }\n\n    // \u9577\u7537\u306B\u79FB\u52D5\u3059\u308B\n    fn move_to_first_child(&mut\
+    \ self) {\n        let u = self.child(self.v);\n        self.move_to_child(u);\n\
+    \    }\n\n    // \u5B50\u3067\u3042\u308B u \u306B\u79FB\u52D5\u3059\u308B\n \
+    \   fn move_to_child(&mut self, u: u32) {\n        self.v = u;\n        let action\
+    \ = &self.nodes.get(self.v).action;\n        self.state.apply_action(action);\n\
+    \        self.turn += action.consumed_turns();\n    }\n\n    #[allow(unused)]\n\
+    \    // \u5F1F\u306B\u79FB\u52D5\u3059\u308B\n    fn move_to_right(&mut self)\
+    \ {\n        let u = self.right(self.v);\n        self.move_to_sibling(u);\n \
+    \   }\n\n    // \u5144\u5F1F\u3067\u3042\u308B u \u306B\u79FB\u52D5\u3059\u308B\
+    \n    fn move_to_sibling(&mut self, u: u32) {\n        self.move_to_parent();\n\
+    \        self.move_to_child(u);\n    }\n}\n\n#[derive(Default)]\nstruct NopHasher\
+    \ {\n    hash: u64,\n}\n\nimpl Hasher for NopHasher {\n    fn write(&mut self,\
+    \ _: &[u8]) {\n        unimplemented!()\n    }\n\n    #[inline]\n    fn write_u64(&mut\
     \ self, n: u64) {\n        self.hash = n;\n    }\n\n    #[inline]\n    fn finish(&self)\
     \ -> u64 {\n        self.hash\n    }\n}\n\n#[allow(dead_code)]\ntype NopHashMap<K,\
     \ V> = HashMap<K, V, BuildHasherDefault<NopHasher>>;\ntype NopHashSet<K> = HashSet<K,\
     \ BuildHasherDefault<NopHasher>>;\n"
-  dependsOn: []
+  dependsOn:
+  - crates/heuristic/timer/src/lib.rs
   isVerificationFile: false
   path: crates/heuristic/beam-search/src/lib.rs
   requiredBy: []
-  timestamp: '2024-12-27 03:53:35+00:00'
+  timestamp: '2025-01-25 11:36:32+00:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: crates/heuristic/beam-search/src/lib.rs

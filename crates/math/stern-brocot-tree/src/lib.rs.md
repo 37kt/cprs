@@ -138,8 +138,8 @@ data:
   timestamp: '2025-01-11 09:03:35+00:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/stern_brocot_tree/src/main.rs
   - verify/rational_approximation/src/main.rs
+  - verify/stern_brocot_tree/src/main.rs
 documentation_of: crates/math/stern-brocot-tree/src/lib.rs
 layout: document
 redirect_from:

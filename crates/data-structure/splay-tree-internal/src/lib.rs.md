@@ -139,8 +139,8 @@ data:
   isVerificationFile: false
   path: crates/data-structure/splay-tree-internal/src/lib.rs
   requiredBy:
-  - crates/data-structure/splay-tree/src/lib.rs
   - crates/data-structure/link-cut-tree/src/lib.rs
+  - crates/data-structure/splay-tree/src/lib.rs
   timestamp: '2025-01-11 09:03:35+00:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []

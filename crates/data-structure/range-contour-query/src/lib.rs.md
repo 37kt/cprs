@@ -137,8 +137,8 @@ data:
   isVerificationFile: false
   path: crates/data-structure/range-contour-query/src/lib.rs
   requiredBy:
-  - crates/data-structure/vertex-get-range-contour-add/src/lib.rs
   - crates/data-structure/vertex-add-range-contour-sum/src/lib.rs
+  - crates/data-structure/vertex-get-range-contour-add/src/lib.rs
   timestamp: '2025-01-15 06:25:46+00:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []

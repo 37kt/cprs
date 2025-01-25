@@ -43,8 +43,8 @@ data:
   isVerificationFile: false
   path: crates/misc/random/src/lib.rs
   requiredBy:
-  - crates/string/wildcard-pattern-matching/src/lib.rs
   - crates/string/rolling-hash/src/lib.rs
+  - crates/string/wildcard-pattern-matching/src/lib.rs
   timestamp: '2024-12-30 09:13:10+00:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
