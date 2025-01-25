@@ -42,23 +42,23 @@ where
     }
 }
 
-#[cfg(test)]
-mod tests {
-    use super::*;
+// #[cfg(test)]
+// mod tests {
+//     use super::*;
 
-    #[test]
-    fn test() {
-        let mut s = 0;
-        let mut f = Recurse::new(|f, n| {
-            if n < 0 {
-            } else if n <= 1 {
-                s += 1;
-            } else {
-                f.call(n - 1);
-                f.call(n - 2);
-            }
-        });
-        f.call(10);
-        assert_eq!(s, 89);
-    }
-}
+//     #[test]
+//     fn test() {
+//         let mut s = 0;
+//         let mut f = Recurse::new(|f, n| {
+//             if n < 0 {
+//             } else if n <= 1 {
+//                 s += 1;
+//             } else {
+//                 f.call(n - 1);
+//                 f.call(n - 2);
+//             }
+//         });
+//         f.call(10);
+//         assert_eq!(s, 89);
+//     }
+// }

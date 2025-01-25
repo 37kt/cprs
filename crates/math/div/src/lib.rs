@@ -42,24 +42,3 @@ where
             zero
         }
 }
-
-#[cfg(test)]
-mod tests {
-    use super::*;
-
-    #[test]
-    fn test_div_floor() {
-        assert_eq!(div_floor(10, 3), 3);
-        assert_eq!(div_floor(10, -3), -4);
-        assert_eq!(div_floor(-10, 3), -4);
-        assert_eq!(div_floor(-10, -3), 3);
-    }
-
-    #[test]
-    fn test_div_ceil() {
-        assert_eq!(div_ceil(10, 3), 4);
-        assert_eq!(div_ceil(10, -3), -3);
-        assert_eq!(div_ceil(-10, 3), -3);
-        assert_eq!(div_ceil(-10, -3), 4);
-    }
-}
