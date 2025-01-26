@@ -8,6 +8,6 @@ fn main() {
     input! {
         n: usize,
     }
-    let p = partition::<998244353>(n + 1);
+    let p = partition::<998244353>(n);
     println!("{}", p);
 }
