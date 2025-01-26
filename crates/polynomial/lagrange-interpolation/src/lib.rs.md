@@ -26,17 +26,17 @@ data:
     \ = vec![1.into(); n + 1];\n    let mut pd = vec![1.into(); n + 1];\n    for i\
     \ in 0..n {\n        dp[i + 1] = dp[i] * (x - i).into();\n    }\n    for i in\
     \ (1..=n).rev() {\n        pd[i - 1] = pd[i] * (x - i).into();\n    }\n    let\
-    \ comb = Combination::<T>::new();\n    for i in 0..=n {\n        let tmp = ys[i]\
-    \ * dp[i] * pd[i] * comb.fact_inv(i) * comb.fact_inv(n - i);\n        if (n -\
-    \ i) & 1 == 1 {\n            res -= tmp;\n        } else {\n            res +=\
-    \ tmp;\n        }\n    }\n    res\n}\n"
+    \ comb = Combination::<T>::new();\n    comb.expand(n);\n    for i in 0..=n {\n\
+    \        let tmp = ys[i] * dp[i] * pd[i] * comb.fact_inv(i) * comb.fact_inv(n\
+    \ - i);\n        if (n - i) & 1 == 1 {\n            res -= tmp;\n        } else\
+    \ {\n            res += tmp;\n        }\n    }\n    res\n}\n"
   dependsOn:
   - crates/number-theory/combination/src/lib.rs
   - crates/number-theory/modint/src/lib.rs
   isVerificationFile: false
   path: crates/polynomial/lagrange-interpolation/src/lib.rs
   requiredBy: []
-  timestamp: '2024-12-30 09:13:10+00:00'
+  timestamp: '2025-01-26 00:19:46+00:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: crates/polynomial/lagrange-interpolation/src/lib.rs

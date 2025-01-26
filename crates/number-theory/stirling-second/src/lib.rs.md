@@ -32,11 +32,12 @@ data:
     \ k \u500B\u306E\u533A\u5225\u3067\u304D\u306A\u3044\u7BB1\u306B\u5206\u5272\u3059\
     \u308B\u65B9\u6CD5\u306E\u6570\n/// S(0, k), S(1, k), ..., S(n, k) \u3092\u8FD4\
     \u3059\npub fn stirling_second<const P: u32>(n: usize) -> FormalPowerSeries<P>\
-    \ {\n    let comb = Combination::<StaticModInt<P>>::new();\n    let mut f = fps![0;\
-    \ n + 1];\n    let mut g = fps![0; n + 1];\n    for i in 0..=n {\n        f[i]\
-    \ = StaticModInt::from(i).pow(n) * comb.fact_inv(i);\n        g[i] = if i & 1\
-    \ == 1 {\n            -comb.fact_inv(i)\n        } else {\n            comb.fact_inv(i)\n\
-    \        };\n    }\n    (f * g).pre(n + 1)\n}\n"
+    \ {\n    let comb = Combination::<StaticModInt<P>>::new();\n    comb.expand(n);\n\
+    \    let mut f = fps![0; n + 1];\n    let mut g = fps![0; n + 1];\n    for i in\
+    \ 0..=n {\n        f[i] = StaticModInt::from(i).pow(n) * comb.fact_inv(i);\n \
+    \       g[i] = if i & 1 == 1 {\n            -comb.fact_inv(i)\n        } else\
+    \ {\n            comb.fact_inv(i)\n        };\n    }\n    (f * g).pre(n + 1)\n\
+    }\n"
   dependsOn:
   - crates/number-theory/combination/src/lib.rs
   - crates/number-theory/modint/src/lib.rs
@@ -44,7 +45,7 @@ data:
   isVerificationFile: false
   path: crates/number-theory/stirling-second/src/lib.rs
   requiredBy: []
-  timestamp: '2024-12-30 09:13:10+00:00'
+  timestamp: '2025-01-26 00:19:46+00:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/stirling_number_of_the_second_kind/src/main.rs

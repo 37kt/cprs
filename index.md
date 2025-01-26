@@ -501,6 +501,11 @@ data:
     - icon: ':warning:'
       path: crates/misc/recurse/src/lib.rs
       title: crates/misc/recurse/src/lib.rs
+  - name: crates/number-theory/bell-number/src
+    pages:
+    - icon: ':heavy_check_mark:'
+      path: crates/number-theory/bell-number/src/lib.rs
+      title: crates/number-theory/bell-number/src/lib.rs
   - name: crates/number-theory/combination/src
     pages:
     - icon: ':heavy_check_mark:'
@@ -687,6 +692,11 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/assignment/src/main.rs
       title: verify/assignment/src/main.rs
+  - name: verify/bell_number/src
+    pages:
+    - icon: ':heavy_check_mark:'
+      path: verify/bell_number/src/main.rs
+      title: verify/bell_number/src/main.rs
   - name: verify/biconnected_components/src
     pages:
     - icon: ':heavy_check_mark:'

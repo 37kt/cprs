@@ -24,6 +24,9 @@ data:
     path: crates/graph/count-spanning-tree-undirected/src/lib.rs
     title: crates/graph/count-spanning-tree-undirected/src/lib.rs
   - icon: ':heavy_check_mark:'
+    path: crates/number-theory/bell-number/src/lib.rs
+    title: crates/number-theory/bell-number/src/lib.rs
+  - icon: ':heavy_check_mark:'
     path: crates/number-theory/combination/src/lib.rs
     title: crates/number-theory/combination/src/lib.rs
   - icon: ':heavy_check_mark:'
@@ -502,6 +505,7 @@ data:
   - crates/convolution/convolution-ntt-friendly/src/lib.rs
   - crates/convolution/convolution-u64/src/lib.rs
   - crates/convolution/convolution-arbitrary-mod/src/lib.rs
+  - crates/number-theory/bell-number/src/lib.rs
   - crates/number-theory/combination/src/lib.rs
   - crates/number-theory/q-binomial/src/lib.rs
   - crates/number-theory/stirling-second/src/lib.rs

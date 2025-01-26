@@ -6,6 +6,9 @@ data:
     title: crates/number-theory/modint/src/lib.rs
   _extendedRequiredBy:
   - icon: ':heavy_check_mark:'
+    path: crates/number-theory/bell-number/src/lib.rs
+    title: crates/number-theory/bell-number/src/lib.rs
+  - icon: ':heavy_check_mark:'
     path: crates/number-theory/q-binomial/src/lib.rs
     title: crates/number-theory/q-binomial/src/lib.rs
   - icon: ':heavy_check_mark:'
@@ -45,9 +48,9 @@ data:
     }\n\nimpl<M: ModInt> Combination<M> {\n    /// \u521D\u671F\u5316\n    pub fn\
     \ new() -> Self {\n        Self {\n            inv: RefCell::new(vec![M::from(0),\
     \ M::from(1)]),\n            fact: RefCell::new(vec![M::from(1); 2]),\n      \
-    \      fact_inv: RefCell::new(vec![M::from(1); 2]),\n        }\n    }\n\n    fn\
-    \ expand(&self, n: usize) {\n        let mut inv = self.inv.borrow_mut();\n  \
-    \      let mut fact = self.fact.borrow_mut();\n        let mut fact_inv = self.fact_inv.borrow_mut();\n\
+    \      fact_inv: RefCell::new(vec![M::from(1); 2]),\n        }\n    }\n\n    pub\
+    \ fn expand(&self, n: usize) {\n        let mut inv = self.inv.borrow_mut();\n\
+    \        let mut fact = self.fact.borrow_mut();\n        let mut fact_inv = self.fact_inv.borrow_mut();\n\
     \        let m = inv.len();\n        let mut nn = m;\n        while nn <= n {\n\
     \            nn *= 2;\n        }\n        inv.resize(nn, M::default());\n    \
     \    fact.resize(nn, M::default());\n        fact_inv.resize(nn, M::default());\n\
@@ -83,11 +86,12 @@ data:
   path: crates/number-theory/combination/src/lib.rs
   requiredBy:
   - crates/polynomial/lagrange-interpolation/src/lib.rs
+  - crates/number-theory/bell-number/src/lib.rs
   - crates/number-theory/q-binomial/src/lib.rs
   - crates/number-theory/stirling-second/src/lib.rs
   - crates/number-theory/stirling-second-fixed-k/src/lib.rs
   - crates/number-theory/stirling-first-fixed-k/src/lib.rs
-  timestamp: '2024-12-30 09:13:10+00:00'
+  timestamp: '2025-01-26 00:19:46+00:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/binomial_coefficient_prime_mod/src/main.rs

@@ -30,10 +30,10 @@ data:
     \ M) -> Self {\n        Self {\n            q,\n            num: RefCell::new(vec![M::from(0),\
     \ M::from(1)]),\n            inv: RefCell::new(vec![M::from(0), M::from(1)]),\n\
     \            fact: RefCell::new(vec![M::from(1); 2]),\n            fact_inv: RefCell::new(vec![M::from(1);\
-    \ 2]),\n            comb: Combination::new(),\n        }\n    }\n\n    fn expand(&self,\
-    \ n: usize) {\n        let mut num = self.num.borrow_mut();\n        let mut inv\
-    \ = self.inv.borrow_mut();\n        let mut fact = self.fact.borrow_mut();\n \
-    \       let mut fact_inv = self.fact_inv.borrow_mut();\n        let m = inv.len();\n\
+    \ 2]),\n            comb: Combination::new(),\n        }\n    }\n\n    pub fn\
+    \ expand(&self, n: usize) {\n        let mut num = self.num.borrow_mut();\n  \
+    \      let mut inv = self.inv.borrow_mut();\n        let mut fact = self.fact.borrow_mut();\n\
+    \        let mut fact_inv = self.fact_inv.borrow_mut();\n        let m = inv.len();\n\
     \        let mut nn = m;\n        while nn <= n {\n            nn *= 2;\n    \
     \    }\n        num.reserve(nn - m);\n        for i in m..nn {\n            let\
     \ x = num[i - 1] * self.q + M::from(1);\n            if x.val() == 0 {\n     \
@@ -65,7 +65,7 @@ data:
   isVerificationFile: false
   path: crates/number-theory/q-binomial/src/lib.rs
   requiredBy: []
-  timestamp: '2024-12-30 09:13:10+00:00'
+  timestamp: '2025-01-26 00:19:46+00:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/q_binomial_coefficient_prime_mod/src/main.rs

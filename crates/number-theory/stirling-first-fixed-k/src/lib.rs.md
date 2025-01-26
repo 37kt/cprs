@@ -33,13 +33,14 @@ data:
     \ c(0, k), c(1, k), ..., c(n, k) \u3092\u8FD4\u3059\npub fn stirling_first_fixed_k<const\
     \ P: u32>(n: usize, k: usize) -> FormalPowerSeries<P> {\n    let mut f = fps![0;\
     \ n + 1];\n    if n < k {\n        return f;\n    }\n    let comb = Combination::new();\n\
-    \    for i in 1..=n {\n        f[i] = comb.inv(i);\n    }\n    f = f.pow(k, n\
-    \ + 1) * comb.fact_inv(k);\n    for i in k..=n {\n        f[i] *= comb.fact(i);\n\
-    \    }\n    f\n}\n\n/// \u7B26\u53F7\u4ED8\u304D\u7B2C 1 \u7A2E\u30B9\u30BF\u30FC\
-    \u30EA\u30F3\u30B0\u6570\n/// s(0, k), s(1, k), ..., s(n, k) \u3092\u8FD4\u3059\
-    \npub fn signed_stirling_first_fixed_k<const P: u32>(n: usize, k: usize) -> FormalPowerSeries<P>\
-    \ {\n    let mut f = stirling_first_fixed_k::<P>(n, k);\n    for i in k..=n {\n\
-    \        f[i] = if (i - k) % 2 == 0 { f[i] } else { -f[i] };\n    }\n    f\n}\n"
+    \    comb.expand(n);\n    for i in 1..=n {\n        f[i] = comb.inv(i);\n    }\n\
+    \    f = f.pow(k, n + 1) * comb.fact_inv(k);\n    for i in k..=n {\n        f[i]\
+    \ *= comb.fact(i);\n    }\n    f\n}\n\n/// \u7B26\u53F7\u4ED8\u304D\u7B2C 1 \u7A2E\
+    \u30B9\u30BF\u30FC\u30EA\u30F3\u30B0\u6570\n/// s(0, k), s(1, k), ..., s(n, k)\
+    \ \u3092\u8FD4\u3059\npub fn signed_stirling_first_fixed_k<const P: u32>(n: usize,\
+    \ k: usize) -> FormalPowerSeries<P> {\n    let mut f = stirling_first_fixed_k::<P>(n,\
+    \ k);\n    for i in k..=n {\n        f[i] = if (i - k) % 2 == 0 { f[i] } else\
+    \ { -f[i] };\n    }\n    f\n}\n"
   dependsOn:
   - crates/number-theory/combination/src/lib.rs
   - crates/number-theory/modint/src/lib.rs
@@ -47,7 +48,7 @@ data:
   isVerificationFile: false
   path: crates/number-theory/stirling-first-fixed-k/src/lib.rs
   requiredBy: []
-  timestamp: '2024-12-30 09:13:10+00:00'
+  timestamp: '2025-01-26 00:19:46+00:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/stirling_number_of_the_first_kind_fixed_k/src/main.rs

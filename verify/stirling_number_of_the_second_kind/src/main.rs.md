@@ -32,7 +32,7 @@ data:
   isVerificationFile: true
   path: verify/stirling_number_of_the_second_kind/src/main.rs
   requiredBy: []
-  timestamp: '2024-12-30 09:13:10+00:00'
+  timestamp: '2025-01-26 00:19:46+00:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/stirling_number_of_the_second_kind/src/main.rs

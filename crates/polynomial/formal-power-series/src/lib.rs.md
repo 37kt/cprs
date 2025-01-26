@@ -12,6 +12,9 @@ data:
     title: crates/number-theory/modint/src/lib.rs
   _extendedRequiredBy:
   - icon: ':heavy_check_mark:'
+    path: crates/number-theory/bell-number/src/lib.rs
+    title: crates/number-theory/bell-number/src/lib.rs
+  - icon: ':heavy_check_mark:'
     path: crates/number-theory/partition/src/lib.rs
     title: crates/number-theory/partition/src/lib.rs
   - icon: ':heavy_check_mark:'
@@ -395,6 +398,7 @@ data:
   - crates/polynomial/composition/src/lib.rs
   - crates/polynomial/compositional-inverse/src/lib.rs
   - crates/polynomial/power-projection/src/lib.rs
+  - crates/number-theory/bell-number/src/lib.rs
   - crates/number-theory/stirling-second/src/lib.rs
   - crates/number-theory/partition/src/lib.rs
   - crates/number-theory/stirling-second-fixed-k/src/lib.rs
