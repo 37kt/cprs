@@ -10,6 +10,7 @@ pub fn stirling_first_fixed_k<const P: u32>(n: usize, k: usize) -> FormalPowerSe
         return f;
     }
     let comb = Combination::new();
+    comb.expand(n);
     for i in 1..=n {
         f[i] = comb.inv(i);
     }

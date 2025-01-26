@@ -25,7 +25,7 @@ impl<M: ModInt> QBinomial<M> {
         }
     }
 
-    fn expand(&self, n: usize) {
+    pub fn expand(&self, n: usize) {
         let mut num = self.num.borrow_mut();
         let mut inv = self.inv.borrow_mut();
         let mut fact = self.fact.borrow_mut();

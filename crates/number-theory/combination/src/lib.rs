@@ -21,7 +21,7 @@ impl<M: ModInt> Combination<M> {
         }
     }
 
-    fn expand(&self, n: usize) {
+    pub fn expand(&self, n: usize) {
         let mut inv = self.inv.borrow_mut();
         let mut fact = self.fact.borrow_mut();
         let mut fact_inv = self.fact_inv.borrow_mut();

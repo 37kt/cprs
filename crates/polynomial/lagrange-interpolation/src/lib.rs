@@ -16,6 +16,7 @@ pub fn lagrange_interpolation<T: ModInt>(ys: &[T], x: usize) -> T {
         pd[i - 1] = pd[i] * (x - i).into();
     }
     let comb = Combination::<T>::new();
+    comb.expand(n);
     for i in 0..=n {
         let tmp = ys[i] * dp[i] * pd[i] * comb.fact_inv(i) * comb.fact_inv(n - i);
         if (n - i) & 1 == 1 {

@@ -7,6 +7,7 @@ use modint::StaticModInt;
 /// S(0, k), S(1, k), ..., S(n, k) を返す
 pub fn stirling_second<const P: u32>(n: usize) -> FormalPowerSeries<P> {
     let comb = Combination::<StaticModInt<P>>::new();
+    comb.expand(n);
     let mut f = fps![0; n + 1];
     let mut g = fps![0; n + 1];
     for i in 0..=n {
