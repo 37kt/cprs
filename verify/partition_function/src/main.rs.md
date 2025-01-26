@@ -21,14 +21,14 @@ data:
     , line 288, in bundle\n    raise NotImplementedError\nNotImplementedError\n"
   code: "// verification-helper: PROBLEM https://judge.yosupo.jp/problem/partition_function\n\
     \nuse partition::partition;\nuse proconio::input;\n\n#[proconio::fastout]\nfn\
-    \ main() {\n    input! {\n        n: usize,\n    }\n    let p = partition::<998244353>(n\
-    \ + 1);\n    println!(\"{}\", p);\n}\n"
+    \ main() {\n    input! {\n        n: usize,\n    }\n    let p = partition::<998244353>(n);\n\
+    \    println!(\"{}\", p);\n}\n"
   dependsOn:
   - crates/number-theory/partition/src/lib.rs
   isVerificationFile: true
   path: verify/partition_function/src/main.rs
   requiredBy: []
-  timestamp: '2024-12-30 09:13:10+00:00'
+  timestamp: '2025-01-26 00:01:59+00:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/partition_function/src/main.rs
