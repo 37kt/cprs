@@ -12,11 +12,11 @@ data:
   attributes:
     links:
     - https://eijirou-kyopro.hatenablog.com/entry/2024/02/01/115639
-  bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.12.8/x64/lib/python3.12/site-packages/onlinejudge_verify/documentation/build.py\"\
+  bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.13.1/x64/lib/python3.13/site-packages/onlinejudge_verify/documentation/build.py\"\
     , line 71, in _render_source_code_stat\n    bundled_code = language.bundle(stat.path,\
     \ basedir=basedir, options={'include_paths': [basedir]}).decode()\n          \
-    \         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\
-    \  File \"/opt/hostedtoolcache/Python/3.12.8/x64/lib/python3.12/site-packages/onlinejudge_verify/languages/rust.py\"\
+    \         ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\
+    \  File \"/opt/hostedtoolcache/Python/3.13.1/x64/lib/python3.13/site-packages/onlinejudge_verify/languages/rust.py\"\
     , line 288, in bundle\n    raise NotImplementedError\nNotImplementedError\n"
   code: "// \u53C2\u8003: https://eijirou-kyopro.hatenablog.com/entry/2024/02/01/115639\n\
     \nuse std::{\n    cmp::Reverse,\n    collections::{HashMap, HashSet},\n    hash::{BuildHasherDefault,\
@@ -56,7 +56,7 @@ data:
     \         nodes,\n            root: v,\n            best_valid_score: i32::MIN,\n\
     \            best_node: !0,\n            dfs_stack: Vec::with_capacity(nodes_capacity\
     \ * 2),\n            candidates: vec![vec![]; max_turns + 1],\n        }\n   \
-    \ }\n\n    pub fn run(&mut self) -> Vec<S::A> {\n        let timer = Timer::new();\n\
+    \ }\n\n    pub fn run(&mut self) -> (Vec<S::A>, i32) {\n        let timer = Timer::new();\n\
     \        let mut appeared = NopHashSet::default();\n\n        for turn in 0..=self.max_turns\
     \ {\n            let width = self.width_manager.width(turn, timer.elapsed_secs());\n\
     \n            let mut ord = (0..self.candidates[turn].len() as u32).collect::<Vec<_>>();\n\
@@ -82,27 +82,28 @@ data:
     \ {\n            let node = self.nodes.get(v);\n            let parent = node.parent;\n\
     \            if parent == !0 {\n                break;\n            }\n      \
     \      res.push(node.action.clone());\n            v = parent;\n        }\n\n\
-    \        res.reverse();\n        res\n    }\n\n    // \u65B0\u3057\u3044\u30CE\
-    \u30FC\u30C9\u3092\u9577\u7537\u3068\u3057\u3066\u8FFD\u52A0\u3059\u308B\n   \
-    \ fn add_node(&mut self, cand: Candidate<S::A>) -> u32 {\n        let parent =\
-    \ cand.parent;\n        let sibling = self.nodes.get(parent).child;\n        let\
-    \ u = self.nodes.push(Node {\n            action: cand.action,\n            parent,\n\
-    \            child: !0,\n            left: !0,\n            right: sibling,\n\
-    \        });\n        self.nodes.get_mut(parent).child = u;\n        if sibling\
-    \ != !0 {\n            self.nodes.get_mut(sibling).left = u;\n        }\n    \
-    \    if cand.valid && cand.score > self.best_valid_score {\n            self.best_node\
-    \ = u;\n            self.best_valid_score = cand.score;\n        }\n        u\n\
-    \    }\n\n    // \u73FE\u5728\u306E\u30BF\u30FC\u30F3\u6570\u304C target_turn\
-    \ \u3067\u3042\u308B\u72B6\u614B\u305F\u3061\u306E\u5B50\u306E\u5019\u88DC\u3092\
-    \u5217\u6319\u3059\u308B\u3002\n    // \u3064\u3044\u3067\u306B\u3001\u9014\u4E2D\
-    \u3067\u898B\u3064\u3051\u305F\u4E0D\u8981\u306A\u30CE\u30FC\u30C9\u3092\u524A\
-    \u9664\u3059\u308B\u3002\n    fn dfs(&mut self, target_turn: usize) {\n      \
-    \  assert!(self.dfs_stack.is_empty());\n\n        self.update_root();\n      \
-    \  // self.v == self.root\n\n        if self.turn > target_turn {\n          \
-    \  return;\n        }\n\n        if self.turn == target_turn {\n            self.enumerate_candidates();\n\
-    \            return;\n        }\n\n        let mut u = self.child(self.v);\n\n\
-    \        while u != !0 {\n            let next_turn = self.turn + self.nodes.get(u).action.consumed_turns();\n\
-    \            if next_turn <= target_turn {\n                self.dfs_stack.push(u);\n\
+    \        res.reverse();\n        (res, self.best_valid_score)\n    }\n\n    //\
+    \ \u65B0\u3057\u3044\u30CE\u30FC\u30C9\u3092\u9577\u7537\u3068\u3057\u3066\u8FFD\
+    \u52A0\u3059\u308B\n    fn add_node(&mut self, cand: Candidate<S::A>) -> u32 {\n\
+    \        let parent = cand.parent;\n        let sibling = self.nodes.get(parent).child;\n\
+    \        let u = self.nodes.push(Node {\n            action: cand.action,\n  \
+    \          parent,\n            child: !0,\n            left: !0,\n          \
+    \  right: sibling,\n        });\n        self.nodes.get_mut(parent).child = u;\n\
+    \        if sibling != !0 {\n            self.nodes.get_mut(sibling).left = u;\n\
+    \        }\n        if cand.valid && cand.score > self.best_valid_score {\n  \
+    \          self.best_node = u;\n            self.best_valid_score = cand.score;\n\
+    \        }\n        u\n    }\n\n    // \u73FE\u5728\u306E\u30BF\u30FC\u30F3\u6570\
+    \u304C target_turn \u3067\u3042\u308B\u72B6\u614B\u305F\u3061\u306E\u5B50\u306E\
+    \u5019\u88DC\u3092\u5217\u6319\u3059\u308B\u3002\n    // \u3064\u3044\u3067\u306B\
+    \u3001\u9014\u4E2D\u3067\u898B\u3064\u3051\u305F\u4E0D\u8981\u306A\u30CE\u30FC\
+    \u30C9\u3092\u524A\u9664\u3059\u308B\u3002\n    fn dfs(&mut self, target_turn:\
+    \ usize) {\n        assert!(self.dfs_stack.is_empty());\n\n        self.update_root();\n\
+    \        // self.v == self.root\n\n        if self.turn > target_turn {\n    \
+    \        return;\n        }\n\n        if self.turn == target_turn {\n       \
+    \     self.enumerate_candidates();\n            return;\n        }\n\n       \
+    \ let mut u = self.child(self.v);\n\n        while u != !0 {\n            let\
+    \ next_turn = self.turn + self.nodes.get(u).action.consumed_turns();\n       \
+    \     if next_turn <= target_turn {\n                self.dfs_stack.push(u);\n\
     \            }\n            u = self.right(u);\n        }\n\n        let mut disused_nodes\
     \ = vec![];\n        while let Some(u) = self.dfs_stack.pop() {\n            if\
     \ u == !0 {\n                self.move_to_parent();\n                continue;\n\
@@ -191,7 +192,7 @@ data:
   isVerificationFile: false
   path: crates/heuristic/beam-search/src/lib.rs
   requiredBy: []
-  timestamp: '2025-01-25 11:36:32+00:00'
+  timestamp: '2025-01-31 01:08:31+00:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: crates/heuristic/beam-search/src/lib.rs
