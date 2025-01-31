@@ -130,7 +130,7 @@ impl<S: State, W: WidthManager> BeamSearch<S, W> {
         }
     }
 
-    pub fn run(&mut self) -> Vec<S::A> {
+    pub fn run(&mut self) -> (Vec<S::A>, i32) {
         let timer = Timer::new();
         let mut appeared = NopHashSet::default();
 
@@ -188,7 +188,7 @@ impl<S: State, W: WidthManager> BeamSearch<S, W> {
         }
 
         res.reverse();
-        res
+        (res, self.best_valid_score)
     }
 
     // 新しいノードを長男として追加する
