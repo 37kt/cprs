@@ -391,6 +391,11 @@ data:
     - icon: ':warning:'
       path: crates/heuristic/beam-search/src/lib.rs
       title: crates/heuristic/beam-search/src/lib.rs
+  - name: crates/heuristic/normal-distribution/src
+    pages:
+    - icon: ':warning:'
+      path: crates/heuristic/normal-distribution/src/lib.rs
+      title: crates/heuristic/normal-distribution/src/lib.rs
   - name: crates/heuristic/timer/src
     pages:
     - icon: ':warning:'
