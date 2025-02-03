@@ -5,6 +5,9 @@ data:
   - icon: ':warning:'
     path: crates/heuristic/beam-search/src/lib.rs
     title: crates/heuristic/beam-search/src/lib.rs
+  - icon: ':warning:'
+    path: crates/heuristic/simulated-annealing-scheduler/src/lib.rs
+    title: crates/heuristic/simulated-annealing-scheduler/src/lib.rs
   _extendedVerifiedWith: []
   _isVerificationFailed: false
   _pathExtension: rs
@@ -27,6 +30,7 @@ data:
   isVerificationFile: false
   path: crates/heuristic/timer/src/lib.rs
   requiredBy:
+  - crates/heuristic/simulated-annealing-scheduler/src/lib.rs
   - crates/heuristic/beam-search/src/lib.rs
   timestamp: '2025-01-25 11:36:32+00:00'
   verificationStatus: LIBRARY_NO_TESTS

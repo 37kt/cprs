@@ -396,6 +396,11 @@ data:
     - icon: ':warning:'
       path: crates/heuristic/normal-distribution/src/lib.rs
       title: crates/heuristic/normal-distribution/src/lib.rs
+  - name: crates/heuristic/simulated-annealing-scheduler/src
+    pages:
+    - icon: ':warning:'
+      path: crates/heuristic/simulated-annealing-scheduler/src/lib.rs
+      title: crates/heuristic/simulated-annealing-scheduler/src/lib.rs
   - name: crates/heuristic/timer/src
     pages:
     - icon: ':warning:'

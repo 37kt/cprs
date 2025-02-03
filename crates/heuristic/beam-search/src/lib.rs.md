@@ -56,54 +56,54 @@ data:
     \         nodes,\n            root: v,\n            best_valid_score: i32::MIN,\n\
     \            best_node: !0,\n            dfs_stack: Vec::with_capacity(nodes_capacity\
     \ * 2),\n            candidates: vec![vec![]; max_turns + 1],\n        }\n   \
-    \ }\n\n    pub fn run(&mut self) -> (Vec<S::A>, i32) {\n        let timer = Timer::new();\n\
-    \        let mut appeared = NopHashSet::default();\n\n        for turn in 0..=self.max_turns\
-    \ {\n            let width = self.width_manager.width(turn, timer.elapsed_secs());\n\
-    \n            let mut ord = (0..self.candidates[turn].len() as u32).collect::<Vec<_>>();\n\
-    \            if self.candidates[turn].len() > width * 2 {\n                ord.select_nth_unstable_by_key(width\
-    \ * 2, |&i| {\n                    Reverse(self.candidates[turn][i as usize].score)\n\
-    \                });\n                ord.truncate(width * 2);\n            }\n\
-    \            ord.sort_unstable_by_key(|&i| Reverse(self.candidates[turn][i as\
-    \ usize].score));\n\n            appeared.clear();\n            let mut cnt =\
-    \ 0;\n            for &i in &ord {\n                let i = i as usize;\n\n  \
-    \              // \u30CF\u30C3\u30B7\u30E5\u304C\u88AB\u3063\u305F\u3089\u3001\
-    1\u500B\u3060\u3051\u6B8B\u3059\u3002\n                // \u5225\u306E\u65B9\u91DD\
-    \u3068\u3057\u3066\u306F\u3001\u6D88\u3055\u305A\u306B\u30DA\u30CA\u30EB\u30C6\
-    \u30A3\u3092\u4E0E\u3048\u308B\u3068\u304B\u3082\u3042\u308B\u304B\u3082\u3002\
-    \n                if appeared.insert(self.candidates[turn][i].hash) {\n      \
-    \              self.add_node(self.candidates[turn][i].clone());\n            \
-    \        cnt += 1;\n                    if cnt >= width {\n                  \
-    \      break;\n                    }\n                }\n            }\n\n   \
-    \         self.candidates[turn].clear();\n            self.candidates[turn].shrink_to_fit();\n\
+    \ }\n\n    pub fn run(&mut self) -> Result<(Vec<S::A>, i32), &'static str> {\n\
+    \        let timer = Timer::new();\n        let mut appeared = NopHashSet::default();\n\
+    \n        for turn in 0..=self.max_turns {\n            let width = self.width_manager.width(turn,\
+    \ timer.elapsed_secs());\n\n            let mut ord = (0..self.candidates[turn].len()\
+    \ as u32).collect::<Vec<_>>();\n            if self.candidates[turn].len() > width\
+    \ * 2 {\n                ord.select_nth_unstable_by_key(width * 2, |&i| {\n  \
+    \                  Reverse(self.candidates[turn][i as usize].score)\n        \
+    \        });\n                ord.truncate(width * 2);\n            }\n      \
+    \      ord.sort_unstable_by_key(|&i| Reverse(self.candidates[turn][i as usize].score));\n\
+    \n            // appeared.clear();\n            let mut cnt = 0;\n           \
+    \ for &i in &ord {\n                let i = i as usize;\n\n                //\
+    \ \u30CF\u30C3\u30B7\u30E5\u304C\u88AB\u3063\u305F\u3089\u30011\u500B\u3060\u3051\
+    \u6B8B\u3059\u3002\n                // \u5225\u306E\u65B9\u91DD\u3068\u3057\u3066\
+    \u306F\u3001\u6D88\u3055\u305A\u306B\u30DA\u30CA\u30EB\u30C6\u30A3\u3092\u4E0E\
+    \u3048\u308B\u3068\u304B\u3082\u3042\u308B\u304B\u3082\u3002\n               \
+    \ if appeared.insert(self.candidates[turn][i].hash) {\n                    self.add_node(self.candidates[turn][i].clone());\n\
+    \                    cnt += 1;\n                    if cnt >= width {\n      \
+    \                  break;\n                    }\n                }\n        \
+    \    }\n\n            self.candidates[turn].clear();\n            self.candidates[turn].shrink_to_fit();\n\
     \n            if turn == self.max_turns {\n                break;\n          \
     \  }\n\n            self.dfs(turn);\n        }\n\n        let mut res = vec![];\n\
-    \        let mut v = self.best_node;\n\n        assert!(v != !0, \"\u89E3\u304C\
-    \u898B\u3064\u304B\u308A\u307E\u305B\u3093\u3067\u3057\u305F\");\n\n        loop\
-    \ {\n            let node = self.nodes.get(v);\n            let parent = node.parent;\n\
-    \            if parent == !0 {\n                break;\n            }\n      \
-    \      res.push(node.action.clone());\n            v = parent;\n        }\n\n\
-    \        res.reverse();\n        (res, self.best_valid_score)\n    }\n\n    //\
-    \ \u65B0\u3057\u3044\u30CE\u30FC\u30C9\u3092\u9577\u7537\u3068\u3057\u3066\u8FFD\
-    \u52A0\u3059\u308B\n    fn add_node(&mut self, cand: Candidate<S::A>) -> u32 {\n\
-    \        let parent = cand.parent;\n        let sibling = self.nodes.get(parent).child;\n\
-    \        let u = self.nodes.push(Node {\n            action: cand.action,\n  \
-    \          parent,\n            child: !0,\n            left: !0,\n          \
-    \  right: sibling,\n        });\n        self.nodes.get_mut(parent).child = u;\n\
-    \        if sibling != !0 {\n            self.nodes.get_mut(sibling).left = u;\n\
-    \        }\n        if cand.valid && cand.score > self.best_valid_score {\n  \
-    \          self.best_node = u;\n            self.best_valid_score = cand.score;\n\
-    \        }\n        u\n    }\n\n    // \u73FE\u5728\u306E\u30BF\u30FC\u30F3\u6570\
-    \u304C target_turn \u3067\u3042\u308B\u72B6\u614B\u305F\u3061\u306E\u5B50\u306E\
-    \u5019\u88DC\u3092\u5217\u6319\u3059\u308B\u3002\n    // \u3064\u3044\u3067\u306B\
-    \u3001\u9014\u4E2D\u3067\u898B\u3064\u3051\u305F\u4E0D\u8981\u306A\u30CE\u30FC\
-    \u30C9\u3092\u524A\u9664\u3059\u308B\u3002\n    fn dfs(&mut self, target_turn:\
-    \ usize) {\n        assert!(self.dfs_stack.is_empty());\n\n        self.update_root();\n\
-    \        // self.v == self.root\n\n        if self.turn > target_turn {\n    \
-    \        return;\n        }\n\n        if self.turn == target_turn {\n       \
-    \     self.enumerate_candidates();\n            return;\n        }\n\n       \
-    \ let mut u = self.child(self.v);\n\n        while u != !0 {\n            let\
-    \ next_turn = self.turn + self.nodes.get(u).action.consumed_turns();\n       \
-    \     if next_turn <= target_turn {\n                self.dfs_stack.push(u);\n\
+    \        let mut v = self.best_node;\n\n        if v == !0 {\n            return\
+    \ Err(\"\u89E3\u304C\u898B\u3064\u304B\u308A\u307E\u305B\u3093\u3067\u3057\u305F\
+    \");\n        }\n\n        loop {\n            let node = self.nodes.get(v);\n\
+    \            let parent = node.parent;\n            if parent == !0 {\n      \
+    \          break;\n            }\n            res.push(node.action.clone());\n\
+    \            v = parent;\n        }\n\n        res.reverse();\n        Ok((res,\
+    \ self.best_valid_score))\n    }\n\n    // \u65B0\u3057\u3044\u30CE\u30FC\u30C9\
+    \u3092\u9577\u7537\u3068\u3057\u3066\u8FFD\u52A0\u3059\u308B\n    fn add_node(&mut\
+    \ self, cand: Candidate<S::A>) -> u32 {\n        let parent = cand.parent;\n \
+    \       let sibling = self.nodes.get(parent).child;\n        let u = self.nodes.push(Node\
+    \ {\n            action: cand.action,\n            parent,\n            child:\
+    \ !0,\n            left: !0,\n            right: sibling,\n        });\n     \
+    \   self.nodes.get_mut(parent).child = u;\n        if sibling != !0 {\n      \
+    \      self.nodes.get_mut(sibling).left = u;\n        }\n        if cand.valid\
+    \ && cand.score > self.best_valid_score {\n            self.best_node = u;\n \
+    \           self.best_valid_score = cand.score;\n        }\n        u\n    }\n\
+    \n    // \u73FE\u5728\u306E\u30BF\u30FC\u30F3\u6570\u304C target_turn \u3067\u3042\
+    \u308B\u72B6\u614B\u305F\u3061\u306E\u5B50\u306E\u5019\u88DC\u3092\u5217\u6319\
+    \u3059\u308B\u3002\n    // \u3064\u3044\u3067\u306B\u3001\u9014\u4E2D\u3067\u898B\
+    \u3064\u3051\u305F\u4E0D\u8981\u306A\u30CE\u30FC\u30C9\u3092\u524A\u9664\u3059\
+    \u308B\u3002\n    fn dfs(&mut self, target_turn: usize) {\n        assert!(self.dfs_stack.is_empty());\n\
+    \n        self.update_root();\n        // self.v == self.root\n\n        if self.turn\
+    \ > target_turn {\n            return;\n        }\n\n        if self.turn == target_turn\
+    \ {\n            self.enumerate_candidates();\n            return;\n        }\n\
+    \n        let mut u = self.child(self.v);\n\n        while u != !0 {\n       \
+    \     let next_turn = self.turn + self.nodes.get(u).action.consumed_turns();\n\
+    \            if next_turn <= target_turn {\n                self.dfs_stack.push(u);\n\
     \            }\n            u = self.right(u);\n        }\n\n        let mut disused_nodes\
     \ = vec![];\n        while let Some(u) = self.dfs_stack.pop() {\n            if\
     \ u == !0 {\n                self.move_to_parent();\n                continue;\n\
@@ -192,7 +192,7 @@ data:
   isVerificationFile: false
   path: crates/heuristic/beam-search/src/lib.rs
   requiredBy: []
-  timestamp: '2025-01-31 01:08:31+00:00'
+  timestamp: '2025-02-03 05:51:20+00:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: crates/heuristic/beam-search/src/lib.rs

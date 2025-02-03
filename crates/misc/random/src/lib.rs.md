@@ -2,6 +2,9 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy:
+  - icon: ':warning:'
+    path: crates/heuristic/simulated-annealing-scheduler/src/lib.rs
+    title: crates/heuristic/simulated-annealing-scheduler/src/lib.rs
   - icon: ':heavy_check_mark:'
     path: crates/string/rolling-hash/src/lib.rs
     title: crates/string/rolling-hash/src/lib.rs
@@ -43,6 +46,7 @@ data:
   isVerificationFile: false
   path: crates/misc/random/src/lib.rs
   requiredBy:
+  - crates/heuristic/simulated-annealing-scheduler/src/lib.rs
   - crates/string/rolling-hash/src/lib.rs
   - crates/string/wildcard-pattern-matching/src/lib.rs
   timestamp: '2024-12-30 09:13:10+00:00'
