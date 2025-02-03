@@ -130,7 +130,7 @@ impl<S: State, W: WidthManager> BeamSearch<S, W> {
         }
     }
 
-    pub fn run(&mut self) -> (Vec<S::A>, i32) {
+    pub fn run(&mut self) -> Result<(Vec<S::A>, i32), &'static str> {
         let timer = Timer::new();
         let mut appeared = NopHashSet::default();
 
@@ -146,7 +146,7 @@ impl<S: State, W: WidthManager> BeamSearch<S, W> {
             }
             ord.sort_unstable_by_key(|&i| Reverse(self.candidates[turn][i as usize].score));
 
-            appeared.clear();
+            // appeared.clear();
             let mut cnt = 0;
             for &i in &ord {
                 let i = i as usize;
@@ -175,7 +175,9 @@ impl<S: State, W: WidthManager> BeamSearch<S, W> {
         let mut res = vec![];
         let mut v = self.best_node;
 
-        assert!(v != !0, "解が見つかりませんでした");
+        if v == !0 {
+            return Err("解が見つかりませんでした");
+        }
 
         loop {
             let node = self.nodes.get(v);
@@ -188,7 +190,7 @@ impl<S: State, W: WidthManager> BeamSearch<S, W> {
         }
 
         res.reverse();
-        (res, self.best_valid_score)
+        Ok((res, self.best_valid_score))
     }
 
     // 新しいノードを長男として追加する
