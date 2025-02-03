@@ -11,11 +11,16 @@ use timer::Timer;
 pub trait State {
     type A: Action;
 
-    fn score(&mut self) -> i32;
-    fn hash(&mut self) -> u64;
-    fn is_valid(&mut self) -> bool;
+    fn score(&self) -> i32;
+    fn hash(&self) -> u64;
+    fn is_valid(&self) -> bool;
 
-    fn enumerate_actions(&mut self) -> Vec<Self::A>;
+    fn enumerate_actions(&self) -> Vec<Self::A>;
+
+    #[allow(unused_variables)]
+    fn post_action(&self, action: &Self::A) -> PostActionInfo {
+        UNIMPLEMENT_POST_ACTION
+    }
 
     fn apply_action(&mut self, action: &Self::A);
     fn revert_action(&mut self, action: &Self::A);
@@ -24,6 +29,19 @@ pub trait State {
 pub trait Action: Clone + Default {
     fn consumed_turns(&self) -> usize;
 }
+
+#[derive(Clone, Copy, PartialEq, Eq)]
+pub struct PostActionInfo {
+    score: i32,
+    hash: u64,
+    valid: bool,
+}
+
+const UNIMPLEMENT_POST_ACTION: PostActionInfo = PostActionInfo {
+    score: i32::MIN,
+    hash: !0,
+    valid: false,
+};
 
 pub trait WidthManager {
     fn width(&mut self, turn: usize, elapsed_secs: f64) -> usize;
@@ -88,6 +106,7 @@ impl<T> Pool<T> {
 pub struct BeamSearch<S: State, W: WidthManager> {
     max_turns: usize,
     width_manager: W,
+    minimize_turn: bool,
 
     v: u32, // 現在のノード
     turn: usize,
@@ -106,6 +125,7 @@ impl<S: State, W: WidthManager> BeamSearch<S, W> {
         max_turns: usize,
         width_manager: W,
         nodes_capacity: usize,
+        minimize_turn: bool,
     ) -> Self {
         let mut nodes = Pool::new(nodes_capacity);
         let v = nodes.push(Node {
@@ -118,6 +138,7 @@ impl<S: State, W: WidthManager> BeamSearch<S, W> {
         Self {
             max_turns,
             width_manager,
+            minimize_turn,
             v,
             turn: 0,
             state: initial_state,
@@ -146,7 +167,7 @@ impl<S: State, W: WidthManager> BeamSearch<S, W> {
             }
             ord.sort_unstable_by_key(|&i| Reverse(self.candidates[turn][i as usize].score));
 
-            // appeared.clear();
+            appeared.clear();
             let mut cnt = 0;
             for &i in &ord {
                 let i = i as usize;
@@ -165,6 +186,9 @@ impl<S: State, W: WidthManager> BeamSearch<S, W> {
             self.candidates[turn].clear();
             self.candidates[turn].shrink_to_fit();
 
+            if self.minimize_turn && self.best_node != !0 {
+                break;
+            }
             if turn == self.max_turns {
                 break;
             }
@@ -289,19 +313,26 @@ impl<S: State, W: WidthManager> BeamSearch<S, W> {
                 continue;
             }
 
-            // ノードを移動しているわけではないけど、score を計算するために一時的に state を変化させて、
-            // 終わったらすぐに元に戻している。
-            // apply_action 後のスコアとハッシュを apply_action せずに高速に計算できるときは、
-            // こうしなくてもいい
-            self.state.apply_action(&action);
-            self.candidates[next_turn].push(Candidate {
-                action: action.clone(),
-                parent: self.v,
-                score: self.state.score(),
-                hash: self.state.hash(),
-                valid: self.state.is_valid(),
-            });
-            self.state.revert_action(&action);
+            let post_action = self.state.post_action(&action);
+            if post_action == UNIMPLEMENT_POST_ACTION {
+                self.state.apply_action(&action);
+                self.candidates[next_turn].push(Candidate {
+                    action: action.clone(),
+                    parent: self.v,
+                    score: self.state.score(),
+                    hash: self.state.hash(),
+                    valid: self.state.is_valid(),
+                });
+                self.state.revert_action(&action);
+            } else {
+                self.candidates[next_turn].push(Candidate {
+                    action,
+                    parent: self.v,
+                    score: post_action.score,
+                    hash: post_action.hash,
+                    valid: post_action.valid,
+                });
+            }
         }
     }
 
