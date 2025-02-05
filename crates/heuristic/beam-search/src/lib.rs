@@ -1,29 +1,28 @@
 // 参考: https://eijirou-kyopro.hatenablog.com/entry/2024/02/01/115639
 
 use std::{
-    cmp::Reverse,
-    collections::{HashMap, HashSet},
+    cmp::{Ordering, Reverse},
+    collections::{BinaryHeap, HashMap, HashSet},
     hash::{BuildHasherDefault, Hasher},
 };
-
-use timer::Timer;
 
 pub trait State {
     type A: Action;
 
-    fn score(&self) -> i32;
-    fn hash(&self) -> u64;
-    fn is_valid(&self) -> bool;
-
     fn enumerate_actions(&self) -> Vec<Self::A>;
-
-    #[allow(unused_variables)]
-    fn post_action(&self, action: &Self::A) -> PostActionInfo {
-        UNIMPLEMENT_POST_ACTION
-    }
-
     fn apply_action(&mut self, action: &Self::A);
     fn revert_action(&mut self, action: &Self::A);
+
+    fn evaluate_current_state(&self) -> StateInfo {
+        unimplemented!()
+    }
+
+    fn evaluate_after_action(&mut self, action: &Self::A) -> StateInfo {
+        self.apply_action(action);
+        let res = self.evaluate_current_state();
+        self.revert_action(action);
+        res
+    }
 }
 
 pub trait Action: Clone + Default {
@@ -31,20 +30,10 @@ pub trait Action: Clone + Default {
 }
 
 #[derive(Clone, Copy, PartialEq, Eq)]
-pub struct PostActionInfo {
-    score: i32,
-    hash: u64,
-    valid: bool,
-}
-
-const UNIMPLEMENT_POST_ACTION: PostActionInfo = PostActionInfo {
-    score: i32::MIN,
-    hash: !0,
-    valid: false,
-};
-
-pub trait WidthManager {
-    fn width(&mut self, turn: usize, elapsed_secs: f64) -> usize;
+pub struct StateInfo {
+    pub score: i32,
+    pub hash: u64,
+    pub valid: bool,
 }
 
 #[derive(Clone)]
@@ -56,14 +45,35 @@ struct Candidate<A: Action> {
     valid: bool,
 }
 
+impl<A: Action> PartialEq for Candidate<A> {
+    fn eq(&self, other: &Self) -> bool {
+        self.score == other.score
+    }
+}
+
+impl<A: Action> Eq for Candidate<A> {}
+
+impl<A: Action> PartialOrd for Candidate<A> {
+    fn partial_cmp(&self, other: &Self) -> Option<Ordering> {
+        Some(self.cmp(other))
+    }
+}
+
+impl<A: Action> Ord for Candidate<A> {
+    fn cmp(&self, other: &Self) -> Ordering {
+        other.score.cmp(&self.score)
+    }
+}
+
 // 二重連鎖木のノード
 #[derive(Clone, Default)]
 struct Node<A: Action> {
     action: A,
     parent: u32,
-    child: u32, // 長男
-    left: u32,  // 兄
-    right: u32, // 弟
+    child: u32,       // 長男
+    left: u32,        // 兄
+    right: u32,       // 弟
+    count_cands: u32, // 子候補の Candidate の個数
 }
 
 struct Pool<T> {
@@ -103,9 +113,45 @@ impl<T> Pool<T> {
     }
 }
 
-pub struct BeamSearch<S: State, W: WidthManager> {
+#[derive(Clone)]
+struct MinK<A: Action> {
+    size: usize,
+    pq: BinaryHeap<Candidate<A>>,
+}
+
+impl<A: Action> MinK<A> {
+    fn new(size: usize) -> Self {
+        Self {
+            size,
+            pq: BinaryHeap::with_capacity(size),
+        }
+    }
+
+    // 削除される候補の親を返す
+    fn push(&mut self, x: Candidate<A>) -> u32 {
+        if self.pq.len() < self.size {
+            self.pq.push(x);
+            !0
+        } else if let Some(mut top) = self.pq.peek_mut() {
+            if top.score < x.score {
+                let res = top.parent;
+                *top = x;
+                res
+            } else {
+                x.parent
+            }
+        } else {
+            unreachable!()
+        }
+    }
+
+    fn drain(&mut self) -> impl Iterator<Item = Candidate<A>> + '_ {
+        self.pq.drain()
+    }
+}
+
+pub struct BeamSearch<S: State> {
     max_turns: usize,
-    width_manager: W,
     minimize_turn: bool,
 
     v: u32, // 現在のノード
@@ -116,14 +162,14 @@ pub struct BeamSearch<S: State, W: WidthManager> {
     best_valid_score: i32,
     best_node: u32,
     dfs_stack: Vec<u32>,
-    candidates: Vec<Vec<Candidate<S::A>>>,
+    candidates: Vec<MinK<S::A>>,
 }
 
-impl<S: State, W: WidthManager> BeamSearch<S, W> {
+impl<S: State> BeamSearch<S> {
     pub fn new(
         initial_state: S,
         max_turns: usize,
-        width_manager: W,
+        width: usize,
         nodes_capacity: usize,
         minimize_turn: bool,
     ) -> Self {
@@ -134,10 +180,10 @@ impl<S: State, W: WidthManager> BeamSearch<S, W> {
             child: !0,
             left: !0,
             right: !0,
+            count_cands: 0,
         });
         Self {
             max_turns,
-            width_manager,
             minimize_turn,
             v,
             turn: 0,
@@ -147,44 +193,28 @@ impl<S: State, W: WidthManager> BeamSearch<S, W> {
             best_valid_score: i32::MIN,
             best_node: !0,
             dfs_stack: Vec::with_capacity(nodes_capacity * 2),
-            candidates: vec![vec![]; max_turns + 1],
+            candidates: vec![MinK::new(width); max_turns + 1],
         }
     }
 
     pub fn run(&mut self) -> Result<(Vec<S::A>, i32), &'static str> {
-        let timer = Timer::new();
         let mut appeared = NopHashSet::default();
 
         for turn in 0..=self.max_turns {
-            let width = self.width_manager.width(turn, timer.elapsed_secs());
-
-            let mut ord = (0..self.candidates[turn].len() as u32).collect::<Vec<_>>();
-            if self.candidates[turn].len() > width * 2 {
-                ord.select_nth_unstable_by_key(width * 2, |&i| {
-                    Reverse(self.candidates[turn][i as usize].score)
-                });
-                ord.truncate(width * 2);
-            }
-            ord.sort_unstable_by_key(|&i| Reverse(self.candidates[turn][i as usize].score));
+            let mut cands = self.candidates[turn].drain().collect::<Vec<_>>();
+            cands.sort_unstable_by_key(|c| Reverse(c.score));
 
             appeared.clear();
-            let mut cnt = 0;
-            for &i in &ord {
-                let i = i as usize;
-
-                // ハッシュが被ったら、1個だけ残す。
-                // 別の方針としては、消さずにペナルティを与えるとかもあるかも。
-                if appeared.insert(self.candidates[turn][i].hash) {
-                    self.add_node(self.candidates[turn][i].clone());
-                    cnt += 1;
-                    if cnt >= width {
-                        break;
-                    }
+            for c in cands {
+                let p = c.parent;
+                if appeared.insert(c.hash) {
+                    self.add_node(c);
+                }
+                self.nodes.get_mut(p).count_cands -= 1;
+                if self.removable(p) {
+                    self.remove_leaf(p);
                 }
             }
-
-            self.candidates[turn].clear();
-            self.candidates[turn].shrink_to_fit();
 
             if self.minimize_turn && self.best_node != !0 {
                 break;
@@ -227,6 +257,7 @@ impl<S: State, W: WidthManager> BeamSearch<S, W> {
             child: !0,
             left: !0,
             right: sibling,
+            count_cands: 0,
         });
         self.nodes.get_mut(parent).child = u;
         if sibling != !0 {
@@ -276,12 +307,20 @@ impl<S: State, W: WidthManager> BeamSearch<S, W> {
             self.dfs_stack.push(!0);
             self.move_to_child(u);
             if self.turn == target_turn {
-                assert!(!self.has_child(self.v));
+                assert!(
+                    !self.has_child(self.v),
+                    "v={}, child={}",
+                    self.v,
+                    self.child(self.v)
+                );
                 self.enumerate_candidates();
+                if self.removable(self.v) {
+                    disused_nodes.push(self.v);
+                }
             } else if self.turn < target_turn {
                 let mut u = self.child(self.v);
                 if u == !0 {
-                    if self.state.score() < self.best_valid_score {
+                    if self.removable(self.v) {
                         disused_nodes.push(self.v);
                     }
                 } else {
@@ -306,32 +345,23 @@ impl<S: State, W: WidthManager> BeamSearch<S, W> {
 
     // 現在の状態の子の候補を列挙する
     fn enumerate_candidates(&mut self) {
-        let actions = self.state.enumerate_actions();
-        for action in actions {
+        for action in self.state.enumerate_actions() {
             let next_turn = self.turn + action.consumed_turns();
             if next_turn > self.max_turns {
                 continue;
             }
 
-            let post_action = self.state.post_action(&action);
-            if post_action == UNIMPLEMENT_POST_ACTION {
-                self.state.apply_action(&action);
-                self.candidates[next_turn].push(Candidate {
-                    action: action.clone(),
-                    parent: self.v,
-                    score: self.state.score(),
-                    hash: self.state.hash(),
-                    valid: self.state.is_valid(),
-                });
-                self.state.revert_action(&action);
-            } else {
-                self.candidates[next_turn].push(Candidate {
-                    action,
-                    parent: self.v,
-                    score: post_action.score,
-                    hash: post_action.hash,
-                    valid: post_action.valid,
-                });
+            let after_action = self.state.evaluate_after_action(&action);
+            self.nodes.get_mut(self.v).count_cands += 1;
+            let p = self.candidates[next_turn].push(Candidate {
+                action,
+                parent: self.v,
+                score: after_action.score,
+                hash: after_action.hash,
+                valid: after_action.valid,
+            });
+            if p != !0 {
+                self.nodes.get_mut(p).count_cands -= 1;
             }
         }
     }
@@ -350,11 +380,15 @@ impl<S: State, W: WidthManager> BeamSearch<S, W> {
         self.root = self.v;
     }
 
+    fn removable(&self, v: u32) -> bool {
+        v != !0 && !self.has_child(v) && v != self.best_node && self.nodes.get(v).count_cands == 0
+    }
+
     // 葉 v を削除する。その結果親が葉になる場合は、その親も削除する。これを繰り返す
     fn remove_leaf(&mut self, mut v: u32) {
         assert!(!self.has_child(v));
 
-        while v != self.best_node {
+        while self.removable(v) {
             assert!(!self.has_child(v));
 
             let parent = self.parent(v);
