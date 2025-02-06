@@ -28,4 +28,9 @@ impl NormalDistribution {
     pub fn ccdf(&self, x: f64) -> f64 {
         1.0 - self.cdf(x)
     }
+
+    pub fn pdf(&self, x: f64) -> f64 {
+        let d = (x - self.mean) / self.std_dev;
+        (-0.5 * d * d).exp() / (self.std_dev * std::f64::consts::SQRT_2 * std::f64::consts::PI)
+    }
 }
