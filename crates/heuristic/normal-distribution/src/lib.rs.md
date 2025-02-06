@@ -22,12 +22,15 @@ data:
     \u306E\u78BA\u7387\n    pub fn cdf(&self, x: f64) -> f64 {\n        0.5 * (1.0\
     \ + erf((x - self.mean) / (self.std_dev * std::f64::consts::SQRT_2)))\n    }\n\
     \n    // x \u4EE5\u4E0A\u306E\u78BA\u7387\n    pub fn ccdf(&self, x: f64) -> f64\
-    \ {\n        1.0 - self.cdf(x)\n    }\n}\n"
+    \ {\n        1.0 - self.cdf(x)\n    }\n\n    pub fn pdf(&self, x: f64) -> f64\
+    \ {\n        let d = (x - self.mean) / self.std_dev;\n        (-0.5 * d * d).exp()\
+    \ / (self.std_dev * std::f64::consts::SQRT_2 * std::f64::consts::PI)\n    }\n\
+    }\n"
   dependsOn: []
   isVerificationFile: false
   path: crates/heuristic/normal-distribution/src/lib.rs
   requiredBy: []
-  timestamp: '2025-02-02 07:05:55+00:00'
+  timestamp: '2025-02-06 06:59:03+00:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: crates/heuristic/normal-distribution/src/lib.rs
