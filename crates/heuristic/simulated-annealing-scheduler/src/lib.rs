@@ -1,6 +1,37 @@
+use std::cell::RefCell;
+
 use timer::Timer;
 
 const LOG_RAND_LEN: usize = 1 << 16;
+
+struct LogRand {
+    log_rand: Vec<f64>,
+    log_rand_index: usize,
+}
+
+impl LogRand {
+    fn new() -> Self {
+        let mut rng = random::Pcg64Fast::default();
+        let log_u64max = 2.0f64.ln() * 64.0;
+        let log_rand = (0..LOG_RAND_LEN)
+            .map(|_| (rng.u64() as f64).ln() - log_u64max)
+            .collect();
+        Self {
+            log_rand,
+            log_rand_index: 0,
+        }
+    }
+
+    fn next(&mut self) -> f64 {
+        let res = self.log_rand[self.log_rand_index];
+        self.log_rand_index = (self.log_rand_index + 1) % LOG_RAND_LEN;
+        res
+    }
+}
+
+thread_local! {
+    static LOG_RAND: RefCell<LogRand> = RefCell::new(LogRand::new());
+}
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub enum SimulatedAnnealingTemperatureFunction {
@@ -16,8 +47,6 @@ pub struct SimulatedAnnealingScheduler {
     timer: Timer,
     current_temp: f64,
     progress: f64,
-    log_rand: Vec<f64>,
-    log_rand_index: usize,
 }
 
 impl SimulatedAnnealingScheduler {
@@ -28,12 +57,6 @@ impl SimulatedAnnealingScheduler {
         time_limit: f64,
     ) -> Self {
         let timer = Timer::new();
-        let mut rng = random::Pcg64Fast::default();
-        let log_u64max = 2.0f64.ln() * 64.0;
-        let log_rand = (0..LOG_RAND_LEN)
-            .map(|_| (rng.u64() as f64).ln() - log_u64max)
-            .collect();
-
         let mut scheduler = Self {
             start_temp,
             end_temp,
@@ -42,8 +65,6 @@ impl SimulatedAnnealingScheduler {
             timer,
             current_temp: start_temp,
             progress: 0.0,
-            log_rand,
-            log_rand_index: 0,
         };
         scheduler.update_temperature();
         scheduler
@@ -76,8 +97,7 @@ impl SimulatedAnnealingScheduler {
     }
 
     pub fn accept(&mut self, score_diff: f64) -> bool {
-        self.log_rand_index = (self.log_rand_index + 1) % LOG_RAND_LEN;
-        let rand = self.log_rand[self.log_rand_index];
+        let rand = LOG_RAND.with(|log_rand| log_rand.borrow_mut().next());
         score_diff > self.current_temp * rand
     }
 }
