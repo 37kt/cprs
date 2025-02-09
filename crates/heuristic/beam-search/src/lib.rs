@@ -6,6 +6,8 @@ use std::{
     hash::{BuildHasherDefault, Hasher},
 };
 
+type Score = i32;
+
 pub trait State {
     type A: Action;
 
@@ -31,7 +33,7 @@ pub trait Action: Clone + Default {
 
 #[derive(Clone, Copy, PartialEq, Eq)]
 pub struct StateInfo {
-    pub score: i32,
+    pub score: Score,
     pub hash: u64,
     pub valid: bool,
 }
@@ -40,7 +42,7 @@ pub struct StateInfo {
 struct Candidate<A: Action> {
     action: A,
     parent: u32,
-    score: i32,
+    score: Score,
     hash: u64,
     valid: bool,
 }
@@ -159,7 +161,7 @@ pub struct BeamSearch<S: State> {
     state: S,
     nodes: Pool<Node<S::A>>,
     root: u32,
-    best_valid_score: i32,
+    best_valid_score: Score,
     best_node: u32,
     dfs_stack: Vec<u32>,
     candidates: Vec<MinK<S::A>>,
@@ -190,14 +192,14 @@ impl<S: State> BeamSearch<S> {
             state: initial_state,
             nodes,
             root: v,
-            best_valid_score: i32::MIN,
+            best_valid_score: Score::MIN,
             best_node: !0,
             dfs_stack: Vec::with_capacity(nodes_capacity * 2),
             candidates: vec![MinK::new(width); max_turns + 1],
         }
     }
 
-    pub fn run(&mut self) -> Result<(Vec<S::A>, i32), &'static str> {
+    pub fn run(&mut self) -> Result<(Vec<S::A>, Score), &'static str> {
         let mut appeared = NopHashSet::default();
 
         for turn in 0..=self.max_turns {

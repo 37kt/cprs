@@ -33,4 +33,23 @@ impl NormalDistribution {
         let d = (x - self.mean) / self.std_dev;
         (-0.5 * d * d).exp() / (self.std_dev * std::f64::consts::SQRT_2 * std::f64::consts::PI)
     }
+
+    pub fn lb(&self, d: f64) -> f64 {
+        self.mean - d * self.std_dev
+    }
+
+    pub fn ub(&self, d: f64) -> f64 {
+        self.mean + d * self.std_dev
+    }
+}
+
+impl std::ops::Add for NormalDistribution {
+    type Output = NormalDistribution;
+
+    fn add(self, other: NormalDistribution) -> NormalDistribution {
+        NormalDistribution::new(
+            self.mean + other.mean,
+            (self.std_dev.powi(2) + other.std_dev.powi(2)).sqrt(),
+        )
+    }
 }
