@@ -17,17 +17,17 @@ data:
     , line 288, in bundle\n    raise NotImplementedError\nNotImplementedError\n"
   code: "// \u53C2\u8003: https://eijirou-kyopro.hatenablog.com/entry/2024/02/01/115639\n\
     \nuse std::{\n    cmp::{Ordering, Reverse},\n    collections::{BinaryHeap, HashMap,\
-    \ HashSet},\n    hash::{BuildHasherDefault, Hasher},\n};\n\npub trait State {\n\
-    \    type A: Action;\n\n    fn enumerate_actions(&self) -> Vec<Self::A>;\n   \
-    \ fn apply_action(&mut self, action: &Self::A);\n    fn revert_action(&mut self,\
-    \ action: &Self::A);\n\n    fn evaluate_current_state(&self) -> StateInfo {\n\
-    \        unimplemented!()\n    }\n\n    fn evaluate_after_action(&mut self, action:\
-    \ &Self::A) -> StateInfo {\n        self.apply_action(action);\n        let res\
-    \ = self.evaluate_current_state();\n        self.revert_action(action);\n    \
-    \    res\n    }\n}\n\npub trait Action: Clone + Default {\n    fn consumed_turns(&self)\
+    \ HashSet},\n    hash::{BuildHasherDefault, Hasher},\n};\n\ntype Score = i32;\n\
+    \npub trait State {\n    type A: Action;\n\n    fn enumerate_actions(&self) ->\
+    \ Vec<Self::A>;\n    fn apply_action(&mut self, action: &Self::A);\n    fn revert_action(&mut\
+    \ self, action: &Self::A);\n\n    fn evaluate_current_state(&self) -> StateInfo\
+    \ {\n        unimplemented!()\n    }\n\n    fn evaluate_after_action(&mut self,\
+    \ action: &Self::A) -> StateInfo {\n        self.apply_action(action);\n     \
+    \   let res = self.evaluate_current_state();\n        self.revert_action(action);\n\
+    \        res\n    }\n}\n\npub trait Action: Clone + Default {\n    fn consumed_turns(&self)\
     \ -> usize;\n}\n\n#[derive(Clone, Copy, PartialEq, Eq)]\npub struct StateInfo\
-    \ {\n    pub score: i32,\n    pub hash: u64,\n    pub valid: bool,\n}\n\n#[derive(Clone)]\n\
-    struct Candidate<A: Action> {\n    action: A,\n    parent: u32,\n    score: i32,\n\
+    \ {\n    pub score: Score,\n    pub hash: u64,\n    pub valid: bool,\n}\n\n#[derive(Clone)]\n\
+    struct Candidate<A: Action> {\n    action: A,\n    parent: u32,\n    score: Score,\n\
     \    hash: u64,\n    valid: bool,\n}\n\nimpl<A: Action> PartialEq for Candidate<A>\
     \ {\n    fn eq(&self, other: &Self) -> bool {\n        self.score == other.score\n\
     \    }\n}\n\nimpl<A: Action> Eq for Candidate<A> {}\n\nimpl<A: Action> PartialOrd\
@@ -62,7 +62,7 @@ data:
     \    }\n}\n\npub struct BeamSearch<S: State> {\n    max_turns: usize,\n    minimize_turn:\
     \ bool,\n\n    v: u32, // \u73FE\u5728\u306E\u30CE\u30FC\u30C9\n    turn: usize,\n\
     \    state: S,\n    nodes: Pool<Node<S::A>>,\n    root: u32,\n    best_valid_score:\
-    \ i32,\n    best_node: u32,\n    dfs_stack: Vec<u32>,\n    candidates: Vec<MinK<S::A>>,\n\
+    \ Score,\n    best_node: u32,\n    dfs_stack: Vec<u32>,\n    candidates: Vec<MinK<S::A>>,\n\
     }\n\nimpl<S: State> BeamSearch<S> {\n    pub fn new(\n        initial_state: S,\n\
     \        max_turns: usize,\n        width: usize,\n        nodes_capacity: usize,\n\
     \        minimize_turn: bool,\n    ) -> Self {\n        let mut nodes = Pool::new(nodes_capacity);\n\
@@ -71,11 +71,11 @@ data:
     \        right: !0,\n            count_cands: 0,\n        });\n        Self {\n\
     \            max_turns,\n            minimize_turn,\n            v,\n        \
     \    turn: 0,\n            state: initial_state,\n            nodes,\n       \
-    \     root: v,\n            best_valid_score: i32::MIN,\n            best_node:\
+    \     root: v,\n            best_valid_score: Score::MIN,\n            best_node:\
     \ !0,\n            dfs_stack: Vec::with_capacity(nodes_capacity * 2),\n      \
     \      candidates: vec![MinK::new(width); max_turns + 1],\n        }\n    }\n\n\
-    \    pub fn run(&mut self) -> Result<(Vec<S::A>, i32), &'static str> {\n     \
-    \   let mut appeared = NopHashSet::default();\n\n        for turn in 0..=self.max_turns\
+    \    pub fn run(&mut self) -> Result<(Vec<S::A>, Score), &'static str> {\n   \
+    \     let mut appeared = NopHashSet::default();\n\n        for turn in 0..=self.max_turns\
     \ {\n            let mut cands = self.candidates[turn].drain().collect::<Vec<_>>();\n\
     \            cands.sort_unstable_by_key(|c| Reverse(c.score));\n\n           \
     \ appeared.clear();\n            for c in cands {\n                let p = c.parent;\n\
@@ -198,7 +198,7 @@ data:
   isVerificationFile: false
   path: crates/heuristic/beam-search/src/lib.rs
   requiredBy: []
-  timestamp: '2025-02-05 04:08:52+00:00'
+  timestamp: '2025-02-09 07:12:32+00:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: crates/heuristic/beam-search/src/lib.rs

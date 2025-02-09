@@ -24,13 +24,18 @@ data:
     \n    // x \u4EE5\u4E0A\u306E\u78BA\u7387\n    pub fn ccdf(&self, x: f64) -> f64\
     \ {\n        1.0 - self.cdf(x)\n    }\n\n    pub fn pdf(&self, x: f64) -> f64\
     \ {\n        let d = (x - self.mean) / self.std_dev;\n        (-0.5 * d * d).exp()\
-    \ / (self.std_dev * std::f64::consts::SQRT_2 * std::f64::consts::PI)\n    }\n\
-    }\n"
+    \ / (self.std_dev * std::f64::consts::SQRT_2 * std::f64::consts::PI)\n    }\n\n\
+    \    pub fn lb(&self, d: f64) -> f64 {\n        self.mean - d * self.std_dev\n\
+    \    }\n\n    pub fn ub(&self, d: f64) -> f64 {\n        self.mean + d * self.std_dev\n\
+    \    }\n}\n\nimpl std::ops::Add for NormalDistribution {\n    type Output = NormalDistribution;\n\
+    \n    fn add(self, other: NormalDistribution) -> NormalDistribution {\n      \
+    \  NormalDistribution::new(\n            self.mean + other.mean,\n           \
+    \ (self.std_dev.powi(2) + other.std_dev.powi(2)).sqrt(),\n        )\n    }\n}\n"
   dependsOn: []
   isVerificationFile: false
   path: crates/heuristic/normal-distribution/src/lib.rs
   requiredBy: []
-  timestamp: '2025-02-06 06:59:03+00:00'
+  timestamp: '2025-02-09 07:12:32+00:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: crates/heuristic/normal-distribution/src/lib.rs
