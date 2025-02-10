@@ -1,0 +1,10 @@
+[package]
+name = "algebraic_new_test"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+algebraic_new = { path = "../../crates/algebraic/algebraic_new" }
+proconio = { version = "=0.3.6", features = ["derive"] }
