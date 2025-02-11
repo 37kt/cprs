@@ -1,32 +1,47 @@
 // verification-helper: PROBLEM https://judge.yosupo.jp/problem/range_affine_range_sum
 
-use ac_library::ModInt998244353 as Mint;
-use algebraic::{act, algebra, monoid};
+use algebra::{define_algebra, Affine, CntSum, Semiring};
 use lazy_segment_tree::LazySegmentTree;
+use modint::ModInt998244353 as Mint;
+use proconio::fastout;
 use proconio::input;
 
-algebra!(M, (Mint, Mint));
-monoid!(M, (0.into(), 0.into()), |&(s1, c1), &(s2, c2)| (
-    s1 + s2,
-    c1 + c2
-));
+define_algebra! {
+    name: A,
+    element: Mint,
+    op: |x, y| x + y,
+    unit: 0.into(),
+    associative,
+    commutative,
+}
 
-algebra!(F, (Mint, Mint));
-monoid!(F, (1.into(), 0.into()), |&(a, b), &(c, d)| (
-    a * c,
-    a * d + b
-));
-act!(F, (Mint, Mint), |&(a, b), &(s, c)| (a * s + b * c, c));
+define_algebra! {
+    name: M,
+    element: Mint,
+    op: |x, y| x * y,
+    unit: 1.into(),
+    associative,
+    commutative,
+}
 
-#[proconio::fastout]
+define_algebra! {
+    name: SR,
+    element: Mint,
+}
+impl Semiring for SR {
+    type Additive = A;
+    type Multiplicative = M;
+}
+
+#[fastout]
 fn main() {
     input! {
         n: usize,
         q: usize,
         a: [Mint; n],
     }
-    let a: Vec<_> = a.into_iter().map(|x| (x, 1.into())).collect();
-    let mut seg = LazySegmentTree::<M, F>::from(a);
+    let a: Vec<_> = a.into_iter().map(|x| (1.into(), x)).collect();
+    let mut seg = LazySegmentTree::<CntSum<SR>, Affine<SR>>::from(a);
     for _ in 0..q {
         input! {
             ty: usize,
@@ -40,7 +55,7 @@ fn main() {
             }
             seg.apply_range(l..r, (b, c));
         } else {
-            println!("{}", seg.prod(l..r).0);
+            println!("{}", seg.prod(l..r).1);
         }
     }
 }

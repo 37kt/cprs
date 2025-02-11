@@ -1,6 +1,6 @@
 use std::ops::{Bound, RangeBounds};
 
-use algebraic::{Act, Monoid};
+use algebra::{Act, Algebraic, Monoid};
 
 /// 遅延セグメント木。
 /// 区間作用、区間積取得ができる。
@@ -8,21 +8,22 @@ use algebraic::{Act, Monoid};
 pub struct LazySegmentTree<M, F>
 where
     M: Monoid,
-    M::S: Clone,
-    F: Act<X = M::S> + Monoid,
-    F::S: Clone,
+    F: Monoid + Act<M>,
+    M::Element: Clone,
+    F::Element: Clone,
 {
     n: usize,
-    v: Vec<M::S>,
-    lz: Vec<F::S>,
+    v: Vec<M::Element>,
+    lz: Vec<F::Element>,
 }
 
-impl<M, F> From<Vec<M::S>> for LazySegmentTree<M, F>
+impl<M, F> From<Vec<M::Element>> for LazySegmentTree<M, F>
 where
     M: Monoid,
-    M::S: Clone,
-    F: Act<X = M::S> + Monoid,
-    F::S: Clone,
+    F: Monoid + Act<M>,
+    M::Element: Clone,
+    F::Element: Clone,
+    <M as Algebraic>::Element: Clone,
 {
     /// Vec で初期化する。
     ///
@@ -33,11 +34,11 @@ where
     /// # 計算量
     ///
     /// O(N)
-    fn from(mut a: Vec<M::S>) -> Self {
+    fn from(mut a: Vec<M::Element>) -> Self {
         let n = a.len();
-        let mut v = vec![M::e(); n];
+        let mut v = vec![M::unit(); n];
         v.append(&mut a);
-        let lz = vec![F::e(); n];
+        let lz = vec![F::unit(); n];
         let mut seg = LazySegmentTree { n, v, lz };
         for k in (1..n).rev() {
             seg.update(k);
@@ -49,16 +50,16 @@ where
 impl<M, F> LazySegmentTree<M, F>
 where
     M: Monoid,
-    M::S: Clone,
-    F: Act<X = M::S> + Monoid,
-    F::S: Clone,
+    F: Monoid + Act<M>,
+    M::Element: Clone,
+    F::Element: Clone,
 {
     /// a\[k\] を x に更新する。
     ///
     /// # 計算量
     ///
     /// O(log N)
-    pub fn set(&mut self, k: usize, x: M::S) {
+    pub fn set(&mut self, k: usize, x: M::Element) {
         assert!(k < self.n);
         let k = k + self.n;
         let h = 63 - k.leading_zeros() as usize;
@@ -76,7 +77,7 @@ where
     /// # 計算量
     ///
     /// O(log N)
-    pub fn get(&mut self, mut k: usize) -> M::S {
+    pub fn get(&mut self, mut k: usize) -> M::Element {
         assert!(k < self.n);
         k += self.n;
         let h = 63 - k.leading_zeros() as usize;
@@ -91,7 +92,7 @@ where
     /// # 計算量
     ///
     /// O(log N)
-    pub fn prod<R>(&mut self, range: R) -> M::S
+    pub fn prod<R>(&mut self, range: R) -> M::Element
     where
         R: RangeBounds<usize>,
     {
@@ -108,7 +109,7 @@ where
         assert!(l <= r);
         assert!(r <= self.n);
         if l == r {
-            return M::e();
+            return M::unit();
         }
 
         l += self.n;
@@ -123,8 +124,8 @@ where
             }
         }
 
-        let mut sl = M::e();
-        let mut sr = M::e();
+        let mut sl = M::unit();
+        let mut sr = M::unit();
         while l < r {
             if l & 1 != 0 {
                 sl = M::op(&sl, &self.v[l]);
@@ -146,7 +147,7 @@ where
     /// # 計算量
     ///
     /// O(log N)
-    pub fn apply(&mut self, k: usize, f: F::S) {
+    pub fn apply(&mut self, k: usize, f: F::Element) {
         assert!(k < self.n);
         let k = k + self.n;
         let h = 63 - k.leading_zeros() as usize;
@@ -164,7 +165,7 @@ where
     /// # 計算量
     ///
     /// O(log N)
-    pub fn apply_range<R>(&mut self, range: R, f: F::S)
+    pub fn apply_range<R>(&mut self, range: R, f: F::Element)
     where
         R: RangeBounds<usize>,
     {
@@ -236,10 +237,10 @@ where
     /// O(log N)
     pub fn max_right<P>(&mut self, mut l: usize, pred: P) -> usize
     where
-        P: Fn(&M::S) -> bool,
+        P: Fn(&M::Element) -> bool,
     {
         assert!(l <= self.n);
-        assert!(pred(&M::e()));
+        assert!(pred(&M::unit()));
         if pred(&self.prod(l..)) {
             return self.n;
         }
@@ -248,7 +249,7 @@ where
         for i in (1..=h).rev() {
             self.push(l >> i);
         }
-        let mut s = M::e();
+        let mut s = M::unit();
         loop {
             while l & 1 == 0 && self.is_good_node(l >> 1) {
                 l >>= 1;
@@ -282,10 +283,10 @@ where
     /// O(log N)
     pub fn min_left<P>(&mut self, mut r: usize, pred: P) -> usize
     where
-        P: Fn(&M::S) -> bool,
+        P: Fn(&M::Element) -> bool,
     {
         assert!(r <= self.n);
-        assert!(pred(&M::e()));
+        assert!(pred(&M::unit()));
         if pred(&self.prod(..r)) {
             return 0;
         }
@@ -294,7 +295,7 @@ where
         for i in (1..=h).rev() {
             self.push(r - 1 >> i);
         }
-        let mut s = M::e();
+        let mut s = M::unit();
         loop {
             r -= 1;
             while !self.is_good_node(r) {
@@ -325,10 +326,10 @@ where
     }
 
     /// ノードに作用させる。子への作用は遅延させる。
-    fn all_apply(&mut self, k: usize, f: F::S) {
+    fn all_apply(&mut self, k: usize, f: F::Element) {
         self.v[k] = F::act(&f, &self.v[k]);
         if k < self.n {
-            self.lz[k] = F::op(&f, &self.lz[k]);
+            self.lz[k] = F::op(&self.lz[k], &f);
         }
     }
 
@@ -336,7 +337,7 @@ where
     fn push(&mut self, k: usize) {
         self.all_apply(k * 2, self.lz[k].clone());
         self.all_apply(k * 2 + 1, self.lz[k].clone());
-        self.lz[k] = F::e();
+        self.lz[k] = F::unit();
     }
 
     /// セグ木のサイズを 2 冪にしていない都合上、無効なノードもある。  
