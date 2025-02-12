@@ -1,6 +1,9 @@
 // verification-helper: PROBLEM https://judge.yosupo.jp/problem/range_affine_range_sum
 
-use algebra::{define_algebra, Affine, CntSum, Semiring};
+use algebraic_structure::{Affine, CountSum};
+use algebraic_structure::{AffineOperator, CountSumOperator};
+use algebraic_traits::define_algebra;
+use algebraic_traits::Semiring;
 use lazy_segment_tree::LazySegmentTree;
 use modint::ModInt998244353 as Mint;
 use proconio::fastout;
@@ -40,8 +43,14 @@ fn main() {
         q: usize,
         a: [Mint; n],
     }
-    let a: Vec<_> = a.into_iter().map(|x| (1.into(), x)).collect();
-    let mut seg = LazySegmentTree::<CntSum<SR>, Affine<SR>>::from(a);
+    let a: Vec<_> = a
+        .into_iter()
+        .map(|x| CountSum {
+            count: 1.into(),
+            sum: x,
+        })
+        .collect();
+    let mut seg = LazySegmentTree::<CountSumOperator<SR>, AffineOperator<SR>>::from(a);
     for _ in 0..q {
         input! {
             ty: usize,
@@ -53,9 +62,9 @@ fn main() {
                 b: Mint,
                 c: Mint,
             }
-            seg.apply_range(l..r, (b, c));
+            seg.apply_range(l..r, Affine(b, c));
         } else {
-            println!("{}", seg.prod(l..r).1);
+            println!("{}", seg.prod(l..r).sum);
         }
     }
 }

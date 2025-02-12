@@ -7,6 +7,7 @@ edition = "2021"
 
 [dependencies]
 proconio = { version = "=0.5.0", features = ["derive"] }
-algebra = { path = "../../crates/algebraic/algebra" }
+algebraic_structure = { path = "../../crates/algebra/algebraic_structure" }
+algebraic_traits = { path = "../../crates/algebra/algebraic_traits" }
 lazy-segment-tree = { path = "../../crates/data-structure/lazy-segment-tree" }
 modint = { path = "../../crates/number-theory/modint" }

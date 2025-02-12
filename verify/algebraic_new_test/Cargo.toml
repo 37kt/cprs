@@ -6,5 +6,6 @@ edition = "2021"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-algebra = { path = "../../crates/algebraic/algebra" }
+algebraic_structure = { path = "../../crates/algebra/algebraic_structure" }
+algebraic_traits = { path = "../../crates/algebra/algebraic_traits" }
 proconio = { version = "=0.3.6", features = ["derive"] }

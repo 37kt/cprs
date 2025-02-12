@@ -1,6 +1,6 @@
 use std::ops::{Bound, RangeBounds};
 
-use algebra::{Act, Algebraic, Monoid};
+use algebraic_traits::{Act, Algebraic, Monoid};
 
 /// 遅延セグメント木。
 /// 区間作用、区間積取得ができる。

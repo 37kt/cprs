@@ -1,4 +1,4 @@
-use algebra::{define_algebra, Magma, Unital};
+use algebraic_traits::{define_algebra, Magma, Unital};
 
 define_algebra! {
     name: Add,
