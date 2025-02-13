@@ -53,8 +53,14 @@ pub trait Pow: Monoid {
     }
 }
 
-pub trait Act<Operand: Algebraic>: Algebraic {
-    fn act(f: &Self::Element, x: &Operand::Element) -> Operand::Element;
+pub trait Act {
+    type Operand: Algebraic;
+    type Operator: Algebraic;
+
+    fn act(
+        x: &<Self::Operand as Algebraic>::Element,
+        f: &<Self::Operator as Algebraic>::Element,
+    ) -> <Self::Operand as Algebraic>::Element;
 }
 
 pub trait Semiring: Algebraic {

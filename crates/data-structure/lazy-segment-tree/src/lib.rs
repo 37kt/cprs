@@ -1,29 +1,29 @@
 use std::ops::{Bound, RangeBounds};
 
-use algebraic_traits::{Act, Algebraic, Monoid};
+use algebraic_traits::{Act, Algebraic, Magma, Monoid, Unital};
 
 /// 遅延セグメント木。
 /// 区間作用、区間積取得ができる。
-#[derive(Clone)]
-pub struct LazySegmentTree<M, F>
+pub struct LazySegmentTree<A>
 where
-    M: Monoid,
-    F: Monoid + Act<M>,
-    M::Element: Clone,
-    F::Element: Clone,
+    A: Act,
+    A::Operand: Monoid,
+    A::Operator: Monoid,
+    <A::Operand as Algebraic>::Element: Clone,
+    <A::Operator as Algebraic>::Element: Clone,
 {
     n: usize,
-    v: Vec<M::Element>,
-    lz: Vec<F::Element>,
+    v: Vec<<A::Operand as Algebraic>::Element>,
+    lz: Vec<<A::Operator as Algebraic>::Element>,
 }
 
-impl<M, F> From<Vec<M::Element>> for LazySegmentTree<M, F>
+impl<A> From<Vec<<A::Operand as Algebraic>::Element>> for LazySegmentTree<A>
 where
-    M: Monoid,
-    F: Monoid + Act<M>,
-    M::Element: Clone,
-    F::Element: Clone,
-    <M as Algebraic>::Element: Clone,
+    A: Act,
+    A::Operand: Monoid,
+    A::Operator: Monoid,
+    <A::Operand as Algebraic>::Element: Clone,
+    <A::Operator as Algebraic>::Element: Clone,
 {
     /// Vec で初期化する。
     ///
@@ -34,11 +34,11 @@ where
     /// # 計算量
     ///
     /// O(N)
-    fn from(mut a: Vec<M::Element>) -> Self {
+    fn from(mut a: Vec<<A::Operand as Algebraic>::Element>) -> Self {
         let n = a.len();
-        let mut v = vec![M::unit(); n];
+        let mut v = vec![A::Operand::unit(); n];
         v.append(&mut a);
-        let lz = vec![F::unit(); n];
+        let lz = vec![A::Operator::unit(); n];
         let mut seg = LazySegmentTree { n, v, lz };
         for k in (1..n).rev() {
             seg.update(k);
@@ -47,19 +47,20 @@ where
     }
 }
 
-impl<M, F> LazySegmentTree<M, F>
+impl<A> LazySegmentTree<A>
 where
-    M: Monoid,
-    F: Monoid + Act<M>,
-    M::Element: Clone,
-    F::Element: Clone,
+    A: Act,
+    A::Operand: Monoid,
+    A::Operator: Monoid,
+    <A::Operand as Algebraic>::Element: Clone,
+    <A::Operator as Algebraic>::Element: Clone,
 {
     /// a\[k\] を x に更新する。
     ///
     /// # 計算量
     ///
     /// O(log N)
-    pub fn set(&mut self, k: usize, x: M::Element) {
+    pub fn set(&mut self, k: usize, x: <A::Operand as Algebraic>::Element) {
         assert!(k < self.n);
         let k = k + self.n;
         let h = 63 - k.leading_zeros() as usize;
@@ -77,7 +78,7 @@ where
     /// # 計算量
     ///
     /// O(log N)
-    pub fn get(&mut self, mut k: usize) -> M::Element {
+    pub fn get(&mut self, mut k: usize) -> <A::Operand as Algebraic>::Element {
         assert!(k < self.n);
         k += self.n;
         let h = 63 - k.leading_zeros() as usize;
@@ -92,7 +93,7 @@ where
     /// # 計算量
     ///
     /// O(log N)
-    pub fn prod<R>(&mut self, range: R) -> M::Element
+    pub fn prod<R>(&mut self, range: R) -> <A::Operand as Algebraic>::Element
     where
         R: RangeBounds<usize>,
     {
@@ -109,7 +110,7 @@ where
         assert!(l <= r);
         assert!(r <= self.n);
         if l == r {
-            return M::unit();
+            return A::Operand::unit();
         }
 
         l += self.n;
@@ -124,22 +125,22 @@ where
             }
         }
 
-        let mut sl = M::unit();
-        let mut sr = M::unit();
+        let mut sl = A::Operand::unit();
+        let mut sr = A::Operand::unit();
         while l < r {
             if l & 1 != 0 {
-                sl = M::op(&sl, &self.v[l]);
+                sl = A::Operand::op(&sl, &self.v[l]);
                 l += 1;
             }
             if r & 1 != 0 {
                 r -= 1;
-                sr = M::op(&self.v[r], &sr);
+                sr = A::Operand::op(&self.v[r], &sr);
             }
             l >>= 1;
             r >>= 1;
         }
 
-        M::op(&sl, &sr)
+        A::Operand::op(&sl, &sr)
     }
 
     /// a\[k\] に f を左から作用させる。
@@ -147,14 +148,14 @@ where
     /// # 計算量
     ///
     /// O(log N)
-    pub fn apply(&mut self, k: usize, f: F::Element) {
+    pub fn apply(&mut self, k: usize, f: <A::Operator as Algebraic>::Element) {
         assert!(k < self.n);
         let k = k + self.n;
         let h = 63 - k.leading_zeros() as usize;
         for i in (1..=h).rev() {
             self.push(k >> i);
         }
-        self.v[k] = F::act(&f, &self.v[k]);
+        self.v[k] = A::act(&self.v[k], &f);
         for i in 1..=h {
             self.update(k >> i);
         }
@@ -165,7 +166,7 @@ where
     /// # 計算量
     ///
     /// O(log N)
-    pub fn apply_range<R>(&mut self, range: R, f: F::Element)
+    pub fn apply_range<R>(&mut self, range: R, f: <A::Operator as Algebraic>::Element)
     where
         R: RangeBounds<usize>,
     {
@@ -237,10 +238,10 @@ where
     /// O(log N)
     pub fn max_right<P>(&mut self, mut l: usize, pred: P) -> usize
     where
-        P: Fn(&M::Element) -> bool,
+        P: Fn(&<A::Operand as Algebraic>::Element) -> bool,
     {
         assert!(l <= self.n);
-        assert!(pred(&M::unit()));
+        assert!(pred(&A::Operand::unit()));
         if pred(&self.prod(l..)) {
             return self.n;
         }
@@ -249,16 +250,16 @@ where
         for i in (1..=h).rev() {
             self.push(l >> i);
         }
-        let mut s = M::unit();
+        let mut s = A::Operand::unit();
         loop {
             while l & 1 == 0 && self.is_good_node(l >> 1) {
                 l >>= 1;
             }
-            if !pred(&M::op(&s, &self.v[l])) {
+            if !pred(&A::Operand::op(&s, &self.v[l])) {
                 while l < self.n {
                     self.push(l);
                     l <<= 1;
-                    let t = M::op(&s, &self.v[l]);
+                    let t = A::Operand::op(&s, &self.v[l]);
                     if pred(&t) {
                         s = t;
                         l += 1;
@@ -266,7 +267,7 @@ where
                 }
                 return l - self.n;
             }
-            s = M::op(&s, &self.v[l]);
+            s = A::Operand::op(&s, &self.v[l]);
             l += 1;
         }
     }
@@ -283,10 +284,10 @@ where
     /// O(log N)
     pub fn min_left<P>(&mut self, mut r: usize, pred: P) -> usize
     where
-        P: Fn(&M::Element) -> bool,
+        P: Fn(&<A::Operand as Algebraic>::Element) -> bool,
     {
         assert!(r <= self.n);
-        assert!(pred(&M::unit()));
+        assert!(pred(&A::Operand::unit()));
         if pred(&self.prod(..r)) {
             return 0;
         }
@@ -295,7 +296,7 @@ where
         for i in (1..=h).rev() {
             self.push(r - 1 >> i);
         }
-        let mut s = M::unit();
+        let mut s = A::Operand::unit();
         loop {
             r -= 1;
             while !self.is_good_node(r) {
@@ -304,11 +305,11 @@ where
             while r & 1 != 0 && self.is_good_node(r >> 1) {
                 r >>= 1;
             }
-            if !pred(&M::op(&self.v[r], &s)) {
+            if !pred(&A::Operand::op(&self.v[r], &s)) {
                 while r < self.n {
                     self.push(r);
                     r = r * 2 + 1;
-                    let t = M::op(&self.v[r], &s);
+                    let t = A::Operand::op(&self.v[r], &s);
                     if pred(&t) {
                         s = t;
                         r -= 1;
@@ -316,20 +317,20 @@ where
                 }
                 return r + 1 - self.n;
             }
-            s = M::op(&self.v[r], &s);
+            s = A::Operand::op(&self.v[r], &s);
         }
     }
 
     /// 子ノードの値を親ノードに反映させる。
     fn update(&mut self, k: usize) {
-        self.v[k] = M::op(&self.v[k * 2], &self.v[k * 2 + 1]);
+        self.v[k] = A::Operand::op(&self.v[k * 2], &self.v[k * 2 + 1]);
     }
 
     /// ノードに作用させる。子への作用は遅延させる。
-    fn all_apply(&mut self, k: usize, f: F::Element) {
-        self.v[k] = F::act(&f, &self.v[k]);
+    fn all_apply(&mut self, k: usize, f: <A::Operator as Algebraic>::Element) {
+        self.v[k] = A::act(&self.v[k], &f);
         if k < self.n {
-            self.lz[k] = F::op(&self.lz[k], &f);
+            self.lz[k] = A::Operator::op(&self.lz[k], &f);
         }
     }
 
@@ -337,7 +338,7 @@ where
     fn push(&mut self, k: usize) {
         self.all_apply(k * 2, self.lz[k].clone());
         self.all_apply(k * 2 + 1, self.lz[k].clone());
-        self.lz[k] = F::unit();
+        self.lz[k] = A::Operator::unit();
     }
 
     /// セグ木のサイズを 2 冪にしていない都合上、無効なノードもある。  

@@ -12,3 +12,5 @@ name = "algebraic_structure"
 
 [dependencies]
 algebraic_traits = { path = "../algebraic_traits" }
+primitive_number = { path = "../primitive_number" }
+modint = { path = "../../number-theory/modint" }

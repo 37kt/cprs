@@ -1,5 +1,5 @@
-pub mod affine;
-pub use affine::*;
+pub mod act;
+pub use act::*;
 
-pub mod count_sum;
-pub use count_sum::*;
+pub mod magma;
+pub use magma::*;

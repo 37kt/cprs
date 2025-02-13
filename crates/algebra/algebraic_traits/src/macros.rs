@@ -1,7 +1,6 @@
 #[macro_export]
 macro_rules! define_algebra {
     (name: $name:ident, element: $element:ty) => {
-        #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)]
         enum $name {}
         impl $crate::Algebraic for $name {
             type Element = $element;
@@ -9,7 +8,6 @@ macro_rules! define_algebra {
     };
 
     ($vis:vis, name: $name:ident, element: $element:ty) => {
-        #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)]
         $vis enum $name {}
         impl $crate::Algebraic for $name {
             type Element = $element;
@@ -72,15 +70,31 @@ macro_rules! define_algebra {
 }
 
 #[macro_export]
-macro_rules! impl_act {
-    ($operator:ty, $operand:ty, $act:expr $(,)?) => {
-        impl $crate::Act for $operator {
+macro_rules! define_act {
+    (name: $name:ident, operand: $operand:ty, operator: $operator:ty, act: $act:expr $(,)*) => {
+        enum $name {}
+        impl $crate::Act for $name {
             type Operand = $operand;
+            type Operator = $operator;
             fn act(
-                f: &Self::Element,
                 x: &<Self::Operand as $crate::Algebraic>::Element,
+                f: &<Self::Operator as $crate::Algebraic>::Element,
             ) -> <Self::Operand as $crate::Algebraic>::Element {
-                $act(f, x)
+                $act(x, f)
+            }
+        }
+    };
+
+    ($vis:vis, name: $name:ident, operand: $operand:ty, operator: $operator:ty, act: $act:expr $(,)*) => {
+        $vis enum $name {}
+        impl $crate::Act for $name {
+            type Operand = $operand;
+            type Operator = $operator;
+            fn act(
+                x: &<Self::Operand as $crate::Algebraic>::Element,
+                f: &<Self::Operator as $crate::Algebraic>::Element,
+            ) -> <Self::Operand as $crate::Algebraic>::Element {
+                $act(x, f)
             }
         }
     };
