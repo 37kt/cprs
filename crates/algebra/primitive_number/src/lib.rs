@@ -3,7 +3,7 @@ use std::{
     hash::Hash,
     ops::{
         Add, AddAssign, BitAnd, BitAndAssign, BitOr, BitOrAssign, BitXor, BitXorAssign, Div,
-        DivAssign, Mul, MulAssign, Rem, RemAssign, ShlAssign, ShrAssign, Sub, SubAssign,
+        DivAssign, Mul, MulAssign, Neg, Rem, RemAssign, ShlAssign, ShrAssign, Sub, SubAssign,
     },
 };
 
@@ -26,10 +26,12 @@ pub trait PrimitiveNumber:
 {
     const ZERO: Self;
     const ONE: Self;
-    const MIN: Self;
-    const MAX: Self;
+    const MIN_VALUE: Self;
+    const MAX_VALUE: Self;
     fn abs(self) -> Self;
 }
+
+pub trait PrimitiveSignedNumber: PrimitiveNumber + Neg<Output = Self> {}
 
 pub trait PrimitiveInteger:
     PrimitiveNumber
@@ -47,10 +49,15 @@ pub trait PrimitiveInteger:
     + ShlAssign
     + ShrAssign
 {
-    const BITS: usize;
+    const BIT_LEN: usize;
+    fn popcount(self) -> usize;
+    fn msb_index(self) -> usize;
+    fn lsb_index(self) -> usize;
+    fn msb(self) -> Self;
+    fn lsb(self) -> Self;
 }
 
-pub trait PrimitiveFloat: PrimitiveNumber {}
+pub trait PrimitiveFloat: PrimitiveSignedNumber {}
 
 macro_rules! impl_primitive_signed_integer {
     ($($t:ty),*) => {
@@ -58,15 +65,32 @@ macro_rules! impl_primitive_signed_integer {
             impl PrimitiveNumber for $t {
                 const ZERO: Self = 0;
                 const ONE: Self = 1;
-                const MIN: Self = Self::MIN;
-                const MAX: Self = Self::MAX;
+                const MIN_VALUE: Self = Self::MIN;
+                const MAX_VALUE: Self = Self::MAX;
                 fn abs(self) -> Self {
                     <$t>::abs(self)
                 }
             }
 
+            impl PrimitiveSignedNumber for $t {}
+
             impl PrimitiveInteger for $t {
-                const BITS: usize = <$t>::BITS as usize;
+                const BIT_LEN: usize = <$t>::BITS as usize;
+                fn popcount(self) -> usize {
+                    <$t>::count_ones(self) as usize
+                }
+                fn msb_index(self) -> usize {
+                    (<$t>::BITS - 1 - self.leading_zeros()) as usize
+                }
+                fn lsb_index(self) -> usize {
+                    self.trailing_zeros() as usize
+                }
+                fn msb(self) -> Self {
+                    1 << self.msb_index()
+                }
+                fn lsb(self) -> Self {
+                    self & self.wrapping_neg()
+                }
             }
         )*
     }
@@ -80,15 +104,30 @@ macro_rules! impl_primitive_unsigned_integer {
             impl PrimitiveNumber for $t {
                 const ZERO: Self = 0;
                 const ONE: Self = 1;
-                const MIN: Self = Self::MIN;
-                const MAX: Self = Self::MAX;
+                const MIN_VALUE: Self = Self::MIN;
+                const MAX_VALUE: Self = Self::MAX;
                 fn abs(self) -> Self {
                     self
                 }
             }
 
             impl PrimitiveInteger for $t {
-                const BITS: usize = <$t>::BITS as usize;
+                const BIT_LEN: usize = <$t>::BITS as usize;
+                fn popcount(self) -> usize {
+                    <$t>::count_ones(self) as usize
+                }
+                fn msb_index(self) -> usize {
+                    (<$t>::BITS - 1 - self.leading_zeros()) as usize
+                }
+                fn lsb_index(self) -> usize {
+                    self.trailing_zeros() as usize
+                }
+                fn msb(self) -> Self {
+                    1 << self.msb_index()
+                }
+                fn lsb(self) -> Self {
+                    self & self.wrapping_neg()
+                }
             }
         )*
     }
@@ -102,12 +141,14 @@ macro_rules! impl_primitive_float {
             impl PrimitiveNumber for $t {
                 const ZERO: Self = 0.0;
                 const ONE: Self = 1.0;
-                const MIN: Self = Self::MIN;
-                const MAX: Self = Self::MAX;
+                const MIN_VALUE: Self = Self::MIN;
+                const MAX_VALUE: Self = Self::MAX;
                 fn abs(self) -> Self {
                     <$t>::abs(self)
                 }
             }
+
+            impl PrimitiveSignedNumber for $t {}
 
             impl PrimitiveFloat for $t {}
         )*

@@ -1,11 +1,9 @@
 [package]
-name = "algebraic_new_test"
+name = "aplusb"
 version = "0.1.0"
-edition = "2021"
+edition = "2018"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-algebraic_structure = { path = "../../crates/algebra/algebraic_structure" }
-algebraic_traits = { path = "../../crates/algebra/algebraic_traits" }
 proconio = { version = "=0.3.6", features = ["derive"] }
