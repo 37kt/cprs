@@ -1,51 +1,56 @@
+use crate::{barrett_reduction, DynamicModInt};
 use std::{
-    iter::{Product, Sum},
+    marker::PhantomData,
     num::ParseIntError,
     ops::{Add, AddAssign, Div, DivAssign, Mul, MulAssign, Neg, Sub, SubAssign},
     str::FromStr,
 };
 
-use crate::{
-    mod_arithmetic::{inv_mod, mul_mod, pow_mod},
-    StaticModInt,
-};
-
-impl<const MOD: u32> StaticModInt<MOD> {
+impl<ID> DynamicModInt<ID> {
     #[inline]
-    pub fn new<T: Into<StaticModInt<MOD>>>(x: T) -> Self {
+    pub fn new<T: Into<DynamicModInt<ID>>>(x: T) -> Self {
         x.into()
     }
 
     #[inline]
-    pub const fn from_raw(x: u32) -> Self {
-        Self(x)
+    pub fn from_raw(x: u32) -> Self {
+        Self(x, PhantomData::default())
+    }
+
+    pub fn set_modulus(m: u32) {
+        barrett_reduction::barrett_reduction::<ID>().set_modulus(m);
     }
 
     #[inline]
-    pub const fn modulus() -> u32 {
-        MOD
+    pub fn modulus() -> u32 {
+        barrett_reduction::barrett_reduction::<ID>().modulus()
     }
 
     #[inline]
-    pub const fn val(self) -> u32 {
+    pub fn val(self) -> u32 {
         self.0
     }
 
-    pub const fn pow(self, exp: usize) -> Self {
-        Self::from_raw(pow_mod(self.0, exp as u32, MOD))
-    }
-
-    pub const fn recip(self) -> Self {
-        if Self::IS_PRIME {
-            self.pow(MOD as usize - 2)
-        } else {
-            Self::from_raw(inv_mod(self.0, MOD))
+    pub fn pow(self, exp: usize) -> Self {
+        let mut res = Self::from(1);
+        let mut base = self;
+        let mut exp = exp;
+        while exp > 0 {
+            if exp & 1 == 1 {
+                res *= base;
+            }
+            base *= base;
+            exp >>= 1;
         }
+        res
     }
 
-    pub fn sqrt(self) -> Option<Self> {
-        assert!(Self::IS_PRIME);
+    pub fn recip(self) -> Self {
+        Self::from_raw(inv_mod(self.0, Self::modulus()))
+    }
 
+    /// 制約: `MOD` は素数
+    pub fn sqrt(self) -> Option<Self> {
         let p = Self::modulus() as usize;
         if self.0 < 2 {
             return Some(self);
@@ -82,92 +87,94 @@ impl<const MOD: u32> StaticModInt<MOD> {
     }
 }
 
-impl<const MOD: u32> From<&StaticModInt<MOD>> for StaticModInt<MOD> {
+impl<ID> From<&DynamicModInt<ID>> for DynamicModInt<ID> {
     #[inline]
-    fn from(x: &StaticModInt<MOD>) -> Self {
+    fn from(x: &DynamicModInt<ID>) -> Self {
         *x
     }
 }
 
-impl<const MOD: u32> FromStr for StaticModInt<MOD> {
+impl<ID> FromStr for DynamicModInt<ID> {
     type Err = ParseIntError;
     fn from_str(s: &str) -> Result<Self, Self::Err> {
         s.parse::<i64>().map(Self::from)
     }
 }
 
-impl<const MOD: u32> std::fmt::Display for StaticModInt<MOD> {
+impl<ID> std::fmt::Display for DynamicModInt<ID> {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         write!(f, "{}", self.0)
     }
 }
 
-impl<const MOD: u32> std::fmt::Debug for StaticModInt<MOD> {
+impl<ID> std::fmt::Debug for DynamicModInt<ID> {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         write!(f, "{}", self.0)
     }
 }
 
-impl<const MOD: u32> Neg for StaticModInt<MOD> {
+impl<ID> Neg for DynamicModInt<ID> {
     type Output = Self;
 
     #[inline]
     fn neg(self) -> Self::Output {
         if self.0 == 0 {
-            Self(0)
+            Self(0, PhantomData::default())
         } else {
-            Self(MOD - self.0)
+            Self(Self::modulus() - self.0, PhantomData::default())
         }
     }
 }
 
-impl<const MOD: u32> Neg for &StaticModInt<MOD> {
-    type Output = StaticModInt<MOD>;
+impl<ID> Neg for &DynamicModInt<ID> {
+    type Output = DynamicModInt<ID>;
 
     #[inline]
     fn neg(self) -> Self::Output {
         -*self
     }
 }
-impl<const MOD: u32, T: Into<StaticModInt<MOD>>> Add<T> for StaticModInt<MOD> {
+
+impl<ID, T: Into<DynamicModInt<ID>>> Add<T> for DynamicModInt<ID> {
     type Output = Self;
 
     #[inline]
     fn add(self, rhs: T) -> Self::Output {
         let rhs = rhs.into();
         let mut x = self.0 + rhs.0;
-        if x >= MOD {
-            x -= MOD;
+        if x >= Self::modulus() {
+            x -= Self::modulus();
         }
-        Self(x)
+        Self(x, PhantomData::default())
     }
 }
 
-impl<const MOD: u32, T: Into<StaticModInt<MOD>>> Sub<T> for StaticModInt<MOD> {
+impl<ID, T: Into<DynamicModInt<ID>>> Sub<T> for DynamicModInt<ID> {
     type Output = Self;
 
     #[inline]
     fn sub(self, rhs: T) -> Self::Output {
         let rhs = rhs.into();
         if self.0 < rhs.0 {
-            Self(MOD + self.0 - rhs.0)
+            Self(Self::modulus() + self.0 - rhs.0, PhantomData::default())
         } else {
-            Self(self.0 - rhs.0)
+            Self(self.0 - rhs.0, PhantomData::default())
         }
     }
 }
 
-impl<const MOD: u32, T: Into<StaticModInt<MOD>>> Mul<T> for StaticModInt<MOD> {
+impl<ID, T: Into<DynamicModInt<ID>>> Mul<T> for DynamicModInt<ID> {
     type Output = Self;
 
     #[inline]
     fn mul(self, rhs: T) -> Self::Output {
         let rhs = rhs.into();
-        Self(mul_mod(self.0, rhs.0, MOD))
+        let barrett = barrett_reduction::barrett_reduction::<ID>();
+        Self(barrett.mul(self.0, rhs.0), PhantomData::default())
     }
 }
 
-impl<const MOD: u32, T: Into<StaticModInt<MOD>>> Div<T> for StaticModInt<MOD> {
+impl<ID, T: Into<DynamicModInt<ID>>> Div<T> for DynamicModInt<ID> {
     type Output = Self;
 
     #[inline]
@@ -179,17 +186,10 @@ impl<const MOD: u32, T: Into<StaticModInt<MOD>>> Div<T> for StaticModInt<MOD> {
 macro_rules! impl_from_integer {
     ($(($t1:ty, $t2:ty)),*) => {
         $(
-            impl<const MOD: u32> From<$t1> for StaticModInt<MOD> {
+            impl<ID> From<$t1> for DynamicModInt<ID> {
                 #[inline]
                 fn from(x: $t1) -> Self {
-                    Self((x as $t2).rem_euclid(MOD as $t2) as u32)
-                }
-            }
-
-            impl<const MOD: u32> From<&$t1> for StaticModInt<MOD> {
-                #[inline]
-                fn from(x: &$t1) -> Self {
-                    Self((*x as $t2).rem_euclid(MOD as $t2) as u32)
+                    Self((x as $t2).rem_euclid(Self::modulus() as $t2) as u32, PhantomData::default())
                 }
             }
         )*
@@ -218,19 +218,19 @@ macro_rules! impl_ops {
         $f:ident,
         $f_a:ident,
     )*) => {$(
-        impl<const MOD: u32, T: Into<StaticModInt<MOD>>> $tr<T> for &StaticModInt<MOD> {
-            type Output = StaticModInt<MOD>;
+        impl<ID, T: Into<DynamicModInt<ID>>> $tr<T> for &DynamicModInt<ID> {
+            type Output = DynamicModInt<ID>;
 
             #[inline]
             fn $f(self, rhs: T) -> Self::Output {
-                (*self).$f(rhs)
+                (*self).$f(rhs.into())
             }
         }
 
-        impl<const MOD: u32, T: Into<StaticModInt<MOD>>> $tr_a<T> for StaticModInt<MOD> {
+        impl<ID, T: Into<DynamicModInt<ID>>> $tr_a<T> for DynamicModInt<ID> {
             #[inline]
             fn $f_a(&mut self, rhs: T) {
-                *self = (*self).$f(rhs);
+                *self = (*self).$f(rhs.into());
             }
         }
     )*};
@@ -243,14 +243,27 @@ impl_ops! {
     Div, DivAssign, div, div_assign,
 }
 
-impl<T: Into<StaticModInt<MOD>>, const MOD: u32> Sum<T> for StaticModInt<MOD> {
-    fn sum<I: Iterator<Item = T>>(iter: I) -> Self {
-        iter.fold(Self::from_raw(0), |b, x| b + x.into())
+const fn inv_mod(x: u32, m: u32) -> u32 {
+    let (mut a, mut b, mut x, mut y) = (1, 0, x, m);
+    if m == 1 {
+        return 0;
     }
-}
 
-impl<T: Into<StaticModInt<MOD>>, const MOD: u32> Product<T> for StaticModInt<MOD> {
-    fn product<I: Iterator<Item = T>>(iter: I) -> Self {
-        iter.fold(Self::new(1), |b, x| b * x.into())
+    loop {
+        match x {
+            0 => panic!("gcd(x, m) is not 1."),
+            1 => return a,
+            _ => {}
+        }
+        b += a * (y / x);
+        y %= x;
+
+        match y {
+            0 => panic!("gcd(x, m) is not 1."),
+            1 => return m - b,
+            _ => {}
+        }
+        a += b * (x / y);
+        x %= y;
     }
 }

@@ -1,3 +1,4 @@
+#[inline]
 pub(crate) const fn mul_mod(x: u32, y: u32, m: u32) -> u32 {
     ((x as u64) * (y as u64) % (m as u64)) as u32
 }

@@ -11,3 +11,4 @@ name = "dynamic_modint"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
+modint = { path = "../modint" }

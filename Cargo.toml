@@ -18,5 +18,7 @@ members = [
     # "crates/tree/*",
     # "crates/misc/*",
     # "crates/number-theory/*",
-    "verify/*",
+
+    "verify/library_checker/sample/*",
+    "verify/library_checker/number_theory/*",
 ]
