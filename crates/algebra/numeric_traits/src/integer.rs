@@ -28,6 +28,10 @@ pub trait Integer:
     fn lsb_index(self) -> usize;
     fn msb(self) -> Self;
     fn lsb(self) -> Self;
+    fn ceil_pow2(self) -> Self;
+    fn floor_pow2(self) -> Self;
+    fn ceil_log2(self) -> usize;
+    fn floor_log2(self) -> usize;
 }
 
 macro_rules! impl_integer {
@@ -52,6 +56,25 @@ macro_rules! impl_integer {
 
                 fn lsb(self) -> Self {
                     self & self.wrapping_neg()
+                }
+
+                fn ceil_pow2(self) -> Self {
+                    1 << self.ceil_log2()
+                }
+
+                fn floor_pow2(self) -> Self {
+                    assert!(self > 0);
+                    self.msb()
+                }
+
+                fn ceil_log2(self) -> usize {
+                    assert!(self > 0);
+                    (<$t>::BITS - (self - 1).leading_zeros()) as usize
+                }
+
+                fn floor_log2(self) -> usize {
+                    assert!(self > 0);
+                    self.msb_index()
                 }
             }
         )*

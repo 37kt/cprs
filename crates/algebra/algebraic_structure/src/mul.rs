@@ -1,9 +1,9 @@
-use std::{convert::Infallible, marker::PhantomData};
+use std::marker::PhantomData;
 
 use algebraic_traits::{Algebraic, Associative, Commutative, Invertive, Magma, Pow, Unital};
 use numeric_traits::{Numeric, Recip};
 
-pub struct MulOperator<T: Numeric>(Infallible, PhantomData<fn() -> T>);
+pub struct MulOperator<T: Numeric>(PhantomData<fn() -> T>);
 
 impl<T: Numeric> Algebraic for MulOperator<T> {
     type Value = T;

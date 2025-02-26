@@ -12,6 +12,4 @@ name = "static_modint"
 
 [dependencies]
 modint = { path = "../modint" }
-algebraic_structure = { path = "../../../algebra/algebraic_structure" }
-algebraic_traits = { path = "../../../algebra/algebraic_traits" }
 numeric_traits = { path = "../../../algebra/numeric_traits" }

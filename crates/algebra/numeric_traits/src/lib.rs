@@ -1,7 +1,7 @@
 use std::ops::Neg;
 
-pub mod infty;
-pub use infty::*;
+pub mod inf;
+pub use inf::*;
 pub mod zero_one;
 pub use zero_one::*;
 pub mod cast;

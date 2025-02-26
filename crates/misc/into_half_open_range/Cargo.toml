@@ -1,0 +1,14 @@
+[package]
+name = "into_half_open_range"
+version = "0.1.0"
+edition = "2021"
+license = "CC0-1.0"
+publish = false
+
+[lib]
+name = "into_half_open_range"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+numeric_traits = { path = "../../algebra/numeric_traits" }

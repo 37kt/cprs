@@ -1,4 +1,4 @@
-use std::{convert::Infallible, marker::PhantomData};
+use std::marker::PhantomData;
 
 use algebraic_traits::{Algebraic, Associative, Invertive, Magma, Pow, Unital};
 use numeric_traits::{Numeric, Recip, Signed};
@@ -12,7 +12,7 @@ impl<T: Numeric> Affine<T> {
     }
 }
 
-pub struct AffineOperator<T: Numeric>(Infallible, PhantomData<fn() -> T>);
+pub struct AffineOperator<T: Numeric>(PhantomData<fn() -> T>);
 
 impl<T: Numeric> Algebraic for AffineOperator<T> {
     type Value = Affine<T>;

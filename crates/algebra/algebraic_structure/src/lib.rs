@@ -1,12 +1,16 @@
 mod add;
 mod affine;
 mod count_sum;
+mod max;
+mod min;
 mod mul;
 mod trivial_group;
 pub mod magma {
     pub use crate::add::*;
     pub use crate::affine::*;
     pub use crate::count_sum::*;
+    pub use crate::max::*;
+    pub use crate::min::*;
     pub use crate::mul::*;
     pub use crate::trivial_group::*;
 }

@@ -12,6 +12,4 @@ name = "dynamic_modint"
 
 [dependencies]
 modint = { path = "../modint" }
-algebraic_traits = { path = "../../../algebra/algebraic_traits" }
-algebraic_structure = { path = "../../../algebra/algebraic_structure" }
 numeric_traits = { path = "../../../algebra/numeric_traits" }

@@ -1,11 +1,10 @@
-use std::{convert::Infallible, marker::PhantomData};
+use std::marker::PhantomData;
 
 use algebraic_traits::{Algebraic, CommutativeMonoid, Monoid, Semiring};
 
 use crate::{add::AddOperator, mul::MulOperator};
 
 pub struct SemiringImpl<Additive, Multiplicative>(
-    Infallible,
     PhantomData<fn() -> Additive>,
     PhantomData<fn() -> Multiplicative>,
 )

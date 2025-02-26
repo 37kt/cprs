@@ -1,4 +1,4 @@
-use std::{convert::Infallible, marker::PhantomData};
+use std::marker::PhantomData;
 
 use algebraic_traits::{Algebraic, Associative, Commutative, Magma, Unital};
 use numeric_traits::Numeric;
@@ -9,7 +9,7 @@ pub struct CountSum<T: Numeric> {
     pub sum: T,
 }
 
-pub struct CountSumOperator<T: Numeric>(Infallible, PhantomData<fn() -> T>);
+pub struct CountSumOperator<T: Numeric>(PhantomData<fn() -> T>);
 
 impl<T: Numeric> Algebraic for CountSumOperator<T> {
     type Value = CountSum<T>;
