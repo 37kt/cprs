@@ -12,6 +12,7 @@ name = "algebraic_structure"
 
 [dependencies]
 algebraic_traits = { path = "../algebraic_traits" }
+numeric_traits = { path = "../numeric_traits" }
 # primitive_number = { path = "../primitive_number" }
-static_modint = { path = "../../number_theory/modint/static_modint" }
-dynamic_modint = { path = "../../number_theory/modint/dynamic_modint" }
+# static_modint = { path = "../../number_theory/modint/static_modint" }
+# dynamic_modint = { path = "../../number_theory/modint/dynamic_modint" }

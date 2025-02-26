@@ -3,6 +3,7 @@ use ntt_precalc::NTTPrecalc;
 
 mod mod_arithmetic;
 mod ntt_precalc;
+mod numeric;
 mod ops;
 
 #[derive(Clone, Copy, Default, PartialEq, Eq, Hash)]

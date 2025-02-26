@@ -1,17 +1,17 @@
 pub trait Algebraic {
-    type Element;
+    type Value;
 }
 
 pub trait Magma: Algebraic {
-    fn op(x: &Self::Element, y: &Self::Element) -> Self::Element;
+    fn op(x: &Self::Value, y: &Self::Value) -> Self::Value;
 }
 
 pub trait Unital: Magma {
-    fn unit() -> Self::Element;
+    fn unit() -> Self::Value;
 }
 
 pub trait Invertive: Magma {
-    fn inv(x: &Self::Element) -> Self::Element;
+    fn inv(x: &Self::Value) -> Self::Value;
 }
 
 pub trait Associative: Magma {}
@@ -39,7 +39,7 @@ pub trait Band: Associative + Idempotent {}
 impl<T: Associative + Idempotent> Band for T {}
 
 pub trait Pow: Monoid {
-    fn pow(x: &Self::Element, mut exp: usize) -> Self::Element {
+    fn pow(x: &Self::Value, mut exp: usize) -> Self::Value {
         let mut res = Self::unit();
         let mut x = Self::op(&res, x);
         while exp > 0 {
@@ -58,28 +58,28 @@ pub trait Act {
     type Operator: Algebraic;
 
     fn act(
-        x: &<Self::Operand as Algebraic>::Element,
-        f: &<Self::Operator as Algebraic>::Element,
-    ) -> <Self::Operand as Algebraic>::Element;
+        x: &<Self::Operand as Algebraic>::Value,
+        f: &<Self::Operator as Algebraic>::Value,
+    ) -> <Self::Operand as Algebraic>::Value;
 }
 
 pub trait Semiring: Algebraic {
-    type Additive: CommutativeMonoid<Element = Self::Element>;
-    type Multiplicative: Monoid<Element = Self::Element>;
+    type Additive: CommutativeMonoid<Value = Self::Value>;
+    type Multiplicative: Monoid<Value = Self::Value>;
 
-    fn zero() -> Self::Element {
+    fn zero() -> Self::Value {
         Self::Additive::unit()
     }
 
-    fn one() -> Self::Element {
+    fn one() -> Self::Value {
         Self::Multiplicative::unit()
     }
 
-    fn add(x: &Self::Element, y: &Self::Element) -> Self::Element {
+    fn add(x: &Self::Value, y: &Self::Value) -> Self::Value {
         Self::Additive::op(x, y)
     }
 
-    fn mul(x: &Self::Element, y: &Self::Element) -> Self::Element {
+    fn mul(x: &Self::Value, y: &Self::Value) -> Self::Value {
         Self::Multiplicative::op(x, y)
     }
 }
@@ -88,11 +88,11 @@ pub trait Ring: Semiring
 where
     Self::Additive: Invertive,
 {
-    fn neg(x: &Self::Element) -> Self::Element {
+    fn neg(x: &Self::Value) -> Self::Value {
         Self::Additive::inv(x)
     }
 
-    fn sub(x: &Self::Element, y: &Self::Element) -> Self::Element {
+    fn sub(x: &Self::Value, y: &Self::Value) -> Self::Value {
         Self::Additive::op(x, &Self::neg(y))
     }
 }
@@ -108,11 +108,11 @@ where
     Self::Additive: Invertive,
     Self::Multiplicative: Invertive,
 {
-    fn recip(x: &Self::Element) -> Self::Element {
+    fn recip(x: &Self::Value) -> Self::Value {
         Self::Multiplicative::inv(x)
     }
 
-    fn div(x: &Self::Element, y: &Self::Element) -> Self::Element {
+    fn div(x: &Self::Value, y: &Self::Value) -> Self::Value {
         Self::Multiplicative::op(x, &Self::recip(y))
     }
 }

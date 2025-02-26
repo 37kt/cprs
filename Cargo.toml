@@ -1,6 +1,7 @@
 [workspace]
 members = [
     "crates/algebra/*",
+    "crates/data_structure/union_find/*",
     "crates/number_theory/modint/*",
 
     # "crates/algebraic/*",
@@ -21,4 +22,5 @@ members = [
 
     "verify/library_checker/sample/*",
     "verify/library_checker/number_theory/*",
+    "verify/library_checker/data_structure/*",
 ]

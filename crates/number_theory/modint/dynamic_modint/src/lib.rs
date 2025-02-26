@@ -6,6 +6,7 @@ use std::{
 use modint::ModInt;
 
 mod barrett_reduction;
+mod numeric;
 mod ops;
 
 pub enum DynamicModIntID {}

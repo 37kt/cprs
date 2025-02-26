@@ -2,7 +2,7 @@ use std::{convert::Infallible, marker::PhantomData};
 
 use algebraic_traits::{Algebraic, CommutativeMonoid, Monoid, Semiring};
 
-use crate::{AddOperator, MulOperator};
+use crate::{add::AddOperator, mul::MulOperator};
 
 pub struct SemiringImpl<Additive, Multiplicative>(
     Infallible,
@@ -11,23 +11,23 @@ pub struct SemiringImpl<Additive, Multiplicative>(
 )
 where
     Additive: CommutativeMonoid,
-    Multiplicative: Monoid<Element = Additive::Element>;
+    Multiplicative: Monoid<Value = Additive::Value>;
+
+pub type AddMulOperator<T> = SemiringImpl<AddOperator<T>, MulOperator<T>>;
 
 impl<Additive, Multiplicative> Algebraic for SemiringImpl<Additive, Multiplicative>
 where
     Additive: CommutativeMonoid,
-    Multiplicative: Monoid<Element = Additive::Element>,
+    Multiplicative: Monoid<Value = Additive::Value>,
 {
-    type Element = Additive::Element;
+    type Value = Additive::Value;
 }
 
 impl<Additive, Multiplicative> Semiring for SemiringImpl<Additive, Multiplicative>
 where
     Additive: CommutativeMonoid,
-    Multiplicative: Monoid<Element = Additive::Element>,
+    Multiplicative: Monoid<Value = Additive::Value>,
 {
     type Additive = Additive;
     type Multiplicative = Multiplicative;
 }
-
-pub type AddMulOperator<T> = SemiringImpl<AddOperator<T>, MulOperator<T>>;
