@@ -43,21 +43,12 @@ where
 {
     pub fn new(n: usize) -> Self {
         let sz = n.checked_ceil_pow2().unwrap_or(1);
-        let v = (0..sz * 2).map(|_| M::unit()).collect();
+        let v = vec![M::unit(); sz * 2];
         Self { n, sz, v }
     }
 
-    pub fn get(&self, i: usize) -> M::Value {
-        assert!(i < self.n);
-        self.v[i + self.sz].clone()
-    }
-
-    pub fn get_mut(&mut self, i: usize) -> GetMut<M> {
-        assert!(i < self.n);
-        GetMut {
-            i: i + self.sz,
-            seg: self,
-        }
+    pub fn from_fn(n: usize, f: impl FnMut(usize) -> M::Value) -> Self {
+        Self::from_iter((0..n).map(f))
     }
 
     pub fn set(&mut self, i: usize, x: M::Value) {
@@ -78,6 +69,23 @@ where
             i >>= 1;
             self.update(i);
         }
+    }
+
+    pub fn get(&self, i: usize) -> M::Value {
+        assert!(i < self.n);
+        self.v[i + self.sz].clone()
+    }
+
+    pub fn get_mut(&mut self, i: usize) -> GetMut<M> {
+        assert!(i < self.n);
+        GetMut {
+            i: i + self.sz,
+            seg: self,
+        }
+    }
+
+    pub fn as_slice(&self) -> &[M::Value] {
+        &self.v[self.sz..self.sz + self.n]
     }
 
     pub fn fold(&self, range: impl RangeBounds<usize>) -> M::Value {
@@ -111,7 +119,6 @@ where
         if l == self.n {
             return self.n;
         }
-
         let mut r = l + self.sz;
         let mut s = M::unit();
         loop {
@@ -143,14 +150,12 @@ where
         if r == 0 {
             return 0;
         }
-
         let mut l = r + self.sz;
         let mut s = M::unit();
         loop {
             l -= 1;
             l >>= (!l).lsb_index();
             l = l.max(1);
-
             let t = M::op(&self.v[l], &s);
             if !pred(&t) {
                 while l < self.sz {
@@ -172,7 +177,7 @@ where
     }
 
     fn update(&mut self, i: usize) {
-        self.v[i] = M::op(&self.v[i * 2], &self.v[i * 2 + 1]);
+        self.v[i] = M::op(&self.v[i << 1], &self.v[i << 1 | 1]);
     }
 }
 
@@ -217,6 +222,20 @@ where
         while i > 1 {
             i >>= 1;
             self.seg.update(i);
+        }
+    }
+}
+
+impl<M> Clone for SegmentTree<M>
+where
+    M: Monoid,
+    M::Value: Clone,
+{
+    fn clone(&self) -> Self {
+        Self {
+            n: self.n,
+            sz: self.sz,
+            v: self.v.clone(),
         }
     }
 }
