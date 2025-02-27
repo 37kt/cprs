@@ -70,6 +70,16 @@ where
         }
     }
 
+    pub fn add(&mut self, i: usize, x: M::Value) {
+        assert!(i < self.n);
+        let mut i = i + self.sz;
+        self.v[i] = M::op(&self.v[i], &x);
+        while i > 1 {
+            i >>= 1;
+            self.update(i);
+        }
+    }
+
     pub fn fold(&self, range: impl RangeBounds<usize>) -> M::Value {
         let (mut l, mut r) = range.into_half_open_range(0, self.n);
         l += self.sz;

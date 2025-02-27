@@ -28,3 +28,13 @@ impl Recip for f64 {
 }
 
 pub trait Signed: Sized + Neg<Output = Self> {}
+
+macro_rules! impl_signed {
+    ($($t:ty),*) => {
+        $(impl Signed for $t {})*
+    };
+}
+
+impl_signed! {
+    i8, i16, i32, i64, i128, isize, f32, f64
+}
