@@ -110,6 +110,10 @@ where
     Aggregate: Commutative + Semigroup,
     Aggregate::Value: Clone,
 {
+    pub(crate) fn len(&self) -> usize {
+        self.nodes.len()
+    }
+
     pub(crate) fn merge_with(
         &mut self,
         x: usize,

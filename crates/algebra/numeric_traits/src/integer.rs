@@ -32,6 +32,12 @@ pub trait Integer:
     fn floor_pow2(self) -> Self;
     fn ceil_log2(self) -> usize;
     fn floor_log2(self) -> usize;
+    fn checked_msb_index(self) -> Option<usize>;
+    fn checked_lsb_index(self) -> Option<usize>;
+    fn checked_ceil_pow2(self) -> Option<Self>;
+    fn checked_floor_pow2(self) -> Option<Self>;
+    fn checked_ceil_log2(self) -> Option<usize>;
+    fn checked_floor_log2(self) -> Option<usize>;
 }
 
 macro_rules! impl_integer {
@@ -51,7 +57,11 @@ macro_rules! impl_integer {
                 }
 
                 fn msb(self) -> Self {
-                    1 << self.msb_index()
+                    if self == 0 {
+                        0
+                    } else {
+                        1 << self.msb_index()
+                    }
                 }
 
                 fn lsb(self) -> Self {
@@ -75,6 +85,54 @@ macro_rules! impl_integer {
                 fn floor_log2(self) -> usize {
                     assert!(self > 0);
                     self.msb_index()
+                }
+
+                fn checked_msb_index(self) -> Option<usize> {
+                    if self == 0 {
+                        None
+                    } else {
+                        Some(self.msb_index())
+                    }
+                }
+
+                fn checked_lsb_index(self) -> Option<usize> {
+                    if self == 0 {
+                        None
+                    } else {
+                        Some(self.lsb_index())
+                    }
+                }
+
+                fn checked_ceil_pow2(self) -> Option<Self> {
+                    if self <= 0 {
+                        None
+                    } else {
+                        Some(self.ceil_pow2())
+                    }
+                }
+
+                fn checked_floor_pow2(self) -> Option<Self> {
+                    if self <= 0 {
+                        None
+                    } else {
+                        Some(self.floor_pow2())
+                    }
+                }
+
+                fn checked_ceil_log2(self) -> Option<usize> {
+                    if self <= 0 {
+                        None
+                    } else {
+                        Some(self.ceil_log2())
+                    }
+                }
+
+                fn checked_floor_log2(self) -> Option<usize> {
+                    if self <= 0 {
+                        None
+                    } else {
+                        Some(self.floor_log2())
+                    }
                 }
             }
         )*

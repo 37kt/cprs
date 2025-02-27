@@ -1,3 +1,5 @@
+use std::ops::RangeBounds;
+
 use algebraic_traits::Monoid;
 use into_half_open_range::IntoHalfOpenRange;
 use numeric_traits::Integer;
@@ -48,7 +50,11 @@ where
         self.n
     }
 
-    pub fn fold(&self, range: impl IntoHalfOpenRange<usize>) -> M::Value {
+    pub fn get(&self, i: usize) -> M::Value {
+        self.fold(i..i + 1)
+    }
+
+    pub fn fold(&self, range: impl RangeBounds<usize>) -> M::Value {
         let (l, r) = range.into_half_open_range(0, self.n);
         if l == r {
             M::unit()
@@ -57,6 +63,19 @@ where
             let k = (l ^ r).floor_log2();
             let t = &self.table[k];
             M::op(&t[l], &t[r])
+        }
+    }
+}
+
+impl<M> Clone for DisjointSparseTable<M>
+where
+    M: Monoid,
+    M::Value: Clone,
+{
+    fn clone(&self) -> Self {
+        Self {
+            n: self.n,
+            table: self.table.clone(),
         }
     }
 }

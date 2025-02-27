@@ -23,6 +23,10 @@ where
         }
     }
 
+    pub fn len(&self) -> usize {
+        self.inner.len()
+    }
+
     pub fn merge_with(
         &mut self,
         x: usize,

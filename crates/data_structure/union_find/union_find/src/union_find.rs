@@ -14,6 +14,10 @@ impl UnionFind {
         }
     }
 
+    pub fn len(&self) -> usize {
+        self.inner.len()
+    }
+
     pub fn merge_with(&mut self, x: usize, y: usize, f: impl FnMut(usize, usize)) -> bool {
         self.inner.merge_with(x, y, (), f)
     }

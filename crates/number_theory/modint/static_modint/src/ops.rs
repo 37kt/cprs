@@ -11,22 +11,18 @@ use crate::{
 };
 
 impl<const MOD: u32> StaticModInt<MOD> {
-    #[inline]
     pub fn new<T: Into<StaticModInt<MOD>>>(x: T) -> Self {
         x.into()
     }
 
-    #[inline]
     pub const fn from_raw(x: u32) -> Self {
         Self(x)
     }
 
-    #[inline]
     pub const fn modulus() -> u32 {
         MOD
     }
 
-    #[inline]
     pub const fn val(self) -> u32 {
         self.0
     }
@@ -83,7 +79,6 @@ impl<const MOD: u32> StaticModInt<MOD> {
 }
 
 impl<const MOD: u32> From<&StaticModInt<MOD>> for StaticModInt<MOD> {
-    #[inline]
     fn from(x: &StaticModInt<MOD>) -> Self {
         *x
     }
@@ -91,6 +86,7 @@ impl<const MOD: u32> From<&StaticModInt<MOD>> for StaticModInt<MOD> {
 
 impl<const MOD: u32> FromStr for StaticModInt<MOD> {
     type Err = ParseIntError;
+
     fn from_str(s: &str) -> Result<Self, Self::Err> {
         s.parse::<i64>().map(Self::from)
     }
@@ -111,7 +107,6 @@ impl<const MOD: u32> std::fmt::Debug for StaticModInt<MOD> {
 impl<const MOD: u32> Neg for StaticModInt<MOD> {
     type Output = Self;
 
-    #[inline]
     fn neg(self) -> Self::Output {
         if self.0 == 0 {
             Self(0)
@@ -124,7 +119,6 @@ impl<const MOD: u32> Neg for StaticModInt<MOD> {
 impl<const MOD: u32> Neg for &StaticModInt<MOD> {
     type Output = StaticModInt<MOD>;
 
-    #[inline]
     fn neg(self) -> Self::Output {
         -*self
     }
@@ -132,7 +126,6 @@ impl<const MOD: u32> Neg for &StaticModInt<MOD> {
 impl<const MOD: u32, T: Into<StaticModInt<MOD>>> Add<T> for StaticModInt<MOD> {
     type Output = Self;
 
-    #[inline]
     fn add(self, rhs: T) -> Self::Output {
         let rhs = rhs.into();
         let mut x = self.0 + rhs.0;
@@ -146,7 +139,6 @@ impl<const MOD: u32, T: Into<StaticModInt<MOD>>> Add<T> for StaticModInt<MOD> {
 impl<const MOD: u32, T: Into<StaticModInt<MOD>>> Sub<T> for StaticModInt<MOD> {
     type Output = Self;
 
-    #[inline]
     fn sub(self, rhs: T) -> Self::Output {
         let rhs = rhs.into();
         if self.0 < rhs.0 {
@@ -160,7 +152,6 @@ impl<const MOD: u32, T: Into<StaticModInt<MOD>>> Sub<T> for StaticModInt<MOD> {
 impl<const MOD: u32, T: Into<StaticModInt<MOD>>> Mul<T> for StaticModInt<MOD> {
     type Output = Self;
 
-    #[inline]
     fn mul(self, rhs: T) -> Self::Output {
         let rhs = rhs.into();
         Self(mul_mod(self.0, rhs.0, MOD))
@@ -170,7 +161,6 @@ impl<const MOD: u32, T: Into<StaticModInt<MOD>>> Mul<T> for StaticModInt<MOD> {
 impl<const MOD: u32, T: Into<StaticModInt<MOD>>> Div<T> for StaticModInt<MOD> {
     type Output = Self;
 
-    #[inline]
     fn div(self, rhs: T) -> Self::Output {
         self * rhs.into().recip()
     }
@@ -180,14 +170,12 @@ macro_rules! impl_from_integer {
     ($(($t1:ty, $t2:ty)),*) => {
         $(
             impl<const MOD: u32> From<$t1> for StaticModInt<MOD> {
-                #[inline]
                 fn from(x: $t1) -> Self {
                     Self((x as $t2).rem_euclid(MOD as $t2) as u32)
                 }
             }
 
             impl<const MOD: u32> From<&$t1> for StaticModInt<MOD> {
-                #[inline]
                 fn from(x: &$t1) -> Self {
                     Self((*x as $t2).rem_euclid(MOD as $t2) as u32)
                 }
@@ -221,14 +209,12 @@ macro_rules! impl_ops {
         impl<const MOD: u32, T: Into<StaticModInt<MOD>>> $tr<T> for &StaticModInt<MOD> {
             type Output = StaticModInt<MOD>;
 
-            #[inline]
             fn $f(self, rhs: T) -> Self::Output {
                 (*self).$f(rhs)
             }
         }
 
         impl<const MOD: u32, T: Into<StaticModInt<MOD>>> $tr_a<T> for StaticModInt<MOD> {
-            #[inline]
             fn $f_a(&mut self, rhs: T) {
                 *self = (*self).$f(rhs);
             }
