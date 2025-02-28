@@ -1,0 +1,16 @@
+[package]
+name = "dual_segment_tree"
+version = "0.1.0"
+edition = "2021"
+license = "CC0-1.0"
+publish = false
+
+[lib]
+name = "dual_segment_tree"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+algebraic_traits = { path = "../../../algebra/algebraic_traits" }
+numeric_traits = { path = "../../../algebra/numeric_traits" }
+into_half_open_range = { path = "../../../misc/into_half_open_range" }
