@@ -21,12 +21,12 @@ where
     M::Value: Clone,
 {
     fn from_iter<T: IntoIterator<Item = M::Value>>(iter: T) -> Self {
-        let mut v = std::iter::once(M::unit()).chain(iter).collect::<Vec<_>>();
-        let n = v.len() - 1;
+        let mut v = iter.into_iter().collect::<Vec<_>>();
+        let n = v.len();
         for i in 1..=n {
             let j = i + i.lsb();
             if j <= n {
-                v[j] = M::op(&v[j], &v[i]);
+                v[j - 1] = M::op(&v[j - 1], &v[i - 1]);
             }
         }
         Self { n, v }
@@ -43,8 +43,10 @@ where
     }
 
     pub fn new(n: usize) -> Self {
-        let v = (0..n + 1).map(|_| M::unit()).collect();
-        Self { n, v }
+        Self {
+            n,
+            v: vec![M::unit(); n],
+        }
     }
 
     pub fn len(&self) -> usize {
@@ -55,7 +57,7 @@ where
         assert!(i < self.n);
         i += 1;
         while i <= self.n {
-            self.v[i] = M::op(&self.v[i], &x);
+            self.v[i - 1] = M::op(&self.v[i - 1], &x);
             i += i.lsb();
         }
     }
@@ -63,7 +65,7 @@ where
     pub fn fold_prefix(&self, mut i: usize) -> M::Value {
         let mut s = M::unit();
         while i > 0 {
-            s = M::op(&s, &self.v[i]);
+            s = M::op(&s, &self.v[i - 1]);
             i -= i.lsb();
         }
         s
@@ -79,11 +81,11 @@ where
         let (mut l, mut r) = range.into_half_open_range(0, self.n);
         let mut s = G::unit();
         while r > l {
-            s = G::op(&s, &self.v[r]);
+            s = G::op(&s, &self.v[r - 1]);
             r -= r.lsb();
         }
         while l > r {
-            s = G::op(&s, &G::inv(&self.v[l]));
+            s = G::op(&s, &G::inv(&self.v[l - 1]));
             l -= l.lsb();
         }
         s

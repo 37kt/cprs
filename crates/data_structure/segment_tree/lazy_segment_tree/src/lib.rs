@@ -66,6 +66,10 @@ where
         Self::from_iter((0..n).map(f))
     }
 
+    pub fn len(&self) -> usize {
+        self.n
+    }
+
     pub fn set(&mut self, mut i: usize, x: <A::Operand as Algebraic>::Value) {
         assert!(i < self.n);
         i += self.sz;

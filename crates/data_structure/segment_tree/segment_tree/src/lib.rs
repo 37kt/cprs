@@ -51,6 +51,10 @@ where
         Self::from_iter((0..n).map(f))
     }
 
+    pub fn len(&self) -> usize {
+        self.n
+    }
+
     pub fn set(&mut self, i: usize, x: M::Value) {
         assert!(i < self.n);
         let mut i = i + self.sz;
