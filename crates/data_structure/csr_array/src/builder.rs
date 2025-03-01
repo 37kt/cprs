@@ -47,9 +47,11 @@ impl<T> CsrArrayBuilder<T> {
             ord[j] = sep[i];
         }
         for i in 0..self.idx.len() {
-            let j = ord[i];
-            ord.swap(i, j);
-            self.val.swap(i, j);
+            while ord[i] != i {
+                let j = ord[i];
+                ord.swap(i, j);
+                self.val.swap(i, j);
+            }
         }
         CsrArray { sep, val: self.val }
     }
