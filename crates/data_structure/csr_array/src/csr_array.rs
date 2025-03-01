@@ -84,6 +84,19 @@ impl<T> Index<usize> for CsrArray<T> {
     }
 }
 
+impl<T: std::fmt::Debug> std::fmt::Debug for CsrArray<T> {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        write!(f, "[")?;
+        for (i, v) in self.iter().enumerate() {
+            write!(f, "{:?}", v)?;
+            if i < self.len() - 1 {
+                write!(f, ", ")?;
+            }
+        }
+        write!(f, "]")
+    }
+}
+
 #[derive(Clone)]
 pub struct CsrArray<T> {
     pub(crate) sep: Vec<usize>,
