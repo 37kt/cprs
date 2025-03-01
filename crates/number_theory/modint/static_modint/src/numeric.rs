@@ -1,4 +1,4 @@
-use numeric_traits::{Cast, Numeric, One, Recip, Signed, Zero};
+use numeric_traits::{Cast, Numeric, One, Recip, Zero};
 
 use crate::StaticModInt;
 
@@ -21,8 +21,6 @@ impl<const MOD: u32> Recip for StaticModInt<MOD> {
         self.recip()
     }
 }
-
-impl<const MOD: u32> Signed for StaticModInt<MOD> {}
 
 macro_rules! impl_cast {
     ($($t:ty),*) => {

@@ -1,7 +1,7 @@
-use std::marker::PhantomData;
+use std::{marker::PhantomData, ops::Neg};
 
 use algebraic_traits::{Algebraic, Associative, Commutative, Invertive, Magma, Pow, Unital};
-use numeric_traits::{Cast, Numeric, Signed};
+use numeric_traits::{Cast, Numeric};
 
 pub struct AddOperator<T: Numeric>(PhantomData<fn() -> T>);
 
@@ -25,7 +25,7 @@ impl<T: Numeric> Associative for AddOperator<T> {}
 
 impl<T: Numeric> Commutative for AddOperator<T> {}
 
-impl<T: Numeric + Signed> Invertive for AddOperator<T> {
+impl<T: Numeric + Neg<Output = T>> Invertive for AddOperator<T> {
     fn inv(x: &T) -> T {
         -*x
     }

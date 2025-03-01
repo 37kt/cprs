@@ -1,4 +1,4 @@
-use numeric_traits::{Cast, Numeric, One, Recip, Signed, Zero};
+use numeric_traits::{Cast, Numeric, One, Recip, Zero};
 
 use crate::DynamicModInt;
 
@@ -21,8 +21,6 @@ impl<ID> Recip for DynamicModInt<ID> {
         self.recip()
     }
 }
-
-impl<ID> Signed for DynamicModInt<ID> {}
 
 macro_rules! impl_cast {
     ($($t:ty),*) => {

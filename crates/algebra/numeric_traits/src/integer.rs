@@ -38,6 +38,10 @@ pub trait Integer:
     fn checked_floor_pow2(self) -> Option<Self>;
     fn checked_ceil_log2(self) -> Option<usize>;
     fn checked_floor_log2(self) -> Option<usize>;
+    fn floor_div(self, other: Self) -> Self;
+    fn ceil_div(self, other: Self) -> Self;
+    fn gcd(self, other: Self) -> Self;
+    fn lcm(self, other: Self) -> Self;
 }
 
 macro_rules! impl_integer {
@@ -133,6 +137,51 @@ macro_rules! impl_integer {
                     } else {
                         Some(self.floor_log2())
                     }
+                }
+
+                #[allow(unused_comparisons)]
+                fn floor_div(self, other: Self) -> Self {
+                    self / other - if self ^ other < 0 && self % other != 0 {
+                        1
+                    } else {
+                        0
+                    }
+                }
+
+                #[allow(unused_comparisons)]
+                fn ceil_div(self, other: Self) -> Self {
+                    self / other + if self ^ other >= 0 && self % other != 0 {
+                        1
+                    } else {
+                        0
+                    }
+                }
+
+                #[allow(unused_comparisons)]
+                fn gcd(self, other: Self) -> Self {
+                    let mut x = if self < 0 { 0 - self } else { self };
+                    let mut y = if other < 0 { 0 - other } else { other };
+                    if x == 0 || y == 0 {
+                        return x | y;
+                    }
+                    let n = x.trailing_zeros();
+                    let m = y.trailing_zeros();
+                    x >>= n;
+                    y >>= m;
+                    while x != y {
+                        if x > y {
+                            x -= y;
+                            x >>= x.trailing_zeros();
+                        } else {
+                            y -= x;
+                            y >>= y.trailing_zeros();
+                        }
+                    }
+                    x << n.min(m)
+                }
+
+                fn lcm(self, other: Self) -> Self {
+                    self / self.gcd(other) * other
                 }
             }
         )*
