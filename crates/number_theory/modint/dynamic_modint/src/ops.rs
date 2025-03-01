@@ -6,8 +6,8 @@ use std::{
     str::FromStr,
 };
 
-impl<ID> DynamicModInt<ID> {
-    pub fn new<T: Into<DynamicModInt<ID>>>(x: T) -> Self {
+impl<Id> DynamicModInt<Id> {
+    pub fn new<T: Into<DynamicModInt<Id>>>(x: T) -> Self {
         x.into()
     }
 
@@ -16,11 +16,13 @@ impl<ID> DynamicModInt<ID> {
     }
 
     pub fn set_modulus(m: u32) {
-        barrett_reduction::barrett_reduction::<ID>().set_modulus(m);
+        barrett_reduction::barrett_reduction::<Id, _>(|br| {
+            br.replace(barrett_reduction::BarrettReduction::new(m));
+        });
     }
 
     pub fn modulus() -> u32 {
-        barrett_reduction::barrett_reduction::<ID>().modulus()
+        barrett_reduction::barrett_reduction::<Id, _>(|br| br.get().modulus())
     }
 
     pub fn val(self) -> u32 {
@@ -83,13 +85,13 @@ impl<ID> DynamicModInt<ID> {
     }
 }
 
-impl<ID> From<&DynamicModInt<ID>> for DynamicModInt<ID> {
-    fn from(x: &DynamicModInt<ID>) -> Self {
+impl<Id> From<&DynamicModInt<Id>> for DynamicModInt<Id> {
+    fn from(x: &DynamicModInt<Id>) -> Self {
         *x
     }
 }
 
-impl<ID> FromStr for DynamicModInt<ID> {
+impl<Id> FromStr for DynamicModInt<Id> {
     type Err = ParseIntError;
 
     fn from_str(s: &str) -> Result<Self, Self::Err> {
@@ -97,39 +99,39 @@ impl<ID> FromStr for DynamicModInt<ID> {
     }
 }
 
-impl<ID> std::fmt::Display for DynamicModInt<ID> {
+impl<Id> std::fmt::Display for DynamicModInt<Id> {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         write!(f, "{}", self.0)
     }
 }
 
-impl<ID> std::fmt::Debug for DynamicModInt<ID> {
+impl<Id> std::fmt::Debug for DynamicModInt<Id> {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         write!(f, "{}", self.0)
     }
 }
 
-impl<ID> Neg for DynamicModInt<ID> {
+impl<Id> Neg for DynamicModInt<Id> {
     type Output = Self;
 
     fn neg(self) -> Self::Output {
         if self.0 == 0 {
-            Self(0, PhantomData::default())
+            Self::from_raw(0)
         } else {
-            Self(Self::modulus() - self.0, PhantomData::default())
+            Self::from_raw(Self::modulus() - self.0)
         }
     }
 }
 
-impl<ID> Neg for &DynamicModInt<ID> {
-    type Output = DynamicModInt<ID>;
+impl<Id> Neg for &DynamicModInt<Id> {
+    type Output = DynamicModInt<Id>;
 
     fn neg(self) -> Self::Output {
         -*self
     }
 }
 
-impl<ID, T: Into<DynamicModInt<ID>>> Add<T> for DynamicModInt<ID> {
+impl<Id, T: Into<DynamicModInt<Id>>> Add<T> for DynamicModInt<Id> {
     type Output = Self;
 
     fn add(self, rhs: T) -> Self::Output {
@@ -138,34 +140,35 @@ impl<ID, T: Into<DynamicModInt<ID>>> Add<T> for DynamicModInt<ID> {
         if x >= Self::modulus() {
             x -= Self::modulus();
         }
-        Self(x, PhantomData::default())
+        Self::from_raw(x)
     }
 }
 
-impl<ID, T: Into<DynamicModInt<ID>>> Sub<T> for DynamicModInt<ID> {
+impl<Id, T: Into<DynamicModInt<Id>>> Sub<T> for DynamicModInt<Id> {
     type Output = Self;
 
     fn sub(self, rhs: T) -> Self::Output {
         let rhs = rhs.into();
         if self.0 < rhs.0 {
-            Self(Self::modulus() + self.0 - rhs.0, PhantomData::default())
+            Self::from_raw(Self::modulus() + self.0 - rhs.0)
         } else {
-            Self(self.0 - rhs.0, PhantomData::default())
+            Self::from_raw(self.0 - rhs.0)
         }
     }
 }
 
-impl<ID, T: Into<DynamicModInt<ID>>> Mul<T> for DynamicModInt<ID> {
+impl<Id, T: Into<DynamicModInt<Id>>> Mul<T> for DynamicModInt<Id> {
     type Output = Self;
 
     fn mul(self, rhs: T) -> Self::Output {
         let rhs = rhs.into();
-        let barrett = barrett_reduction::barrett_reduction::<ID>();
-        Self(barrett.mul(self.0, rhs.0), PhantomData::default())
+        barrett_reduction::barrett_reduction::<Id, _>(|br| {
+            Self::from_raw(br.get().mul(self.0, rhs.0))
+        })
     }
 }
 
-impl<ID, T: Into<DynamicModInt<ID>>> Div<T> for DynamicModInt<ID> {
+impl<Id, T: Into<DynamicModInt<Id>>> Div<T> for DynamicModInt<Id> {
     type Output = Self;
 
     fn div(self, rhs: T) -> Self::Output {
@@ -176,9 +179,9 @@ impl<ID, T: Into<DynamicModInt<ID>>> Div<T> for DynamicModInt<ID> {
 macro_rules! impl_from_integer {
     ($(($t1:ty, $t2:ty)),*) => {
         $(
-            impl<ID> From<$t1> for DynamicModInt<ID> {
+            impl<Id> From<$t1> for DynamicModInt<Id> {
                 fn from(x: $t1) -> Self {
-                    Self((x as $t2).rem_euclid(Self::modulus() as $t2) as u32, PhantomData::default())
+                    Self::from_raw((x as $t2).rem_euclid(Self::modulus() as $t2) as u32)
                 }
             }
         )*
@@ -207,15 +210,15 @@ macro_rules! impl_ops {
         $f:ident,
         $f_a:ident,
     )*) => {$(
-        impl<ID, T: Into<DynamicModInt<ID>>> $tr<T> for &DynamicModInt<ID> {
-            type Output = DynamicModInt<ID>;
+        impl<Id, T: Into<DynamicModInt<Id>>> $tr<T> for &DynamicModInt<Id> {
+            type Output = DynamicModInt<Id>;
 
             fn $f(self, rhs: T) -> Self::Output {
                 (*self).$f(rhs.into())
             }
         }
 
-        impl<ID, T: Into<DynamicModInt<ID>>> $tr_a<T> for DynamicModInt<ID> {
+        impl<Id, T: Into<DynamicModInt<Id>>> $tr_a<T> for DynamicModInt<Id> {
             fn $f_a(&mut self, rhs: T) {
                 *self = (*self).$f(rhs.into());
             }

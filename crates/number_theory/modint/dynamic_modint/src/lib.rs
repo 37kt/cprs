@@ -9,50 +9,50 @@ mod barrett_reduction;
 mod numeric;
 mod ops;
 
-pub enum DynamicModIntID {}
+pub enum DynamicModIntId {}
 
 #[repr(transparent)]
-pub struct DynamicModInt<ID>(u32, PhantomData<ID>);
+pub struct DynamicModInt<Id>(u32, PhantomData<Id>);
 
-pub type DefaultDynamicModInt = DynamicModInt<DynamicModIntID>;
+pub type DefaultDynamicModInt = DynamicModInt<DynamicModIntId>;
 
-impl<ID> Clone for DynamicModInt<ID> {
+impl<Id> Clone for DynamicModInt<Id> {
     fn clone(&self) -> Self {
-        Self(self.0, PhantomData::default())
+        Self::from_raw(self.0)
     }
 }
 
-impl<ID> Copy for DynamicModInt<ID> {}
+impl<Id> Copy for DynamicModInt<Id> {}
 
-impl<ID> Default for DynamicModInt<ID> {
+impl<Id> Default for DynamicModInt<Id> {
     fn default() -> Self {
-        Self(0, PhantomData::default())
+        Self::from_raw(0)
     }
 }
 
-impl<ID> PartialEq for DynamicModInt<ID> {
+impl<Id> PartialEq for DynamicModInt<Id> {
     fn eq(&self, other: &Self) -> bool {
         self.0 == other.0
     }
 }
 
-impl<ID> Eq for DynamicModInt<ID> {}
+impl<Id> Eq for DynamicModInt<Id> {}
 
-impl<ID> Hash for DynamicModInt<ID> {
+impl<Id> Hash for DynamicModInt<Id> {
     fn hash<H: Hasher>(&self, state: &mut H) {
         self.0.hash(state);
     }
 }
 
-impl<ID> ModInt for DynamicModInt<ID> {
+impl<Id> ModInt for DynamicModInt<Id> {
     type Value = u32;
 
     fn modulus() -> Self::Value {
-        barrett_reduction::barrett_reduction::<ID>().modulus()
+        Self::modulus()
     }
 
     fn from_raw(val: Self::Value) -> Self {
-        Self(val, PhantomData::default())
+        Self::from_raw(val)
     }
 
     fn val(self) -> Self::Value {
