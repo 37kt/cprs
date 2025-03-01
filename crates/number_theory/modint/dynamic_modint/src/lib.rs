@@ -9,12 +9,12 @@ mod barrett_reduction;
 mod numeric;
 mod ops;
 
-pub enum DynamicModIntId {}
+pub enum DefaultDynamicModIntId {}
 
 #[repr(transparent)]
-pub struct DynamicModInt<Id>(u32, PhantomData<Id>);
+pub struct DynamicModInt<Id>(u32, PhantomData<fn() -> Id>);
 
-pub type DefaultDynamicModInt = DynamicModInt<DynamicModIntId>;
+pub type DefaultDynamicModInt = DynamicModInt<DefaultDynamicModIntId>;
 
 impl<Id> Clone for DynamicModInt<Id> {
     fn clone(&self) -> Self {
