@@ -13,6 +13,10 @@ impl<T> CsrArray<T> {
         self.sep.len() - 1
     }
 
+    pub fn is_empty(&self) -> bool {
+        self.sep.len() == 1
+    }
+
     pub fn flat_len(&self) -> usize {
         self.val.len()
     }

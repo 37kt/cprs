@@ -18,6 +18,10 @@ impl UnionFind {
         self.inner.len()
     }
 
+    pub fn is_empty(&self) -> bool {
+        self.inner.is_empty()
+    }
+
     pub fn merge_with(&mut self, x: usize, y: usize, f: impl FnMut(usize, usize)) -> bool {
         self.inner.merge_with(x, y, (), f)
     }

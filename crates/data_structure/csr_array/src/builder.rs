@@ -28,6 +28,10 @@ impl<T> CsrArrayBuilder<T> {
         self.n
     }
 
+    pub fn is_empty(&self) -> bool {
+        self.n == 0
+    }
+
     pub fn push(&mut self, i: usize, x: T) {
         self.idx.push(i);
         self.val.push(x);

@@ -50,20 +50,20 @@ where
         self.n
     }
 
+    pub fn is_empty(&self) -> bool {
+        self.n == 0
+    }
+
     pub fn get(&self, i: usize) -> M::Value {
         self.fold(i..i + 1)
     }
 
     pub fn fold(&self, range: impl RangeBounds<usize>) -> M::Value {
         let (l, r) = range.into_half_open_range(0, self.n);
-        if l == r {
-            M::unit()
-        } else {
-            let r = r + 1;
-            let k = (l ^ r).floor_log2();
-            let t = &self.table[k];
-            M::op(&t[l], &t[r])
-        }
+        let r = r + 1;
+        let k = (l ^ r).floor_log2();
+        let t = &self.table[k];
+        M::op(&t[l], &t[r])
     }
 }
 

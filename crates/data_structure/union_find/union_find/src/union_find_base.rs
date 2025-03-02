@@ -114,6 +114,10 @@ where
         self.nodes.len()
     }
 
+    pub(crate) fn is_empty(&self) -> bool {
+        self.nodes.is_empty()
+    }
+
     pub(crate) fn merge_with(
         &mut self,
         x: usize,

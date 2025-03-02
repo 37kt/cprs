@@ -70,6 +70,10 @@ where
         self.n
     }
 
+    pub fn is_empty(&self) -> bool {
+        self.n == 0
+    }
+
     pub fn set(&mut self, mut i: usize, x: <A::Operand as Algebraic>::Value) {
         assert!(i < self.n);
         i += self.sz;
