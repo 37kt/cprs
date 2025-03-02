@@ -5,7 +5,9 @@ use std::{
     str::FromStr,
 };
 
-use crate::{barrett_reduction, DynamicModInt};
+use barrett_reduction::BarrettReduction32;
+
+use crate::{barrett_reduction::barrett_reduction, DynamicModInt};
 
 impl<Id> DynamicModInt<Id> {
     pub fn new<T: Into<DynamicModInt<Id>>>(x: T) -> Self {
@@ -17,13 +19,13 @@ impl<Id> DynamicModInt<Id> {
     }
 
     pub fn set_modulus(m: u32) {
-        barrett_reduction::barrett_reduction::<Id, _>(|br| {
-            br.replace(barrett_reduction::BarrettReduction::new(m));
+        barrett_reduction::<Id, _>(|br| {
+            br.replace(BarrettReduction32::new(m));
         });
     }
 
     pub fn modulus() -> u32 {
-        barrett_reduction::barrett_reduction::<Id, _>(|br| br.get().modulus())
+        barrett_reduction::<Id, _>(|br| br.get().modulus())
     }
 
     pub fn val(self) -> u32 {
@@ -163,9 +165,7 @@ impl<Id, T: Into<DynamicModInt<Id>>> Mul<T> for DynamicModInt<Id> {
 
     fn mul(self, rhs: T) -> Self::Output {
         let rhs = rhs.into();
-        barrett_reduction::barrett_reduction::<Id, _>(|br| {
-            Self::from_raw(br.get().mul(self.0, rhs.0))
-        })
+        barrett_reduction::<Id, _>(|br| Self::from_raw(br.get().mul(self.0, rhs.0)))
     }
 }
 

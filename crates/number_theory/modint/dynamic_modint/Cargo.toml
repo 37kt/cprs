@@ -13,3 +13,4 @@ name = "dynamic_modint"
 [dependencies]
 modint = { path = "../modint" }
 numeric_traits = { path = "../../../algebra/numeric_traits" }
+barrett_reduction = { path = "../barrett_reduction" }

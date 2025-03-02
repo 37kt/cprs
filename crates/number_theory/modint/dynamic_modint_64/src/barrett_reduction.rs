@@ -1,54 +1,11 @@
 use std::cell::Cell;
 
-#[derive(Clone, Copy)]
-pub(crate) struct BarrettReduction {
-    m: u64,
-    imh: u64,
-    iml: u64,
-}
+use barrett_reduction::BarrettReduction64;
 
-pub(crate) fn barrett_reduction<Id, Ret>(f: impl FnOnce(&Cell<BarrettReduction>) -> Ret) -> Ret {
+pub(crate) fn barrett_reduction<Id, Ret>(f: impl FnOnce(&Cell<BarrettReduction64>) -> Ret) -> Ret {
     thread_local! {
-        static BARRETT_REDUCTION: Cell<BarrettReduction> = Cell::new(BarrettReduction::new(1_000_000_009));
+        static BARRETT_REDUCTION: Cell<BarrettReduction64> = Cell::new(BarrettReduction64::new(1_000_000_009));
     }
 
     BARRETT_REDUCTION.with(|br| f(br))
-}
-
-impl BarrettReduction {
-    pub(crate) fn new(m: u64) -> Self {
-        let im = !0 / m as u128;
-        // これ要るんでしょうか
-        // if (im * m as u128).wrapping_add(m as u128) == 0 {
-        //     im = im.wrapping_add(1);
-        // }
-        Self {
-            m,
-            imh: (im >> 64) as u64,
-            iml: im as u64,
-        }
-    }
-
-    pub(crate) fn modulus(&self) -> u64 {
-        self.m
-    }
-
-    pub(crate) fn mul(&self, a: u64, b: u64) -> u64 {
-        const MASK: u128 = (1 << 64) - 1;
-        let imh = self.imh as u128;
-        let iml = self.iml as u128;
-        let m = self.m as u128;
-        let add = |x: u128, y: u128| -> u128 { x.wrapping_add(y) };
-        let sub = |x: u128, y: u128| -> u128 { x.wrapping_sub(y) };
-        let mul = |x: u128, y: u128| -> u128 { x.wrapping_mul(y) };
-        let mut x = a as u128 * b as u128;
-        let mut z = mul(x & MASK, iml);
-        z = add(add(mul(x & MASK, imh), mul(x >> 64, iml)), z >> 64);
-        z = add(mul(x >> 64, imh), z >> 64);
-        x = sub(x, mul(z, m));
-        if m <= x {
-            x = sub(x, m);
-        }
-        x as u64
-    }
 }

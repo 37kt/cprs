@@ -1,10 +1,11 @@
 // verification-helper: PROBLEM https://judge.yosupo.jp/problem/sqrt_mod
 
 use dynamic_modint::DefaultDynamicModInt;
-use proconio::input;
+use proconio::{fastout, input};
 
 type Mint = DefaultDynamicModInt;
 
+#[fastout]
 fn main() {
     input! {
         t: usize,

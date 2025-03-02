@@ -1,0 +1,16 @@
+[package]
+name = "binomial"
+version = "0.1.0"
+edition = "2021"
+license = "CC0-1.0"
+publish = false
+
+[lib]
+name = "binomial"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+modint = { path = "../../number_theory/modint/modint" }
+prime_factorization = { path = "../../number_theory/prime_factorization" }
+numeric_traits = { path = "../../algebra/numeric_traits" }
