@@ -12,5 +12,4 @@ name = "bitwise_and_convolution"
 
 [dependencies]
 algebraic_traits = { path = "../../algebra/algebraic_traits" }
-algebraic_structure = { path = "../../algebra/algebraic_structure" }
 numeric_traits = { path = "../../algebra/numeric_traits" }
