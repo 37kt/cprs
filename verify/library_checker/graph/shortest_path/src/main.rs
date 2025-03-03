@@ -14,7 +14,7 @@ fn main() {
         edges: [(usize, usize, i64); m],
     }
     let g = DirectedGraph::from_edges(n, &edges);
-    let res = Dijkstra::solve(&g, &[s]);
+    let res = Dijkstra::new(&g, &[s]);
     let Some(x) = res.dist(t) else {
         println!("-1");
         return;

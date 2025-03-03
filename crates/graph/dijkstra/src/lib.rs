@@ -44,10 +44,7 @@ impl<T> Dijkstra<T>
 where
     T: Numeric + Inf,
 {
-    pub fn solve<'a>(
-        g: &CsrArray<(usize, T)>,
-        starts: impl IntoIterator<Item = &'a usize>,
-    ) -> Self {
+    pub fn new<'a>(g: &CsrArray<(usize, T)>, starts: impl IntoIterator<Item = &'a usize>) -> Self {
         let n = g.len();
         let mut dist = vec![T::inf(); n];
         let mut prev = vec![!0; n];
