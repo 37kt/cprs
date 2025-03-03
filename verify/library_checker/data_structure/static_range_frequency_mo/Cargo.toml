@@ -1,5 +1,5 @@
 [package]
-name = "aplusb"
+name = "static_range_frequency_mo"
 version = "0.1.0"
 edition = "2021"
 
@@ -7,3 +7,4 @@ edition = "2021"
 
 [dependencies]
 proconio = { version = "=0.5.0", features = ["derive"] }
+mo = { path = "../../../../crates/algorithm/mo/" }

@@ -3,6 +3,7 @@ members = [
     "crates/algebra/algebraic_structure",
     "crates/algebra/algebraic_traits",
     "crates/algebra/numeric_traits",
+    "crates/algorithm/mo",
     "crates/combinatorics/binomial",
     "crates/data_structure/csr_array",
     "crates/data_structure/disjoint_sparse_table",
@@ -28,6 +29,7 @@ members = [
     "verify/library_checker/data_structure/point_set_range_composite",
     "verify/library_checker/data_structure/range_affine_point_get",
     "verify/library_checker/data_structure/range_affine_range_sum",
+    "verify/library_checker/data_structure/static_range_frequency_mo",
     "verify/library_checker/data_structure/staticrmq_dst",
     "verify/library_checker/data_structure/unionfind",
     "verify/library_checker/data_structure/unionfind_with_potential",
@@ -36,5 +38,4 @@ members = [
     "verify/library_checker/graph/shortest_path",
     "verify/library_checker/number_theory/factorize",
     "verify/library_checker/number_theory/sqrt_mod",
-    "verify/library_checker/sample/aplusb",
 ]
