@@ -1,6 +1,7 @@
 {
 "verify/library_checker/convolution/bitwise_and_convolution/src/main.rs": "2025-03-03 06:11:43 +0000",
 "verify/library_checker/convolution/bitwise_or_convolution/src/main.rs": "2025-03-03 06:38:47 +0000",
+"verify/library_checker/convolution/bitwise_xor_convolution/src/main.rs": "2025-03-03 08:14:21 +0000",
 "verify/library_checker/data_structure/deque_operate_all_composite/src/main.rs": "2025-03-02 09:20:06 +0000",
 "verify/library_checker/data_structure/point_add_range_sum/src/main.rs": "2025-03-02 23:45:27 +0000",
 "verify/library_checker/data_structure/point_set_range_composite/src/main.rs": "2025-03-02 23:45:27 +0000",
