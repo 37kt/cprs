@@ -1,0 +1,12 @@
+[package]
+name = "scc"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+proconio = { version = "=0.5.0", features = ["derive"] }
+# csr_array = { path = "../../../../crates/data_structure/csr_array" }
+graph = { path = "../../../../crates/graph/graph" }
+strongly_connected_components = { path = "../../../../crates/graph/strongly_connected_components" }
