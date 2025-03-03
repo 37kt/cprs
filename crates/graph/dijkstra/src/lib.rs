@@ -7,8 +7,8 @@ pub struct Dijkstra<T>
 where
     T: Numeric + Inf,
 {
-    dist: Vec<T>,
-    prev: Vec<u32>,
+    pub dist: Vec<T>,
+    pub prev: Vec<usize>,
 }
 
 #[derive(PartialEq)]
@@ -70,7 +70,7 @@ where
                 let new_cost = cost + w;
                 if dist[u] > new_cost {
                     dist[u] = new_cost;
-                    prev[u] = v as u32;
+                    prev[u] = v;
                     pq.push(State {
                         cost: new_cost,
                         v: u as u32,
@@ -95,7 +95,7 @@ where
         }
         let mut path = vec![v];
         while self.prev[v] != !0 {
-            v = self.prev[v] as usize;
+            v = self.prev[v];
             path.push(v);
         }
         path.reverse();
