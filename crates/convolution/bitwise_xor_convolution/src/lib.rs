@@ -57,6 +57,7 @@ where
     R::Additive: AbelianGroup,
     R::Value: Clone,
 {
+    assert_eq!(f.len(), g.len(), "f and g must have the same length");
     let mut f = f.to_vec();
     let mut g = g.to_vec();
     hadamard_transform::<R::Additive>(&mut f);

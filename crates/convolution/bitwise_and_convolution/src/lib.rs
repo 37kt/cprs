@@ -1,7 +1,7 @@
 use algebraic_traits::{AbelianGroup, CommutativeMonoid, Magma, Ring};
 use numeric_traits::Integer;
 
-/// 約数の方向に累積和を取る
+/// 部分集合の方向に累積和を取る
 pub fn superset_zeta_transform<M: CommutativeMonoid>(f: &mut [M::Value]) {
     let n = f.len();
     let lg = n.floor_log2();
@@ -18,7 +18,7 @@ pub fn superset_zeta_transform<M: CommutativeMonoid>(f: &mut [M::Value]) {
     }
 }
 
-/// 約数の方向に取られた累積和から復元する
+/// 部分集合の方向に取られた累積和から復元する
 pub fn superset_moebius_transform<G: AbelianGroup>(f: &mut [G::Value]) {
     let n = f.len();
     let lg = n.floor_log2();
@@ -42,6 +42,7 @@ where
     R::Additive: AbelianGroup,
     R::Value: Clone,
 {
+    assert_eq!(f.len(), g.len(), "f and g must have the same length");
     let mut f = f.to_vec();
     let mut g = g.to_vec();
     superset_zeta_transform::<R::Additive>(&mut f);

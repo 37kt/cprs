@@ -7,7 +7,7 @@ use crate::union_find_base::UnionFindBase;
 pub struct PotentializedUnionFind<Potential>
 where
     Potential: Group,
-    Potential::Value: Clone + Eq,
+    Potential::Value: Clone,
 {
     inner: UnionFindBase<Potential, TrivialGroup, false>,
 }
@@ -15,7 +15,7 @@ where
 impl<Potential> PotentializedUnionFind<Potential>
 where
     Potential: Group,
-    Potential::Value: Clone + Eq,
+    Potential::Value: Clone,
 {
     pub fn new(n: usize) -> Self {
         Self {
