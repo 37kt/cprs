@@ -17,19 +17,20 @@ impl LinearSieve {
                 13.. => 4,
                 11.. => 3,
                 7.. => 2,
-                _ => 1,
+                1.. => 1,
+                _ => 0,
             };
-        let n = n as _;
+        let n = n as u32;
 
         let mut ps = vec![2, 3, 5];
-        ps.retain(|&p| p <= n as _);
+        ps.retain(|&p| p <= n);
 
         let mut lpf = vec![1; sz];
         for i in 1..sz {
             let x = Self::x(i);
             if lpf[i] == 1 {
                 lpf[i] = x;
-                ps.push(x as _);
+                ps.push(x);
             }
             let lpf_i = lpf[i];
             for &y in ps.iter().skip(3).take_while(|&&y| y <= lpf_i && x * y <= n) {
@@ -41,11 +42,11 @@ impl LinearSieve {
     }
 
     pub fn is_prime(&self, x: usize) -> bool {
-        assert!(x <= self.n as _);
-        match (x, Self::id(x as _)) {
-            (2 | 3 | 5, _) => true,
-            (_, Some(i)) => self.lpf[i] == x as _,
-            _ => false,
+        let x = x as u32;
+        assert!(x <= self.n);
+        match x {
+            2 | 3 | 5 => true,
+            _ => Self::id(x).map_or(false, |i| self.lpf[i] == x),
         }
     }
 
@@ -57,13 +58,14 @@ impl LinearSieve {
     }
 
     pub fn least_factor(&self, x: usize) -> Option<usize> {
-        assert!(x <= self.n as _);
+        let x = x as u32;
+        assert!(x <= self.n);
         match x {
             ..=1 => None,
             _ if x % 2 == 0 => Some(2),
             _ if x % 3 == 0 => Some(3),
             _ if x % 5 == 0 => Some(5),
-            _ => Some(self.lpf[Self::id(x as _).unwrap()] as _),
+            _ => Some(self.lpf[Self::id(x).unwrap()] as usize),
         }
     }
 
@@ -80,18 +82,18 @@ impl LinearSieve {
             return None;
         }
         let offset = x / 30 * 8;
-        match x % 30 {
-            1 => Some(0),
-            7 => Some(1),
-            11 => Some(2),
-            13 => Some(3),
-            17 => Some(4),
-            19 => Some(5),
-            23 => Some(6),
-            29 => Some(7),
-            _ => None,
-        }
-        .map(|i| (i + offset) as _)
+        let res = match x % 30 {
+            1 => 0,
+            7 => 1,
+            11 => 2,
+            13 => 3,
+            17 => 4,
+            19 => 5,
+            23 => 6,
+            29 => 7,
+            _ => return None,
+        } + offset;
+        Some(res as usize)
     }
 
     fn x(id: usize) -> u32 {
