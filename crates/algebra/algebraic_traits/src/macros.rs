@@ -1,3 +1,18 @@
+// define_algebra! {}
+/// usage:
+/// ```rust
+/// use algebraic_traits::define_algebra;
+/// define_algebra! {
+///     name: MyAlgebra,
+///     value: i32,
+///     op: |x: &i32, y: &i32| x + y,
+///     unit: 0,
+///     inv: |x: &i32| -x,
+///     associative,
+///     commutative,
+///     idempotent,
+/// }
+/// ```
 #[macro_export]
 macro_rules! define_algebra {
     (name: $name:ident, value: $value:ty) => {
@@ -69,6 +84,17 @@ macro_rules! define_algebra {
     (@impl $name:ident $(,)?) => {};
 }
 
+// define_act! {}
+/// usage:
+/// ```rust
+/// use algebraic_traits::define_act;
+/// define_act! {
+///     name: MyAct,
+///     operand: MyAlgebra1,
+///     operator: MyAlgebra2,
+///     act: |x: &MyAlgebra1::Value, f: &MyAlgebra2::Value| x * f,
+/// }
+/// ```
 #[macro_export]
 macro_rules! define_act {
     (name: $name:ident, operand: $operand:ty, operator: $operator:ty, act: $act:expr $(,)*) => {

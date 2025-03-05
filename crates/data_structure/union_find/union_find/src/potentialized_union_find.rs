@@ -31,6 +31,7 @@ where
         self.inner.is_empty()
     }
 
+    /// -p[x] + p[y] = d
     pub fn merge_with(
         &mut self,
         x: usize,
@@ -41,6 +42,7 @@ where
         self.inner.merge_with(x, y, d, f)
     }
 
+    /// -p[x] + p[y] = d
     pub fn merge(&mut self, x: usize, y: usize, d: Potential::Value) -> bool {
         self.merge_with(x, y, d, |_, _| {})
     }
@@ -53,6 +55,7 @@ where
         self.inner.same(x, y)
     }
 
+    /// -p[x] + p[y]
     pub fn diff(&mut self, x: usize, y: usize) -> Option<Potential::Value> {
         self.inner.diff(x, y)
     }

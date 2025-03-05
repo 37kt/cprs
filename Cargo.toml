@@ -45,6 +45,7 @@ members = [
     "verify/library_checker/data_structure/staticrmq_dst",
     "verify/library_checker/data_structure/unionfind",
     "verify/library_checker/data_structure/unionfind_with_potential",
+    "verify/library_checker/data_structure/unionfind_with_potential_non_commutative_group",
     "verify/library_checker/enumerative_combinatorics/binomial_coefficient_prime_mod",
     "verify/library_checker/graph/scc",
     "verify/library_checker/graph/shortest_path",
