@@ -12,4 +12,3 @@ name = "heavy_light_decomposition"
 
 [dependencies]
 csr_array = { path = "../../data_structure/csr_array" }
-# graph = { path = "../../graph/graph" }

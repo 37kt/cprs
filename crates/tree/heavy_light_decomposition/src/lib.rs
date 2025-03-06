@@ -272,8 +272,60 @@ impl HeavyLightDecomposition {
         path
     }
 
-    pub fn path_query(&self, s: usize, t: usize, mut f: impl FnMut(usize, usize, bool)) {
-        todo!()
+    /// f: (l, r, reverse)
+    pub fn path_query(
+        &self,
+        mut s: usize,
+        mut t: usize,
+        vertex_query: bool,
+        mut f: impl FnMut(usize, usize, bool),
+    ) {
+        let mut f = |l, r, reverse| {
+            if vertex_query {
+                f(l, r, reverse);
+            } else {
+                f(l - 1, r - 1, reverse);
+            }
+        };
+
+        let mut down_query = vec![];
+        while self.head(s) != self.head(t) {
+            if self.down[s] < self.down[t] {
+                let l = self.down[self.head(t)];
+                let r = self.down[t] + 1;
+                down_query.push((l, r));
+                t = !self.next[self.head(t)] as _;
+            } else {
+                let l = self.down[self.head(s)];
+                let r = self.down[s] + 1;
+                f(l as _, r as _, true);
+                s = !self.next[self.head(s)] as _;
+            }
+        }
+
+        if vertex_query {
+            if self.down[s] < self.down[t] {
+                let l = self.down[s];
+                let r = self.down[t] + 1;
+                f(l as _, r as _, false);
+            } else {
+                let l = self.down[t];
+                let r = self.down[s] + 1;
+                f(l as _, r as _, true);
+            }
+        } else if self.down[s] < self.down[t] {
+            let l = self.down[s] + 1;
+            let r = self.down[t] + 1;
+            f(l as _, r as _, false);
+        } else if self.down[s] > self.down[t] {
+            let l = self.down[t] + 1;
+            let r = self.down[s] + 1;
+            f(l as _, r as _, true);
+        }
+
+        for &(l, r) in down_query.iter().rev() {
+            f(l as _, r as _, false);
+        }
     }
 
     pub fn euler_tour(
