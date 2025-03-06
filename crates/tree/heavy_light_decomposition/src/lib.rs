@@ -1,3 +1,5 @@
+// https://noya2ruler.github.io/noya2_Library/tree/heavy_light_decomposition.hpp
+
 use std::iter::FusedIterator;
 
 pub struct HeavyLightDecomposition {
