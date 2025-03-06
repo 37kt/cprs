@@ -28,6 +28,16 @@ impl<Op: TreeDpOperator<Vertex = ()>> RerootingTreeDp<Op> {
 impl<Op: TreeDpOperator> RerootingTreeDp<Op> {
     pub fn with_vertices(g: &CsrArray<impl Edge<Op::Edge>>, vs: &[Op::Vertex]) -> Self {
         let n = g.len();
+        if n == 0 {
+            return Self {
+                par: vec![],
+                dp: vec![],
+                dpc: vec![],
+                dpp: vec![],
+            };
+        }
+        assert_eq!(n, vs.len());
+        assert_eq!((n - 1) * 2, g.flat_len(), "g must be a undirected tree");
 
         let mut par = vec![!0; n];
         let mut ord = Vec::with_capacity(n); // BFS 順
