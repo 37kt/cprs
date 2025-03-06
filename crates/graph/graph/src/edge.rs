@@ -1,28 +1,24 @@
-pub trait Edge {
+pub trait Edge<Weight> {
     fn to(&self) -> usize;
+    fn weight(&self) -> &Weight;
 }
 
-pub trait WeightedEdge<T>: Edge {
-    fn weight(&self) -> T;
-}
-
-impl Edge for usize {
+impl Edge<()> for usize {
     fn to(&self) -> usize {
         *self
     }
-}
 
-impl<T> Edge for (usize, T) {
-    fn to(&self) -> usize {
-        self.0
+    fn weight(&self) -> &() {
+        &()
     }
 }
 
-impl<T> WeightedEdge<T> for (usize, T)
-where
-    T: Clone,
-{
-    fn weight(&self) -> T {
-        self.1.clone()
+impl<Weight> Edge<Weight> for (usize, Weight) {
+    fn to(&self) -> usize {
+        self.0
+    }
+
+    fn weight(&self) -> &Weight {
+        &self.1
     }
 }

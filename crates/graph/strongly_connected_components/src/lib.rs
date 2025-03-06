@@ -7,7 +7,7 @@ pub struct StronglyConnectedComponents {
 }
 
 impl StronglyConnectedComponents {
-    pub fn new(g: &CsrArray<impl Edge>) -> Self {
+    pub fn new<W>(g: &CsrArray<impl Edge<W>>) -> Self {
         let n = g.len();
         let mut scc = SccImpl {
             comp: vec![0; n],
@@ -49,7 +49,7 @@ struct SccImpl {
 }
 
 impl SccImpl {
-    fn dfs(&mut self, g: &CsrArray<impl Edge>, v: usize) {
+    fn dfs<W>(&mut self, g: &CsrArray<impl Edge<W>>, v: usize) {
         self.low[v] = self.t;
         self.ord[v] = self.t;
         self.t += 1;

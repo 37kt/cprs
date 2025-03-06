@@ -32,6 +32,7 @@ members = [
     "crates/number_theory/modint/modint_mersenne",
     "crates/number_theory/modint/static_modint",
     "crates/number_theory/prime_factorization",
+    "crates/tree/rerooting_tree_dp",
     "verify/library_checker/convolution/bitwise_and_convolution",
     "verify/library_checker/convolution/bitwise_or_convolution",
     "verify/library_checker/convolution/bitwise_xor_convolution",
@@ -56,4 +57,5 @@ members = [
     "verify/library_checker/number_theory/factorize",
     "verify/library_checker/number_theory/primality_test",
     "verify/library_checker/number_theory/sqrt_mod",
+    "verify/library_checker/tree/tree_path_composite_sum",
 ]
