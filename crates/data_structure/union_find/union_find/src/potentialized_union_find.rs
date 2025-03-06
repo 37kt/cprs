@@ -1,25 +1,28 @@
 use algebraic_structure::magma::TrivialGroup;
 use algebraic_traits::Group;
 
-use crate::union_find_base::UnionFindBase;
+use crate::union_find_impl::UnionFindImpl;
+
+pub type PotentializedUnionFind<Potential> = PotentializedUnionFindBase<Potential, false>;
+pub type UndoablePotentializedUnionFind<Potential> = PotentializedUnionFindBase<Potential, true>;
 
 #[derive(Clone)]
-pub struct PotentializedUnionFind<Potential>
+pub struct PotentializedUnionFindBase<Potential, const UNDOABLE: bool>
 where
     Potential: Group,
     Potential::Value: Clone,
 {
-    inner: UnionFindBase<Potential, TrivialGroup, false>,
+    inner: UnionFindImpl<Potential, TrivialGroup, UNDOABLE>,
 }
 
-impl<Potential> PotentializedUnionFind<Potential>
+impl<Potential, const UNDOABLE: bool> PotentializedUnionFindBase<Potential, UNDOABLE>
 where
     Potential: Group,
     Potential::Value: Clone,
 {
     pub fn new(n: usize) -> Self {
         Self {
-            inner: UnionFindBase::new(n),
+            inner: UnionFindImpl::new(n),
         }
     }
 
@@ -58,5 +61,19 @@ where
     /// -p[x] + p[y]
     pub fn diff(&mut self, x: usize, y: usize) -> Option<Potential::Value> {
         self.inner.diff(x, y)
+    }
+
+    pub fn potential(&mut self, x: usize) -> Potential::Value {
+        self.inner.potential(x)
+    }
+}
+
+impl<Potential> PotentializedUnionFindBase<Potential, true>
+where
+    Potential: Group,
+    Potential::Value: Clone,
+{
+    pub fn undo(&mut self) {
+        self.inner.undo();
     }
 }

@@ -28,7 +28,7 @@ where
     }
 }
 
-pub(crate) struct UnionFindBase<Potential, Aggregate, const UNDOABLE: bool>
+pub(crate) struct UnionFindImpl<Potential, Aggregate, const UNDOABLE: bool>
 where
     Potential: Group,
     Potential::Value: Clone,
@@ -40,7 +40,7 @@ where
 }
 
 impl<Potential, Aggregate, const UNDOABLE: bool> Clone
-    for UnionFindBase<Potential, Aggregate, UNDOABLE>
+    for UnionFindImpl<Potential, Aggregate, UNDOABLE>
 where
     Potential: Group,
     Potential::Value: Clone,
@@ -56,7 +56,7 @@ where
 }
 
 impl<Potential, Aggregate, const UNDOABLE: bool> FromIterator<Aggregate::Value>
-    for UnionFindBase<Potential, Aggregate, UNDOABLE>
+    for UnionFindImpl<Potential, Aggregate, UNDOABLE>
 where
     Potential: Group,
     Potential::Value: Clone,
@@ -79,7 +79,7 @@ where
     }
 }
 
-impl<Potential, Aggregate, const UNDOABLE: bool> UnionFindBase<Potential, Aggregate, UNDOABLE>
+impl<Potential, Aggregate, const UNDOABLE: bool> UnionFindImpl<Potential, Aggregate, UNDOABLE>
 where
     Potential: Group,
     Potential::Value: Clone,
@@ -91,7 +91,7 @@ where
     }
 }
 
-impl<Potential, Aggregate, const UNDOABLE: bool> UnionFindBase<Potential, Aggregate, UNDOABLE>
+impl<Potential, Aggregate, const UNDOABLE: bool> UnionFindImpl<Potential, Aggregate, UNDOABLE>
 where
     Potential: Group,
     Potential::Value: Clone,
@@ -103,7 +103,7 @@ where
     }
 }
 
-impl<Potential, Aggregate, const UNDOABLE: bool> UnionFindBase<Potential, Aggregate, UNDOABLE>
+impl<Potential, Aggregate, const UNDOABLE: bool> UnionFindImpl<Potential, Aggregate, UNDOABLE>
 where
     Potential: Group,
     Potential::Value: Clone,
@@ -229,10 +229,16 @@ where
         let x = self.root(x);
         self.nodes[x].sum = Aggregate::op(&self.nodes[x].sum, &sum);
     }
+}
 
+impl<Potential, Aggregate> UnionFindImpl<Potential, Aggregate, true>
+where
+    Potential: Group,
+    Potential::Value: Clone,
+    Aggregate: Commutative + Semigroup,
+    Aggregate::Value: Clone,
+{
     pub(crate) fn undo(&mut self) {
-        assert!(UNDOABLE);
-
         for _ in 0..2 {
             let (x, node) = self.history.pop().unwrap();
             self.nodes[x as usize] = node;

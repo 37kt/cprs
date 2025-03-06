@@ -1,16 +1,19 @@
 use algebraic_structure::magma::TrivialGroup;
 
-use crate::union_find_base::UnionFindBase;
+use crate::union_find_impl::UnionFindImpl;
+
+pub type UnionFind = UnionFindBase<false>;
+pub type UndoableUnionFind = UnionFindBase<true>;
 
 #[derive(Clone)]
-pub struct UnionFind {
-    inner: UnionFindBase<TrivialGroup, TrivialGroup, false>,
+pub struct UnionFindBase<const UNDOABLE: bool> {
+    inner: UnionFindImpl<TrivialGroup, TrivialGroup, UNDOABLE>,
 }
 
-impl UnionFind {
+impl<const UNDOABLE: bool> UnionFindBase<UNDOABLE> {
     pub fn new(n: usize) -> Self {
         Self {
-            inner: UnionFindBase::new(n),
+            inner: UnionFindImpl::new(n),
         }
     }
 
@@ -40,5 +43,11 @@ impl UnionFind {
 
     pub fn size(&mut self, x: usize) -> usize {
         self.inner.size(x)
+    }
+}
+
+impl UnionFindBase<true> {
+    pub fn undo(&mut self) {
+        self.inner.undo();
     }
 }
