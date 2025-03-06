@@ -58,6 +58,7 @@ members = [
     "verify/library_checker/number_theory/factorize",
     "verify/library_checker/number_theory/primality_test",
     "verify/library_checker/number_theory/sqrt_mod",
+    "verify/library_checker/tree/jump_on_tree",
     "verify/library_checker/tree/lca",
     "verify/library_checker/tree/tree_path_composite_sum",
 ]

@@ -163,7 +163,31 @@ impl HeavyLightDecomposition {
     }
 
     pub fn jump(&self, mut s: usize, mut t: usize, d: usize) -> Option<usize> {
-        todo!()
+        let (ss, tt) = (s, t);
+        let (mut dist_sl, mut dist_tl) = (0, 0);
+        while self.head(s) != self.head(t) {
+            if self.down[s] > self.down[t] {
+                dist_sl += self.down[s] - self.down[self.head(s)] + 1;
+                s = !self.next[self.head(s)] as usize;
+            } else {
+                dist_tl += self.down[t] - self.down[self.head(t)] + 1;
+                t = !self.next[self.head(t)] as usize;
+            }
+        }
+        if self.down[s] > self.down[t] {
+            dist_sl += self.down[s] - self.down[t];
+        } else {
+            dist_tl += self.down[t] - self.down[s];
+        }
+        let mut d = d as i32;
+        if d <= dist_sl {
+            return Some(self.la(ss, d as usize).unwrap());
+        }
+        d -= dist_sl;
+        if d <= dist_tl {
+            return Some(self.la(tt, (dist_tl - d) as usize).unwrap());
+        }
+        None
     }
 
     pub fn parent(&self, v: usize) -> Option<usize> {
