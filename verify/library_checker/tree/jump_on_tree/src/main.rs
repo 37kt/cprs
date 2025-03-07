@@ -10,7 +10,7 @@ fn main() {
         q: usize,
         ab: [(usize, usize); n - 1],
     }
-    let hld = HeavyLightDecomposition::new(&ab, 0);
+    let hld = HeavyLightDecomposition::from_edges(&ab, 0);
     for _ in 0..q {
         input! {
             s: usize,

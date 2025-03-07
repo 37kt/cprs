@@ -8,10 +8,11 @@ fn main() {
     input! {
         n: usize,
         q: usize,
-        p: [usize; n - 1],
+        mut p: [usize; n - 1],
     }
-    let es = p.into_iter().zip(1..).collect::<Vec<_>>();
-    let hld = HeavyLightDecomposition::new(&es, 0);
+    p.insert(0, !0);
+
+    let hld = HeavyLightDecomposition::from_parents(&p);
     for _ in 0..q {
         input! {
             u: usize,

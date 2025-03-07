@@ -16,7 +16,7 @@ fn main() {
         uv: [(usize, usize); n - 1],
     }
     let (a, b): (Vec<_>, Vec<_>) = ab.into_iter().unzip();
-    let hld = HeavyLightDecomposition::new(&uv, 0);
+    let hld = HeavyLightDecomposition::from_edges(&uv, 0);
     let tour = hld.euler_tour().collect::<Vec<_>>();
     let mut seg = SegmentTree::<AffineOperator<_>>::from_fn(n, |i| Affine(a[tour[i]], b[tour[i]]));
     let mut ges = SegmentTree::<AffineOperator<_>>::from_fn(n, |i| {

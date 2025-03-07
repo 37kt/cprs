@@ -14,7 +14,7 @@ fn main() {
         uv: [(usize, usize); n - 1],
     }
 
-    let hld = HeavyLightDecomposition::new(&uv, n - 1);
+    let hld = HeavyLightDecomposition::from_edges(&uv, 0);
     let tour = hld.euler_tour().collect::<Vec<_>>();
     let mut ft = FenwickTree::<AddOperator<_>>::from_fn(n, |i| a[tour[i]]);
 

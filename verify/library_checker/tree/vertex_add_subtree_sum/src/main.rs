@@ -11,11 +11,11 @@ fn main() {
         n: usize,
         q: usize,
         a: [i64; n],
-        p: [usize; n - 1],
+        mut p: [usize; n - 1],
     }
+    p.insert(0, !0);
 
-    let es = p.into_iter().zip(1..).collect::<Vec<_>>();
-    let hld = HeavyLightDecomposition::new(&es, 0);
+    let hld = HeavyLightDecomposition::from_parents(&p);
     let tour = hld.euler_tour().collect::<Vec<_>>();
     let mut ft = FenwickTree::<AddOperator<_>>::from_fn(n, |i| a[tour[i]]);
 

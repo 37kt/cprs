@@ -67,4 +67,5 @@ members = [
     "verify/library_checker/tree/vertex_add_path_sum",
     "verify/library_checker/tree/vertex_add_subtree_sum",
     "verify/library_checker/tree/vertex_set_path_composite",
+    "verify/yukicoder/tree/yuki0901_aux",
 ]
