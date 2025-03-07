@@ -65,14 +65,6 @@ where
     pub fn component_sum(&mut self, x: usize) -> Aggregate::Value {
         self.inner.component_sum(x)
     }
-
-    pub fn set_component_sum(&mut self, x: usize, sum: Aggregate::Value) {
-        self.inner.set_component_sum(x, sum);
-    }
-
-    pub fn add_component_sum(&mut self, x: usize, sum: Aggregate::Value) {
-        self.inner.add_component_sum(x, sum);
-    }
 }
 
 impl<Aggregate> UnionFindComponentSumBase<Aggregate, true>

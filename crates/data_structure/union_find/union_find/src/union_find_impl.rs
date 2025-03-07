@@ -219,16 +219,6 @@ where
         let x = self.root(x);
         self.nodes[x].sum.clone()
     }
-
-    pub(crate) fn set_component_sum(&mut self, x: usize, sum: Aggregate::Value) {
-        let x = self.root(x);
-        self.nodes[x].sum = sum;
-    }
-
-    pub(crate) fn add_component_sum(&mut self, x: usize, sum: Aggregate::Value) {
-        let x = self.root(x);
-        self.nodes[x].sum = Aggregate::op(&self.nodes[x].sum, &sum);
-    }
 }
 
 impl<Potential, Aggregate> UnionFindImpl<Potential, Aggregate, true>
