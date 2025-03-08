@@ -4,6 +4,7 @@ use algebraic_traits::Semiring;
 
 pub mod index;
 pub mod ops;
+pub mod row_reduction;
 
 pub struct Matrix<T: Semiring> {
     h: usize,
