@@ -20,6 +20,10 @@ mod log;
 #[allow(unused_imports)]
 pub use log::*;
 
+mod exp;
+#[allow(unused_imports)]
+pub use exp::*;
+
 use modint::ModInt;
 use static_modint::{ModInt1000000007, ModInt998244353};
 

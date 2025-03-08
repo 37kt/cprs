@@ -1,0 +1,11 @@
+[package]
+name = "exp_of_formal_power_series"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+proconio = { version = "=0.5.0", features = ["derive"] }
+static_modint = { path = "../../../../crates/number_theory/modint/static_modint" }
+formal_power_series = { path = "../../../../crates/polynomial/formal_power_series" }

@@ -15,5 +15,4 @@ numeric_traits = { path = "../../algebra/numeric_traits" }
 modint = { path = "../../number_theory/modint/modint" }
 static_modint = { path = "../../number_theory/modint/static_modint" }
 dynamic_modint = { path = "../../number_theory/modint/dynamic_modint" }
-binomial = { path = "../../combinatorics/binomial" }
 convolution = { path = "../../convolution/convolution" }

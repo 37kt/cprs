@@ -1,4 +1,4 @@
-use std::ops::Mul;
+use std::ops::{Mul, MulAssign};
 
 use convolution::{convolution_arbitrary_mod, convolution_ntt_friendly};
 use dynamic_modint::DynamicModInt;
@@ -37,6 +37,18 @@ impl<M: ModInt<Value = u32> + FpsMul> Mul<&FormalPowerSeries<M>> for &FormalPowe
 
     fn mul(self, rhs: &FormalPowerSeries<M>) -> Self::Output {
         FpsMul::mul(self, rhs)
+    }
+}
+
+impl<M: ModInt<Value = u32> + FpsMul> MulAssign for FormalPowerSeries<M> {
+    fn mul_assign(&mut self, rhs: Self) {
+        *self = &*self * &rhs;
+    }
+}
+
+impl<M: ModInt<Value = u32> + FpsMul> MulAssign<&FormalPowerSeries<M>> for FormalPowerSeries<M> {
+    fn mul_assign(&mut self, rhs: &FormalPowerSeries<M>) {
+        *self = &*self * rhs;
     }
 }
 

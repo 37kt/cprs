@@ -1,6 +1,8 @@
-use std::ops::{Add, AddAssign, Neg, Sub, SubAssign};
+use std::{
+    cell::{Cell, RefCell},
+    ops::{Add, AddAssign, Neg, Sub, SubAssign},
+};
 
-use binomial::BinomialPrime;
 use modint::ModInt;
 
 use crate::FormalPowerSeries;
@@ -15,17 +17,40 @@ impl<M: ModInt<Value = u32>> FormalPowerSeries<M> {
     }
 
     pub fn integral(&self) -> Self {
-        let n = self.len();
+        thread_local! {
+            static MOD: Cell<u32> = Cell::new(0);
+            static INV: RefCell<Vec<u32>> = RefCell::new(vec![0, 1]);
+        }
 
-        let mut bin = BinomialPrime::<M>::new();
-        bin.expand(n);
-
-        Self::from_fn(n + 1, |i| {
-            if i == 0 {
-                M::from_raw(0)
-            } else {
-                bin.inv(i) * self[i - 1]
+        MOD.with(|m| {
+            if m.get() != M::modulus() {
+                m.set(M::modulus());
+                INV.with(|inv| {
+                    let mut inv = inv.borrow_mut();
+                    inv.resize(2, 1);
+                })
             }
+        });
+
+        INV.with(|inv| {
+            let n = self.len();
+            let m = M::modulus();
+            let mut inv = inv.borrow_mut();
+            let sz = inv.len();
+            let nsz = n + 1;
+            inv.reserve(nsz);
+            for i in sz..nsz {
+                let t = inv[m as usize % i];
+                inv.push((-M::from_raw(t) * M::from_raw(m / i as u32)).val());
+            }
+
+            Self::from_fn(n + 1, |i| {
+                if i == 0 {
+                    M::from_raw(0)
+                } else {
+                    self[i - 1] * M::from_raw(inv[i])
+                }
+            })
         })
     }
 }
