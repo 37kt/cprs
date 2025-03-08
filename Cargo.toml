@@ -39,6 +39,8 @@ members = [
     "verify/library_checker/convolution/bitwise_or_convolution",
     "verify/library_checker/convolution/bitwise_xor_convolution",
     "verify/library_checker/convolution/convolution_mod",
+    "verify/library_checker/convolution/convolution_mod_1000000007",
+    "verify/library_checker/convolution/convolution_mod_2_64",
     "verify/library_checker/convolution/gcd_convolution",
     "verify/library_checker/convolution/lcm_convolution",
     "verify/library_checker/data_structure/deque_operate_all_composite",

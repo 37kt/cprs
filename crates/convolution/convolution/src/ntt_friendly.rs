@@ -3,7 +3,7 @@ use static_modint::StaticModInt;
 
 use crate::{convolution_naive, ntt, ntt_inv};
 
-const NAIVE_THRESHOLD: usize = 128;
+const NAIVE_THRESHOLD: usize = 128; // 雑
 
 pub fn convolution_ntt_friendly<const P: u32>(
     f: &[StaticModInt<P>],
