@@ -1,3 +1,5 @@
+// TODO: sparse のとき
+
 use convolution::{ntt, ntt_inv};
 use dynamic_modint::DynamicModInt;
 use modint::ModInt;
@@ -7,8 +9,8 @@ use crate::mul::FpsMul;
 use crate::{fps, FormalPowerSeries};
 
 impl<M: ModInt<Value = u32> + FpsInv> FormalPowerSeries<M> {
-    pub fn inv(self, d: usize) -> Self {
-        FpsInv::inv(&self, d)
+    pub fn inv(&self, d: usize) -> Self {
+        FpsInv::inv(self, d)
     }
 }
 

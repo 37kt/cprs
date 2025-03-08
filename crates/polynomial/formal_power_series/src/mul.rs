@@ -40,7 +40,8 @@ impl<M: ModInt<Value = u32> + FpsMul> Mul<&FormalPowerSeries<M>> for &FormalPowe
     }
 }
 
-pub(crate) trait FpsMul: ModInt<Value = u32> + Numeric {
+#[doc(hidden)]
+pub trait FpsMul: ModInt<Value = u32> + Numeric {
     fn mul(f: &FormalPowerSeries<Self>, g: &FormalPowerSeries<Self>) -> FormalPowerSeries<Self>;
 }
 

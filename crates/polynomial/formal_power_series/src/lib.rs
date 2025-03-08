@@ -9,9 +9,16 @@ mod ops;
 pub use ops::*;
 
 mod mul;
+#[allow(unused_imports)]
+pub use mul::*;
 
 mod inv;
+#[allow(unused_imports)]
 pub use inv::*;
+
+mod log;
+#[allow(unused_imports)]
+pub use log::*;
 
 use modint::ModInt;
 use static_modint::{ModInt1000000007, ModInt998244353};
