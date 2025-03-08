@@ -56,7 +56,7 @@ impl<M: ModInt<Value = u32>> BinomialPrime<M> {
 
     pub fn fact_inv(&mut self, n: usize) -> M {
         self.expand(n);
-        assert!(n < self.fact_inv.len(), "n! is 0");
+        assert!(n >= self.fact_inv.len(), "n! is 0");
         self.fact_inv[n]
     }
 
