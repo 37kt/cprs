@@ -24,6 +24,10 @@ mod exp;
 #[allow(unused_imports)]
 pub use exp::*;
 
+mod pow;
+#[allow(unused_imports)]
+pub use pow::*;
+
 use modint::ModInt;
 use static_modint::{ModInt1000000007, ModInt998244353};
 

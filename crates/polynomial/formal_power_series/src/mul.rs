@@ -1,4 +1,4 @@
-use std::ops::{Mul, MulAssign};
+use std::ops::{Div, DivAssign, Mul, MulAssign};
 
 use convolution::{convolution_arbitrary_mod, convolution_ntt_friendly};
 use dynamic_modint::DynamicModInt;
@@ -49,6 +49,52 @@ impl<M: ModInt<Value = u32> + FpsMul> MulAssign for FormalPowerSeries<M> {
 impl<M: ModInt<Value = u32> + FpsMul> MulAssign<&FormalPowerSeries<M>> for FormalPowerSeries<M> {
     fn mul_assign(&mut self, rhs: &FormalPowerSeries<M>) {
         *self = &*self * rhs;
+    }
+}
+
+impl<M: ModInt<Value = u32>> MulAssign<M> for FormalPowerSeries<M> {
+    fn mul_assign(&mut self, rhs: M) {
+        self.iter_mut().for_each(|x| *x *= rhs);
+    }
+}
+
+impl<M: ModInt<Value = u32>> Mul<M> for FormalPowerSeries<M> {
+    type Output = FormalPowerSeries<M>;
+
+    fn mul(mut self, rhs: M) -> Self::Output {
+        self *= rhs;
+        self
+    }
+}
+
+impl<M: ModInt<Value = u32>> Mul<M> for &FormalPowerSeries<M> {
+    type Output = FormalPowerSeries<M>;
+
+    fn mul(self, rhs: M) -> Self::Output {
+        self.iter().map(|&x| x * rhs).collect()
+    }
+}
+
+impl<M: ModInt<Value = u32>> DivAssign<M> for FormalPowerSeries<M> {
+    fn div_assign(&mut self, rhs: M) {
+        *self *= rhs.recip();
+    }
+}
+
+impl<M: ModInt<Value = u32>> Div<M> for FormalPowerSeries<M> {
+    type Output = FormalPowerSeries<M>;
+
+    fn div(mut self, rhs: M) -> Self::Output {
+        self *= rhs.recip();
+        self
+    }
+}
+
+impl<M: ModInt<Value = u32>> Div<M> for &FormalPowerSeries<M> {
+    type Output = FormalPowerSeries<M>;
+
+    fn div(self, rhs: M) -> Self::Output {
+        self * rhs.recip()
     }
 }
 

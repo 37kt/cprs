@@ -39,7 +39,7 @@ impl NTTPrecalc {
         let mut rate3 = [0; 30];
         let mut irate3 = [0; 30];
 
-        root[rank2] = pow_mod(primitive_root, (modulus - 1) >> rank2, modulus);
+        root[rank2] = pow_mod(primitive_root, ((modulus - 1) >> rank2) as _, modulus);
         iroot[rank2] = inv_mod(root[rank2], modulus);
         let mut i = rank2;
         while i > 0 {

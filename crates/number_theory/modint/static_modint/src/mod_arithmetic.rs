@@ -2,7 +2,7 @@ pub(crate) const fn mul_mod(x: u32, y: u32, m: u32) -> u32 {
     ((x as u64) * (y as u64) % (m as u64)) as u32
 }
 
-pub(crate) const fn pow_mod(x: u32, mut e: u32, m: u32) -> u32 {
+pub(crate) const fn pow_mod(x: u32, mut e: usize, m: u32) -> u32 {
     let mut res = 1;
     let mut x = (x % m) as u64;
     let m = m as u64;
@@ -33,7 +33,7 @@ pub(crate) const fn is_prime(x: u32) -> bool {
     let mut i = 0;
     while i < a.len() {
         let mut t = d;
-        let mut y = pow_mod(a[i], t, x);
+        let mut y = pow_mod(a[i], t as _, x);
         while t != x - 1 && y != 1 && y != x - 1 {
             y = mul_mod(y, y, x);
             t <<= 1;
@@ -85,7 +85,7 @@ pub(crate) const fn primitive_root(m: u32) -> u32 {
     loop {
         let mut i = 0;
         while i < n {
-            if pow_mod(g, (m - 1) / pf[i], m) == 1 {
+            if pow_mod(g, ((m - 1) / pf[i]) as _, m) == 1 {
                 break;
             }
             i += 1;

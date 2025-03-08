@@ -159,10 +159,11 @@ impl<M: ModInt<Value = u32>> Sub<FormalPowerSeries<M>> for &FormalPowerSeries<M>
     type Output = FormalPowerSeries<M>;
 
     fn sub(self, mut rhs: FormalPowerSeries<M>) -> Self::Output {
+        rhs.iter_mut().for_each(|x| *x = -*x);
         if rhs.len() < self.len() {
             rhs.resize(self.len(), M::from_raw(0));
         }
-        rhs.iter_mut().zip(self).for_each(|(a, b)| *a = *b - *a);
+        rhs.iter_mut().zip(self).for_each(|(a, b)| *a += *b);
         rhs
     }
 }

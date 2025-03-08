@@ -28,7 +28,7 @@ impl<const MOD: u32> StaticModInt<MOD> {
     }
 
     pub const fn pow(self, exp: usize) -> Self {
-        Self::from_raw(pow_mod(self.0, exp as u32, MOD))
+        Self::from_raw(pow_mod(self.0, exp, MOD))
     }
 
     pub const fn recip(self) -> Self {
