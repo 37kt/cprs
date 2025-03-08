@@ -38,10 +38,12 @@ impl<M: ModInt<Value = u32>> FormalPowerSeries<M> {
             let mut inv = inv.borrow_mut();
             let sz = inv.len();
             let nsz = n + 1;
-            inv.reserve(nsz);
-            for i in sz..nsz {
-                let t = inv[m as usize % i];
-                inv.push((-M::from_raw(t) * M::from_raw(m / i as u32)).val());
+            if sz < nsz {
+                inv.reserve(nsz);
+                for i in sz..nsz {
+                    let t = inv[m as usize % i];
+                    inv.push((-M::from_raw(t) * M::from_raw(m / i as u32)).val());
+                }
             }
 
             Self::from_fn(n + 1, |i| {
