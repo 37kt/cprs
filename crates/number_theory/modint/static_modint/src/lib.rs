@@ -22,6 +22,10 @@ impl<const MOD: u32> StaticModInt<MOD> {
 impl<const MOD: u32> ModInt for StaticModInt<MOD> {
     type Value = u32;
 
+    fn new<T: Into<Self>>(val: T) -> Self {
+        val.into()
+    }
+
     fn modulus() -> Self::Value {
         Self::modulus()
     }

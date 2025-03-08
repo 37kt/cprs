@@ -47,6 +47,10 @@ impl<Id> Hash for DynamicModInt<Id> {
 impl<Id> ModInt for DynamicModInt<Id> {
     type Value = u32;
 
+    fn new<T: Into<Self>>(val: T) -> Self {
+        val.into()
+    }
+
     fn modulus() -> Self::Value {
         Self::modulus()
     }

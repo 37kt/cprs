@@ -33,6 +33,7 @@ pub trait ModInt:
 {
     type Value;
 
+    fn new<T: Into<Self>>(val: T) -> Self;
     fn modulus() -> Self::Value;
     fn from_raw(val: Self::Value) -> Self;
     fn val(self) -> Self::Value;
