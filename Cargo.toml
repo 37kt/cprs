@@ -52,6 +52,7 @@ members = [
     "verify/library_checker/data_structure/point_set_range_composite",
     "verify/library_checker/data_structure/range_affine_point_get",
     "verify/library_checker/data_structure/range_affine_range_sum",
+    "verify/library_checker/data_structure/range_kth_smallest",
     "verify/library_checker/data_structure/rectangle_add_point_get",
     "verify/library_checker/data_structure/rectangle_sum",
     "verify/library_checker/data_structure/static_range_frequency",
