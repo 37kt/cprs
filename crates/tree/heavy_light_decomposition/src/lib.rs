@@ -5,6 +5,8 @@ pub mod construct;
 
 use std::iter::FusedIterator;
 
+use csr_array::{CsrArray, CsrArrayBuilder};
+
 pub struct HeavyLightDecomposition {
     n: usize,
     root: usize,
@@ -23,6 +25,7 @@ impl HeavyLightDecomposition {
         self.root
     }
 
+    /// 属する heavy path の先頭
     pub fn head(&self, v: usize) -> usize {
         if self.next[v] < 0 {
             v
@@ -69,6 +72,11 @@ impl HeavyLightDecomposition {
             dv = self.down[v];
         }
         v
+    }
+
+    /// u を根としたときの lca(v, w)
+    pub fn meet(&self, u: usize, v: usize, w: usize) -> usize {
+        self.lca(u, v) ^ self.lca(v, w) ^ self.lca(w, u)
     }
 
     pub fn dist(&self, mut u: usize, mut v: usize) -> usize {
@@ -255,6 +263,16 @@ impl HeavyLightDecomposition {
     ) -> impl Iterator<Item = usize> + FusedIterator + ExactSizeIterator + DoubleEndedIterator + '_
     {
         self.tour.iter().map(|&v| v as usize)
+    }
+
+    /// 各頂点の子のリスト  
+    /// heavy child が先頭
+    pub fn children(&self) -> CsrArray<usize> {
+        let mut csr = CsrArrayBuilder::new(self.n);
+        for v in self.euler_tour().skip(1) {
+            csr.push(self.parent(v).unwrap(), v);
+        }
+        csr.build()
     }
 }
 
