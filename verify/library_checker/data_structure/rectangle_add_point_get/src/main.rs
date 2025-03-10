@@ -1,7 +1,9 @@
 // verification-helper: PROBLEM https://judge.yosupo.jp/problem/rectangle_add_point_get
 
+use std::ops::Range;
+
 use algebraic_structure::magma::AddOperator;
-use dual_segment_tree::DualSegmentTree;
+use fenwick_tree::FenwickTree;
 use proconio::fastout;
 use proconio::input;
 use proconio::read_value;
@@ -44,22 +46,24 @@ fn main() {
         }
     }
 
-    let (wm, mut segs) = WaveletMatrixImpl::<u32, u32, false, false, true>::new(&ps, |_| {
-        DualSegmentTree::<AddOperator<i64>>::new(ps.len())
+    let (wm, mut bits) = WaveletMatrixImpl::<u32, u32, false, false, true>::new(&ps, |_| {
+        FenwickTree::<AddOperator<i64>>::new(ps.len() + 1)
     });
 
     for q in qs {
         match q {
             Query::Add(xl, yl, xr, yr, w) => {
                 wm.count_with(xl..xr, yl..yr, |d, range, inv| {
+                    let Range { start: l, end: r } = range;
                     let w = if inv { -w } else { w };
-                    segs[d].apply_range(range, w);
+                    bits[d].add(l, w);
+                    bits[d].add(r, -w);
                 });
             }
             Query::Get(i) => {
                 let mut s = 0;
                 wm.access_with(i, |d, i| {
-                    s += segs[d].get(i);
+                    s += bits[d].fold_prefix(i + 1);
                 });
                 println!("{}", s);
             }
