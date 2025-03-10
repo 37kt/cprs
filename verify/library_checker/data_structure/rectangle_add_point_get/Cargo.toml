@@ -1,0 +1,12 @@
+[package]
+name = "rectangle_add_point_get"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+proconio = { version = "=0.5.0", features = ["derive"] }
+wavelet_matrix = { path = "../../../../crates/data_structure/wavelet_matrix" }
+dual_segment_tree = { path = "../../../../crates/data_structure/segment_tree/dual_segment_tree" }
+algebraic_structure = { path = "../../../../crates/algebra/algebraic_structure" }

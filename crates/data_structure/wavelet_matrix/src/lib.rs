@@ -1,4 +1,7 @@
-use std::ops::{Range, RangeBounds};
+use std::{
+    borrow::Borrow,
+    ops::{Range, RangeBounds},
+};
 
 use bit_vector::BitVector;
 use coordinate_compression::CoordinateCompression;
@@ -16,6 +19,8 @@ pub struct WaveletMatrixImpl<
 > where
     X: Integer + Inf + NegInf + Cast<usize>,
     Y: Integer + Inf + NegInf + Cast<usize>,
+    u32: Cast<X>,
+    u32: Cast<Y>,
 {
     n: usize,
     m: usize,
@@ -32,12 +37,18 @@ impl<X, Y, const X_SMALL: bool, const Y_SMALL: bool, const INVERTIVE: bool>
 where
     X: Integer + Inf + NegInf + Cast<usize>,
     Y: Integer + Inf + NegInf + Cast<usize>,
+    u32: Cast<X>,
+    u32: Cast<Y>,
 {
-    pub fn new<Container>(
-        ps: impl IntoIterator<Item = (X, Y)>,
+    pub fn new<Container, I>(
+        ps: I,
         mut build_container: impl FnMut(&[usize]) -> Container,
-    ) -> (Self, Vec<Container>) {
-        let ps = ps.into_iter().collect::<Vec<_>>();
+    ) -> (Self, Vec<Container>)
+    where
+        I: IntoIterator,
+        I::Item: Borrow<(X, Y)>,
+    {
+        let ps = ps.into_iter().map(|p| *p.borrow()).collect::<Vec<_>>();
         let n = ps.len();
 
         let (ccx, pos) = CoordinateCompression::<X, X_SMALL, true>::new(ps.iter().map(|&(x, _)| x));
@@ -100,11 +111,23 @@ where
         )
     }
 
+    pub fn len(&self) -> usize {
+        self.n
+    }
+
+    pub fn is_empty(&self) -> bool {
+        self.n == 0
+    }
+
+    pub fn map_index(&self, i: usize) -> usize {
+        self.pos[i]
+    }
+
     pub fn count_with(
         &self,
         x_range: impl RangeBounds<X>,
         y_range: impl RangeBounds<Y>,
-        f: impl FnMut(usize, Range<usize>, bool),
+        mut f: impl FnMut(usize, Range<usize>, bool),
     ) -> usize {
         let (xl, xr) = x_range.into_half_open_range(X::neg_inf(), X::inf());
         let (yl, yr) = y_range.into_half_open_range(Y::neg_inf(), Y::inf());
@@ -113,7 +136,23 @@ where
         let yl = self.ccy.encode(yl);
         let yr = self.ccy.encode(yr);
 
-        self.count_with_(xl, xr, yl, yr, f)
+        self.count_with_(xl, xr, yl, yr, &mut f)
+    }
+
+    pub fn access_with(&self, i: usize, mut f: impl FnMut(usize, usize)) -> Y {
+        let mut y = 0;
+        let mut i = self.map_index(i);
+        f(self.lg, i);
+        for d in (0..self.lg).rev() {
+            if self.bv[d].get(i) {
+                y |= 1 << d;
+                i = self.bv[d].count_prefix(i, true) + self.mid[d];
+            } else {
+                i = self.bv[d].count_prefix(i, false);
+            }
+            f(d, i);
+        }
+        self.ccy.decode(y)
     }
 
     fn count_with_(
@@ -126,7 +165,7 @@ where
     ) -> usize {
         if INVERTIVE {
             self.count_prefix_with_(xl, xr, yr, &mut f)
-                - self.count_prefix_with_(xl, xr, yl, &mut |d, x, inv| f(d, x, !inv))
+                - self.count_prefix_with_(xl, xr, yl, |d, x, inv| f(d, x, !inv))
         } else {
             self.dfs_count_with_(self.lg, xl, xr, yl, yr, 0, 1 << self.lg, &mut f)
         }
@@ -143,7 +182,6 @@ where
         b: usize,
         f: &mut impl FnMut(usize, Range<usize>, bool),
     ) -> usize {
-        assert_eq!(1 << d, b - a);
         if yr <= a || b <= yl {
             return 0;
         } else if yl <= a && b <= yr {
@@ -152,8 +190,8 @@ where
         }
         let d = d - 1;
         let c = (a + b) >> 1;
-        let l0 = self.bv[d].count_prefix(xl, 0);
-        let r0 = self.bv[d].count_prefix(xr, 0);
+        let l0 = self.bv[d].count_prefix(xl, false);
+        let r0 = self.bv[d].count_prefix(xr, false);
         let l1 = xl + self.mid[d] - l0;
         let r1 = xr + self.mid[d] - r0;
         self.dfs_count_with_(d, l0, r0, yl, yr, a, c, f)
@@ -165,7 +203,7 @@ where
         mut xl: usize,
         mut xr: usize,
         y: usize,
-        f: &mut impl FnMut(usize, Range<usize>, bool),
+        mut f: impl FnMut(usize, Range<usize>, bool),
     ) -> usize {
         if xl == xr || y == 0 {
             return 0;
@@ -176,8 +214,8 @@ where
 
         let mut cnt = 0;
         for d in (0..self.lg).rev() {
-            let l0 = self.bv[d].count_prefix(xl, 0);
-            let r0 = self.bv[d].count_prefix(xr, 0);
+            let l0 = self.bv[d].count_prefix(xl, false);
+            let r0 = self.bv[d].count_prefix(xr, false);
             let l1 = xl + self.mid[d] - l0;
             let r1 = xr + self.mid[d] - r0;
             if y >> d & 1 == 0 {

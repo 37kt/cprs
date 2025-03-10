@@ -31,16 +31,21 @@ impl BitVector {
         }
     }
 
-    pub(crate) fn count_prefix(&self, i: usize, f: usize) -> usize {
+    pub(crate) fn get(&self, i: usize) -> bool {
+        (self.bit[i / W] >> i % W) & 1 != 0
+    }
+
+    pub(crate) fn count_prefix(&self, i: usize, f: bool) -> usize {
         let cnt = (self.sum[i / W] + (self.bit[i / W] & ((1 << i % W) - 1)).count_ones()) as usize;
-        if f == 0 {
-            i - cnt
-        } else {
+        if f {
             cnt
+        } else {
+            i - cnt
         }
     }
 
-    pub(crate) fn count(&self, l: usize, r: usize, f: usize) -> usize {
+    #[allow(unused)]
+    pub(crate) fn count(&self, l: usize, r: usize, f: bool) -> usize {
         self.count_prefix(r, f) - self.count_prefix(l, f)
     }
 }

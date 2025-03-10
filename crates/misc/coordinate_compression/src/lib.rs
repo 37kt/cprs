@@ -9,10 +9,13 @@ pub struct CoordinateCompression<T, const SMALL: bool = false, const DISTINCT: b
     Container<T>,
 )
 where
-    T: Integer + Cast<usize>;
+    T: Integer + Cast<usize>,
+    u32: Cast<T>;
 
-impl<T: Integer + Cast<usize>, const SMALL: bool, const DISTINCT: bool>
-    CoordinateCompression<T, SMALL, DISTINCT>
+impl<T, const SMALL: bool, const DISTINCT: bool> CoordinateCompression<T, SMALL, DISTINCT>
+where
+    T: Integer + Cast<usize>,
+    u32: Cast<T>,
 {
     pub fn new(xs: impl IntoIterator<Item = T>) -> (Self, Vec<usize>) {
         let xs = xs.into_iter().collect::<Vec<_>>();
@@ -42,7 +45,7 @@ impl<T: Integer + Cast<usize>, const SMALL: bool, const DISTINCT: bool>
                     sum[i] = sum[i - 1];
                 }
                 sum[0] = 0;
-                return (Self(Container::Small(Small { min, max, sum })), ys);
+                return (Self(Container::Small(Small { min, sum })), ys);
             } else {
                 for &x in &xs {
                     sum[(x - min).cast() + 1] = 1;
@@ -54,7 +57,7 @@ impl<T: Integer + Cast<usize>, const SMALL: bool, const DISTINCT: bool>
                     let j = (xs[i] - min).cast();
                     ys[i] = sum[j] as usize;
                 }
-                return (Self(Container::Small(Small { min, max, sum })), ys);
+                return (Self(Container::Small(Small { min, sum })), ys);
             }
         } else {
             if DISTINCT {
@@ -88,41 +91,50 @@ impl<T: Integer + Cast<usize>, const SMALL: bool, const DISTINCT: bool>
         match &self.0 {
             Container::Empty => 0,
             Container::Small(Small { min, sum, .. }) => {
-                let j = (x - *min).max(T::zero()).cast().min(self.len());
+                let j = (x - *min).max(T::zero()).cast().min(sum.len() - 1);
                 sum[j] as usize
             }
             Container::Large(Large { xs }) => xs.partition_point(|&xi| xi < x),
         }
     }
+
+    pub fn decode(&self, i: usize) -> T {
+        match &self.0 {
+            Container::Empty => panic!("out of range"),
+            Container::Small(Small { min, sum, .. }) => *min + sum[i].cast(),
+            Container::Large(Large { xs }) => xs[i],
+        }
+    }
 }
 
-impl<T: Integer + Cast<usize>, const SMALL: bool, const DISTINCT: bool>
-    CoordinateCompression<T, SMALL, DISTINCT>
+impl<T, const SMALL: bool, const DISTINCT: bool> CoordinateCompression<T, SMALL, DISTINCT>
+where
+    T: Integer + Cast<usize>,
+    u32: Cast<T>,
 {
     /// 値の範囲 \[0, n) の n を返す
     pub fn len(&self) -> usize {
         match &self.0 {
             Container::Empty => 0,
-            Container::Small(Small { min, max, .. }) => (*max - *min).cast() + 1,
+            Container::Small(Small { sum, .. }) => *sum.last().unwrap() as usize,
             Container::Large(Large { xs }) => xs.len(),
         }
     }
 }
 
 #[derive(Clone)]
-struct Small<T: Integer + Cast<usize>> {
+struct Small<T> {
     min: T,
-    max: T,
     sum: Vec<u32>,
 }
 
 #[derive(Clone)]
-struct Large<T: Integer + Cast<usize>> {
+struct Large<T> {
     xs: Vec<T>,
 }
 
 #[derive(Clone)]
-enum Container<T: Integer + Cast<usize>> {
+enum Container<T> {
     Empty,
     Small(Small<T>),
     Large(Large<T>),

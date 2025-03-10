@@ -10,20 +10,19 @@ fn main() {
     input! {
         n: usize,
         q: usize,
-        xyw: [(u32, u32, i64); n],
+        xyw: [((u32, u32), i64); n],
     }
 
-    let (wm, css) = WaveletMatrixImpl::<_, _, false, false, true>::new(
-        xyw.iter().map(|&(x, y, _)| (x, y)),
-        |idx| {
-            std::iter::once(0)
-                .chain(idx.iter().scan(0, |acc, &i| {
-                    *acc += xyw[i].2;
-                    Some(*acc)
-                }))
-                .collect::<Vec<_>>()
-        },
-    );
+    let (xy, w): (Vec<_>, Vec<_>) = xyw.into_iter().unzip();
+
+    let (wm, css) = WaveletMatrixImpl::<_, _, false, false, true>::new(&xy, |idx| {
+        std::iter::once(0)
+            .chain(idx.iter().scan(0, |acc, &i| {
+                *acc += w[i];
+                Some(*acc)
+            }))
+            .collect::<Vec<_>>()
+    });
 
     for _ in 0..q {
         input! {
