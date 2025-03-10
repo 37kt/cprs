@@ -3,7 +3,7 @@
 use proconio::fastout;
 use proconio::input;
 use std::ops::Range;
-use wavelet_matrix::WaveletMatrixImpl;
+use wavelet_matrix::WaveletMatrix2D;
 
 #[fastout]
 fn main() {
@@ -15,14 +15,15 @@ fn main() {
 
     let (xy, w): (Vec<_>, Vec<_>) = xyw.into_iter().unzip();
 
-    let (wm, css) = WaveletMatrixImpl::<_, _, false, false, true>::new(&xy, |idx| {
-        std::iter::once(0)
-            .chain(idx.iter().scan(0, |acc, &i| {
-                *acc += w[i];
-                Some(*acc)
-            }))
-            .collect::<Vec<_>>()
-    });
+    let (wm, css) =
+        WaveletMatrix2D::<_, _, false, false, true>::new_2d_with_containers(&xy, |idx| {
+            std::iter::once(0)
+                .chain(idx.iter().scan(0, |acc, &i| {
+                    *acc += w[i];
+                    Some(*acc)
+                }))
+                .collect::<Vec<_>>()
+        });
 
     for _ in 0..q {
         input! {

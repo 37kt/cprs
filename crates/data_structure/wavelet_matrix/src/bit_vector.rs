@@ -43,9 +43,4 @@ impl BitVector {
             i - cnt
         }
     }
-
-    #[allow(unused)]
-    pub(crate) fn count(&self, l: usize, r: usize, f: bool) -> usize {
-        self.count_prefix(r, f) - self.count_prefix(l, f)
-    }
 }

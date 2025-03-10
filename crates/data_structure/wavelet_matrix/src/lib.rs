@@ -9,8 +9,40 @@ use into_half_open_range::IntoHalfOpenRange;
 use numeric_traits::{Cast, Inf, Integer, NegInf};
 
 mod bit_vector;
+mod internal;
 
-pub struct WaveletMatrixImpl<
+pub type WaveletMatrix<Y, const Y_SMALL: bool = false, const INVERTIVE: bool = false> =
+    WaveletMatrix2D<usize, Y, true, Y_SMALL, INVERTIVE>;
+
+impl<Y, const Y_SMALL: bool, const INVERTIVE: bool> WaveletMatrix<Y, Y_SMALL, INVERTIVE>
+where
+    Y: Integer + Inf + NegInf + Cast<usize>,
+    u32: Cast<Y>,
+{
+    pub fn new<I>(a: I) -> Self
+    where
+        I: IntoIterator,
+        I::Item: Borrow<Y>,
+    {
+        Self::new_with_containers(a, |_| ()).0
+    }
+
+    pub fn new_with_containers<Container, I>(
+        a: I,
+        build_container: impl FnMut(&[usize]) -> Container,
+    ) -> (Self, Vec<Container>)
+    where
+        I: IntoIterator,
+        I::Item: Borrow<Y>,
+    {
+        WaveletMatrix2D::<usize, Y, true, Y_SMALL, INVERTIVE>::new_2d_with_containers(
+            a.into_iter().enumerate().map(|(i, y)| (i, *y.borrow())),
+            build_container,
+        )
+    }
+}
+
+pub struct WaveletMatrix2D<
     X,
     Y,
     const X_SMALL: bool = false,
@@ -33,14 +65,22 @@ pub struct WaveletMatrixImpl<
 }
 
 impl<X, Y, const X_SMALL: bool, const Y_SMALL: bool, const INVERTIVE: bool>
-    WaveletMatrixImpl<X, Y, X_SMALL, Y_SMALL, INVERTIVE>
+    WaveletMatrix2D<X, Y, X_SMALL, Y_SMALL, INVERTIVE>
 where
     X: Integer + Inf + NegInf + Cast<usize>,
     Y: Integer + Inf + NegInf + Cast<usize>,
     u32: Cast<X>,
     u32: Cast<Y>,
 {
-    pub fn new<Container, I>(
+    pub fn new_2d<I>(ps: I) -> Self
+    where
+        I: IntoIterator,
+        I::Item: Borrow<(X, Y)>,
+    {
+        Self::new_2d_with_containers(ps, |_| ()).0
+    }
+
+    pub fn new_2d_with_containers<Container, I>(
         ps: I,
         mut build_container: impl FnMut(&[usize]) -> Container,
     ) -> (Self, Vec<Container>)
@@ -123,6 +163,10 @@ where
         self.pos[i]
     }
 
+    pub fn count(&self, x_range: impl RangeBounds<X>, y_range: impl RangeBounds<Y>) -> usize {
+        self.count_with(x_range, y_range, |_, _, _| {})
+    }
+
     pub fn count_with(
         &self,
         x_range: impl RangeBounds<X>,
@@ -137,6 +181,10 @@ where
         let yr = self.ccy.encode(yr);
 
         self.count_with_(xl, xr, yl, yr, &mut f)
+    }
+
+    pub fn access(&self, i: usize) -> Y {
+        self.access_with(i, |_, _| {})
     }
 
     pub fn access_with(&self, i: usize, mut f: impl FnMut(usize, usize)) -> Y {
@@ -155,79 +203,39 @@ where
         self.ccy.decode(y)
     }
 
-    fn count_with_(
-        &self,
-        xl: usize,
-        xr: usize,
-        yl: usize,
-        yr: usize,
-        mut f: impl FnMut(usize, Range<usize>, bool),
-    ) -> usize {
-        if INVERTIVE {
-            self.count_prefix_with_(xl, xr, yr, &mut f)
-                - self.count_prefix_with_(xl, xr, yl, |d, x, inv| f(d, x, !inv))
-        } else {
-            self.dfs_count_with_(self.lg, xl, xr, yl, yr, 0, 1 << self.lg, &mut f)
-        }
-    }
-
-    fn dfs_count_with_(
-        &self,
-        d: usize,
-        xl: usize,
-        xr: usize,
-        yl: usize,
-        yr: usize,
-        a: usize,
-        b: usize,
-        f: &mut impl FnMut(usize, Range<usize>, bool),
-    ) -> usize {
-        if yr <= a || b <= yl {
-            return 0;
-        } else if yl <= a && b <= yr {
-            f(d, xl..xr, false);
-            return xr - xl;
-        }
-        let d = d - 1;
-        let c = (a + b) >> 1;
-        let l0 = self.bv[d].count_prefix(xl, false);
-        let r0 = self.bv[d].count_prefix(xr, false);
-        let l1 = xl + self.mid[d] - l0;
-        let r1 = xr + self.mid[d] - r0;
-        self.dfs_count_with_(d, l0, r0, yl, yr, a, c, f)
-            + self.dfs_count_with_(d, l1, r1, yl, yr, c, b, f)
-    }
-
-    fn count_prefix_with_(
-        &self,
-        mut xl: usize,
-        mut xr: usize,
-        y: usize,
-        mut f: impl FnMut(usize, Range<usize>, bool),
-    ) -> usize {
-        if xl == xr || y == 0 {
-            return 0;
-        } else if y == self.m {
-            f(self.lg, xl..xr, false);
-            return xr - xl;
+    pub fn kth_smallest(&self, x_range: impl RangeBounds<X>, mut k: usize) -> Option<Y> {
+        let (xl, xr) = x_range.into_half_open_range(X::neg_inf(), X::inf());
+        let mut xl = self.ccx.encode(xl);
+        let mut xr = self.ccx.encode(xr);
+        if k >= xr - xl {
+            return None;
         }
 
-        let mut cnt = 0;
+        let mut y = 0;
         for d in (0..self.lg).rev() {
             let l0 = self.bv[d].count_prefix(xl, false);
             let r0 = self.bv[d].count_prefix(xr, false);
             let l1 = xl + self.mid[d] - l0;
             let r1 = xr + self.mid[d] - r0;
-            if y >> d & 1 == 0 {
-                xl = l0;
-                xr = r0;
+            if k < r0 - l0 {
+                (xl, xr) = (l0, r0);
             } else {
-                f(d, l0..r0, false);
-                cnt += r0 - l0;
-                xl = l1;
-                xr = r1;
+                k -= r0 - l0;
+                y |= 1 << d;
+                (xl, xr) = (l1, r1);
             }
         }
-        cnt
+        Some(self.ccy.decode(y))
+    }
+
+    pub fn kth_largest(&self, x_range: impl RangeBounds<X>, k: usize) -> Option<Y> {
+        let (xl, xr) = x_range.into_half_open_range(X::neg_inf(), X::inf());
+        let xl = self.ccx.encode(xl);
+        let xr = self.ccx.encode(xr);
+        if k >= xr - xl {
+            return None;
+        }
+
+        self.kth_smallest(x_range, xr - xl - 1 - k)
     }
 }

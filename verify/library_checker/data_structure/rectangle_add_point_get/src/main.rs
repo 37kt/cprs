@@ -7,7 +7,7 @@ use fenwick_tree::FenwickTree;
 use proconio::fastout;
 use proconio::input;
 use proconio::read_value;
-use wavelet_matrix::WaveletMatrixImpl;
+use wavelet_matrix::WaveletMatrix2D;
 
 enum Query {
     Add(u32, u32, u32, u32, i64),
@@ -46,9 +46,10 @@ fn main() {
         }
     }
 
-    let (wm, mut bits) = WaveletMatrixImpl::<u32, u32, false, false, true>::new(&ps, |_| {
-        FenwickTree::<AddOperator<i64>>::new(ps.len() + 1)
-    });
+    let (wm, mut bits) =
+        WaveletMatrix2D::<_, _, false, false, true>::new_2d_with_containers(&ps, |_| {
+            FenwickTree::<AddOperator<i64>>::new(ps.len() + 1)
+        });
 
     for q in qs {
         match q {
