@@ -88,9 +88,9 @@ impl<T, const M: usize> Index<usize> for PersistentArray<T, M> {
         let mut vp = self.root.expect("out of range");
         while i != 0 {
             let v = unsafe { vp.as_ref() };
-            let c = i % M;
+            let ci = i % M;
             i = (i - 1) / M;
-            vp = v.ch[c].expect("out of range");
+            vp = v.ch[ci].expect("out of range");
         }
 
         unsafe { vp.as_ref().val.as_ref() }

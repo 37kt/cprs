@@ -1,6 +1,6 @@
 use persistent_array::PersistentArray;
 
-const M: usize = 16;
+const M: usize = 8;
 
 #[derive(Clone, Copy)]
 pub struct PersistentUnionFind(PersistentArray<i32, M>);
