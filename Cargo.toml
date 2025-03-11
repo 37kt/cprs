@@ -28,6 +28,7 @@ members = [
     "crates/linear_algebra/matrix",
     "crates/misc/coordinate_compression",
     "crates/misc/into_half_open_range",
+    "crates/misc/simple_arena",
     "crates/number_theory/eratosthenes",
     "crates/number_theory/linear_sieve",
     "crates/number_theory/modint/barrett_reduction",

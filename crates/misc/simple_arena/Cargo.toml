@@ -1,14 +1,13 @@
 [package]
-name = "persistent_array"
+name = "simple_arena"
 version = "0.1.0"
 edition = "2021"
 license = "CC0-1.0"
 publish = false
 
 [lib]
-name = "persistent_array"
+name = "simple_arena"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-simple_arena = { path = "../../misc/simple_arena" }

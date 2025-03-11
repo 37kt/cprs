@@ -1,4 +1,7 @@
+use std::cell::RefCell;
 use std::{ops::Index, ptr::NonNull};
+
+use simple_arena::Arena;
 
 /// 全永続配列  
 /// len は提供しない
@@ -94,10 +97,6 @@ impl<T, const M: usize> Index<usize> for PersistentArray<T, M> {
     }
 }
 
-fn new_ptr<T>(val: T) -> NonNull<T> {
-    NonNull::new(Box::into_raw(Box::new(val))).unwrap()
-}
-
 impl<T, const M: usize> Node<T, M> {
     fn new(val: T) -> Self {
         Self {
@@ -114,4 +113,12 @@ impl<T, const M: usize> Clone for Node<T, M> {
             ch: self.ch,
         }
     }
+}
+
+thread_local! {
+    static ARENA: RefCell<Arena> = RefCell::new(Arena::new(1024 * 1024 * 1024));
+}
+
+fn new_ptr<T>(val: T) -> NonNull<T> {
+    ARENA.with(|arena| NonNull::new(arena.borrow_mut().alloc(val)).unwrap())
 }
