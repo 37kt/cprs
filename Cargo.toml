@@ -22,6 +22,7 @@ members = [
     "crates/data_structure/union_find/persistent_union_find",
     "crates/data_structure/union_find/union_find",
     "crates/data_structure/wavelet_matrix",
+    "crates/flow/max_flow",
     "crates/graph/dijkstra",
     "crates/graph/graph",
     "crates/graph/strongly_connected_components",
@@ -93,5 +94,6 @@ members = [
     "verify/library_checker/tree/vertex_add_path_sum",
     "verify/library_checker/tree/vertex_add_subtree_sum",
     "verify/library_checker/tree/vertex_set_path_composite",
+    "verify/yukicoder/flow/yuki1479_maxflow",
     "verify/yukicoder/tree/yuki0901_aux",
 ]
