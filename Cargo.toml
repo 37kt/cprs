@@ -18,7 +18,6 @@ members = [
     "crates/data_structure/persistent_array",
     "crates/data_structure/segment_tree/dual_segment_tree",
     "crates/data_structure/segment_tree/lazy_segment_tree",
-    "crates/data_structure/segment_tree/persistent_lazy_segment_tree",
     "crates/data_structure/segment_tree/segment_tree",
     "crates/data_structure/union_find/persistent_union_find",
     "crates/data_structure/union_find/union_find",
