@@ -40,6 +40,7 @@ members = [
     "crates/number_theory/modint/modint_mersenne",
     "crates/number_theory/modint/static_modint",
     "crates/number_theory/prime_factorization",
+    "crates/number_theory/rational",
     "crates/polynomial/formal_power_series",
     "crates/tree/heavy_light_decomposition",
     "crates/tree/rerooting_tree_dp",
@@ -96,6 +97,7 @@ members = [
     "verify/library_checker/tree/vertex_add_path_sum",
     "verify/library_checker/tree/vertex_add_subtree_sum",
     "verify/library_checker/tree/vertex_set_path_composite",
+    "verify/stress_test/number_theory/comparing_rational",
     "verify/yukicoder/flow/yuki1479_maxflow",
     "verify/yukicoder/tree/yuki0901_aux",
 ]
