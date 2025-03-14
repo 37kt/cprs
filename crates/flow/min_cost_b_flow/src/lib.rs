@@ -22,8 +22,6 @@ pub struct MinCostBFlow {
 
     excess_vs: Vec<usize>,
     deficit_vs: Vec<usize>,
-
-    time: f64,
 }
 
 #[derive(Debug, Clone, Copy)]
@@ -51,7 +49,6 @@ impl MinCostBFlow {
             pq: BinaryHeap::new(),
             excess_vs: vec![],
             deficit_vs: vec![],
-            time: 0.0,
         }
     }
 
@@ -167,8 +164,6 @@ impl MinCostBFlow {
             }
             delta /= 2;
         }
-
-        eprintln!("dual time: {}", self.time);
 
         let mut cost = 0;
         for &e in &self.edges {
@@ -312,8 +307,6 @@ impl MinCostBFlow {
     }
 
     fn dual(&mut self, delta: i64) -> bool {
-        let start = std::time::Instant::now();
-
         self.dist.resize(self.n, i64::MAX);
         self.dist.fill(i64::MAX);
         self.parent.resize(self.n, !0);
@@ -357,8 +350,6 @@ impl MinCostBFlow {
         for v in 0..self.n {
             self.potential[v] += self.dist[v].min(self.farthest);
         }
-
-        self.time += start.elapsed().as_secs_f64();
 
         deficit_cnt > 0
     }
