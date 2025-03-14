@@ -1,12 +1,12 @@
 [package]
-name = "binary_trie"
+name = "min_cost_b_flow"
 version = "0.1.0"
 edition = "2021"
 license = "CC0-1.0"
 publish = false
 
 [lib]
-name = "binary_trie"
+name = "min_cost_b_flow"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 

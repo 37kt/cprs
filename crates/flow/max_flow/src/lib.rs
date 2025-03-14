@@ -53,7 +53,6 @@ impl MaxFlow {
     }
 
     pub fn add_edge(&mut self, src: usize, dst: usize, cap: i64) -> usize {
-        assert!(src != dst);
         assert!(src < self.count_vertices());
         assert!(dst < self.count_vertices());
         assert!(cap >= 0);
