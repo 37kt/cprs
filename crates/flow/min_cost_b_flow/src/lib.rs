@@ -7,17 +7,17 @@ use std::{cmp::Reverse, collections::BinaryHeap, iter::FusedIterator};
 #[derive(Clone)]
 pub struct MinCostBFlow {
     n: usize,
+    m: usize,
 
-    edges: Vec<internal::Edge>,
-    head: Vec<usize>,
-    next: Vec<usize>,
+    graph: Vec<Vec<internal::Edge>>,
+    pos: Vec<(usize, usize)>,
 
     b: Vec<i64>,
     potential: Vec<i64>,
 
     farthest: i64,
     dist: Vec<i64>,
-    parent: Vec<usize>,
+    parent: Vec<(usize, usize)>,
     pq: BinaryHeap<Reverse<(i64, usize)>>,
 
     excess_vs: Vec<usize>,
@@ -38,15 +38,19 @@ impl MinCostBFlow {
     pub fn new() -> Self {
         Self {
             n: 0,
-            edges: vec![],
-            head: vec![],
-            next: vec![],
+            m: 0,
+
+            graph: vec![],
+            pos: vec![],
+
             b: vec![],
             potential: vec![],
+
             farthest: 0,
             dist: vec![],
             parent: vec![],
             pq: BinaryHeap::new(),
+
             excess_vs: vec![],
             deficit_vs: vec![],
         }
@@ -55,7 +59,7 @@ impl MinCostBFlow {
     /// 頂点を追加してその id を返す
     pub fn add_vertex(&mut self) -> usize {
         self.n += 1;
-        self.head.push(!0);
+        self.graph.push(vec![]);
         self.b.push(0);
         self.n - 1
     }
@@ -65,7 +69,7 @@ impl MinCostBFlow {
         &mut self,
         n: usize,
     ) -> impl Iterator<Item = usize> + DoubleEndedIterator + ExactSizeIterator + FusedIterator {
-        self.head.resize(self.n + n, !0);
+        self.graph.resize(self.n + n, vec![]);
         self.b.resize(self.n + n, 0);
         self.n += n;
         self.n - n..self.n
@@ -76,24 +80,25 @@ impl MinCostBFlow {
         assert!(src < self.n);
         assert!(dst < self.n);
         assert!(lower <= upper);
-        let m = self.edges.len();
-        self.next.push(self.head[src]);
-        self.head[src] = m;
-        self.next.push(self.head[dst]);
-        self.head[dst] = m + 1;
-        self.edges.push(internal::Edge {
+        let i = self.graph[src].len();
+        let j = self.graph[dst].len() + if src == dst { 1 } else { 0 };
+        self.graph[src].push(internal::Edge {
             dst,
             cap: upper,
             cost,
             flow: 0,
+            rev: j,
         });
-        self.edges.push(internal::Edge {
+        self.graph[dst].push(internal::Edge {
             dst: src,
             cap: -lower,
             cost: -cost,
             flow: 0,
+            rev: i,
         });
-        m / 2
+        self.pos.push((src, i));
+        self.m += 1;
+        self.m - 1
     }
 
     /// 頂点 v に湧き出しを追加する
@@ -107,8 +112,8 @@ impl MinCostBFlow {
     }
 
     pub fn edge(&self, e: usize) -> Edge {
-        assert!(e <= self.edges.len() / 2);
-        let e = e * 2;
+        let (src, i) = self.pos[e];
+        let e = &self.graph[src][i];
         Edge {
             src: self.src(e),
             dst: self.dst(e),
@@ -123,7 +128,7 @@ impl MinCostBFlow {
         &self,
     ) -> impl Iterator<Item = Edge> + DoubleEndedIterator + ExactSizeIterator + FusedIterator + '_
     {
-        (0..self.edges.len() / 2).map(|e| self.edge(e))
+        (0..self.m).map(|e| self.edge(e))
     }
 
     /// min cost b-flow を求める  
@@ -134,24 +139,25 @@ impl MinCostBFlow {
         self.potential.fill(0);
 
         for v in 0..self.n {
-            let mut e = self.head[v];
-            while e != !0 {
-                let rcap = self.residual_cap(e);
+            for i in 0..self.graph[v].len() {
+                let e = self.graph[v][i];
+                let rcap = self.residual_cap(&e);
                 if rcap < 0 {
-                    self.push(e, rcap);
+                    self.push(v, i, rcap);
                     self.b[v] -= rcap;
-                    let u = self.dst(e);
+                    let u = self.dst(&e);
                     self.b[u] += rcap;
                 }
-                e = self.next[e];
             }
         }
 
-        let inf_flow = (0..self.edges.len())
-            .map(|e| self.residual_cap(e))
+        let inf_flow = self
+            .graph
+            .iter()
+            .map(|v| v.iter().map(|e| self.residual_cap(e)).max())
+            .flatten()
             .max()
-            .unwrap_or_default()
-            .max(1);
+            .unwrap_or(1);
         let mut delta = 1;
         while delta * 2 <= inf_flow {
             delta *= 2;
@@ -165,11 +171,13 @@ impl MinCostBFlow {
             delta /= 2;
         }
 
-        let mut cost = 0;
-        for &e in &self.edges {
-            cost += e.flow as i128 * e.cost as i128;
-        }
-        cost /= 2;
+        let cost = self
+            .graph
+            .iter()
+            .flatten()
+            .map(|e| e.flow as i128 * e.cost as i128)
+            .sum::<i128>()
+            / 2;
 
         if self.excess_vs.is_empty() && self.deficit_vs.is_empty() {
             Ok(cost)
@@ -185,26 +193,22 @@ impl MinCostBFlow {
         assert!(src != dst);
 
         let mut inf_flow = self.b[src].abs();
-        let mut e = self.head[src];
-        while e != !0 {
-            inf_flow += 0.max(self.edges[e].cap);
-            e = self.next[e];
+        for e in &self.graph[src] {
+            inf_flow += 0.max(self.residual_cap(e));
         }
 
         self.add_edge(dst, src, 0, inf_flow, 0);
         if let Err(circulation_cost) = self.min_cost_b_flow() {
-            self.head[src] = self.next[src];
-            self.head[dst] = self.next[dst];
-            self.edges.pop();
-            self.edges.pop();
+            self.graph[src].pop();
+            self.graph[dst].pop();
+            self.pos.pop();
+            self.m -= 1;
             return Err(circulation_cost);
         }
 
         let mut inf_flow = self.b[src].abs();
-        let mut e = self.head[src];
-        while e != !0 {
+        for e in &self.graph[src] {
             inf_flow += self.residual_cap(e);
-            e = self.next[e];
         }
 
         self.b[src] += inf_flow;
@@ -216,10 +220,10 @@ impl MinCostBFlow {
         self.b[src] -= inf_flow;
         self.b[dst] += inf_flow;
 
-        self.head[src] = self.next[src];
-        self.head[dst] = self.next[dst];
-        self.edges.pop();
-        self.edges.pop();
+        self.graph[src].pop();
+        self.graph[dst].pop();
+        self.pos.pop();
+        self.m -= 1;
 
         Ok((self.b[dst], cost))
     }
@@ -229,11 +233,13 @@ impl MinCostBFlow {
         self.potential.fill(0);
 
         for _ in 0..self.n {
-            for e in 0..self.edges.len() {
-                if self.residual_cap(e) > 0 {
-                    let u = self.dst(e);
-                    self.potential[u] =
-                        self.potential[u].min(self.potential[self.src(e)] + self.cost(e))
+            for v in 0..self.n {
+                for e in &self.graph[v] {
+                    if self.residual_cap(e) > 0 {
+                        let u = self.dst(e);
+                        self.potential[u] =
+                            self.potential[u].min(self.potential[self.src(e)] + self.cost(e))
+                    }
                 }
             }
         }
@@ -241,41 +247,42 @@ impl MinCostBFlow {
         self.potential.clone()
     }
 
-    fn src(&self, e: usize) -> usize {
-        self.edges[e ^ 1].dst
+    fn src(&self, e: &internal::Edge) -> usize {
+        self.graph[e.dst][e.rev].dst
     }
 
-    fn dst(&self, e: usize) -> usize {
-        self.edges[e].dst
+    fn dst(&self, e: &internal::Edge) -> usize {
+        e.dst
     }
 
-    fn flow(&self, e: usize) -> i64 {
-        self.edges[e].flow
+    fn flow(&self, e: &internal::Edge) -> i64 {
+        e.flow
     }
 
-    fn lower(&self, e: usize) -> i64 {
-        -self.edges[e ^ 1].cap
+    fn lower(&self, e: &internal::Edge) -> i64 {
+        -self.graph[e.dst][e.rev].cap
     }
 
-    fn upper(&self, e: usize) -> i64 {
-        self.edges[e].cap
+    fn upper(&self, e: &internal::Edge) -> i64 {
+        e.cap
     }
 
-    fn cost(&self, e: usize) -> i64 {
-        self.edges[e].cost
+    fn cost(&self, e: &internal::Edge) -> i64 {
+        e.cost
     }
 
-    fn residual_cost(&self, e: usize) -> i64 {
+    fn residual_cost(&self, e: &internal::Edge) -> i64 {
         self.cost(e) + self.potential[self.src(e)] - self.potential[self.dst(e)]
     }
 
-    fn residual_cap(&self, e: usize) -> i64 {
-        self.edges[e].cap - self.edges[e].flow
+    fn residual_cap(&self, e: &internal::Edge) -> i64 {
+        e.cap - e.flow
     }
 
-    fn push(&mut self, e: usize, amount: i64) {
-        self.edges[e].flow += amount;
-        self.edges[e ^ 1].flow -= amount;
+    fn push(&mut self, src: usize, i: usize, amount: i64) {
+        let internal::Edge { dst, rev, .. } = self.graph[src][i];
+        self.graph[src][i].flow += amount;
+        self.graph[dst][rev].flow -= amount;
     }
 
     fn primal(&mut self, delta: i64) {
@@ -286,19 +293,21 @@ impl MinCostBFlow {
             }
             let mut f = -self.b[t];
             let mut v = t;
-            while self.parent[v] != !0 && f >= delta {
-                f = f.min(self.residual_cap(self.parent[v]));
-                v = self.src(self.parent[v]);
+            while self.parent[v].0 != !0 && f >= delta {
+                let (src, i) = self.parent[v];
+                f = f.min(self.residual_cap(&self.graph[src][i]));
+                v = src;
             }
             f = f.min(self.b[v]);
             if f < delta {
                 continue;
             }
             v = t;
-            while self.parent[v] != !0 {
-                self.push(self.parent[v], f);
-                let u = self.src(self.parent[v]);
-                self.parent[v] = !0;
+            while self.parent[v].0 != !0 {
+                let (src, i) = self.parent[v];
+                self.push(src, i, f);
+                let u = src;
+                self.parent[v] = (!0, !0);
                 v = u;
             }
             self.b[v] -= f;
@@ -309,8 +318,8 @@ impl MinCostBFlow {
     fn dual(&mut self, delta: i64) -> bool {
         self.dist.resize(self.n, i64::MAX);
         self.dist.fill(i64::MAX);
-        self.parent.resize(self.n, !0);
-        self.parent.fill(!0);
+        self.parent.resize(self.n, (!0, !0));
+        self.parent.fill((!0, !0));
         self.excess_vs.retain(|&v| self.b[v] >= delta);
         self.deficit_vs.retain(|&v| self.b[v] <= -delta);
 
@@ -332,18 +341,16 @@ impl MinCostBFlow {
             if deficit_cnt >= self.deficit_vs.len() {
                 break;
             }
-            let mut e = self.head[v];
-            while e != !0 {
+            for (i, e) in self.graph[v].iter().enumerate() {
                 if self.residual_cap(e) >= delta {
                     let u = self.dst(e);
                     let new_d = d + self.residual_cost(e);
                     if self.dist[u] > new_d {
                         self.dist[u] = new_d;
                         self.pq.push(Reverse((new_d, u)));
-                        self.parent[u] = e;
+                        self.parent[u] = (v, i);
                     }
                 }
-                e = self.next[e];
             }
         }
 
@@ -358,17 +365,16 @@ impl MinCostBFlow {
         self.excess_vs.clear();
         self.deficit_vs.clear();
         for v in 0..self.n {
-            let mut e = self.head[v];
-            while e != !0 {
-                let rcap = self.residual_cap(e);
-                let rcost = self.residual_cost(e);
+            for i in 0..self.graph[v].len() {
+                let e = self.graph[v][i];
+                let rcap = self.residual_cap(&e);
+                let rcost = self.residual_cost(&e);
                 if rcost < 0 && rcap >= delta {
-                    self.push(e, rcap);
+                    self.push(v, i, rcap);
                     self.b[v] -= rcap;
-                    let u = self.dst(e);
+                    let u = self.dst(&e);
                     self.b[u] += rcap;
                 }
-                e = self.next[e];
             }
         }
         for v in 0..self.n {
@@ -388,5 +394,6 @@ mod internal {
         pub(crate) cap: i64,
         pub(crate) cost: i64,
         pub(crate) flow: i64,
+        pub(crate) rev: usize,
     }
 }
