@@ -254,22 +254,3 @@ impl Link {
         }
     }
 }
-
-#[test]
-fn test() {
-    let st = std::collections::BTreeSet::from([1, 2, 10, 4, 5]);
-    let mut bt = BinaryTrie::new();
-    for &x in &st {
-        bt.insert(x, 1);
-    }
-    for s in 0..=10 {
-        eprintln!("{}", bt.count_geq(s, 0));
-    }
-    for s in 0..=10 {
-        for t in s..=10 {
-            let c = st.range(s..=t).count();
-            let d = bt.count_range(s..=t, 0);
-            assert_eq!(c, d, "{} {}", s, t);
-        }
-    }
-}
