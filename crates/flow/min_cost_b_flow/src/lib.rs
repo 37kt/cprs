@@ -2,7 +2,9 @@
 // TODO: dual がめちゃくちゃ遅い
 // TODO: 流量制限, slope
 
-use std::{cmp::Reverse, collections::BinaryHeap, iter::FusedIterator};
+use std::iter::FusedIterator;
+
+use radix_heap::RadixHeap;
 
 #[derive(Clone)]
 pub struct MinCostBFlow {
@@ -15,10 +17,10 @@ pub struct MinCostBFlow {
     b: Vec<i64>,
     potential: Vec<i64>,
 
-    farthest: i64,
-    dist: Vec<i64>,
+    farthest: u64,
+    dist: Vec<u64>,
     parent: Vec<(usize, usize)>,
-    pq: BinaryHeap<Reverse<(i64, usize)>>,
+    pq: RadixHeap,
 
     excess_vs: Vec<usize>,
     deficit_vs: Vec<usize>,
@@ -49,7 +51,7 @@ impl MinCostBFlow {
             farthest: 0,
             dist: vec![],
             parent: vec![],
-            pq: BinaryHeap::new(),
+            pq: RadixHeap::new(0),
 
             excess_vs: vec![],
             deficit_vs: vec![],
@@ -316,21 +318,21 @@ impl MinCostBFlow {
     }
 
     fn dual(&mut self, delta: i64) -> bool {
-        self.dist.resize(self.n, i64::MAX);
-        self.dist.fill(i64::MAX);
+        self.dist.resize(self.n, u64::MAX);
+        self.dist.fill(u64::MAX);
         self.parent.resize(self.n, (!0, !0));
         self.parent.fill((!0, !0));
         self.excess_vs.retain(|&v| self.b[v] >= delta);
         self.deficit_vs.retain(|&v| self.b[v] <= -delta);
 
-        self.pq.clear();
+        self.pq.clear(self.n);
         for &v in &self.excess_vs {
             self.dist[v] = 0;
-            self.pq.push(Reverse((0, v)));
+            self.pq.push(0, v);
         }
         self.farthest = 0;
         let mut deficit_cnt = 0;
-        while let Some(Reverse((d, v))) = self.pq.pop() {
+        while let Some((d, v)) = self.pq.pop() {
             if self.dist[v] < d {
                 continue;
             }
@@ -344,10 +346,10 @@ impl MinCostBFlow {
             for (i, e) in self.graph[v].iter().enumerate() {
                 if self.residual_cap(e) >= delta {
                     let u = self.dst(e);
-                    let new_d = d + self.residual_cost(e);
+                    let new_d = d + self.residual_cost(e) as u64;
                     if self.dist[u] > new_d {
                         self.dist[u] = new_d;
-                        self.pq.push(Reverse((new_d, u)));
+                        self.pq.push(new_d, u);
                         self.parent[u] = (v, i);
                     }
                 }
@@ -355,7 +357,7 @@ impl MinCostBFlow {
         }
 
         for v in 0..self.n {
-            self.potential[v] += self.dist[v].min(self.farthest);
+            self.potential[v] += self.dist[v].min(self.farthest) as i64;
         }
 
         deficit_cnt > 0
