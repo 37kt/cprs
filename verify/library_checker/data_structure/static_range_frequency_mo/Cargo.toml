@@ -8,3 +8,4 @@ edition = "2021"
 [dependencies]
 proconio = { version = "=0.5.0", features = ["derive"] }
 mo = { path = "../../../../crates/algorithm/mo/" }
+coordinate_compression = { path = "../../../../crates/misc/coordinate_compression/" }

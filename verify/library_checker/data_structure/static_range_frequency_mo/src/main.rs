@@ -1,15 +1,16 @@
 // verification-helper: PROBLEM https://judge.yosupo.jp/problem/static_range_frequency
 
+use coordinate_compression::CoordinateCompression;
 use mo::Mo;
 use proconio::fastout;
 use proconio::input;
 
-struct Solver {
-    a: Vec<usize>,
+struct Solver<'a> {
+    a: &'a [usize],
     cnt: Vec<usize>,
 }
 
-impl Mo for Solver {
+impl<'a> Mo for Solver<'a> {
     type Arg = usize;
     type Output = usize;
 
@@ -35,18 +36,23 @@ fn main() {
         mut lrx: [(usize, usize, usize); q],
     }
 
-    let mut xs = lrx.iter().map(|&(_, _, x)| x).collect::<Vec<_>>();
-    xs.sort_unstable();
-    xs.dedup();
-    let m = xs.len() + 1;
-    for x in &mut a {
-        *x = xs.binary_search(x).unwrap_or(m - 1);
-    }
-    for (_, _, x) in &mut lrx {
-        *x = xs.binary_search(x).unwrap();
+    let xs = a
+        .iter()
+        .copied()
+        .chain(lrx.iter().map(|&(_, _, x)| x))
+        .collect::<Vec<_>>();
+    let (cc, xs) = CoordinateCompression::<_>::new(xs);
+    let (a, x) = xs.split_at(n);
+    for i in 0..q {
+        lrx[i].2 = x[i];
     }
 
-    let mut solver = Solver { a, cnt: vec![0; m] };
+    let m = cc.len();
+
+    let mut solver = Solver {
+        a: &a,
+        cnt: vec![0; m],
+    };
     let res = solver.solve(&lrx);
     for x in res {
         println!("{}", x);
