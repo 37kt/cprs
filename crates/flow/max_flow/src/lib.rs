@@ -1,3 +1,7 @@
+// TODO: csr 形式にする
+// TODO: mincut は max_flow と一緒に返す？
+// TODO: s-t のどっちを 0,1 にする？
+
 use std::iter::FusedIterator;
 
 use numeric_traits::{Inf, Integer};
