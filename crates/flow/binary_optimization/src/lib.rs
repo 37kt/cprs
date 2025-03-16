@@ -67,32 +67,46 @@ impl BinaryOptimization {
     ) {
         assert!(i != j && j != k && k != i);
 
-        let a = cost(0, 0, 0);
-        let b = cost(0, 0, 1);
-        let c = cost(0, 1, 0);
-        let d = cost(0, 1, 1);
-        let e = cost(1, 0, 0);
-        let f = cost(1, 0, 1);
-        let g = cost(1, 1, 0);
-        let h = cost(1, 1, 1);
-        let p = (a + d + f + g) - (b + c + e + h);
+        let x000 = cost(0, 0, 0);
+        let x001 = cost(0, 0, 1);
+        let x010 = cost(0, 1, 0);
+        let x011 = cost(0, 1, 1);
+        let x100 = cost(1, 0, 0);
+        let x101 = cost(1, 0, 1);
+        let x110 = cost(1, 1, 0);
+        let x111 = cost(1, 1, 1);
+        let p = x000 - x100 - x010 - x001 + x110 + x101 + x011 - x111;
 
         if p >= 0 {
-            let p1 = f - b;
-            let p2 = g - e;
-            let p3 = d - c;
-            let p12 = (c + e) - (a + g);
-            let p23 = (b + c) - (a + d);
-            let p31 = (b + e) - (a + f);
-            self.add(a);
-            self.add_1(i, |bi| [0, p1][bi]);
-            self.add_1(j, |bj| [0, p2][bj]);
-            self.add_1(k, |bk| [0, p3][bk]);
-            self.add_2(i, j, |bi, bj| [[0, p12], [0, 0]][bi][bj]);
-            self.add_2(j, k, |bj, bk| [[0, p23], [0, 0]][bj][bk]);
-            self.add_2(k, i, |bk, bi| [[0, p31], [0, 0]][bk][bi]);
-            self.add_all1([i, j, k], p);
+            self.add(x000);
+            self.add_1(i, |bi| [x100 - x000, 0][bi]);
+            self.add_1(j, |bj| [x010 - x000, 0][bj]);
+            self.add_1(k, |bk| [x001 - x000, 0][bk]);
+            self.add_2(i, j, |bi, bj| {
+                [[x000 + x110 - x100 - x010, 0], [0, 0]][bi][bj]
+            });
+            self.add_2(j, k, |bj, bk| {
+                [[x000 + x011 - x010 - x001, 0], [0, 0]][bj][bk]
+            });
+            self.add_2(k, i, |bk, bi| {
+                [[x000 + x101 - x001 - x100, 0], [0, 0]][bk][bi]
+            });
+            self.add_all1([i, j, k], -p);
         } else {
+            self.add(x111);
+            self.add_1(i, |bi| [x011 - x111, 0][bi]);
+            self.add_1(j, |bj| [x101 - x111, 0][bj]);
+            self.add_1(k, |bk| [x110 - x111, 0][bk]);
+            self.add_2(i, j, |bi, bj| {
+                [[x111 + x001 - x011 - x101, 0], [0, 0]][bi][bj]
+            });
+            self.add_2(j, k, |bj, bk| {
+                [[x111 + x100 - x101 - x110, 0], [0, 0]][bj][bk]
+            });
+            self.add_2(k, i, |bk, bi| {
+                [[x111 + x010 - x110 - x011, 0], [0, 0]][bk][bi]
+            });
+            self.add_all0([i, j, k], p);
         }
     }
 
