@@ -34,8 +34,8 @@ fn main() {
             continue;
         }
         let mut g = MaxFlow::new();
-        let ls = g.add_vertices(zh[x].len()).collect::<Vec<_>>();
-        let rs = g.add_vertices(zw[x].len()).collect::<Vec<_>>();
+        let ls = g.add_vertices(zh[x].len());
+        let rs = g.add_vertices(zw[x].len());
         let src = g.add_vertex();
         let dst = g.add_vertex();
         for &v in &ls {

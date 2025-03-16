@@ -44,12 +44,9 @@ impl MaxFlow {
         self.head.len() - 1
     }
 
-    pub fn add_vertices(
-        &mut self,
-        n: usize,
-    ) -> impl Iterator<Item = usize> + DoubleEndedIterator + ExactSizeIterator + FusedIterator {
+    pub fn add_vertices(&mut self, n: usize) -> Vec<usize> {
         self.head.resize(self.head.len() + n, !0);
-        self.head.len() - n..self.head.len()
+        (self.head.len() - n..self.head.len()).collect()
     }
 
     pub fn add_edge(&mut self, src: usize, dst: usize, cap: i64) -> usize {
@@ -107,6 +104,7 @@ impl MaxFlow {
         let mut vis = vec![false; self.count_vertices()];
         self.queue.clear();
         self.queue.set_capacity(self.count_vertices());
+        vis[src] = true;
         self.queue.push(src);
         while let Some(v) = self.queue.pop() {
             let mut ei = self.head[v];
