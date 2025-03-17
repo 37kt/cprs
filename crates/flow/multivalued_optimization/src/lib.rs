@@ -130,12 +130,12 @@ impl MultivaluedOptimization {
         }
 
         let cost = self.cost_0 + flow.max_flow(self.src, self.dst);
-        let cut = flow.min_cut(self.src);
+        let cut = flow.min_cut();
 
         let mut choice = vec![0; self.n_options.len()];
         for i in 0..self.n_options.len() {
             for j in 1..self.n_options[i] {
-                if cut[self.id[i][j]] {
+                if cut[self.id[i][j]] == 0 {
                     choice[i] += 1;
                 }
             }

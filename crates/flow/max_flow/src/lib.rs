@@ -1,22 +1,24 @@
-// TODO: csr 形式にする
-// TODO: mincut は max_flow と一緒に返す？
-// TODO: s-t のどっちを 0,1 にする？
-
+/// TODO: 辺の変更
 use std::iter::FusedIterator;
 
-use numeric_traits::{Inf, Integer};
+use numeric_traits::Integer;
 
-mod internal;
+mod graph;
+mod queue;
 
-/// dinic + scaling
+/// dinic + scaling  
 #[derive(Clone)]
 pub struct MaxFlow {
-    edges: Vec<internal::Edge>,
-    head: Vec<usize>,
-    next: Vec<usize>,
-    dist: Vec<i32>,
+    edges: Vec<Vec<graph::Edge>>,
+    pos: Vec<(usize, usize)>,
+
     iter: Vec<usize>,
-    queue: internal::Queue,
+    dist: Vec<u64>,
+    queue: queue::Queue,
+
+    zero: u64,
+
+    cache: Option<(usize, usize, i64)>,
 }
 
 #[derive(Debug, Clone, Copy)]
@@ -31,117 +33,162 @@ impl MaxFlow {
     pub fn new() -> Self {
         Self {
             edges: vec![],
-            head: vec![],
-            next: vec![],
-            dist: vec![],
+            pos: vec![],
+
             iter: vec![],
-            queue: internal::Queue::new(),
+            dist: vec![],
+            queue: queue::Queue::new(),
+
+            zero: 1 << 60,
+
+            cache: None,
         }
     }
 
-    pub fn count_vertices(&self) -> usize {
-        self.head.len()
+    pub fn num_vertices(&self) -> usize {
+        self.edges.len()
+    }
+
+    pub fn num_edges(&self) -> usize {
+        self.pos.len()
     }
 
     pub fn add_vertex(&mut self) -> usize {
-        self.head.push(!0);
-        self.head.len() - 1
+        self.cache = None;
+
+        let v = self.edges.len();
+        self.edges.push(vec![]);
+        self.iter.push(0);
+        self.dist.push(self.zero);
+        v
     }
 
     pub fn add_vertices(&mut self, n: usize) -> Vec<usize> {
-        self.head.resize(self.head.len() + n, !0);
-        (self.head.len() - n..self.head.len()).collect()
+        self.cache = None;
+
+        let v = self.edges.len();
+        self.edges.resize(v + n, vec![]);
+        self.iter.resize(v + n, 0);
+        self.dist.resize(v + n, self.zero);
+        (v..v + n).collect()
     }
 
     pub fn add_edge(&mut self, src: usize, dst: usize, cap: i64) -> usize {
-        assert!(src < self.count_vertices());
-        assert!(dst < self.count_vertices());
+        assert!(src < self.num_vertices());
+        assert!(dst < self.num_vertices());
         assert!(cap >= 0);
-        let m = self.edges.len();
-        self.next.push(self.head[src]);
-        self.head[src] = m;
-        self.next.push(self.head[dst]);
-        self.head[dst] = m + 1;
-        self.edges.push(internal::Edge { dst, cap });
-        self.edges.push(internal::Edge { dst: src, cap: 0 });
-        m / 2
+
+        self.cache = None;
+
+        let e = self.pos.len();
+        let i = self.edges[src].len();
+        let j = self.edges[dst].len() + if src == dst { 1 } else { 0 };
+        self.edges[src].push(graph::Edge { dst, cap, rev: j });
+        self.edges[dst].push(graph::Edge {
+            dst: src,
+            cap: 0,
+            rev: i,
+        });
+        self.pos.push((src, i));
+        e
+    }
+
+    pub fn edge(&self, e: usize) -> Edge {
+        let (src, i) = self.pos[e];
+        let e1 = self.edges[src][i];
+        let e2 = self.edges[e1.dst][e1.rev];
+        Edge {
+            src,
+            dst: e1.dst,
+            cap: e1.cap + e2.cap,
+            flow: e2.cap,
+        }
     }
 
     pub fn edges(
         &self,
     ) -> impl Iterator<Item = Edge> + DoubleEndedIterator + ExactSizeIterator + FusedIterator + '_
     {
-        self.edges.windows(2).map(|e| Edge {
-            src: e[1].dst,
-            dst: e[0].dst,
-            cap: e[0].cap + e[1].cap,
-            flow: e[1].cap,
-        })
+        (0..self.num_edges()).map(|e| self.edge(e))
     }
 
     pub fn max_flow(&mut self, src: usize, dst: usize) -> i64 {
         assert!(src != dst);
-        assert!(src < self.count_vertices());
-        assert!(dst < self.count_vertices());
+        assert!(src < self.num_vertices());
+        assert!(dst < self.num_vertices());
 
-        let max_cap = self.edges.iter().map(|e| e.cap).max().unwrap_or(0);
-        if max_cap == 0 {
-            return 0;
+        if let Some((s, t, f)) = self.cache {
+            if (s, t) == (src, dst) {
+                return f;
+            }
         }
 
-        self.iter.resize(self.count_vertices(), 0);
-        self.dist.resize(self.count_vertices(), 0);
+        let max_cap = self
+            .edges
+            .iter()
+            .flatten()
+            .map(|e| e.cap)
+            .max()
+            .unwrap_or(0);
+        if max_cap == 0 {
+            self.cache = Some((src, dst, 0));
+            return 0;
+        }
 
         let mut flow = 0;
         for f in (0..=max_cap.floor_log2()).map(|i| 1 << i).rev() {
             while self.build_augmenting_path(src, dst, f) {
-                self.iter.copy_from_slice(&self.head);
-                flow += self.find_augmenting_path(src, dst, f, i64::inf());
+                self.iter.fill(0);
+                flow += self.find_augmenting_path(src, dst, f, i64::MAX);
             }
         }
+
+        self.cache = Some((src, dst, flow));
         flow
     }
 
-    /// 頂点 src から到達可能かを返す  
+    /// src 側が 0, dst 側が 1  
     /// max_flow の後に呼び出す
-    pub fn min_cut(&mut self, src: usize) -> Vec<bool> {
-        let mut vis = vec![false; self.count_vertices()];
+    pub fn min_cut(&mut self) -> Vec<usize> {
+        let Some((src, _, _)) = self.cache else {
+            panic!("max_flow が呼ばれていません");
+        };
+
+        let mut res = vec![1; self.num_vertices()];
+
         self.queue.clear();
-        self.queue.set_capacity(self.count_vertices());
-        vis[src] = true;
+        self.queue.set_capacity(self.num_vertices());
+        res[src] = 0;
         self.queue.push(src);
+
         while let Some(v) = self.queue.pop() {
-            let mut ei = self.head[v];
-            while ei != !0 {
-                let e = self.edges[ei];
-                if e.cap > 0 && !vis[e.dst] {
-                    vis[e.dst] = true;
+            for e in &self.edges[v] {
+                if e.cap > 0 && res[e.dst] == 1 {
+                    res[e.dst] = 0;
                     self.queue.push(e.dst);
                 }
-                ei = self.next[ei];
             }
         }
-        vis
+        res
     }
 
     fn build_augmenting_path(&mut self, src: usize, dst: usize, base: i64) -> bool {
-        self.dist.fill(i32::inf());
+        self.zero -= 1 << 30;
+
         self.queue.clear();
-        self.queue.set_capacity(self.count_vertices());
-        self.dist[src] = 0;
+        self.queue.set_capacity(self.num_vertices());
+
+        self.dist[src] = self.zero;
         self.queue.push(src);
         while let Some(v) = self.queue.pop() {
-            let mut ei = self.head[v];
-            while ei != !0 {
-                let e = self.edges[ei];
-                if e.cap >= base && self.dist[e.dst] == i32::inf() {
+            for e in &self.edges[v] {
+                if e.cap >= base && self.dist[e.dst] > self.dist[v] + 1 {
                     self.dist[e.dst] = self.dist[v] + 1;
                     self.queue.push(e.dst);
                     if e.dst == dst {
                         return true;
                     }
                 }
-                ei = self.next[ei];
             }
         }
         false
@@ -151,21 +198,22 @@ impl MaxFlow {
         if v == dst {
             return flow;
         }
+
         let mut sum = 0;
-        while self.iter[v] != !0 {
-            let e = self.edges[self.iter[v]];
+        while self.iter[v] < self.edges[v].len() {
+            let e = self.edges[v][self.iter[v]];
             if e.cap >= base && self.dist[v] < self.dist[e.dst] {
                 let diff = self.find_augmenting_path(e.dst, dst, base, e.cap.min(flow - sum));
                 if diff > 0 {
-                    self.edges[self.iter[v]].cap -= diff;
-                    self.edges[self.iter[v] ^ 1].cap += diff;
+                    self.edges[v][self.iter[v]].cap -= diff;
+                    self.edges[e.dst][e.rev].cap += diff;
                     sum += diff;
                     if flow - sum < base {
                         break;
                     }
                 }
             }
-            self.iter[v] = self.next[self.iter[v]];
+            self.iter[v] += 1;
         }
         sum
     }

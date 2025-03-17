@@ -199,11 +199,10 @@ impl BinaryOptimization {
         }
 
         let cost = self.cost_0 + flow.max_flow(self.src, self.dst);
-        let mut cut = flow.min_cut(self.src);
+        let mut cut = flow.min_cut();
         cut.truncate(self.n_item);
 
-        let choice = cut.into_iter().map(|i| !i as usize).collect();
-        (cost, choice)
+        (cost, cut)
     }
 
     fn add_edge(&mut self, i: usize, j: usize, cost: i64) {
