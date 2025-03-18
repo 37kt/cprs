@@ -58,6 +58,7 @@ impl BinaryOptimization {
         self.add_edge(i, j, (x[0][1] + x[1][0]) - (x[0][0] + x[1][1]));
     }
 
+    #[allow(unused)]
     pub fn add_3(
         &mut self,
         i: usize,
@@ -65,49 +66,51 @@ impl BinaryOptimization {
         k: usize,
         mut cost: impl FnMut(usize, usize, usize) -> i64,
     ) {
-        assert!(i != j && j != k && k != i);
+        todo!("壊れています");
 
-        let x000 = cost(0, 0, 0);
-        let x001 = cost(0, 0, 1);
-        let x010 = cost(0, 1, 0);
-        let x011 = cost(0, 1, 1);
-        let x100 = cost(1, 0, 0);
-        let x101 = cost(1, 0, 1);
-        let x110 = cost(1, 1, 0);
-        let x111 = cost(1, 1, 1);
-        let p = x000 - x100 - x010 - x001 + x110 + x101 + x011 - x111;
+        // assert!(i != j && j != k && k != i);
 
-        if p >= 0 {
-            self.add(x000);
-            self.add_1(i, |bi| [x100 - x000, 0][bi]);
-            self.add_1(j, |bj| [x010 - x000, 0][bj]);
-            self.add_1(k, |bk| [x001 - x000, 0][bk]);
-            self.add_2(i, j, |bi, bj| {
-                [[x000 + x110 - x100 - x010, 0], [0, 0]][bi][bj]
-            });
-            self.add_2(j, k, |bj, bk| {
-                [[x000 + x011 - x010 - x001, 0], [0, 0]][bj][bk]
-            });
-            self.add_2(k, i, |bk, bi| {
-                [[x000 + x101 - x001 - x100, 0], [0, 0]][bk][bi]
-            });
-            self.add_all1([i, j, k], -p);
-        } else {
-            self.add(x111);
-            self.add_1(i, |bi| [x011 - x111, 0][bi]);
-            self.add_1(j, |bj| [x101 - x111, 0][bj]);
-            self.add_1(k, |bk| [x110 - x111, 0][bk]);
-            self.add_2(i, j, |bi, bj| {
-                [[x111 + x001 - x011 - x101, 0], [0, 0]][bi][bj]
-            });
-            self.add_2(j, k, |bj, bk| {
-                [[x111 + x100 - x101 - x110, 0], [0, 0]][bj][bk]
-            });
-            self.add_2(k, i, |bk, bi| {
-                [[x111 + x010 - x110 - x011, 0], [0, 0]][bk][bi]
-            });
-            self.add_all0([i, j, k], p);
-        }
+        // let x000 = cost(0, 0, 0);
+        // let x001 = cost(0, 0, 1);
+        // let x010 = cost(0, 1, 0);
+        // let x011 = cost(0, 1, 1);
+        // let x100 = cost(1, 0, 0);
+        // let x101 = cost(1, 0, 1);
+        // let x110 = cost(1, 1, 0);
+        // let x111 = cost(1, 1, 1);
+        // let p = x000 - x100 - x010 - x001 + x110 + x101 + x011 - x111;
+
+        // if p >= 0 {
+        //     self.add(x000);
+        //     self.add_1(i, |bi| [x100 - x000, 0][bi]);
+        //     self.add_1(j, |bj| [x010 - x000, 0][bj]);
+        //     self.add_1(k, |bk| [x001 - x000, 0][bk]);
+        //     self.add_2(i, j, |bi, bj| {
+        //         [[x000 + x110 - x100 - x010, 0], [0, 0]][bi][bj]
+        //     });
+        //     self.add_2(j, k, |bj, bk| {
+        //         [[x000 + x011 - x010 - x001, 0], [0, 0]][bj][bk]
+        //     });
+        //     self.add_2(k, i, |bk, bi| {
+        //         [[x000 + x101 - x001 - x100, 0], [0, 0]][bk][bi]
+        //     });
+        //     self.add_all1([i, j, k], -p);
+        // } else {
+        //     self.add(x111);
+        //     self.add_1(i, |bi| [x011 - x111, 0][bi]);
+        //     self.add_1(j, |bj| [x101 - x111, 0][bj]);
+        //     self.add_1(k, |bk| [x110 - x111, 0][bk]);
+        //     self.add_2(i, j, |bi, bj| {
+        //         [[x111 + x001 - x011 - x101, 0], [0, 0]][bi][bj]
+        //     });
+        //     self.add_2(j, k, |bj, bk| {
+        //         [[x111 + x100 - x101 - x110, 0], [0, 0]][bj][bk]
+        //     });
+        //     self.add_2(k, i, |bk, bi| {
+        //         [[x111 + x010 - x110 - x011, 0], [0, 0]][bk][bi]
+        //     });
+        //     self.add_all0([i, j, k], p);
+        // }
     }
 
     pub fn add_all0<I>(&mut self, items: I, cost: i64)
