@@ -49,7 +49,7 @@ fn main() {
             let q = zw[x].binary_search(&j).unwrap();
             g.add_edge(ls[p], rs[q], 1);
         }
-        res += g.max_flow(src, dst);
+        res += g.max_flow(src, dst, None);
     }
     println!("{}", res);
 }

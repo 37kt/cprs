@@ -129,7 +129,7 @@ impl MultivaluedOptimization {
             flow.add_edge(i, j, cost);
         }
 
-        let cost = self.cost_0 + flow.max_flow(self.src, self.dst);
+        let cost = self.cost_0 + flow.max_flow(self.src, self.dst, None);
         let cut = flow.min_cut();
 
         let mut choice = vec![0; self.n_options.len()];

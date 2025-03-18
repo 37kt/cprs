@@ -201,7 +201,7 @@ impl BinaryOptimization {
             flow.add_edge(i, j, cost);
         }
 
-        let cost = self.cost_0 + flow.max_flow(self.src, self.dst);
+        let cost = self.cost_0 + flow.max_flow(self.src, self.dst, None);
         let mut cut = flow.min_cut();
         cut.truncate(self.n_item);
 

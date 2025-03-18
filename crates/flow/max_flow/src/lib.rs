@@ -18,7 +18,7 @@ pub struct MaxFlow {
 
     zero: u64,
 
-    cache: Option<(usize, usize, i64)>,
+    src: Option<usize>,
 }
 
 #[derive(Debug, Clone, Copy)]
@@ -41,7 +41,7 @@ impl MaxFlow {
 
             zero: 1 << 60,
 
-            cache: None,
+            src: None,
         }
     }
 
@@ -54,7 +54,7 @@ impl MaxFlow {
     }
 
     pub fn add_vertex(&mut self) -> usize {
-        self.cache = None;
+        self.src = None;
 
         let v = self.edges.len();
         self.edges.push(vec![]);
@@ -64,7 +64,7 @@ impl MaxFlow {
     }
 
     pub fn add_vertices(&mut self, n: usize) -> Vec<usize> {
-        self.cache = None;
+        self.src = None;
 
         let v = self.edges.len();
         self.edges.resize(v + n, vec![]);
@@ -78,7 +78,7 @@ impl MaxFlow {
         assert!(dst < self.num_vertices());
         assert!(cap >= 0);
 
-        self.cache = None;
+        self.src = None;
 
         let e = self.pos.len();
         let i = self.edges[src].len();
@@ -112,16 +112,13 @@ impl MaxFlow {
         (0..self.num_edges()).map(|e| self.edge(e))
     }
 
-    pub fn max_flow(&mut self, src: usize, dst: usize) -> i64 {
+    pub fn max_flow(&mut self, src: usize, dst: usize, limit: Option<i64>) -> i64 {
         assert!(src != dst);
         assert!(src < self.num_vertices());
         assert!(dst < self.num_vertices());
 
-        if let Some((s, t, f)) = self.cache {
-            if (s, t) == (src, dst) {
-                return f;
-            }
-        }
+        self.src = Some(src);
+        let limit = limit.unwrap_or(i64::MAX);
 
         let max_cap = self
             .edges
@@ -131,28 +128,24 @@ impl MaxFlow {
             .max()
             .unwrap_or(0);
         if max_cap == 0 {
-            self.cache = Some((src, dst, 0));
             return 0;
         }
 
         let mut flow = 0;
-        for f in (0..=max_cap.floor_log2()).map(|i| 1 << i).rev() {
-            while self.build_augmenting_path(src, dst, f) {
+        for f in (0..=limit.min(max_cap).floor_log2()).map(|i| 1 << i).rev() {
+            while flow <= limit - f && self.build_augmenting_path(src, dst, f) {
                 self.iter.fill(0);
-                flow += self.find_augmenting_path(src, dst, f, i64::MAX);
+                flow += self.find_augmenting_path(src, dst, f, limit - flow);
             }
         }
 
-        self.cache = Some((src, dst, flow));
         flow
     }
 
     /// src 側が 0, dst 側が 1  
     /// max_flow の後に呼び出す
     pub fn min_cut(&mut self) -> Vec<usize> {
-        let Some((src, _, _)) = self.cache else {
-            panic!("max_flow が呼ばれていません");
-        };
+        let src = self.src.expect("max_flow is not called");
 
         let mut res = vec![1; self.num_vertices()];
 
