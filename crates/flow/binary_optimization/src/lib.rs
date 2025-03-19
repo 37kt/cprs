@@ -33,101 +33,102 @@ impl BinaryOptimization {
         }
     }
 
-    pub fn add(&mut self, cost: i64) {
-        self.cost_0 += cost;
+    /// 定数を加算する  
+    ///
+    /// # 引数
+    /// - `cost`: 加算する定数項のコスト。
+    pub fn add_nullary(&mut self, cost: i64) {
+        self.cost_0 = self.cost_0.saturating_add(cost);
     }
 
-    pub fn add_1(&mut self, i: usize, mut cost: impl FnMut(usize) -> i64) {
-        self.cost_1[i][0] += cost(0);
-        self.cost_1[i][1] += cost(1);
-    }
-
-    /// monge 性が必要
-    pub fn add_2(&mut self, i: usize, j: usize, mut cost: impl FnMut(usize, usize) -> i64) {
-        let mut x: [[i64; 2]; 2] = [[0; 2]; 2];
+    /// 1 変数関数を加算する  
+    /// +∞ は None で表す  
+    ///
+    /// # 引数
+    /// - `i`: 対象の変数のインデックス。
+    /// - `cost`: 各選択肢に対するコストを返すクロージャ。Noneの場合は+∞とみなす。
+    pub fn add_unary(&mut self, i: usize, mut cost: impl FnMut(usize) -> Option<i64>) {
         for bi in 0..2 {
-            for bj in 0..2 {
-                x[bi][bj] = cost(bi, bj);
-            }
+            let x = cost(bi).unwrap_or(i64::MAX);
+            self.cost_1[i][bi] = self.cost_1[i][bi].saturating_add(x);
         }
-        assert!(x[0][0] + x[1][1] <= x[0][1] + x[1][0], "must be monge");
-
-        self.add(x[0][0]);
-        self.add_1(i, |bi| [0, x[1][0] - x[0][0]][bi]);
-        self.add_1(j, |bj| [0, x[1][1] - x[1][0]][bj]);
-        self.add_edge(i, j, (x[0][1] + x[1][0]) - (x[0][0] + x[1][1]));
     }
 
-    #[allow(unused)]
-    pub fn add_3(
+    /// 2 変数関数を加算する  
+    /// +∞ は None で表す  
+    ///
+    /// # 制約
+    /// - Monge 性を満たす  
+    /// - `|cost| <= 10^9` or `cost = None`  
+    /// - None は非対角線上に高々 1 つまで、対角線上に存在しない
+    ///
+    /// # 引数
+    /// - `i`, `j`: 対象の2変数関数に適用する変数のインデックス。
+    pub fn add_binary(
         &mut self,
         i: usize,
         j: usize,
-        k: usize,
-        mut cost: impl FnMut(usize, usize, usize) -> i64,
+        mut cost: impl FnMut(usize, usize) -> Option<i64>,
     ) {
-        todo!("壊れています");
+        const INF: i64 = 1 << 40; // TODO: これは大丈夫？
 
-        // assert!(i != j && j != k && k != i);
+        let cost: [[i64; 2]; 2] =
+            std::array::from_fn(|bi| std::array::from_fn(|bj| cost(bi, bj).unwrap_or(INF)));
 
-        // let x000 = cost(0, 0, 0);
-        // let x001 = cost(0, 0, 1);
-        // let x010 = cost(0, 1, 0);
-        // let x011 = cost(0, 1, 1);
-        // let x100 = cost(1, 0, 0);
-        // let x101 = cost(1, 0, 1);
-        // let x110 = cost(1, 1, 0);
-        // let x111 = cost(1, 1, 1);
-        // let p = x000 - x100 - x010 - x001 + x110 + x101 + x011 - x111;
+        let x = cost[0][1] + cost[1][0] - cost[0][0] - cost[1][1];
+        assert!(x >= 0, "Monge property is violated");
 
-        // if p >= 0 {
-        //     self.add(x000);
-        //     self.add_1(i, |bi| [x100 - x000, 0][bi]);
-        //     self.add_1(j, |bj| [x010 - x000, 0][bj]);
-        //     self.add_1(k, |bk| [x001 - x000, 0][bk]);
-        //     self.add_2(i, j, |bi, bj| {
-        //         [[x000 + x110 - x100 - x010, 0], [0, 0]][bi][bj]
-        //     });
-        //     self.add_2(j, k, |bj, bk| {
-        //         [[x000 + x011 - x010 - x001, 0], [0, 0]][bj][bk]
-        //     });
-        //     self.add_2(k, i, |bk, bi| {
-        //         [[x000 + x101 - x001 - x100, 0], [0, 0]][bk][bi]
-        //     });
-        //     self.add_all1([i, j, k], -p);
-        // } else {
-        //     self.add(x111);
-        //     self.add_1(i, |bi| [x011 - x111, 0][bi]);
-        //     self.add_1(j, |bj| [x101 - x111, 0][bj]);
-        //     self.add_1(k, |bk| [x110 - x111, 0][bk]);
-        //     self.add_2(i, j, |bi, bj| {
-        //         [[x111 + x001 - x011 - x101, 0], [0, 0]][bi][bj]
-        //     });
-        //     self.add_2(j, k, |bj, bk| {
-        //         [[x111 + x100 - x101 - x110, 0], [0, 0]][bj][bk]
-        //     });
-        //     self.add_2(k, i, |bk, bi| {
-        //         [[x111 + x010 - x110 - x011, 0], [0, 0]][bk][bi]
-        //     });
-        //     self.add_all0([i, j, k], p);
-        // }
+        self.add_nullary(cost[0][0]);
+        self.add_unary(i, |bi| Some([0, cost[1][0] - cost[0][0]][bi]));
+        self.add_unary(j, |bj| Some([0, cost[1][1] - cost[1][0]][bj]));
+        self.add_edge(i, j, x);
     }
 
-    pub fn add_all0<I>(&mut self, items: I, cost: i64)
+    /// 3 変数関数を加算する  
+    ///
+    /// ??????????
+    pub fn add_ternary(
+        &mut self,
+        _i: usize,
+        _j: usize,
+        _k: usize,
+        mut _cost: impl FnMut(usize, usize, usize) -> i64,
+    ) {
+        todo!()
+    }
+
+    /// 全ての変数が 0 の場合にのみコストを加算する  
+    ///
+    /// # 制約
+    /// - `items.len() < 2` or `cost <= 0`
+    ///
+    /// # 引数
+    /// - `items`: 対象の変数のインデックス。
+    /// - `cost`: 加算するコスト。
+    pub fn add_if_all_0<I>(&mut self, items: I, cost: i64)
     where
         I: IntoIterator,
         I::Item: Borrow<usize>,
     {
+        if cost == 0 {
+            return;
+        }
+
         let mut items = items.into_iter().map(|x| *x.borrow()).collect::<Vec<_>>();
         items.sort_unstable();
         items.dedup();
 
+        assert!(
+            items.len() < 2 || cost <= 0,
+            "if items.len() >= 2, cost must be non-positive"
+        );
+
         match &items[..] {
-            [] => self.add(cost),
-            &[i] => self.add_1(i, |bi| [cost, 0][bi]),
-            &[i, j] => self.add_2(i, j, |bi, bj| [[cost, 0], [0, 0]][bi][bj]),
+            [] => self.add_nullary(cost),
+            &[i] => self.add_unary(i, |bi| Some([cost, 0][bi])),
+            &[i, j] => self.add_binary(i, j, |bi, bj| Some([[cost, 0], [0, 0]][bi][bj])),
             items => {
-                self.add(cost);
+                self.add_nullary(cost);
                 let aux = self.n_item + 2 + self.n_aux;
                 self.n_aux += 1;
                 self.add_edge(self.src, aux, -cost);
@@ -138,21 +139,38 @@ impl BinaryOptimization {
         }
     }
 
-    pub fn add_all1<I>(&mut self, items: I, cost: i64)
+    /// 全ての変数が 1 の場合にのみコストを加算する  
+    ///
+    /// # 制約
+    /// - `items.len() < 2` or `cost <= 0`
+    ///
+    /// # 引数
+    /// - `items`: 対象の変数のインデックス。
+    /// - `cost`: 加算するコスト。
+    pub fn add_if_all_1<I>(&mut self, items: I, cost: i64)
     where
         I: IntoIterator,
         I::Item: Borrow<usize>,
     {
+        if cost == 0 {
+            return;
+        }
+
         let mut items = items.into_iter().map(|x| *x.borrow()).collect::<Vec<_>>();
         items.sort_unstable();
         items.dedup();
 
+        assert!(
+            items.len() < 2 || cost <= 0,
+            "if items.len() >= 2, cost must be non-positive"
+        );
+
         match &items[..] {
-            [] => self.add(cost),
-            &[i] => self.add_1(i, |bi| [0, cost][bi]),
-            &[i, j] => self.add_2(i, j, |bi, bj| [[0, 0], [0, cost]][bi][bj]),
+            [] => self.add_nullary(cost),
+            &[i] => self.add_unary(i, |bi| Some([0, cost][bi])),
+            &[i, j] => self.add_binary(i, j, |bi, bj| Some([[0, 0], [0, cost]][bi][bj])),
             items => {
-                self.add(cost);
+                self.add_nullary(cost);
                 let aux = self.n_item + 2 + self.n_aux;
                 self.n_aux += 1;
                 for &i in items {
@@ -163,36 +181,53 @@ impl BinaryOptimization {
         }
     }
 
-    pub fn add_any0<I>(&mut self, items: I, cost: i64)
+    /// ある変数が 0 の場合にのみコストを加算する  
+    ///
+    /// # 制約
+    /// - `items.len() < 2` or `cost >= 0`
+    ///
+    /// # 引数
+    /// - `items`: 対象の変数のインデックス。
+    /// - `cost`: 加算するコスト。
+    pub fn add_if_any_0<I>(&mut self, items: I, cost: i64)
     where
         I: IntoIterator,
         I::Item: Borrow<usize>,
     {
-        self.add(cost);
-        self.add_all1(items, -cost);
+        self.add_nullary(cost);
+        self.add_if_all_1(items, -cost);
     }
 
-    pub fn add_any1<I>(&mut self, items: I, cost: i64)
+    /// ある変数が 1 の場合にのみコストを加算する  
+    ///
+    /// # 制約
+    /// - `items.len() < 2` or `cost >= 0`
+    ///
+    /// # 引数
+    /// - `items`: 対象の変数のインデックス。
+    /// - `cost`: 加算するコスト。
+    pub fn add_if_any_1<I>(&mut self, items: I, cost: i64)
     where
         I: IntoIterator,
         I::Item: Borrow<usize>,
     {
-        self.add(cost);
-        self.add_all0(items, -cost);
+        self.add_nullary(cost);
+        self.add_if_all_0(items, -cost);
     }
 
-    /// (最小コスト, 変数の値)
+    /// 最適化問題を解いて、最小コストと各変数の選択値を返す。
+    ///
+    /// # 戻り値
+    /// - タプル (最小コスト, 各変数に対する選択されたインデックス)。
     pub fn solve(&mut self) -> (i64, Vec<usize>) {
-        for i in 0..self.n_item {
-            let cost = self.cost_1[i];
+        for (i, cost) in std::mem::take(&mut self.cost_1).into_iter().enumerate() {
             if cost[0] < cost[1] {
-                self.add(cost[0]);
-                self.add_edge(self.src, i, cost[1] - cost[0]);
+                self.add_nullary(cost[0]);
+                self.add_edge(self.src, i, cost[1].saturating_sub(cost[0]));
             } else {
-                self.add(cost[1]);
-                self.add_edge(i, self.dst, cost[0] - cost[1]);
+                self.add_nullary(cost[1]);
+                self.add_edge(i, self.dst, cost[0].saturating_sub(cost[1]));
             }
-            self.cost_1[i] = [0; 2];
         }
 
         let mut flow = MaxFlow::new();
@@ -201,7 +236,9 @@ impl BinaryOptimization {
             flow.add_edge(i, j, cost);
         }
 
-        let cost = self.cost_0 + flow.max_flow(self.src, self.dst, None);
+        let cost = self
+            .cost_0
+            .saturating_add(flow.max_flow(self.src, self.dst, None));
         let mut cut = flow.min_cut();
         cut.truncate(self.n_item);
 
@@ -210,7 +247,6 @@ impl BinaryOptimization {
 
     fn add_edge(&mut self, i: usize, j: usize, cost: i64) {
         assert!(cost >= 0);
-        assert!(i != j);
         if cost == 0 {
             return;
         }

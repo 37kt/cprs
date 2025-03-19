@@ -137,6 +137,7 @@ impl MultivaluedOptimization {
     /// +∞ は None で表す  
     ///
     /// # 制約
+    /// - Monge 性を満たす  
     /// - `|cost| <= 10^9` or `cost = None`  
     /// - `cost[0][0]` から `cost[h-1][w-1]` までが有限値によって連結である  
     /// - 行番号が増える方向について、有限値をとる区間の端点の位置が広義単調増加である  
@@ -218,7 +219,7 @@ impl MultivaluedOptimization {
         for mi in 1..h {
             for mj in 1..w {
                 let x = -cost[mi - 1][mj - 1] + cost[mi - 1][mj] + cost[mi][mj - 1] - cost[mi][mj];
-                assert!(x >= 0, "The Monge property is violated");
+                assert!(x >= 0, "Monge property is violated");
                 self.add_edge(self.id[i][mi], self.id[j][mj], x);
             }
         }
@@ -235,7 +236,9 @@ impl MultivaluedOptimization {
             flow.add_edge(i, j, cost);
         }
 
-        let cost = self.cost_0 + flow.max_flow(self.src, self.dst, None);
+        let cost = self
+            .cost_0
+            .saturating_add(flow.max_flow(self.src, self.dst, None));
         let cut = flow.min_cut();
 
         let mut choice = vec![0; self.n_options.len()];
