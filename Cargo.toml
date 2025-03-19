@@ -111,6 +111,8 @@ members = [
     "verify/library_checker/tree/vertex_add_path_sum",
     "verify/library_checker/tree/vertex_add_subtree_sum",
     "verify/library_checker/tree/vertex_set_path_composite",
+    "verify/sand_box/abc347g",
+    "verify/sand_box/abc397g",
     "verify/stress_test/number_theory/comparing_rational",
     "verify/yukicoder/flow/yuki0119_mopt",
     "verify/yukicoder/flow/yuki1479_maxflow",

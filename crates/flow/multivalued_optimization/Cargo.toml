@@ -12,4 +12,3 @@ name = "multivalued_optimization"
 
 [dependencies]
 max_flow = { path = "../max_flow" }
-numeric_traits = { path = "../../algebra/numeric_traits" }

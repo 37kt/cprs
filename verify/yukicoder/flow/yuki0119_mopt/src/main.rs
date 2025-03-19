@@ -3,8 +3,6 @@
 use multivalued_optimization::MultivaluedOptimization;
 use proconio::{fastout, input};
 
-const INF: i64 = 1 << 20;
-
 #[fastout]
 fn main() {
     input! {
@@ -17,10 +15,20 @@ fn main() {
     let mut opt = MultivaluedOptimization::new(vec![3; n]);
     for i in 0..n {
         let (b, c) = bc[i];
-        opt.add_1(i, |mi| [-c, 0, -b][mi]);
+        opt.add_unary(i, |mi| Some([-c, 0, -b][mi]));
     }
     for &(i, j) in &de {
-        opt.add_2(i, j, |mi, mj| if mi == 2 && mj == 0 { INF } else { 0 });
+        opt.add_binary(
+            i,
+            j,
+            |mi, mj| {
+                if mi == 2 && mj == 0 {
+                    None
+                } else {
+                    Some(0)
+                }
+            },
+        );
     }
 
     let (cost, choice) = opt.solve();
