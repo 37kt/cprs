@@ -23,6 +23,9 @@ pub trait Integer:
     + Shr<usize, Output = Self>
     + ShrAssign<usize>
 {
+    const MIN: Self;
+    const MAX: Self;
+
     fn popcount(self) -> usize;
     fn msb_index(self) -> usize;
     fn lsb_index(self) -> usize;
@@ -48,6 +51,9 @@ macro_rules! impl_integer {
     ($($t:ty),*) => {
         $(
             impl Integer for $t {
+                const MIN: Self = <$t>::MIN;
+                const MAX: Self = <$t>::MAX;
+
                 fn popcount(self) -> usize {
                     self.count_ones() as usize
                 }

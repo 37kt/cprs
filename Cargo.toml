@@ -63,6 +63,7 @@ members = [
     "verify/library_checker/convolution/convolution_mod_2_64",
     "verify/library_checker/convolution/gcd_convolution",
     "verify/library_checker/convolution/lcm_convolution",
+    "verify/library_checker/convolution/min_plus_convolution_concave_arbitrary",
     "verify/library_checker/convolution/min_plus_convolution_convex_arbitrary",
     "verify/library_checker/convolution/min_plus_convolution_convex_convex",
     "verify/library_checker/data_structure/associative_array_bt",

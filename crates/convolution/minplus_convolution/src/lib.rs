@@ -4,6 +4,8 @@ pub use convex_and_convex::*;
 mod convex_and_arbitrary;
 pub use convex_and_arbitrary::*;
 
+mod concave_and_arbitrary;
+pub use concave_and_arbitrary::*;
 use numeric_traits::Integer;
 
 pub fn is_convex<T>(a: &[T]) -> bool
