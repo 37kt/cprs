@@ -1,14 +1,10 @@
 [package]
-name = "numeric_traits"
+name = "abc218h"
 version = "0.1.0"
 edition = "2021"
-license = "CC0-1.0"
-publish = false
-
-[lib]
-name = "numeric_traits"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
- 
+proconio = { version = "=0.5.0", features = ["derive"] }
+aliens_dp = { path = "../../../crates/dp/aliens_dp" }
