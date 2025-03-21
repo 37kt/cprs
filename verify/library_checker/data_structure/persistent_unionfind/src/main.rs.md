@@ -1,0 +1,46 @@
+---
+data:
+  _extendedDependsOn:
+  - icon: ':heavy_check_mark:'
+    path: crates/data_structure/union_find/persistent_union_find/src/lib.rs
+    title: crates/data_structure/union_find/persistent_union_find/src/lib.rs
+  _extendedRequiredBy: []
+  _extendedVerifiedWith: []
+  _isVerificationFailed: false
+  _pathExtension: rs
+  _verificationStatusIcon: ':heavy_check_mark:'
+  attributes:
+    PROBLEM: https://judge.yosupo.jp/problem/persistent_unionfind
+    links:
+    - https://judge.yosupo.jp/problem/persistent_unionfind
+  bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.13.2/x64/lib/python3.13/site-packages/onlinejudge_verify/documentation/build.py\"\
+    , line 71, in _render_source_code_stat\n    bundled_code = language.bundle(stat.path,\
+    \ basedir=basedir, options={'include_paths': [basedir]}).decode()\n          \
+    \         ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\
+    \  File \"/opt/hostedtoolcache/Python/3.13.2/x64/lib/python3.13/site-packages/onlinejudge_verify/languages/rust.py\"\
+    , line 288, in bundle\n    raise NotImplementedError\nNotImplementedError\n"
+  code: "// verification-helper: PROBLEM https://judge.yosupo.jp/problem/persistent_unionfind\n\
+    \nuse persistent_union_find::PersistentUnionFind;\nuse proconio::fastout;\nuse\
+    \ proconio::input;\n\n#[fastout]\nfn main() {\n    input! {\n        n: usize,\n\
+    \        q: usize,\n    }\n\n    let mut ufs = Vec::with_capacity(q + 1);\n  \
+    \  ufs.push(PersistentUnionFind::new(n));\n\n    for _ in 0..q {\n        input!\
+    \ {\n            t: usize,\n            k: isize,\n            u: usize,\n   \
+    \         v: usize,\n        }\n        let uf = ufs[(k + 1) as usize];\n    \
+    \    if t == 0 {\n            let (uf, _) = uf.merge(u, v);\n            ufs.push(uf);\n\
+    \        } else {\n            println!(\"{}\", uf.same(u, v) as i32);\n     \
+    \       ufs.push(uf);\n        }\n    }\n}\n"
+  dependsOn:
+  - crates/data_structure/union_find/persistent_union_find/src/lib.rs
+  isVerificationFile: true
+  path: verify/library_checker/data_structure/persistent_unionfind/src/main.rs
+  requiredBy: []
+  timestamp: '2025-03-11 07:52:05+00:00'
+  verificationStatus: TEST_ACCEPTED
+  verifiedWith: []
+documentation_of: verify/library_checker/data_structure/persistent_unionfind/src/main.rs
+layout: document
+redirect_from:
+- /verify/verify/library_checker/data_structure/persistent_unionfind/src/main.rs
+- /verify/verify/library_checker/data_structure/persistent_unionfind/src/main.rs.html
+title: verify/library_checker/data_structure/persistent_unionfind/src/main.rs
+---
