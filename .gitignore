@@ -2,3 +2,5 @@
 /Cargo.lock
 /a.rs
 /.envrc
+/generate_dependencies.sh
+/generate_workspace_members.sh
