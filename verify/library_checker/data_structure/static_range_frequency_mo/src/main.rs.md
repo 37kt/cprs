@@ -44,7 +44,7 @@ data:
   isVerificationFile: true
   path: verify/library_checker/data_structure/static_range_frequency_mo/src/main.rs
   requiredBy: []
-  timestamp: '2025-03-16 01:09:41+00:00'
+  timestamp: '2025-03-22 02:08:02+00:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/library_checker/data_structure/static_range_frequency_mo/src/main.rs
