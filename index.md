@@ -185,6 +185,11 @@ data:
     - icon: ':warning:'
       path: crates/data_structure/radix_heap/src/lib.rs
       title: crates/data_structure/radix_heap/src/lib.rs
+  - name: crates/data_structure/range_minimum_query/src
+    pages:
+    - icon: ':heavy_check_mark:'
+      path: crates/data_structure/range_minimum_query/src/lib.rs
+      title: crates/data_structure/range_minimum_query/src/lib.rs
   - name: crates/data_structure/segment_tree/dual_segment_tree/src
     pages:
     - icon: ':heavy_check_mark:'
@@ -655,6 +660,11 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/library_checker/data_structure/static_range_frequency_mo/src/main.rs
       title: verify/library_checker/data_structure/static_range_frequency_mo/src/main.rs
+  - name: verify/library_checker/data_structure/staticrmq/src
+    pages:
+    - icon: ':heavy_check_mark:'
+      path: verify/library_checker/data_structure/staticrmq/src/main.rs
+      title: verify/library_checker/data_structure/staticrmq/src/main.rs
   - name: verify/library_checker/data_structure/staticrmq_dst/src
     pages:
     - icon: ':heavy_check_mark:'
