@@ -45,7 +45,7 @@ where
                     sum[i] = sum[i - 1];
                 }
                 sum[0] = 0;
-                return (Self(Container::Small(Small { min, sum })), ys);
+                return (Self(Container::Small { min, sum }), ys);
             } else {
                 for &x in &xs {
                     sum[(x - min).cast() + 1] = 1;
@@ -57,7 +57,7 @@ where
                     let j = (xs[i] - min).cast();
                     ys[i] = sum[j] as usize;
                 }
-                return (Self(Container::Small(Small { min, sum })), ys);
+                return (Self(Container::Small { min, sum }), ys);
             }
         } else {
             if DISTINCT {
@@ -68,7 +68,7 @@ where
                     ys[ord[i]] = i;
                     new_xs.push(xs[ord[i]]);
                 }
-                return (Self(Container::Large(Large { xs: new_xs })), ys);
+                return (Self(Container::Large { xs: new_xs }), ys);
             } else {
                 let mut ord = (0..n).collect::<Vec<_>>();
                 ord.sort_unstable_by_key(|&i| xs[i]);
@@ -82,7 +82,7 @@ where
                     }
                 }
                 new_xs.shrink_to_fit();
-                return (Self(Container::Large(Large { xs: new_xs })), ys);
+                return (Self(Container::Large { xs: new_xs }), ys);
             }
         }
     }
@@ -90,19 +90,19 @@ where
     pub fn encode(&self, x: T) -> usize {
         match &self.0 {
             Container::Empty => 0,
-            Container::Small(Small { min, sum, .. }) => {
+            Container::Small { min, sum, .. } => {
                 let j = (x - *min).max(T::zero()).cast().min(sum.len() - 1);
                 sum[j] as usize
             }
-            Container::Large(Large { xs }) => xs.partition_point(|&xi| xi < x),
+            Container::Large { xs } => xs.partition_point(|&xi| xi < x),
         }
     }
 
     pub fn decode(&self, i: usize) -> T {
         match &self.0 {
             Container::Empty => panic!("out of range"),
-            Container::Small(Small { min, sum, .. }) => *min + sum[i].cast(),
-            Container::Large(Large { xs }) => xs[i],
+            Container::Small { min, sum, .. } => *min + sum[i].cast(),
+            Container::Large { xs } => xs[i],
         }
     }
 }
@@ -116,26 +116,15 @@ where
     pub fn len(&self) -> usize {
         match &self.0 {
             Container::Empty => 0,
-            Container::Small(Small { sum, .. }) => *sum.last().unwrap() as usize,
-            Container::Large(Large { xs }) => xs.len(),
+            Container::Small { sum, .. } => *sum.last().unwrap() as usize,
+            Container::Large { xs } => xs.len(),
         }
     }
 }
 
 #[derive(Clone)]
-struct Small<T> {
-    min: T,
-    sum: Vec<u32>,
-}
-
-#[derive(Clone)]
-struct Large<T> {
-    xs: Vec<T>,
-}
-
-#[derive(Clone)]
 enum Container<T> {
     Empty,
-    Small(Small<T>),
-    Large(Large<T>),
+    Small { min: T, sum: Vec<u32> },
+    Large { xs: Vec<T> },
 }
