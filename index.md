@@ -412,11 +412,17 @@ data:
     - icon: ':warning:'
       path: crates/number_theory/modint/modint/src/lib.rs
       title: crates/number_theory/modint/modint/src/lib.rs
-  - name: crates/number_theory/modint/modint_mersenne/src
+  - name: crates/number_theory/modint/modint_61/src
     pages:
     - icon: ':warning:'
-      path: crates/number_theory/modint/modint_mersenne/src/lib.rs
-      title: crates/number_theory/modint/modint_mersenne/src/lib.rs
+      path: crates/number_theory/modint/modint_61/src/lib.rs
+      title: crates/number_theory/modint/modint_61/src/lib.rs
+    - icon: ':warning:'
+      path: crates/number_theory/modint/modint_61/src/numeric.rs
+      title: crates/number_theory/modint/modint_61/src/numeric.rs
+    - icon: ':warning:'
+      path: crates/number_theory/modint/modint_61/src/ops.rs
+      title: crates/number_theory/modint/modint_61/src/ops.rs
   - name: crates/number_theory/modint/static_modint/src
     pages:
     - icon: ':heavy_check_mark:'

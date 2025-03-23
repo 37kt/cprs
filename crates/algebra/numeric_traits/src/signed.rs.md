@@ -116,6 +116,9 @@ data:
   - icon: ':warning:'
     path: crates/number_theory/modint/dynamic_modint_64/src/lib.rs
     title: crates/number_theory/modint/dynamic_modint_64/src/lib.rs
+  - icon: ':warning:'
+    path: crates/number_theory/modint/modint_61/src/lib.rs
+    title: crates/number_theory/modint/modint_61/src/lib.rs
   - icon: ':heavy_check_mark:'
     path: crates/number_theory/modint/static_modint/src/lib.rs
     title: crates/number_theory/modint/static_modint/src/lib.rs
@@ -178,6 +181,7 @@ data:
   - crates/convolution/bitwise_xor_convolution/src/lib.rs
   - crates/number_theory/prime_factorization/src/lib.rs
   - crates/number_theory/modint/dynamic_modint/src/lib.rs
+  - crates/number_theory/modint/modint_61/src/lib.rs
   - crates/number_theory/modint/dynamic_modint_64/src/lib.rs
   - crates/number_theory/modint/barrett_reduction/src/lib.rs
   - crates/number_theory/modint/static_modint/src/lib.rs
