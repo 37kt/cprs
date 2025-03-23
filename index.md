@@ -348,6 +348,11 @@ data:
     - icon: ':heavy_check_mark:'
       path: crates/misc/macros/src/yes.rs
       title: crates/misc/macros/src/yes.rs
+  - name: crates/misc/random/src
+    pages:
+    - icon: ':warning:'
+      path: crates/misc/random/src/lib.rs
+      title: crates/misc/random/src/lib.rs
   - name: crates/misc/simple_arena/src
     pages:
     - icon: ':warning:'
