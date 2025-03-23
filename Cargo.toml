@@ -51,7 +51,7 @@ members = [
     "crates/number_theory/modint/dynamic_modint",
     "crates/number_theory/modint/dynamic_modint_64",
     "crates/number_theory/modint/modint",
-    "crates/number_theory/modint/modint_mersenne",
+    "crates/number_theory/modint/modint_61",
     "crates/number_theory/modint/static_modint",
     "crates/number_theory/prime_factorization",
     "crates/number_theory/rational",
