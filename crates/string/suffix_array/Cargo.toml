@@ -1,0 +1,16 @@
+[package]
+name = "suffix_array"
+version = "0.1.0"
+edition = "2021"
+license = "CC0-1.0"
+publish = false
+
+[lib]
+name = "suffix_array"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+range_minimum_query = { path = "../../data_structure/range_minimum_query" }
+numeric_traits = { path = "../../algebra/numeric_traits" }
+into_half_open_range = { path = "../../misc/into_half_open_range" }

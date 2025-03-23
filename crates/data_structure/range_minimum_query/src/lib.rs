@@ -5,6 +5,7 @@ use numeric_traits::Integer;
 
 const BLOCK_SIZE: usize = 16;
 
+#[derive(Clone)]
 pub struct RangeMinimumQuery<T> {
     array: Vec<T>,
     large: Vec<Vec<u32>>,
