@@ -43,6 +43,7 @@ members = [
     "crates/misc/coordinate_compression",
     "crates/misc/into_half_open_range",
     "crates/misc/macros",
+    "crates/misc/random",
     "crates/misc/simple_arena",
     "crates/number_theory/eratosthenes",
     "crates/number_theory/linear_sieve",
