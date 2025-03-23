@@ -478,6 +478,11 @@ data:
     - icon: ':heavy_check_mark:'
       path: crates/polynomial/formal_power_series/src/sqrt.rs
       title: crates/polynomial/formal_power_series/src/sqrt.rs
+  - name: crates/string/manacher/src
+    pages:
+    - icon: ':heavy_check_mark:'
+      path: crates/string/manacher/src/lib.rs
+      title: crates/string/manacher/src/lib.rs
   - name: crates/string/suffix_array/src
     pages:
     - icon: ':heavy_check_mark:'
@@ -810,6 +815,11 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/library_checker/sample/many_aplusb/src/main.rs
       title: verify/library_checker/sample/many_aplusb/src/main.rs
+  - name: verify/library_checker/string/enumerate_palindromes/src
+    pages:
+    - icon: ':heavy_check_mark:'
+      path: verify/library_checker/string/enumerate_palindromes/src/main.rs
+      title: verify/library_checker/string/enumerate_palindromes/src/main.rs
   - name: verify/library_checker/string/suffixarray/src
     pages:
     - icon: ':heavy_check_mark:'
