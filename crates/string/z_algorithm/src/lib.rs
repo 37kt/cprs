@@ -1,5 +1,3 @@
-// TODO: 返す配列の長さは n と n+1 どっちがいい？
-
 /// `z[i]` = `s[i..]` と `s[..]` の最長共通接頭辞の長さ
 pub fn z_algorithm<T: PartialEq>(s: &[T]) -> Vec<usize> {
     let n = s.len();
