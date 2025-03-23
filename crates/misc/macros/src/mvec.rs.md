@@ -1,32 +1,35 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':warning:'
+  - icon: ':heavy_check_mark:'
     path: crates/misc/macros/src/chminmax.rs
     title: crates/misc/macros/src/chminmax.rs
-  - icon: ':warning:'
+  - icon: ':heavy_check_mark:'
     path: crates/misc/macros/src/lib.rs
     title: crates/misc/macros/src/lib.rs
-  - icon: ':warning:'
+  - icon: ':heavy_check_mark:'
     path: crates/misc/macros/src/yes.rs
     title: crates/misc/macros/src/yes.rs
   _extendedRequiredBy:
-  - icon: ':warning:'
+  - icon: ':heavy_check_mark:'
     path: crates/misc/macros/src/chminmax.rs
     title: crates/misc/macros/src/chminmax.rs
-  - icon: ':warning:'
+  - icon: ':heavy_check_mark:'
     path: crates/misc/macros/src/lib.rs
     title: crates/misc/macros/src/lib.rs
-  - icon: ':warning:'
+  - icon: ':heavy_check_mark:'
     path: crates/misc/macros/src/yes.rs
     title: crates/misc/macros/src/yes.rs
   - icon: ':warning:'
     path: verify/sandbox/test/src/main.rs
     title: verify/sandbox/test/src/main.rs
-  _extendedVerifiedWith: []
+  _extendedVerifiedWith:
+  - icon: ':heavy_check_mark:'
+    path: verify/yukicoder/dp/yuki0733_bitdp/src/main.rs
+    title: verify/yukicoder/dp/yuki0733_bitdp/src/main.rs
   _isVerificationFailed: false
   _pathExtension: rs
-  _verificationStatusIcon: ':warning:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.13.2/x64/lib/python3.13/site-packages/onlinejudge_verify/documentation/build.py\"\
@@ -50,8 +53,9 @@ data:
   - crates/misc/macros/src/chminmax.rs
   - crates/misc/macros/src/yes.rs
   timestamp: '2025-03-21 00:58:56+00:00'
-  verificationStatus: LIBRARY_NO_TESTS
-  verifiedWith: []
+  verificationStatus: LIBRARY_ALL_AC
+  verifiedWith:
+  - verify/yukicoder/dp/yuki0733_bitdp/src/main.rs
 documentation_of: crates/misc/macros/src/mvec.rs
 layout: document
 redirect_from:

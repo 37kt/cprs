@@ -1,16 +1,16 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':warning:'
+  - icon: ':heavy_check_mark:'
     path: crates/misc/macros/src/chminmax.rs
     title: crates/misc/macros/src/chminmax.rs
-  - icon: ':warning:'
+  - icon: ':heavy_check_mark:'
     path: crates/misc/macros/src/lib.rs
     title: crates/misc/macros/src/lib.rs
-  - icon: ':warning:'
+  - icon: ':heavy_check_mark:'
     path: crates/misc/macros/src/mvec.rs
     title: crates/misc/macros/src/mvec.rs
-  - icon: ':warning:'
+  - icon: ':heavy_check_mark:'
     path: crates/misc/macros/src/yes.rs
     title: crates/misc/macros/src/yes.rs
   - icon: ':heavy_check_mark:'

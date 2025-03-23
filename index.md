@@ -319,6 +319,11 @@ data:
     - icon: ':heavy_check_mark:'
       path: crates/linear_algebra/matrix/src/row_reduction.rs
       title: crates/linear_algebra/matrix/src/row_reduction.rs
+  - name: crates/misc/bit_subset/src
+    pages:
+    - icon: ':heavy_check_mark:'
+      path: crates/misc/bit_subset/src/lib.rs
+      title: crates/misc/bit_subset/src/lib.rs
   - name: crates/misc/coordinate_compression/src
     pages:
     - icon: ':heavy_check_mark:'
@@ -331,16 +336,16 @@ data:
       title: crates/misc/into_half_open_range/src/lib.rs
   - name: crates/misc/macros/src
     pages:
-    - icon: ':warning:'
+    - icon: ':heavy_check_mark:'
       path: crates/misc/macros/src/chminmax.rs
       title: crates/misc/macros/src/chminmax.rs
-    - icon: ':warning:'
+    - icon: ':heavy_check_mark:'
       path: crates/misc/macros/src/lib.rs
       title: crates/misc/macros/src/lib.rs
-    - icon: ':warning:'
+    - icon: ':heavy_check_mark:'
       path: crates/misc/macros/src/mvec.rs
       title: crates/misc/macros/src/mvec.rs
-    - icon: ':warning:'
+    - icon: ':heavy_check_mark:'
       path: crates/misc/macros/src/yes.rs
       title: crates/misc/macros/src/yes.rs
   - name: crates/misc/simple_arena/src
@@ -870,6 +875,11 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/yukicoder/dp/yuki0705_larsch/src/main.rs
       title: verify/yukicoder/dp/yuki0705_larsch/src/main.rs
+  - name: verify/yukicoder/dp/yuki0733_bitdp/src
+    pages:
+    - icon: ':heavy_check_mark:'
+      path: verify/yukicoder/dp/yuki0733_bitdp/src/main.rs
+      title: verify/yukicoder/dp/yuki0733_bitdp/src/main.rs
   - name: verify/yukicoder/dp/yuki0952_mm/src
     pages:
     - icon: ':heavy_check_mark:'
