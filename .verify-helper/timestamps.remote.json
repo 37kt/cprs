@@ -67,6 +67,7 @@
 "verify/library_checker/tree/vertex_set_path_composite/src/main.rs": "2025-03-10 08:02:08 +0000",
 "verify/stress_test/number_theory/comparing_rational/src/main.rs": "2025-03-20 09:27:03 +0000",
 "verify/yukicoder/dp/yuki0705_larsch/src/main.rs": "2025-03-20 04:28:46 +0000",
+"verify/yukicoder/dp/yuki0733_bitdp/src/main.rs": "2025-03-23 08:46:19 +0000",
 "verify/yukicoder/dp/yuki0952_mm/src/main.rs": "2025-03-20 00:46:18 +0000",
 "verify/yukicoder/flow/yuki0119_mopt/src/main.rs": "2025-03-19 23:25:14 +0000",
 "verify/yukicoder/flow/yuki1479_maxflow/src/main.rs": "2025-03-18 02:28:18 +0000",
