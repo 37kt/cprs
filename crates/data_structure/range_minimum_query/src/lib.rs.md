@@ -25,7 +25,10 @@ data:
   - icon: ':warning:'
     path: crates/misc/into_half_open_range/src/lib.rs
     title: crates/misc/into_half_open_range/src/lib.rs
-  _extendedRequiredBy: []
+  _extendedRequiredBy:
+  - icon: ':heavy_check_mark:'
+    path: crates/string/suffix_array/src/lib.rs
+    title: crates/string/suffix_array/src/lib.rs
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: verify/library_checker/data_structure/staticrmq/src/main.rs
@@ -42,23 +45,24 @@ data:
     \  File \"/opt/hostedtoolcache/Python/3.13.2/x64/lib/python3.13/site-packages/onlinejudge_verify/languages/rust.py\"\
     , line 288, in bundle\n    raise NotImplementedError\nNotImplementedError\n"
   code: "use std::ops::RangeBounds;\n\nuse into_half_open_range::IntoHalfOpenRange;\n\
-    use numeric_traits::Integer;\n\nconst BLOCK_SIZE: usize = 16;\n\npub struct RangeMinimumQuery<T>\
-    \ {\n    array: Vec<T>,\n    large: Vec<Vec<u32>>,\n    small: Vec<u16>,\n}\n\n\
-    impl<T> FromIterator<T> for RangeMinimumQuery<T>\nwhere\n    T: Ord,\n{\n    fn\
-    \ from_iter<I: IntoIterator<Item = T>>(iter: I) -> Self {\n        let xs = iter.into_iter().collect::<Vec<_>>();\n\
-    \        let n = xs.len();\n        let block_n = n.floor_div(BLOCK_SIZE);\n \
-    \       let large = if let Some(lg_block_n) = block_n.checked_floor_log2() {\n\
-    \            let mut large = Vec::with_capacity(lg_block_n + 1);\n           \
-    \ let level = xs\n                .chunks_exact(BLOCK_SIZE)\n                .enumerate()\n\
-    \                .map(|(b, v)| {\n                    (v.iter()\n            \
-    \            .enumerate()\n                        .min_by_key(|&(_, x)| x)\n\
-    \                        .map(|(i, _)| i)\n                        .unwrap()\n\
-    \                        + b * BLOCK_SIZE) as u32\n                })\n      \
-    \          .collect::<Vec<_>>();\n            large.push(level);\n           \
-    \ for i in 0..lg_block_n {\n                let level = large[i]\n           \
-    \         .iter()\n                    .zip(&large[i][1 << i..])\n           \
-    \         .map(|(&a, &b)| {\n                        if xs[a as usize] <= xs[b\
-    \ as usize] {\n                            a\n                        } else {\n\
+    use numeric_traits::Integer;\n\nconst BLOCK_SIZE: usize = 16;\n\n#[derive(Clone)]\n\
+    pub struct RangeMinimumQuery<T> {\n    array: Vec<T>,\n    large: Vec<Vec<u32>>,\n\
+    \    small: Vec<u16>,\n}\n\nimpl<T> FromIterator<T> for RangeMinimumQuery<T>\n\
+    where\n    T: Ord,\n{\n    fn from_iter<I: IntoIterator<Item = T>>(iter: I) ->\
+    \ Self {\n        let xs = iter.into_iter().collect::<Vec<_>>();\n        let\
+    \ n = xs.len();\n        let block_n = n.floor_div(BLOCK_SIZE);\n        let large\
+    \ = if let Some(lg_block_n) = block_n.checked_floor_log2() {\n            let\
+    \ mut large = Vec::with_capacity(lg_block_n + 1);\n            let level = xs\n\
+    \                .chunks_exact(BLOCK_SIZE)\n                .enumerate()\n   \
+    \             .map(|(b, v)| {\n                    (v.iter()\n               \
+    \         .enumerate()\n                        .min_by_key(|&(_, x)| x)\n   \
+    \                     .map(|(i, _)| i)\n                        .unwrap()\n  \
+    \                      + b * BLOCK_SIZE) as u32\n                })\n        \
+    \        .collect::<Vec<_>>();\n            large.push(level);\n            for\
+    \ i in 0..lg_block_n {\n                let level = large[i]\n               \
+    \     .iter()\n                    .zip(&large[i][1 << i..])\n               \
+    \     .map(|(&a, &b)| {\n                        if xs[a as usize] <= xs[b as\
+    \ usize] {\n                            a\n                        } else {\n\
     \                            b\n                        }\n                  \
     \  })\n                    .collect::<Vec<_>>();\n                large.push(level);\n\
     \            }\n            large\n        } else {\n            vec![]\n    \
@@ -100,8 +104,9 @@ data:
   - crates/misc/into_half_open_range/src/lib.rs
   isVerificationFile: false
   path: crates/data_structure/range_minimum_query/src/lib.rs
-  requiredBy: []
-  timestamp: '2025-03-22 07:18:01+00:00'
+  requiredBy:
+  - crates/string/suffix_array/src/lib.rs
+  timestamp: '2025-03-23 00:32:36+00:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/library_checker/data_structure/staticrmq/src/main.rs

@@ -31,7 +31,7 @@ data:
   isVerificationFile: true
   path: verify/library_checker/data_structure/staticrmq/src/main.rs
   requiredBy: []
-  timestamp: '2025-03-22 07:18:01+00:00'
+  timestamp: '2025-03-23 00:32:36+00:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/library_checker/data_structure/staticrmq/src/main.rs

@@ -128,6 +128,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: crates/polynomial/formal_power_series/src/lib.rs
     title: crates/polynomial/formal_power_series/src/lib.rs
+  - icon: ':heavy_check_mark:'
+    path: crates/string/suffix_array/src/lib.rs
+    title: crates/string/suffix_array/src/lib.rs
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: verify/stress_test/number_theory/comparing_rational/src/main.rs
@@ -246,6 +249,7 @@ data:
   - crates/number_theory/rational/src/lib.rs
   - crates/misc/coordinate_compression/src/lib.rs
   - crates/misc/into_half_open_range/src/lib.rs
+  - crates/string/suffix_array/src/lib.rs
   - crates/graph/dijkstra/src/lib.rs
   - crates/flow/max_flow/src/lib.rs
   - crates/data_structure/offline_dynamic_convex_hull_trick/src/lib.rs

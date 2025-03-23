@@ -47,6 +47,9 @@ data:
   - icon: ':warning:'
     path: crates/dp/aliens_dp/src/lib.rs
     title: crates/dp/aliens_dp/src/lib.rs
+  - icon: ':heavy_check_mark:'
+    path: crates/string/suffix_array/src/lib.rs
+    title: crates/string/suffix_array/src/lib.rs
   _extendedVerifiedWith: []
   _isVerificationFailed: false
   _pathExtension: rs
@@ -80,6 +83,7 @@ data:
   isVerificationFile: false
   path: crates/misc/into_half_open_range/src/lib.rs
   requiredBy:
+  - crates/string/suffix_array/src/lib.rs
   - crates/data_structure/wavelet_matrix/src/lib.rs
   - crates/data_structure/fenwick_tree/fenwick_tree/src/lib.rs
   - crates/data_structure/disjoint_sparse_table/src/lib.rs
