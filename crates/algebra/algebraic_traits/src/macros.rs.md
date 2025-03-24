@@ -62,6 +62,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: crates/linear_algebra/matrix/src/lib.rs
     title: crates/linear_algebra/matrix/src/lib.rs
+  - icon: ':heavy_check_mark:'
+    path: crates/string/rolling_hash/src/lib.rs
+    title: crates/string/rolling_hash/src/lib.rs
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: verify/library_checker/data_structure/unionfind_with_potential_non_commutative_group/src/main.rs
@@ -140,6 +143,7 @@ data:
   - crates/convolution/lcm_convolution/src/lib.rs
   - crates/convolution/gcd_convolution/src/lib.rs
   - crates/convolution/bitwise_xor_convolution/src/lib.rs
+  - crates/string/rolling_hash/src/lib.rs
   - crates/data_structure/union_find/union_find/src/lib.rs
   - crates/data_structure/wavelet_matrix/src/lib.rs
   - crates/data_structure/fenwick_tree/fenwick_tree/src/lib.rs

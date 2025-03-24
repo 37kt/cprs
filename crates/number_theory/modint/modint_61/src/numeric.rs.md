@@ -14,6 +14,12 @@ data:
   - icon: ':warning:'
     path: crates/number_theory/modint/modint_61/src/ops.rs
     title: crates/number_theory/modint/modint_61/src/ops.rs
+  - icon: ':heavy_check_mark:'
+    path: crates/string/rolling_hash/src/lib.rs
+    title: crates/string/rolling_hash/src/lib.rs
+  - icon: ':warning:'
+    path: verify/sandbox/test/src/main.rs
+    title: verify/sandbox/test/src/main.rs
   _extendedVerifiedWith: []
   _isVerificationFailed: false
   _pathExtension: rs
@@ -41,9 +47,11 @@ data:
   isVerificationFile: false
   path: crates/number_theory/modint/modint_61/src/numeric.rs
   requiredBy:
+  - verify/sandbox/test/src/main.rs
   - crates/number_theory/modint/modint_61/src/lib.rs
   - crates/number_theory/modint/modint_61/src/ops.rs
-  timestamp: '2025-03-23 09:39:20+00:00'
+  - crates/string/rolling_hash/src/lib.rs
+  timestamp: '2025-03-24 01:42:22+00:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: crates/number_theory/modint/modint_61/src/numeric.rs

@@ -38,6 +38,12 @@ data:
   - icon: ':warning:'
     path: crates/number_theory/modint/modint_61/src/ops.rs
     title: crates/number_theory/modint/modint_61/src/ops.rs
+  - icon: ':heavy_check_mark:'
+    path: crates/string/rolling_hash/src/lib.rs
+    title: crates/string/rolling_hash/src/lib.rs
+  - icon: ':warning:'
+    path: verify/sandbox/test/src/main.rs
+    title: verify/sandbox/test/src/main.rs
   _extendedVerifiedWith: []
   _isVerificationFailed: false
   _pathExtension: rs
@@ -50,11 +56,12 @@ data:
     \         ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\
     \  File \"/opt/hostedtoolcache/Python/3.13.2/x64/lib/python3.13/site-packages/onlinejudge_verify/languages/rust.py\"\
     , line 288, in bundle\n    raise NotImplementedError\nNotImplementedError\n"
-  code: "mod ops;\nuse modint::ModInt;\npub use ops::*;\n\nmod numeric;\npub use numeric::*;\n\
-    \npub(crate) const P: u64 = (1 << 61) - 1;\n\n#[derive(Clone, Copy, Default, PartialEq,\
-    \ Eq, Hash)]\npub struct ModInt61(u64);\n\nimpl ModInt for ModInt61 {\n    type\
-    \ Value = u64;\n\n    fn new<T: Into<ModInt61>>(val: T) -> Self {\n        val.into()\n\
-    \    }\n\n    fn modulus() -> Self::Value {\n        P\n    }\n\n    fn from_raw(val:\
+  code: "use modint::ModInt;\n\nmod ops;\n#[allow(unused_imports)]\npub use ops::*;\n\
+    \nmod numeric;\n#[allow(unused_imports)]\npub use numeric::*;\n\npub(crate) const\
+    \ P: u64 = (1 << 61) - 1;\n\n#[derive(Clone, Copy, Default, PartialEq, Eq, Hash)]\n\
+    pub struct ModInt61(u64);\n\nimpl ModInt for ModInt61 {\n    type Value = u64;\n\
+    \n    fn new<T: Into<ModInt61>>(val: T) -> Self {\n        val.into()\n    }\n\
+    \n    fn modulus() -> Self::Value {\n        P\n    }\n\n    fn from_raw(val:\
     \ Self::Value) -> Self {\n        Self::from_raw(val)\n    }\n\n    fn val(self)\
     \ -> Self::Value {\n        self.val()\n    }\n\n    fn recip(self) -> Self {\n\
     \        self.recip()\n    }\n\n    fn pow(self, exp: usize) -> Self {\n     \
@@ -74,9 +81,11 @@ data:
   isVerificationFile: false
   path: crates/number_theory/modint/modint_61/src/lib.rs
   requiredBy:
+  - verify/sandbox/test/src/main.rs
   - crates/number_theory/modint/modint_61/src/numeric.rs
   - crates/number_theory/modint/modint_61/src/ops.rs
-  timestamp: '2025-03-23 09:39:20+00:00'
+  - crates/string/rolling_hash/src/lib.rs
+  timestamp: '2025-03-24 01:42:22+00:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: crates/number_theory/modint/modint_61/src/lib.rs

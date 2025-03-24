@@ -56,9 +56,6 @@ data:
   - icon: ':heavy_check_mark:'
     path: crates/polynomial/formal_power_series/src/sqrt.rs
     title: crates/polynomial/formal_power_series/src/sqrt.rs
-  - icon: ':warning:'
-    path: verify/sandbox/test/src/main.rs
-    title: verify/sandbox/test/src/main.rs
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: verify/library_checker/polynomial/exp_of_formal_power_series/src/main.rs
@@ -127,7 +124,6 @@ data:
   isVerificationFile: false
   path: crates/polynomial/formal_power_series/src/convert.rs
   requiredBy:
-  - verify/sandbox/test/src/main.rs
   - crates/polynomial/formal_power_series/src/lib.rs
   - crates/polynomial/formal_power_series/src/ops.rs
   - crates/polynomial/formal_power_series/src/constructor.rs

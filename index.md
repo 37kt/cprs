@@ -499,6 +499,17 @@ data:
     - icon: ':heavy_check_mark:'
       path: crates/string/manacher/src/lib.rs
       title: crates/string/manacher/src/lib.rs
+  - name: crates/string/rolling_hash/src
+    pages:
+    - icon: ':heavy_check_mark:'
+      path: crates/string/rolling_hash/src/lib.rs
+      title: crates/string/rolling_hash/src/lib.rs
+    - icon: ':heavy_check_mark:'
+      path: crates/string/rolling_hash/src/monoid.rs
+      title: crates/string/rolling_hash/src/monoid.rs
+    - icon: ':heavy_check_mark:'
+      path: crates/string/rolling_hash/src/sequence.rs
+      title: crates/string/rolling_hash/src/sequence.rs
   - name: crates/string/suffix_array/src
     pages:
     - icon: ':heavy_check_mark:'
@@ -846,6 +857,11 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/library_checker/string/zalgorithm/src/main.rs
       title: verify/library_checker/string/zalgorithm/src/main.rs
+  - name: verify/library_checker/string/zalgorithm_rh/src
+    pages:
+    - icon: ':heavy_check_mark:'
+      path: verify/library_checker/string/zalgorithm_rh/src/main.rs
+      title: verify/library_checker/string/zalgorithm_rh/src/main.rs
   - name: verify/library_checker/tree/jump_on_tree/src
     pages:
     - icon: ':heavy_check_mark:'

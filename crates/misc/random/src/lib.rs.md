@@ -1,7 +1,13 @@
 ---
 data:
   _extendedDependsOn: []
-  _extendedRequiredBy: []
+  _extendedRequiredBy:
+  - icon: ':heavy_check_mark:'
+    path: crates/string/rolling_hash/src/lib.rs
+    title: crates/string/rolling_hash/src/lib.rs
+  - icon: ':warning:'
+    path: verify/sandbox/test/src/main.rs
+    title: verify/sandbox/test/src/main.rs
   _extendedVerifiedWith: []
   _isVerificationFailed: false
   _pathExtension: rs
@@ -37,7 +43,9 @@ data:
   dependsOn: []
   isVerificationFile: false
   path: crates/misc/random/src/lib.rs
-  requiredBy: []
+  requiredBy:
+  - verify/sandbox/test/src/main.rs
+  - crates/string/rolling_hash/src/lib.rs
   timestamp: '2025-03-23 09:17:11+00:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []

@@ -14,6 +14,12 @@ data:
   - icon: ':warning:'
     path: crates/number_theory/modint/modint_61/src/numeric.rs
     title: crates/number_theory/modint/modint_61/src/numeric.rs
+  - icon: ':heavy_check_mark:'
+    path: crates/string/rolling_hash/src/lib.rs
+    title: crates/string/rolling_hash/src/lib.rs
+  - icon: ':warning:'
+    path: verify/sandbox/test/src/main.rs
+    title: verify/sandbox/test/src/main.rs
   _extendedVerifiedWith: []
   _isVerificationFailed: false
   _pathExtension: rs
@@ -77,28 +83,32 @@ data:
     \  ($(($t1:ty, $t2:ty)),*) => {\n        $(\n            impl From<$t1> for ModInt61\
     \ {\n                fn from(x: $t1) -> Self {\n                    Self::from_raw((x\
     \ as $t2).rem_euclid(Self::modulus() as $t2) as u64)\n                }\n    \
-    \        }\n        )*\n    };\n}\n\nimpl_from_integer! {\n    (i8, i64),\n  \
-    \  (i16, i64),\n    (i32, i64),\n    (i64, i64),\n    (isize, i64),\n    (i128,\
-    \ i128),\n    (u8, u64),\n    (u16, u64),\n    (u32, u64),\n    (u64, u64),\n\
-    \    (usize, u64),\n    (u128, u128)\n}\n\nmacro_rules! impl_ops {\n    ($(\n\
-    \        $tr:ident,\n        $tr_a:ident,\n        $f:ident,\n        $f_a:ident,\n\
-    \    )*) => {$(\n        impl<T: Into<ModInt61>> $tr<T> for &ModInt61 {\n    \
-    \        type Output = ModInt61;\n\n            fn $f(self, rhs: T) -> Self::Output\
-    \ {\n                (*self).$f(rhs.into())\n            }\n        }\n\n    \
-    \    impl<T: Into<ModInt61>> $tr_a<T> for ModInt61 {\n            fn $f_a(&mut\
-    \ self, rhs: T) {\n                *self = (*self).$f(rhs.into());\n         \
-    \   }\n        }\n    )*};\n}\n\nimpl_ops! {\n    Add, AddAssign, add, add_assign,\n\
-    \    Sub, SubAssign, sub, sub_assign,\n    Mul, MulAssign, mul, mul_assign,\n\
-    \    Div, DivAssign, div, div_assign,\n}\n"
+    \        }\n\n            impl From<&$t1> for ModInt61 {\n                fn from(x:\
+    \ &$t1) -> Self {\n                    Self::from_raw((*x as $t2).rem_euclid(Self::modulus()\
+    \ as $t2) as u64)\n                }\n            }\n        )*\n    };\n}\n\n\
+    impl_from_integer! {\n    (i8, i64),\n    (i16, i64),\n    (i32, i64),\n    (i64,\
+    \ i64),\n    (isize, i64),\n    (i128, i128),\n    (u8, u64),\n    (u16, u64),\n\
+    \    (u32, u64),\n    (u64, u64),\n    (usize, u64),\n    (u128, u128)\n}\n\n\
+    macro_rules! impl_ops {\n    ($(\n        $tr:ident,\n        $tr_a:ident,\n \
+    \       $f:ident,\n        $f_a:ident,\n    )*) => {$(\n        impl<T: Into<ModInt61>>\
+    \ $tr<T> for &ModInt61 {\n            type Output = ModInt61;\n\n            fn\
+    \ $f(self, rhs: T) -> Self::Output {\n                (*self).$f(rhs.into())\n\
+    \            }\n        }\n\n        impl<T: Into<ModInt61>> $tr_a<T> for ModInt61\
+    \ {\n            fn $f_a(&mut self, rhs: T) {\n                *self = (*self).$f(rhs.into());\n\
+    \            }\n        }\n    )*};\n}\n\nimpl_ops! {\n    Add, AddAssign, add,\
+    \ add_assign,\n    Sub, SubAssign, sub, sub_assign,\n    Mul, MulAssign, mul,\
+    \ mul_assign,\n    Div, DivAssign, div, div_assign,\n}\n"
   dependsOn:
   - crates/number_theory/modint/modint_61/src/lib.rs
   - crates/number_theory/modint/modint_61/src/numeric.rs
   isVerificationFile: false
   path: crates/number_theory/modint/modint_61/src/ops.rs
   requiredBy:
+  - verify/sandbox/test/src/main.rs
   - crates/number_theory/modint/modint_61/src/lib.rs
   - crates/number_theory/modint/modint_61/src/numeric.rs
-  timestamp: '2025-03-23 09:39:20+00:00'
+  - crates/string/rolling_hash/src/lib.rs
+  timestamp: '2025-03-24 01:42:22+00:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: crates/number_theory/modint/modint_61/src/ops.rs
