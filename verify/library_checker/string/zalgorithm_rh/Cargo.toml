@@ -1,5 +1,5 @@
 [package]
-name = "testtesttest"
+name = "zalgorithm_rh"
 version = "0.1.0"
 edition = "2021"
 
@@ -7,6 +7,4 @@ edition = "2021"
 
 [dependencies]
 proconio = { version = "=0.5.0", features = ["derive"] }
-macros = { path = "../../../crates/misc/macros" }
-random = { path = "../../../crates/misc/random" }
-modint_61 = { path = "../../../crates/number_theory/modint/modint_61" }
+rolling_hash = { path = "../../../../crates/string/rolling_hash" }

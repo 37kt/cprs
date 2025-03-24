@@ -176,6 +176,12 @@ macro_rules! impl_from_integer {
                     Self::from_raw((x as $t2).rem_euclid(Self::modulus() as $t2) as u64)
                 }
             }
+
+            impl From<&$t1> for ModInt61 {
+                fn from(x: &$t1) -> Self {
+                    Self::from_raw((*x as $t2).rem_euclid(Self::modulus() as $t2) as u64)
+                }
+            }
         )*
     };
 }

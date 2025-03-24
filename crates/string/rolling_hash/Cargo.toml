@@ -1,0 +1,17 @@
+[package]
+name = "rolling_hash"
+version = "0.1.0"
+edition = "2021"
+license = "CC0-1.0"
+publish = false
+
+[lib]
+name = "rolling_hash"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+modint_61 = { path = "../../number_theory/modint/modint_61" }
+random = { path = "../../misc/random" }
+algebraic_traits = { path = "../../algebra/algebraic_traits" }
+into_half_open_range = { path = "../../misc/into_half_open_range" }
