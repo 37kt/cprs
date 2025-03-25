@@ -195,7 +195,8 @@ impl MaxFlow {
         let mut sum = 0;
         while self.iter[v] < self.edges[v].len() {
             let e = self.edges[v][self.iter[v]];
-            if e.cap >= base && self.dist[v] < self.dist[e.dst] {
+            // if e.cap >= base && self.dist[v] < self.dist[e.dst] {
+            if e.cap >= base && self.dist[v] + 1 == self.dist[e.dst] {
                 let diff = self.find_augmenting_path(e.dst, dst, base, e.cap.min(flow - sum));
                 if diff > 0 {
                     self.edges[v][self.iter[v]].cap -= diff;
