@@ -146,7 +146,7 @@ data:
   isVerificationFile: false
   path: crates/flow/binary_optimization/src/lib.rs
   requiredBy: []
-  timestamp: '2025-03-19 23:25:14+00:00'
+  timestamp: '2025-03-25 09:58:57+00:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/yukicoder/flow/yuki2713_binopt/src/main.rs

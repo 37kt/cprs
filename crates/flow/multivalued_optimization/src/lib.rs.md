@@ -173,7 +173,7 @@ data:
   requiredBy:
   - verify/sandbox/abc397g/src/main.rs
   - verify/sandbox/abc347g/src/main.rs
-  timestamp: '2025-03-19 23:25:14+00:00'
+  timestamp: '2025-03-25 09:58:57+00:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/yukicoder/flow/yuki0119_mopt/src/main.rs

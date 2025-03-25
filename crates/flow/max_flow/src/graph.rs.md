@@ -47,7 +47,7 @@ data:
   - crates/flow/binary_optimization/src/lib.rs
   - crates/flow/max_flow/src/lib.rs
   - crates/flow/max_flow/src/queue.rs
-  timestamp: '2025-03-18 02:28:18+00:00'
+  timestamp: '2025-03-25 09:58:57+00:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/yukicoder/flow/yuki1479_maxflow/src/main.rs

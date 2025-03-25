@@ -120,9 +120,10 @@ data:
     \ self, v: usize, dst: usize, base: i64, flow: i64) -> i64 {\n        if v ==\
     \ dst {\n            return flow;\n        }\n\n        let mut sum = 0;\n   \
     \     while self.iter[v] < self.edges[v].len() {\n            let e = self.edges[v][self.iter[v]];\n\
-    \            if e.cap >= base && self.dist[v] < self.dist[e.dst] {\n         \
-    \       let diff = self.find_augmenting_path(e.dst, dst, base, e.cap.min(flow\
-    \ - sum));\n                if diff > 0 {\n                    self.edges[v][self.iter[v]].cap\
+    \            // if e.cap >= base && self.dist[v] < self.dist[e.dst] {\n      \
+    \      if e.cap >= base && self.dist[v] + 1 == self.dist[e.dst] {\n          \
+    \      let diff = self.find_augmenting_path(e.dst, dst, base, e.cap.min(flow -\
+    \ sum));\n                if diff > 0 {\n                    self.edges[v][self.iter[v]].cap\
     \ -= diff;\n                    self.edges[e.dst][e.rev].cap += diff;\n      \
     \              sum += diff;\n                    if flow - sum < base {\n    \
     \                    break;\n                    }\n                }\n      \
@@ -144,7 +145,7 @@ data:
   - crates/flow/binary_optimization/src/lib.rs
   - crates/flow/max_flow/src/graph.rs
   - crates/flow/max_flow/src/queue.rs
-  timestamp: '2025-03-20 09:27:03+00:00'
+  timestamp: '2025-03-25 09:58:57+00:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/yukicoder/flow/yuki1479_maxflow/src/main.rs
