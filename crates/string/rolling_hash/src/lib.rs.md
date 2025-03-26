@@ -53,7 +53,7 @@ data:
     \         ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\
     \  File \"/opt/hostedtoolcache/Python/3.13.2/x64/lib/python3.13/site-packages/onlinejudge_verify/languages/rust.py\"\
     , line 288, in bundle\n    raise NotImplementedError\nNotImplementedError\n"
-  code: "use std::{cell::RefCell, fmt::Debug, sync::OnceLock};\n\nuse modint_61::ModInt61;\n\
+  code: "use std::{\n    cell::{OnceCell, RefCell},\n    fmt::Debug,\n};\n\nuse modint_61::ModInt61;\n\
     use random::Pcg64Fast;\n\nmod monoid;\npub use monoid::*;\n\nmod sequence;\npub\
     \ use sequence::*;\n\n#[derive(Clone, Copy, PartialEq, Eq, Hash)]\npub struct\
     \ RollingHash {\n    pub hash: ModInt61,\n    pub base_pow: ModInt61, // base^len\n\
@@ -75,8 +75,9 @@ data:
     \ + random::<0x_ADD>()) * self.base_pow,\n                base_pow: self.base_pow\
     \ * Self::base(),\n            };\n        }\n    }\n}\n\nthread_local! {\n  \
     \  static RNG: RefCell<Pcg64Fast> = RefCell::new(Pcg64Fast::default());\n}\n\n\
-    pub(crate) fn random<const ID: u64>() -> ModInt61 {\n    static VALUE: OnceLock<ModInt61>\
-    \ = OnceLock::new();\n    *VALUE.get_or_init(|| RNG.with(|rng| ModInt61::new(rng.borrow_mut().u64())))\n\
+    pub(crate) fn random<const ID: u64>() -> ModInt61 {\n    thread_local! {\n   \
+    \     static VALUE: OnceCell<ModInt61> = OnceCell::new();\n    }\n    VALUE.with(|v|\
+    \ *v.get_or_init(|| RNG.with(|rng| ModInt61::new(rng.borrow_mut().u64()))))\n\
     }\n"
   dependsOn:
   - crates/algebra/algebraic_traits/src/lib.rs
@@ -94,7 +95,7 @@ data:
   requiredBy:
   - crates/string/rolling_hash/src/monoid.rs
   - crates/string/rolling_hash/src/sequence.rs
-  timestamp: '2025-03-24 01:42:22+00:00'
+  timestamp: '2025-03-26 05:05:06+00:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/library_checker/string/zalgorithm_rh/src/main.rs
