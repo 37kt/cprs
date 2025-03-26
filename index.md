@@ -305,6 +305,11 @@ data:
     - icon: ':heavy_check_mark:'
       path: crates/graph/strongly_connected_components/src/lib.rs
       title: crates/graph/strongly_connected_components/src/lib.rs
+  - name: crates/graph/two_edge_connected_components/src
+    pages:
+    - icon: ':heavy_check_mark:'
+      path: crates/graph/two_edge_connected_components/src/lib.rs
+      title: crates/graph/two_edge_connected_components/src/lib.rs
   - name: crates/linear_algebra/matrix/src
     pages:
     - icon: ':heavy_check_mark:'
@@ -747,6 +752,11 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/library_checker/graph/shortest_path/src/main.rs
       title: verify/library_checker/graph/shortest_path/src/main.rs
+  - name: verify/library_checker/graph/two_edge_connected_components/src
+    pages:
+    - icon: ':heavy_check_mark:'
+      path: verify/library_checker/graph/two_edge_connected_components/src/main.rs
+      title: verify/library_checker/graph/two_edge_connected_components/src/main.rs
   - name: verify/library_checker/linear_algebra/inverse_matrix/src
     pages:
     - icon: ':heavy_check_mark:'

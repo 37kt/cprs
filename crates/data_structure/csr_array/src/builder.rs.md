@@ -24,6 +24,9 @@ data:
     path: crates/graph/strongly_connected_components/src/lib.rs
     title: crates/graph/strongly_connected_components/src/lib.rs
   - icon: ':heavy_check_mark:'
+    path: crates/graph/two_edge_connected_components/src/lib.rs
+    title: crates/graph/two_edge_connected_components/src/lib.rs
+  - icon: ':heavy_check_mark:'
     path: crates/tree/heavy_light_decomposition/src/lib.rs
     title: crates/tree/heavy_light_decomposition/src/lib.rs
   - icon: ':heavy_check_mark:'
@@ -71,6 +74,7 @@ data:
   requiredBy:
   - crates/tree/heavy_light_decomposition/src/lib.rs
   - crates/tree/rerooting_tree_dp/src/lib.rs
+  - crates/graph/two_edge_connected_components/src/lib.rs
   - crates/graph/graph/src/lib.rs
   - crates/graph/strongly_connected_components/src/lib.rs
   - crates/graph/dijkstra/src/lib.rs
