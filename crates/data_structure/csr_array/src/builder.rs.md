@@ -18,6 +18,9 @@ data:
     path: crates/graph/dijkstra/src/lib.rs
     title: crates/graph/dijkstra/src/lib.rs
   - icon: ':heavy_check_mark:'
+    path: crates/graph/extended_block_cut_tree/src/lib.rs
+    title: crates/graph/extended_block_cut_tree/src/lib.rs
+  - icon: ':heavy_check_mark:'
     path: crates/graph/graph/src/lib.rs
     title: crates/graph/graph/src/lib.rs
   - icon: ':heavy_check_mark:'
@@ -76,6 +79,7 @@ data:
   - crates/tree/rerooting_tree_dp/src/lib.rs
   - crates/graph/two_edge_connected_components/src/lib.rs
   - crates/graph/graph/src/lib.rs
+  - crates/graph/extended_block_cut_tree/src/lib.rs
   - crates/graph/strongly_connected_components/src/lib.rs
   - crates/graph/dijkstra/src/lib.rs
   - crates/data_structure/csr_array/src/csr_array.rs

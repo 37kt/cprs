@@ -18,6 +18,9 @@ data:
     title: crates/graph/graph/src/edge.rs
   _extendedRequiredBy:
   - icon: ':heavy_check_mark:'
+    path: crates/graph/extended_block_cut_tree/src/lib.rs
+    title: crates/graph/extended_block_cut_tree/src/lib.rs
+  - icon: ':heavy_check_mark:'
     path: crates/graph/graph/src/builder.rs
     title: crates/graph/graph/src/builder.rs
   - icon: ':heavy_check_mark:'
@@ -33,6 +36,9 @@ data:
     path: crates/tree/rerooting_tree_dp/src/lib.rs
     title: crates/tree/rerooting_tree_dp/src/lib.rs
   _extendedVerifiedWith:
+  - icon: ':heavy_check_mark:'
+    path: verify/library_checker/graph/biconnected_components/src/main.rs
+    title: verify/library_checker/graph/biconnected_components/src/main.rs
   - icon: ':heavy_check_mark:'
     path: verify/library_checker/graph/scc/src/main.rs
     title: verify/library_checker/graph/scc/src/main.rs
@@ -79,6 +85,7 @@ data:
   - crates/graph/two_edge_connected_components/src/lib.rs
   - crates/graph/graph/src/builder.rs
   - crates/graph/graph/src/edge.rs
+  - crates/graph/extended_block_cut_tree/src/lib.rs
   - crates/graph/strongly_connected_components/src/lib.rs
   timestamp: '2025-03-06 00:54:38+00:00'
   verificationStatus: LIBRARY_ALL_AC
@@ -87,6 +94,7 @@ data:
   - verify/library_checker/graph/two_edge_connected_components/src/main.rs
   - verify/library_checker/graph/scc/src/main.rs
   - verify/library_checker/graph/shortest_path/src/main.rs
+  - verify/library_checker/graph/biconnected_components/src/main.rs
 documentation_of: crates/graph/graph/src/lib.rs
 layout: document
 redirect_from:

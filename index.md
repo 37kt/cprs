@@ -289,6 +289,11 @@ data:
     - icon: ':heavy_check_mark:'
       path: crates/graph/dijkstra/src/lib.rs
       title: crates/graph/dijkstra/src/lib.rs
+  - name: crates/graph/extended_block_cut_tree/src
+    pages:
+    - icon: ':heavy_check_mark:'
+      path: crates/graph/extended_block_cut_tree/src/lib.rs
+      title: crates/graph/extended_block_cut_tree/src/lib.rs
   - name: crates/graph/graph/src
     pages:
     - icon: ':heavy_check_mark:'
@@ -737,6 +742,11 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/library_checker/graph/assignment/src/main.rs
       title: verify/library_checker/graph/assignment/src/main.rs
+  - name: verify/library_checker/graph/biconnected_components/src
+    pages:
+    - icon: ':heavy_check_mark:'
+      path: verify/library_checker/graph/biconnected_components/src/main.rs
+      title: verify/library_checker/graph/biconnected_components/src/main.rs
   - name: verify/library_checker/graph/min_cost_b_flow/src
     pages:
     - icon: ':heavy_check_mark:'
