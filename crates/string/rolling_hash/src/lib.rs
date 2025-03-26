@@ -1,4 +1,7 @@
-use std::{cell::RefCell, fmt::Debug, sync::OnceLock};
+use std::{
+    cell::{OnceCell, RefCell},
+    fmt::Debug,
+};
 
 use modint_61::ModInt61;
 use random::Pcg64Fast;
@@ -77,6 +80,8 @@ thread_local! {
 }
 
 pub(crate) fn random<const ID: u64>() -> ModInt61 {
-    static VALUE: OnceLock<ModInt61> = OnceLock::new();
-    *VALUE.get_or_init(|| RNG.with(|rng| ModInt61::new(rng.borrow_mut().u64())))
+    thread_local! {
+        static VALUE: OnceCell<ModInt61> = OnceCell::new();
+    }
+    VALUE.with(|v| *v.get_or_init(|| RNG.with(|rng| ModInt61::new(rng.borrow_mut().u64()))))
 }
