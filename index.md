@@ -551,6 +551,11 @@ data:
     - icon: ':heavy_check_mark:'
       path: crates/tree/rerooting_tree_dp/src/lib.rs
       title: crates/tree/rerooting_tree_dp/src/lib.rs
+  - name: crates/tree/static_top_tree/src
+    pages:
+    - icon: ':warning:'
+      path: crates/tree/static_top_tree/src/lib.rs
+      title: crates/tree/static_top_tree/src/lib.rs
   - name: verify/sandbox/abc218h/src
     pages:
     - icon: ':warning:'

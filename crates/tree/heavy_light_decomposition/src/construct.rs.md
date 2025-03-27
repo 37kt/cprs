@@ -14,6 +14,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: crates/tree/heavy_light_decomposition/src/lib.rs
     title: crates/tree/heavy_light_decomposition/src/lib.rs
+  - icon: ':warning:'
+    path: crates/tree/static_top_tree/src/lib.rs
+    title: crates/tree/static_top_tree/src/lib.rs
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: verify/library_checker/tree/jump_on_tree/src/main.rs
@@ -104,6 +107,7 @@ data:
   requiredBy:
   - crates/tree/heavy_light_decomposition/src/lib.rs
   - crates/tree/heavy_light_decomposition/src/compress.rs
+  - crates/tree/static_top_tree/src/lib.rs
   timestamp: '2025-03-10 08:02:08+00:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
