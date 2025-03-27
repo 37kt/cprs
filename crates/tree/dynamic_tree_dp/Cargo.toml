@@ -1,15 +1,16 @@
 [package]
-name = "static_top_tree"
+name = "dynamic_tree_dp"
 version = "0.1.0"
 edition = "2021"
 license = "CC0-1.0"
 publish = false
 
 [lib]
-name = "static_top_tree"
+name = "dynamic_tree_dp"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
 csr_array = { path = "../../data_structure/csr_array" }
-heavy_light_decomposition = { path = "../../tree/heavy_light_decomposition" }
+static_top_tree = { path = "../static_top_tree" }
+heavy_light_decomposition = { path = "../heavy_light_decomposition" }

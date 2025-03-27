@@ -50,6 +50,12 @@ impl HeavyLightDecomposition {
             tour[t] = v as i32;
         }
 
+        let mut edge_ord = vec![0; n - 1];
+        for e in 0..n - 1 {
+            let i = down[e + 1] as usize - 1;
+            edge_ord[i] = e;
+        }
+
         Self {
             n,
             root,
@@ -57,6 +63,7 @@ impl HeavyLightDecomposition {
             next,
             sub,
             tour,
+            edge_ord,
         }
     }
 
@@ -133,6 +140,13 @@ impl HeavyLightDecomposition {
             tour[t] = v as i32;
         }
 
+        let mut edge_ord = vec![0; n - 1];
+        for e in 0..n - 1 {
+            let (u, v) = edges[e].endpoints();
+            let i = down[u].max(down[v]) as usize - 1;
+            edge_ord[i] = e;
+        }
+
         Self {
             n,
             root,
@@ -140,6 +154,7 @@ impl HeavyLightDecomposition {
             next,
             sub,
             tour,
+            edge_ord,
         }
     }
 }

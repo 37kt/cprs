@@ -10,17 +10,17 @@ pub enum SttNodeType {
     Compress,
 }
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+#[derive(Debug, Clone, Copy)]
 pub struct SttNode {
-    ty: SttNodeType,
-    par: usize,
-    lch: usize,
-    rch: usize,
+    pub ty: SttNodeType,
+    pub par: usize,
+    pub lch: usize,
+    pub rch: usize,
 }
 
 #[derive(Clone)]
 pub struct StaticTopTree {
-    nodes: Vec<SttNode>,
+    pub nodes: Vec<SttNode>,
 }
 
 impl StaticTopTree {
@@ -82,17 +82,18 @@ impl StaticTopTree {
                 pq.push(Reverse((h1.max(h2) + 1, v3)));
             }
             stack.push(pq.pop().unwrap().0);
-        }
 
-        loop {
-            if matches!(&stack[..], &[.., (h0, _), (h1, _), (h2, _)] if (h0 == h1 || h0 <= h2)) {
-                let x = stack.pop().unwrap();
-                self.compress_last_two(&mut stack);
-                stack.push(x);
-            } else if matches!(&stack[..], &[.., (h0, _), (h1, _)] if h0 <= h1) {
-                self.compress_last_two(&mut stack);
-            } else {
-                break;
+            loop {
+                if matches!(&stack[..], &[.., (h0, _), (h1, _), (h2, _)] if (h0 == h1 || h0 <= h2))
+                {
+                    let x = stack.pop().unwrap();
+                    self.compress_last_two(&mut stack);
+                    stack.push(x);
+                } else if matches!(&stack[..], &[.., (h0, _), (h1, _)] if h0 <= h1) {
+                    self.compress_last_two(&mut stack);
+                } else {
+                    break;
+                }
             }
         }
 

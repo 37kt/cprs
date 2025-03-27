@@ -14,6 +14,7 @@ pub struct HeavyLightDecomposition {
     next: Vec<i32>,
     sub: Vec<i32>,
     tour: Vec<i32>,
+    edge_ord: Vec<usize>,
 }
 
 impl HeavyLightDecomposition {
@@ -263,6 +264,13 @@ impl HeavyLightDecomposition {
     ) -> impl Iterator<Item = usize> + FusedIterator + ExactSizeIterator + DoubleEndedIterator + '_
     {
         self.tour.iter().map(|&v| v as usize)
+    }
+
+    pub fn edges_order(
+        &self,
+    ) -> impl Iterator<Item = usize> + FusedIterator + ExactSizeIterator + DoubleEndedIterator + '_
+    {
+        self.edge_ord.iter().map(|&v| v)
     }
 
     /// 各頂点の子のリスト  
