@@ -10,3 +10,4 @@ proconio = { version = "=0.5.0", features = ["derive"] }
 centroid_decomposition = { path = "../../../../crates/tree/centroid_decomposition" }
 convolution = { path = "../../../../crates/convolution/convolution" }
 graph = { path = "../../../../crates/graph/graph" }
+static_modint = { path = "../../../../crates/number_theory/modint/static_modint" }

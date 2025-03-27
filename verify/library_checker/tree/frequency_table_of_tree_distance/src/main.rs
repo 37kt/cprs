@@ -1,12 +1,20 @@
 // verification-helper: PROBLEM https://judge.yosupo.jp/problem/frequency_table_of_tree_distance
 
 use centroid_decomposition::CentroidDecomposition;
-use convolution::convolution_mod_2_64;
+use convolution::convolution_ntt_friendly;
 use graph::{GraphBuilder, UndirectedGraph};
 use proconio::{fastout, input};
+use static_modint::StaticModInt;
+
+const P1: u32 = 998_244_353;
+const P2: u32 = 1_004_535_809;
+type Fp1 = StaticModInt<P1>;
+type Fp2 = StaticModInt<P2>;
 
 #[fastout]
 fn main() {
+    let m1inv_fp2 = Fp2::from_raw(P1).recip();
+
     input! {
         n: usize,
         ab: [(usize, usize); n - 1],
@@ -16,22 +24,29 @@ fn main() {
     let mut depth = vec![0; n];
     CentroidDecomposition::solve(&g, |tr| {
         depth[tr.root] = 0;
-        let mut f = vec![vec![]; 2];
+        let mut f1 = vec![vec![]; 2];
+        let mut f2 = vec![vec![]; 2];
         for c in 0..2 {
             for (&v, &p) in tr.vs[c].iter().zip(tr.par[c].iter()) {
                 depth[v] = depth[p] + 1;
-                if f[c].len() <= depth[v] {
-                    f[c].resize(depth[v] + 1, 0);
+                if f1[c].len() <= depth[v] {
+                    f1[c].resize(depth[v] + 1, Fp1::from_raw(0));
+                    f2[c].resize(depth[v] + 1, Fp2::from_raw(0));
                 }
-                f[c][depth[v]] += 1;
+                f1[c][depth[v]] += 1;
+                f2[c][depth[v]] += 1;
             }
         }
-        let g = convolution_mod_2_64(&f[0], &f[1]);
-        for i in 0..g.len() {
-            res[i] += g[i];
+        let g1 = convolution_ntt_friendly(&f1[0], &f1[1]);
+        let g2 = convolution_ntt_friendly(&f2[0], &f2[1]);
+        for (i, (e1, e2)) in g1.into_iter().zip(g2).enumerate() {
+            let x1 = e1;
+            let x2 = (e2 - Fp2::from_raw(e1.val())) * m1inv_fp2;
+            res[i] += (x1.val() as u64) + (x2.val() as u64) * (P1 as u64);
         }
     });
     res[1] += (n - 1) as u64;
+
     for x in &res[1..] {
         print!("{} ", x);
     }
