@@ -18,6 +18,9 @@ data:
     title: crates/tree/heavy_light_decomposition/src/construct.rs
   _extendedRequiredBy:
   - icon: ':heavy_check_mark:'
+    path: crates/tree/dynamic_tree_dp/src/lib.rs
+    title: crates/tree/dynamic_tree_dp/src/lib.rs
+  - icon: ':heavy_check_mark:'
     path: crates/tree/heavy_light_decomposition/src/compress.rs
     title: crates/tree/heavy_light_decomposition/src/compress.rs
   - icon: ':heavy_check_mark:'
@@ -61,41 +64,41 @@ data:
     \npub mod compress;\npub mod construct;\n\nuse std::iter::FusedIterator;\n\nuse\
     \ csr_array::{CsrArray, CsrArrayBuilder};\n\npub struct HeavyLightDecomposition\
     \ {\n    n: usize,\n    root: usize,\n    down: Vec<i32>,\n    next: Vec<i32>,\n\
-    \    sub: Vec<i32>,\n    tour: Vec<i32>,\n}\n\nimpl HeavyLightDecomposition {\n\
-    \    pub fn len(&self) -> usize {\n        self.n\n    }\n\n    pub fn root(&self)\
-    \ -> usize {\n        self.root\n    }\n\n    /// \u5C5E\u3059\u308B heavy path\
-    \ \u306E\u5148\u982D\n    pub fn head(&self, v: usize) -> usize {\n        if\
-    \ self.next[v] < 0 {\n            v\n        } else {\n            self.next[v]\
-    \ as usize\n        }\n    }\n\n    /// \u9802\u70B9 v \u306E d \u500B\u89AA\n\
-    \    pub fn la(&self, mut v: usize, d: usize) -> Option<usize> {\n        let\
-    \ mut d = d as i32;\n        while v != !0 {\n            let u = self.head(v);\n\
-    \            if self.down[v] - d >= self.down[u] {\n                v = self.tour[(self.down[v]\
-    \ - d) as usize] as usize;\n                break;\n            }\n          \
-    \  d -= self.down[v] - self.down[u] + 1;\n            v = if u == self.root {\n\
-    \                !0\n            } else {\n                (!self.next[u]) as\
-    \ usize\n            };\n        }\n        if v == !0 {\n            None\n \
-    \       } else {\n            Some(v)\n        }\n    }\n\n    pub fn lca(&self,\
-    \ mut u: usize, mut v: usize) -> usize {\n        let mut du = self.down[u];\n\
-    \        let mut dv = self.down[v];\n        if du > dv {\n            std::mem::swap(&mut\
-    \ u, &mut v);\n            std::mem::swap(&mut du, &mut dv);\n        }\n    \
-    \    if dv < du + self.sub[u] {\n            return u;\n        }\n        while\
-    \ du < dv {\n            v = !self.next[self.head(v)] as usize;\n            dv\
-    \ = self.down[v];\n        }\n        v\n    }\n\n    /// u \u3092\u6839\u3068\
-    \u3057\u305F\u3068\u304D\u306E lca(v, w)\n    pub fn meet(&self, u: usize, v:\
-    \ usize, w: usize) -> usize {\n        self.lca(u, v) ^ self.lca(v, w) ^ self.lca(w,\
-    \ u)\n    }\n\n    pub fn dist(&self, mut u: usize, mut v: usize) -> usize {\n\
-    \        let mut dist = 0;\n        while self.head(u) != self.head(v) {\n   \
-    \         if self.down[u] > self.down[v] {\n                std::mem::swap(&mut\
-    \ u, &mut v);\n            }\n            dist += self.down[v] - self.down[self.head(v)]\
-    \ + 1;\n            v = !self.next[self.head(v)] as usize;\n        }\n      \
-    \  dist += (self.down[u] - self.down[v]).abs();\n        dist as usize\n    }\n\
-    \n    pub fn jump(&self, mut s: usize, mut t: usize, d: usize) -> Option<usize>\
-    \ {\n        let (ss, tt) = (s, t);\n        let (mut dist_sl, mut dist_tl) =\
-    \ (0, 0);\n        while self.head(s) != self.head(t) {\n            if self.down[s]\
-    \ > self.down[t] {\n                dist_sl += self.down[s] - self.down[self.head(s)]\
-    \ + 1;\n                s = !self.next[self.head(s)] as usize;\n            }\
-    \ else {\n                dist_tl += self.down[t] - self.down[self.head(t)] +\
-    \ 1;\n                t = !self.next[self.head(t)] as usize;\n            }\n\
+    \    sub: Vec<i32>,\n    tour: Vec<i32>,\n    edge_ord: Vec<usize>,\n}\n\nimpl\
+    \ HeavyLightDecomposition {\n    pub fn len(&self) -> usize {\n        self.n\n\
+    \    }\n\n    pub fn root(&self) -> usize {\n        self.root\n    }\n\n    ///\
+    \ \u5C5E\u3059\u308B heavy path \u306E\u5148\u982D\n    pub fn head(&self, v:\
+    \ usize) -> usize {\n        if self.next[v] < 0 {\n            v\n        } else\
+    \ {\n            self.next[v] as usize\n        }\n    }\n\n    /// \u9802\u70B9\
+    \ v \u306E d \u500B\u89AA\n    pub fn la(&self, mut v: usize, d: usize) -> Option<usize>\
+    \ {\n        let mut d = d as i32;\n        while v != !0 {\n            let u\
+    \ = self.head(v);\n            if self.down[v] - d >= self.down[u] {\n       \
+    \         v = self.tour[(self.down[v] - d) as usize] as usize;\n             \
+    \   break;\n            }\n            d -= self.down[v] - self.down[u] + 1;\n\
+    \            v = if u == self.root {\n                !0\n            } else {\n\
+    \                (!self.next[u]) as usize\n            };\n        }\n       \
+    \ if v == !0 {\n            None\n        } else {\n            Some(v)\n    \
+    \    }\n    }\n\n    pub fn lca(&self, mut u: usize, mut v: usize) -> usize {\n\
+    \        let mut du = self.down[u];\n        let mut dv = self.down[v];\n    \
+    \    if du > dv {\n            std::mem::swap(&mut u, &mut v);\n            std::mem::swap(&mut\
+    \ du, &mut dv);\n        }\n        if dv < du + self.sub[u] {\n            return\
+    \ u;\n        }\n        while du < dv {\n            v = !self.next[self.head(v)]\
+    \ as usize;\n            dv = self.down[v];\n        }\n        v\n    }\n\n \
+    \   /// u \u3092\u6839\u3068\u3057\u305F\u3068\u304D\u306E lca(v, w)\n    pub\
+    \ fn meet(&self, u: usize, v: usize, w: usize) -> usize {\n        self.lca(u,\
+    \ v) ^ self.lca(v, w) ^ self.lca(w, u)\n    }\n\n    pub fn dist(&self, mut u:\
+    \ usize, mut v: usize) -> usize {\n        let mut dist = 0;\n        while self.head(u)\
+    \ != self.head(v) {\n            if self.down[u] > self.down[v] {\n          \
+    \      std::mem::swap(&mut u, &mut v);\n            }\n            dist += self.down[v]\
+    \ - self.down[self.head(v)] + 1;\n            v = !self.next[self.head(v)] as\
+    \ usize;\n        }\n        dist += (self.down[u] - self.down[v]).abs();\n  \
+    \      dist as usize\n    }\n\n    pub fn jump(&self, mut s: usize, mut t: usize,\
+    \ d: usize) -> Option<usize> {\n        let (ss, tt) = (s, t);\n        let (mut\
+    \ dist_sl, mut dist_tl) = (0, 0);\n        while self.head(s) != self.head(t)\
+    \ {\n            if self.down[s] > self.down[t] {\n                dist_sl +=\
+    \ self.down[s] - self.down[self.head(s)] + 1;\n                s = !self.next[self.head(s)]\
+    \ as usize;\n            } else {\n                dist_tl += self.down[t] - self.down[self.head(t)]\
+    \ + 1;\n                t = !self.next[self.head(t)] as usize;\n            }\n\
     \        }\n        if self.down[s] > self.down[t] {\n            dist_sl += self.down[s]\
     \ - self.down[t];\n        } else {\n            dist_tl += self.down[t] - self.down[s];\n\
     \        }\n        let mut d = d as i32;\n        if d <= dist_sl {\n       \
@@ -157,15 +160,17 @@ data:
     \ {\n            f(l as _, r as _, false);\n        }\n    }\n\n    pub fn euler_tour(\n\
     \        &self,\n    ) -> impl Iterator<Item = usize> + FusedIterator + ExactSizeIterator\
     \ + DoubleEndedIterator + '_\n    {\n        self.tour.iter().map(|&v| v as usize)\n\
-    \    }\n\n    /// \u5404\u9802\u70B9\u306E\u5B50\u306E\u30EA\u30B9\u30C8  \n \
-    \   /// heavy child \u304C\u5148\u982D\n    pub fn children(&self) -> CsrArray<usize>\
-    \ {\n        let mut csr = CsrArrayBuilder::new(self.n);\n        for v in self.euler_tour().skip(1)\
-    \ {\n            csr.push(self.parent(v).unwrap(), v);\n        }\n        csr.build()\n\
-    \    }\n}\n\n#[doc(hidden)]\npub trait Edge {\n    fn endpoints(&self) -> (usize,\
-    \ usize);\n}\n\n#[doc(hidden)]\nimpl Edge for (usize, usize) {\n    fn endpoints(&self)\
-    \ -> (usize, usize) {\n        *self\n    }\n}\n\n#[doc(hidden)]\nimpl<T> Edge\
-    \ for (usize, usize, T) {\n    fn endpoints(&self) -> (usize, usize) {\n     \
-    \   (self.0, self.1)\n    }\n}\n"
+    \    }\n\n    pub fn edges_order(\n        &self,\n    ) -> impl Iterator<Item\
+    \ = usize> + FusedIterator + ExactSizeIterator + DoubleEndedIterator + '_\n  \
+    \  {\n        self.edge_ord.iter().map(|&v| v)\n    }\n\n    /// \u5404\u9802\u70B9\
+    \u306E\u5B50\u306E\u30EA\u30B9\u30C8  \n    /// heavy child \u304C\u5148\u982D\
+    \n    pub fn children(&self) -> CsrArray<usize> {\n        let mut csr = CsrArrayBuilder::new(self.n);\n\
+    \        for v in self.euler_tour().skip(1) {\n            csr.push(self.parent(v).unwrap(),\
+    \ v);\n        }\n        csr.build()\n    }\n}\n\n#[doc(hidden)]\npub trait Edge\
+    \ {\n    fn endpoints(&self) -> (usize, usize);\n}\n\n#[doc(hidden)]\nimpl Edge\
+    \ for (usize, usize) {\n    fn endpoints(&self) -> (usize, usize) {\n        *self\n\
+    \    }\n}\n\n#[doc(hidden)]\nimpl<T> Edge for (usize, usize, T) {\n    fn endpoints(&self)\
+    \ -> (usize, usize) {\n        (self.0, self.1)\n    }\n}\n"
   dependsOn:
   - crates/data_structure/csr_array/src/builder.rs
   - crates/data_structure/csr_array/src/csr_array.rs
@@ -175,10 +180,11 @@ data:
   isVerificationFile: false
   path: crates/tree/heavy_light_decomposition/src/lib.rs
   requiredBy:
+  - crates/tree/dynamic_tree_dp/src/lib.rs
   - crates/tree/heavy_light_decomposition/src/compress.rs
   - crates/tree/heavy_light_decomposition/src/construct.rs
   - crates/tree/static_top_tree/src/lib.rs
-  timestamp: '2025-03-10 08:02:08+00:00'
+  timestamp: '2025-03-27 07:31:57+00:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/library_checker/tree/lca/src/main.rs

@@ -19,7 +19,10 @@ data:
   - icon: ':heavy_check_mark:'
     path: crates/tree/heavy_light_decomposition/src/lib.rs
     title: crates/tree/heavy_light_decomposition/src/lib.rs
-  _extendedRequiredBy: []
+  _extendedRequiredBy:
+  - icon: ':heavy_check_mark:'
+    path: crates/tree/dynamic_tree_dp/src/lib.rs
+    title: crates/tree/dynamic_tree_dp/src/lib.rs
   _extendedVerifiedWith: []
   _isVerificationFailed: false
   _pathExtension: rs
@@ -35,9 +38,9 @@ data:
   code: "use std::{cmp::Reverse, collections::BinaryHeap};\n\nuse csr_array::CsrArray;\n\
     use heavy_light_decomposition::HeavyLightDecomposition;\n\n#[derive(Debug, Clone,\
     \ Copy, PartialEq, Eq)]\npub enum SttNodeType {\n    Value,\n    Rake,\n    Compress,\n\
-    }\n\n#[derive(Debug, Clone, Copy, PartialEq, Eq)]\npub struct SttNode {\n    ty:\
-    \ SttNodeType,\n    par: usize,\n    lch: usize,\n    rch: usize,\n}\n\n#[derive(Clone)]\n\
-    pub struct StaticTopTree {\n    nodes: Vec<SttNode>,\n}\n\nimpl StaticTopTree\
+    }\n\n#[derive(Debug, Clone, Copy)]\npub struct SttNode {\n    pub ty: SttNodeType,\n\
+    \    pub par: usize,\n    pub lch: usize,\n    pub rch: usize,\n}\n\n#[derive(Clone)]\n\
+    pub struct StaticTopTree {\n    pub nodes: Vec<SttNode>,\n}\n\nimpl StaticTopTree\
     \ {\n    pub fn new(hld: &HeavyLightDecomposition) -> Self {\n        let n =\
     \ hld.len();\n        let root = hld.root();\n        let mut nodes = Vec::with_capacity(n\
     \ * 2 - 1);\n        nodes.extend(\n            std::iter::repeat(SttNode {\n\
@@ -61,15 +64,16 @@ data:
     \             let v3 = self.new_node(SttNodeType::Rake, v1, v2);\n           \
     \     if v == v1 {\n                    v = v3;\n                }\n         \
     \       pq.push(Reverse((h1.max(h2) + 1, v3)));\n            }\n            stack.push(pq.pop().unwrap().0);\n\
-    \        }\n\n        loop {\n            if matches!(&stack[..], &[.., (h0, _),\
-    \ (h1, _), (h2, _)] if (h0 == h1 || h0 <= h2)) {\n                let x = stack.pop().unwrap();\n\
-    \                self.compress_last_two(&mut stack);\n                stack.push(x);\n\
-    \            } else if matches!(&stack[..], &[.., (h0, _), (h1, _)] if h0 <= h1)\
-    \ {\n                self.compress_last_two(&mut stack);\n            } else {\n\
-    \                break;\n            }\n        }\n\n        while stack.len()\
-    \ >= 2 {\n            self.compress_last_two(&mut stack);\n        }\n       \
-    \ stack.pop().unwrap()\n    }\n\n    fn new_node(&mut self, ty: SttNodeType, lch:\
-    \ usize, rch: usize) -> usize {\n        let v = self.nodes.len();\n        self.nodes.push(SttNode\
+    \n            loop {\n                if matches!(&stack[..], &[.., (h0, _), (h1,\
+    \ _), (h2, _)] if (h0 == h1 || h0 <= h2))\n                {\n               \
+    \     let x = stack.pop().unwrap();\n                    self.compress_last_two(&mut\
+    \ stack);\n                    stack.push(x);\n                } else if matches!(&stack[..],\
+    \ &[.., (h0, _), (h1, _)] if h0 <= h1) {\n                    self.compress_last_two(&mut\
+    \ stack);\n                } else {\n                    break;\n            \
+    \    }\n            }\n        }\n\n        while stack.len() >= 2 {\n       \
+    \     self.compress_last_two(&mut stack);\n        }\n        stack.pop().unwrap()\n\
+    \    }\n\n    fn new_node(&mut self, ty: SttNodeType, lch: usize, rch: usize)\
+    \ -> usize {\n        let v = self.nodes.len();\n        self.nodes.push(SttNode\
     \ {\n            ty,\n            par: !0,\n            lch,\n            rch,\n\
     \        });\n        self.nodes[lch].par = v;\n        self.nodes[rch].par =\
     \ v;\n        v\n    }\n\n    fn compress_last_two(&mut self, stack: &mut Vec<(usize,\
@@ -85,8 +89,9 @@ data:
   - crates/tree/heavy_light_decomposition/src/lib.rs
   isVerificationFile: false
   path: crates/tree/static_top_tree/src/lib.rs
-  requiredBy: []
-  timestamp: '2025-03-27 05:10:31+00:00'
+  requiredBy:
+  - crates/tree/dynamic_tree_dp/src/lib.rs
+  timestamp: '2025-03-27 07:31:57+00:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: crates/tree/static_top_tree/src/lib.rs

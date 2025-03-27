@@ -9,6 +9,9 @@ data:
     title: crates/tree/heavy_light_decomposition/src/lib.rs
   _extendedRequiredBy:
   - icon: ':heavy_check_mark:'
+    path: crates/tree/dynamic_tree_dp/src/lib.rs
+    title: crates/tree/dynamic_tree_dp/src/lib.rs
+  - icon: ':heavy_check_mark:'
     path: crates/tree/heavy_light_decomposition/src/construct.rs
     title: crates/tree/heavy_light_decomposition/src/construct.rs
   - icon: ':heavy_check_mark:'
@@ -70,10 +73,11 @@ data:
   isVerificationFile: false
   path: crates/tree/heavy_light_decomposition/src/compress.rs
   requiredBy:
+  - crates/tree/dynamic_tree_dp/src/lib.rs
   - crates/tree/heavy_light_decomposition/src/lib.rs
   - crates/tree/heavy_light_decomposition/src/construct.rs
   - crates/tree/static_top_tree/src/lib.rs
-  timestamp: '2025-03-10 08:02:08+00:00'
+  timestamp: '2025-03-27 07:31:57+00:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/library_checker/tree/lca/src/main.rs

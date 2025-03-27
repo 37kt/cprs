@@ -535,6 +535,11 @@ data:
     - icon: ':heavy_check_mark:'
       path: crates/tree/centroid_decomposition/src/lib.rs
       title: crates/tree/centroid_decomposition/src/lib.rs
+  - name: crates/tree/dynamic_tree_dp/src
+    pages:
+    - icon: ':heavy_check_mark:'
+      path: crates/tree/dynamic_tree_dp/src/lib.rs
+      title: crates/tree/dynamic_tree_dp/src/lib.rs
   - name: crates/tree/heavy_light_decomposition/src
     pages:
     - icon: ':heavy_check_mark:'
@@ -907,6 +912,11 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/library_checker/tree/lca/src/main.rs
       title: verify/library_checker/tree/lca/src/main.rs
+  - name: verify/library_checker/tree/point_set_tree_path_composite_sum_fixed_root/src
+    pages:
+    - icon: ':heavy_check_mark:'
+      path: verify/library_checker/tree/point_set_tree_path_composite_sum_fixed_root/src/main.rs
+      title: verify/library_checker/tree/point_set_tree_path_composite_sum_fixed_root/src/main.rs
   - name: verify/library_checker/tree/tree_path_composite_sum/src
     pages:
     - icon: ':heavy_check_mark:'

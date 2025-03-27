@@ -33,6 +33,9 @@ data:
     path: crates/tree/centroid_decomposition/src/lib.rs
     title: crates/tree/centroid_decomposition/src/lib.rs
   - icon: ':heavy_check_mark:'
+    path: crates/tree/dynamic_tree_dp/src/lib.rs
+    title: crates/tree/dynamic_tree_dp/src/lib.rs
+  - icon: ':heavy_check_mark:'
     path: crates/tree/heavy_light_decomposition/src/lib.rs
     title: crates/tree/heavy_light_decomposition/src/lib.rs
   - icon: ':heavy_check_mark:'
@@ -81,6 +84,7 @@ data:
   isVerificationFile: false
   path: crates/data_structure/csr_array/src/builder.rs
   requiredBy:
+  - crates/tree/dynamic_tree_dp/src/lib.rs
   - crates/tree/centroid_decomposition/src/lib.rs
   - crates/tree/heavy_light_decomposition/src/lib.rs
   - crates/tree/static_top_tree/src/lib.rs
