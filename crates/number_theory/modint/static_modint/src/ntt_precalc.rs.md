@@ -103,6 +103,9 @@ data:
     path: verify/library_checker/polynomial/sqrt_of_formal_power_series/src/main.rs
     title: verify/library_checker/polynomial/sqrt_of_formal_power_series/src/main.rs
   - icon: ':heavy_check_mark:'
+    path: verify/library_checker/tree/frequency_table_of_tree_distance/src/main.rs
+    title: verify/library_checker/tree/frequency_table_of_tree_distance/src/main.rs
+  - icon: ':heavy_check_mark:'
     path: verify/library_checker/tree/tree_path_composite_sum/src/main.rs
     title: verify/library_checker/tree/tree_path_composite_sum/src/main.rs
   - icon: ':heavy_check_mark:'
@@ -176,6 +179,7 @@ data:
   - verify/library_checker/polynomial/inv_of_formal_power_series/src/main.rs
   - verify/library_checker/tree/tree_path_composite_sum/src/main.rs
   - verify/library_checker/tree/vertex_set_path_composite/src/main.rs
+  - verify/library_checker/tree/frequency_table_of_tree_distance/src/main.rs
   - verify/library_checker/convolution/convolution_mod_1000000007/src/main.rs
   - verify/library_checker/convolution/bitwise_and_convolution/src/main.rs
   - verify/library_checker/convolution/bitwise_or_convolution/src/main.rs
