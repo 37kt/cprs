@@ -65,6 +65,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: crates/string/rolling_hash/src/lib.rs
     title: crates/string/rolling_hash/src/lib.rs
+  - icon: ':warning:'
+    path: verify/sandbox/test/src/main.rs
+    title: verify/sandbox/test/src/main.rs
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: verify/library_checker/data_structure/unionfind_with_potential_non_commutative_group/src/main.rs
@@ -127,6 +130,7 @@ data:
   isVerificationFile: false
   path: crates/algebra/algebraic_traits/src/traits.rs
   requiredBy:
+  - verify/sandbox/test/src/main.rs
   - crates/convolution/convolution/src/lib.rs
   - crates/convolution/bitwise_and_convolution/src/lib.rs
   - crates/convolution/bitwise_or_convolution/src/lib.rs

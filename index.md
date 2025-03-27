@@ -530,6 +530,11 @@ data:
     - icon: ':heavy_check_mark:'
       path: crates/string/z_algorithm/src/lib.rs
       title: crates/string/z_algorithm/src/lib.rs
+  - name: crates/tree/centroid_decomposition/src
+    pages:
+    - icon: ':heavy_check_mark:'
+      path: crates/tree/centroid_decomposition/src/lib.rs
+      title: crates/tree/centroid_decomposition/src/lib.rs
   - name: crates/tree/heavy_light_decomposition/src
     pages:
     - icon: ':heavy_check_mark:'
@@ -882,6 +887,11 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/library_checker/string/zalgorithm_rh/src/main.rs
       title: verify/library_checker/string/zalgorithm_rh/src/main.rs
+  - name: verify/library_checker/tree/frequency_table_of_tree_distance/src
+    pages:
+    - icon: ':heavy_check_mark:'
+      path: verify/library_checker/tree/frequency_table_of_tree_distance/src/main.rs
+      title: verify/library_checker/tree/frequency_table_of_tree_distance/src/main.rs
   - name: verify/library_checker/tree/jump_on_tree/src
     pages:
     - icon: ':heavy_check_mark:'

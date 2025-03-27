@@ -59,6 +59,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: crates/data_structure/union_find/union_find/src/lib.rs
     title: crates/data_structure/union_find/union_find/src/lib.rs
+  - icon: ':warning:'
+    path: verify/sandbox/test/src/main.rs
+    title: verify/sandbox/test/src/main.rs
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: verify/library_checker/convolution/bitwise_and_convolution/src/main.rs
@@ -166,6 +169,7 @@ data:
   isVerificationFile: false
   path: crates/algebra/algebraic_structure/src/count_sum.rs
   requiredBy:
+  - verify/sandbox/test/src/main.rs
   - crates/data_structure/union_find/union_find/src/lib.rs
   - crates/algebra/algebraic_structure/src/lib.rs
   - crates/algebra/algebraic_structure/src/semiring.rs

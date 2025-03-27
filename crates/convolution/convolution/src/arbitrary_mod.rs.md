@@ -45,6 +45,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/library_checker/convolution/convolution_mod_2_64/src/main.rs
     title: verify/library_checker/convolution/convolution_mod_2_64/src/main.rs
+  - icon: ':heavy_check_mark:'
+    path: verify/library_checker/tree/frequency_table_of_tree_distance/src/main.rs
+    title: verify/library_checker/tree/frequency_table_of_tree_distance/src/main.rs
   _isVerificationFailed: false
   _pathExtension: rs
   _verificationStatusIcon: ':heavy_check_mark:'
@@ -96,6 +99,7 @@ data:
   timestamp: '2025-03-08 02:08:27+00:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
+  - verify/library_checker/tree/frequency_table_of_tree_distance/src/main.rs
   - verify/library_checker/convolution/convolution_mod_1000000007/src/main.rs
   - verify/library_checker/convolution/convolution_mod_2_64/src/main.rs
   - verify/library_checker/convolution/convolution_mod/src/main.rs

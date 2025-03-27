@@ -24,6 +24,9 @@ data:
     path: crates/graph/two_edge_connected_components/src/lib.rs
     title: crates/graph/two_edge_connected_components/src/lib.rs
   - icon: ':heavy_check_mark:'
+    path: crates/tree/centroid_decomposition/src/lib.rs
+    title: crates/tree/centroid_decomposition/src/lib.rs
+  - icon: ':heavy_check_mark:'
     path: crates/tree/rerooting_tree_dp/src/lib.rs
     title: crates/tree/rerooting_tree_dp/src/lib.rs
   _extendedVerifiedWith:
@@ -39,6 +42,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/library_checker/graph/two_edge_connected_components/src/main.rs
     title: verify/library_checker/graph/two_edge_connected_components/src/main.rs
+  - icon: ':heavy_check_mark:'
+    path: verify/library_checker/tree/frequency_table_of_tree_distance/src/main.rs
+    title: verify/library_checker/tree/frequency_table_of_tree_distance/src/main.rs
   - icon: ':heavy_check_mark:'
     path: verify/library_checker/tree/tree_path_composite_sum/src/main.rs
     title: verify/library_checker/tree/tree_path_composite_sum/src/main.rs
@@ -65,6 +71,7 @@ data:
   isVerificationFile: false
   path: crates/graph/graph/src/edge.rs
   requiredBy:
+  - crates/tree/centroid_decomposition/src/lib.rs
   - crates/tree/rerooting_tree_dp/src/lib.rs
   - crates/graph/two_edge_connected_components/src/lib.rs
   - crates/graph/graph/src/lib.rs
@@ -75,6 +82,7 @@ data:
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/library_checker/tree/tree_path_composite_sum/src/main.rs
+  - verify/library_checker/tree/frequency_table_of_tree_distance/src/main.rs
   - verify/library_checker/graph/two_edge_connected_components/src/main.rs
   - verify/library_checker/graph/scc/src/main.rs
   - verify/library_checker/graph/shortest_path/src/main.rs

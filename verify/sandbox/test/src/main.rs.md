@@ -2,6 +2,45 @@
 data:
   _extendedDependsOn:
   - icon: ':heavy_check_mark:'
+    path: crates/algebra/algebraic_structure/src/add.rs
+    title: crates/algebra/algebraic_structure/src/add.rs
+  - icon: ':heavy_check_mark:'
+    path: crates/algebra/algebraic_structure/src/affine.rs
+    title: crates/algebra/algebraic_structure/src/affine.rs
+  - icon: ':heavy_check_mark:'
+    path: crates/algebra/algebraic_structure/src/count_sum.rs
+    title: crates/algebra/algebraic_structure/src/count_sum.rs
+  - icon: ':heavy_check_mark:'
+    path: crates/algebra/algebraic_structure/src/countsum_affine.rs
+    title: crates/algebra/algebraic_structure/src/countsum_affine.rs
+  - icon: ':heavy_check_mark:'
+    path: crates/algebra/algebraic_structure/src/lib.rs
+    title: crates/algebra/algebraic_structure/src/lib.rs
+  - icon: ':heavy_check_mark:'
+    path: crates/algebra/algebraic_structure/src/max.rs
+    title: crates/algebra/algebraic_structure/src/max.rs
+  - icon: ':heavy_check_mark:'
+    path: crates/algebra/algebraic_structure/src/min.rs
+    title: crates/algebra/algebraic_structure/src/min.rs
+  - icon: ':heavy_check_mark:'
+    path: crates/algebra/algebraic_structure/src/mul.rs
+    title: crates/algebra/algebraic_structure/src/mul.rs
+  - icon: ':heavy_check_mark:'
+    path: crates/algebra/algebraic_structure/src/semiring.rs
+    title: crates/algebra/algebraic_structure/src/semiring.rs
+  - icon: ':heavy_check_mark:'
+    path: crates/algebra/algebraic_structure/src/trivial_group.rs
+    title: crates/algebra/algebraic_structure/src/trivial_group.rs
+  - icon: ':heavy_check_mark:'
+    path: crates/algebra/algebraic_traits/src/lib.rs
+    title: crates/algebra/algebraic_traits/src/lib.rs
+  - icon: ':heavy_check_mark:'
+    path: crates/algebra/algebraic_traits/src/macros.rs
+    title: crates/algebra/algebraic_traits/src/macros.rs
+  - icon: ':heavy_check_mark:'
+    path: crates/algebra/algebraic_traits/src/traits.rs
+    title: crates/algebra/algebraic_traits/src/traits.rs
+  - icon: ':heavy_check_mark:'
     path: crates/misc/macros/src/chminmax.rs
     title: crates/misc/macros/src/chminmax.rs
   - icon: ':heavy_check_mark:'
@@ -38,13 +77,32 @@ data:
     \         ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\
     \  File \"/opt/hostedtoolcache/Python/3.13.2/x64/lib/python3.13/site-packages/onlinejudge_verify/languages/rust.py\"\
     , line 288, in bundle\n    raise NotImplementedError\nNotImplementedError\n"
-  code: "use modint_61::ModInt61;\nuse proconio::fastout;\n\n#[fastout]\nfn main()\
-    \ {\n    let timer = std::time::Instant::now();\n    let mut rng = random::Pcg64Fast::default();\n\
-    \    const N: usize = 1_000_000_000;\n    let x = ModInt61::new(rng.u64());\n\
-    \    let mut s = ModInt61::new(1);\n    for _ in 0..N {\n        s *= x;\n   \
-    \ }\n    println!(\"{}\", s);\n    println!(\"{} ms\", timer.elapsed().as_millis());\n\
-    }\n"
+  code: 'use algebraic_structure::magma::TrivialGroup;
+
+    use algebraic_traits::{Act, Algebraic, Monoid};
+
+    use proconio::fastout;
+
+
+    #[fastout]
+
+    fn main() {}
+
+    '
   dependsOn:
+  - crates/algebra/algebraic_structure/src/add.rs
+  - crates/algebra/algebraic_structure/src/affine.rs
+  - crates/algebra/algebraic_structure/src/count_sum.rs
+  - crates/algebra/algebraic_structure/src/countsum_affine.rs
+  - crates/algebra/algebraic_structure/src/lib.rs
+  - crates/algebra/algebraic_structure/src/max.rs
+  - crates/algebra/algebraic_structure/src/min.rs
+  - crates/algebra/algebraic_structure/src/mul.rs
+  - crates/algebra/algebraic_structure/src/semiring.rs
+  - crates/algebra/algebraic_structure/src/trivial_group.rs
+  - crates/algebra/algebraic_traits/src/lib.rs
+  - crates/algebra/algebraic_traits/src/macros.rs
+  - crates/algebra/algebraic_traits/src/traits.rs
   - crates/misc/macros/src/chminmax.rs
   - crates/misc/macros/src/lib.rs
   - crates/misc/macros/src/mvec.rs
@@ -56,7 +114,7 @@ data:
   isVerificationFile: false
   path: verify/sandbox/test/src/main.rs
   requiredBy: []
-  timestamp: '2025-03-24 01:42:22+00:00'
+  timestamp: '2025-03-27 00:50:57+00:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: verify/sandbox/test/src/main.rs
