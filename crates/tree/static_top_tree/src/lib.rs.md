@@ -21,6 +21,9 @@ data:
     title: crates/tree/heavy_light_decomposition/src/lib.rs
   _extendedRequiredBy:
   - icon: ':heavy_check_mark:'
+    path: crates/tree/dynamic_rerooting_tree_dp/src/lib.rs
+    title: crates/tree/dynamic_rerooting_tree_dp/src/lib.rs
+  - icon: ':heavy_check_mark:'
     path: crates/tree/dynamic_tree_dp/src/lib.rs
     title: crates/tree/dynamic_tree_dp/src/lib.rs
   _extendedVerifiedWith: []
@@ -90,6 +93,7 @@ data:
   isVerificationFile: false
   path: crates/tree/static_top_tree/src/lib.rs
   requiredBy:
+  - crates/tree/dynamic_rerooting_tree_dp/src/lib.rs
   - crates/tree/dynamic_tree_dp/src/lib.rs
   timestamp: '2025-03-27 07:31:57+00:00'
   verificationStatus: LIBRARY_NO_TESTS

@@ -106,6 +106,9 @@ data:
     path: verify/library_checker/tree/frequency_table_of_tree_distance/src/main.rs
     title: verify/library_checker/tree/frequency_table_of_tree_distance/src/main.rs
   - icon: ':heavy_check_mark:'
+    path: verify/library_checker/tree/point_set_tree_path_composite_sum/src/main.rs
+    title: verify/library_checker/tree/point_set_tree_path_composite_sum/src/main.rs
+  - icon: ':heavy_check_mark:'
     path: verify/library_checker/tree/point_set_tree_path_composite_sum_fixed_root/src/main.rs
     title: verify/library_checker/tree/point_set_tree_path_composite_sum_fixed_root/src/main.rs
   - icon: ':heavy_check_mark:'
@@ -157,6 +160,7 @@ data:
   - verify/library_checker/polynomial/log_of_formal_power_series/src/main.rs
   - verify/library_checker/polynomial/exp_of_formal_power_series/src/main.rs
   - verify/library_checker/polynomial/inv_of_formal_power_series/src/main.rs
+  - verify/library_checker/tree/point_set_tree_path_composite_sum/src/main.rs
   - verify/library_checker/tree/tree_path_composite_sum/src/main.rs
   - verify/library_checker/tree/vertex_set_path_composite/src/main.rs
   - verify/library_checker/tree/frequency_table_of_tree_distance/src/main.rs

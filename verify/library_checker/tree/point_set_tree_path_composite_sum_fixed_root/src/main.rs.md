@@ -41,30 +41,29 @@ data:
     enum Op {}\nimpl DynamicTreeDpOperator for Op {\n    type Value = S;\n    type\
     \ Vertex = Mint;\n    type Edge = (Mint, Mint);\n\n    fn unit() -> Self::Value\
     \ {\n        S {\n            a: 1.into(),\n            b: 0.into(),\n       \
-    \     cnt: 0.into(),\n            sum: 0.into(),\n        }\n    }\n\n    fn add_vertex(x:\
-    \ &Self::Value, v: &Self::Vertex) -> Self::Value {\n        S {\n            a:\
-    \ x.a,\n            b: x.b,\n            cnt: x.cnt + 1,\n            sum: x.sum\
-    \ + v,\n        }\n    }\n\n    fn add_edge(x: &Self::Value, e: &Self::Edge) ->\
-    \ Self::Value {\n        S {\n            a: e.0,\n            b: e.1,\n     \
-    \       cnt: 1.into(),\n            sum: e.0 * x.sum + e.1 * x.cnt,\n        }\n\
-    \    }\n\n    fn rake(l: &Self::Value, r: &Self::Value) -> Self::Value {\n   \
-    \     S {\n            a: l.a,\n            b: l.b,\n            cnt: l.cnt +\
-    \ r.cnt,\n            sum: l.sum + r.sum,\n        }\n    }\n\n    fn compress(p:\
-    \ &Self::Value, c: &Self::Value) -> Self::Value {\n        S {\n            a:\
-    \ p.a * c.a,\n            b: p.a * c.b + p.b,\n            cnt: p.cnt + c.cnt,\n\
-    \            sum: p.sum + p.a * c.sum + p.b * c.cnt,\n        }\n    }\n}\n\n\
-    #[fastout]\nfn main() {\n    input! {\n        n: usize,\n        q: usize,\n\
-    \        a: [Mint; n],\n        edges: [(usize, usize, (Mint, Mint)); n - 1],\n\
-    \    }\n    let mut dp = DynamicTreeDp::<Op>::with_vertices(&edges, &a, 0);\n\
-    \    for _ in 0..q {\n        input! {\n            ty: usize,\n        }\n  \
-    \      match ty {\n            0 => {\n                input! {\n            \
-    \        v: usize,\n                    x: Mint,\n                }\n        \
-    \        dp.set_vertex(v, x);\n            }\n            1 => {\n           \
-    \     input! {\n                    e: usize,\n                    a: Mint,\n\
-    \                    b: Mint,\n                }\n                let (u, v, _)\
-    \ = edges[e];\n                dp.set_edge(u, v, (a, b));\n            }\n   \
-    \         _ => unreachable!(),\n        }\n\n        println!(\"{}\", dp.fold().sum);\n\
-    \    }\n}\n"
+    \     cnt: 0.into(),\n            sum: 0.into(),\n        }\n    }\n\n    fn vertex(v:\
+    \ &Self::Vertex) -> Self::Value {\n        S {\n            a: 1.into(),\n   \
+    \         b: 0.into(),\n            cnt: 1.into(),\n            sum: *v,\n   \
+    \     }\n    }\n\n    fn add_edge(x: &Self::Value, e: &Self::Edge) -> Self::Value\
+    \ {\n        S {\n            a: e.0,\n            b: e.1,\n            cnt: 1.into(),\n\
+    \            sum: e.0 * x.sum + e.1,\n        }\n    }\n\n    fn rake(l: &Self::Value,\
+    \ r: &Self::Value) -> Self::Value {\n        S {\n            a: l.a,\n      \
+    \      b: l.b,\n            cnt: l.cnt + r.cnt,\n            sum: l.sum + r.sum,\n\
+    \        }\n    }\n\n    fn compress(p: &Self::Value, c: &Self::Value) -> Self::Value\
+    \ {\n        S {\n            a: p.a * c.a,\n            b: p.a * c.b + p.b,\n\
+    \            cnt: p.cnt + c.cnt,\n            sum: p.sum + p.a * c.sum + p.b *\
+    \ c.cnt,\n        }\n    }\n}\n\n#[fastout]\nfn main() {\n    input! {\n     \
+    \   n: usize,\n        q: usize,\n        a: [Mint; n],\n        edges: [(usize,\
+    \ usize, (Mint, Mint)); n - 1],\n    }\n    let mut dp = DynamicTreeDp::<Op>::with_vertices(&edges,\
+    \ &a, 0);\n    for _ in 0..q {\n        input! {\n            ty: usize,\n   \
+    \     }\n        match ty {\n            0 => {\n                input! {\n  \
+    \                  v: usize,\n                    x: Mint,\n                }\n\
+    \                dp.set_vertex(v, x);\n            }\n            1 => {\n   \
+    \             input! {\n                    e: usize,\n                    a:\
+    \ Mint,\n                    b: Mint,\n                }\n                let\
+    \ (u, v, _) = edges[e];\n                dp.set_edge(u, v, (a, b));\n        \
+    \    }\n            _ => unreachable!(),\n        }\n\n        println!(\"{}\"\
+    , dp.fold().sum);\n    }\n}\n"
   dependsOn:
   - crates/number_theory/modint/static_modint/src/lib.rs
   - crates/number_theory/modint/static_modint/src/mod_arithmetic.rs
@@ -75,7 +74,7 @@ data:
   isVerificationFile: true
   path: verify/library_checker/tree/point_set_tree_path_composite_sum_fixed_root/src/main.rs
   requiredBy: []
-  timestamp: '2025-03-27 07:31:57+00:00'
+  timestamp: '2025-03-28 00:26:59+00:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/library_checker/tree/point_set_tree_path_composite_sum_fixed_root/src/main.rs
