@@ -22,20 +22,19 @@ fn main() {
     let g = UndirectedGraph::from_edges(n, ab);
     let mut res = vec![0; n];
     let mut depth = vec![0; n];
-    CentroidDecomposition::solve(&g, |tr| {
-        depth[tr.root] = 0;
+    CentroidDecomposition::solve(&g, |cd| {
+        depth[cd.root] = 0;
         let mut f1 = vec![vec![]; 2];
         let mut f2 = vec![vec![]; 2];
-        for c in 0..2 {
-            for (&v, &p) in tr.vs[c].iter().zip(tr.par[c].iter()) {
-                depth[v] = depth[p] + 1;
-                if f1[c].len() <= depth[v] {
-                    f1[c].resize(depth[v] + 1, Fp1::from_raw(0));
-                    f2[c].resize(depth[v] + 1, Fp2::from_raw(0));
-                }
-                f1[c][depth[v]] += 1;
-                f2[c][depth[v]] += 1;
+        for (i, &v) in cd.vs.iter().enumerate() {
+            depth[v] = depth[cd.par[v]] + 1;
+            let c = if i < cd.mid { 0 } else { 1 };
+            if f1[c].len() <= depth[v] {
+                f1[c].resize(depth[v] + 1, Fp1::from_raw(0));
+                f2[c].resize(depth[v] + 1, Fp2::from_raw(0));
             }
+            f1[c][depth[v]] += 1;
+            f2[c][depth[v]] += 1;
         }
         let g1 = convolution_ntt_friendly(&f1[0], &f1[1]);
         let g2 = convolution_ntt_friendly(&f2[0], &f2[1]);

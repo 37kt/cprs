@@ -1,33 +1,18 @@
 use csr_array::CsrArray;
 use graph::Edge;
 
-#[derive(Debug)]
-pub struct CentroidDecomposition {
+#[derive(Debug, Clone, Copy)]
+pub struct CentroidDecomposition<'a> {
     pub root: usize,
-    pub vs: [Vec<usize>; 2],
-    pub par: [Vec<usize>; 2],
+    pub vs: &'a [usize],
+    pub mid: usize,
+    pub par: &'a [usize],
 }
 
-impl CentroidDecomposition {
-    pub fn solve<W>(g: &CsrArray<impl Edge<W>>, mut f: impl FnMut(&CentroidDecomposition)) {
+impl<'a> CentroidDecomposition<'a> {
+    pub fn solve<W>(g: &CsrArray<impl Edge<W>>, mut f: impl FnMut(CentroidDecomposition)) {
         let mut cd = CdImpl::new(g);
         cd.dfs_decompose(0, &mut f);
-    }
-
-    fn new() -> Self {
-        Self {
-            root: !0,
-            vs: [vec![], vec![]],
-            par: [vec![], vec![]],
-        }
-    }
-
-    fn clear(&mut self) {
-        self.root = !0;
-        for i in 0..2 {
-            self.vs[i].clear();
-            self.par[i].clear();
-        }
     }
 }
 
@@ -37,7 +22,7 @@ struct CdImpl {
     tail: Vec<usize>,
 
     sz: Vec<usize>,
-    cd: CentroidDecomposition,
+    par: Vec<usize>,
 }
 
 impl CdImpl {
@@ -58,49 +43,50 @@ impl CdImpl {
             head,
             tail,
             sz: vec![0; n],
-            cd: CentroidDecomposition::new(),
+            par: vec![!0; n],
         }
     }
 
-    fn dfs_sz(&mut self, v: usize, p: usize) {
-        self.sz[v] = 1;
-        for i in self.head[v]..self.tail[v] {
-            let u = self.edges[i];
-            if u != p {
-                self.dfs_sz(u, v);
-                self.sz[v] += self.sz[u];
+    fn dfs_decompose(&mut self, v: usize, f: &mut impl FnMut(CentroidDecomposition)) {
+        self.par[v] = !0;
+        let mut ord = vec![v];
+        let mut i = 0;
+        while i < ord.len() {
+            let v = ord[i];
+            self.sz[v] = 1;
+            for &u in &self.edges[self.head[v]..self.tail[v]] {
+                if u != self.par[v] {
+                    self.par[u] = v;
+                    ord.push(u);
+                }
             }
+            i += 1;
         }
-    }
 
-    fn dfs_centroid(&mut self, v: usize, p: usize, mid: usize) -> usize {
-        for i in self.head[v]..self.tail[v] {
-            let u = self.edges[i];
-            if u != p && self.sz[u] > mid {
-                return self.dfs_centroid(u, v, mid);
-            }
-        }
-        v
-    }
-
-    fn dfs_build_tree(&mut self, color: usize, v: usize, p: usize) {
-        self.cd.vs[color].push(v);
-        self.cd.par[color].push(p);
-        for i in self.head[v]..self.tail[v] {
-            let u = self.edges[i];
-            if u != p {
-                self.dfs_build_tree(color, u, v);
-            }
-        }
-    }
-
-    fn dfs_decompose(&mut self, v: usize, f: &mut impl FnMut(&CentroidDecomposition)) {
-        self.dfs_sz(v, !0);
-        if self.sz[v] <= 2 {
+        let n = ord.len();
+        if n <= 2 {
             return;
         }
-        let c = self.dfs_centroid(v, !0, self.sz[v] / 2);
-        self.dfs_sz(c, !0);
+
+        let mut c = !0;
+        for &v in ord.iter().rev() {
+            if self.par[v] != !0 {
+                self.sz[self.par[v]] += self.sz[v];
+            }
+            if c == !0 && self.sz[v] >= (n + 1) / 2 {
+                c = v;
+            }
+        }
+
+        let mut p = !0;
+        let mut p_sz = 0;
+        let mut v = c;
+        while v != !0 {
+            std::mem::swap(&mut self.sz[v], &mut p_sz);
+            self.sz[v] = n - self.sz[v];
+            std::mem::swap(&mut self.par[v], &mut p);
+            std::mem::swap(&mut p, &mut v);
+        }
 
         let mut sum_sz = 0;
         let mut m = self.head[c];
@@ -113,14 +99,35 @@ impl CdImpl {
             }
         }
 
-        self.cd.clear();
-        self.cd.root = c;
-        for i in self.head[c]..self.tail[c] {
-            let v = self.edges[i];
-            let color = if i < m { 0 } else { 1 };
-            self.dfs_build_tree(color, v, c);
+        let mut vs = Vec::with_capacity(n - 1);
+        let mut mid = 0;
+        for (color, cs) in [
+            (0, &self.edges[self.head[c]..m]),
+            (1, &self.edges[m..self.tail[c]]),
+        ] {
+            for &v in cs {
+                vs.push(v);
+            }
+            let mut i = mid;
+            while i < vs.len() {
+                let v = vs[i];
+                for &u in &self.edges[self.head[v]..self.tail[v]] {
+                    if u != self.par[v] {
+                        vs.push(u);
+                    }
+                }
+                i += 1;
+            }
+            if color == 0 {
+                mid = vs.len();
+            }
         }
-        f(&self.cd);
+        f(CentroidDecomposition {
+            root: c,
+            vs: &vs,
+            mid,
+            par: &self.par,
+        });
 
         std::mem::swap(&mut self.head[c], &mut m);
         self.dfs_decompose(c, f);

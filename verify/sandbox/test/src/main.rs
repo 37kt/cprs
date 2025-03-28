@@ -1,6 +1,10 @@
-use algebraic_structure::magma::TrivialGroup;
-use algebraic_traits::{Act, Algebraic, Monoid};
 use proconio::fastout;
 
 #[fastout]
-fn main() {}
+fn main() {
+    let mut v = Vec::with_capacity(10);
+    for i in 0..100 {
+        v.resize(i, i);
+        eprintln!("{}", v.capacity());
+    }
+}

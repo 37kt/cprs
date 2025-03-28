@@ -68,6 +68,7 @@ members = [
     "crates/tree/heavy_light_decomposition",
     "crates/tree/rerooting_tree_dp",
     "crates/tree/static_top_tree",
+    "crates/tree/tree_contour_range",
     "verify/library_checker/convolution/bitwise_and_convolution",
     "verify/library_checker/convolution/bitwise_or_convolution",
     "verify/library_checker/convolution/bitwise_xor_convolution",
