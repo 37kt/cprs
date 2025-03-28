@@ -1,6 +1,6 @@
-// verification-helper: PROBLEM https://judge.yosupo.jp/problem/point_set_tree_path_composite_sum_fixed_root
+// verification-helper: PROBLEM https://judge.yosupo.jp/problem/point_set_tree_path_composite_sum
 
-use dynamic_tree_dp::{DynamicTreeDp, DynamicTreeDpOperator};
+use dynamic_rerooting_tree_dp::{DynamicRerootingTreeDp, DynamicRerootingTreeDpOperator};
 use proconio::{fastout, input};
 use static_modint::ModInt998244353 as Mint;
 
@@ -13,7 +13,7 @@ struct S {
 }
 
 enum Op {}
-impl DynamicTreeDpOperator for Op {
+impl DynamicRerootingTreeDpOperator for Op {
     type Value = S;
     type Vertex = Mint;
     type Edge = (Mint, Mint);
@@ -36,7 +36,7 @@ impl DynamicTreeDpOperator for Op {
         }
     }
 
-    fn add_edge(x: &Self::Value, e: &Self::Edge) -> Self::Value {
+    fn add_up_edge(x: &Self::Value, e: &Self::Edge) -> Self::Value {
         S {
             a: e.0,
             b: e.1,
@@ -45,7 +45,16 @@ impl DynamicTreeDpOperator for Op {
         }
     }
 
-    fn rake(l: &Self::Value, r: &Self::Value) -> Self::Value {
+    fn add_down_edge(x: &Self::Value, e: &Self::Edge) -> Self::Value {
+        S {
+            a: e.0,
+            b: e.1,
+            cnt: 1.into(),
+            sum: x.sum,
+        }
+    }
+
+    fn rake1(l: &Self::Value, r: &Self::Value) -> Self::Value {
         S {
             a: l.a,
             b: l.b,
@@ -54,13 +63,30 @@ impl DynamicTreeDpOperator for Op {
         }
     }
 
-    fn compress(p: &Self::Value, c: &Self::Value) -> Self::Value {
+    fn rake2(l: &Self::Value, r: &Self::Value) -> Self::Value {
+        S {
+            a: l.a,
+            b: l.b,
+            cnt: l.cnt + r.cnt,
+            sum: l.sum + l.a * r.sum + l.b * r.cnt,
+        }
+    }
+
+    fn rake3(p: &Self::Value, c: &Self::Value) -> Self::Value {
+        Self::rake1(p, c)
+    }
+
+    fn compress1(p: &Self::Value, c: &Self::Value) -> Self::Value {
         S {
             a: p.a * c.a,
             b: p.a * c.b + p.b,
             cnt: p.cnt + c.cnt,
             sum: p.sum + p.a * c.sum + p.b * c.cnt,
         }
+    }
+
+    fn compress2(p: &Self::Value, c: &Self::Value) -> Self::Value {
+        Self::compress1(c, p)
     }
 }
 
@@ -72,7 +98,7 @@ fn main() {
         a: [Mint; n],
         edges: [(usize, usize, (Mint, Mint)); n - 1],
     }
-    let mut dp = DynamicTreeDp::<Op>::with_vertices(&edges, &a, 0);
+    let mut dp = DynamicRerootingTreeDp::<Op>::with_vertices(&edges, &a, 0);
     for _ in 0..q {
         input! {
             ty: usize,
@@ -97,6 +123,9 @@ fn main() {
             _ => unreachable!(),
         }
 
-        println!("{}", dp.fold().sum);
+        input! {
+            r: usize,
+        }
+        println!("{}", dp.fold(r).sum);
     }
 }

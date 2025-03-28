@@ -7,10 +7,15 @@ pub trait DynamicTreeDpOperator {
     type Edge;
 
     fn unit() -> Self::Value;
-    fn add_vertex(x: &Self::Value, v: &Self::Vertex) -> Self::Value;
 
-    /// `x` は必ず単体の頂点であることが保証されている  
-    /// (`rerooting_tree_dp` の `add_edge` とは異なる定義)
+    /// 値 `v` の頂点 1 つからなるクラスターを生成する<br>
+    /// `v → [a]`
+    fn vertex(v: &Self::Vertex) -> Self::Value;
+
+    /// クラスターに上向きの辺を追加する<br>
+    /// `x` は頂点 1 つからなるクラスターであることが保証されている<br>
+    /// (`rerooting_tree_dp` の `add_edge` とは異なる定義)<br>
+    /// `[a] → (o←a]`
     fn add_edge(x: &Self::Value, e: &Self::Edge) -> Self::Value;
 
     /// `(a←b], (a←c] → (a←b]`
@@ -51,7 +56,7 @@ where
 
         let mut dp = vec![Op::unit(); n * 2 - 1];
         for v in 0..n {
-            dp[v] = Op::add_vertex(&dp[v], &vertices[v]);
+            dp[v] = Op::vertex(&vertices[v]);
             if let Some(e) = hld.vertex_index(v).checked_sub(1) {
                 dp[v] = Op::add_edge(&dp[v], &edges[e]);
             }
@@ -72,7 +77,7 @@ where
 
     pub fn set_vertex(&mut self, v: usize, x: Op::Vertex) {
         self.vertices[v] = x;
-        self.dp[v] = Op::add_vertex(&Op::unit(), &self.vertices[v]);
+        self.dp[v] = Op::vertex(&self.vertices[v]);
         if let Some(e) = self.hld.vertex_index(v).checked_sub(1) {
             self.dp[v] = Op::add_edge(&self.dp[v], &self.edges[e]);
         }
@@ -87,10 +92,7 @@ where
         let e = self.hld.edge_index(u, v);
         self.edges[e] = x;
         let v = if self.hld.parent(u) == Some(v) { u } else { v };
-        self.dp[v] = Op::add_edge(
-            &Op::add_vertex(&Op::unit(), &self.vertices[v]),
-            &self.edges[e],
-        );
+        self.dp[v] = Op::add_edge(&Op::vertex(&self.vertices[v]), &self.edges[e]);
         let mut v = self.stt.nodes[v].par;
         while v != !0 {
             self.update(v);
