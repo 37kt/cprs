@@ -77,18 +77,9 @@ data:
     \         ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\
     \  File \"/opt/hostedtoolcache/Python/3.13.2/x64/lib/python3.13/site-packages/onlinejudge_verify/languages/rust.py\"\
     , line 288, in bundle\n    raise NotImplementedError\nNotImplementedError\n"
-  code: 'use algebraic_structure::magma::TrivialGroup;
-
-    use algebraic_traits::{Act, Algebraic, Monoid};
-
-    use proconio::fastout;
-
-
-    #[fastout]
-
-    fn main() {}
-
-    '
+  code: "use proconio::fastout;\n\n#[fastout]\nfn main() {\n    let mut v = Vec::with_capacity(10);\n\
+    \    for i in 0..100 {\n        v.resize(i, i);\n        eprintln!(\"{}\", v.capacity());\n\
+    \    }\n}\n"
   dependsOn:
   - crates/algebra/algebraic_structure/src/add.rs
   - crates/algebra/algebraic_structure/src/affine.rs
@@ -114,7 +105,7 @@ data:
   isVerificationFile: false
   path: verify/sandbox/test/src/main.rs
   requiredBy: []
-  timestamp: '2025-03-27 00:50:57+00:00'
+  timestamp: '2025-03-28 02:27:58+00:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: verify/sandbox/test/src/main.rs

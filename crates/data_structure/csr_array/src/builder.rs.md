@@ -47,6 +47,9 @@ data:
   - icon: ':warning:'
     path: crates/tree/static_top_tree/src/lib.rs
     title: crates/tree/static_top_tree/src/lib.rs
+  - icon: ':warning:'
+    path: crates/tree/tree_contour_range/src/lib.rs
+    title: crates/tree/tree_contour_range/src/lib.rs
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: verify/library_checker/graph/shortest_path/src/main.rs
@@ -91,6 +94,7 @@ data:
   - crates/tree/dynamic_tree_dp/src/lib.rs
   - crates/tree/centroid_decomposition/src/lib.rs
   - crates/tree/heavy_light_decomposition/src/lib.rs
+  - crates/tree/tree_contour_range/src/lib.rs
   - crates/tree/static_top_tree/src/lib.rs
   - crates/tree/rerooting_tree_dp/src/lib.rs
   - crates/graph/two_edge_connected_components/src/lib.rs

@@ -38,6 +38,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: crates/tree/rerooting_tree_dp/src/lib.rs
     title: crates/tree/rerooting_tree_dp/src/lib.rs
+  - icon: ':warning:'
+    path: crates/tree/tree_contour_range/src/lib.rs
+    title: crates/tree/tree_contour_range/src/lib.rs
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: verify/library_checker/graph/biconnected_components/src/main.rs
@@ -88,6 +91,7 @@ data:
   path: crates/graph/graph/src/lib.rs
   requiredBy:
   - crates/tree/centroid_decomposition/src/lib.rs
+  - crates/tree/tree_contour_range/src/lib.rs
   - crates/tree/rerooting_tree_dp/src/lib.rs
   - crates/graph/two_edge_connected_components/src/lib.rs
   - crates/graph/graph/src/builder.rs

@@ -566,6 +566,11 @@ data:
     - icon: ':warning:'
       path: crates/tree/static_top_tree/src/lib.rs
       title: crates/tree/static_top_tree/src/lib.rs
+  - name: crates/tree/tree_contour_range/src
+    pages:
+    - icon: ':warning:'
+      path: crates/tree/tree_contour_range/src/lib.rs
+      title: crates/tree/tree_contour_range/src/lib.rs
   - name: verify/sandbox/abc218h/src
     pages:
     - icon: ':warning:'

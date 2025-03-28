@@ -69,14 +69,14 @@ data:
     \n#[fastout]\nfn main() {\n    let m1inv_fp2 = Fp2::from_raw(P1).recip();\n\n\
     \    input! {\n        n: usize,\n        ab: [(usize, usize); n - 1],\n    }\n\
     \    let g = UndirectedGraph::from_edges(n, ab);\n    let mut res = vec![0; n];\n\
-    \    let mut depth = vec![0; n];\n    CentroidDecomposition::solve(&g, |tr| {\n\
-    \        depth[tr.root] = 0;\n        let mut f1 = vec![vec![]; 2];\n        let\
-    \ mut f2 = vec![vec![]; 2];\n        for c in 0..2 {\n            for (&v, &p)\
-    \ in tr.vs[c].iter().zip(tr.par[c].iter()) {\n                depth[v] = depth[p]\
-    \ + 1;\n                if f1[c].len() <= depth[v] {\n                    f1[c].resize(depth[v]\
-    \ + 1, Fp1::from_raw(0));\n                    f2[c].resize(depth[v] + 1, Fp2::from_raw(0));\n\
-    \                }\n                f1[c][depth[v]] += 1;\n                f2[c][depth[v]]\
-    \ += 1;\n            }\n        }\n        let g1 = convolution_ntt_friendly(&f1[0],\
+    \    let mut depth = vec![0; n];\n    CentroidDecomposition::solve(&g, |cd| {\n\
+    \        depth[cd.root] = 0;\n        let mut f1 = vec![vec![]; 2];\n        let\
+    \ mut f2 = vec![vec![]; 2];\n        for (i, &v) in cd.vs.iter().enumerate() {\n\
+    \            depth[v] = depth[cd.par[v]] + 1;\n            let c = if i < cd.mid\
+    \ { 0 } else { 1 };\n            if f1[c].len() <= depth[v] {\n              \
+    \  f1[c].resize(depth[v] + 1, Fp1::from_raw(0));\n                f2[c].resize(depth[v]\
+    \ + 1, Fp2::from_raw(0));\n            }\n            f1[c][depth[v]] += 1;\n\
+    \            f2[c][depth[v]] += 1;\n        }\n        let g1 = convolution_ntt_friendly(&f1[0],\
     \ &f1[1]);\n        let g2 = convolution_ntt_friendly(&f2[0], &f2[1]);\n     \
     \   for (i, (e1, e2)) in g1.into_iter().zip(g2).enumerate() {\n            let\
     \ x1 = e1;\n            let x2 = (e2 - Fp2::from_raw(e1.val())) * m1inv_fp2;\n\
@@ -102,7 +102,7 @@ data:
   isVerificationFile: true
   path: verify/library_checker/tree/frequency_table_of_tree_distance/src/main.rs
   requiredBy: []
-  timestamp: '2025-03-27 01:40:05+00:00'
+  timestamp: '2025-03-28 02:27:58+00:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/library_checker/tree/frequency_table_of_tree_distance/src/main.rs
