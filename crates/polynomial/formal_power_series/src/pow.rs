@@ -27,7 +27,10 @@ impl<M: ModInt<Value = u32> + FpsInv + FpsMul + FpsExp> FormalPowerSeries<M> {
         let offset = l * exp;
         let c = self[l];
         let recip_c = c.recip();
-        let g = Self::from_fn(d - offset, |i| self[l + i] * recip_c);
+        // let g = Self::from_fn(d - offset, |i| self[l + i] * recip_c);
+        let g = Self::from_fn(d - offset, |i| {
+            *self.get(l + i).unwrap_or(&0.into()) * recip_c
+        });
         let mut log_g = g.log(g.len());
         log_g *= M::from(exp);
         let mut g = log_g.exp(g.len());

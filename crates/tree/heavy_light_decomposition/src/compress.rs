@@ -24,7 +24,7 @@ impl HeavyLightDecomposition {
         let mut par = vec![0; sz];
         let mut st = vec![0];
         for i in 1..sz {
-            while !self.in_subtree(*st.last().unwrap(), v[i]) {
+            while !self.in_subtree(v[*st.last().unwrap()], v[i]) {
                 st.pop();
             }
             par[i] = *st.last().unwrap();

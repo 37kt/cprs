@@ -13,3 +13,7 @@ name = "tree_contour_range"
 [dependencies]
 csr_array = { path = "../../data_structure/csr_array" }
 graph = { path = "../../graph/graph" }
+centroid_decomposition = { path = "../centroid_decomposition" }
+
+[dev-dependencies]
+rand = "0.8"
