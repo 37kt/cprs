@@ -19,7 +19,10 @@ data:
   - icon: ':heavy_check_mark:'
     path: crates/graph/graph/src/lib.rs
     title: crates/graph/graph/src/lib.rs
-  _extendedRequiredBy: []
+  _extendedRequiredBy:
+  - icon: ':warning:'
+    path: crates/tree/tree_contour_range/src/lib.rs
+    title: crates/tree/tree_contour_range/src/lib.rs
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: verify/library_checker/tree/frequency_table_of_tree_distance/src/main.rs
@@ -92,7 +95,8 @@ data:
   - crates/graph/graph/src/lib.rs
   isVerificationFile: false
   path: crates/tree/centroid_decomposition/src/lib.rs
-  requiredBy: []
+  requiredBy:
+  - crates/tree/tree_contour_range/src/lib.rs
   timestamp: '2025-03-28 02:27:58+00:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:

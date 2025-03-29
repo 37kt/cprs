@@ -162,7 +162,7 @@ data:
   - crates/polynomial/formal_power_series/src/log.rs
   - crates/polynomial/formal_power_series/src/inv.rs
   - crates/polynomial/formal_power_series/src/mul.rs
-  timestamp: '2025-03-21 01:12:00+00:00'
+  timestamp: '2025-03-29 09:22:56+00:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/library_checker/polynomial/sqrt_of_formal_power_series/src/main.rs

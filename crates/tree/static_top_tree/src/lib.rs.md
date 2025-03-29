@@ -95,7 +95,7 @@ data:
   requiredBy:
   - crates/tree/dynamic_rerooting_tree_dp/src/lib.rs
   - crates/tree/dynamic_tree_dp/src/lib.rs
-  timestamp: '2025-03-27 07:31:57+00:00'
+  timestamp: '2025-03-29 09:22:56+00:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: crates/tree/static_top_tree/src/lib.rs

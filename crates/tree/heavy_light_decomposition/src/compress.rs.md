@@ -67,7 +67,7 @@ data:
     \        for i in 0..v.len() - 1 {\n            v.push(self.lca(v[i], v[i + 1]));\n\
     \        }\n        v.sort_unstable_by_key(|&v| self.down[v]);\n        v.dedup();\n\
     \n        let sz = v.len();\n        let mut par = vec![0; sz];\n        let mut\
-    \ st = vec![0];\n        for i in 1..sz {\n            while !self.in_subtree(*st.last().unwrap(),\
+    \ st = vec![0];\n        for i in 1..sz {\n            while !self.in_subtree(v[*st.last().unwrap()],\
     \ v[i]) {\n                st.pop();\n            }\n            par[i] = *st.last().unwrap();\n\
     \            st.push(i);\n        }\n\n        (par, v)\n    }\n}\n"
   dependsOn:
@@ -81,7 +81,7 @@ data:
   - crates/tree/heavy_light_decomposition/src/lib.rs
   - crates/tree/heavy_light_decomposition/src/construct.rs
   - crates/tree/static_top_tree/src/lib.rs
-  timestamp: '2025-03-27 07:31:57+00:00'
+  timestamp: '2025-03-29 09:22:56+00:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/library_checker/tree/lca/src/main.rs

@@ -82,7 +82,7 @@ data:
   isVerificationFile: true
   path: verify/library_checker/polynomial/inv_of_formal_power_series_not_ntt_friendly/src/main.rs
   requiredBy: []
-  timestamp: '2025-03-21 01:12:00+00:00'
+  timestamp: '2025-03-29 09:22:56+00:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/library_checker/polynomial/inv_of_formal_power_series_not_ntt_friendly/src/main.rs

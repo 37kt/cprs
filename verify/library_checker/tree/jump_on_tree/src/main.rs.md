@@ -40,7 +40,7 @@ data:
   isVerificationFile: true
   path: verify/library_checker/tree/jump_on_tree/src/main.rs
   requiredBy: []
-  timestamp: '2025-03-27 07:31:57+00:00'
+  timestamp: '2025-03-29 09:22:56+00:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/library_checker/tree/jump_on_tree/src/main.rs
