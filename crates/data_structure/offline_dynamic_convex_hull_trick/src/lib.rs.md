@@ -42,38 +42,39 @@ data:
     \ {\n    lines: Vec<(i64, i64)>,\n    add_time: Vec<usize>,\n    remove_time:\
     \ Vec<usize>,\n    points: Vec<i64>,\n    get_time: Vec<usize>,\n    time: usize,\n\
     \    last_is_get: bool,\n\n    st: Vec<usize>,\n    res: Vec<i64>,\n}\n\nimpl\
-    \ OfflineDynamicConvexHullTrick {\n    pub fn new() -> Self {\n        Self {\n\
-    \            lines: vec![],\n            add_time: vec![],\n            remove_time:\
-    \ vec![],\n            points: vec![],\n            get_time: vec![],\n      \
-    \      time: 0,\n            last_is_get: false,\n\n            st: vec![],\n\
-    \            res: vec![],\n        }\n    }\n\n    /// \u76F4\u7DDA\u3092\u8FFD\
-    \u52A0\u3057\u3066\u3001\u305D\u306E `id` \u3092\u8FD4\u3059  \n    pub fn add_line(&mut\
-    \ self, a: i64, b: i64) -> usize {\n        if std::mem::replace(&mut self.last_is_get,\
-    \ false) {\n            self.time += 1;\n        }\n        let id = self.lines.len();\n\
-    \        self.lines.push((a, b));\n        self.add_time.push(self.time);\n  \
-    \      self.remove_time.push(usize::inf());\n        id\n    }\n\n    /// \u76F4\
-    \u7DDA `id` \u3092\u524A\u9664\u3059\u308B\n    pub fn remove_line(&mut self,\
-    \ id: usize) {\n        assert!(id < self.lines.len(), \"line {} is not added\"\
-    , id);\n        if std::mem::replace(&mut self.last_is_get, false) {\n       \
-    \     self.time += 1;\n        }\n        assert_eq!(\n            std::mem::replace(&mut\
-    \ self.remove_time[id], self.time),\n            usize::inf(),\n            \"\
-    line {} is already removed\",\n            id\n        );\n    }\n\n    /// min(ax\
-    \ + b) \u3092\u6C42\u3081\u308B\u30AF\u30A8\u30EA\u3092\u767A\u884C\u3057\u3066\
-    \u3001\u30AF\u30A8\u30EA\u306E `id` \u3092\u8FD4\u3059  \n    /// \u7B54\u3048\
-    \u306F `solve` \u3067\u8FD4\u3063\u3066\u304F\u308B\u914D\u5217\u306E `id` \u756A\
-    \u76EE\u306B\u5165\u308B\n    pub fn min(&mut self, x: i64) -> usize {\n     \
-    \   self.last_is_get = true;\n        let id = self.points.len();\n        self.points.push(x);\n\
-    \        self.get_time.push(self.time);\n        id\n    }\n\n    /// \u3059\u3079\
-    \u3066\u306E `min` \u30AF\u30A8\u30EA\u306E\u7B54\u3048\u3092\u8FD4\u3059  \n\
-    \    pub fn solve(mut self) -> Vec<i64> {\n        if self.points.is_empty() {\n\
-    \            return vec![];\n        }\n        if self.last_is_get {\n      \
-    \      self.time += 1;\n        }\n        let lg = self.time.ceil_log2();\n \
-    \       let n = 1 << lg;\n        for t in &mut self.remove_time {\n         \
-    \   if *t >= self.time {\n                *t = n;\n            }\n        }\n\n\
-    \        let mut lines = (0..self.lines.len()).collect::<Vec<_>>();\n        lines.sort_by_key(|&i|\
-    \ {\n            let (a, b) = self.lines[i];\n            (-a, b)\n        });\n\
-    \        let mut points = (0..self.points.len()).collect::<Vec<_>>();\n      \
-    \  points.sort_by_key(|&i| -self.points[i]);\n\n        self.res.resize(self.points.len(),\
+    \ Default for OfflineDynamicConvexHullTrick {\n    fn default() -> Self {\n  \
+    \      Self::new()\n    }\n}\n\nimpl OfflineDynamicConvexHullTrick {\n    pub\
+    \ fn new() -> Self {\n        Self {\n            lines: vec![],\n           \
+    \ add_time: vec![],\n            remove_time: vec![],\n            points: vec![],\n\
+    \            get_time: vec![],\n            time: 0,\n            last_is_get:\
+    \ false,\n\n            st: vec![],\n            res: vec![],\n        }\n   \
+    \ }\n\n    /// \u76F4\u7DDA\u3092\u8FFD\u52A0\u3057\u3066\u3001\u305D\u306E `id`\
+    \ \u3092\u8FD4\u3059  \n    pub fn add_line(&mut self, a: i64, b: i64) -> usize\
+    \ {\n        if std::mem::replace(&mut self.last_is_get, false) {\n          \
+    \  self.time += 1;\n        }\n        let id = self.lines.len();\n        self.lines.push((a,\
+    \ b));\n        self.add_time.push(self.time);\n        self.remove_time.push(usize::inf());\n\
+    \        id\n    }\n\n    /// \u76F4\u7DDA `id` \u3092\u524A\u9664\u3059\u308B\
+    \n    pub fn remove_line(&mut self, id: usize) {\n        assert!(id < self.lines.len(),\
+    \ \"line {} is not added\", id);\n        if std::mem::replace(&mut self.last_is_get,\
+    \ false) {\n            self.time += 1;\n        }\n        assert_eq!(\n    \
+    \        std::mem::replace(&mut self.remove_time[id], self.time),\n          \
+    \  usize::inf(),\n            \"line {} is already removed\",\n            id\n\
+    \        );\n    }\n\n    /// min(ax + b) \u3092\u6C42\u3081\u308B\u30AF\u30A8\
+    \u30EA\u3092\u767A\u884C\u3057\u3066\u3001\u30AF\u30A8\u30EA\u306E `id` \u3092\
+    \u8FD4\u3059  \n    /// \u7B54\u3048\u306F `solve` \u3067\u8FD4\u3063\u3066\u304F\
+    \u308B\u914D\u5217\u306E `id` \u756A\u76EE\u306B\u5165\u308B\n    pub fn min(&mut\
+    \ self, x: i64) -> usize {\n        self.last_is_get = true;\n        let id =\
+    \ self.points.len();\n        self.points.push(x);\n        self.get_time.push(self.time);\n\
+    \        id\n    }\n\n    /// \u3059\u3079\u3066\u306E `min` \u30AF\u30A8\u30EA\
+    \u306E\u7B54\u3048\u3092\u8FD4\u3059  \n    pub fn solve(mut self) -> Vec<i64>\
+    \ {\n        if self.points.is_empty() {\n            return vec![];\n       \
+    \ }\n        if self.last_is_get {\n            self.time += 1;\n        }\n \
+    \       let lg = self.time.ceil_log2();\n        let n = 1 << lg;\n        for\
+    \ t in &mut self.remove_time {\n            if *t >= self.time {\n           \
+    \     *t = n;\n            }\n        }\n\n        let mut lines = (0..self.lines.len()).collect::<Vec<_>>();\n\
+    \        lines.sort_by_key(|&i| {\n            let (a, b) = self.lines[i];\n \
+    \           (-a, b)\n        });\n        let mut points = (0..self.points.len()).collect::<Vec<_>>();\n\
+    \        points.sort_by_key(|&i| -self.points[i]);\n\n        self.res.resize(self.points.len(),\
     \ i64::inf());\n        self.dfs(0, n, lines, points);\n        self.res\n   \
     \ }\n\n    fn eval(&self, i: usize, x: i64) -> i64 {\n        let (a, b) = self.lines[i];\n\
     \        a * x + b\n    }\n\n    fn f(&self, i: usize, j: usize) -> i64 {\n  \
@@ -118,7 +119,7 @@ data:
   isVerificationFile: false
   path: crates/data_structure/offline_dynamic_convex_hull_trick/src/lib.rs
   requiredBy: []
-  timestamp: '2025-03-20 09:27:03+00:00'
+  timestamp: '2025-04-06 02:35:23+00:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/library_checker/data_structure/line_add_get_min/src/main.rs

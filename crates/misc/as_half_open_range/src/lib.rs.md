@@ -66,14 +66,14 @@ data:
     \  File \"/opt/hostedtoolcache/Python/3.13.2/x64/lib/python3.13/site-packages/onlinejudge_verify/languages/rust.py\"\
     , line 288, in bundle\n    raise NotImplementedError\nNotImplementedError\n"
   code: "use std::ops::{Bound, RangeBounds};\n\nuse numeric_traits::Integer;\n\npub\
-    \ trait IntoHalfOpenRange<T>: RangeBounds<T>\nwhere\n    T: Integer,\n{\n    fn\
-    \ into_half_open_range(&self, l: T, r: T) -> (T, T) {\n        let start = match\
+    \ trait AsHalfOpenRange<T>: RangeBounds<T>\nwhere\n    T: Integer,\n{\n    fn\
+    \ as_half_open_range(&self, l: T, r: T) -> (T, T) {\n        let start = match\
     \ self.start_bound() {\n            Bound::Unbounded => l,\n            Bound::Included(&start)\
     \ => start,\n            Bound::Excluded(&start) => start + T::one(),\n      \
     \  };\n        let end = match self.end_bound() {\n            Bound::Unbounded\
     \ => r,\n            Bound::Included(&end) => end + T::one(),\n            Bound::Excluded(&end)\
     \ => end,\n        };\n        assert!(l <= start && start <= end && end <= r);\n\
-    \        (start, end)\n    }\n}\n\nimpl<R, T> IntoHalfOpenRange<T> for R\nwhere\n\
+    \        (start, end)\n    }\n}\n\nimpl<R, T> AsHalfOpenRange<T> for R\nwhere\n\
     \    R: RangeBounds<T>,\n    T: Integer,\n{\n}\n"
   dependsOn:
   - crates/algebra/numeric_traits/src/cast.rs
@@ -84,7 +84,7 @@ data:
   - crates/algebra/numeric_traits/src/signed.rs
   - crates/algebra/numeric_traits/src/zero_one.rs
   isVerificationFile: false
-  path: crates/misc/into_half_open_range/src/lib.rs
+  path: crates/misc/as_half_open_range/src/lib.rs
   requiredBy:
   - crates/string/rolling_hash/src/lib.rs
   - crates/string/suffix_array/src/lib.rs
@@ -96,13 +96,13 @@ data:
   - crates/data_structure/segment_tree/segment_tree/src/lib.rs
   - crates/data_structure/segment_tree/lazy_segment_tree/src/lib.rs
   - crates/dp/aliens_dp/src/lib.rs
-  timestamp: '2025-03-20 09:27:03+00:00'
+  timestamp: '2025-04-06 02:35:23+00:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
-documentation_of: crates/misc/into_half_open_range/src/lib.rs
+documentation_of: crates/misc/as_half_open_range/src/lib.rs
 layout: document
 redirect_from:
-- /library/crates/misc/into_half_open_range/src/lib.rs
-- /library/crates/misc/into_half_open_range/src/lib.rs.html
-title: crates/misc/into_half_open_range/src/lib.rs
+- /library/crates/misc/as_half_open_range/src/lib.rs
+- /library/crates/misc/as_half_open_range/src/lib.rs.html
+title: crates/misc/as_half_open_range/src/lib.rs
 ---

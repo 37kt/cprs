@@ -25,22 +25,23 @@ data:
     , line 288, in bundle\n    raise NotImplementedError\nNotImplementedError\n"
   code: "// TODO: \u30DE\u30FC\u30B8\n\nuse std::ops::{Bound, RangeBounds};\n\nconst\
     \ W: u8 = usize::BITS as u8;\n\n#[derive(Clone)]\npub struct BinaryTrie {\n  \
-    \  nodes: Vec<Node>,\n}\n\nimpl BinaryTrie {\n    pub fn new() -> Self {\n   \
-    \     Self {\n            nodes: vec![Node::new(0)],\n        }\n    }\n\n   \
-    \ /// x \u3092 n \u500B\u8FFD\u52A0\u3059\u308B  \n    pub fn insert(&mut self,\
-    \ mut x: usize, n: usize) {\n        if n == 0 {\n            return;\n      \
-    \  }\n\n        let mut v = 0;\n        let mut d = W;\n        while {\n    \
-    \        self.nodes[v].cnt += n;\n            d != 0\n        } {\n          \
-    \  x &= !0 >> W - d;\n            let c = x >> (d - 1) & 1;\n            if let\
-    \ Some(link) = self.nodes[v].link[c] {\n                let common_prefix = (W\
-    \ - (x ^ link.seq).leading_zeros() as u8).max(link.d);\n                if common_prefix\
-    \ == link.d {\n                    v = link.ch as _;\n                    d =\
-    \ common_prefix;\n                } else {\n                    let u = link.ch\
-    \ as usize;\n                    let w = self.new_node(self.nodes[u].cnt);\n \
-    \                   let nx = x & !((1 << common_prefix) - 1);\n              \
-    \      self.nodes[v].link[c] = Some(Link::new(w, nx, common_prefix));\n      \
-    \              let x2 = link.seq & (!0 >> W - common_prefix);\n              \
-    \      let c2 = link.seq >> (common_prefix - 1) & 1;\n                    self.nodes[w].cnt\
+    \  nodes: Vec<Node>,\n}\n\nimpl Default for BinaryTrie {\n    fn default() ->\
+    \ Self {\n        Self::new()\n    }\n}\n\nimpl BinaryTrie {\n    pub fn new()\
+    \ -> Self {\n        Self {\n            nodes: vec![Node::new(0)],\n        }\n\
+    \    }\n\n    /// x \u3092 n \u500B\u8FFD\u52A0\u3059\u308B  \n    pub fn insert(&mut\
+    \ self, mut x: usize, n: usize) {\n        if n == 0 {\n            return;\n\
+    \        }\n\n        let mut v = 0;\n        let mut d = W;\n        while {\n\
+    \            self.nodes[v].cnt += n;\n            d != 0\n        } {\n      \
+    \      x &= !0 >> (W - d);\n            let c = x >> (d - 1) & 1;\n          \
+    \  if let Some(link) = self.nodes[v].link[c] {\n                let common_prefix\
+    \ = (W - (x ^ link.seq).leading_zeros() as u8).max(link.d);\n                if\
+    \ common_prefix == link.d {\n                    v = link.ch as _;\n         \
+    \           d = common_prefix;\n                } else {\n                   \
+    \ let u = link.ch as usize;\n                    let w = self.new_node(self.nodes[u].cnt);\n\
+    \                    let nx = x & !((1 << common_prefix) - 1);\n             \
+    \       self.nodes[v].link[c] = Some(Link::new(w, nx, common_prefix));\n     \
+    \               let x2 = link.seq & (!0 >> (W - common_prefix));\n           \
+    \         let c2 = link.seq >> (common_prefix - 1) & 1;\n                    self.nodes[w].cnt\
     \ = self.nodes[u].cnt;\n                    self.nodes[w].link[c2] = Some(Link::new(u,\
     \ x2, link.d));\n                    v = w;\n                    d = common_prefix;\n\
     \                }\n            } else {\n                let u = self.new_node(0);\n\
@@ -51,12 +52,12 @@ data:
     \u7FA9\n    pub fn remove(&mut self, mut x: usize, n: usize) {\n        if n ==\
     \ 0 {\n            return;\n        }\n\n        let mut v = 0;\n        let mut\
     \ d = W;\n        while {\n            self.nodes[v].cnt -= n;\n            d\
-    \ != 0\n        } {\n            x &= !0 >> W - d;\n            let c = x >> (d\
-    \ - 1) & 1;\n            let link = self.nodes[v].link[c].unwrap();\n        \
-    \    v = link.ch as _;\n            d = link.d;\n        }\n    }\n\n    /// x\
-    \ \u306E\u500B\u6570\u3092\u8FD4\u3059  \n    pub fn count(&self, mut x: usize)\
+    \ != 0\n        } {\n            x &= !0 >> (W - d);\n            let c = x >>\
+    \ (d - 1) & 1;\n            let link = self.nodes[v].link[c].unwrap();\n     \
+    \       v = link.ch as _;\n            d = link.d;\n        }\n    }\n\n    ///\
+    \ x \u306E\u500B\u6570\u3092\u8FD4\u3059  \n    pub fn count(&self, mut x: usize)\
     \ -> usize {\n        let mut v = 0;\n        let mut d = W;\n        while d\
-    \ > 0 {\n            x &= !0 >> W - d;\n            let c = x >> (d - 1) & 1;\n\
+    \ > 0 {\n            x &= !0 >> (W - d);\n            let c = x >> (d - 1) & 1;\n\
     \            if let Some(link) = self.nodes[v].link[c] {\n                let\
     \ common_prefix = (W - (x ^ link.seq).leading_zeros() as u8).max(link.d);\n  \
     \              if common_prefix == link.d {\n                    v = link.ch as\
@@ -104,14 +105,14 @@ data:
     \    /// {y \u2208 S | y ^ xor \u2265 x} \u306E\u500B\u6570\u3092\u8FD4\u3059\n\
     \    fn count_geq(&self, mut x: usize, mut xor: usize) -> usize {\n        let\
     \ mut v = 0;\n        let mut d = W;\n        let mut res = 0;\n        while\
-    \ d > 0 {\n            x &= !0 >> W - d;\n            xor &= !0 >> W - d;\n  \
-    \          let c = (x ^ xor) >> (d - 1) & 1;\n            if x >> (d - 1) & 1\
-    \ == 0 {\n                if let Some(link) = self.nodes[v].link[c ^ 1] {\n  \
-    \                  res += self.nodes[link.ch as usize].cnt;\n                }\n\
-    \            }\n            if let Some(link) = self.nodes[v].link[c] {\n    \
-    \            let mask = !((1 << link.d) - 1);\n                if (x ^ xor) &\
-    \ mask == link.seq {\n                    v = link.ch as usize;\n            \
-    \        d = link.d;\n                } else {\n                    if x < link.seq\
+    \ d > 0 {\n            x &= !0 >> (W - d);\n            xor &= !0 >> (W - d);\n\
+    \            let c = (x ^ xor) >> (d - 1) & 1;\n            if x >> (d - 1) &\
+    \ 1 == 0 {\n                if let Some(link) = self.nodes[v].link[c ^ 1] {\n\
+    \                    res += self.nodes[link.ch as usize].cnt;\n              \
+    \  }\n            }\n            if let Some(link) = self.nodes[v].link[c] {\n\
+    \                let mask = !((1 << link.d) - 1);\n                if (x ^ xor)\
+    \ & mask == link.seq {\n                    v = link.ch as usize;\n          \
+    \          d = link.d;\n                } else {\n                    if x < link.seq\
     \ ^ xor {\n                        res += self.nodes[link.ch as usize].cnt;\n\
     \                    }\n                    return res;\n                }\n \
     \           } else {\n                return res;\n            }\n        }\n\
@@ -129,7 +130,7 @@ data:
   isVerificationFile: false
   path: crates/data_structure/binary_trie/src/lib.rs
   requiredBy: []
-  timestamp: '2025-03-14 06:35:33+00:00'
+  timestamp: '2025-04-06 02:35:23+00:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/library_checker/data_structure/set_xor_min/src/main.rs

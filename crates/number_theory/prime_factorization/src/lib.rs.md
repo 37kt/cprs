@@ -94,14 +94,14 @@ data:
     \ + Eq + Mul<Output = T> + Copy,\n    <T as TryInto<u64>>::Error: std::fmt::Debug,\n\
     \    <T as TryFrom<u64>>::Error: std::fmt::Debug,\n{\n    let pe = prime_factorization(n);\n\
     \    let mut res = vec![T::try_from(1).unwrap()];\n    for (p, e) in pe {\n  \
-    \      for i in 0..res.len() {\n            let mut x = res[i].clone();\n    \
-    \        for _ in 0..e {\n                x = x * p.clone();\n               \
-    \ res.push(x.clone());\n            }\n        }\n    }\n    res\n}\n\n/// n \u306E\
-    \u7D04\u6570\u3092\u6607\u9806\u3067\u8FD4\u3059\npub fn divisors<T>(n: T) ->\
-    \ Vec<T>\nwhere\n    T: TryInto<u64> + TryFrom<u64> + Ord + Mul<Output = T> +\
-    \ Copy,\n    <T as TryInto<u64>>::Error: std::fmt::Debug,\n    <T as TryFrom<u64>>::Error:\
-    \ std::fmt::Debug,\n{\n    let mut res = divisors_unordered(n);\n    res.sort_unstable();\n\
-    \    res\n}\n\nenum Id {}\ntype Mint = DynamicModInt64<Id>;\n"
+    \      for i in 0..res.len() {\n            let mut x = res[i];\n            for\
+    \ _ in 0..e {\n                x = x * p;\n                res.push(x);\n    \
+    \        }\n        }\n    }\n    res\n}\n\n/// n \u306E\u7D04\u6570\u3092\u6607\
+    \u9806\u3067\u8FD4\u3059\npub fn divisors<T>(n: T) -> Vec<T>\nwhere\n    T: TryInto<u64>\
+    \ + TryFrom<u64> + Ord + Mul<Output = T> + Copy,\n    <T as TryInto<u64>>::Error:\
+    \ std::fmt::Debug,\n    <T as TryFrom<u64>>::Error: std::fmt::Debug,\n{\n    let\
+    \ mut res = divisors_unordered(n);\n    res.sort_unstable();\n    res\n}\n\nenum\
+    \ Id {}\ntype Mint = DynamicModInt64<Id>;\n"
   dependsOn:
   - crates/algebra/numeric_traits/src/cast.rs
   - crates/algebra/numeric_traits/src/inf.rs
@@ -122,7 +122,7 @@ data:
   - crates/combinatorics/binomial/src/lib.rs
   - crates/number_theory/prime_factorization/src/miller_rabin.rs
   - crates/number_theory/prime_factorization/src/pollard_rho.rs
-  timestamp: '2025-03-20 09:27:03+00:00'
+  timestamp: '2025-04-06 02:35:23+00:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/library_checker/number_theory/primality_test/src/main.rs

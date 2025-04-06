@@ -23,10 +23,10 @@ data:
     \nuse proconio::fastout;\nuse proconio::input;\nuse proconio::marker::Bytes;\n\
     use wordsize_ary_tree_set::WordsizeAryTreeSet;\n\n#[fastout]\nfn main() {\n  \
     \  input! {\n        n: usize,\n        q: usize,\n        t: Bytes,\n    }\n\n\
-    \    let mut st = WordsizeAryTreeSet::new(n);\n    for i in 0..n {\n        if\
-    \ t[i] == b'1' {\n            st.insert(i);\n        }\n    }\n\n    for _ in\
-    \ 0..q {\n        input! {\n            t: usize,\n            x: usize,\n   \
-    \     }\n        match t {\n            0 => {\n                st.insert(x);\n\
+    \    let mut st = WordsizeAryTreeSet::new(n);\n    for (i, &c) in t.iter().enumerate()\
+    \ {\n        if c == b'1' {\n            st.insert(i);\n        }\n    }\n\n \
+    \   for _ in 0..q {\n        input! {\n            t: usize,\n            x: usize,\n\
+    \        }\n        match t {\n            0 => {\n                st.insert(x);\n\
     \            }\n            1 => {\n                st.remove(x);\n          \
     \  }\n            2 => {\n                println!(\"{}\", st[x] as i32);\n  \
     \          }\n            3 => {\n                println!(\"{}\", st.next(x).map_or(-1,\
@@ -38,7 +38,7 @@ data:
   isVerificationFile: true
   path: verify/library_checker/data_structure/predecessor_problem/src/main.rs
   requiredBy: []
-  timestamp: '2025-03-14 00:52:07+00:00'
+  timestamp: '2025-04-06 02:35:23+00:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/library_checker/data_structure/predecessor_problem/src/main.rs

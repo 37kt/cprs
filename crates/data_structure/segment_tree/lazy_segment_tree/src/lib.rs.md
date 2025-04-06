@@ -32,8 +32,8 @@ data:
     path: crates/algebra/numeric_traits/src/zero_one.rs
     title: crates/algebra/numeric_traits/src/zero_one.rs
   - icon: ':warning:'
-    path: crates/misc/into_half_open_range/src/lib.rs
-    title: crates/misc/into_half_open_range/src/lib.rs
+    path: crates/misc/as_half_open_range/src/lib.rs
+    title: crates/misc/as_half_open_range/src/lib.rs
   _extendedRequiredBy: []
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
@@ -51,7 +51,7 @@ data:
     \  File \"/opt/hostedtoolcache/Python/3.13.2/x64/lib/python3.13/site-packages/onlinejudge_verify/languages/rust.py\"\
     , line 288, in bundle\n    raise NotImplementedError\nNotImplementedError\n"
   code: "use std::ops::{Deref, DerefMut, RangeBounds};\n\nuse algebraic_traits::{Act,\
-    \ Algebraic, Magma, Monoid, Unital};\nuse into_half_open_range::IntoHalfOpenRange;\n\
+    \ Algebraic, Magma, Monoid, Unital};\nuse as_half_open_range::AsHalfOpenRange;\n\
     use numeric_traits::Integer;\n\npub struct LazySegmentTree<A>\nwhere\n    A: Act,\n\
     \    A::Operand: Monoid,\n    A::Operator: Monoid,\n    <A::Operand as Algebraic>::Value:\
     \ Clone,\n    <A::Operator as Algebraic>::Value: Clone + Eq,\n{\n    n: usize,\n\
@@ -94,34 +94,34 @@ data:
     \ {\n        for i in 1..self.sz {\n            self.push(i);\n        }\n   \
     \     &self.v[self.sz..self.sz + self.n]\n    }\n\n    pub fn fold(&mut self,\
     \ range: impl RangeBounds<usize>) -> <A::Operand as Algebraic>::Value {\n    \
-    \    let (mut l, mut r) = range.into_half_open_range(0, self.n);\n        if l\
-    \ == r {\n            return A::Operand::unit();\n        }\n        l += self.sz;\n\
+    \    let (mut l, mut r) = range.as_half_open_range(0, self.n);\n        if l ==\
+    \ r {\n            return A::Operand::unit();\n        }\n        l += self.sz;\n\
     \        r += self.sz;\n        for h in (1..=self.lg).rev() {\n            if\
     \ l >> h << h != l {\n                self.push(l >> h);\n            }\n    \
-    \        if r >> h << h != r {\n                self.push(r - 1 >> h);\n     \
-    \       }\n        }\n        let mut sl = A::Operand::unit();\n        let mut\
-    \ sr = A::Operand::unit();\n        while l < r {\n            if l & 1 != 0 {\n\
-    \                sl = A::Operand::op(&sl, &self.v[l]);\n                l += 1;\n\
-    \            }\n            if r & 1 != 0 {\n                r -= 1;\n       \
-    \         sr = A::Operand::op(&self.v[r], &sr);\n            }\n            l\
-    \ >>= 1;\n            r >>= 1;\n        }\n        A::Operand::op(&sl, &sr)\n\
-    \    }\n\n    pub fn fold_all(&self) -> <A::Operand as Algebraic>::Value {\n \
-    \       self.v[1].clone()\n    }\n\n    pub fn apply_range(\n        &mut self,\n\
-    \        range: impl RangeBounds<usize>,\n        f: <A::Operator as Algebraic>::Value,\n\
-    \    ) {\n        let (mut l, mut r) = range.into_half_open_range(0, self.n);\n\
+    \        if r >> h << h != r {\n                self.push((r - 1) >> h);\n   \
+    \         }\n        }\n        let mut sl = A::Operand::unit();\n        let\
+    \ mut sr = A::Operand::unit();\n        while l < r {\n            if l & 1 !=\
+    \ 0 {\n                sl = A::Operand::op(&sl, &self.v[l]);\n               \
+    \ l += 1;\n            }\n            if r & 1 != 0 {\n                r -= 1;\n\
+    \                sr = A::Operand::op(&self.v[r], &sr);\n            }\n      \
+    \      l >>= 1;\n            r >>= 1;\n        }\n        A::Operand::op(&sl,\
+    \ &sr)\n    }\n\n    pub fn fold_all(&self) -> <A::Operand as Algebraic>::Value\
+    \ {\n        self.v[1].clone()\n    }\n\n    pub fn apply_range(\n        &mut\
+    \ self,\n        range: impl RangeBounds<usize>,\n        f: <A::Operator as Algebraic>::Value,\n\
+    \    ) {\n        let (mut l, mut r) = range.as_half_open_range(0, self.n);\n\
     \        if l == r {\n            return;\n        }\n        l += self.sz;\n\
     \        r += self.sz;\n        for h in (1..=self.lg).rev() {\n            if\
     \ l >> h << h != l {\n                self.push(l >> h);\n            }\n    \
-    \        if r >> h << h != r {\n                self.push(r - 1 >> h);\n     \
-    \       }\n        }\n        let l2 = l;\n        let r2 = r;\n        while\
+    \        if r >> h << h != r {\n                self.push((r - 1) >> h);\n   \
+    \         }\n        }\n        let l2 = l;\n        let r2 = r;\n        while\
     \ l < r {\n            if l & 1 != 0 {\n                self.apply_at(l, &f);\n\
     \                l += 1;\n            }\n            if r & 1 != 0 {\n       \
     \         r -= 1;\n                self.apply_at(r, &f);\n            }\n    \
     \        l >>= 1;\n            r >>= 1;\n        }\n        l = l2;\n        r\
     \ = r2;\n        for h in 1..=self.lg {\n            if l >> h << h != l {\n \
     \               self.update(l >> h);\n            }\n            if r >> h <<\
-    \ h != r {\n                self.update(r - 1 >> h);\n            }\n        }\n\
-    \    }\n\n    pub fn apply(&mut self, i: usize, f: <A::Operator as Algebraic>::Value)\
+    \ h != r {\n                self.update((r - 1) >> h);\n            }\n      \
+    \  }\n    }\n\n    pub fn apply(&mut self, i: usize, f: <A::Operator as Algebraic>::Value)\
     \ {\n        self.apply_range(i..i + 1, f);\n    }\n\n    pub fn max_right(\n\
     \        &mut self,\n        l: usize,\n        mut pred: impl FnMut(&<A::Operand\
     \ as Algebraic>::Value) -> bool,\n    ) -> usize {\n        assert!(l <= self.n);\n\
@@ -141,7 +141,7 @@ data:
     \ as Algebraic>::Value) -> bool,\n    ) -> usize {\n        assert!(r <= self.n);\n\
     \        assert!(pred(&A::Operand::unit()));\n        if r == 0 {\n          \
     \  return 0;\n        }\n        let mut l = r + self.sz;\n        for h in (1..=self.lg).rev()\
-    \ {\n            self.push(l - 1 >> h);\n        }\n        let mut s = A::Operand::unit();\n\
+    \ {\n            self.push((l - 1) >> h);\n        }\n        let mut s = A::Operand::unit();\n\
     \        loop {\n            l -= 1;\n            l >>= (!l).lsb_index();\n  \
     \          l = l.max(1);\n            let t = A::Operand::op(&self.v[l], &s);\n\
     \            if !pred(&t) {\n                while l < self.sz {\n           \
@@ -190,11 +190,11 @@ data:
   - crates/algebra/numeric_traits/src/numeric.rs
   - crates/algebra/numeric_traits/src/signed.rs
   - crates/algebra/numeric_traits/src/zero_one.rs
-  - crates/misc/into_half_open_range/src/lib.rs
+  - crates/misc/as_half_open_range/src/lib.rs
   isVerificationFile: false
   path: crates/data_structure/segment_tree/lazy_segment_tree/src/lib.rs
   requiredBy: []
-  timestamp: '2025-03-20 09:27:03+00:00'
+  timestamp: '2025-04-06 02:35:23+00:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/library_checker/data_structure/range_affine_range_sum/src/main.rs

@@ -329,6 +329,11 @@ data:
     - icon: ':heavy_check_mark:'
       path: crates/linear_algebra/matrix/src/row_reduction.rs
       title: crates/linear_algebra/matrix/src/row_reduction.rs
+  - name: crates/misc/as_half_open_range/src
+    pages:
+    - icon: ':warning:'
+      path: crates/misc/as_half_open_range/src/lib.rs
+      title: crates/misc/as_half_open_range/src/lib.rs
   - name: crates/misc/bit_subset/src
     pages:
     - icon: ':heavy_check_mark:'
@@ -339,11 +344,6 @@ data:
     - icon: ':heavy_check_mark:'
       path: crates/misc/coordinate_compression/src/lib.rs
       title: crates/misc/coordinate_compression/src/lib.rs
-  - name: crates/misc/into_half_open_range/src
-    pages:
-    - icon: ':warning:'
-      path: crates/misc/into_half_open_range/src/lib.rs
-      title: crates/misc/into_half_open_range/src/lib.rs
   - name: crates/misc/macros/src
     pages:
     - icon: ':heavy_check_mark:'

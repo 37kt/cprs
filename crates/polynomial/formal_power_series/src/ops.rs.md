@@ -144,13 +144,13 @@ data:
     \ &FormalPowerSeries<M>) -> Self::Output {\n        self.sub_assign(rhs);\n  \
     \      self\n    }\n}\n\nimpl<M: ModInt<Value = u32>> Sub<FormalPowerSeries<M>>\
     \ for &FormalPowerSeries<M> {\n    type Output = FormalPowerSeries<M>;\n\n   \
-    \ fn sub(self, mut rhs: FormalPowerSeries<M>) -> Self::Output {\n        rhs.iter_mut().for_each(|x|\
-    \ *x = -*x);\n        if rhs.len() < self.len() {\n            rhs.resize(self.len(),\
-    \ M::from_raw(0));\n        }\n        rhs.iter_mut().zip(self).for_each(|(a,\
-    \ b)| *a += *b);\n        rhs\n    }\n}\n\nimpl<M: ModInt<Value = u32>> Sub for\
-    \ &FormalPowerSeries<M> {\n    type Output = FormalPowerSeries<M>;\n\n    fn sub(self,\
-    \ rhs: &FormalPowerSeries<M>) -> Self::Output {\n        self.clone().sub(rhs)\n\
-    \    }\n}\n"
+    \ #[allow(clippy::suspicious_arithmetic_impl)]\n    fn sub(self, mut rhs: FormalPowerSeries<M>)\
+    \ -> Self::Output {\n        rhs.iter_mut().for_each(|x| *x = -*x);\n        if\
+    \ rhs.len() < self.len() {\n            rhs.resize(self.len(), M::from_raw(0));\n\
+    \        }\n        rhs.iter_mut().zip(self).for_each(|(a, b)| *a += *b);\n  \
+    \      rhs\n    }\n}\n\nimpl<M: ModInt<Value = u32>> Sub for &FormalPowerSeries<M>\
+    \ {\n    type Output = FormalPowerSeries<M>;\n\n    fn sub(self, rhs: &FormalPowerSeries<M>)\
+    \ -> Self::Output {\n        self.clone().sub(rhs)\n    }\n}\n"
   dependsOn:
   - crates/polynomial/formal_power_series/src/constructor.rs
   - crates/polynomial/formal_power_series/src/convert.rs
@@ -173,7 +173,7 @@ data:
   - crates/polynomial/formal_power_series/src/log.rs
   - crates/polynomial/formal_power_series/src/inv.rs
   - crates/polynomial/formal_power_series/src/mul.rs
-  timestamp: '2025-03-29 09:22:56+00:00'
+  timestamp: '2025-04-06 02:35:23+00:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/library_checker/polynomial/sqrt_of_formal_power_series/src/main.rs

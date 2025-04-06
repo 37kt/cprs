@@ -35,9 +35,9 @@ data:
     \         ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\
     \  File \"/opt/hostedtoolcache/Python/3.13.2/x64/lib/python3.13/site-packages/onlinejudge_verify/languages/rust.py\"\
     , line 288, in bundle\n    raise NotImplementedError\nNotImplementedError\n"
-  code: "use std::cell::Cell;\n\nuse barrett_reduction::BarrettReduction64;\n\npub(crate)\
-    \ fn barrett_reduction<Id, Ret>(f: impl FnOnce(&Cell<BarrettReduction64>) -> Ret)\
-    \ -> Ret {\n    thread_local! {\n        static BARRETT_REDUCTION: Cell<BarrettReduction64>\
+  code: "use std::cell::Cell;\n\nuse barrett_reduction::BarrettReduction64;\n\n#[allow(clippy::extra_unused_type_parameters)]\n\
+    pub(crate) fn barrett_reduction<Id, Ret>(f: impl FnOnce(&Cell<BarrettReduction64>)\
+    \ -> Ret) -> Ret {\n    thread_local! {\n        static BARRETT_REDUCTION: Cell<BarrettReduction64>\
     \ = Cell::new(BarrettReduction64::new(1_000_000_009));\n    }\n\n    BARRETT_REDUCTION.with(|br|\
     \ f(br))\n}\n"
   dependsOn:
@@ -51,7 +51,7 @@ data:
   - crates/number_theory/modint/dynamic_modint_64/src/lib.rs
   - crates/number_theory/modint/dynamic_modint_64/src/numeric.rs
   - crates/number_theory/modint/dynamic_modint_64/src/ops.rs
-  timestamp: '2025-03-08 06:04:29+00:00'
+  timestamp: '2025-04-06 02:35:23+00:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: crates/number_theory/modint/dynamic_modint_64/src/barrett_reduction.rs

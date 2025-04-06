@@ -68,7 +68,7 @@ data:
   - crates/number_theory/modint/dynamic_modint/src/lib.rs
   - crates/number_theory/modint/dynamic_modint/src/barrett_reduction.rs
   - crates/number_theory/modint/dynamic_modint/src/ops.rs
-  timestamp: '2025-03-08 06:04:29+00:00'
+  timestamp: '2025-04-06 02:35:23+00:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/library_checker/enumerative_combinatorics/binomial_coefficient_prime_mod/src/main.rs

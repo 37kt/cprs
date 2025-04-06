@@ -48,12 +48,12 @@ data:
     \ -> usize {\n        self.n\n    }\n\n    pub fn is_empty(&self) -> bool {\n\
     \        self.v.last().unwrap()[0] == 0\n    }\n\n    pub fn insert(&mut self,\
     \ mut x: usize) -> bool {\n        if self[x] {\n            return false;\n \
-    \       }\n        for v in &mut self.v {\n            v[x / W] |= 1 << x % W;\n\
+    \       }\n        for v in &mut self.v {\n            v[x / W] |= 1 << (x % W);\n\
     \            x /= W;\n        }\n        true\n    }\n\n    pub fn remove(&mut\
     \ self, mut x: usize) -> bool {\n        if !self[x] {\n            return false;\n\
-    \        }\n        for v in &mut self.v {\n            v[x / W] &= !(1 << x %\
-    \ W);\n            if v[x / W] != 0 {\n                break;\n            }\n\
-    \            x /= W;\n        }\n        true\n    }\n\n    pub fn contains(&self,\
+    \        }\n        for v in &mut self.v {\n            v[x / W] &= !(1 << (x\
+    \ % W));\n            if v[x / W] != 0 {\n                break;\n           \
+    \ }\n            x /= W;\n        }\n        true\n    }\n\n    pub fn contains(&self,\
     \ x: usize) -> bool {\n        self[x]\n    }\n\n    /// x \u4EE5\u4E0A\u3067\u6700\
     \u5C0F\u306E\u8981\u7D20\n    pub fn next(&self, mut x: usize) -> Option<usize>\
     \ {\n        let mut d = 0;\n        loop {\n            let i = x / W;\n    \
@@ -87,7 +87,7 @@ data:
   isVerificationFile: false
   path: crates/data_structure/wordsize_ary_tree_set/src/lib.rs
   requiredBy: []
-  timestamp: '2025-03-20 09:27:03+00:00'
+  timestamp: '2025-04-06 02:35:23+00:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/library_checker/data_structure/predecessor_problem/src/main.rs

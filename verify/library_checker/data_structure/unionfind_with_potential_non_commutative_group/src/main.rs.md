@@ -102,10 +102,10 @@ data:
     \        }\n        if t == 0 {\n            input! {\n                x: [[Mint;\
     \ 2]; 2],\n            }\n            let x = [[x[0][0], x[0][1]], [x[1][0], x[1][1]]];\n\
     \            uf.merge(v, u, x);\n            let f = uf.diff(v, u).unwrap() ==\
-    \ x;\n            println!(\"{}\", f as i32);\n        } else {\n            if\
-    \ let Some(d) = uf.diff(v, u) {\n                println!(\"{} {} {} {}\", d[0][0],\
-    \ d[0][1], d[1][0], d[1][1]);\n            } else {\n                println!(\"\
-    -1\");\n            }\n        }\n    }\n}\n"
+    \ x;\n            println!(\"{}\", f as i32);\n        } else if let Some(d) =\
+    \ uf.diff(v, u) {\n            println!(\"{} {} {} {}\", d[0][0], d[0][1], d[1][0],\
+    \ d[1][1]);\n        } else {\n            println!(\"-1\");\n        }\n    }\n\
+    }\n"
   dependsOn:
   - crates/algebra/algebraic_structure/src/add.rs
   - crates/algebra/algebraic_structure/src/affine.rs
@@ -133,7 +133,7 @@ data:
   isVerificationFile: true
   path: verify/library_checker/data_structure/unionfind_with_potential_non_commutative_group/src/main.rs
   requiredBy: []
-  timestamp: '2025-03-08 09:50:27+00:00'
+  timestamp: '2025-04-06 02:35:23+00:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/library_checker/data_structure/unionfind_with_potential_non_commutative_group/src/main.rs

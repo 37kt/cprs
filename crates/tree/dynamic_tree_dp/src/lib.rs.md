@@ -94,8 +94,7 @@ data:
     }\n\n#[doc(hidden)]\npub trait Edge<Weight> {\n    fn weight(&self) -> Weight;\n\
     }\n\n#[doc(hidden)]\nimpl<Weight: Clone> Edge<Weight> for (usize, usize, Weight)\
     \ {\n    fn weight(&self) -> Weight {\n        self.2.clone()\n    }\n}\n\n#[doc(hidden)]\n\
-    impl Edge<()> for (usize, usize) {\n    fn weight(&self) -> () {\n        ()\n\
-    \    }\n}\n"
+    impl Edge<()> for (usize, usize) {\n    fn weight(&self) {}\n}\n"
   dependsOn:
   - crates/data_structure/csr_array/src/builder.rs
   - crates/data_structure/csr_array/src/csr_array.rs
@@ -107,7 +106,7 @@ data:
   isVerificationFile: false
   path: crates/tree/dynamic_tree_dp/src/lib.rs
   requiredBy: []
-  timestamp: '2025-03-29 09:22:56+00:00'
+  timestamp: '2025-04-06 02:35:23+00:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/library_checker/tree/point_set_tree_path_composite_sum_fixed_root/src/main.rs

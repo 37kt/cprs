@@ -55,36 +55,38 @@ data:
     \        let mut dq = Self::new();\n        for x in v.drain(len / 2..) {\n  \
     \          dq.push_back(x);\n        }\n        for x in v.drain(..).rev() {\n\
     \            dq.push_front(x);\n        }\n        dq\n    }\n}\n\nimpl<M: Monoid>\
-    \ FoldableDeque<M> {\n    pub fn new() -> Self {\n        Self {\n           \
-    \ fv: vec![],\n            bv: vec![],\n            fs: vec![M::unit()],\n   \
-    \         bs: vec![M::unit()],\n        }\n    }\n\n    pub fn from_fn(n: usize,\
-    \ f: impl FnMut(usize) -> M::Value) -> Self {\n        Self::from_iter((0..n).map(f))\n\
-    \    }\n\n    pub fn clear(&mut self) {\n        self.fv.clear();\n        self.bv.clear();\n\
-    \        self.fs.clear();\n        self.bs.clear();\n        self.fs.push(M::unit());\n\
-    \        self.bs.push(M::unit());\n    }\n\n    pub fn len(&self) -> usize {\n\
-    \        self.fv.len() + self.bv.len()\n    }\n\n    pub fn is_empty(&self) ->\
-    \ bool {\n        self.fv.is_empty() && self.bv.is_empty()\n    }\n\n    pub fn\
-    \ push_front(&mut self, x: M::Value) {\n        self.fs.push(M::op(&x, self.fs.last().unwrap()));\n\
-    \        self.fv.push(x);\n    }\n\n    pub fn push_back(&mut self, x: M::Value)\
-    \ {\n        self.bs.push(M::op(self.bs.last().unwrap(), &x));\n        self.bv.push(x);\n\
-    \    }\n\n    pub fn pop_front(&mut self) -> Option<M::Value> {\n        match\
-    \ self.len() {\n            0 => None,\n            1 => {\n                if\
-    \ self.bv.len() == 1 {\n                    self.bs.pop();\n                 \
-    \   self.bv.pop()\n                } else {\n                    self.fs.pop();\n\
-    \                    self.fv.pop()\n                }\n            }\n       \
-    \     _ => {\n                if self.fv.is_empty() {\n                    self.rebuild();\n\
-    \                }\n                self.fs.pop();\n                self.fv.pop()\n\
-    \            }\n        }\n    }\n\n    pub fn pop_back(&mut self) -> Option<M::Value>\
-    \ {\n        match self.len() {\n            0 => None,\n            1 => {\n\
-    \                if self.bv.len() == 1 {\n                    self.bs.pop();\n\
-    \                    self.bv.pop()\n                } else {\n               \
-    \     self.fs.pop();\n                    self.fv.pop()\n                }\n \
-    \           }\n            _ => {\n                if self.bv.is_empty() {\n \
-    \                   self.rebuild();\n                }\n                self.bs.pop();\n\
-    \                self.bv.pop()\n            }\n        }\n    }\n\n    pub fn\
-    \ front(&self) -> Option<&M::Value> {\n        self.fv.last().or(self.bv.first())\n\
-    \    }\n\n    pub fn back(&self) -> Option<&M::Value> {\n        self.bv.last().or(self.fv.first())\n\
-    \    }\n\n    pub fn fold_all(&self) -> M::Value {\n        M::op(self.fs.last().unwrap(),\
+    \ Default for FoldableDeque<M> {\n    fn default() -> Self {\n        Self::new()\n\
+    \    }\n}\n\nimpl<M: Monoid> FoldableDeque<M> {\n    pub fn new() -> Self {\n\
+    \        Self {\n            fv: vec![],\n            bv: vec![],\n          \
+    \  fs: vec![M::unit()],\n            bs: vec![M::unit()],\n        }\n    }\n\n\
+    \    pub fn from_fn(n: usize, f: impl FnMut(usize) -> M::Value) -> Self {\n  \
+    \      Self::from_iter((0..n).map(f))\n    }\n\n    pub fn clear(&mut self) {\n\
+    \        self.fv.clear();\n        self.bv.clear();\n        self.fs.clear();\n\
+    \        self.bs.clear();\n        self.fs.push(M::unit());\n        self.bs.push(M::unit());\n\
+    \    }\n\n    pub fn len(&self) -> usize {\n        self.fv.len() + self.bv.len()\n\
+    \    }\n\n    pub fn is_empty(&self) -> bool {\n        self.fv.is_empty() &&\
+    \ self.bv.is_empty()\n    }\n\n    pub fn push_front(&mut self, x: M::Value) {\n\
+    \        self.fs.push(M::op(&x, self.fs.last().unwrap()));\n        self.fv.push(x);\n\
+    \    }\n\n    pub fn push_back(&mut self, x: M::Value) {\n        self.bs.push(M::op(self.bs.last().unwrap(),\
+    \ &x));\n        self.bv.push(x);\n    }\n\n    pub fn pop_front(&mut self) ->\
+    \ Option<M::Value> {\n        match self.len() {\n            0 => None,\n   \
+    \         1 => {\n                if self.bv.len() == 1 {\n                  \
+    \  self.bs.pop();\n                    self.bv.pop()\n                } else {\n\
+    \                    self.fs.pop();\n                    self.fv.pop()\n     \
+    \           }\n            }\n            _ => {\n                if self.fv.is_empty()\
+    \ {\n                    self.rebuild();\n                }\n                self.fs.pop();\n\
+    \                self.fv.pop()\n            }\n        }\n    }\n\n    pub fn\
+    \ pop_back(&mut self) -> Option<M::Value> {\n        match self.len() {\n    \
+    \        0 => None,\n            1 => {\n                if self.bv.len() == 1\
+    \ {\n                    self.bs.pop();\n                    self.bv.pop()\n \
+    \               } else {\n                    self.fs.pop();\n               \
+    \     self.fv.pop()\n                }\n            }\n            _ => {\n  \
+    \              if self.bv.is_empty() {\n                    self.rebuild();\n\
+    \                }\n                self.bs.pop();\n                self.bv.pop()\n\
+    \            }\n        }\n    }\n\n    pub fn front(&self) -> Option<&M::Value>\
+    \ {\n        self.fv.last().or(self.bv.first())\n    }\n\n    pub fn back(&self)\
+    \ -> Option<&M::Value> {\n        self.bv.last().or(self.fv.first())\n    }\n\n\
+    \    pub fn fold_all(&self) -> M::Value {\n        M::op(self.fs.last().unwrap(),\
     \ self.bs.last().unwrap())\n    }\n\n    fn rebuild(&mut self) {\n        let\
     \ len = self.len();\n        let mut v = self\n            .fv\n            .drain(..)\n\
     \            .rev()\n            .chain(self.bv.drain(..))\n            .collect::<Vec<_>>();\n\
@@ -105,7 +107,7 @@ data:
   isVerificationFile: false
   path: crates/data_structure/foldable_deque/src/lib.rs
   requiredBy: []
-  timestamp: '2025-03-20 09:27:03+00:00'
+  timestamp: '2025-04-06 02:35:23+00:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/library_checker/data_structure/deque_operate_all_composite/src/main.rs

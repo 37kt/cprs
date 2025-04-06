@@ -35,16 +35,15 @@ data:
     \    .copied()\n        .chain(lrx.iter().map(|&(_, _, x)| x))\n        .collect::<Vec<_>>();\n\
     \    let (cc, xs) = CoordinateCompression::<_>::new(xs);\n    let (a, x) = xs.split_at(n);\n\
     \    for i in 0..q {\n        lrx[i].2 = x[i];\n    }\n\n    let m = cc.len();\n\
-    \n    let mut solver = Solver {\n        a: &a,\n        cnt: vec![0; m],\n  \
-    \  };\n    let res = solver.solve(&lrx);\n    for x in res {\n        println!(\"\
-    {}\", x);\n    }\n}\n"
+    \n    let mut solver = Solver { a, cnt: vec![0; m] };\n    let res = solver.solve(&lrx);\n\
+    \    for x in res {\n        println!(\"{}\", x);\n    }\n}\n"
   dependsOn:
   - crates/algorithm/mo/src/lib.rs
   - crates/misc/coordinate_compression/src/lib.rs
   isVerificationFile: true
   path: verify/library_checker/data_structure/static_range_frequency_mo/src/main.rs
   requiredBy: []
-  timestamp: '2025-03-22 02:08:02+00:00'
+  timestamp: '2025-04-06 02:35:23+00:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/library_checker/data_structure/static_range_frequency_mo/src/main.rs

@@ -32,8 +32,8 @@ data:
     path: crates/algebra/numeric_traits/src/zero_one.rs
     title: crates/algebra/numeric_traits/src/zero_one.rs
   - icon: ':warning:'
-    path: crates/misc/into_half_open_range/src/lib.rs
-    title: crates/misc/into_half_open_range/src/lib.rs
+    path: crates/misc/as_half_open_range/src/lib.rs
+    title: crates/misc/as_half_open_range/src/lib.rs
   _extendedRequiredBy: []
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
@@ -63,7 +63,7 @@ data:
     \  File \"/opt/hostedtoolcache/Python/3.13.2/x64/lib/python3.13/site-packages/onlinejudge_verify/languages/rust.py\"\
     , line 288, in bundle\n    raise NotImplementedError\nNotImplementedError\n"
   code: "// TODO: \u4E8C\u5206\u63A2\u7D22\n\nuse std::ops::{Deref, DerefMut, RangeBounds};\n\
-    \nuse algebraic_traits::{AbelianGroup, CommutativeMonoid};\nuse into_half_open_range::IntoHalfOpenRange;\n\
+    \nuse algebraic_traits::{AbelianGroup, CommutativeMonoid};\nuse as_half_open_range::AsHalfOpenRange;\n\
     use numeric_traits::Integer;\n\npub struct FenwickTree<M>\nwhere\n    M: CommutativeMonoid,\n\
     \    M::Value: Clone,\n{\n    n: usize,\n    v: Vec<M::Value>,\n}\n\nimpl<M> FromIterator<M::Value>\
     \ for FenwickTree<M>\nwhere\n    M: CommutativeMonoid,\n    M::Value: Clone,\n\
@@ -85,7 +85,7 @@ data:
     \    s = M::op(&s, &self.v[i - 1]);\n            i -= i.lsb();\n        }\n  \
     \      s\n    }\n}\n\nimpl<G> FenwickTree<G>\nwhere\n    G: AbelianGroup,\n  \
     \  G::Value: Clone,\n{\n    pub fn fold(&self, range: impl RangeBounds<usize>)\
-    \ -> G::Value {\n        let (mut l, mut r) = range.into_half_open_range(0, self.n);\n\
+    \ -> G::Value {\n        let (mut l, mut r) = range.as_half_open_range(0, self.n);\n\
     \        let mut s = G::unit();\n        while r > l {\n            s = G::op(&s,\
     \ &self.v[r - 1]);\n            r -= r.lsb();\n        }\n        while l > r\
     \ {\n            s = G::op(&s, &G::inv(&self.v[l - 1]));\n            l -= l.lsb();\n\
@@ -115,11 +115,11 @@ data:
   - crates/algebra/numeric_traits/src/numeric.rs
   - crates/algebra/numeric_traits/src/signed.rs
   - crates/algebra/numeric_traits/src/zero_one.rs
-  - crates/misc/into_half_open_range/src/lib.rs
+  - crates/misc/as_half_open_range/src/lib.rs
   isVerificationFile: false
   path: crates/data_structure/fenwick_tree/fenwick_tree/src/lib.rs
   requiredBy: []
-  timestamp: '2025-03-20 09:27:03+00:00'
+  timestamp: '2025-04-06 02:35:23+00:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/library_checker/tree/vertex_add_path_sum/src/main.rs

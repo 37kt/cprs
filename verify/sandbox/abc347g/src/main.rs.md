@@ -21,20 +21,21 @@ data:
     \ input};\n\n#[fastout]\nfn main() {\n    input! {\n        n: usize,\n      \
     \  a: [[usize; n]; n],\n    }\n\n    let mut opt = MultivaluedOptimization::new(vec![5;\
     \ n * n]);\n    let id = |i: usize, j: usize| i * n + j;\n    let f = |x: usize,\
-    \ y: usize| Some(x.abs_diff(y).pow(2) as i64);\n    for i in 0..n {\n        for\
-    \ j in 0..n {\n            if a[i][j] != 0 {\n                opt.add_unary(id(i,\
-    \ j), |x| (x == a[i][j] - 1).then_some(0));\n            }\n            if i +\
-    \ 1 < n {\n                opt.add_binary(id(i, j), id(i + 1, j), f);\n      \
-    \      }\n            if j + 1 < n {\n                opt.add_binary(id(i, j),\
-    \ id(i, j + 1), f);\n            }\n        }\n    }\n\n    let (_, res) = opt.solve();\n\
-    \    for i in 0..n {\n        for j in 0..n {\n            print!(\"{} \", res[id(i,\
-    \ j)] + 1);\n        }\n        println!();\n    }\n}\n"
+    \ y: usize| Some(x.abs_diff(y).pow(2) as i64);\n    #[allow(clippy::needless_range_loop)]\n\
+    \    for i in 0..n {\n        for j in 0..n {\n            if a[i][j] != 0 {\n\
+    \                opt.add_unary(id(i, j), |x| (x == a[i][j] - 1).then_some(0));\n\
+    \            }\n            if i + 1 < n {\n                opt.add_binary(id(i,\
+    \ j), id(i + 1, j), f);\n            }\n            if j + 1 < n {\n         \
+    \       opt.add_binary(id(i, j), id(i, j + 1), f);\n            }\n        }\n\
+    \    }\n\n    let (_, res) = opt.solve();\n    for i in 0..n {\n        for j\
+    \ in 0..n {\n            print!(\"{} \", res[id(i, j)] + 1);\n        }\n    \
+    \    println!();\n    }\n}\n"
   dependsOn:
   - crates/flow/multivalued_optimization/src/lib.rs
   isVerificationFile: false
   path: verify/sandbox/abc347g/src/main.rs
   requiredBy: []
-  timestamp: '2025-03-19 23:25:14+00:00'
+  timestamp: '2025-04-06 02:35:23+00:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: verify/sandbox/abc347g/src/main.rs

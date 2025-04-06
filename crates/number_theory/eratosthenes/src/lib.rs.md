@@ -67,31 +67,31 @@ data:
     \ &f)| {\n                let mut f = f;\n                std::iter::from_fn(move\
     \ || {\n                    (f != 0).then(|| {\n                        let j\
     \ = f.lsb_index();\n                        f &= f - 1;\n                    \
-    \    i * 30 + MOD_30[j as usize]\n                    })\n                })\n\
-    \            }))\n    }\n\n    pub fn is_prime(&self, x: usize) -> bool {\n  \
-    \      assert!(x <= self.n);\n        match x {\n            2 | 3 | 5 => true,\n\
-    \            _ => Self::id(x).map_or(false, |i| self.fs[i / 30] >> (i % 30) &\
-    \ 1 != 0),\n        }\n    }\n\n    fn id(x: usize) -> Option<usize> {\n     \
-    \   if x <= 6 {\n            return None;\n        }\n        let offset = x /\
-    \ 30 * 8;\n        let res = match x % 30 {\n            1 => 0,\n           \
-    \ 7 => 1,\n            11 => 2,\n            13 => 3,\n            17 => 4,\n\
-    \            19 => 5,\n            23 => 6,\n            29 => 7,\n          \
-    \  _ => return None,\n        } + offset;\n        Some(res)\n    }\n}\n\nconst\
-    \ MOD_30: [usize; 8] = [1, 7, 11, 13, 17, 19, 23, 29];\nconst D1: [usize; 8] =\
-    \ [6, 4, 2, 4, 2, 4, 6, 2];\nconst D2: [[usize; 8]; 8] = init_d2();\nconst MUL_MASK:\
-    \ [[u8; 8]; 8] = init_mul_mask();\n\nconst fn init_mul_mask() -> [[u8; 8]; 8]\
-    \ {\n    let mut mul = [[0; 8]; 8];\n    let mut i = 0;\n    while i < 8 {\n \
-    \       let mut j = 0;\n        while j < 8 {\n            let x = MOD_30[i] *\
-    \ MOD_30[j] % 30;\n            let k = match x {\n                1 => 0,\n  \
-    \              7 => 1,\n                11 => 2,\n                13 => 3,\n \
-    \               17 => 4,\n                19 => 5,\n                23 => 6,\n\
-    \                29 => 7,\n                _ => unreachable!(),\n            };\n\
-    \            mul[i][j] = !(1 << k);\n            j += 1;\n        }\n        i\
-    \ += 1;\n    }\n    mul\n}\n\nconst fn init_d2() -> [[usize; 8]; 8] {\n    let\
-    \ mut d2 = [[0; 8]; 8];\n    let mut i = 0;\n    while i < 8 {\n        let mut\
-    \ j = 0;\n        while j < 8 {\n            let x = MOD_30[i] * (MOD_30[j] +\
-    \ D1[j]) / 30;\n            let y = MOD_30[i] * MOD_30[j] / 30;\n            d2[i][j]\
-    \ = x - y;\n            j += 1;\n        }\n        i += 1;\n    }\n    d2\n}\n"
+    \    i * 30 + MOD_30[j]\n                    })\n                })\n        \
+    \    }))\n    }\n\n    pub fn is_prime(&self, x: usize) -> bool {\n        assert!(x\
+    \ <= self.n);\n        match x {\n            2 | 3 | 5 => true,\n           \
+    \ _ => Self::id(x).map_or(false, |i| self.fs[i / 30] >> (i % 30) & 1 != 0),\n\
+    \        }\n    }\n\n    fn id(x: usize) -> Option<usize> {\n        if x <= 6\
+    \ {\n            return None;\n        }\n        let offset = x / 30 * 8;\n \
+    \       let res = match x % 30 {\n            1 => 0,\n            7 => 1,\n \
+    \           11 => 2,\n            13 => 3,\n            17 => 4,\n           \
+    \ 19 => 5,\n            23 => 6,\n            29 => 7,\n            _ => return\
+    \ None,\n        } + offset;\n        Some(res)\n    }\n}\n\nconst MOD_30: [usize;\
+    \ 8] = [1, 7, 11, 13, 17, 19, 23, 29];\nconst D1: [usize; 8] = [6, 4, 2, 4, 2,\
+    \ 4, 6, 2];\nconst D2: [[usize; 8]; 8] = init_d2();\nconst MUL_MASK: [[u8; 8];\
+    \ 8] = init_mul_mask();\n\nconst fn init_mul_mask() -> [[u8; 8]; 8] {\n    let\
+    \ mut mul = [[0; 8]; 8];\n    let mut i = 0;\n    while i < 8 {\n        let mut\
+    \ j = 0;\n        while j < 8 {\n            let x = MOD_30[i] * MOD_30[j] % 30;\n\
+    \            let k = match x {\n                1 => 0,\n                7 =>\
+    \ 1,\n                11 => 2,\n                13 => 3,\n                17 =>\
+    \ 4,\n                19 => 5,\n                23 => 6,\n                29 =>\
+    \ 7,\n                _ => unreachable!(),\n            };\n            mul[i][j]\
+    \ = !(1 << k);\n            j += 1;\n        }\n        i += 1;\n    }\n    mul\n\
+    }\n\nconst fn init_d2() -> [[usize; 8]; 8] {\n    let mut d2 = [[0; 8]; 8];\n\
+    \    let mut i = 0;\n    while i < 8 {\n        let mut j = 0;\n        while\
+    \ j < 8 {\n            let x = MOD_30[i] * (MOD_30[j] + D1[j]) / 30;\n       \
+    \     let y = MOD_30[i] * MOD_30[j] / 30;\n            d2[i][j] = x - y;\n   \
+    \         j += 1;\n        }\n        i += 1;\n    }\n    d2\n}\n"
   dependsOn:
   - crates/algebra/numeric_traits/src/cast.rs
   - crates/algebra/numeric_traits/src/inf.rs
@@ -105,7 +105,7 @@ data:
   requiredBy:
   - crates/convolution/lcm_convolution/src/lib.rs
   - crates/convolution/gcd_convolution/src/lib.rs
-  timestamp: '2025-03-20 09:27:03+00:00'
+  timestamp: '2025-04-06 02:35:23+00:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/library_checker/number_theory/enumerate_primes_era/src/main.rs

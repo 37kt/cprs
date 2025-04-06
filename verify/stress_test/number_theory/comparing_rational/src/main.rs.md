@@ -77,7 +77,7 @@ data:
   isVerificationFile: true
   path: verify/stress_test/number_theory/comparing_rational/src/main.rs
   requiredBy: []
-  timestamp: '2025-03-20 09:27:03+00:00'
+  timestamp: '2025-04-06 02:35:23+00:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/stress_test/number_theory/comparing_rational/src/main.rs

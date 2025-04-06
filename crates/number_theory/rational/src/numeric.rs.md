@@ -54,7 +54,7 @@ data:
   requiredBy:
   - crates/number_theory/rational/src/lib.rs
   - crates/number_theory/rational/src/ops.rs
-  timestamp: '2025-03-13 09:00:06+00:00'
+  timestamp: '2025-04-06 02:35:23+00:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/stress_test/number_theory/comparing_rational/src/main.rs

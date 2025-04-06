@@ -32,8 +32,8 @@ data:
     path: crates/algebra/numeric_traits/src/zero_one.rs
     title: crates/algebra/numeric_traits/src/zero_one.rs
   - icon: ':warning:'
-    path: crates/misc/into_half_open_range/src/lib.rs
-    title: crates/misc/into_half_open_range/src/lib.rs
+    path: crates/misc/as_half_open_range/src/lib.rs
+    title: crates/misc/as_half_open_range/src/lib.rs
   _extendedRequiredBy: []
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
@@ -50,18 +50,18 @@ data:
     \         ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\
     \  File \"/opt/hostedtoolcache/Python/3.13.2/x64/lib/python3.13/site-packages/onlinejudge_verify/languages/rust.py\"\
     , line 288, in bundle\n    raise NotImplementedError\nNotImplementedError\n"
-  code: "use std::ops::RangeBounds;\n\nuse algebraic_traits::Monoid;\nuse into_half_open_range::IntoHalfOpenRange;\n\
+  code: "use std::ops::RangeBounds;\n\nuse algebraic_traits::Monoid;\nuse as_half_open_range::AsHalfOpenRange;\n\
     use numeric_traits::Integer;\n\npub struct DisjointSparseTable<M>\nwhere\n   \
     \ M: Monoid,\n{\n    n: usize,\n    table: Vec<Vec<M::Value>>,\n}\n\nimpl<M> FromIterator<M::Value>\
     \ for DisjointSparseTable<M>\nwhere\n    M: Monoid,\n{\n    fn from_iter<T: IntoIterator<Item\
     \ = M::Value>>(iter: T) -> Self {\n        let a = iter.into_iter().collect::<Vec<_>>();\n\
     \        let n = a.len();\n        let h = (n + 2).ceil_log2();\n        let mut\
     \ table = (0..h)\n            .map(|_| (0..n + 2).map(|_| M::unit()).collect::<Vec<_>>())\n\
-    \            .collect::<Vec<_>>();\n        for k in 1..h {\n            let w\
-    \ = 1 << k;\n            for i in (w..n + 2).step_by(w * 2) {\n              \
-    \  for j in (i + 1 - w..i).rev() {\n                    table[k][j - 1] = M::op(&a[j\
-    \ - 1], &table[k][j]);\n                }\n                for j in i..(i + w\
-    \ - 1).min(n + 1) {\n                    table[k][j + 1] = M::op(&table[k][j],\
+    \            .collect::<Vec<_>>();\n        for (k, table) in table.iter_mut().enumerate().skip(1)\
+    \ {\n            let w = 1 << k;\n            for i in (w..n + 2).step_by(w *\
+    \ 2) {\n                for j in (i + 1 - w..i).rev() {\n                    table[j\
+    \ - 1] = M::op(&a[j - 1], &table[j]);\n                }\n                for\
+    \ j in i..(i + w - 1).min(n + 1) {\n                    table[j + 1] = M::op(&table[j],\
     \ &a[j - 1]);\n                }\n            }\n        }\n        Self { n,\
     \ table }\n    }\n}\n\nimpl<M> DisjointSparseTable<M>\nwhere\n    M: Monoid,\n\
     {\n    pub fn from_fn(n: usize, f: impl FnMut(usize) -> M::Value) -> Self {\n\
@@ -69,8 +69,8 @@ data:
     \ {\n        self.n\n    }\n\n    pub fn is_empty(&self) -> bool {\n        self.n\
     \ == 0\n    }\n\n    pub fn get(&self, i: usize) -> M::Value {\n        self.fold(i..i\
     \ + 1)\n    }\n\n    pub fn fold(&self, range: impl RangeBounds<usize>) -> M::Value\
-    \ {\n        let (l, r) = range.into_half_open_range(0, self.n);\n        let\
-    \ r = r + 1;\n        let k = (l ^ r).floor_log2();\n        let t = &self.table[k];\n\
+    \ {\n        let (l, r) = range.as_half_open_range(0, self.n);\n        let r\
+    \ = r + 1;\n        let k = (l ^ r).floor_log2();\n        let t = &self.table[k];\n\
     \        M::op(&t[l], &t[r])\n    }\n}\n\nimpl<M> Clone for DisjointSparseTable<M>\n\
     where\n    M: Monoid,\n    M::Value: Clone,\n{\n    fn clone(&self) -> Self {\n\
     \        Self {\n            n: self.n,\n            table: self.table.clone(),\n\
@@ -86,11 +86,11 @@ data:
   - crates/algebra/numeric_traits/src/numeric.rs
   - crates/algebra/numeric_traits/src/signed.rs
   - crates/algebra/numeric_traits/src/zero_one.rs
-  - crates/misc/into_half_open_range/src/lib.rs
+  - crates/misc/as_half_open_range/src/lib.rs
   isVerificationFile: false
   path: crates/data_structure/disjoint_sparse_table/src/lib.rs
   requiredBy: []
-  timestamp: '2025-03-20 09:27:03+00:00'
+  timestamp: '2025-04-06 02:35:23+00:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/library_checker/data_structure/staticrmq_dst/src/main.rs

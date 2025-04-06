@@ -176,7 +176,7 @@ data:
   - crates/number_theory/modint/static_modint/src/numeric.rs
   - crates/number_theory/modint/static_modint/src/ops.rs
   - crates/number_theory/modint/static_modint/src/ntt_precalc.rs
-  timestamp: '2025-03-08 09:50:27+00:00'
+  timestamp: '2025-04-06 02:35:23+00:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/library_checker/polynomial/sqrt_of_formal_power_series/src/main.rs

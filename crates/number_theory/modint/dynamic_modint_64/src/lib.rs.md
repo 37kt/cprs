@@ -109,7 +109,7 @@ data:
   - crates/number_theory/modint/dynamic_modint_64/src/barrett_reduction.rs
   - crates/number_theory/modint/dynamic_modint_64/src/numeric.rs
   - crates/number_theory/modint/dynamic_modint_64/src/ops.rs
-  timestamp: '2025-03-20 09:27:03+00:00'
+  timestamp: '2025-04-06 02:35:23+00:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: crates/number_theory/modint/dynamic_modint_64/src/lib.rs

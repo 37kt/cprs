@@ -32,8 +32,8 @@ data:
     path: crates/algebra/numeric_traits/src/zero_one.rs
     title: crates/algebra/numeric_traits/src/zero_one.rs
   - icon: ':warning:'
-    path: crates/misc/into_half_open_range/src/lib.rs
-    title: crates/misc/into_half_open_range/src/lib.rs
+    path: crates/misc/as_half_open_range/src/lib.rs
+    title: crates/misc/as_half_open_range/src/lib.rs
   _extendedRequiredBy: []
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
@@ -50,7 +50,7 @@ data:
     \         ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\
     \  File \"/opt/hostedtoolcache/Python/3.13.2/x64/lib/python3.13/site-packages/onlinejudge_verify/languages/rust.py\"\
     , line 288, in bundle\n    raise NotImplementedError\nNotImplementedError\n"
-  code: "use std::ops::RangeBounds;\n\nuse algebraic_traits::Monoid;\nuse into_half_open_range::IntoHalfOpenRange;\n\
+  code: "use std::ops::RangeBounds;\n\nuse algebraic_traits::Monoid;\nuse as_half_open_range::AsHalfOpenRange;\n\
     use numeric_traits::Integer;\n\npub struct DualSegmentTree<M>\nwhere\n    M: Monoid,\n\
     \    M::Value: Clone + Eq,\n{\n    n: usize,\n    sz: usize,\n    lg: usize,\n\
     \    lz: Vec<M::Value>,\n}\n\nimpl<M> FromIterator<M::Value> for DualSegmentTree<M>\n\
@@ -73,7 +73,7 @@ data:
     \ M::Value {\n        assert!(i < self.n);\n        i += self.sz;\n        for\
     \ h in (1..=self.lg).rev() {\n            self.push(i >> h);\n        }\n    \
     \    self.lz[i].clone()\n    }\n\n    pub fn apply_range(&mut self, range: impl\
-    \ RangeBounds<usize>, f: M::Value) {\n        let (mut l, mut r) = range.into_half_open_range(0,\
+    \ RangeBounds<usize>, f: M::Value) {\n        let (mut l, mut r) = range.as_half_open_range(0,\
     \ self.n);\n        if l == r {\n            return;\n        }\n        l +=\
     \ self.sz;\n        r += self.sz;\n\n        // if !COMMUTATIVE {\n        for\
     \ h in (1..=self.lg).rev() {\n            if l >> h << h != l {\n            \
@@ -100,11 +100,11 @@ data:
   - crates/algebra/numeric_traits/src/numeric.rs
   - crates/algebra/numeric_traits/src/signed.rs
   - crates/algebra/numeric_traits/src/zero_one.rs
-  - crates/misc/into_half_open_range/src/lib.rs
+  - crates/misc/as_half_open_range/src/lib.rs
   isVerificationFile: false
   path: crates/data_structure/segment_tree/dual_segment_tree/src/lib.rs
   requiredBy: []
-  timestamp: '2025-03-20 09:27:03+00:00'
+  timestamp: '2025-04-06 02:35:23+00:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/library_checker/data_structure/range_affine_point_get/src/main.rs

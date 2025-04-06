@@ -23,19 +23,20 @@ data:
     use binary_optimization::BinaryOptimization;\nuse proconio::{fastout, input, marker::Usize1};\n\
     \n#[fastout]\nfn main() {\n    input! {\n        n: usize,\n        m: usize,\n\
     \        a: [i64; n],\n        b: [i64; m],\n        c: [[Usize1]; m],\n    }\n\
-    \n    let mut opt = BinaryOptimization::new(n);\n    for i in 0..n {\n       \
-    \ opt.add_unary(i, |bi| Some([0, a[i]][bi]));\n    }\n    for i in 0..m {\n  \
-    \      opt.add_if_all_1(&c[i], -b[i]);\n    }\n\n    let (cost, choice) = opt.solve();\n\
-    \    let mut sum = 0;\n    for i in 0..n {\n        if choice[i] == 1 {\n    \
-    \        sum += a[i];\n        }\n    }\n    for i in 0..m {\n        if c[i].iter().all(|&j|\
-    \ choice[j] == 1) {\n            sum -= b[i];\n        }\n    }\n    assert_eq!(cost,\
-    \ sum);\n\n    println!(\"{}\", -cost);\n}\n"
+    \n    let mut opt = BinaryOptimization::new(n);\n    for (i, &x) in a.iter().enumerate()\
+    \ {\n        opt.add_unary(i, |bi| Some([0, x][bi]));\n    }\n    for i in 0..m\
+    \ {\n        opt.add_if_all_1(&c[i], -b[i]);\n    }\n\n    let (cost, choice)\
+    \ = opt.solve();\n    let mut sum = 0;\n    for i in 0..n {\n        if choice[i]\
+    \ == 1 {\n            sum += a[i];\n        }\n    }\n    for i in 0..m {\n  \
+    \      if c[i].iter().all(|&j| choice[j] == 1) {\n            sum -= b[i];\n \
+    \       }\n    }\n    assert_eq!(cost, sum);\n\n    println!(\"{}\", -cost);\n\
+    }\n"
   dependsOn:
   - crates/flow/binary_optimization/src/lib.rs
   isVerificationFile: true
   path: verify/yukicoder/flow/yuki2713_binopt/src/main.rs
   requiredBy: []
-  timestamp: '2025-03-19 23:25:14+00:00'
+  timestamp: '2025-04-06 02:35:23+00:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/yukicoder/flow/yuki2713_binopt/src/main.rs

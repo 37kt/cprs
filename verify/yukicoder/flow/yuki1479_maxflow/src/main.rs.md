@@ -50,7 +50,7 @@ data:
   isVerificationFile: true
   path: verify/yukicoder/flow/yuki1479_maxflow/src/main.rs
   requiredBy: []
-  timestamp: '2025-03-25 09:58:57+00:00'
+  timestamp: '2025-04-06 02:35:23+00:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/yukicoder/flow/yuki1479_maxflow/src/main.rs

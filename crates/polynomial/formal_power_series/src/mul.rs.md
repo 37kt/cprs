@@ -116,39 +116,40 @@ data:
     \   self\n    }\n}\n\nimpl<M: ModInt<Value = u32>> Mul<M> for &FormalPowerSeries<M>\
     \ {\n    type Output = FormalPowerSeries<M>;\n\n    fn mul(self, rhs: M) -> Self::Output\
     \ {\n        self.iter().map(|&x| x * rhs).collect()\n    }\n}\n\nimpl<M: ModInt<Value\
-    \ = u32>> DivAssign<M> for FormalPowerSeries<M> {\n    fn div_assign(&mut self,\
-    \ rhs: M) {\n        *self *= rhs.recip();\n    }\n}\n\nimpl<M: ModInt<Value =\
-    \ u32>> Div<M> for FormalPowerSeries<M> {\n    type Output = FormalPowerSeries<M>;\n\
-    \n    fn div(mut self, rhs: M) -> Self::Output {\n        self *= rhs.recip();\n\
+    \ = u32>> DivAssign<M> for FormalPowerSeries<M> {\n    #[allow(clippy::suspicious_op_assign_impl)]\n\
+    \    fn div_assign(&mut self, rhs: M) {\n        *self *= rhs.recip();\n    }\n\
+    }\n\nimpl<M: ModInt<Value = u32>> Div<M> for FormalPowerSeries<M> {\n    type\
+    \ Output = FormalPowerSeries<M>;\n\n    #[allow(clippy::suspicious_arithmetic_impl)]\n\
+    \    fn div(mut self, rhs: M) -> Self::Output {\n        self *= rhs.recip();\n\
     \        self\n    }\n}\n\nimpl<M: ModInt<Value = u32>> Div<M> for &FormalPowerSeries<M>\
-    \ {\n    type Output = FormalPowerSeries<M>;\n\n    fn div(self, rhs: M) -> Self::Output\
-    \ {\n        self * rhs.recip()\n    }\n}\n\n#[doc(hidden)]\npub trait FpsMul:\
-    \ ModInt<Value = u32> + Numeric {\n    fn mul(f: &FormalPowerSeries<Self>, g:\
-    \ &FormalPowerSeries<Self>) -> FormalPowerSeries<Self>;\n}\n\nconst MUL_THRESHOLD_NTT_FRIENDLY:\
-    \ usize = 128;\nconst MUL_THRESHOLD_ARBITRARY: usize = 512;\n\nfn mul_naive<M:\
-    \ ModInt<Value = u32> + Numeric>(\n    f: &FormalPowerSeries<M>,\n    g: &FormalPowerSeries<M>,\n\
-    ) -> FormalPowerSeries<M> {\n    if f.is_empty() || g.is_empty() {\n        return\
-    \ fps![];\n    }\n\n    let mut h = fps![0; f.len() + g.len() - 1];\n    for (i,\
-    \ &x) in f.iter().enumerate() {\n        if x.val() == 0 {\n            continue;\n\
-    \        }\n        for (j, &y) in g.iter().enumerate() {\n            h[i + j]\
-    \ += x * y;\n        }\n    }\n    h\n}\n\nimpl<const MOD: u32> FpsMul for StaticModInt<MOD>\
-    \ {\n    fn mul<'a>(\n        mut f: &'a FormalPowerSeries<Self>,\n        mut\
-    \ g: &'a FormalPowerSeries<Self>,\n    ) -> FormalPowerSeries<Self> {\n      \
-    \  let mut fc = f.count_terms();\n        let mut gc = g.count_terms();\n    \
-    \    if fc > gc {\n            std::mem::swap(&mut f, &mut g);\n            std::mem::swap(&mut\
-    \ fc, &mut gc);\n        }\n\n        if StaticModInt::<MOD>::IS_NTT_FRIENDLY\
-    \ {\n            if fc <= MUL_THRESHOLD_NTT_FRIENDLY {\n                mul_naive(f,\
-    \ g)\n            } else {\n                FormalPowerSeries(convolution_ntt_friendly(f,\
-    \ g))\n            }\n        } else {\n            if fc <= MUL_THRESHOLD_ARBITRARY\
-    \ {\n                mul_naive(f, g)\n            } else {\n                FormalPowerSeries(convolution_arbitrary_mod(f,\
-    \ g))\n            }\n        }\n    }\n}\n\nimpl<Id> FpsMul for DynamicModInt<Id>\
-    \ {\n    fn mul<'a>(\n        mut f: &'a FormalPowerSeries<Self>,\n        mut\
-    \ g: &'a FormalPowerSeries<Self>,\n    ) -> FormalPowerSeries<Self> {\n      \
-    \  let mut fc = f.count_terms();\n        let mut gc = g.count_terms();\n    \
-    \    if fc > gc {\n            std::mem::swap(&mut f, &mut g);\n            std::mem::swap(&mut\
-    \ fc, &mut gc);\n        }\n\n        if fc <= MUL_THRESHOLD_ARBITRARY {\n   \
-    \         mul_naive(f, g)\n        } else {\n            FormalPowerSeries(convolution_arbitrary_mod(f,\
-    \ g))\n        }\n    }\n}\n"
+    \ {\n    type Output = FormalPowerSeries<M>;\n\n    #[allow(clippy::suspicious_arithmetic_impl)]\n\
+    \    fn div(self, rhs: M) -> Self::Output {\n        self * rhs.recip()\n    }\n\
+    }\n\n#[doc(hidden)]\npub trait FpsMul: ModInt<Value = u32> + Numeric {\n    fn\
+    \ mul(f: &FormalPowerSeries<Self>, g: &FormalPowerSeries<Self>) -> FormalPowerSeries<Self>;\n\
+    }\n\nconst MUL_THRESHOLD_NTT_FRIENDLY: usize = 128;\nconst MUL_THRESHOLD_ARBITRARY:\
+    \ usize = 512;\n\nfn mul_naive<M: ModInt<Value = u32> + Numeric>(\n    f: &FormalPowerSeries<M>,\n\
+    \    g: &FormalPowerSeries<M>,\n) -> FormalPowerSeries<M> {\n    if f.is_empty()\
+    \ || g.is_empty() {\n        return fps![];\n    }\n\n    let mut h = fps![0;\
+    \ f.len() + g.len() - 1];\n    for (i, &x) in f.iter().enumerate() {\n       \
+    \ if x.val() == 0 {\n            continue;\n        }\n        for (j, &y) in\
+    \ g.iter().enumerate() {\n            h[i + j] += x * y;\n        }\n    }\n \
+    \   h\n}\n\nimpl<const MOD: u32> FpsMul for StaticModInt<MOD> {\n    fn mul<'a>(\n\
+    \        mut f: &'a FormalPowerSeries<Self>,\n        mut g: &'a FormalPowerSeries<Self>,\n\
+    \    ) -> FormalPowerSeries<Self> {\n        let mut fc = f.count_terms();\n \
+    \       let mut gc = g.count_terms();\n        if fc > gc {\n            std::mem::swap(&mut\
+    \ f, &mut g);\n            std::mem::swap(&mut fc, &mut gc);\n        }\n\n  \
+    \      if StaticModInt::<MOD>::IS_NTT_FRIENDLY {\n            if fc <= MUL_THRESHOLD_NTT_FRIENDLY\
+    \ {\n                mul_naive(f, g)\n            } else {\n                FormalPowerSeries(convolution_ntt_friendly(f,\
+    \ g))\n            }\n        } else if fc <= MUL_THRESHOLD_ARBITRARY {\n    \
+    \        mul_naive(f, g)\n        } else {\n            FormalPowerSeries(convolution_arbitrary_mod(f,\
+    \ g))\n        }\n    }\n}\n\nimpl<Id> FpsMul for DynamicModInt<Id> {\n    fn\
+    \ mul<'a>(\n        mut f: &'a FormalPowerSeries<Self>,\n        mut g: &'a FormalPowerSeries<Self>,\n\
+    \    ) -> FormalPowerSeries<Self> {\n        let mut fc = f.count_terms();\n \
+    \       let mut gc = g.count_terms();\n        if fc > gc {\n            std::mem::swap(&mut\
+    \ f, &mut g);\n            std::mem::swap(&mut fc, &mut gc);\n        }\n\n  \
+    \      if fc <= MUL_THRESHOLD_ARBITRARY {\n            mul_naive(f, g)\n     \
+    \   } else {\n            FormalPowerSeries(convolution_arbitrary_mod(f, g))\n\
+    \        }\n    }\n}\n"
   dependsOn:
   - crates/polynomial/formal_power_series/src/constructor.rs
   - crates/polynomial/formal_power_series/src/convert.rs
@@ -171,7 +172,7 @@ data:
   - crates/polynomial/formal_power_series/src/exp.rs
   - crates/polynomial/formal_power_series/src/log.rs
   - crates/polynomial/formal_power_series/src/inv.rs
-  timestamp: '2025-03-29 09:22:56+00:00'
+  timestamp: '2025-04-06 02:35:23+00:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/library_checker/polynomial/sqrt_of_formal_power_series/src/main.rs

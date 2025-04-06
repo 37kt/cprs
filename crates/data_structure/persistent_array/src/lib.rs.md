@@ -29,23 +29,23 @@ data:
     \ = T>>(iter: I) -> Self {\n        let mut iter = iter.into_iter();\n\n     \
     \   let Some(first) = iter.next() else {\n            return Self { root: None\
     \ };\n        };\n\n        let root = new_ptr(Node::new(first));\n        let\
-    \ mut n = 1;\n        while let Some(val) = iter.next() {\n            let mut\
-    \ vp = root;\n            let mut i = n;\n            loop {\n               \
-    \ let v = unsafe { vp.as_mut() };\n                let ci = i % M;\n         \
-    \       i = (i - 1) / M;\n                if i == 0 {\n                    v.ch[ci]\
-    \ = Some(new_ptr(Node::new(val)));\n                    break;\n             \
-    \   } else {\n                    vp = v.ch[ci].unwrap();\n                }\n\
-    \            }\n            n += 1;\n        }\n\n        Self { root: Some(root)\
-    \ }\n    }\n}\n\nimpl<T, const M: usize> PersistentArray<T, M> {\n    pub fn from_fn(n:\
-    \ usize, f: impl FnMut(usize) -> T) -> Self {\n        Self::from_iter((0..n).map(f))\n\
-    \    }\n\n    pub fn is_empty(&self) -> bool {\n        self.root.is_none()\n\
-    \    }\n\n    pub fn update_with(&self, mut i: usize, f: impl FnOnce(&T) -> T)\
-    \ -> Self {\n        let root = unsafe { self.root.expect(\"out of range\").as_ref()\
-    \ };\n        let new_root = new_ptr(root.clone());\n        let mut vp = new_root;\n\
-    \        let mut x = unsafe { vp.as_ref().val };\n        while i != 0 {\n   \
-    \         let v = unsafe { vp.as_mut() };\n            let ci = i % M;\n     \
-    \       i = (i - 1) / M;\n            let c = unsafe { v.ch[ci].expect(\"out of\
-    \ range\").as_ref() };\n            x = c.val;\n            let new_c = new_ptr(c.clone());\n\
+    \ mut n = 1;\n        for val in iter {\n            let mut vp = root;\n    \
+    \        let mut i = n;\n            loop {\n                let v = unsafe {\
+    \ vp.as_mut() };\n                let ci = i % M;\n                i = (i - 1)\
+    \ / M;\n                if i == 0 {\n                    v.ch[ci] = Some(new_ptr(Node::new(val)));\n\
+    \                    break;\n                } else {\n                    vp\
+    \ = v.ch[ci].unwrap();\n                }\n            }\n            n += 1;\n\
+    \        }\n\n        Self { root: Some(root) }\n    }\n}\n\nimpl<T, const M:\
+    \ usize> PersistentArray<T, M> {\n    pub fn from_fn(n: usize, f: impl FnMut(usize)\
+    \ -> T) -> Self {\n        Self::from_iter((0..n).map(f))\n    }\n\n    pub fn\
+    \ is_empty(&self) -> bool {\n        self.root.is_none()\n    }\n\n    pub fn\
+    \ update_with(&self, mut i: usize, f: impl FnOnce(&T) -> T) -> Self {\n      \
+    \  let root = unsafe { self.root.expect(\"out of range\").as_ref() };\n      \
+    \  let new_root = new_ptr(root.clone());\n        let mut vp = new_root;\n   \
+    \     let mut x = unsafe { vp.as_ref().val };\n        while i != 0 {\n      \
+    \      let v = unsafe { vp.as_mut() };\n            let ci = i % M;\n        \
+    \    i = (i - 1) / M;\n            let c = unsafe { v.ch[ci].expect(\"out of range\"\
+    ).as_ref() };\n            x = c.val;\n            let new_c = new_ptr(c.clone());\n\
     \            v.ch[ci] = Some(new_c);\n            vp = new_c;\n        }\n   \
     \     unsafe { vp.as_mut().val = new_ptr(f(x.as_ref())) };\n        Self {\n \
     \           root: Some(new_root),\n        }\n    }\n\n    pub fn set(&self, i:\
@@ -69,7 +69,7 @@ data:
   path: crates/data_structure/persistent_array/src/lib.rs
   requiredBy:
   - crates/data_structure/union_find/persistent_union_find/src/lib.rs
-  timestamp: '2025-03-11 07:52:05+00:00'
+  timestamp: '2025-04-06 02:35:23+00:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: crates/data_structure/persistent_array/src/lib.rs

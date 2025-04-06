@@ -49,13 +49,14 @@ data:
     \ sz = (n + 1).ceil_div(W);\n        Self {\n            n,\n            bit:\
     \ vec![0; sz],\n            sum: vec![0; sz + 1],\n        }\n    }\n\n    pub(crate)\
     \ fn set(&mut self, i: usize) {\n        assert!(i < self.n);\n        self.bit[i\
-    \ / W] |= 1 << i % W;\n    }\n\n    pub(crate) fn build(&mut self) {\n       \
-    \ for i in 0..self.bit.len() {\n            self.sum[i + 1] = self.sum[i] + self.bit[i].count_ones();\n\
-    \        }\n    }\n\n    pub(crate) fn get(&self, i: usize) -> bool {\n      \
-    \  (self.bit[i / W] >> i % W) & 1 != 0\n    }\n\n    pub(crate) fn count_prefix(&self,\
-    \ i: usize, f: bool) -> usize {\n        let cnt = (self.sum[i / W] + (self.bit[i\
-    \ / W] & ((1 << i % W) - 1)).count_ones()) as usize;\n        if f {\n       \
-    \     cnt\n        } else {\n            i - cnt\n        }\n    }\n}\n"
+    \ / W] |= 1 << (i % W);\n    }\n\n    pub(crate) fn build(&mut self) {\n     \
+    \   for i in 0..self.bit.len() {\n            self.sum[i + 1] = self.sum[i] +\
+    \ self.bit[i].count_ones();\n        }\n    }\n\n    pub(crate) fn get(&self,\
+    \ i: usize) -> bool {\n        (self.bit[i / W] >> (i % W)) & 1 != 0\n    }\n\n\
+    \    pub(crate) fn count_prefix(&self, i: usize, f: bool) -> usize {\n       \
+    \ let cnt =\n            (self.sum[i / W] + (self.bit[i / W] & ((1 << (i % W))\
+    \ - 1)).count_ones()) as usize;\n        if f {\n            cnt\n        } else\
+    \ {\n            i - cnt\n        }\n    }\n}\n"
   dependsOn:
   - crates/data_structure/wavelet_matrix/src/internal.rs
   - crates/data_structure/wavelet_matrix/src/lib.rs
@@ -64,7 +65,7 @@ data:
   requiredBy:
   - crates/data_structure/wavelet_matrix/src/lib.rs
   - crates/data_structure/wavelet_matrix/src/internal.rs
-  timestamp: '2025-03-10 07:35:38+00:00'
+  timestamp: '2025-04-06 02:35:23+00:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/library_checker/data_structure/point_add_rectangle_sum/src/main.rs

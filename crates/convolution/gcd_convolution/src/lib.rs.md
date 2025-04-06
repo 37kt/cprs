@@ -43,8 +43,8 @@ data:
     \ j) = k} f\\[i\\] * g\\[j\\]\npub fn gcd_convolution<R>(f: &[R::Value], g: &[R::Value])\
     \ -> Vec<R::Value>\nwhere\n    R: Ring,\n    R::Additive: AbelianGroup,\n    R::Value:\
     \ Clone,\n{\n    assert_eq!(f.len(), g.len(), \"f and g must have the same length\"\
-    );\n    let mut f = f.to_vec();\n    let mut g = g.to_vec();\n    if f.len() ==\
-    \ 0 {\n        return vec![];\n    }\n    multiple_zeta_transform::<R::Additive>(&mut\
+    );\n    let mut f = f.to_vec();\n    let mut g = g.to_vec();\n    if f.is_empty()\
+    \ {\n        return vec![];\n    }\n    multiple_zeta_transform::<R::Additive>(&mut\
     \ f);\n    multiple_zeta_transform::<R::Additive>(&mut g);\n    for (x, y) in\
     \ f.iter_mut().zip(&g).skip(1) {\n        *x = R::Multiplicative::op(x, y);\n\
     \    }\n    multiple_moebius_transform::<R::Additive>(&mut f);\n    f\n}\n"
@@ -56,7 +56,7 @@ data:
   isVerificationFile: false
   path: crates/convolution/gcd_convolution/src/lib.rs
   requiredBy: []
-  timestamp: '2025-03-07 00:14:11+00:00'
+  timestamp: '2025-04-06 02:35:23+00:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/library_checker/convolution/gcd_convolution/src/main.rs

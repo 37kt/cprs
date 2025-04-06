@@ -63,29 +63,27 @@ data:
     \              let j = (xs[i] - min).cast();\n                    ys[i] = sum[j]\
     \ as usize;\n                    sum[j] += 1;\n                }\n           \
     \     for i in (1..=len).rev() {\n                    sum[i] = sum[i - 1];\n \
-    \               }\n                sum[0] = 0;\n                return (Self(Container::Small\
-    \ { min, sum }), ys);\n            } else {\n                for &x in &xs {\n\
+    \               }\n                sum[0] = 0;\n                (Self(Container::Small\
+    \ { min, sum }), ys)\n            } else {\n                for &x in &xs {\n\
     \                    sum[(x - min).cast() + 1] = 1;\n                }\n     \
     \           for i in 0..len {\n                    sum[i + 1] += sum[i];\n   \
     \             }\n                for i in 0..n {\n                    let j =\
     \ (xs[i] - min).cast();\n                    ys[i] = sum[j] as usize;\n      \
-    \          }\n                return (Self(Container::Small { min, sum }), ys);\n\
-    \            }\n        } else {\n            if DISTINCT {\n                let\
-    \ mut ord = (0..n).collect::<Vec<_>>();\n                ord.sort_by_key(|&i|\
-    \ xs[i]);\n                let mut new_xs = Vec::with_capacity(n);\n         \
-    \       for i in 0..n {\n                    ys[ord[i]] = i;\n               \
-    \     new_xs.push(xs[ord[i]]);\n                }\n                return (Self(Container::Large\
-    \ { xs: new_xs }), ys);\n            } else {\n                let mut ord = (0..n).collect::<Vec<_>>();\n\
-    \                ord.sort_unstable_by_key(|&i| xs[i]);\n                let mut\
-    \ new_xs = Vec::with_capacity(n);\n                for i in 0..n {\n         \
-    \           if i > 0 && xs[ord[i]] == xs[ord[i - 1]] {\n                     \
-    \   ys[ord[i]] = new_xs.len() - 1;\n                    } else {\n           \
-    \             ys[ord[i]] = new_xs.len();\n                        new_xs.push(xs[ord[i]]);\n\
-    \                    }\n                }\n                new_xs.shrink_to_fit();\n\
-    \                return (Self(Container::Large { xs: new_xs }), ys);\n       \
-    \     }\n        }\n    }\n\n    pub fn encode(&self, x: T) -> usize {\n     \
-    \   match &self.0 {\n            Container::Empty => 0,\n            Container::Small\
-    \ { min, sum, .. } => {\n                let j = (x - *min).max(T::zero()).cast().min(sum.len()\
+    \          }\n                (Self(Container::Small { min, sum }), ys)\n    \
+    \        }\n        } else if DISTINCT {\n            let mut ord = (0..n).collect::<Vec<_>>();\n\
+    \            ord.sort_by_key(|&i| xs[i]);\n            let mut new_xs = Vec::with_capacity(n);\n\
+    \            for i in 0..n {\n                ys[ord[i]] = i;\n              \
+    \  new_xs.push(xs[ord[i]]);\n            }\n            (Self(Container::Large\
+    \ { xs: new_xs }), ys)\n        } else {\n            let mut ord = (0..n).collect::<Vec<_>>();\n\
+    \            ord.sort_unstable_by_key(|&i| xs[i]);\n            let mut new_xs\
+    \ = Vec::with_capacity(n);\n            for i in 0..n {\n                if i\
+    \ > 0 && xs[ord[i]] == xs[ord[i - 1]] {\n                    ys[ord[i]] = new_xs.len()\
+    \ - 1;\n                } else {\n                    ys[ord[i]] = new_xs.len();\n\
+    \                    new_xs.push(xs[ord[i]]);\n                }\n           \
+    \ }\n            new_xs.shrink_to_fit();\n            (Self(Container::Large {\
+    \ xs: new_xs }), ys)\n        }\n    }\n\n    pub fn encode(&self, x: T) -> usize\
+    \ {\n        match &self.0 {\n            Container::Empty => 0,\n           \
+    \ Container::Small { min, sum, .. } => {\n                let j = (x - *min).max(T::zero()).cast().min(sum.len()\
     \ - 1);\n                sum[j] as usize\n            }\n            Container::Large\
     \ { xs } => xs.partition_point(|&xi| xi < x),\n        }\n    }\n\n    pub fn\
     \ decode(&self, i: usize) -> T {\n        match &self.0 {\n            Container::Empty\
@@ -96,9 +94,10 @@ data:
     {\n    /// \u5024\u306E\u7BC4\u56F2 \\[0, n) \u306E n \u3092\u8FD4\u3059\n   \
     \ pub fn len(&self) -> usize {\n        match &self.0 {\n            Container::Empty\
     \ => 0,\n            Container::Small { sum, .. } => *sum.last().unwrap() as usize,\n\
-    \            Container::Large { xs } => xs.len(),\n        }\n    }\n}\n\n#[derive(Clone)]\n\
-    enum Container<T> {\n    Empty,\n    Small { min: T, sum: Vec<u32> },\n    Large\
-    \ { xs: Vec<T> },\n}\n"
+    \            Container::Large { xs } => xs.len(),\n        }\n    }\n\n    pub\
+    \ fn is_empty(&self) -> bool {\n        matches!(&self.0, Container::Empty)\n\
+    \    }\n}\n\n#[derive(Clone)]\nenum Container<T> {\n    Empty,\n    Small { min:\
+    \ T, sum: Vec<u32> },\n    Large { xs: Vec<T> },\n}\n"
   dependsOn:
   - crates/algebra/numeric_traits/src/cast.rs
   - crates/algebra/numeric_traits/src/inf.rs
@@ -111,7 +110,7 @@ data:
   path: crates/misc/coordinate_compression/src/lib.rs
   requiredBy:
   - crates/data_structure/wavelet_matrix/src/lib.rs
-  timestamp: '2025-03-22 02:08:02+00:00'
+  timestamp: '2025-04-06 02:35:23+00:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/library_checker/data_structure/static_range_frequency_mo/src/main.rs

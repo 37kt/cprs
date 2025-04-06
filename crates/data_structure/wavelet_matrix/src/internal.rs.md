@@ -51,28 +51,29 @@ data:
     \   ) -> usize {\n        if INVERTIVE {\n            self.count_prefix_with_(xl,\
     \ xr, yr, &mut f)\n                - self.count_prefix_with_(xl, xr, yl, |d, x,\
     \ inv| f(d, x, !inv))\n        } else {\n            self.dfs_count_with_(self.lg,\
-    \ xl, xr, yl, yr, 0, 1 << self.lg, &mut f)\n        }\n    }\n\n    fn dfs_count_with_(\n\
-    \        &self,\n        d: usize,\n        xl: usize,\n        xr: usize,\n \
-    \       yl: usize,\n        yr: usize,\n        a: usize,\n        b: usize,\n\
-    \        f: &mut impl FnMut(usize, Range<usize>, bool),\n    ) -> usize {\n  \
-    \      if yr <= a || b <= yl {\n            return 0;\n        } else if yl <=\
-    \ a && b <= yr {\n            f(d, xl..xr, false);\n            return xr - xl;\n\
-    \        }\n        let d = d - 1;\n        let c = (a + b) >> 1;\n        let\
-    \ l0 = self.bv[d].count_prefix(xl, false);\n        let r0 = self.bv[d].count_prefix(xr,\
-    \ false);\n        let l1 = xl + self.mid[d] - l0;\n        let r1 = xr + self.mid[d]\
-    \ - r0;\n        self.dfs_count_with_(d, l0, r0, yl, yr, a, c, f)\n          \
-    \  + self.dfs_count_with_(d, l1, r1, yl, yr, c, b, f)\n    }\n\n    fn count_prefix_with_(\n\
-    \        &self,\n        mut xl: usize,\n        mut xr: usize,\n        y: usize,\n\
-    \        mut f: impl FnMut(usize, Range<usize>, bool),\n    ) -> usize {\n   \
-    \     if xl == xr || y == 0 {\n            return 0;\n        } else if y == self.m\
-    \ {\n            f(self.lg, xl..xr, false);\n            return xr - xl;\n   \
-    \     }\n\n        let mut cnt = 0;\n        for d in (0..self.lg).rev() {\n \
-    \           let l0 = self.bv[d].count_prefix(xl, false);\n            let r0 =\
-    \ self.bv[d].count_prefix(xr, false);\n            let l1 = xl + self.mid[d] -\
-    \ l0;\n            let r1 = xr + self.mid[d] - r0;\n            if y >> d & 1\
-    \ == 0 {\n                (xl, xr) = (l0, r0);\n            } else {\n       \
-    \         f(d, l0..r0, false);\n                cnt += r0 - l0;\n            \
-    \    (xl, xr) = (l1, r1);\n            }\n        }\n        cnt\n    }\n}\n"
+    \ xl, xr, yl, yr, 0, 1 << self.lg, &mut f)\n        }\n    }\n\n    #[allow(clippy::too_many_arguments)]\n\
+    \    fn dfs_count_with_(\n        &self,\n        d: usize,\n        xl: usize,\n\
+    \        xr: usize,\n        yl: usize,\n        yr: usize,\n        a: usize,\n\
+    \        b: usize,\n        f: &mut impl FnMut(usize, Range<usize>, bool),\n \
+    \   ) -> usize {\n        if yr <= a || b <= yl {\n            return 0;\n   \
+    \     } else if yl <= a && b <= yr {\n            f(d, xl..xr, false);\n     \
+    \       return xr - xl;\n        }\n        let d = d - 1;\n        let c = (a\
+    \ + b) >> 1;\n        let l0 = self.bv[d].count_prefix(xl, false);\n        let\
+    \ r0 = self.bv[d].count_prefix(xr, false);\n        let l1 = xl + self.mid[d]\
+    \ - l0;\n        let r1 = xr + self.mid[d] - r0;\n        self.dfs_count_with_(d,\
+    \ l0, r0, yl, yr, a, c, f)\n            + self.dfs_count_with_(d, l1, r1, yl,\
+    \ yr, c, b, f)\n    }\n\n    fn count_prefix_with_(\n        &self,\n        mut\
+    \ xl: usize,\n        mut xr: usize,\n        y: usize,\n        mut f: impl FnMut(usize,\
+    \ Range<usize>, bool),\n    ) -> usize {\n        if xl == xr || y == 0 {\n  \
+    \          return 0;\n        } else if y == self.m {\n            f(self.lg,\
+    \ xl..xr, false);\n            return xr - xl;\n        }\n\n        let mut cnt\
+    \ = 0;\n        for d in (0..self.lg).rev() {\n            let l0 = self.bv[d].count_prefix(xl,\
+    \ false);\n            let r0 = self.bv[d].count_prefix(xr, false);\n        \
+    \    let l1 = xl + self.mid[d] - l0;\n            let r1 = xr + self.mid[d] -\
+    \ r0;\n            if y >> d & 1 == 0 {\n                (xl, xr) = (l0, r0);\n\
+    \            } else {\n                f(d, l0..r0, false);\n                cnt\
+    \ += r0 - l0;\n                (xl, xr) = (l1, r1);\n            }\n        }\n\
+    \        cnt\n    }\n}\n"
   dependsOn:
   - crates/data_structure/wavelet_matrix/src/bit_vector.rs
   - crates/data_structure/wavelet_matrix/src/lib.rs
@@ -81,7 +82,7 @@ data:
   requiredBy:
   - crates/data_structure/wavelet_matrix/src/bit_vector.rs
   - crates/data_structure/wavelet_matrix/src/lib.rs
-  timestamp: '2025-03-10 07:35:38+00:00'
+  timestamp: '2025-04-06 02:35:23+00:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/library_checker/data_structure/point_add_rectangle_sum/src/main.rs

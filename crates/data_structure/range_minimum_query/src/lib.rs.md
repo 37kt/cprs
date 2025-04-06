@@ -23,8 +23,8 @@ data:
     path: crates/algebra/numeric_traits/src/zero_one.rs
     title: crates/algebra/numeric_traits/src/zero_one.rs
   - icon: ':warning:'
-    path: crates/misc/into_half_open_range/src/lib.rs
-    title: crates/misc/into_half_open_range/src/lib.rs
+    path: crates/misc/as_half_open_range/src/lib.rs
+    title: crates/misc/as_half_open_range/src/lib.rs
   _extendedRequiredBy:
   - icon: ':heavy_check_mark:'
     path: crates/string/suffix_array/src/lib.rs
@@ -44,7 +44,7 @@ data:
     \         ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\
     \  File \"/opt/hostedtoolcache/Python/3.13.2/x64/lib/python3.13/site-packages/onlinejudge_verify/languages/rust.py\"\
     , line 288, in bundle\n    raise NotImplementedError\nNotImplementedError\n"
-  code: "use std::ops::RangeBounds;\n\nuse into_half_open_range::IntoHalfOpenRange;\n\
+  code: "use std::ops::RangeBounds;\n\nuse as_half_open_range::AsHalfOpenRange;\n\
     use numeric_traits::Integer;\n\nconst BLOCK_SIZE: usize = 16;\n\n#[derive(Clone)]\n\
     pub struct RangeMinimumQuery<T> {\n    array: Vec<T>,\n    large: Vec<Vec<u32>>,\n\
     \    small: Vec<u16>,\n}\n\nimpl<T> FromIterator<T> for RangeMinimumQuery<T>\n\
@@ -71,22 +71,22 @@ data:
     \   for i in 0..n {\n            if i % BLOCK_SIZE == 0 {\n                stack.clear();\n\
     \                bit = 0;\n            }\n            while let Some(&j) = stack.last()\
     \ {\n                if xs[j] <= xs[i] {\n                    break;\n       \
-    \         }\n                bit &= !(1 << j % BLOCK_SIZE);\n                stack.pop();\n\
-    \            }\n            stack.push(i);\n            bit |= 1 << i % BLOCK_SIZE;\n\
-    \            small.push(bit);\n        }\n\n        Self {\n            array:\
-    \ xs,\n            large,\n            small,\n        }\n    }\n}\n\nimpl<T>\
-    \ RangeMinimumQuery<T>\nwhere\n    T: Ord,\n{\n    pub fn min(&self, range: impl\
-    \ RangeBounds<usize>) -> Option<&T> {\n        let (l, r) = range.into_half_open_range(0,\
+    \         }\n                bit &= !(1 << (j % BLOCK_SIZE));\n              \
+    \  stack.pop();\n            }\n            stack.push(i);\n            bit |=\
+    \ 1 << (i % BLOCK_SIZE);\n            small.push(bit);\n        }\n\n        Self\
+    \ {\n            array: xs,\n            large,\n            small,\n        }\n\
+    \    }\n}\n\nimpl<T> RangeMinimumQuery<T>\nwhere\n    T: Ord,\n{\n    pub fn min(&self,\
+    \ range: impl RangeBounds<usize>) -> Option<&T> {\n        let (l, r) = range.as_half_open_range(0,\
     \ self.array.len());\n        if l == r {\n            return None;\n        }\n\
     \        let bl = l.ceil_div(BLOCK_SIZE);\n        let br = r.floor_div(BLOCK_SIZE);\n\
     \        let mut res = None;\n        if bl > br {\n            let i = (self.small[r\
-    \ - 1] & (!0 << l % BLOCK_SIZE)).lsb_index();\n            res = Self::merge(res,\
+    \ - 1] & (!0 << (l % BLOCK_SIZE))).lsb_index();\n            res = Self::merge(res,\
     \ Some(&self.array[i + br * BLOCK_SIZE]));\n        } else {\n            if bl\
     \ < br {\n                let d = (br - bl).floor_log2();\n                let\
     \ level = &self.large[d];\n                res = Self::merge(res, Some(&self.array[level[bl]\
     \ as usize]));\n                res = Self::merge(res, Some(&self.array[level[br\
     \ - (1 << d)] as usize]));\n            }\n            if l % BLOCK_SIZE != 0\
-    \ {\n                let i = (self.small[bl * BLOCK_SIZE - 1] & (!0 << l % BLOCK_SIZE)).lsb_index();\n\
+    \ {\n                let i = (self.small[bl * BLOCK_SIZE - 1] & (!0 << (l % BLOCK_SIZE))).lsb_index();\n\
     \                res = Self::merge(res, Some(&self.array[i + (bl - 1) * BLOCK_SIZE]));\n\
     \            }\n            if r % BLOCK_SIZE != 0 {\n                let i =\
     \ self.small[r - 1].lsb_index();\n                res = Self::merge(res, Some(&self.array[i\
@@ -101,12 +101,12 @@ data:
   - crates/algebra/numeric_traits/src/numeric.rs
   - crates/algebra/numeric_traits/src/signed.rs
   - crates/algebra/numeric_traits/src/zero_one.rs
-  - crates/misc/into_half_open_range/src/lib.rs
+  - crates/misc/as_half_open_range/src/lib.rs
   isVerificationFile: false
   path: crates/data_structure/range_minimum_query/src/lib.rs
   requiredBy:
   - crates/string/suffix_array/src/lib.rs
-  timestamp: '2025-03-23 00:32:36+00:00'
+  timestamp: '2025-04-06 02:35:23+00:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/library_checker/data_structure/staticrmq/src/main.rs

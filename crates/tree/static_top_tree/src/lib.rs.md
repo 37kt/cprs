@@ -54,12 +54,12 @@ data:
     \        &mut self,\n        v: usize,\n        hld: &HeavyLightDecomposition,\n\
     \        children: &CsrArray<usize>,\n    ) -> (usize, usize) {\n        assert!(hld.head(v)\
     \ == v);\n\n        let path = {\n            let mut path = vec![v];\n      \
-    \      let mut v = v;\n            while children[v].len() > 0 {\n           \
-    \     v = children[v][0];\n                path.push(v);\n            }\n    \
-    \        path\n        };\n\n        let mut stack = vec![(0, v)];\n        for\
-    \ i in 1..path.len() {\n            let mut pq = BinaryHeap::new();\n        \
-    \    let mut v = path[i];\n            pq.push(Reverse((0, v)));\n           \
-    \ for &c in children[path[i - 1]].iter().skip(1) {\n                pq.push(Reverse(self.dfs_build(c,\
+    \      let mut v = v;\n            while !children[v].is_empty() {\n         \
+    \       v = children[v][0];\n                path.push(v);\n            }\n  \
+    \          path\n        };\n\n        let mut stack = vec![(0, v)];\n       \
+    \ for i in 1..path.len() {\n            let mut pq = BinaryHeap::new();\n    \
+    \        let mut v = path[i];\n            pq.push(Reverse((0, v)));\n       \
+    \     for &c in children[path[i - 1]].iter().skip(1) {\n                pq.push(Reverse(self.dfs_build(c,\
     \ hld, children)));\n            }\n            while pq.len() >= 2 {\n      \
     \          let Reverse((h1, mut v1)) = pq.pop().unwrap();\n                let\
     \ Reverse((h2, mut v2)) = pq.pop().unwrap();\n                if v2 == v {\n \
@@ -95,7 +95,7 @@ data:
   requiredBy:
   - crates/tree/dynamic_rerooting_tree_dp/src/lib.rs
   - crates/tree/dynamic_tree_dp/src/lib.rs
-  timestamp: '2025-03-29 09:22:56+00:00'
+  timestamp: '2025-04-06 02:35:23+00:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: crates/tree/static_top_tree/src/lib.rs

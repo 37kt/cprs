@@ -37,12 +37,12 @@ data:
   - icon: ':heavy_check_mark:'
     path: crates/data_structure/wavelet_matrix/src/internal.rs
     title: crates/data_structure/wavelet_matrix/src/internal.rs
+  - icon: ':warning:'
+    path: crates/misc/as_half_open_range/src/lib.rs
+    title: crates/misc/as_half_open_range/src/lib.rs
   - icon: ':heavy_check_mark:'
     path: crates/misc/coordinate_compression/src/lib.rs
     title: crates/misc/coordinate_compression/src/lib.rs
-  - icon: ':warning:'
-    path: crates/misc/into_half_open_range/src/lib.rs
-    title: crates/misc/into_half_open_range/src/lib.rs
   _extendedRequiredBy:
   - icon: ':heavy_check_mark:'
     path: crates/data_structure/wavelet_matrix/src/bit_vector.rs
@@ -78,33 +78,33 @@ data:
     \  File \"/opt/hostedtoolcache/Python/3.13.2/x64/lib/python3.13/site-packages/onlinejudge_verify/languages/rust.py\"\
     , line 288, in bundle\n    raise NotImplementedError\nNotImplementedError\n"
   code: "use std::{\n    borrow::Borrow,\n    ops::{Range, RangeBounds},\n};\n\nuse\
-    \ bit_vector::BitVector;\nuse coordinate_compression::CoordinateCompression;\n\
-    use into_half_open_range::IntoHalfOpenRange;\nuse numeric_traits::{Cast, Inf,\
-    \ Integer, NegInf};\n\nmod bit_vector;\nmod internal;\n\npub type WaveletMatrix<Y,\
-    \ const Y_SMALL: bool = false, const INVERTIVE: bool = false> =\n    WaveletMatrix2D<usize,\
-    \ Y, true, Y_SMALL, INVERTIVE>;\n\nimpl<Y, const Y_SMALL: bool, const INVERTIVE:\
-    \ bool> WaveletMatrix<Y, Y_SMALL, INVERTIVE>\nwhere\n    Y: Integer + Inf + NegInf\
-    \ + Cast<usize>,\n    u32: Cast<Y>,\n{\n    pub fn new<I>(a: I) -> Self\n    where\n\
-    \        I: IntoIterator,\n        I::Item: Borrow<Y>,\n    {\n        Self::new_with_containers(a,\
-    \ |_| ()).0\n    }\n\n    pub fn new_with_containers<Container, I>(\n        a:\
-    \ I,\n        build_container: impl FnMut(&[usize]) -> Container,\n    ) -> (Self,\
-    \ Vec<Container>)\n    where\n        I: IntoIterator,\n        I::Item: Borrow<Y>,\n\
-    \    {\n        WaveletMatrix2D::<usize, Y, true, Y_SMALL, INVERTIVE>::new_2d_with_containers(\n\
-    \            a.into_iter().enumerate().map(|(i, y)| (i, *y.borrow())),\n     \
-    \       build_container,\n        )\n    }\n}\n\npub struct WaveletMatrix2D<\n\
-    \    X,\n    Y,\n    const X_SMALL: bool = false,\n    const Y_SMALL: bool = false,\n\
-    \    const INVERTIVE: bool = false,\n> where\n    X: Integer + Inf + NegInf +\
-    \ Cast<usize>,\n    Y: Integer + Inf + NegInf + Cast<usize>,\n    u32: Cast<X>,\n\
-    \    u32: Cast<Y>,\n{\n    n: usize,\n    m: usize,\n    lg: usize,\n    ccx:\
-    \ CoordinateCompression<X, X_SMALL, true>,\n    ccy: CoordinateCompression<Y,\
-    \ Y_SMALL, false>,\n    pos: Vec<usize>,\n    mid: Vec<usize>,\n    bv: Vec<BitVector>,\n\
-    }\n\nimpl<X, Y, const X_SMALL: bool, const Y_SMALL: bool, const INVERTIVE: bool>\n\
-    \    WaveletMatrix2D<X, Y, X_SMALL, Y_SMALL, INVERTIVE>\nwhere\n    X: Integer\
-    \ + Inf + NegInf + Cast<usize>,\n    Y: Integer + Inf + NegInf + Cast<usize>,\n\
-    \    u32: Cast<X>,\n    u32: Cast<Y>,\n{\n    pub fn new_2d<I>(ps: I) -> Self\n\
-    \    where\n        I: IntoIterator,\n        I::Item: Borrow<(X, Y)>,\n    {\n\
-    \        Self::new_2d_with_containers(ps, |_| ()).0\n    }\n\n    pub fn new_2d_with_containers<Container,\
-    \ I>(\n        ps: I,\n        mut build_container: impl FnMut(&[usize]) -> Container,\n\
+    \ as_half_open_range::AsHalfOpenRange;\nuse bit_vector::BitVector;\nuse coordinate_compression::CoordinateCompression;\n\
+    use numeric_traits::{Cast, Inf, Integer, NegInf};\n\nmod bit_vector;\nmod internal;\n\
+    \npub type WaveletMatrix<Y, const Y_SMALL: bool = false, const INVERTIVE: bool\
+    \ = false> =\n    WaveletMatrix2D<usize, Y, true, Y_SMALL, INVERTIVE>;\n\nimpl<Y,\
+    \ const Y_SMALL: bool, const INVERTIVE: bool> WaveletMatrix<Y, Y_SMALL, INVERTIVE>\n\
+    where\n    Y: Integer + Inf + NegInf + Cast<usize>,\n    u32: Cast<Y>,\n{\n  \
+    \  pub fn new<I>(a: I) -> Self\n    where\n        I: IntoIterator,\n        I::Item:\
+    \ Borrow<Y>,\n    {\n        Self::new_with_containers(a, |_| ()).0\n    }\n\n\
+    \    pub fn new_with_containers<Container, I>(\n        a: I,\n        build_container:\
+    \ impl FnMut(&[usize]) -> Container,\n    ) -> (Self, Vec<Container>)\n    where\n\
+    \        I: IntoIterator,\n        I::Item: Borrow<Y>,\n    {\n        WaveletMatrix2D::<usize,\
+    \ Y, true, Y_SMALL, INVERTIVE>::new_2d_with_containers(\n            a.into_iter().enumerate().map(|(i,\
+    \ y)| (i, *y.borrow())),\n            build_container,\n        )\n    }\n}\n\n\
+    pub struct WaveletMatrix2D<\n    X,\n    Y,\n    const X_SMALL: bool = false,\n\
+    \    const Y_SMALL: bool = false,\n    const INVERTIVE: bool = false,\n> where\n\
+    \    X: Integer + Inf + NegInf + Cast<usize>,\n    Y: Integer + Inf + NegInf +\
+    \ Cast<usize>,\n    u32: Cast<X>,\n    u32: Cast<Y>,\n{\n    n: usize,\n    m:\
+    \ usize,\n    lg: usize,\n    ccx: CoordinateCompression<X, X_SMALL, true>,\n\
+    \    ccy: CoordinateCompression<Y, Y_SMALL, false>,\n    pos: Vec<usize>,\n  \
+    \  mid: Vec<usize>,\n    bv: Vec<BitVector>,\n}\n\nimpl<X, Y, const X_SMALL: bool,\
+    \ const Y_SMALL: bool, const INVERTIVE: bool>\n    WaveletMatrix2D<X, Y, X_SMALL,\
+    \ Y_SMALL, INVERTIVE>\nwhere\n    X: Integer + Inf + NegInf + Cast<usize>,\n \
+    \   Y: Integer + Inf + NegInf + Cast<usize>,\n    u32: Cast<X>,\n    u32: Cast<Y>,\n\
+    {\n    pub fn new_2d<I>(ps: I) -> Self\n    where\n        I: IntoIterator,\n\
+    \        I::Item: Borrow<(X, Y)>,\n    {\n        Self::new_2d_with_containers(ps,\
+    \ |_| ()).0\n    }\n\n    pub fn new_2d_with_containers<Container, I>(\n     \
+    \   ps: I,\n        mut build_container: impl FnMut(&[usize]) -> Container,\n\
     \    ) -> (Self, Vec<Container>)\n    where\n        I: IntoIterator,\n      \
     \  I::Item: Borrow<(X, Y)>,\n    {\n        let ps = ps.into_iter().map(|p| *p.borrow()).collect::<Vec<_>>();\n\
     \        let n = ps.len();\n\n        let (ccx, pos) = CoordinateCompression::<X,\
@@ -138,10 +138,10 @@ data:
     \ y_range, |_, _, _| {})\n    }\n\n    pub fn count_with(\n        &self,\n  \
     \      x_range: impl RangeBounds<X>,\n        y_range: impl RangeBounds<Y>,\n\
     \        mut f: impl FnMut(usize, Range<usize>, bool),\n    ) -> usize {\n   \
-    \     let (xl, xr) = x_range.into_half_open_range(X::neg_inf(), X::inf());\n \
-    \       let (yl, yr) = y_range.into_half_open_range(Y::neg_inf(), Y::inf());\n\
-    \        let xl = self.ccx.encode(xl);\n        let xr = self.ccx.encode(xr);\n\
-    \        let yl = self.ccy.encode(yl);\n        let yr = self.ccy.encode(yr);\n\
+    \     let (xl, xr) = x_range.as_half_open_range(X::neg_inf(), X::inf());\n   \
+    \     let (yl, yr) = y_range.as_half_open_range(Y::neg_inf(), Y::inf());\n   \
+    \     let xl = self.ccx.encode(xl);\n        let xr = self.ccx.encode(xr);\n \
+    \       let yl = self.ccy.encode(yl);\n        let yr = self.ccy.encode(yr);\n\
     \n        self.count_with_(xl, xr, yl, yr, &mut f)\n    }\n\n    pub fn access(&self,\
     \ i: usize) -> Y {\n        self.access_with(i, |_, _| {})\n    }\n\n    pub fn\
     \ access_with(&self, i: usize, mut f: impl FnMut(usize, usize)) -> Y {\n     \
@@ -151,7 +151,7 @@ data:
     \ true) + self.mid[d];\n            } else {\n                i = self.bv[d].count_prefix(i,\
     \ false);\n            }\n            f(d, i);\n        }\n        self.ccy.decode(y)\n\
     \    }\n\n    pub fn kth_smallest(&self, x_range: impl RangeBounds<X>, mut k:\
-    \ usize) -> Option<Y> {\n        let (xl, xr) = x_range.into_half_open_range(X::neg_inf(),\
+    \ usize) -> Option<Y> {\n        let (xl, xr) = x_range.as_half_open_range(X::neg_inf(),\
     \ X::inf());\n        let mut xl = self.ccx.encode(xl);\n        let mut xr =\
     \ self.ccx.encode(xr);\n        if k >= xr - xl {\n            return None;\n\
     \        }\n\n        let mut y = 0;\n        for d in (0..self.lg).rev() {\n\
@@ -162,7 +162,7 @@ data:
     \       k -= r0 - l0;\n                y |= 1 << d;\n                (xl, xr)\
     \ = (l1, r1);\n            }\n        }\n        Some(self.ccy.decode(y))\n  \
     \  }\n\n    pub fn kth_largest(&self, x_range: impl RangeBounds<X>, k: usize)\
-    \ -> Option<Y> {\n        let (xl, xr) = x_range.into_half_open_range(X::neg_inf(),\
+    \ -> Option<Y> {\n        let (xl, xr) = x_range.as_half_open_range(X::neg_inf(),\
     \ X::inf());\n        let xl = self.ccx.encode(xl);\n        let xr = self.ccx.encode(xr);\n\
     \        if k >= xr - xl {\n            return None;\n        }\n\n        self.kth_smallest(x_range,\
     \ xr - xl - 1 - k)\n    }\n}\n"
@@ -179,14 +179,14 @@ data:
   - crates/algebra/numeric_traits/src/zero_one.rs
   - crates/data_structure/wavelet_matrix/src/bit_vector.rs
   - crates/data_structure/wavelet_matrix/src/internal.rs
+  - crates/misc/as_half_open_range/src/lib.rs
   - crates/misc/coordinate_compression/src/lib.rs
-  - crates/misc/into_half_open_range/src/lib.rs
   isVerificationFile: false
   path: crates/data_structure/wavelet_matrix/src/lib.rs
   requiredBy:
   - crates/data_structure/wavelet_matrix/src/bit_vector.rs
   - crates/data_structure/wavelet_matrix/src/internal.rs
-  timestamp: '2025-03-22 02:08:02+00:00'
+  timestamp: '2025-04-06 02:35:23+00:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/library_checker/data_structure/point_add_rectangle_sum/src/main.rs

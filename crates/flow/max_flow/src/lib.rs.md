@@ -62,24 +62,25 @@ data:
     \  pos: Vec<(usize, usize)>,\n\n    iter: Vec<usize>,\n    dist: Vec<u64>,\n \
     \   queue: queue::Queue,\n\n    zero: u64,\n\n    src: Option<usize>,\n}\n\n#[derive(Debug,\
     \ Clone, Copy)]\npub struct Edge {\n    pub src: usize,\n    pub dst: usize,\n\
-    \    pub cap: i64,\n    pub flow: i64,\n}\n\nimpl MaxFlow {\n    pub fn new()\
-    \ -> Self {\n        Self {\n            edges: vec![],\n            pos: vec![],\n\
-    \n            iter: vec![],\n            dist: vec![],\n            queue: queue::Queue::new(),\n\
-    \n            zero: 1 << 60,\n\n            src: None,\n        }\n    }\n\n \
-    \   pub fn num_vertices(&self) -> usize {\n        self.edges.len()\n    }\n\n\
-    \    pub fn num_edges(&self) -> usize {\n        self.pos.len()\n    }\n\n   \
-    \ pub fn add_vertex(&mut self) -> usize {\n        self.src = None;\n\n      \
-    \  let v = self.edges.len();\n        self.edges.push(vec![]);\n        self.iter.push(0);\n\
-    \        self.dist.push(self.zero);\n        v\n    }\n\n    pub fn add_vertices(&mut\
-    \ self, n: usize) -> Vec<usize> {\n        self.src = None;\n\n        let v =\
-    \ self.edges.len();\n        self.edges.resize(v + n, vec![]);\n        self.iter.resize(v\
-    \ + n, 0);\n        self.dist.resize(v + n, self.zero);\n        (v..v + n).collect()\n\
-    \    }\n\n    pub fn add_edge(&mut self, src: usize, dst: usize, cap: i64) ->\
-    \ usize {\n        assert!(src < self.num_vertices());\n        assert!(dst <\
-    \ self.num_vertices());\n        assert!(cap >= 0);\n\n        self.src = None;\n\
-    \n        let e = self.pos.len();\n        let i = self.edges[src].len();\n  \
-    \      let j = self.edges[dst].len() + if src == dst { 1 } else { 0 };\n     \
-    \   self.edges[src].push(graph::Edge { dst, cap, rev: j });\n        self.edges[dst].push(graph::Edge\
+    \    pub cap: i64,\n    pub flow: i64,\n}\n\nimpl Default for MaxFlow {\n    fn\
+    \ default() -> Self {\n        Self::new()\n    }\n}\n\nimpl MaxFlow {\n    pub\
+    \ fn new() -> Self {\n        Self {\n            edges: vec![],\n           \
+    \ pos: vec![],\n\n            iter: vec![],\n            dist: vec![],\n     \
+    \       queue: queue::Queue::new(),\n\n            zero: 1 << 60,\n\n        \
+    \    src: None,\n        }\n    }\n\n    pub fn num_vertices(&self) -> usize {\n\
+    \        self.edges.len()\n    }\n\n    pub fn num_edges(&self) -> usize {\n \
+    \       self.pos.len()\n    }\n\n    pub fn add_vertex(&mut self) -> usize {\n\
+    \        self.src = None;\n\n        let v = self.edges.len();\n        self.edges.push(vec![]);\n\
+    \        self.iter.push(0);\n        self.dist.push(self.zero);\n        v\n \
+    \   }\n\n    pub fn add_vertices(&mut self, n: usize) -> Vec<usize> {\n      \
+    \  self.src = None;\n\n        let v = self.edges.len();\n        self.edges.resize(v\
+    \ + n, vec![]);\n        self.iter.resize(v + n, 0);\n        self.dist.resize(v\
+    \ + n, self.zero);\n        (v..v + n).collect()\n    }\n\n    pub fn add_edge(&mut\
+    \ self, src: usize, dst: usize, cap: i64) -> usize {\n        assert!(src < self.num_vertices());\n\
+    \        assert!(dst < self.num_vertices());\n        assert!(cap >= 0);\n\n \
+    \       self.src = None;\n\n        let e = self.pos.len();\n        let i = self.edges[src].len();\n\
+    \        let j = self.edges[dst].len() + if src == dst { 1 } else { 0 };\n   \
+    \     self.edges[src].push(graph::Edge { dst, cap, rev: j });\n        self.edges[dst].push(graph::Edge\
     \ {\n            dst: src,\n            cap: 0,\n            rev: i,\n       \
     \ });\n        self.pos.push((src, i));\n        e\n    }\n\n    pub fn edge(&self,\
     \ e: usize) -> Edge {\n        let (src, i) = self.pos[e];\n        let e1 = self.edges[src][i];\n\
@@ -145,7 +146,7 @@ data:
   - crates/flow/binary_optimization/src/lib.rs
   - crates/flow/max_flow/src/graph.rs
   - crates/flow/max_flow/src/queue.rs
-  timestamp: '2025-03-25 09:58:57+00:00'
+  timestamp: '2025-04-06 02:35:23+00:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/yukicoder/flow/yuki1479_maxflow/src/main.rs

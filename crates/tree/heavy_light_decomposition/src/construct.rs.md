@@ -72,41 +72,42 @@ data:
     \ };\n            } else {\n                down[v] = down[p] + sub[p];\n    \
     \            sub[p] += sub[v];\n                next[v] = !(p as i32);\n     \
     \       }\n            sub[v] = nsub;\n        }\n\n        let mut tour = vec![-1;\
-    \ n];\n        for v in 0..n {\n            let t = down[v] as usize;\n      \
-    \      tour[t] = v as i32;\n        }\n\n        let mut edge_ord = vec![0; n\
-    \ - 1];\n        for e in 0..n - 1 {\n            let i = down[e + 1] as usize\
-    \ - 1;\n            edge_ord[i] = e;\n        }\n\n        Self {\n          \
-    \  n,\n            root,\n            down,\n            next,\n            sub,\n\
-    \            tour,\n            edge_ord,\n        }\n    }\n\n    /// &[(usize,\
-    \ usize)] \u304B &[(usize, usize, T)] \u304B\u3089\u69CB\u7BC9\n    pub fn from_edges(edges:\
-    \ &[impl Edge], root: usize) -> Self {\n        let n = edges.len() + 1;\n   \
-    \     assert!(root < n);\n\n        let mut down = vec![0; n];\n        let mut\
-    \ next = vec![0; n];\n        for e in edges {\n            let (u, v) = e.endpoints();\n\
-    \            down[u] += 1;\n            down[v] += 1;\n            next[u] ^=\
-    \ v as i32;\n            next[v] ^= u as i32;\n        }\n\n        let mut tour\
-    \ = Vec::with_capacity(n);\n        for v in 0..n {\n            if v != root\
-    \ && down[v] == 1 {\n                tour.push(v as i32);\n            }\n   \
-    \     }\n        for i in 0..n - 1 {\n            let v = tour[i] as usize;\n\
-    \            down[v] = -1;\n            let u = next[v] as usize;\n          \
-    \  next[u] ^= v as i32;\n            down[u] -= 1;\n            if down[u] ==\
-    \ 1 && u != root {\n                tour.push(u as i32);\n            }\n    \
-    \    }\n\n        let mut sub = vec![1; n];\n        for &v in &tour {\n     \
-    \       let v = v as usize;\n            let p = next[v] as usize;\n         \
-    \   sub[p] += sub[v];\n            down[p] = down[p].max(sub[v]);\n        }\n\
-    \        for &v in &tour {\n            let v = v as usize;\n            let p\
-    \ = next[v] as usize;\n            if down[p] == sub[v] {\n                sub[v]\
-    \ = !sub[v];\n                down[p] = !down[p];\n            }\n        }\n\n\
-    \        sub[root] = !down[root] + 1;\n        down[root] = 0;\n        next[root]\
-    \ = -1;\n\n        for &v in tour.iter().rev() {\n            let v = v as usize;\n\
-    \            let p = next[v] as usize;\n            let nsub = !down[v] + 1;\n\
-    \            if sub[v] < 0 {\n                down[v] = down[p] + 1;\n       \
-    \         next[v] = if next[p] < 0 { p as i32 } else { next[p] };\n          \
-    \  } else {\n                down[v] = down[p] + sub[p];\n                sub[p]\
-    \ += sub[v];\n                next[v] = !(p as i32);\n            }\n        \
-    \    sub[v] = nsub;\n        }\n\n        tour.resize(n, -1);\n        for v in\
-    \ 0..n {\n            let t = down[v] as usize;\n            tour[t] = v as i32;\n\
-    \        }\n\n        let mut edge_ord = vec![0; n - 1];\n        for e in 0..n\
-    \ - 1 {\n            let (u, v) = edges[e].endpoints();\n            let i = down[u].max(down[v])\
+    \ n];\n        for (v, &d) in down.iter().enumerate() {\n            let t = d\
+    \ as usize;\n            tour[t] = v as i32;\n        }\n\n        let mut edge_ord\
+    \ = vec![0; n - 1];\n        for (e, &d) in down.iter().enumerate().skip(1) {\n\
+    \            let i = d as usize - 1;\n            edge_ord[i] = e;\n        }\n\
+    \n        Self {\n            n,\n            root,\n            down,\n     \
+    \       next,\n            sub,\n            tour,\n            edge_ord,\n  \
+    \      }\n    }\n\n    /// &[(usize, usize)] \u304B &[(usize, usize, T)] \u304B\
+    \u3089\u69CB\u7BC9\n    pub fn from_edges(edges: &[impl Edge], root: usize) ->\
+    \ Self {\n        let n = edges.len() + 1;\n        assert!(root < n);\n\n   \
+    \     let mut down = vec![0; n];\n        let mut next = vec![0; n];\n       \
+    \ for e in edges {\n            let (u, v) = e.endpoints();\n            down[u]\
+    \ += 1;\n            down[v] += 1;\n            next[u] ^= v as i32;\n       \
+    \     next[v] ^= u as i32;\n        }\n\n        let mut tour = Vec::with_capacity(n);\n\
+    \        for (v, &d) in down.iter().enumerate() {\n            if v != root &&\
+    \ d == 1 {\n                tour.push(v as i32);\n            }\n        }\n \
+    \       for i in 0..n - 1 {\n            let v = tour[i] as usize;\n         \
+    \   down[v] = -1;\n            let u = next[v] as usize;\n            next[u]\
+    \ ^= v as i32;\n            down[u] -= 1;\n            if down[u] == 1 && u !=\
+    \ root {\n                tour.push(u as i32);\n            }\n        }\n\n \
+    \       let mut sub = vec![1; n];\n        for &v in &tour {\n            let\
+    \ v = v as usize;\n            let p = next[v] as usize;\n            sub[p] +=\
+    \ sub[v];\n            down[p] = down[p].max(sub[v]);\n        }\n        for\
+    \ &v in &tour {\n            let v = v as usize;\n            let p = next[v]\
+    \ as usize;\n            if down[p] == sub[v] {\n                sub[v] = !sub[v];\n\
+    \                down[p] = !down[p];\n            }\n        }\n\n        sub[root]\
+    \ = !down[root] + 1;\n        down[root] = 0;\n        next[root] = -1;\n\n  \
+    \      for &v in tour.iter().rev() {\n            let v = v as usize;\n      \
+    \      let p = next[v] as usize;\n            let nsub = !down[v] + 1;\n     \
+    \       if sub[v] < 0 {\n                down[v] = down[p] + 1;\n            \
+    \    next[v] = if next[p] < 0 { p as i32 } else { next[p] };\n            } else\
+    \ {\n                down[v] = down[p] + sub[p];\n                sub[p] += sub[v];\n\
+    \                next[v] = !(p as i32);\n            }\n            sub[v] = nsub;\n\
+    \        }\n\n        tour.resize(n, -1);\n        for (v, &d) in down.iter().enumerate()\
+    \ {\n            let t = d as usize;\n            tour[t] = v as i32;\n      \
+    \  }\n\n        let mut edge_ord = vec![0; n - 1];\n        for (e, edge) in edges.iter().enumerate()\
+    \ {\n            let (u, v) = edge.endpoints();\n            let i = down[u].max(down[v])\
     \ as usize - 1;\n            edge_ord[i] = e;\n        }\n\n        Self {\n \
     \           n,\n            root,\n            down,\n            next,\n    \
     \        sub,\n            tour,\n            edge_ord,\n        }\n    }\n}\n"
@@ -121,7 +122,7 @@ data:
   - crates/tree/heavy_light_decomposition/src/lib.rs
   - crates/tree/heavy_light_decomposition/src/compress.rs
   - crates/tree/static_top_tree/src/lib.rs
-  timestamp: '2025-03-29 09:22:56+00:00'
+  timestamp: '2025-04-06 02:35:23+00:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/library_checker/tree/lca/src/main.rs

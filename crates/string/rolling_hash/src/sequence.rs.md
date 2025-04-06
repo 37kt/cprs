@@ -29,7 +29,7 @@ data:
     \         ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\
     \  File \"/opt/hostedtoolcache/Python/3.13.2/x64/lib/python3.13/site-packages/onlinejudge_verify/languages/rust.py\"\
     , line 288, in bundle\n    raise NotImplementedError\nNotImplementedError\n"
-  code: "use std::ops::RangeBounds;\n\nuse into_half_open_range::IntoHalfOpenRange;\n\
+  code: "use std::ops::RangeBounds;\n\nuse as_half_open_range::AsHalfOpenRange;\n\
     use modint_61::ModInt61;\n\nuse crate::{random, RollingHash};\n\n#[derive(Clone)]\n\
     pub struct RollingHashSequence {\n    hash: Vec<ModInt61>,\n    base_pow: Vec<ModInt61>,\n\
     }\n\nimpl<T> FromIterator<T> for RollingHashSequence\nwhere\n    T: Into<ModInt61>,\n\
@@ -45,18 +45,18 @@ data:
     \    pub fn is_empty(&self) -> bool {\n        self.len() == 0\n    }\n\n    pub\
     \ fn base_pow(&self, exp: usize) -> ModInt61 {\n        self.base_pow[exp]\n \
     \   }\n\n    pub fn range(&self, range: impl RangeBounds<usize>) -> RollingHash\
-    \ {\n        let (l, r) = range.into_half_open_range(0, self.len());\n       \
-    \ RollingHash {\n            hash: self.hash[l] - self.hash[r] * self.base_pow[r\
-    \ - l],\n            base_pow: self.base_pow[r - l],\n        }\n    }\n\n   \
-    \ pub fn lcp(\n        &self,\n        range: impl RangeBounds<usize>,\n     \
-    \   other: &RollingHashSequence,\n        other_range: impl RangeBounds<usize>,\n\
-    \    ) -> usize {\n        let (l1, r1) = range.into_half_open_range(0, self.len());\n\
-    \        let (l2, r2) = other_range.into_half_open_range(0, other.len());\n  \
-    \      let max = (r1 - l1).min(r2 - l2);\n        let mut ok = 0;\n        let\
-    \ mut ng = max + 1;\n        while ok + 1 < ng {\n            let md = (ok + ng)\
-    \ / 2;\n            if self.range(l1..l1 + md) == other.range(l2..l2 + md) {\n\
-    \                ok = md;\n            } else {\n                ng = md;\n  \
-    \          }\n        }\n        ok\n    }\n}\n"
+    \ {\n        let (l, r) = range.as_half_open_range(0, self.len());\n        RollingHash\
+    \ {\n            hash: self.hash[l] - self.hash[r] * self.base_pow[r - l],\n \
+    \           base_pow: self.base_pow[r - l],\n        }\n    }\n\n    pub fn lcp(\n\
+    \        &self,\n        range: impl RangeBounds<usize>,\n        other: &RollingHashSequence,\n\
+    \        other_range: impl RangeBounds<usize>,\n    ) -> usize {\n        let\
+    \ (l1, r1) = range.as_half_open_range(0, self.len());\n        let (l2, r2) =\
+    \ other_range.as_half_open_range(0, other.len());\n        let max = (r1 - l1).min(r2\
+    \ - l2);\n        let mut ok = 0;\n        let mut ng = max + 1;\n        while\
+    \ ok + 1 < ng {\n            let md = (ok + ng) / 2;\n            if self.range(l1..l1\
+    \ + md) == other.range(l2..l2 + md) {\n                ok = md;\n            }\
+    \ else {\n                ng = md;\n            }\n        }\n        ok\n   \
+    \ }\n}\n"
   dependsOn:
   - crates/string/rolling_hash/src/lib.rs
   - crates/string/rolling_hash/src/monoid.rs
@@ -65,7 +65,7 @@ data:
   requiredBy:
   - crates/string/rolling_hash/src/lib.rs
   - crates/string/rolling_hash/src/monoid.rs
-  timestamp: '2025-03-26 05:05:06+00:00'
+  timestamp: '2025-04-06 02:35:23+00:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/library_checker/string/zalgorithm_rh/src/main.rs

@@ -55,7 +55,7 @@ data:
   - crates/flow/binary_optimization/src/lib.rs
   - crates/flow/max_flow/src/graph.rs
   - crates/flow/max_flow/src/lib.rs
-  timestamp: '2025-03-25 09:58:57+00:00'
+  timestamp: '2025-04-06 02:35:23+00:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/yukicoder/flow/yuki1479_maxflow/src/main.rs

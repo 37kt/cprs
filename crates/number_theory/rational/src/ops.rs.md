@@ -56,15 +56,15 @@ data:
     \ Self::nan();\n        }\n        let num = (self.num / g1) * (rhs.num / g2);\n\
     \        let den = (self.den / g2) * (rhs.den / g1);\n        Self::from_raw(num,\
     \ den)\n    }\n}\n\nimpl<const AUTO_REDUCE: bool> Div for Rational<AUTO_REDUCE>\
-    \ {\n    type Output = Self;\n\n    fn div(self, rhs: Self) -> Self::Output {\n\
-    \        self * rhs.recip()\n    }\n}\n\nimpl<const AUTO_REDUCE: bool> PartialEq\
-    \ for Rational<AUTO_REDUCE> {\n    fn eq(&self, other: &Self) -> bool {\n    \
-    \    self.cmp(other).is_eq()\n    }\n}\n\nimpl<const AUTO_REDUCE: bool> Eq for\
-    \ Rational<AUTO_REDUCE> {}\n\n// https://misawa.github.io/others/avoid_errors/compare_fractions.html\n\
-    fn compare<const AUTO_REDUCE: bool>(\n    mut a: Rational<AUTO_REDUCE>,\n    mut\
-    \ b: Rational<AUTO_REDUCE>,\n) -> Ordering {\n    if a.num <= 0 || b.num <= 0\
-    \ {\n        if a.num == 0 || b.num == 0 {\n            return a.num.cmp(&b.num);\n\
-    \        } else if (a.num < 0) ^ (b.num < 0) {\n            return a.num.cmp(&b.num);\n\
+    \ {\n    type Output = Self;\n\n    #[allow(clippy::suspicious_arithmetic_impl)]\n\
+    \    fn div(self, rhs: Self) -> Self::Output {\n        self * rhs.recip()\n \
+    \   }\n}\n\nimpl<const AUTO_REDUCE: bool> PartialEq for Rational<AUTO_REDUCE>\
+    \ {\n    fn eq(&self, other: &Self) -> bool {\n        self.cmp(other).is_eq()\n\
+    \    }\n}\n\nimpl<const AUTO_REDUCE: bool> Eq for Rational<AUTO_REDUCE> {}\n\n\
+    // https://misawa.github.io/others/avoid_errors/compare_fractions.html\nfn compare<const\
+    \ AUTO_REDUCE: bool>(\n    mut a: Rational<AUTO_REDUCE>,\n    mut b: Rational<AUTO_REDUCE>,\n\
+    ) -> Ordering {\n    if a.num <= 0 || b.num <= 0 {\n        if a.num == 0 || b.num\
+    \ == 0 || ((a.num < 0) ^ (b.num < 0)) {\n            return a.num.cmp(&b.num);\n\
     \        } else {\n            return compare(-b, -a);\n        }\n    }\n   \
     \ let ord = (a.num / a.den).cmp(&(b.num / b.den));\n    if !ord.is_eq() {\n  \
     \      return ord;\n    }\n    a.num %= a.den;\n    b.num %= b.den;\n    if a.num\
@@ -109,7 +109,7 @@ data:
   requiredBy:
   - crates/number_theory/rational/src/lib.rs
   - crates/number_theory/rational/src/numeric.rs
-  timestamp: '2025-03-13 09:00:06+00:00'
+  timestamp: '2025-04-06 02:35:23+00:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/stress_test/number_theory/comparing_rational/src/main.rs

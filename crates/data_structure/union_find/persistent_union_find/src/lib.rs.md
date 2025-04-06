@@ -41,7 +41,7 @@ data:
   isVerificationFile: false
   path: crates/data_structure/union_find/persistent_union_find/src/lib.rs
   requiredBy: []
-  timestamp: '2025-03-11 07:52:05+00:00'
+  timestamp: '2025-04-06 02:35:23+00:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/library_checker/data_structure/persistent_unionfind/src/main.rs

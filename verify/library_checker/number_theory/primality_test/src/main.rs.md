@@ -38,7 +38,7 @@ data:
   isVerificationFile: true
   path: verify/library_checker/number_theory/primality_test/src/main.rs
   requiredBy: []
-  timestamp: '2025-03-05 00:53:03+00:00'
+  timestamp: '2025-04-06 02:35:23+00:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/library_checker/number_theory/primality_test/src/main.rs

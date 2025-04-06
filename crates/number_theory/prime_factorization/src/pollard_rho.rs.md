@@ -39,8 +39,8 @@ data:
     \ fn pollard_rho(n: u64, res: &mut Vec<u64>) {\n    if n == 1 {\n        return;\n\
     \    } else if n & 1 == 0 {\n        res.push(2);\n        pollard_rho(n >> 1,\
     \ res);\n        return;\n    } else if is_prime(n) {\n        res.push(n);\n\
-    \        return;\n    }\n    let m = 1 << (n.floor_log2() + 1) / 8;\n    let mut\
-    \ c = Mint::from_raw(1);\n    loop {\n        let mut x = Mint::from_raw(1);\n\
+    \        return;\n    }\n    let m = 1 << ((n.floor_log2() + 1) / 8);\n    let\
+    \ mut c = Mint::from_raw(1);\n    loop {\n        let mut x = Mint::from_raw(1);\n\
     \        let mut y = Mint::from_raw(2);\n        let mut ys = Mint::from_raw(1);\n\
     \        let mut q = Mint::from_raw(1);\n        let mut r = 1;\n        let mut\
     \ g = 1;\n        while g == 1 {\n            x = y;\n            for _ in 0..r\
@@ -63,7 +63,7 @@ data:
   - crates/combinatorics/binomial/src/lib.rs
   - crates/number_theory/prime_factorization/src/lib.rs
   - crates/number_theory/prime_factorization/src/miller_rabin.rs
-  timestamp: '2025-03-01 09:08:13+00:00'
+  timestamp: '2025-04-06 02:35:23+00:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/library_checker/number_theory/primality_test/src/main.rs

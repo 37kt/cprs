@@ -52,7 +52,7 @@ data:
   isVerificationFile: true
   path: verify/library_checker/enumerative_combinatorics/binomial_coefficient_prime_mod/src/main.rs
   requiredBy: []
-  timestamp: '2025-03-09 00:42:04+00:00'
+  timestamp: '2025-04-06 02:35:23+00:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/library_checker/enumerative_combinatorics/binomial_coefficient_prime_mod/src/main.rs

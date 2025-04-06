@@ -26,8 +26,8 @@ data:
     path: crates/data_structure/range_minimum_query/src/lib.rs
     title: crates/data_structure/range_minimum_query/src/lib.rs
   - icon: ':warning:'
-    path: crates/misc/into_half_open_range/src/lib.rs
-    title: crates/misc/into_half_open_range/src/lib.rs
+    path: crates/misc/as_half_open_range/src/lib.rs
+    title: crates/misc/as_half_open_range/src/lib.rs
   _extendedRequiredBy: []
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
@@ -46,7 +46,7 @@ data:
     \  File \"/opt/hostedtoolcache/Python/3.13.2/x64/lib/python3.13/site-packages/onlinejudge_verify/languages/rust.py\"\
     , line 288, in bundle\n    raise NotImplementedError\nNotImplementedError\n"
   code: "// https://rsk0315.github.io/library-rs/nekolib/seq/suffix_array/struct.SuffixArray.html#fnref2\n\
-    \nuse std::{cmp::Ordering, ops::RangeBounds};\n\nuse into_half_open_range::IntoHalfOpenRange;\n\
+    \nuse std::{cmp::Ordering, ops::RangeBounds};\n\nuse as_half_open_range::AsHalfOpenRange;\n\
     use numeric_traits::{Cast, Integer};\nuse range_minimum_query::RangeMinimumQuery;\n\
     \n#[derive(Clone)]\npub struct SuffixArray {\n    sa: Vec<usize>,\n    sa_inv:\
     \ Vec<usize>,\n    lcp: Vec<usize>,\n    rmq: RangeMinimumQuery<usize>,\n}\n\n\
@@ -81,9 +81,9 @@ data:
     \        if i > j {\n            std::mem::swap(&mut i, &mut j);\n        }\n\
     \        *self.rmq.min(i..j).unwrap()\n    }\n\n    pub fn compare(\n        &self,\n\
     \        s1_range: impl RangeBounds<usize>,\n        s2_range: impl RangeBounds<usize>,\n\
-    \    ) -> Ordering {\n        let (l1, r1) = s1_range.into_half_open_range(0,\
-    \ self.sa.len());\n        let (l2, r2) = s2_range.into_half_open_range(0, self.sa.len());\n\
-    \        let n1 = r1 - l1;\n        let n2 = r2 - l2;\n        let lcp = self.lcp(l1,\
+    \    ) -> Ordering {\n        let (l1, r1) = s1_range.as_half_open_range(0, self.sa.len());\n\
+    \        let (l2, r2) = s2_range.as_half_open_range(0, self.sa.len());\n     \
+    \   let n1 = r1 - l1;\n        let n2 = r2 - l2;\n        let lcp = self.lcp(l1,\
     \ l2);\n        match (n1 == lcp, n2 == lcp) {\n            (true, true) => Ordering::Equal,\n\
     \            (true, false) => Ordering::Less,\n            (false, true) => Ordering::Greater,\n\
     \            (false, false) => self.sa_inv[l1 + lcp].cmp(&self.sa_inv[l2 + lcp]),\n\
@@ -120,11 +120,11 @@ data:
     \            .scan(0, |acc, &x| {\n                *acc += x;\n              \
     \  Some(*acc)\n            })\n            .collect()\n    }\n\n    fn induce(s:\
     \ &[usize], sa: &mut [usize], count: &[usize], ls: &[Type]) {\n        let n =\
-    \ s.len();\n\n        let mut head = Self::bucket_head(&count);\n        for i\
+    \ s.len();\n\n        let mut head = Self::bucket_head(count);\n        for i\
     \ in 0..n {\n            if sa[i] == 0 || sa[i] == !0 || ls[sa[i] - 1] != Type::L\
     \ {\n                continue;\n            }\n            let j = sa[i] - 1;\n\
     \            sa[head[s[j]]] = j;\n            head[s[j]] += 1;\n        }\n\n\
-    \        let mut tail = Self::bucket_tail(&count);\n        for i in (1..n).rev()\
+    \        let mut tail = Self::bucket_tail(count);\n        for i in (1..n).rev()\
     \ {\n            if sa[i] == 0 || sa[i] == !0 || ls[sa[i] - 1] == Type::L {\n\
     \                continue;\n            }\n            let j = sa[i] - 1;\n  \
     \          tail[s[j]] -= 1;\n            sa[tail[s[j]]] = j;\n        }\n    }\n\
@@ -144,14 +144,14 @@ data:
     \ Type::S(true)).then_some(map[i]))\n            .collect()\n    }\n\n    fn build_lcp_array(s:\
     \ &[usize], sa: &[usize], sa_inv: &[usize]) -> Vec<usize> {\n        let n = s.len();\n\
     \        if n == 0 {\n            return vec![];\n        }\n\n        let mut\
-    \ h = 0;\n        let mut lcp = vec![0; n - 1];\n        for i in 0..n - 1 {\n\
-    \            if h > 0 {\n                h -= 1;\n            }\n            if\
-    \ sa_inv[i] == 0 {\n                continue;\n            }\n            let\
-    \ j = sa[sa_inv[i] - 1];\n            while i + h < n && j + h < n {\n       \
-    \         if s[i + h] != s[j + h] {\n                    break;\n            \
-    \    }\n                h += 1;\n            }\n            lcp[sa_inv[i] - 1]\
-    \ = h;\n        }\n        lcp\n    }\n}\n\n#[derive(Clone, Copy, PartialEq, Eq)]\n\
-    enum Type {\n    L,\n    S(bool), // true: leftmost S-type\n}\n"
+    \ h = 0usize;\n        let mut lcp = vec![0; n - 1];\n        for i in 0..n -\
+    \ 1 {\n            h = h.saturating_sub(1);\n            if sa_inv[i] == 0 {\n\
+    \                continue;\n            }\n            let j = sa[sa_inv[i] -\
+    \ 1];\n            while i + h < n && j + h < n {\n                if s[i + h]\
+    \ != s[j + h] {\n                    break;\n                }\n             \
+    \   h += 1;\n            }\n            lcp[sa_inv[i] - 1] = h;\n        }\n \
+    \       lcp\n    }\n}\n\n#[derive(Clone, Copy, PartialEq, Eq)]\nenum Type {\n\
+    \    L,\n    S(bool), // true: leftmost S-type\n}\n"
   dependsOn:
   - crates/algebra/numeric_traits/src/cast.rs
   - crates/algebra/numeric_traits/src/inf.rs
@@ -161,11 +161,11 @@ data:
   - crates/algebra/numeric_traits/src/signed.rs
   - crates/algebra/numeric_traits/src/zero_one.rs
   - crates/data_structure/range_minimum_query/src/lib.rs
-  - crates/misc/into_half_open_range/src/lib.rs
+  - crates/misc/as_half_open_range/src/lib.rs
   isVerificationFile: false
   path: crates/string/suffix_array/src/lib.rs
   requiredBy: []
-  timestamp: '2025-03-23 00:32:36+00:00'
+  timestamp: '2025-04-06 02:35:23+00:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/library_checker/string/suffixarray/src/main.rs

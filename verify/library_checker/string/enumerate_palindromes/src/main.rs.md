@@ -22,14 +22,14 @@ data:
   code: "// verification-helper: PROBLEM https://judge.yosupo.jp/problem/enumerate_palindromes\n\
     \nuse manacher::manacher;\nuse proconio::{fastout, input, marker::Bytes};\n\n\
     #[fastout]\nfn main() {\n    input! {\n        s: Bytes,\n    }\n    let n = s.len();\n\
-    \    let rad = manacher(&s);\n    for i in 1..n * 2 {\n        print!(\"{} \"\
-    , rad[i]);\n    }\n    println!();\n}\n"
+    \    let rad = manacher(&s);\n    for &x in &rad[1..n * 2] {\n        print!(\"\
+    {} \", x);\n    }\n    println!();\n}\n"
   dependsOn:
   - crates/string/manacher/src/lib.rs
   isVerificationFile: true
   path: verify/library_checker/string/enumerate_palindromes/src/main.rs
   requiredBy: []
-  timestamp: '2025-03-23 01:06:29+00:00'
+  timestamp: '2025-04-06 02:35:23+00:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/library_checker/string/enumerate_palindromes/src/main.rs

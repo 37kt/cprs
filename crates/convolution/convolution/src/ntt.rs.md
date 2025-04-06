@@ -63,15 +63,15 @@ data:
     \ ntt<const P: u32>(f: &mut [StaticModInt<P>]) {\n    assert!(StaticModInt::<P>::IS_NTT_FRIENDLY);\n\
     \n    let n = f.len();\n    let lg = n.floor_log2();\n    assert_eq!(n, 1 << lg,\
     \ \"length must be a power of 2\");\n\n    let mut l = 0;\n    if (lg - l) % 2\
-    \ == 1 {\n        let p = 1 << lg - l - 1;\n        let mut rot = StaticModInt::from_raw(1);\n\
+    \ == 1 {\n        let p = 1 << (lg - l - 1);\n        let mut rot = StaticModInt::from_raw(1);\n\
     \        for (s, b) in f.chunks_exact_mut(p << 1).enumerate() {\n            let\
     \ (b0, b1) = b.split_at_mut(p);\n            for (x, y) in b0.iter_mut().zip(b1)\
     \ {\n                let l = *x;\n                let r = *y * rot;\n        \
     \        *x = l + r;\n                *y = l - r;\n            }\n           \
     \ rot *= StaticModInt::from_raw(\n                StaticModInt::<P>::NTT_PRECALC.rate2[s.trailing_ones()\
     \ as usize],\n            );\n        }\n        l += 1;\n    }\n\n    let mod2\
-    \ = (P as u64) * (P as u64);\n    while l < lg {\n        let p = 1 << lg - l\
-    \ - 2;\n        let mut rot = StaticModInt::<P>::from_raw(1);\n        let imag\
+    \ = (P as u64) * (P as u64);\n    while l < lg {\n        let p = 1 << (lg - l\
+    \ - 2);\n        let mut rot = StaticModInt::<P>::from_raw(1);\n        let imag\
     \ = StaticModInt::<P>::from_raw(StaticModInt::<P>::NTT_PRECALC.root[2]);\n   \
     \     for (s, b) in f.chunks_exact_mut(p << 2).enumerate() {\n            let\
     \ rot2 = rot * rot;\n            let rot3 = rot2 * rot;\n            let (b0,\
@@ -91,7 +91,7 @@ data:
     \ P: u32>(f: &mut [StaticModInt<P>]) {\n    assert!(StaticModInt::<P>::IS_NTT_FRIENDLY);\n\
     \n    let n = f.len();\n    let lg = n.floor_log2();\n    assert_eq!(n, 1 << lg,\
     \ \"length must be a power of 2\");\n\n    let mut l = lg;\n    if l % 2 == 1\
-    \ {\n        let p = 1 << lg - l;\n        let mut irot = StaticModInt::<P>::from_raw(1);\n\
+    \ {\n        let p = 1 << (lg - l);\n        let mut irot = StaticModInt::<P>::from_raw(1);\n\
     \        for (s, b) in f.chunks_exact_mut(p << 1).enumerate() {\n            let\
     \ (b0, b1) = b.split_at_mut(p);\n            for (x, y) in b0.iter_mut().zip(b1)\
     \ {\n                let l = *x;\n                let r = *y;\n              \
@@ -99,7 +99,7 @@ data:
     \ as u64 * irot.val() as u64);\n            }\n            irot *= StaticModInt::<P>::from_raw(\n\
     \                StaticModInt::<P>::NTT_PRECALC.irate2[s.trailing_ones() as usize],\n\
     \            );\n        }\n        l -= 1;\n    }\n\n    while l > 0 {\n    \
-    \    let p = 1 << lg - l;\n        let mut irot = StaticModInt::<P>::from_raw(1);\n\
+    \    let p = 1 << (lg - l);\n        let mut irot = StaticModInt::<P>::from_raw(1);\n\
     \        let iimag = StaticModInt::<P>::from_raw(StaticModInt::<P>::NTT_PRECALC.iroot[2]);\n\
     \        for (s, b) in f.chunks_exact_mut(p << 2).enumerate() {\n            let\
     \ irot2 = irot * irot;\n            let irot3 = irot2 * irot;\n            let\
@@ -141,7 +141,7 @@ data:
   - crates/convolution/convolution/src/naive.rs
   - crates/convolution/convolution/src/ntt_friendly.rs
   - crates/convolution/convolution/src/mod_2_64.rs
-  timestamp: '2025-03-08 02:08:27+00:00'
+  timestamp: '2025-04-06 02:35:23+00:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/library_checker/tree/frequency_table_of_tree_distance/src/main.rs

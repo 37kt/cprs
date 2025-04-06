@@ -25,9 +25,10 @@ data:
     , line 288, in bundle\n    raise NotImplementedError\nNotImplementedError\n"
   code: "use modint::ModInt;\nuse numeric_traits::Integer;\nuse prime_factorization::is_prime;\n\
     \npub struct BinomialPrime<M: ModInt<Value = u32>> {\n    fact: Vec<M>,\n    fact_inv:\
-    \ Vec<M>,\n    inv: Vec<M>,\n}\n\nimpl<M: ModInt<Value = u32>> BinomialPrime<M>\
-    \ {\n    pub fn new() -> Self {\n        assert!(is_prime(M::modulus()));\n\n\
-    \        Self {\n            fact: vec![M::from_raw(1); 2],\n            fact_inv:\
+    \ Vec<M>,\n    inv: Vec<M>,\n}\n\nimpl<M: ModInt<Value = u32>> Default for BinomialPrime<M>\
+    \ {\n    fn default() -> Self {\n        Self::new()\n    }\n}\n\nimpl<M: ModInt<Value\
+    \ = u32>> BinomialPrime<M> {\n    pub fn new() -> Self {\n        assert!(is_prime(M::modulus()));\n\
+    \n        Self {\n            fact: vec![M::from_raw(1); 2],\n            fact_inv:\
     \ vec![M::from_raw(1); 2],\n            inv: vec![M::from_raw(1); 2],\n      \
     \  }\n    }\n\n    pub fn expand(&mut self, n: usize) {\n        let prev_n =\
     \ self.fact.len() - 1;\n        if prev_n >= n {\n            return;\n      \
@@ -59,7 +60,7 @@ data:
   path: crates/combinatorics/binomial/src/prime.rs
   requiredBy:
   - crates/combinatorics/binomial/src/lib.rs
-  timestamp: '2025-03-09 00:42:04+00:00'
+  timestamp: '2025-04-06 02:35:23+00:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/library_checker/enumerative_combinatorics/binomial_coefficient_prime_mod/src/main.rs

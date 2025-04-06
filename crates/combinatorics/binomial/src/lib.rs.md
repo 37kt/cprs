@@ -78,7 +78,7 @@ data:
   path: crates/combinatorics/binomial/src/lib.rs
   requiredBy:
   - crates/combinatorics/binomial/src/prime.rs
-  timestamp: '2025-03-20 09:27:03+00:00'
+  timestamp: '2025-04-06 02:35:23+00:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/library_checker/enumerative_combinatorics/binomial_coefficient_prime_mod/src/main.rs

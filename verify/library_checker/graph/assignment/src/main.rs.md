@@ -29,8 +29,8 @@ data:
     \ {\n                        cost: i64,\n                    }\n             \
     \       mcf.add_edge(a[i], b[j], 0, 1, cost)\n                })\n           \
     \     .collect::<Vec<_>>()\n        })\n        .collect::<Vec<_>>();\n\n    let\
-    \ res = mcf.min_cost_b_flow().unwrap();\n    println!(\"{}\", res);\n\n    for\
-    \ i in 0..n {\n        for j in 0..n {\n            if mcf.edge(es[i][j]).flow\
+    \ res = mcf.min_cost_b_flow().unwrap();\n    println!(\"{}\", res);\n\n    #[allow(clippy::needless_range_loop)]\n\
+    \    for i in 0..n {\n        for j in 0..n {\n            if mcf.edge(es[i][j]).flow\
     \ > 0 {\n                print!(\"{} \", j);\n            }\n        }\n    }\n\
     \    println!();\n}\n"
   dependsOn:
@@ -38,7 +38,7 @@ data:
   isVerificationFile: true
   path: verify/library_checker/graph/assignment/src/main.rs
   requiredBy: []
-  timestamp: '2025-03-15 09:42:03+00:00'
+  timestamp: '2025-04-06 02:35:23+00:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/library_checker/graph/assignment/src/main.rs

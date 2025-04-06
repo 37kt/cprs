@@ -31,14 +31,14 @@ data:
     \      } else {\n                INF\n            }\n        };\n        let select\
     \ = |i, j, k| f(i, j) > f(i, k);\n        let argmin = monotone_minima(n + 2,\
     \ n + 2, select);\n        dp = (0..n + 2).map(|i| f(i, argmin[i])).collect();\n\
-    \        res[n + 1 - k] = dp[n + 1];\n    }\n\n    for i in 1..=n {\n        println!(\"\
-    {}\", res[i]);\n    }\n}\n"
+    \        res[n + 1 - k] = dp[n + 1];\n    }\n\n    for &x in &res[1..=n] {\n \
+    \       println!(\"{}\", x);\n    }\n}\n"
   dependsOn:
   - crates/dp/monotone_minima/src/lib.rs
   isVerificationFile: true
   path: verify/yukicoder/dp/yuki0952_mm/src/main.rs
   requiredBy: []
-  timestamp: '2025-03-20 00:46:18+00:00'
+  timestamp: '2025-04-06 02:35:23+00:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/yukicoder/dp/yuki0952_mm/src/main.rs

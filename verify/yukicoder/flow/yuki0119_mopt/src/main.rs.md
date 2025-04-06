@@ -24,7 +24,7 @@ data:
     \ input};\n\n#[fastout]\nfn main() {\n    input! {\n        n: usize,\n      \
     \  bc: [(i64, i64); n],\n        m: usize,\n        de: [(usize, usize); m],\n\
     \    }\n\n    let mut opt = MultivaluedOptimization::new(vec![3; n]);\n    for\
-    \ i in 0..n {\n        let (b, c) = bc[i];\n        opt.add_unary(i, |mi| Some([-c,\
+    \ (i, &(b, c)) in bc.iter().enumerate() {\n        opt.add_unary(i, |mi| Some([-c,\
     \ 0, -b][mi]));\n    }\n    for &(i, j) in &de {\n        opt.add_binary(\n  \
     \          i,\n            j,\n            |mi, mj| {\n                if mi ==\
     \ 2 && mj == 0 {\n                    None\n                } else {\n       \
@@ -38,7 +38,7 @@ data:
   isVerificationFile: true
   path: verify/yukicoder/flow/yuki0119_mopt/src/main.rs
   requiredBy: []
-  timestamp: '2025-03-19 23:25:14+00:00'
+  timestamp: '2025-04-06 02:35:23+00:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/yukicoder/flow/yuki0119_mopt/src/main.rs

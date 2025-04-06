@@ -11,8 +11,8 @@ data:
     path: crates/algebra/algebraic_traits/src/traits.rs
     title: crates/algebra/algebraic_traits/src/traits.rs
   - icon: ':warning:'
-    path: crates/misc/into_half_open_range/src/lib.rs
-    title: crates/misc/into_half_open_range/src/lib.rs
+    path: crates/misc/as_half_open_range/src/lib.rs
+    title: crates/misc/as_half_open_range/src/lib.rs
   - icon: ':warning:'
     path: crates/misc/random/src/lib.rs
     title: crates/misc/random/src/lib.rs
@@ -83,7 +83,7 @@ data:
   - crates/algebra/algebraic_traits/src/lib.rs
   - crates/algebra/algebraic_traits/src/macros.rs
   - crates/algebra/algebraic_traits/src/traits.rs
-  - crates/misc/into_half_open_range/src/lib.rs
+  - crates/misc/as_half_open_range/src/lib.rs
   - crates/misc/random/src/lib.rs
   - crates/number_theory/modint/modint_61/src/lib.rs
   - crates/number_theory/modint/modint_61/src/numeric.rs
@@ -95,7 +95,7 @@ data:
   requiredBy:
   - crates/string/rolling_hash/src/monoid.rs
   - crates/string/rolling_hash/src/sequence.rs
-  timestamp: '2025-03-26 05:05:06+00:00'
+  timestamp: '2025-04-06 02:35:23+00:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/library_checker/string/zalgorithm_rh/src/main.rs

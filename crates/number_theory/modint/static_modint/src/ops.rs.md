@@ -140,68 +140,68 @@ data:
     \ {\n            self.pow(MOD as usize - 2)\n        } else {\n            Self::from_raw(inv_mod(self.0,\
     \ MOD))\n        }\n    }\n\n    pub fn sqrt(self) -> Option<Self> {\n       \
     \ assert!(Self::IS_PRIME);\n\n        let p = Self::modulus() as usize;\n    \
-    \    if self.0 < 2 {\n            return Some(self);\n        } else if self.pow(p\
-    \ - 1 >> 1).val() != 1 {\n            return None;\n        }\n\n        let mut\
-    \ b = Self::from_raw(1);\n        while b.pow(p - 1 >> 1).val() == 1 {\n     \
-    \       b += 1;\n        }\n\n        let mut e = (p - 1).trailing_zeros() as\
-    \ usize;\n        let m = p - 1 >> e;\n        let mut x = self.pow(m - 1 >> 1);\n\
-    \        let mut y = self * x * x;\n        x *= self;\n        let mut z = b.pow(m);\n\
-    \        while y.val() != 1 {\n            let mut j = 0;\n            let mut\
-    \ t = y;\n            while t.val() != 1 {\n                j += 1;\n        \
-    \        t *= t;\n            }\n            z = z.pow(1 << e - j - 1);\n    \
-    \        x *= z;\n            z *= z;\n            y *= z;\n            e = j;\n\
-    \        }\n\n        Some(x)\n    }\n}\n\nimpl<const MOD: u32> From<&StaticModInt<MOD>>\
-    \ for StaticModInt<MOD> {\n    fn from(x: &StaticModInt<MOD>) -> Self {\n    \
-    \    *x\n    }\n}\n\nimpl<const MOD: u32> FromStr for StaticModInt<MOD> {\n  \
-    \  type Err = ParseIntError;\n\n    fn from_str(s: &str) -> Result<Self, Self::Err>\
-    \ {\n        s.parse::<i64>().map(Self::from)\n    }\n}\n\nimpl<const MOD: u32>\
-    \ std::fmt::Display for StaticModInt<MOD> {\n    fn fmt(&self, f: &mut std::fmt::Formatter<'_>)\
-    \ -> std::fmt::Result {\n        write!(f, \"{}\", self.0)\n    }\n}\n\nimpl<const\
-    \ MOD: u32> std::fmt::Debug for StaticModInt<MOD> {\n    fn fmt(&self, f: &mut\
+    \    if self.0 < 2 {\n            return Some(self);\n        } else if self.pow((p\
+    \ - 1) >> 1).val() != 1 {\n            return None;\n        }\n\n        let\
+    \ mut b = Self::from_raw(1);\n        while b.pow((p - 1) >> 1).val() == 1 {\n\
+    \            b += 1;\n        }\n\n        let mut e = (p - 1).trailing_zeros()\
+    \ as usize;\n        let m = (p - 1) >> e;\n        let mut x = self.pow((m -\
+    \ 1) >> 1);\n        let mut y = self * x * x;\n        x *= self;\n        let\
+    \ mut z = b.pow(m);\n        while y.val() != 1 {\n            let mut j = 0;\n\
+    \            let mut t = y;\n            while t.val() != 1 {\n              \
+    \  j += 1;\n                t *= t;\n            }\n            z = z.pow(1 <<\
+    \ (e - j - 1));\n            x *= z;\n            z *= z;\n            y *= z;\n\
+    \            e = j;\n        }\n\n        Some(x)\n    }\n}\n\nimpl<const MOD:\
+    \ u32> From<&StaticModInt<MOD>> for StaticModInt<MOD> {\n    fn from(x: &StaticModInt<MOD>)\
+    \ -> Self {\n        *x\n    }\n}\n\nimpl<const MOD: u32> FromStr for StaticModInt<MOD>\
+    \ {\n    type Err = ParseIntError;\n\n    fn from_str(s: &str) -> Result<Self,\
+    \ Self::Err> {\n        s.parse::<i64>().map(Self::from)\n    }\n}\n\nimpl<const\
+    \ MOD: u32> std::fmt::Display for StaticModInt<MOD> {\n    fn fmt(&self, f: &mut\
     \ std::fmt::Formatter<'_>) -> std::fmt::Result {\n        write!(f, \"{}\", self.0)\n\
-    \    }\n}\n\nimpl<const MOD: u32> Neg for StaticModInt<MOD> {\n    type Output\
-    \ = Self;\n\n    fn neg(self) -> Self::Output {\n        if self.0 == 0 {\n  \
-    \          Self(0)\n        } else {\n            Self(MOD - self.0)\n       \
-    \ }\n    }\n}\n\nimpl<const MOD: u32> Neg for &StaticModInt<MOD> {\n    type Output\
-    \ = StaticModInt<MOD>;\n\n    fn neg(self) -> Self::Output {\n        -*self\n\
-    \    }\n}\nimpl<const MOD: u32, T: Into<StaticModInt<MOD>>> Add<T> for StaticModInt<MOD>\
-    \ {\n    type Output = Self;\n\n    fn add(self, rhs: T) -> Self::Output {\n \
-    \       let rhs = rhs.into();\n        let mut x = self.0 + rhs.0;\n        if\
-    \ x >= MOD {\n            x -= MOD;\n        }\n        Self(x)\n    }\n}\n\n\
-    impl<const MOD: u32, T: Into<StaticModInt<MOD>>> Sub<T> for StaticModInt<MOD>\
-    \ {\n    type Output = Self;\n\n    fn sub(self, rhs: T) -> Self::Output {\n \
-    \       let rhs = rhs.into();\n        if self.0 < rhs.0 {\n            Self(MOD\
-    \ + self.0 - rhs.0)\n        } else {\n            Self(self.0 - rhs.0)\n    \
-    \    }\n    }\n}\n\nimpl<const MOD: u32, T: Into<StaticModInt<MOD>>> Mul<T> for\
-    \ StaticModInt<MOD> {\n    type Output = Self;\n\n    fn mul(self, rhs: T) ->\
-    \ Self::Output {\n        let rhs = rhs.into();\n        Self(mul_mod(self.0,\
+    \    }\n}\n\nimpl<const MOD: u32> std::fmt::Debug for StaticModInt<MOD> {\n  \
+    \  fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {\n    \
+    \    write!(f, \"{}\", self.0)\n    }\n}\n\nimpl<const MOD: u32> Neg for StaticModInt<MOD>\
+    \ {\n    type Output = Self;\n\n    fn neg(self) -> Self::Output {\n        if\
+    \ self.0 == 0 {\n            Self(0)\n        } else {\n            Self(MOD -\
+    \ self.0)\n        }\n    }\n}\n\nimpl<const MOD: u32> Neg for &StaticModInt<MOD>\
+    \ {\n    type Output = StaticModInt<MOD>;\n\n    fn neg(self) -> Self::Output\
+    \ {\n        -*self\n    }\n}\nimpl<const MOD: u32, T: Into<StaticModInt<MOD>>>\
+    \ Add<T> for StaticModInt<MOD> {\n    type Output = Self;\n\n    fn add(self,\
+    \ rhs: T) -> Self::Output {\n        let rhs = rhs.into();\n        let mut x\
+    \ = self.0 + rhs.0;\n        if x >= MOD {\n            x -= MOD;\n        }\n\
+    \        Self(x)\n    }\n}\n\nimpl<const MOD: u32, T: Into<StaticModInt<MOD>>>\
+    \ Sub<T> for StaticModInt<MOD> {\n    type Output = Self;\n\n    fn sub(self,\
+    \ rhs: T) -> Self::Output {\n        let rhs = rhs.into();\n        if self.0\
+    \ < rhs.0 {\n            Self(MOD + self.0 - rhs.0)\n        } else {\n      \
+    \      Self(self.0 - rhs.0)\n        }\n    }\n}\n\nimpl<const MOD: u32, T: Into<StaticModInt<MOD>>>\
+    \ Mul<T> for StaticModInt<MOD> {\n    type Output = Self;\n\n    fn mul(self,\
+    \ rhs: T) -> Self::Output {\n        let rhs = rhs.into();\n        Self(mul_mod(self.0,\
     \ rhs.0, MOD))\n    }\n}\n\nimpl<const MOD: u32, T: Into<StaticModInt<MOD>>> Div<T>\
-    \ for StaticModInt<MOD> {\n    type Output = Self;\n\n    fn div(self, rhs: T)\
-    \ -> Self::Output {\n        self * rhs.into().recip()\n    }\n}\n\nmacro_rules!\
-    \ impl_from_integer {\n    ($(($t1:ty, $t2:ty)),*) => {\n        $(\n        \
-    \    impl<const MOD: u32> From<$t1> for StaticModInt<MOD> {\n                fn\
-    \ from(x: $t1) -> Self {\n                    Self((x as $t2).rem_euclid(MOD as\
-    \ $t2) as u32)\n                }\n            }\n\n            impl<const MOD:\
-    \ u32> From<&$t1> for StaticModInt<MOD> {\n                fn from(x: &$t1) ->\
-    \ Self {\n                    Self((*x as $t2).rem_euclid(MOD as $t2) as u32)\n\
-    \                }\n            }\n        )*\n    };\n}\n\nimpl_from_integer!\
-    \ {\n    (i8, i32),\n    (i16, i32),\n    (i32, i32),\n    (i64, i64),\n    (isize,\
-    \ i64),\n    (i128, i128),\n    (u8, u32),\n    (u16, u32),\n    (u32, u32),\n\
-    \    (u64, u64),\n    (usize, u64),\n    (u128, u128)\n}\n\nmacro_rules! impl_ops\
-    \ {\n    ($(\n        $tr:ident,\n        $tr_a:ident,\n        $f:ident,\n  \
-    \      $f_a:ident,\n    )*) => {$(\n        impl<const MOD: u32, T: Into<StaticModInt<MOD>>>\
-    \ $tr<T> for &StaticModInt<MOD> {\n            type Output = StaticModInt<MOD>;\n\
-    \n            fn $f(self, rhs: T) -> Self::Output {\n                (*self).$f(rhs)\n\
-    \            }\n        }\n\n        impl<const MOD: u32, T: Into<StaticModInt<MOD>>>\
-    \ $tr_a<T> for StaticModInt<MOD> {\n            fn $f_a(&mut self, rhs: T) {\n\
-    \                *self = (*self).$f(rhs);\n            }\n        }\n    )*};\n\
-    }\n\nimpl_ops! {\n    Add, AddAssign, add, add_assign,\n    Sub, SubAssign, sub,\
-    \ sub_assign,\n    Mul, MulAssign, mul, mul_assign,\n    Div, DivAssign, div,\
-    \ div_assign,\n}\n\nimpl<T: Into<StaticModInt<MOD>>, const MOD: u32> Sum<T> for\
-    \ StaticModInt<MOD> {\n    fn sum<I: Iterator<Item = T>>(iter: I) -> Self {\n\
-    \        iter.fold(Self::from_raw(0), |b, x| b + x.into())\n    }\n}\n\nimpl<T:\
-    \ Into<StaticModInt<MOD>>, const MOD: u32> Product<T> for StaticModInt<MOD> {\n\
-    \    fn product<I: Iterator<Item = T>>(iter: I) -> Self {\n        iter.fold(Self::new(1),\
+    \ for StaticModInt<MOD> {\n    type Output = Self;\n\n    #[allow(clippy::suspicious_arithmetic_impl)]\n\
+    \    fn div(self, rhs: T) -> Self::Output {\n        self * rhs.into().recip()\n\
+    \    }\n}\n\nmacro_rules! impl_from_integer {\n    ($(($t1:ty, $t2:ty)),*) =>\
+    \ {\n        $(\n            impl<const MOD: u32> From<$t1> for StaticModInt<MOD>\
+    \ {\n                fn from(x: $t1) -> Self {\n                    Self((x as\
+    \ $t2).rem_euclid(MOD as $t2) as u32)\n                }\n            }\n\n  \
+    \          impl<const MOD: u32> From<&$t1> for StaticModInt<MOD> {\n         \
+    \       fn from(x: &$t1) -> Self {\n                    Self((*x as $t2).rem_euclid(MOD\
+    \ as $t2) as u32)\n                }\n            }\n        )*\n    };\n}\n\n\
+    impl_from_integer! {\n    (i8, i32),\n    (i16, i32),\n    (i32, i32),\n    (i64,\
+    \ i64),\n    (isize, i64),\n    (i128, i128),\n    (u8, u32),\n    (u16, u32),\n\
+    \    (u32, u32),\n    (u64, u64),\n    (usize, u64),\n    (u128, u128)\n}\n\n\
+    macro_rules! impl_ops {\n    ($(\n        $tr:ident,\n        $tr_a:ident,\n \
+    \       $f:ident,\n        $f_a:ident,\n    )*) => {$(\n        impl<const MOD:\
+    \ u32, T: Into<StaticModInt<MOD>>> $tr<T> for &StaticModInt<MOD> {\n         \
+    \   type Output = StaticModInt<MOD>;\n\n            fn $f(self, rhs: T) -> Self::Output\
+    \ {\n                (*self).$f(rhs)\n            }\n        }\n\n        impl<const\
+    \ MOD: u32, T: Into<StaticModInt<MOD>>> $tr_a<T> for StaticModInt<MOD> {\n   \
+    \         fn $f_a(&mut self, rhs: T) {\n                *self = (*self).$f(rhs);\n\
+    \            }\n        }\n    )*};\n}\n\nimpl_ops! {\n    Add, AddAssign, add,\
+    \ add_assign,\n    Sub, SubAssign, sub, sub_assign,\n    Mul, MulAssign, mul,\
+    \ mul_assign,\n    Div, DivAssign, div, div_assign,\n}\n\nimpl<T: Into<StaticModInt<MOD>>,\
+    \ const MOD: u32> Sum<T> for StaticModInt<MOD> {\n    fn sum<I: Iterator<Item\
+    \ = T>>(iter: I) -> Self {\n        iter.fold(Self::from_raw(0), |b, x| b + x.into())\n\
+    \    }\n}\n\nimpl<T: Into<StaticModInt<MOD>>, const MOD: u32> Product<T> for StaticModInt<MOD>\
+    \ {\n    fn product<I: Iterator<Item = T>>(iter: I) -> Self {\n        iter.fold(Self::new(1),\
     \ |b, x| b * x.into())\n    }\n}\n"
   dependsOn:
   - crates/number_theory/modint/static_modint/src/lib.rs
@@ -217,7 +217,7 @@ data:
   - crates/number_theory/modint/static_modint/src/mod_arithmetic.rs
   - crates/number_theory/modint/static_modint/src/numeric.rs
   - crates/number_theory/modint/static_modint/src/ntt_precalc.rs
-  timestamp: '2025-03-08 09:50:27+00:00'
+  timestamp: '2025-04-06 02:35:23+00:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/library_checker/polynomial/sqrt_of_formal_power_series/src/main.rs

@@ -21,20 +21,20 @@ data:
     \ i64 = 1 << 60;\nconst C: i64 = 1 << 40;\n\n#[fastout]\nfn main() {\n    input!\
     \ {\n        n: usize,\n        r: usize,\n        a: [i64; n - 1],\n    }\n\n\
     \    let g = |p: i64| {\n        let mut dp = [0, p];\n        for &x in &a {\n\
-    \            let mut ndp = [INF; 2];\n            for i in 0..2 {\n          \
-    \      for j in 0..2 {\n                    let mut cost = 0;\n              \
-    \      if i != j {\n                        cost -= x;\n                    }\n\
-    \                    if j == 1 {\n                        cost += p;\n       \
-    \             }\n                    ndp[j] = ndp[j].min(dp[i] + cost);\n    \
-    \            }\n            }\n            dp = ndp;\n        }\n        dp[0].min(dp[1])\n\
-    \    };\n\n    let res = aliens_dp(r, -C..=C, g);\n    println!(\"{}\", -res);\n\
-    }\n"
+    \            let mut ndp = [INF; 2];\n            #[allow(clippy::needless_range_loop)]\n\
+    \            for i in 0..2 {\n                for j in 0..2 {\n              \
+    \      let mut cost = 0;\n                    if i != j {\n                  \
+    \      cost -= x;\n                    }\n                    if j == 1 {\n  \
+    \                      cost += p;\n                    }\n                   \
+    \ ndp[j] = ndp[j].min(dp[i] + cost);\n                }\n            }\n     \
+    \       dp = ndp;\n        }\n        dp[0].min(dp[1])\n    };\n\n    let res\
+    \ = aliens_dp(r, -C..=C, g);\n    println!(\"{}\", -res);\n}\n"
   dependsOn:
   - crates/dp/aliens_dp/src/lib.rs
   isVerificationFile: false
   path: verify/sandbox/abc218h/src/main.rs
   requiredBy: []
-  timestamp: '2025-03-20 06:13:16+00:00'
+  timestamp: '2025-04-06 02:35:23+00:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: verify/sandbox/abc218h/src/main.rs

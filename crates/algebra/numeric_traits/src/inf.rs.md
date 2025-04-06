@@ -98,12 +98,12 @@ data:
   - icon: ':heavy_check_mark:'
     path: crates/graph/dijkstra/src/lib.rs
     title: crates/graph/dijkstra/src/lib.rs
+  - icon: ':warning:'
+    path: crates/misc/as_half_open_range/src/lib.rs
+    title: crates/misc/as_half_open_range/src/lib.rs
   - icon: ':heavy_check_mark:'
     path: crates/misc/coordinate_compression/src/lib.rs
     title: crates/misc/coordinate_compression/src/lib.rs
-  - icon: ':warning:'
-    path: crates/misc/into_half_open_range/src/lib.rs
-    title: crates/misc/into_half_open_range/src/lib.rs
   - icon: ':heavy_check_mark:'
     path: crates/number_theory/eratosthenes/src/lib.rs
     title: crates/number_theory/eratosthenes/src/lib.rs
@@ -191,7 +191,7 @@ data:
   - crates/number_theory/eratosthenes/src/lib.rs
   - crates/number_theory/rational/src/lib.rs
   - crates/misc/coordinate_compression/src/lib.rs
-  - crates/misc/into_half_open_range/src/lib.rs
+  - crates/misc/as_half_open_range/src/lib.rs
   - crates/string/suffix_array/src/lib.rs
   - crates/graph/dijkstra/src/lib.rs
   - crates/flow/max_flow/src/lib.rs

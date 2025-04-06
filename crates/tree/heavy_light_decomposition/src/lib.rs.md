@@ -68,12 +68,13 @@ data:
     \ csr_array::{CsrArray, CsrArrayBuilder};\n\npub struct HeavyLightDecomposition\
     \ {\n    n: usize,\n    root: usize,\n    down: Vec<i32>,\n    next: Vec<i32>,\n\
     \    sub: Vec<i32>,\n    tour: Vec<i32>,\n    edge_ord: Vec<usize>,\n}\n\nimpl\
-    \ HeavyLightDecomposition {\n    pub fn len(&self) -> usize {\n        self.n\n\
-    \    }\n\n    pub fn root(&self) -> usize {\n        self.root\n    }\n\n    ///\
-    \ \u5C5E\u3059\u308B heavy path \u306E\u5148\u982D\n    pub fn head(&self, v:\
-    \ usize) -> usize {\n        if self.next[v] < 0 {\n            v\n        } else\
-    \ {\n            self.next[v] as usize\n        }\n    }\n\n    /// \u9802\u70B9\
-    \ v \u306E d \u500B\u89AA\n    pub fn la(&self, mut v: usize, d: usize) -> Option<usize>\
+    \ HeavyLightDecomposition {\n    pub fn is_empty(&self) -> bool {\n        self.n\
+    \ == 0\n    }\n\n    pub fn len(&self) -> usize {\n        self.n\n    }\n\n \
+    \   pub fn root(&self) -> usize {\n        self.root\n    }\n\n    /// \u5C5E\u3059\
+    \u308B heavy path \u306E\u5148\u982D\n    pub fn head(&self, v: usize) -> usize\
+    \ {\n        if self.next[v] < 0 {\n            v\n        } else {\n        \
+    \    self.next[v] as usize\n        }\n    }\n\n    /// \u9802\u70B9 v \u306E\
+    \ d \u500B\u89AA\n    pub fn la(&self, mut v: usize, d: usize) -> Option<usize>\
     \ {\n        let mut d = d as i32;\n        while v != !0 {\n            let u\
     \ = self.head(v);\n            if self.down[v] - d >= self.down[u] {\n       \
     \         v = self.tour[(self.down[v] - d) as usize] as usize;\n             \
@@ -165,7 +166,7 @@ data:
     \ + DoubleEndedIterator + '_\n    {\n        self.tour.iter().map(|&v| v as usize)\n\
     \    }\n\n    pub fn edges_order(\n        &self,\n    ) -> impl Iterator<Item\
     \ = usize> + FusedIterator + ExactSizeIterator + DoubleEndedIterator + '_\n  \
-    \  {\n        self.edge_ord.iter().map(|&v| v)\n    }\n\n    /// \u5404\u9802\u70B9\
+    \  {\n        self.edge_ord.iter().copied()\n    }\n\n    /// \u5404\u9802\u70B9\
     \u306E\u5B50\u306E\u30EA\u30B9\u30C8  \n    /// heavy child \u304C\u5148\u982D\
     \n    pub fn children(&self) -> CsrArray<usize> {\n        let mut csr = CsrArrayBuilder::new(self.n);\n\
     \        for v in self.euler_tour().skip(1) {\n            csr.push(self.parent(v).unwrap(),\
@@ -188,7 +189,7 @@ data:
   - crates/tree/heavy_light_decomposition/src/compress.rs
   - crates/tree/heavy_light_decomposition/src/construct.rs
   - crates/tree/static_top_tree/src/lib.rs
-  timestamp: '2025-03-29 09:22:56+00:00'
+  timestamp: '2025-04-06 02:35:23+00:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/library_checker/tree/lca/src/main.rs
