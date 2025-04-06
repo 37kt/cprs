@@ -2,7 +2,7 @@
 
 use std::{cmp::Ordering, ops::RangeBounds};
 
-use into_half_open_range::IntoHalfOpenRange;
+use as_half_open_range::AsHalfOpenRange;
 use numeric_traits::{Cast, Integer};
 use range_minimum_query::RangeMinimumQuery;
 
@@ -100,8 +100,8 @@ impl SuffixArray {
         s1_range: impl RangeBounds<usize>,
         s2_range: impl RangeBounds<usize>,
     ) -> Ordering {
-        let (l1, r1) = s1_range.into_half_open_range(0, self.sa.len());
-        let (l2, r2) = s2_range.into_half_open_range(0, self.sa.len());
+        let (l1, r1) = s1_range.as_half_open_range(0, self.sa.len());
+        let (l2, r2) = s2_range.as_half_open_range(0, self.sa.len());
         let n1 = r1 - l1;
         let n2 = r2 - l2;
         let lcp = self.lcp(l1, l2);
@@ -207,7 +207,7 @@ impl SuffixArray {
     fn induce(s: &[usize], sa: &mut [usize], count: &[usize], ls: &[Type]) {
         let n = s.len();
 
-        let mut head = Self::bucket_head(&count);
+        let mut head = Self::bucket_head(count);
         for i in 0..n {
             if sa[i] == 0 || sa[i] == !0 || ls[sa[i] - 1] != Type::L {
                 continue;
@@ -217,7 +217,7 @@ impl SuffixArray {
             head[s[j]] += 1;
         }
 
-        let mut tail = Self::bucket_tail(&count);
+        let mut tail = Self::bucket_tail(count);
         for i in (1..n).rev() {
             if sa[i] == 0 || sa[i] == !0 || ls[sa[i] - 1] == Type::L {
                 continue;
@@ -267,12 +267,10 @@ impl SuffixArray {
             return vec![];
         }
 
-        let mut h = 0;
+        let mut h = 0usize;
         let mut lcp = vec![0; n - 1];
         for i in 0..n - 1 {
-            if h > 0 {
-                h -= 1;
-            }
+            h = h.saturating_sub(1);
             if sa_inv[i] == 0 {
                 continue;
             }

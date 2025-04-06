@@ -54,7 +54,7 @@ impl StaticTopTree {
         let path = {
             let mut path = vec![v];
             let mut v = v;
-            while children[v].len() > 0 {
+            while !children[v].is_empty() {
                 v = children[v][0];
                 path.push(v);
             }

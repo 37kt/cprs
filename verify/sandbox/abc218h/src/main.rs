@@ -16,6 +16,7 @@ fn main() {
         let mut dp = [0, p];
         for &x in &a {
             let mut ndp = [INF; 2];
+            #[allow(clippy::needless_range_loop)]
             for i in 0..2 {
                 for j in 0..2 {
                     let mut cost = 0;

@@ -41,8 +41,8 @@ impl MultivaluedOptimization {
             .map(|&n| {
                 assert!(n > 0);
                 let mut id = vec![!0; n];
-                for i in 1..n {
-                    id[i] = cur;
+                for i in id.iter_mut().skip(1) {
+                    *i = cur;
                     cur += 1;
                 }
                 id
@@ -89,10 +89,8 @@ impl MultivaluedOptimization {
     /// # 引数
     /// - `i`: 対象の変数のインデックス。
     /// - `cost`: 各選択肢に対するコストを返すクロージャ。Noneの場合は+∞とみなす。
-    pub fn add_unary(&mut self, i: usize, mut cost: impl FnMut(usize) -> Option<i64>) {
-        let cost = (0..self.n_options[i])
-            .map(|mi| cost(mi))
-            .collect::<Vec<_>>();
+    pub fn add_unary(&mut self, i: usize, cost: impl FnMut(usize) -> Option<i64>) {
+        let cost = (0..self.n_options[i]).map(cost).collect::<Vec<_>>();
 
         let mut appeared_finite_value = false;
         if let Some(x0) = cost[0] {
@@ -183,12 +181,11 @@ impl MultivaluedOptimization {
 
         // 左上と右下が有限値によって連結であることを確認する
         // また、有限値の区間が下の行にいくにつれて右に移動していくことを確認する
-        let mut is_connected = true;
-        is_connected &= l[0] <= 0 && 0 < r[0];
+        let mut is_connected = 0 < r[0];
         for i in 1..h {
             is_connected &= l[i - 1] <= l[i] && l[i] < r[i - 1] && r[i - 1] <= r[i];
         }
-        is_connected &= l[h - 1] <= w - 1 && w - 1 < r[h - 1];
+        is_connected &= l[h - 1] < w && w - 1 < r[h - 1];
         assert!(
             is_connected,
             "Finite cost values in the matrix must form a single connected region that spans from cost[0][0] to cost[h-1][w-1]"

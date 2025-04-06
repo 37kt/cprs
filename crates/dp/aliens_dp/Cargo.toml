@@ -12,4 +12,4 @@ name = "aliens_dp"
 
 [dependencies]
 numeric_traits = { path = "../../algebra/numeric_traits" }
-into_half_open_range = { path = "../../misc/into_half_open_range" }
+as_half_open_range = { path = "../../misc/as_half_open_range" }

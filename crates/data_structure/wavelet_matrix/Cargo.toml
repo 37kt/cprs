@@ -13,5 +13,5 @@ name = "wavelet_matrix"
 [dependencies]
 algebraic_traits = { path = "../../algebra/algebraic_traits" }
 numeric_traits = { path = "../../algebra/numeric_traits" }
-into_half_open_range = { path = "../../misc/into_half_open_range" }
+as_half_open_range = { path = "../../misc/as_half_open_range" }
 coordinate_compression = { path = "../../misc/coordinate_compression" }

@@ -29,6 +29,12 @@ pub struct Edge {
     pub flow: i64,
 }
 
+impl Default for MaxFlow {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl MaxFlow {
     pub fn new() -> Self {
         Self {

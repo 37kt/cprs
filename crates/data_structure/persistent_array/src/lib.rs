@@ -25,7 +25,7 @@ impl<T, const M: usize> FromIterator<T> for PersistentArray<T, M> {
 
         let root = new_ptr(Node::new(first));
         let mut n = 1;
-        while let Some(val) = iter.next() {
+        for val in iter {
             let mut vp = root;
             let mut i = n;
             loop {

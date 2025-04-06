@@ -8,6 +8,12 @@ pub struct BinomialPrime<M: ModInt<Value = u32>> {
     inv: Vec<M>,
 }
 
+impl<M: ModInt<Value = u32>> Default for BinomialPrime<M> {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl<M: ModInt<Value = u32>> BinomialPrime<M> {
     pub fn new() -> Self {
         assert!(is_prime(M::modulus()));

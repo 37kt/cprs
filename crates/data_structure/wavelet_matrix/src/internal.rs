@@ -28,6 +28,7 @@ where
         }
     }
 
+    #[allow(clippy::too_many_arguments)]
     fn dfs_count_with_(
         &self,
         d: usize,

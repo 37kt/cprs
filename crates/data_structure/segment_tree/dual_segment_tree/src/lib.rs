@@ -1,7 +1,7 @@
 use std::ops::RangeBounds;
 
 use algebraic_traits::Monoid;
-use into_half_open_range::IntoHalfOpenRange;
+use as_half_open_range::AsHalfOpenRange;
 use numeric_traits::Integer;
 
 pub struct DualSegmentTree<M>
@@ -77,7 +77,7 @@ where
     }
 
     pub fn apply_range(&mut self, range: impl RangeBounds<usize>, f: M::Value) {
-        let (mut l, mut r) = range.into_half_open_range(0, self.n);
+        let (mut l, mut r) = range.as_half_open_range(0, self.n);
         if l == r {
             return;
         }

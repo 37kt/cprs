@@ -10,7 +10,7 @@ pub fn ntt<const P: u32>(f: &mut [StaticModInt<P>]) {
 
     let mut l = 0;
     if (lg - l) % 2 == 1 {
-        let p = 1 << lg - l - 1;
+        let p = 1 << (lg - l - 1);
         let mut rot = StaticModInt::from_raw(1);
         for (s, b) in f.chunks_exact_mut(p << 1).enumerate() {
             let (b0, b1) = b.split_at_mut(p);
@@ -29,7 +29,7 @@ pub fn ntt<const P: u32>(f: &mut [StaticModInt<P>]) {
 
     let mod2 = (P as u64) * (P as u64);
     while l < lg {
-        let p = 1 << lg - l - 2;
+        let p = 1 << (lg - l - 2);
         let mut rot = StaticModInt::<P>::from_raw(1);
         let imag = StaticModInt::<P>::from_raw(StaticModInt::<P>::NTT_PRECALC.root[2]);
         for (s, b) in f.chunks_exact_mut(p << 2).enumerate() {
@@ -68,7 +68,7 @@ pub fn ntt_inv<const P: u32>(f: &mut [StaticModInt<P>]) {
 
     let mut l = lg;
     if l % 2 == 1 {
-        let p = 1 << lg - l;
+        let p = 1 << (lg - l);
         let mut irot = StaticModInt::<P>::from_raw(1);
         for (s, b) in f.chunks_exact_mut(p << 1).enumerate() {
             let (b0, b1) = b.split_at_mut(p);
@@ -86,7 +86,7 @@ pub fn ntt_inv<const P: u32>(f: &mut [StaticModInt<P>]) {
     }
 
     while l > 0 {
-        let p = 1 << lg - l;
+        let p = 1 << (lg - l);
         let mut irot = StaticModInt::<P>::from_raw(1);
         let iimag = StaticModInt::<P>::from_raw(StaticModInt::<P>::NTT_PRECALC.iroot[2]);
         for (s, b) in f.chunks_exact_mut(p << 2).enumerate() {

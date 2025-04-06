@@ -147,7 +147,5 @@ impl<Weight: Clone> Edge<Weight> for (usize, usize, Weight) {
 
 #[doc(hidden)]
 impl Edge<()> for (usize, usize) {
-    fn weight(&self) -> () {
-        ()
-    }
+    fn weight(&self) {}
 }

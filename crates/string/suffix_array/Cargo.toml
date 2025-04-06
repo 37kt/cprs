@@ -13,4 +13,4 @@ name = "suffix_array"
 [dependencies]
 range_minimum_query = { path = "../../data_structure/range_minimum_query" }
 numeric_traits = { path = "../../algebra/numeric_traits" }
-into_half_open_range = { path = "../../misc/into_half_open_range" }
+as_half_open_range = { path = "../../misc/as_half_open_range" }

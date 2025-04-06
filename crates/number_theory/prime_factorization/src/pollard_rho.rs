@@ -13,7 +13,7 @@ pub(crate) fn pollard_rho(n: u64, res: &mut Vec<u64>) {
         res.push(n);
         return;
     }
-    let m = 1 << (n.floor_log2() + 1) / 8;
+    let m = 1 << ((n.floor_log2() + 1) / 8);
     let mut c = Mint::from_raw(1);
     loop {
         let mut x = Mint::from_raw(1);

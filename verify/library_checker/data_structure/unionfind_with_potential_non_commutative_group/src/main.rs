@@ -51,12 +51,10 @@ fn main() {
             uf.merge(v, u, x);
             let f = uf.diff(v, u).unwrap() == x;
             println!("{}", f as i32);
+        } else if let Some(d) = uf.diff(v, u) {
+            println!("{} {} {} {}", d[0][0], d[0][1], d[1][0], d[1][1]);
         } else {
-            if let Some(d) = uf.diff(v, u) {
-                println!("{} {} {} {}", d[0][0], d[0][1], d[1][0], d[1][1]);
-            } else {
-                println!("-1");
-            }
+            println!("-1");
         }
     }
 }

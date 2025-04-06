@@ -35,6 +35,7 @@ fn main() {
     let res = mcf.min_cost_b_flow().unwrap();
     println!("{}", res);
 
+    #[allow(clippy::needless_range_loop)]
     for i in 0..n {
         for j in 0..n {
             if mcf.edge(es[i][j]).flow > 0 {

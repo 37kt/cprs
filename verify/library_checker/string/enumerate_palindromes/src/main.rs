@@ -10,8 +10,8 @@ fn main() {
     }
     let n = s.len();
     let rad = manacher(&s);
-    for i in 1..n * 2 {
-        print!("{} ", rad[i]);
+    for &x in &rad[1..n * 2] {
+        print!("{} ", x);
     }
     println!();
 }

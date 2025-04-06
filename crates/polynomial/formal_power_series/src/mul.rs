@@ -76,6 +76,7 @@ impl<M: ModInt<Value = u32>> Mul<M> for &FormalPowerSeries<M> {
 }
 
 impl<M: ModInt<Value = u32>> DivAssign<M> for FormalPowerSeries<M> {
+    #[allow(clippy::suspicious_op_assign_impl)]
     fn div_assign(&mut self, rhs: M) {
         *self *= rhs.recip();
     }
@@ -84,6 +85,7 @@ impl<M: ModInt<Value = u32>> DivAssign<M> for FormalPowerSeries<M> {
 impl<M: ModInt<Value = u32>> Div<M> for FormalPowerSeries<M> {
     type Output = FormalPowerSeries<M>;
 
+    #[allow(clippy::suspicious_arithmetic_impl)]
     fn div(mut self, rhs: M) -> Self::Output {
         self *= rhs.recip();
         self
@@ -93,6 +95,7 @@ impl<M: ModInt<Value = u32>> Div<M> for FormalPowerSeries<M> {
 impl<M: ModInt<Value = u32>> Div<M> for &FormalPowerSeries<M> {
     type Output = FormalPowerSeries<M>;
 
+    #[allow(clippy::suspicious_arithmetic_impl)]
     fn div(self, rhs: M) -> Self::Output {
         self * rhs.recip()
     }
@@ -144,12 +147,10 @@ impl<const MOD: u32> FpsMul for StaticModInt<MOD> {
             } else {
                 FormalPowerSeries(convolution_ntt_friendly(f, g))
             }
+        } else if fc <= MUL_THRESHOLD_ARBITRARY {
+            mul_naive(f, g)
         } else {
-            if fc <= MUL_THRESHOLD_ARBITRARY {
-                mul_naive(f, g)
-            } else {
-                FormalPowerSeries(convolution_arbitrary_mod(f, g))
-            }
+            FormalPowerSeries(convolution_arbitrary_mod(f, g))
         }
     }
 }

@@ -45,7 +45,7 @@ where
                     sum[i] = sum[i - 1];
                 }
                 sum[0] = 0;
-                return (Self(Container::Small { min, sum }), ys);
+                (Self(Container::Small { min, sum }), ys)
             } else {
                 for &x in &xs {
                     sum[(x - min).cast() + 1] = 1;
@@ -57,33 +57,31 @@ where
                     let j = (xs[i] - min).cast();
                     ys[i] = sum[j] as usize;
                 }
-                return (Self(Container::Small { min, sum }), ys);
+                (Self(Container::Small { min, sum }), ys)
             }
+        } else if DISTINCT {
+            let mut ord = (0..n).collect::<Vec<_>>();
+            ord.sort_by_key(|&i| xs[i]);
+            let mut new_xs = Vec::with_capacity(n);
+            for i in 0..n {
+                ys[ord[i]] = i;
+                new_xs.push(xs[ord[i]]);
+            }
+            (Self(Container::Large { xs: new_xs }), ys)
         } else {
-            if DISTINCT {
-                let mut ord = (0..n).collect::<Vec<_>>();
-                ord.sort_by_key(|&i| xs[i]);
-                let mut new_xs = Vec::with_capacity(n);
-                for i in 0..n {
-                    ys[ord[i]] = i;
+            let mut ord = (0..n).collect::<Vec<_>>();
+            ord.sort_unstable_by_key(|&i| xs[i]);
+            let mut new_xs = Vec::with_capacity(n);
+            for i in 0..n {
+                if i > 0 && xs[ord[i]] == xs[ord[i - 1]] {
+                    ys[ord[i]] = new_xs.len() - 1;
+                } else {
+                    ys[ord[i]] = new_xs.len();
                     new_xs.push(xs[ord[i]]);
                 }
-                return (Self(Container::Large { xs: new_xs }), ys);
-            } else {
-                let mut ord = (0..n).collect::<Vec<_>>();
-                ord.sort_unstable_by_key(|&i| xs[i]);
-                let mut new_xs = Vec::with_capacity(n);
-                for i in 0..n {
-                    if i > 0 && xs[ord[i]] == xs[ord[i - 1]] {
-                        ys[ord[i]] = new_xs.len() - 1;
-                    } else {
-                        ys[ord[i]] = new_xs.len();
-                        new_xs.push(xs[ord[i]]);
-                    }
-                }
-                new_xs.shrink_to_fit();
-                return (Self(Container::Large { xs: new_xs }), ys);
             }
+            new_xs.shrink_to_fit();
+            (Self(Container::Large { xs: new_xs }), ys)
         }
     }
 
@@ -119,6 +117,10 @@ where
             Container::Small { sum, .. } => *sum.last().unwrap() as usize,
             Container::Large { xs } => xs.len(),
         }
+    }
+
+    pub fn is_empty(&self) -> bool {
+        matches!(&self.0, Container::Empty)
     }
 }
 

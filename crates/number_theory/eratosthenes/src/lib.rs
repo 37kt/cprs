@@ -58,7 +58,7 @@ impl Eratosthenes {
                     (f != 0).then(|| {
                         let j = f.lsb_index();
                         f &= f - 1;
-                        i * 30 + MOD_30[j as usize]
+                        i * 30 + MOD_30[j]
                     })
                 })
             }))

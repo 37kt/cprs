@@ -41,9 +41,9 @@ impl<const AUTO_REDUCE: bool> From<i64> for Rational<AUTO_REDUCE> {
     }
 }
 
-impl<const AUTO_REDUCE: bool> Into<f64> for Rational<AUTO_REDUCE> {
-    fn into(self) -> f64 {
-        self.num as f64 / self.den as f64
+impl<const AUTO_REDUCE: bool> From<Rational<AUTO_REDUCE>> for f64 {
+    fn from(r: Rational<AUTO_REDUCE>) -> Self {
+        r.num as f64 / r.den as f64
     }
 }
 

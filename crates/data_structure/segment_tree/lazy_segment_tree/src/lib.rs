@@ -1,7 +1,7 @@
 use std::ops::{Deref, DerefMut, RangeBounds};
 
 use algebraic_traits::{Act, Algebraic, Magma, Monoid, Unital};
-use into_half_open_range::IntoHalfOpenRange;
+use as_half_open_range::AsHalfOpenRange;
 use numeric_traits::Integer;
 
 pub struct LazySegmentTree<A>
@@ -124,7 +124,7 @@ where
     }
 
     pub fn fold(&mut self, range: impl RangeBounds<usize>) -> <A::Operand as Algebraic>::Value {
-        let (mut l, mut r) = range.into_half_open_range(0, self.n);
+        let (mut l, mut r) = range.as_half_open_range(0, self.n);
         if l == r {
             return A::Operand::unit();
         }
@@ -135,7 +135,7 @@ where
                 self.push(l >> h);
             }
             if r >> h << h != r {
-                self.push(r - 1 >> h);
+                self.push((r - 1) >> h);
             }
         }
         let mut sl = A::Operand::unit();
@@ -164,7 +164,7 @@ where
         range: impl RangeBounds<usize>,
         f: <A::Operator as Algebraic>::Value,
     ) {
-        let (mut l, mut r) = range.into_half_open_range(0, self.n);
+        let (mut l, mut r) = range.as_half_open_range(0, self.n);
         if l == r {
             return;
         }
@@ -175,7 +175,7 @@ where
                 self.push(l >> h);
             }
             if r >> h << h != r {
-                self.push(r - 1 >> h);
+                self.push((r - 1) >> h);
             }
         }
         let l2 = l;
@@ -199,7 +199,7 @@ where
                 self.update(l >> h);
             }
             if r >> h << h != r {
-                self.update(r - 1 >> h);
+                self.update((r - 1) >> h);
             }
         }
     }
@@ -259,7 +259,7 @@ where
         }
         let mut l = r + self.sz;
         for h in (1..=self.lg).rev() {
-            self.push(l - 1 >> h);
+            self.push((l - 1) >> h);
         }
         let mut s = A::Operand::unit();
         loop {

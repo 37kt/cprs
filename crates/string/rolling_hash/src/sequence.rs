@@ -1,6 +1,6 @@
 use std::ops::RangeBounds;
 
-use into_half_open_range::IntoHalfOpenRange;
+use as_half_open_range::AsHalfOpenRange;
 use modint_61::ModInt61;
 
 use crate::{random, RollingHash};
@@ -50,7 +50,7 @@ impl RollingHashSequence {
     }
 
     pub fn range(&self, range: impl RangeBounds<usize>) -> RollingHash {
-        let (l, r) = range.into_half_open_range(0, self.len());
+        let (l, r) = range.as_half_open_range(0, self.len());
         RollingHash {
             hash: self.hash[l] - self.hash[r] * self.base_pow[r - l],
             base_pow: self.base_pow[r - l],
@@ -63,8 +63,8 @@ impl RollingHashSequence {
         other: &RollingHashSequence,
         other_range: impl RangeBounds<usize>,
     ) -> usize {
-        let (l1, r1) = range.into_half_open_range(0, self.len());
-        let (l2, r2) = other_range.into_half_open_range(0, other.len());
+        let (l1, r1) = range.as_half_open_range(0, self.len());
+        let (l2, r2) = other_range.as_half_open_range(0, other.len());
         let max = (r1 - l1).min(r2 - l2);
         let mut ok = 0;
         let mut ng = max + 1;

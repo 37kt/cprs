@@ -160,6 +160,7 @@ impl<M: ModInt<Value = u32>> Sub<&FormalPowerSeries<M>> for FormalPowerSeries<M>
 impl<M: ModInt<Value = u32>> Sub<FormalPowerSeries<M>> for &FormalPowerSeries<M> {
     type Output = FormalPowerSeries<M>;
 
+    #[allow(clippy::suspicious_arithmetic_impl)]
     fn sub(self, mut rhs: FormalPowerSeries<M>) -> Self::Output {
         rhs.iter_mut().for_each(|x| *x = -*x);
         if rhs.len() < self.len() {

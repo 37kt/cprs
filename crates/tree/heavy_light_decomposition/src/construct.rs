@@ -45,14 +45,14 @@ impl HeavyLightDecomposition {
         }
 
         let mut tour = vec![-1; n];
-        for v in 0..n {
-            let t = down[v] as usize;
+        for (v, &d) in down.iter().enumerate() {
+            let t = d as usize;
             tour[t] = v as i32;
         }
 
         let mut edge_ord = vec![0; n - 1];
-        for e in 0..n - 1 {
-            let i = down[e + 1] as usize - 1;
+        for (e, &d) in down.iter().enumerate().skip(1) {
+            let i = d as usize - 1;
             edge_ord[i] = e;
         }
 
@@ -83,8 +83,8 @@ impl HeavyLightDecomposition {
         }
 
         let mut tour = Vec::with_capacity(n);
-        for v in 0..n {
-            if v != root && down[v] == 1 {
+        for (v, &d) in down.iter().enumerate() {
+            if v != root && d == 1 {
                 tour.push(v as i32);
             }
         }
@@ -135,14 +135,14 @@ impl HeavyLightDecomposition {
         }
 
         tour.resize(n, -1);
-        for v in 0..n {
-            let t = down[v] as usize;
+        for (v, &d) in down.iter().enumerate() {
+            let t = d as usize;
             tour[t] = v as i32;
         }
 
         let mut edge_ord = vec![0; n - 1];
-        for e in 0..n - 1 {
-            let (u, v) = edges[e].endpoints();
+        for (e, edge) in edges.iter().enumerate() {
+            let (u, v) = edge.endpoints();
             let i = down[u].max(down[v]) as usize - 1;
             edge_ord[i] = e;
         }

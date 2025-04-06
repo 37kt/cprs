@@ -9,6 +9,12 @@ pub struct BinaryTrie {
     nodes: Vec<Node>,
 }
 
+impl Default for BinaryTrie {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl BinaryTrie {
     pub fn new() -> Self {
         Self {
@@ -28,7 +34,7 @@ impl BinaryTrie {
             self.nodes[v].cnt += n;
             d != 0
         } {
-            x &= !0 >> W - d;
+            x &= !0 >> (W - d);
             let c = x >> (d - 1) & 1;
             if let Some(link) = self.nodes[v].link[c] {
                 let common_prefix = (W - (x ^ link.seq).leading_zeros() as u8).max(link.d);
@@ -40,7 +46,7 @@ impl BinaryTrie {
                     let w = self.new_node(self.nodes[u].cnt);
                     let nx = x & !((1 << common_prefix) - 1);
                     self.nodes[v].link[c] = Some(Link::new(w, nx, common_prefix));
-                    let x2 = link.seq & (!0 >> W - common_prefix);
+                    let x2 = link.seq & (!0 >> (W - common_prefix));
                     let c2 = link.seq >> (common_prefix - 1) & 1;
                     self.nodes[w].cnt = self.nodes[u].cnt;
                     self.nodes[w].link[c2] = Some(Link::new(u, x2, link.d));
@@ -69,7 +75,7 @@ impl BinaryTrie {
             self.nodes[v].cnt -= n;
             d != 0
         } {
-            x &= !0 >> W - d;
+            x &= !0 >> (W - d);
             let c = x >> (d - 1) & 1;
             let link = self.nodes[v].link[c].unwrap();
             v = link.ch as _;
@@ -82,7 +88,7 @@ impl BinaryTrie {
         let mut v = 0;
         let mut d = W;
         while d > 0 {
-            x &= !0 >> W - d;
+            x &= !0 >> (W - d);
             let c = x >> (d - 1) & 1;
             if let Some(link) = self.nodes[v].link[c] {
                 let common_prefix = (W - (x ^ link.seq).leading_zeros() as u8).max(link.d);
@@ -193,8 +199,8 @@ impl BinaryTrie {
         let mut d = W;
         let mut res = 0;
         while d > 0 {
-            x &= !0 >> W - d;
-            xor &= !0 >> W - d;
+            x &= !0 >> (W - d);
+            xor &= !0 >> (W - d);
             let c = (x ^ xor) >> (d - 1) & 1;
             if x >> (d - 1) & 1 == 0 {
                 if let Some(link) = self.nodes[v].link[c ^ 1] {

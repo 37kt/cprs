@@ -38,7 +38,7 @@ impl WordsizeAryTreeSet {
             return false;
         }
         for v in &mut self.v {
-            v[x / W] |= 1 << x % W;
+            v[x / W] |= 1 << (x % W);
             x /= W;
         }
         true
@@ -49,7 +49,7 @@ impl WordsizeAryTreeSet {
             return false;
         }
         for v in &mut self.v {
-            v[x / W] &= !(1 << x % W);
+            v[x / W] &= !(1 << (x % W));
             if v[x / W] != 0 {
                 break;
             }

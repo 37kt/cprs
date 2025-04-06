@@ -76,6 +76,7 @@ impl<const AUTO_REDUCE: bool> Mul for Rational<AUTO_REDUCE> {
 impl<const AUTO_REDUCE: bool> Div for Rational<AUTO_REDUCE> {
     type Output = Self;
 
+    #[allow(clippy::suspicious_arithmetic_impl)]
     fn div(self, rhs: Self) -> Self::Output {
         self * rhs.recip()
     }
@@ -95,9 +96,7 @@ fn compare<const AUTO_REDUCE: bool>(
     mut b: Rational<AUTO_REDUCE>,
 ) -> Ordering {
     if a.num <= 0 || b.num <= 0 {
-        if a.num == 0 || b.num == 0 {
-            return a.num.cmp(&b.num);
-        } else if (a.num < 0) ^ (b.num < 0) {
+        if a.num == 0 || b.num == 0 || ((a.num < 0) ^ (b.num < 0)) {
             return a.num.cmp(&b.num);
         } else {
             return compare(-b, -a);

@@ -11,6 +11,7 @@ fn main() {
     let mut opt = MultivaluedOptimization::new(vec![5; n * n]);
     let id = |i: usize, j: usize| i * n + j;
     let f = |x: usize, y: usize| Some(x.abs_diff(y).pow(2) as i64);
+    #[allow(clippy::needless_range_loop)]
     for i in 0..n {
         for j in 0..n {
             if a[i][j] != 0 {

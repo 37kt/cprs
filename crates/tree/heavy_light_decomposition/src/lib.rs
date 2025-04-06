@@ -18,6 +18,10 @@ pub struct HeavyLightDecomposition {
 }
 
 impl HeavyLightDecomposition {
+    pub fn is_empty(&self) -> bool {
+        self.n == 0
+    }
+
     pub fn len(&self) -> usize {
         self.n
     }
@@ -270,7 +274,7 @@ impl HeavyLightDecomposition {
         &self,
     ) -> impl Iterator<Item = usize> + FusedIterator + ExactSizeIterator + DoubleEndedIterator + '_
     {
-        self.edge_ord.iter().map(|&v| v)
+        self.edge_ord.iter().copied()
     }
 
     /// 各頂点の子のリスト  

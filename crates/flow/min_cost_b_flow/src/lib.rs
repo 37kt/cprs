@@ -2,6 +2,7 @@
 // TODO: dual がめちゃくちゃ遅い
 // TODO: 流量制限, slope
 
+use std::cmp::Ordering;
 use std::iter::FusedIterator;
 
 use radix_heap::RadixHeap;
@@ -34,6 +35,12 @@ pub struct Edge {
     pub upper: i64,
     pub cost: i64,
     pub flow: i64,
+}
+
+impl Default for MinCostBFlow {
+    fn default() -> Self {
+        Self::new()
+    }
 }
 
 impl MinCostBFlow {
@@ -156,8 +163,7 @@ impl MinCostBFlow {
         let inf_flow = self
             .graph
             .iter()
-            .map(|v| v.iter().map(|e| self.residual_cap(e)).max())
-            .flatten()
+            .filter_map(|v| v.iter().map(|e| self.residual_cap(e)).max())
             .max()
             .unwrap_or(1);
         let mut delta = 1;
@@ -380,10 +386,10 @@ impl MinCostBFlow {
             }
         }
         for v in 0..self.n {
-            if self.b[v] > 0 {
-                self.excess_vs.push(v);
-            } else if self.b[v] < 0 {
-                self.deficit_vs.push(v);
+            match self.b[v].cmp(&0) {
+                Ordering::Greater => self.excess_vs.push(v),
+                Ordering::Less => self.deficit_vs.push(v),
+                Ordering::Equal => {}
             }
         }
     }

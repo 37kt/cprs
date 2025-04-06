@@ -43,7 +43,7 @@ members = [
     "crates/linear_algebra/matrix",
     "crates/misc/bit_subset",
     "crates/misc/coordinate_compression",
-    "crates/misc/into_half_open_range",
+    "crates/misc/as_half_open_range",
     "crates/misc/macros",
     "crates/misc/random",
     "crates/misc/simple_arena",

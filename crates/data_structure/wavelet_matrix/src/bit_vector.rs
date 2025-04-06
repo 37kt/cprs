@@ -22,7 +22,7 @@ impl BitVector {
 
     pub(crate) fn set(&mut self, i: usize) {
         assert!(i < self.n);
-        self.bit[i / W] |= 1 << i % W;
+        self.bit[i / W] |= 1 << (i % W);
     }
 
     pub(crate) fn build(&mut self) {
@@ -32,11 +32,12 @@ impl BitVector {
     }
 
     pub(crate) fn get(&self, i: usize) -> bool {
-        (self.bit[i / W] >> i % W) & 1 != 0
+        (self.bit[i / W] >> (i % W)) & 1 != 0
     }
 
     pub(crate) fn count_prefix(&self, i: usize, f: bool) -> usize {
-        let cnt = (self.sum[i / W] + (self.bit[i / W] & ((1 << i % W) - 1)).count_ones()) as usize;
+        let cnt =
+            (self.sum[i / W] + (self.bit[i / W] & ((1 << (i % W)) - 1)).count_ones()) as usize;
         if f {
             cnt
         } else {

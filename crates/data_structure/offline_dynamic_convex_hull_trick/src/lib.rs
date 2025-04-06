@@ -13,6 +13,12 @@ pub struct OfflineDynamicConvexHullTrick {
     res: Vec<i64>,
 }
 
+impl Default for OfflineDynamicConvexHullTrick {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl OfflineDynamicConvexHullTrick {
     pub fn new() -> Self {
         Self {

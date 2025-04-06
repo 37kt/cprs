@@ -4,6 +4,7 @@ pub struct Arena {
 }
 
 impl Arena {
+    #[allow(clippy::uninit_vec)]
     pub fn new(capacity: usize) -> Self {
         let mut pool = Vec::with_capacity(capacity);
         unsafe { pool.set_len(capacity) };

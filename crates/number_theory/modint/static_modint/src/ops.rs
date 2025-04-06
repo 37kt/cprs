@@ -45,18 +45,18 @@ impl<const MOD: u32> StaticModInt<MOD> {
         let p = Self::modulus() as usize;
         if self.0 < 2 {
             return Some(self);
-        } else if self.pow(p - 1 >> 1).val() != 1 {
+        } else if self.pow((p - 1) >> 1).val() != 1 {
             return None;
         }
 
         let mut b = Self::from_raw(1);
-        while b.pow(p - 1 >> 1).val() == 1 {
+        while b.pow((p - 1) >> 1).val() == 1 {
             b += 1;
         }
 
         let mut e = (p - 1).trailing_zeros() as usize;
-        let m = p - 1 >> e;
-        let mut x = self.pow(m - 1 >> 1);
+        let m = (p - 1) >> e;
+        let mut x = self.pow((m - 1) >> 1);
         let mut y = self * x * x;
         x *= self;
         let mut z = b.pow(m);
@@ -67,7 +67,7 @@ impl<const MOD: u32> StaticModInt<MOD> {
                 j += 1;
                 t *= t;
             }
-            z = z.pow(1 << e - j - 1);
+            z = z.pow(1 << (e - j - 1));
             x *= z;
             z *= z;
             y *= z;
@@ -161,6 +161,7 @@ impl<const MOD: u32, T: Into<StaticModInt<MOD>>> Mul<T> for StaticModInt<MOD> {
 impl<const MOD: u32, T: Into<StaticModInt<MOD>>> Div<T> for StaticModInt<MOD> {
     type Output = Self;
 
+    #[allow(clippy::suspicious_arithmetic_impl)]
     fn div(self, rhs: T) -> Self::Output {
         self * rhs.into().recip()
     }

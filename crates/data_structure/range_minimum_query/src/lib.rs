@@ -1,6 +1,6 @@
 use std::ops::RangeBounds;
 
-use into_half_open_range::IntoHalfOpenRange;
+use as_half_open_range::AsHalfOpenRange;
 use numeric_traits::Integer;
 
 const BLOCK_SIZE: usize = 16;
@@ -65,11 +65,11 @@ where
                 if xs[j] <= xs[i] {
                     break;
                 }
-                bit &= !(1 << j % BLOCK_SIZE);
+                bit &= !(1 << (j % BLOCK_SIZE));
                 stack.pop();
             }
             stack.push(i);
-            bit |= 1 << i % BLOCK_SIZE;
+            bit |= 1 << (i % BLOCK_SIZE);
             small.push(bit);
         }
 
@@ -86,7 +86,7 @@ where
     T: Ord,
 {
     pub fn min(&self, range: impl RangeBounds<usize>) -> Option<&T> {
-        let (l, r) = range.into_half_open_range(0, self.array.len());
+        let (l, r) = range.as_half_open_range(0, self.array.len());
         if l == r {
             return None;
         }
@@ -94,7 +94,7 @@ where
         let br = r.floor_div(BLOCK_SIZE);
         let mut res = None;
         if bl > br {
-            let i = (self.small[r - 1] & (!0 << l % BLOCK_SIZE)).lsb_index();
+            let i = (self.small[r - 1] & (!0 << (l % BLOCK_SIZE))).lsb_index();
             res = Self::merge(res, Some(&self.array[i + br * BLOCK_SIZE]));
         } else {
             if bl < br {
@@ -104,7 +104,7 @@ where
                 res = Self::merge(res, Some(&self.array[level[br - (1 << d)] as usize]));
             }
             if l % BLOCK_SIZE != 0 {
-                let i = (self.small[bl * BLOCK_SIZE - 1] & (!0 << l % BLOCK_SIZE)).lsb_index();
+                let i = (self.small[bl * BLOCK_SIZE - 1] & (!0 << (l % BLOCK_SIZE))).lsb_index();
                 res = Self::merge(res, Some(&self.array[i + (bl - 1) * BLOCK_SIZE]));
             }
             if r % BLOCK_SIZE != 0 {

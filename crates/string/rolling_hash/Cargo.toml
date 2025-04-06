@@ -14,4 +14,4 @@ name = "rolling_hash"
 modint_61 = { path = "../../number_theory/modint/modint_61" }
 random = { path = "../../misc/random" }
 algebraic_traits = { path = "../../algebra/algebraic_traits" }
-into_half_open_range = { path = "../../misc/into_half_open_range" }
+as_half_open_range = { path = "../../misc/as_half_open_range" }

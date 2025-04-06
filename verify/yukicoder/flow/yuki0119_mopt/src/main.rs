@@ -13,8 +13,7 @@ fn main() {
     }
 
     let mut opt = MultivaluedOptimization::new(vec![3; n]);
-    for i in 0..n {
-        let (b, c) = bc[i];
+    for (i, &(b, c)) in bc.iter().enumerate() {
         opt.add_unary(i, |mi| Some([-c, 0, -b][mi]));
     }
     for &(i, j) in &de {

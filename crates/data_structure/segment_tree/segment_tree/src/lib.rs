@@ -1,7 +1,7 @@
 use std::ops::{Deref, DerefMut, RangeBounds};
 
 use algebraic_traits::Monoid;
-use into_half_open_range::IntoHalfOpenRange;
+use as_half_open_range::AsHalfOpenRange;
 use numeric_traits::Integer;
 
 pub struct SegmentTree<M>
@@ -97,7 +97,7 @@ where
     }
 
     pub fn fold(&self, range: impl RangeBounds<usize>) -> M::Value {
-        let (mut l, mut r) = range.into_half_open_range(0, self.n);
+        let (mut l, mut r) = range.as_half_open_range(0, self.n);
         l += self.sz;
         r += self.sz;
         let mut sl = M::unit();

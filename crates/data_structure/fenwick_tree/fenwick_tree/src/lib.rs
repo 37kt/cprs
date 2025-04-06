@@ -3,7 +3,7 @@
 use std::ops::{Deref, DerefMut, RangeBounds};
 
 use algebraic_traits::{AbelianGroup, CommutativeMonoid};
-use into_half_open_range::IntoHalfOpenRange;
+use as_half_open_range::AsHalfOpenRange;
 use numeric_traits::Integer;
 
 pub struct FenwickTree<M>
@@ -82,7 +82,7 @@ where
     G::Value: Clone,
 {
     pub fn fold(&self, range: impl RangeBounds<usize>) -> G::Value {
-        let (mut l, mut r) = range.into_half_open_range(0, self.n);
+        let (mut l, mut r) = range.as_half_open_range(0, self.n);
         let mut s = G::unit();
         while r > l {
             s = G::op(&s, &self.v[r - 1]);

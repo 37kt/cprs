@@ -69,10 +69,10 @@ where
     let mut res = vec![T::try_from(1).unwrap()];
     for (p, e) in pe {
         for i in 0..res.len() {
-            let mut x = res[i].clone();
+            let mut x = res[i];
             for _ in 0..e {
-                x = x * p.clone();
-                res.push(x.clone());
+                x = x * p;
+                res.push(x);
             }
         }
     }

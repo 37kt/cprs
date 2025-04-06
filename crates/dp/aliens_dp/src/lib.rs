@@ -2,7 +2,7 @@
 
 use std::ops::RangeBounds;
 
-use into_half_open_range::IntoHalfOpenRange;
+use as_half_open_range::AsHalfOpenRange;
 use numeric_traits::{Cast, Inf, Integer, NegInf, Signed};
 
 /// Aliens DP  
@@ -18,11 +18,11 @@ where
     let one = T::one();
 
     let x = x.cast();
-    let (mut l, mut r) = p_range.into_half_open_range(T::neg_inf(), T::inf());
+    let (mut l, mut r) = p_range.as_half_open_range(T::neg_inf(), T::inf());
     l -= one;
     r -= one;
     while l + one < r {
-        let p = l + (r - l >> 1);
+        let p = l + ((r - l) >> 1);
         let c = g(p + one) - g(p);
         if c <= x {
             r = p;

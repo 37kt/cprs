@@ -14,8 +14,8 @@ fn main() {
     }
 
     let mut opt = BinaryOptimization::new(n);
-    for i in 0..n {
-        opt.add_unary(i, |bi| Some([0, a[i]][bi]));
+    for (i, &x) in a.iter().enumerate() {
+        opt.add_unary(i, |bi| Some([0, x][bi]));
     }
     for i in 0..m {
         opt.add_if_all_1(&c[i], -b[i]);

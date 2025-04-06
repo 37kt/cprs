@@ -35,7 +35,7 @@ fn main() {
         res[n + 1 - k] = dp[n + 1];
     }
 
-    for i in 1..=n {
-        println!("{}", res[i]);
+    for &x in &res[1..=n] {
+        println!("{}", x);
     }
 }

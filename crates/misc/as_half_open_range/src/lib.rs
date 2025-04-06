@@ -2,11 +2,11 @@ use std::ops::{Bound, RangeBounds};
 
 use numeric_traits::Integer;
 
-pub trait IntoHalfOpenRange<T>: RangeBounds<T>
+pub trait AsHalfOpenRange<T>: RangeBounds<T>
 where
     T: Integer,
 {
-    fn into_half_open_range(&self, l: T, r: T) -> (T, T) {
+    fn as_half_open_range(&self, l: T, r: T) -> (T, T) {
         let start = match self.start_bound() {
             Bound::Unbounded => l,
             Bound::Included(&start) => start,
@@ -22,7 +22,7 @@ where
     }
 }
 
-impl<R, T> IntoHalfOpenRange<T> for R
+impl<R, T> AsHalfOpenRange<T> for R
 where
     R: RangeBounds<T>,
     T: Integer,

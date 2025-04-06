@@ -3,9 +3,9 @@ use std::{
     ops::{Range, RangeBounds},
 };
 
+use as_half_open_range::AsHalfOpenRange;
 use bit_vector::BitVector;
 use coordinate_compression::CoordinateCompression;
-use into_half_open_range::IntoHalfOpenRange;
 use numeric_traits::{Cast, Inf, Integer, NegInf};
 
 mod bit_vector;
@@ -173,8 +173,8 @@ where
         y_range: impl RangeBounds<Y>,
         mut f: impl FnMut(usize, Range<usize>, bool),
     ) -> usize {
-        let (xl, xr) = x_range.into_half_open_range(X::neg_inf(), X::inf());
-        let (yl, yr) = y_range.into_half_open_range(Y::neg_inf(), Y::inf());
+        let (xl, xr) = x_range.as_half_open_range(X::neg_inf(), X::inf());
+        let (yl, yr) = y_range.as_half_open_range(Y::neg_inf(), Y::inf());
         let xl = self.ccx.encode(xl);
         let xr = self.ccx.encode(xr);
         let yl = self.ccy.encode(yl);
@@ -204,7 +204,7 @@ where
     }
 
     pub fn kth_smallest(&self, x_range: impl RangeBounds<X>, mut k: usize) -> Option<Y> {
-        let (xl, xr) = x_range.into_half_open_range(X::neg_inf(), X::inf());
+        let (xl, xr) = x_range.as_half_open_range(X::neg_inf(), X::inf());
         let mut xl = self.ccx.encode(xl);
         let mut xr = self.ccx.encode(xr);
         if k >= xr - xl {
@@ -229,7 +229,7 @@ where
     }
 
     pub fn kth_largest(&self, x_range: impl RangeBounds<X>, k: usize) -> Option<Y> {
-        let (xl, xr) = x_range.into_half_open_range(X::neg_inf(), X::inf());
+        let (xl, xr) = x_range.as_half_open_range(X::neg_inf(), X::inf());
         let xl = self.ccx.encode(xl);
         let xr = self.ccx.encode(xr);
         if k >= xr - xl {

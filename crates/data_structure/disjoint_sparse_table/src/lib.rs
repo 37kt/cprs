@@ -1,7 +1,7 @@
 use std::ops::RangeBounds;
 
 use algebraic_traits::Monoid;
-use into_half_open_range::IntoHalfOpenRange;
+use as_half_open_range::AsHalfOpenRange;
 use numeric_traits::Integer;
 
 pub struct DisjointSparseTable<M>
@@ -23,14 +23,14 @@ where
         let mut table = (0..h)
             .map(|_| (0..n + 2).map(|_| M::unit()).collect::<Vec<_>>())
             .collect::<Vec<_>>();
-        for k in 1..h {
+        for (k, table) in table.iter_mut().enumerate().skip(1) {
             let w = 1 << k;
             for i in (w..n + 2).step_by(w * 2) {
                 for j in (i + 1 - w..i).rev() {
-                    table[k][j - 1] = M::op(&a[j - 1], &table[k][j]);
+                    table[j - 1] = M::op(&a[j - 1], &table[j]);
                 }
                 for j in i..(i + w - 1).min(n + 1) {
-                    table[k][j + 1] = M::op(&table[k][j], &a[j - 1]);
+                    table[j + 1] = M::op(&table[j], &a[j - 1]);
                 }
             }
         }
@@ -59,7 +59,7 @@ where
     }
 
     pub fn fold(&self, range: impl RangeBounds<usize>) -> M::Value {
-        let (l, r) = range.into_half_open_range(0, self.n);
+        let (l, r) = range.as_half_open_range(0, self.n);
         let r = r + 1;
         let k = (l ^ r).floor_log2();
         let t = &self.table[k];

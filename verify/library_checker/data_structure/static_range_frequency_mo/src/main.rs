@@ -49,10 +49,7 @@ fn main() {
 
     let m = cc.len();
 
-    let mut solver = Solver {
-        a: &a,
-        cnt: vec![0; m],
-    };
+    let mut solver = Solver { a, cnt: vec![0; m] };
     let res = solver.solve(&lrx);
     for x in res {
         println!("{}", x);

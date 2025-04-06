@@ -14,8 +14,8 @@ fn main() {
     }
 
     let mut st = WordsizeAryTreeSet::new(n);
-    for i in 0..n {
-        if t[i] == b'1' {
+    for (i, &c) in t.iter().enumerate() {
+        if c == b'1' {
             st.insert(i);
         }
     }

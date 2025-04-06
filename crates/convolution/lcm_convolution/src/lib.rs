@@ -33,7 +33,7 @@ where
     assert_eq!(f.len(), g.len(), "f and g must have the same length");
     let mut f = f.to_vec();
     let mut g = g.to_vec();
-    if f.len() == 0 {
+    if f.is_empty() {
         return vec![];
     }
     divisor_zeta_transform::<R::Additive>(&mut f);

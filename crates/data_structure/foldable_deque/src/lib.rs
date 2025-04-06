@@ -22,6 +22,12 @@ impl<M: Monoid> FromIterator<M::Value> for FoldableDeque<M> {
     }
 }
 
+impl<M: Monoid> Default for FoldableDeque<M> {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl<M: Monoid> FoldableDeque<M> {
     pub fn new() -> Self {
         Self {
