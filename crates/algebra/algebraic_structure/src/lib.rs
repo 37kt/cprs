@@ -5,6 +5,7 @@ mod max;
 mod min;
 mod mul;
 mod trivial_group;
+mod xor;
 pub mod magma {
     pub use crate::add::*;
     pub use crate::affine::*;
@@ -13,6 +14,7 @@ pub mod magma {
     pub use crate::min::*;
     pub use crate::mul::*;
     pub use crate::trivial_group::*;
+    pub use crate::xor::*;
 }
 
 mod countsum_affine;

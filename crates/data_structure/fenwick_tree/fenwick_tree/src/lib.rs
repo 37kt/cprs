@@ -15,6 +15,19 @@ where
     v: Vec<M::Value>,
 }
 
+impl<M> Clone for FenwickTree<M>
+where
+    M: CommutativeMonoid,
+    M::Value: Clone,
+{
+    fn clone(&self) -> Self {
+        Self {
+            n: self.n,
+            v: self.v.clone(),
+        }
+    }
+}
+
 impl<M> FromIterator<M::Value> for FenwickTree<M>
 where
     M: CommutativeMonoid,
@@ -88,11 +101,12 @@ where
             s = G::op(&s, &self.v[r - 1]);
             r -= r.lsb();
         }
+        let mut t = G::unit();
         while l > r {
-            s = G::op(&s, &G::inv(&self.v[l - 1]));
+            t = G::op(&t, &self.v[l - 1]);
             l -= l.lsb();
         }
-        s
+        G::op(&s, &G::inv(&t))
     }
 
     pub fn get(&self, i: usize) -> G::Value {
