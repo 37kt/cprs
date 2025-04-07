@@ -2,6 +2,9 @@
 data:
   _extendedDependsOn:
   - icon: ':heavy_check_mark:'
+    path: crates/algebra/algebraic_structure/src/add.rs
+    title: crates/algebra/algebraic_structure/src/add.rs
+  - icon: ':heavy_check_mark:'
     path: crates/algebra/algebraic_structure/src/affine.rs
     title: crates/algebra/algebraic_structure/src/affine.rs
   - icon: ':heavy_check_mark:'
@@ -28,11 +31,11 @@ data:
   - icon: ':heavy_check_mark:'
     path: crates/algebra/algebraic_structure/src/trivial_group.rs
     title: crates/algebra/algebraic_structure/src/trivial_group.rs
-  - icon: ':heavy_check_mark:'
-    path: crates/algebra/algebraic_structure/src/xor.rs
-    title: crates/algebra/algebraic_structure/src/xor.rs
   _extendedRequiredBy:
   - icon: ':heavy_check_mark:'
+    path: crates/algebra/algebraic_structure/src/add.rs
+    title: crates/algebra/algebraic_structure/src/add.rs
+  - icon: ':heavy_check_mark:'
     path: crates/algebra/algebraic_structure/src/affine.rs
     title: crates/algebra/algebraic_structure/src/affine.rs
   - icon: ':heavy_check_mark:'
@@ -59,9 +62,6 @@ data:
   - icon: ':heavy_check_mark:'
     path: crates/algebra/algebraic_structure/src/trivial_group.rs
     title: crates/algebra/algebraic_structure/src/trivial_group.rs
-  - icon: ':heavy_check_mark:'
-    path: crates/algebra/algebraic_structure/src/xor.rs
-    title: crates/algebra/algebraic_structure/src/xor.rs
   - icon: ':heavy_check_mark:'
     path: crates/data_structure/union_find/union_find/src/lib.rs
     title: crates/data_structure/union_find/union_find/src/lib.rs
@@ -149,19 +149,20 @@ data:
     \         ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\
     \  File \"/opt/hostedtoolcache/Python/3.13.2/x64/lib/python3.13/site-packages/onlinejudge_verify/languages/rust.py\"\
     , line 288, in bundle\n    raise NotImplementedError\nNotImplementedError\n"
-  code: "use std::{marker::PhantomData, ops::Neg};\n\nuse algebraic_traits::{Algebraic,\
-    \ Associative, Commutative, Invertive, Magma, Pow, Unital};\nuse numeric_traits::{Cast,\
-    \ Numeric};\n\npub struct AddOperator<T: Numeric>(PhantomData<fn() -> T>);\n\n\
-    impl<T: Numeric> Algebraic for AddOperator<T> {\n    type Value = T;\n}\n\nimpl<T:\
-    \ Numeric> Magma for AddOperator<T> {\n    fn op(a: &T, b: &T) -> T {\n      \
-    \  *a + *b\n    }\n}\n\nimpl<T: Numeric> Unital for AddOperator<T> {\n    fn unit()\
-    \ -> T {\n        T::zero()\n    }\n}\n\nimpl<T: Numeric> Associative for AddOperator<T>\
-    \ {}\n\nimpl<T: Numeric> Commutative for AddOperator<T> {}\n\nimpl<T: Numeric\
-    \ + Neg<Output = T>> Invertive for AddOperator<T> {\n    fn inv(x: &T) -> T {\n\
-    \        -*x\n    }\n}\n\nimpl<T: Numeric> Pow for AddOperator<T>\nwhere\n   \
-    \ usize: Cast<T>,\n{\n    fn pow(x: &T, exp: usize) -> T {\n        *x * exp.cast()\n\
-    \    }\n}\n"
+  code: "use std::marker::PhantomData;\n\nuse algebraic_traits::{Algebraic, Associative,\
+    \ Commutative, Invertive, Magma, Pow, Unital};\nuse numeric_traits::Integer;\n\
+    \npub struct XorOperator<T: Integer>(PhantomData<fn() -> T>);\n\nimpl<T: Integer>\
+    \ Algebraic for XorOperator<T> {\n    type Value = T;\n}\n\nimpl<T: Integer> Magma\
+    \ for XorOperator<T> {\n    fn op(a: &T, b: &T) -> T {\n        *a ^ *b\n    }\n\
+    }\n\nimpl<T: Integer> Unital for XorOperator<T> {\n    fn unit() -> T {\n    \
+    \    T::zero()\n    }\n}\n\nimpl<T: Integer> Associative for XorOperator<T> {}\n\
+    \nimpl<T: Integer> Commutative for XorOperator<T> {}\n\nimpl<T: Integer> Invertive\
+    \ for XorOperator<T> {\n    fn inv(x: &T) -> T {\n        *x\n    }\n}\n\nimpl<T:\
+    \ Integer> Pow for XorOperator<T> {\n    fn pow(x: &T, exp: usize) -> T {\n  \
+    \      if exp & 1 == 0 {\n            T::zero()\n        } else {\n          \
+    \  *x\n        }\n    }\n}\n"
   dependsOn:
+  - crates/algebra/algebraic_structure/src/add.rs
   - crates/algebra/algebraic_structure/src/affine.rs
   - crates/algebra/algebraic_structure/src/count_sum.rs
   - crates/algebra/algebraic_structure/src/countsum_affine.rs
@@ -171,15 +172,14 @@ data:
   - crates/algebra/algebraic_structure/src/mul.rs
   - crates/algebra/algebraic_structure/src/semiring.rs
   - crates/algebra/algebraic_structure/src/trivial_group.rs
-  - crates/algebra/algebraic_structure/src/xor.rs
   isVerificationFile: false
-  path: crates/algebra/algebraic_structure/src/add.rs
+  path: crates/algebra/algebraic_structure/src/xor.rs
   requiredBy:
   - verify/sandbox/test/src/main.rs
   - crates/data_structure/union_find/union_find/src/lib.rs
   - crates/algebra/algebraic_structure/src/lib.rs
   - crates/algebra/algebraic_structure/src/semiring.rs
-  - crates/algebra/algebraic_structure/src/xor.rs
+  - crates/algebra/algebraic_structure/src/add.rs
   - crates/algebra/algebraic_structure/src/trivial_group.rs
   - crates/algebra/algebraic_structure/src/min.rs
   - crates/algebra/algebraic_structure/src/countsum_affine.rs
@@ -213,10 +213,10 @@ data:
   - verify/library_checker/linear_algebra/matrix_det/src/main.rs
   - verify/library_checker/linear_algebra/matrix_product/src/main.rs
   - verify/library_checker/linear_algebra/matrix_rank/src/main.rs
-documentation_of: crates/algebra/algebraic_structure/src/add.rs
+documentation_of: crates/algebra/algebraic_structure/src/xor.rs
 layout: document
 redirect_from:
-- /library/crates/algebra/algebraic_structure/src/add.rs
-- /library/crates/algebra/algebraic_structure/src/add.rs.html
-title: crates/algebra/algebraic_structure/src/add.rs
+- /library/crates/algebra/algebraic_structure/src/xor.rs
+- /library/crates/algebra/algebraic_structure/src/xor.rs.html
+title: crates/algebra/algebraic_structure/src/xor.rs
 ---

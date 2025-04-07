@@ -32,6 +32,9 @@ data:
     path: crates/algebra/algebraic_structure/src/trivial_group.rs
     title: crates/algebra/algebraic_structure/src/trivial_group.rs
   - icon: ':heavy_check_mark:'
+    path: crates/algebra/algebraic_structure/src/xor.rs
+    title: crates/algebra/algebraic_structure/src/xor.rs
+  - icon: ':heavy_check_mark:'
     path: crates/data_structure/segment_tree/segment_tree/src/lib.rs
     title: crates/data_structure/segment_tree/segment_tree/src/lib.rs
   - icon: ':heavy_check_mark:'
@@ -87,6 +90,7 @@ data:
   - crates/algebra/algebraic_structure/src/mul.rs
   - crates/algebra/algebraic_structure/src/semiring.rs
   - crates/algebra/algebraic_structure/src/trivial_group.rs
+  - crates/algebra/algebraic_structure/src/xor.rs
   - crates/data_structure/segment_tree/segment_tree/src/lib.rs
   - crates/number_theory/modint/static_modint/src/lib.rs
   - crates/number_theory/modint/static_modint/src/mod_arithmetic.rs
@@ -96,7 +100,7 @@ data:
   isVerificationFile: true
   path: verify/library_checker/data_structure/point_set_range_composite/src/main.rs
   requiredBy: []
-  timestamp: '2025-04-06 02:35:23+00:00'
+  timestamp: '2025-04-07 08:03:10+00:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/library_checker/data_structure/point_set_range_composite/src/main.rs

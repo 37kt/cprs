@@ -29,6 +29,9 @@ data:
     path: crates/algebra/algebraic_structure/src/trivial_group.rs
     title: crates/algebra/algebraic_structure/src/trivial_group.rs
   - icon: ':heavy_check_mark:'
+    path: crates/algebra/algebraic_structure/src/xor.rs
+    title: crates/algebra/algebraic_structure/src/xor.rs
+  - icon: ':heavy_check_mark:'
     path: crates/algebra/algebraic_traits/src/lib.rs
     title: crates/algebra/algebraic_traits/src/lib.rs
   - icon: ':heavy_check_mark:'
@@ -86,6 +89,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: crates/algebra/algebraic_structure/src/trivial_group.rs
     title: crates/algebra/algebraic_structure/src/trivial_group.rs
+  - icon: ':heavy_check_mark:'
+    path: crates/algebra/algebraic_structure/src/xor.rs
+    title: crates/algebra/algebraic_structure/src/xor.rs
   - icon: ':heavy_check_mark:'
     path: crates/data_structure/union_find/union_find/src/lib.rs
     title: crates/data_structure/union_find/union_find/src/lib.rs
@@ -174,11 +180,11 @@ data:
     \  File \"/opt/hostedtoolcache/Python/3.13.2/x64/lib/python3.13/site-packages/onlinejudge_verify/languages/rust.py\"\
     , line 288, in bundle\n    raise NotImplementedError\nNotImplementedError\n"
   code: "mod add;\nmod affine;\nmod count_sum;\nmod max;\nmod min;\nmod mul;\nmod\
-    \ trivial_group;\npub mod magma {\n    pub use crate::add::*;\n    pub use crate::affine::*;\n\
-    \    pub use crate::count_sum::*;\n    pub use crate::max::*;\n    pub use crate::min::*;\n\
-    \    pub use crate::mul::*;\n    pub use crate::trivial_group::*;\n}\n\nmod countsum_affine;\n\
-    pub mod act {\n    pub use crate::countsum_affine::*;\n}\n\npub mod semiring;\n\
-    pub use semiring::*;\n"
+    \ trivial_group;\nmod xor;\npub mod magma {\n    pub use crate::add::*;\n    pub\
+    \ use crate::affine::*;\n    pub use crate::count_sum::*;\n    pub use crate::max::*;\n\
+    \    pub use crate::min::*;\n    pub use crate::mul::*;\n    pub use crate::trivial_group::*;\n\
+    \    pub use crate::xor::*;\n}\n\nmod countsum_affine;\npub mod act {\n    pub\
+    \ use crate::countsum_affine::*;\n}\n\npub mod semiring;\npub use semiring::*;\n"
   dependsOn:
   - crates/algebra/algebraic_structure/src/add.rs
   - crates/algebra/algebraic_structure/src/affine.rs
@@ -189,6 +195,7 @@ data:
   - crates/algebra/algebraic_structure/src/mul.rs
   - crates/algebra/algebraic_structure/src/semiring.rs
   - crates/algebra/algebraic_structure/src/trivial_group.rs
+  - crates/algebra/algebraic_structure/src/xor.rs
   - crates/algebra/algebraic_traits/src/lib.rs
   - crates/algebra/algebraic_traits/src/macros.rs
   - crates/algebra/algebraic_traits/src/traits.rs
@@ -205,6 +212,7 @@ data:
   - verify/sandbox/test/src/main.rs
   - crates/data_structure/union_find/union_find/src/lib.rs
   - crates/algebra/algebraic_structure/src/semiring.rs
+  - crates/algebra/algebraic_structure/src/xor.rs
   - crates/algebra/algebraic_structure/src/add.rs
   - crates/algebra/algebraic_structure/src/trivial_group.rs
   - crates/algebra/algebraic_structure/src/min.rs
@@ -213,7 +221,7 @@ data:
   - crates/algebra/algebraic_structure/src/mul.rs
   - crates/algebra/algebraic_structure/src/count_sum.rs
   - crates/algebra/algebraic_structure/src/max.rs
-  timestamp: '2025-03-20 09:27:03+00:00'
+  timestamp: '2025-04-07 08:03:10+00:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/library_checker/tree/vertex_add_path_sum/src/main.rs

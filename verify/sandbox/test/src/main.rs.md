@@ -32,6 +32,9 @@ data:
     path: crates/algebra/algebraic_structure/src/trivial_group.rs
     title: crates/algebra/algebraic_structure/src/trivial_group.rs
   - icon: ':heavy_check_mark:'
+    path: crates/algebra/algebraic_structure/src/xor.rs
+    title: crates/algebra/algebraic_structure/src/xor.rs
+  - icon: ':heavy_check_mark:'
     path: crates/algebra/algebraic_traits/src/lib.rs
     title: crates/algebra/algebraic_traits/src/lib.rs
   - icon: ':heavy_check_mark:'
@@ -96,6 +99,7 @@ data:
   - crates/algebra/algebraic_structure/src/mul.rs
   - crates/algebra/algebraic_structure/src/semiring.rs
   - crates/algebra/algebraic_structure/src/trivial_group.rs
+  - crates/algebra/algebraic_structure/src/xor.rs
   - crates/algebra/algebraic_traits/src/lib.rs
   - crates/algebra/algebraic_traits/src/macros.rs
   - crates/algebra/algebraic_traits/src/traits.rs
@@ -110,7 +114,7 @@ data:
   isVerificationFile: false
   path: verify/sandbox/test/src/main.rs
   requiredBy: []
-  timestamp: '2025-04-06 02:35:23+00:00'
+  timestamp: '2025-04-07 08:03:10+00:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: verify/sandbox/test/src/main.rs

@@ -65,7 +65,10 @@ data:
   code: "// TODO: \u4E8C\u5206\u63A2\u7D22\n\nuse std::ops::{Deref, DerefMut, RangeBounds};\n\
     \nuse algebraic_traits::{AbelianGroup, CommutativeMonoid};\nuse as_half_open_range::AsHalfOpenRange;\n\
     use numeric_traits::Integer;\n\npub struct FenwickTree<M>\nwhere\n    M: CommutativeMonoid,\n\
-    \    M::Value: Clone,\n{\n    n: usize,\n    v: Vec<M::Value>,\n}\n\nimpl<M> FromIterator<M::Value>\
+    \    M::Value: Clone,\n{\n    n: usize,\n    v: Vec<M::Value>,\n}\n\nimpl<M> Clone\
+    \ for FenwickTree<M>\nwhere\n    M: CommutativeMonoid,\n    M::Value: Clone,\n\
+    {\n    fn clone(&self) -> Self {\n        Self {\n            n: self.n,\n   \
+    \         v: self.v.clone(),\n        }\n    }\n}\n\nimpl<M> FromIterator<M::Value>\
     \ for FenwickTree<M>\nwhere\n    M: CommutativeMonoid,\n    M::Value: Clone,\n\
     {\n    fn from_iter<T: IntoIterator<Item = M::Value>>(iter: T) -> Self {\n   \
     \     let mut v = iter.into_iter().collect::<Vec<_>>();\n        let n = v.len();\n\
@@ -87,23 +90,23 @@ data:
     \  G::Value: Clone,\n{\n    pub fn fold(&self, range: impl RangeBounds<usize>)\
     \ -> G::Value {\n        let (mut l, mut r) = range.as_half_open_range(0, self.n);\n\
     \        let mut s = G::unit();\n        while r > l {\n            s = G::op(&s,\
-    \ &self.v[r - 1]);\n            r -= r.lsb();\n        }\n        while l > r\
-    \ {\n            s = G::op(&s, &G::inv(&self.v[l - 1]));\n            l -= l.lsb();\n\
-    \        }\n        s\n    }\n\n    pub fn get(&self, i: usize) -> G::Value {\n\
-    \        self.fold(i..i + 1)\n    }\n\n    pub fn set(&mut self, i: usize, x:\
-    \ G::Value) {\n        self.add(i, G::op(&x, &G::inv(&self.get(i))));\n    }\n\
-    \n    pub fn get_mut(&mut self, i: usize) -> GetMut<G> {\n        GetMut {\n \
-    \           x: self.get(i),\n            ft: self,\n            i,\n        }\n\
-    \    }\n}\n\npub struct GetMut<'a, G>\nwhere\n    G: AbelianGroup,\n    G::Value:\
-    \ Clone,\n{\n    ft: &'a mut FenwickTree<G>,\n    i: usize,\n    x: G::Value,\n\
-    }\n\nimpl<'a, G> Deref for GetMut<'a, G>\nwhere\n    G: AbelianGroup,\n    G::Value:\
-    \ Clone,\n{\n    type Target = G::Value;\n\n    fn deref(&self) -> &Self::Target\
-    \ {\n        &self.x\n    }\n}\n\nimpl<'a, G> DerefMut for GetMut<'a, G>\nwhere\n\
-    \    G: AbelianGroup,\n    G::Value: Clone,\n{\n    fn deref_mut(&mut self) ->\
-    \ &mut Self::Target {\n        &mut self.x\n    }\n}\n\nimpl<'a, G> Drop for GetMut<'a,\
-    \ G>\nwhere\n    G: AbelianGroup,\n    G::Value: Clone,\n{\n    fn drop(&mut self)\
-    \ {\n        let Self { ft, i, x } = self;\n        ft.set(*i, x.clone());\n \
-    \   }\n}\n"
+    \ &self.v[r - 1]);\n            r -= r.lsb();\n        }\n        let mut t =\
+    \ G::unit();\n        while l > r {\n            t = G::op(&t, &self.v[l - 1]);\n\
+    \            l -= l.lsb();\n        }\n        G::op(&s, &G::inv(&t))\n    }\n\
+    \n    pub fn get(&self, i: usize) -> G::Value {\n        self.fold(i..i + 1)\n\
+    \    }\n\n    pub fn set(&mut self, i: usize, x: G::Value) {\n        self.add(i,\
+    \ G::op(&x, &G::inv(&self.get(i))));\n    }\n\n    pub fn get_mut(&mut self, i:\
+    \ usize) -> GetMut<G> {\n        GetMut {\n            x: self.get(i),\n     \
+    \       ft: self,\n            i,\n        }\n    }\n}\n\npub struct GetMut<'a,\
+    \ G>\nwhere\n    G: AbelianGroup,\n    G::Value: Clone,\n{\n    ft: &'a mut FenwickTree<G>,\n\
+    \    i: usize,\n    x: G::Value,\n}\n\nimpl<'a, G> Deref for GetMut<'a, G>\nwhere\n\
+    \    G: AbelianGroup,\n    G::Value: Clone,\n{\n    type Target = G::Value;\n\n\
+    \    fn deref(&self) -> &Self::Target {\n        &self.x\n    }\n}\n\nimpl<'a,\
+    \ G> DerefMut for GetMut<'a, G>\nwhere\n    G: AbelianGroup,\n    G::Value: Clone,\n\
+    {\n    fn deref_mut(&mut self) -> &mut Self::Target {\n        &mut self.x\n \
+    \   }\n}\n\nimpl<'a, G> Drop for GetMut<'a, G>\nwhere\n    G: AbelianGroup,\n\
+    \    G::Value: Clone,\n{\n    fn drop(&mut self) {\n        let Self { ft, i,\
+    \ x } = self;\n        ft.set(*i, x.clone());\n    }\n}\n"
   dependsOn:
   - crates/algebra/algebraic_traits/src/lib.rs
   - crates/algebra/algebraic_traits/src/macros.rs
@@ -119,7 +122,7 @@ data:
   isVerificationFile: false
   path: crates/data_structure/fenwick_tree/fenwick_tree/src/lib.rs
   requiredBy: []
-  timestamp: '2025-04-06 02:35:23+00:00'
+  timestamp: '2025-04-07 08:03:10+00:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/library_checker/tree/vertex_add_path_sum/src/main.rs

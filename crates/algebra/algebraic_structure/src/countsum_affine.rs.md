@@ -28,6 +28,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: crates/algebra/algebraic_structure/src/trivial_group.rs
     title: crates/algebra/algebraic_structure/src/trivial_group.rs
+  - icon: ':heavy_check_mark:'
+    path: crates/algebra/algebraic_structure/src/xor.rs
+    title: crates/algebra/algebraic_structure/src/xor.rs
   _extendedRequiredBy:
   - icon: ':heavy_check_mark:'
     path: crates/algebra/algebraic_structure/src/add.rs
@@ -56,6 +59,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: crates/algebra/algebraic_structure/src/trivial_group.rs
     title: crates/algebra/algebraic_structure/src/trivial_group.rs
+  - icon: ':heavy_check_mark:'
+    path: crates/algebra/algebraic_structure/src/xor.rs
+    title: crates/algebra/algebraic_structure/src/xor.rs
   - icon: ':heavy_check_mark:'
     path: crates/data_structure/union_find/union_find/src/lib.rs
     title: crates/data_structure/union_find/union_find/src/lib.rs
@@ -161,6 +167,7 @@ data:
   - crates/algebra/algebraic_structure/src/mul.rs
   - crates/algebra/algebraic_structure/src/semiring.rs
   - crates/algebra/algebraic_structure/src/trivial_group.rs
+  - crates/algebra/algebraic_structure/src/xor.rs
   isVerificationFile: false
   path: crates/algebra/algebraic_structure/src/countsum_affine.rs
   requiredBy:
@@ -168,6 +175,7 @@ data:
   - crates/data_structure/union_find/union_find/src/lib.rs
   - crates/algebra/algebraic_structure/src/lib.rs
   - crates/algebra/algebraic_structure/src/semiring.rs
+  - crates/algebra/algebraic_structure/src/xor.rs
   - crates/algebra/algebraic_structure/src/add.rs
   - crates/algebra/algebraic_structure/src/trivial_group.rs
   - crates/algebra/algebraic_structure/src/min.rs
@@ -175,7 +183,7 @@ data:
   - crates/algebra/algebraic_structure/src/mul.rs
   - crates/algebra/algebraic_structure/src/count_sum.rs
   - crates/algebra/algebraic_structure/src/max.rs
-  timestamp: '2025-03-01 05:00:44+00:00'
+  timestamp: '2025-04-07 08:03:10+00:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/library_checker/tree/vertex_add_path_sum/src/main.rs

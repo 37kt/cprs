@@ -32,6 +32,9 @@ data:
     path: crates/algebra/algebraic_structure/src/trivial_group.rs
     title: crates/algebra/algebraic_structure/src/trivial_group.rs
   - icon: ':heavy_check_mark:'
+    path: crates/algebra/algebraic_structure/src/xor.rs
+    title: crates/algebra/algebraic_structure/src/xor.rs
+  - icon: ':heavy_check_mark:'
     path: crates/algebra/algebraic_traits/src/lib.rs
     title: crates/algebra/algebraic_traits/src/lib.rs
   - icon: ':heavy_check_mark:'
@@ -115,6 +118,7 @@ data:
   - crates/algebra/algebraic_structure/src/mul.rs
   - crates/algebra/algebraic_structure/src/semiring.rs
   - crates/algebra/algebraic_structure/src/trivial_group.rs
+  - crates/algebra/algebraic_structure/src/xor.rs
   - crates/algebra/algebraic_traits/src/lib.rs
   - crates/algebra/algebraic_traits/src/macros.rs
   - crates/algebra/algebraic_traits/src/traits.rs
@@ -129,7 +133,7 @@ data:
   - crates/data_structure/union_find/union_find/src/union_find_impl.rs
   - crates/data_structure/union_find/union_find/src/union_find_component_sum.rs
   - crates/data_structure/union_find/union_find/src/union_find.rs
-  timestamp: '2025-03-07 01:17:39+00:00'
+  timestamp: '2025-04-07 08:03:10+00:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/library_checker/data_structure/unionfind/src/main.rs

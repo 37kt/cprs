@@ -33,6 +33,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: crates/algebra/algebraic_structure/src/trivial_group.rs
       title: crates/algebra/algebraic_structure/src/trivial_group.rs
+    - icon: ':heavy_check_mark:'
+      path: crates/algebra/algebraic_structure/src/xor.rs
+      title: crates/algebra/algebraic_structure/src/xor.rs
   - name: crates/algebra/algebraic_traits/src
     pages:
     - icon: ':heavy_check_mark:'

@@ -32,6 +32,9 @@ data:
     path: crates/algebra/algebraic_structure/src/trivial_group.rs
     title: crates/algebra/algebraic_structure/src/trivial_group.rs
   - icon: ':heavy_check_mark:'
+    path: crates/algebra/algebraic_structure/src/xor.rs
+    title: crates/algebra/algebraic_structure/src/xor.rs
+  - icon: ':heavy_check_mark:'
     path: crates/linear_algebra/matrix/src/index.rs
     title: crates/linear_algebra/matrix/src/index.rs
   - icon: ':heavy_check_mark:'
@@ -92,6 +95,7 @@ data:
   - crates/algebra/algebraic_structure/src/mul.rs
   - crates/algebra/algebraic_structure/src/semiring.rs
   - crates/algebra/algebraic_structure/src/trivial_group.rs
+  - crates/algebra/algebraic_structure/src/xor.rs
   - crates/linear_algebra/matrix/src/index.rs
   - crates/linear_algebra/matrix/src/lib.rs
   - crates/linear_algebra/matrix/src/ops.rs
@@ -104,7 +108,7 @@ data:
   isVerificationFile: true
   path: verify/library_checker/linear_algebra/pow_of_matrix/src/main.rs
   requiredBy: []
-  timestamp: '2025-04-06 02:35:23+00:00'
+  timestamp: '2025-04-07 08:03:10+00:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/library_checker/linear_algebra/pow_of_matrix/src/main.rs
