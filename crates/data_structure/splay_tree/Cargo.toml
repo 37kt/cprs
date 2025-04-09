@@ -1,0 +1,17 @@
+[package]
+name = "splay_tree"
+version = "0.1.0"
+edition = "2021"
+license = "CC0-1.0"
+publish = false
+
+[lib]
+name = "splay_tree"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+algebraic_traits = { path = "../../algebra/algebraic_traits" }
+numeric_traits = { path = "../../algebra/numeric_traits" }
+as_half_open_range = { path = "../../misc/as_half_open_range" }
+simple_arena = { path = "../../misc/simple_arena" }
