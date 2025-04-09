@@ -58,6 +58,9 @@ data:
     path: verify/library_checker/data_structure/deque_operate_all_composite/src/main.rs
     title: verify/library_checker/data_structure/deque_operate_all_composite/src/main.rs
   - icon: ':heavy_check_mark:'
+    path: verify/library_checker/data_structure/dynamic_sequence_range_affine_range_sum/src/main.rs
+    title: verify/library_checker/data_structure/dynamic_sequence_range_affine_range_sum/src/main.rs
+  - icon: ':heavy_check_mark:'
     path: verify/library_checker/data_structure/point_set_range_composite/src/main.rs
     title: verify/library_checker/data_structure/point_set_range_composite/src/main.rs
   - icon: ':heavy_check_mark:'
@@ -198,6 +201,7 @@ data:
   - verify/library_checker/convolution/bitwise_xor_convolution/src/main.rs
   - verify/library_checker/data_structure/point_set_range_composite/src/main.rs
   - verify/library_checker/data_structure/range_affine_range_sum/src/main.rs
+  - verify/library_checker/data_structure/dynamic_sequence_range_affine_range_sum/src/main.rs
   - verify/library_checker/data_structure/deque_operate_all_composite/src/main.rs
   - verify/library_checker/data_structure/range_affine_point_get/src/main.rs
   - verify/library_checker/data_structure/unionfind_with_potential_non_commutative_group/src/main.rs

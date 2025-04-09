@@ -84,6 +84,9 @@ data:
     path: crates/data_structure/segment_tree/segment_tree/src/lib.rs
     title: crates/data_structure/segment_tree/segment_tree/src/lib.rs
   - icon: ':heavy_check_mark:'
+    path: crates/data_structure/splay_tree/src/lib.rs
+    title: crates/data_structure/splay_tree/src/lib.rs
+  - icon: ':heavy_check_mark:'
     path: crates/data_structure/wavelet_matrix/src/lib.rs
     title: crates/data_structure/wavelet_matrix/src/lib.rs
   - icon: ':heavy_check_mark:'
@@ -186,6 +189,7 @@ data:
   - crates/graph/dijkstra/src/lib.rs
   - crates/flow/max_flow/src/lib.rs
   - crates/data_structure/offline_dynamic_convex_hull_trick/src/lib.rs
+  - crates/data_structure/splay_tree/src/lib.rs
   - crates/data_structure/wavelet_matrix/src/lib.rs
   - crates/data_structure/wordsize_ary_tree_set/src/lib.rs
   - crates/data_structure/fenwick_tree/fenwick_tree/src/lib.rs

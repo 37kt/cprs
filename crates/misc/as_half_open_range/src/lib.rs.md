@@ -42,6 +42,9 @@ data:
     path: crates/data_structure/segment_tree/segment_tree/src/lib.rs
     title: crates/data_structure/segment_tree/segment_tree/src/lib.rs
   - icon: ':heavy_check_mark:'
+    path: crates/data_structure/splay_tree/src/lib.rs
+    title: crates/data_structure/splay_tree/src/lib.rs
+  - icon: ':heavy_check_mark:'
     path: crates/data_structure/wavelet_matrix/src/lib.rs
     title: crates/data_structure/wavelet_matrix/src/lib.rs
   - icon: ':warning:'
@@ -88,6 +91,7 @@ data:
   requiredBy:
   - crates/string/rolling_hash/src/lib.rs
   - crates/string/suffix_array/src/lib.rs
+  - crates/data_structure/splay_tree/src/lib.rs
   - crates/data_structure/wavelet_matrix/src/lib.rs
   - crates/data_structure/fenwick_tree/fenwick_tree/src/lib.rs
   - crates/data_structure/disjoint_sparse_table/src/lib.rs

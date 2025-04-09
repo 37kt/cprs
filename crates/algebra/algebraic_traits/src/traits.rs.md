@@ -54,6 +54,9 @@ data:
     path: crates/data_structure/segment_tree/segment_tree/src/lib.rs
     title: crates/data_structure/segment_tree/segment_tree/src/lib.rs
   - icon: ':heavy_check_mark:'
+    path: crates/data_structure/splay_tree/src/lib.rs
+    title: crates/data_structure/splay_tree/src/lib.rs
+  - icon: ':heavy_check_mark:'
     path: crates/data_structure/union_find/union_find/src/lib.rs
     title: crates/data_structure/union_find/union_find/src/lib.rs
   - icon: ':heavy_check_mark:'
@@ -139,6 +142,7 @@ data:
   - crates/convolution/bitwise_xor_convolution/src/lib.rs
   - crates/string/rolling_hash/src/lib.rs
   - crates/data_structure/union_find/union_find/src/lib.rs
+  - crates/data_structure/splay_tree/src/lib.rs
   - crates/data_structure/wavelet_matrix/src/lib.rs
   - crates/data_structure/fenwick_tree/fenwick_tree/src/lib.rs
   - crates/data_structure/foldable_deque/src/lib.rs

@@ -208,6 +208,26 @@ data:
     - icon: ':heavy_check_mark:'
       path: crates/data_structure/segment_tree/segment_tree/src/lib.rs
       title: crates/data_structure/segment_tree/segment_tree/src/lib.rs
+  - name: crates/data_structure/splay_tree/src
+    pages:
+    - icon: ':heavy_check_mark:'
+      path: crates/data_structure/splay_tree/src/allocator.rs
+      title: crates/data_structure/splay_tree/src/allocator.rs
+    - icon: ':heavy_check_mark:'
+      path: crates/data_structure/splay_tree/src/lib.rs
+      title: crates/data_structure/splay_tree/src/lib.rs
+    - icon: ':heavy_check_mark:'
+      path: crates/data_structure/splay_tree/src/node.rs
+      title: crates/data_structure/splay_tree/src/node.rs
+    - icon: ':heavy_check_mark:'
+      path: crates/data_structure/splay_tree/src/operator.rs
+      title: crates/data_structure/splay_tree/src/operator.rs
+    - icon: ':heavy_check_mark:'
+      path: crates/data_structure/splay_tree/src/sequence.rs
+      title: crates/data_structure/splay_tree/src/sequence.rs
+    - icon: ':heavy_check_mark:'
+      path: crates/data_structure/splay_tree/src/tree.rs
+      title: crates/data_structure/splay_tree/src/tree.rs
   - name: crates/data_structure/union_find/persistent_union_find/src
     pages:
     - icon: ':heavy_check_mark:'
@@ -660,6 +680,11 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/library_checker/data_structure/deque_operate_all_composite/src/main.rs
       title: verify/library_checker/data_structure/deque_operate_all_composite/src/main.rs
+  - name: verify/library_checker/data_structure/dynamic_sequence_range_affine_range_sum/src
+    pages:
+    - icon: ':heavy_check_mark:'
+      path: verify/library_checker/data_structure/dynamic_sequence_range_affine_range_sum/src/main.rs
+      title: verify/library_checker/data_structure/dynamic_sequence_range_affine_range_sum/src/main.rs
   - name: verify/library_checker/data_structure/line_add_get_min/src
     pages:
     - icon: ':heavy_check_mark:'
