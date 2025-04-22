@@ -125,7 +125,7 @@ data:
   - crates/data_structure/splay_tree/src/tree.rs
   - crates/data_structure/splay_tree/src/sequence.rs
   - crates/data_structure/splay_tree/src/node.rs
-  timestamp: '2025-04-09 07:52:13+00:00'
+  timestamp: '2025-04-22 06:09:15+00:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/library_checker/data_structure/dynamic_sequence_range_affine_range_sum/src/main.rs

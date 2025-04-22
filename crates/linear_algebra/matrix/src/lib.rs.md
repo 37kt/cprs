@@ -93,7 +93,7 @@ data:
   - crates/linear_algebra/matrix/src/row_reduction.rs
   - crates/linear_algebra/matrix/src/index.rs
   - crates/linear_algebra/matrix/src/ops.rs
-  timestamp: '2025-03-08 00:53:12+00:00'
+  timestamp: '2025-04-22 06:09:15+00:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/library_checker/linear_algebra/pow_of_matrix/src/main.rs

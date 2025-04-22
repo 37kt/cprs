@@ -186,7 +186,7 @@ data:
   requiredBy:
   - crates/data_structure/wavelet_matrix/src/bit_vector.rs
   - crates/data_structure/wavelet_matrix/src/internal.rs
-  timestamp: '2025-04-06 02:35:23+00:00'
+  timestamp: '2025-04-22 06:09:15+00:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/library_checker/data_structure/point_add_rectangle_sum/src/main.rs

@@ -104,7 +104,7 @@ data:
   isVerificationFile: false
   path: crates/data_structure/segment_tree/dual_segment_tree/src/lib.rs
   requiredBy: []
-  timestamp: '2025-04-06 02:35:23+00:00'
+  timestamp: '2025-04-22 06:09:15+00:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/library_checker/data_structure/range_affine_point_get/src/main.rs

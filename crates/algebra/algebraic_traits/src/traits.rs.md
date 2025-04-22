@@ -89,30 +89,31 @@ data:
     \         ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\
     \  File \"/opt/hostedtoolcache/Python/3.13.3/x64/lib/python3.13/site-packages/onlinejudge_verify/languages/rust.py\"\
     , line 288, in bundle\n    raise NotImplementedError\nNotImplementedError\n"
-  code: "pub trait Algebraic {\n    type Value;\n}\n\npub trait Magma: Algebraic {\n\
-    \    fn op(x: &Self::Value, y: &Self::Value) -> Self::Value;\n}\n\npub trait Unital:\
-    \ Magma {\n    fn unit() -> Self::Value;\n}\n\npub trait Invertive: Magma {\n\
-    \    fn inv(x: &Self::Value) -> Self::Value;\n}\n\npub trait Associative: Magma\
-    \ {}\n\npub trait Commutative: Magma {}\n\npub trait Idempotent: Magma {}\n\n\
-    pub trait Semigroup: Associative {}\nimpl<T: Associative> Semigroup for T {}\n\
-    \npub trait Monoid: Associative + Unital {}\nimpl<T: Associative + Unital> Monoid\
-    \ for T {}\n\npub trait CommutativeMonoid: Associative + Unital + Commutative\
-    \ {}\nimpl<T: Associative + Unital + Commutative> CommutativeMonoid for T {}\n\
-    \npub trait Group: Associative + Unital + Invertive {}\nimpl<T: Associative +\
-    \ Unital + Invertive> Group for T {}\n\npub trait AbelianGroup: Associative +\
-    \ Unital + Commutative + Invertive {}\nimpl<T: Associative + Unital + Commutative\
-    \ + Invertive> AbelianGroup for T {}\n\npub trait Band: Associative + Idempotent\
-    \ {}\nimpl<T: Associative + Idempotent> Band for T {}\n\npub trait Pow: Monoid\
-    \ {\n    fn pow(x: &Self::Value, mut exp: usize) -> Self::Value {\n        let\
-    \ mut res = Self::unit();\n        let mut x = Self::op(&res, x);\n        while\
-    \ exp > 0 {\n            if exp & 1 == 1 {\n                res = Self::op(&res,\
-    \ &x);\n            }\n            x = Self::op(&x, &x);\n            exp >>=\
-    \ 1;\n        }\n        res\n    }\n}\n\npub trait Act {\n    type Operand: Algebraic;\n\
-    \    type Operator: Algebraic;\n\n    fn act(\n        x: &<Self::Operand as Algebraic>::Value,\n\
-    \        f: &<Self::Operator as Algebraic>::Value,\n    ) -> <Self::Operand as\
-    \ Algebraic>::Value;\n}\n\npub trait Semiring: Algebraic {\n    type Additive:\
-    \ CommutativeMonoid<Value = Self::Value>;\n    type Multiplicative: Monoid<Value\
-    \ = Self::Value>;\n\n    fn zero() -> Self::Value {\n        Self::Additive::unit()\n\
+  code: "pub trait Algebraic {\n    type Value: Clone;\n}\n\npub trait Magma: Algebraic\
+    \ {\n    fn op(x: &Self::Value, y: &Self::Value) -> Self::Value;\n}\n\npub trait\
+    \ Unital: Magma {\n    fn unit() -> Self::Value;\n\n    fn is_unit(x: &Self::Value)\
+    \ -> bool\n    where\n        Self::Value: PartialEq,\n    {\n        &Self::unit()\
+    \ == x\n    }\n}\n\npub trait Invertive: Magma {\n    fn inv(x: &Self::Value)\
+    \ -> Self::Value;\n}\n\npub trait Associative: Magma {}\n\npub trait Commutative:\
+    \ Magma {}\n\npub trait Idempotent: Magma {}\n\npub trait Semigroup: Associative\
+    \ {}\nimpl<T: Associative> Semigroup for T {}\n\npub trait Monoid: Associative\
+    \ + Unital {}\nimpl<T: Associative + Unital> Monoid for T {}\n\npub trait CommutativeMonoid:\
+    \ Associative + Unital + Commutative {}\nimpl<T: Associative + Unital + Commutative>\
+    \ CommutativeMonoid for T {}\n\npub trait Group: Associative + Unital + Invertive\
+    \ {}\nimpl<T: Associative + Unital + Invertive> Group for T {}\n\npub trait AbelianGroup:\
+    \ Associative + Unital + Commutative + Invertive {}\nimpl<T: Associative + Unital\
+    \ + Commutative + Invertive> AbelianGroup for T {}\n\npub trait Band: Associative\
+    \ + Idempotent {}\nimpl<T: Associative + Idempotent> Band for T {}\n\npub trait\
+    \ Pow: Monoid {\n    fn pow(x: &Self::Value, mut exp: usize) -> Self::Value {\n\
+    \        let mut res = Self::unit();\n        let mut x = Self::op(&res, x);\n\
+    \        while exp > 0 {\n            if exp & 1 == 1 {\n                res =\
+    \ Self::op(&res, &x);\n            }\n            x = Self::op(&x, &x);\n    \
+    \        exp >>= 1;\n        }\n        res\n    }\n}\n\npub trait Act {\n   \
+    \ type Operand: Monoid;\n    type Operator: Monoid;\n\n    fn act(\n        x:\
+    \ &<Self::Operand as Algebraic>::Value,\n        f: &<Self::Operator as Algebraic>::Value,\n\
+    \    ) -> <Self::Operand as Algebraic>::Value;\n}\n\npub trait Semiring: Algebraic\
+    \ {\n    type Additive: CommutativeMonoid<Value = Self::Value>;\n    type Multiplicative:\
+    \ Monoid<Value = Self::Value>;\n\n    fn zero() -> Self::Value {\n        Self::Additive::unit()\n\
     \    }\n\n    fn one() -> Self::Value {\n        Self::Multiplicative::unit()\n\
     \    }\n\n    fn add(x: &Self::Value, y: &Self::Value) -> Self::Value {\n    \
     \    Self::Additive::op(x, y)\n    }\n\n    fn mul(x: &Self::Value, y: &Self::Value)\
@@ -154,7 +155,7 @@ data:
   - crates/algebra/algebraic_traits/src/lib.rs
   - crates/algebra/algebraic_traits/src/macros.rs
   - crates/algebra/algebraic_structure/src/lib.rs
-  timestamp: '2025-03-07 00:14:11+00:00'
+  timestamp: '2025-04-22 06:09:15+00:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/library_checker/tree/vertex_set_path_composite/src/main.rs

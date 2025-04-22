@@ -122,7 +122,7 @@ data:
   isVerificationFile: false
   path: crates/data_structure/fenwick_tree/fenwick_tree/src/lib.rs
   requiredBy: []
-  timestamp: '2025-04-07 08:03:10+00:00'
+  timestamp: '2025-04-22 06:09:15+00:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/library_checker/tree/vertex_add_path_sum/src/main.rs

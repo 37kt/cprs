@@ -54,25 +54,21 @@ data:
     \  File \"/opt/hostedtoolcache/Python/3.13.3/x64/lib/python3.13/site-packages/onlinejudge_verify/languages/rust.py\"\
     , line 288, in bundle\n    raise NotImplementedError\nNotImplementedError\n"
   code: "use std::ops::{Deref, DerefMut, RangeBounds};\n\nuse algebraic_traits::{Act,\
-    \ Algebraic, Magma, Monoid, Unital};\nuse as_half_open_range::AsHalfOpenRange;\n\
-    use numeric_traits::Integer;\n\npub struct LazySegmentTree<A>\nwhere\n    A: Act,\n\
-    \    A::Operand: Monoid,\n    A::Operator: Monoid,\n    <A::Operand as Algebraic>::Value:\
-    \ Clone,\n    <A::Operator as Algebraic>::Value: Clone + Eq,\n{\n    n: usize,\n\
-    \    sz: usize,\n    lg: usize,\n    v: Vec<<A::Operand as Algebraic>::Value>,\n\
-    \    lz: Vec<<A::Operator as Algebraic>::Value>,\n}\n\nimpl<A> FromIterator<<A::Operand\
-    \ as Algebraic>::Value> for LazySegmentTree<A>\nwhere\n    A: Act,\n    A::Operand:\
-    \ Monoid,\n    A::Operator: Monoid,\n    <A::Operand as Algebraic>::Value: Clone,\n\
-    \    <A::Operator as Algebraic>::Value: Clone + Eq,\n{\n    fn from_iter<T: IntoIterator<Item\
-    \ = <A::Operand as Algebraic>::Value>>(iter: T) -> Self {\n        let a = iter.into_iter().collect::<Vec<_>>();\n\
+    \ Algebraic, Magma, Unital};\nuse as_half_open_range::AsHalfOpenRange;\nuse numeric_traits::Integer;\n\
+    \npub struct LazySegmentTree<A>\nwhere\n    A: Act,\n{\n    n: usize,\n    sz:\
+    \ usize,\n    lg: usize,\n    v: Vec<<A::Operand as Algebraic>::Value>,\n    lz:\
+    \ Vec<<A::Operator as Algebraic>::Value>,\n}\n\nimpl<A> FromIterator<<A::Operand\
+    \ as Algebraic>::Value> for LazySegmentTree<A>\nwhere\n    A: Act,\n    <A::Operator\
+    \ as Algebraic>::Value: PartialEq,\n{\n    fn from_iter<T: IntoIterator<Item =\
+    \ <A::Operand as Algebraic>::Value>>(iter: T) -> Self {\n        let a = iter.into_iter().collect::<Vec<_>>();\n\
     \        let n = a.len();\n        let lg = n.checked_ceil_log2().unwrap_or(0);\n\
     \        let sz = 1 << lg;\n        let v = (0..sz)\n            .map(|_| A::Operand::unit())\n\
     \            .chain(a)\n            .chain((0..sz - n).map(|_| A::Operand::unit()))\n\
     \            .collect();\n        let lz = vec![A::Operator::unit(); sz];\n  \
     \      let mut seg = Self { n, sz, lg, v, lz };\n        for i in (1..sz).rev()\
     \ {\n            seg.update(i);\n        }\n        seg\n    }\n}\n\nimpl<A> LazySegmentTree<A>\n\
-    where\n    A: Act,\n    A::Operand: Monoid,\n    A::Operator: Monoid,\n    <A::Operand\
-    \ as Algebraic>::Value: Clone,\n    <A::Operator as Algebraic>::Value: Clone +\
-    \ Eq,\n{\n    pub fn new(n: usize) -> Self {\n        let lg = n.checked_ceil_log2().unwrap_or(0);\n\
+    where\n    A: Act,\n    <A::Operator as Algebraic>::Value: PartialEq,\n{\n   \
+    \ pub fn new(n: usize) -> Self {\n        let lg = n.checked_ceil_log2().unwrap_or(0);\n\
     \        let sz = 1 << lg;\n        let v = vec![A::Operand::unit(); sz * 2];\n\
     \        let lz = vec![A::Operator::unit(); sz];\n        Self { n, sz, lg, v,\
     \ lz }\n    }\n\n    pub fn from_fn(n: usize, f: impl FnMut(usize) -> <A::Operand\
@@ -158,28 +154,21 @@ data:
     \ << 1 | 1]);\n    }\n\n    fn apply_at(&mut self, i: usize, f: &<A::Operator\
     \ as Algebraic>::Value) {\n        self.v[i] = A::act(&self.v[i], f);\n      \
     \  if i < self.sz {\n            self.lz[i] = A::Operator::op(&self.lz[i], f);\n\
-    \        }\n    }\n\n    fn push(&mut self, i: usize) {\n        if self.lz[i]\
-    \ == A::Operator::unit() {\n            return;\n        }\n        let f = std::mem::replace(&mut\
-    \ self.lz[i], A::Operator::unit());\n        self.apply_at(i << 1, &f);\n    \
-    \    self.apply_at(i << 1 | 1, &f);\n    }\n}\n\npub struct GetMut<'a, A>\nwhere\n\
-    \    A: Act,\n    A::Operand: Monoid,\n    A::Operator: Monoid,\n    <A::Operand\
-    \ as Algebraic>::Value: Clone,\n    <A::Operator as Algebraic>::Value: Clone +\
-    \ Eq,\n{\n    seg: &'a mut LazySegmentTree<A>,\n    i: usize,\n}\n\nimpl<'a, A>\
-    \ Deref for GetMut<'a, A>\nwhere\n    A: Act,\n    A::Operand: Monoid,\n    A::Operator:\
-    \ Monoid,\n    <A::Operand as Algebraic>::Value: Clone,\n    <A::Operator as Algebraic>::Value:\
-    \ Clone + Eq,\n{\n    type Target = <A::Operand as Algebraic>::Value;\n\n    fn\
-    \ deref(&self) -> &Self::Target {\n        &self.seg.v[self.i]\n    }\n}\n\nimpl<'a,\
-    \ A> DerefMut for GetMut<'a, A>\nwhere\n    A: Act,\n    A::Operand: Monoid,\n\
-    \    A::Operator: Monoid,\n    <A::Operand as Algebraic>::Value: Clone,\n    <A::Operator\
-    \ as Algebraic>::Value: Clone + Eq,\n{\n    fn deref_mut(&mut self) -> &mut Self::Target\
+    \        }\n    }\n\n    fn push(&mut self, i: usize) {\n        if A::Operator::is_unit(&self.lz[i])\
+    \ {\n            return;\n        }\n        let f = std::mem::replace(&mut self.lz[i],\
+    \ A::Operator::unit());\n        self.apply_at(i << 1, &f);\n        self.apply_at(i\
+    \ << 1 | 1, &f);\n    }\n}\n\npub struct GetMut<'a, A>\nwhere\n    A: Act,\n \
+    \   <A::Operator as Algebraic>::Value: PartialEq,\n{\n    seg: &'a mut LazySegmentTree<A>,\n\
+    \    i: usize,\n}\n\nimpl<'a, A> Deref for GetMut<'a, A>\nwhere\n    A: Act,\n\
+    \    <A::Operator as Algebraic>::Value: PartialEq,\n{\n    type Target = <A::Operand\
+    \ as Algebraic>::Value;\n\n    fn deref(&self) -> &Self::Target {\n        &self.seg.v[self.i]\n\
+    \    }\n}\n\nimpl<'a, A> DerefMut for GetMut<'a, A>\nwhere\n    A: Act,\n    <A::Operator\
+    \ as Algebraic>::Value: PartialEq,\n{\n    fn deref_mut(&mut self) -> &mut Self::Target\
     \ {\n        &mut self.seg.v[self.i]\n    }\n}\n\nimpl<'a, A> Drop for GetMut<'a,\
-    \ A>\nwhere\n    A: Act,\n    A::Operand: Monoid,\n    A::Operator: Monoid,\n\
-    \    <A::Operand as Algebraic>::Value: Clone,\n    <A::Operator as Algebraic>::Value:\
-    \ Clone + Eq,\n{\n    fn drop(&mut self) {\n        for h in 1..=self.seg.lg {\n\
-    \            self.seg.update(self.i >> h);\n        }\n    }\n}\n\nimpl<A> Clone\
-    \ for LazySegmentTree<A>\nwhere\n    A: Act,\n    A::Operand: Monoid,\n    A::Operator:\
-    \ Monoid,\n    <A::Operand as Algebraic>::Value: Clone,\n    <A::Operator as Algebraic>::Value:\
-    \ Clone + Eq,\n{\n    fn clone(&self) -> Self {\n        Self {\n            n:\
+    \ A>\nwhere\n    A: Act,\n    <A::Operator as Algebraic>::Value: PartialEq,\n\
+    {\n    fn drop(&mut self) {\n        for h in 1..=self.seg.lg {\n            self.seg.update(self.i\
+    \ >> h);\n        }\n    }\n}\n\nimpl<A> Clone for LazySegmentTree<A>\nwhere\n\
+    \    A: Act,\n{\n    fn clone(&self) -> Self {\n        Self {\n            n:\
     \ self.n,\n            sz: self.sz,\n            lg: self.lg,\n            v:\
     \ self.v.clone(),\n            lz: self.lz.clone(),\n        }\n    }\n}\n"
   dependsOn:
@@ -198,7 +187,7 @@ data:
   path: crates/data_structure/segment_tree/lazy_segment_tree/src/lib.rs
   requiredBy:
   - verify/sandbox/test/src/main.rs
-  timestamp: '2025-04-06 02:35:23+00:00'
+  timestamp: '2025-04-22 06:09:15+00:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/library_checker/data_structure/range_affine_range_sum/src/main.rs
