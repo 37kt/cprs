@@ -1,16 +1,12 @@
 use std::ops::{Deref, DerefMut, RangeBounds};
 
-use algebraic_traits::{Act, Algebraic, Magma, Monoid, Unital};
+use algebraic_traits::{Act, Algebraic, Magma, Unital};
 use as_half_open_range::AsHalfOpenRange;
 use numeric_traits::Integer;
 
 pub struct LazySegmentTree<A>
 where
     A: Act,
-    A::Operand: Monoid,
-    A::Operator: Monoid,
-    <A::Operand as Algebraic>::Value: Clone,
-    <A::Operator as Algebraic>::Value: Clone + Eq,
 {
     n: usize,
     sz: usize,
@@ -22,10 +18,7 @@ where
 impl<A> FromIterator<<A::Operand as Algebraic>::Value> for LazySegmentTree<A>
 where
     A: Act,
-    A::Operand: Monoid,
-    A::Operator: Monoid,
-    <A::Operand as Algebraic>::Value: Clone,
-    <A::Operator as Algebraic>::Value: Clone + Eq,
+    <A::Operator as Algebraic>::Value: PartialEq,
 {
     fn from_iter<T: IntoIterator<Item = <A::Operand as Algebraic>::Value>>(iter: T) -> Self {
         let a = iter.into_iter().collect::<Vec<_>>();
@@ -49,10 +42,7 @@ where
 impl<A> LazySegmentTree<A>
 where
     A: Act,
-    A::Operand: Monoid,
-    A::Operator: Monoid,
-    <A::Operand as Algebraic>::Value: Clone,
-    <A::Operator as Algebraic>::Value: Clone + Eq,
+    <A::Operator as Algebraic>::Value: PartialEq,
 {
     pub fn new(n: usize) -> Self {
         let lg = n.checked_ceil_log2().unwrap_or(0);
@@ -299,7 +289,7 @@ where
     }
 
     fn push(&mut self, i: usize) {
-        if self.lz[i] == A::Operator::unit() {
+        if A::Operator::is_unit(&self.lz[i]) {
             return;
         }
         let f = std::mem::replace(&mut self.lz[i], A::Operator::unit());
@@ -311,10 +301,7 @@ where
 pub struct GetMut<'a, A>
 where
     A: Act,
-    A::Operand: Monoid,
-    A::Operator: Monoid,
-    <A::Operand as Algebraic>::Value: Clone,
-    <A::Operator as Algebraic>::Value: Clone + Eq,
+    <A::Operator as Algebraic>::Value: PartialEq,
 {
     seg: &'a mut LazySegmentTree<A>,
     i: usize,
@@ -323,10 +310,7 @@ where
 impl<'a, A> Deref for GetMut<'a, A>
 where
     A: Act,
-    A::Operand: Monoid,
-    A::Operator: Monoid,
-    <A::Operand as Algebraic>::Value: Clone,
-    <A::Operator as Algebraic>::Value: Clone + Eq,
+    <A::Operator as Algebraic>::Value: PartialEq,
 {
     type Target = <A::Operand as Algebraic>::Value;
 
@@ -338,10 +322,7 @@ where
 impl<'a, A> DerefMut for GetMut<'a, A>
 where
     A: Act,
-    A::Operand: Monoid,
-    A::Operator: Monoid,
-    <A::Operand as Algebraic>::Value: Clone,
-    <A::Operator as Algebraic>::Value: Clone + Eq,
+    <A::Operator as Algebraic>::Value: PartialEq,
 {
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.seg.v[self.i]
@@ -351,10 +332,7 @@ where
 impl<'a, A> Drop for GetMut<'a, A>
 where
     A: Act,
-    A::Operand: Monoid,
-    A::Operator: Monoid,
-    <A::Operand as Algebraic>::Value: Clone,
-    <A::Operator as Algebraic>::Value: Clone + Eq,
+    <A::Operator as Algebraic>::Value: PartialEq,
 {
     fn drop(&mut self) {
         for h in 1..=self.seg.lg {
@@ -366,10 +344,6 @@ where
 impl<A> Clone for LazySegmentTree<A>
 where
     A: Act,
-    A::Operand: Monoid,
-    A::Operator: Monoid,
-    <A::Operand as Algebraic>::Value: Clone,
-    <A::Operator as Algebraic>::Value: Clone + Eq,
 {
     fn clone(&self) -> Self {
         Self {

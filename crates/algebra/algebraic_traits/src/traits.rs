@@ -1,5 +1,5 @@
 pub trait Algebraic {
-    type Value;
+    type Value: Clone;
 }
 
 pub trait Magma: Algebraic {
@@ -8,6 +8,13 @@ pub trait Magma: Algebraic {
 
 pub trait Unital: Magma {
     fn unit() -> Self::Value;
+
+    fn is_unit(x: &Self::Value) -> bool
+    where
+        Self::Value: PartialEq,
+    {
+        &Self::unit() == x
+    }
 }
 
 pub trait Invertive: Magma {
@@ -54,8 +61,8 @@ pub trait Pow: Monoid {
 }
 
 pub trait Act {
-    type Operand: Algebraic;
-    type Operator: Algebraic;
+    type Operand: Monoid;
+    type Operator: Monoid;
 
     fn act(
         x: &<Self::Operand as Algebraic>::Value,
