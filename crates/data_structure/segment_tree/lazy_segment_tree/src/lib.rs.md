@@ -34,7 +34,10 @@ data:
   - icon: ':warning:'
     path: crates/misc/as_half_open_range/src/lib.rs
     title: crates/misc/as_half_open_range/src/lib.rs
-  _extendedRequiredBy: []
+  _extendedRequiredBy:
+  - icon: ':warning:'
+    path: verify/sandbox/test/src/main.rs
+    title: verify/sandbox/test/src/main.rs
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: verify/library_checker/data_structure/range_affine_range_sum/src/main.rs
@@ -44,11 +47,11 @@ data:
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
-  bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.13.2/x64/lib/python3.13/site-packages/onlinejudge_verify/documentation/build.py\"\
+  bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.13.3/x64/lib/python3.13/site-packages/onlinejudge_verify/documentation/build.py\"\
     , line 71, in _render_source_code_stat\n    bundled_code = language.bundle(stat.path,\
     \ basedir=basedir, options={'include_paths': [basedir]}).decode()\n          \
     \         ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\
-    \  File \"/opt/hostedtoolcache/Python/3.13.2/x64/lib/python3.13/site-packages/onlinejudge_verify/languages/rust.py\"\
+    \  File \"/opt/hostedtoolcache/Python/3.13.3/x64/lib/python3.13/site-packages/onlinejudge_verify/languages/rust.py\"\
     , line 288, in bundle\n    raise NotImplementedError\nNotImplementedError\n"
   code: "use std::ops::{Deref, DerefMut, RangeBounds};\n\nuse algebraic_traits::{Act,\
     \ Algebraic, Magma, Monoid, Unital};\nuse as_half_open_range::AsHalfOpenRange;\n\
@@ -193,7 +196,8 @@ data:
   - crates/misc/as_half_open_range/src/lib.rs
   isVerificationFile: false
   path: crates/data_structure/segment_tree/lazy_segment_tree/src/lib.rs
-  requiredBy: []
+  requiredBy:
+  - verify/sandbox/test/src/main.rs
   timestamp: '2025-04-06 02:35:23+00:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:

@@ -47,11 +47,11 @@ data:
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
-  bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.13.2/x64/lib/python3.13/site-packages/onlinejudge_verify/documentation/build.py\"\
+  bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.13.3/x64/lib/python3.13/site-packages/onlinejudge_verify/documentation/build.py\"\
     , line 71, in _render_source_code_stat\n    bundled_code = language.bundle(stat.path,\
     \ basedir=basedir, options={'include_paths': [basedir]}).decode()\n          \
     \         ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\
-    \  File \"/opt/hostedtoolcache/Python/3.13.2/x64/lib/python3.13/site-packages/onlinejudge_verify/languages/rust.py\"\
+    \  File \"/opt/hostedtoolcache/Python/3.13.3/x64/lib/python3.13/site-packages/onlinejudge_verify/languages/rust.py\"\
     , line 288, in bundle\n    raise NotImplementedError\nNotImplementedError\n"
   code: "use crate::{Edge, HeavyLightDecomposition};\n\nimpl HeavyLightDecomposition\
     \ {\n    /// \u89AA\u914D\u5217\u304B\u3089\u69CB\u7BC9  \n    /// `0` \u304C\u6839\
@@ -122,7 +122,7 @@ data:
   - crates/tree/heavy_light_decomposition/src/lib.rs
   - crates/tree/heavy_light_decomposition/src/compress.rs
   - crates/tree/static_top_tree/src/lib.rs
-  timestamp: '2025-04-06 02:35:23+00:00'
+  timestamp: '2025-04-22 05:57:06+00:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/library_checker/tree/lca/src/main.rs

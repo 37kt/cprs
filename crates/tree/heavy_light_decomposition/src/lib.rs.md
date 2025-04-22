@@ -57,11 +57,11 @@ data:
   attributes:
     links:
     - https://noya2ruler.github.io/noya2_Library/tree/heavy_light_decomposition.hpp
-  bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.13.2/x64/lib/python3.13/site-packages/onlinejudge_verify/documentation/build.py\"\
+  bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.13.3/x64/lib/python3.13/site-packages/onlinejudge_verify/documentation/build.py\"\
     , line 71, in _render_source_code_stat\n    bundled_code = language.bundle(stat.path,\
     \ basedir=basedir, options={'include_paths': [basedir]}).decode()\n          \
     \         ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\
-    \  File \"/opt/hostedtoolcache/Python/3.13.2/x64/lib/python3.13/site-packages/onlinejudge_verify/languages/rust.py\"\
+    \  File \"/opt/hostedtoolcache/Python/3.13.3/x64/lib/python3.13/site-packages/onlinejudge_verify/languages/rust.py\"\
     , line 288, in bundle\n    raise NotImplementedError\nNotImplementedError\n"
   code: "// https://noya2ruler.github.io/noya2_Library/tree/heavy_light_decomposition.hpp\n\
     \npub mod compress;\npub mod construct;\n\nuse std::iter::FusedIterator;\n\nuse\
@@ -127,11 +127,12 @@ data:
     \ -> Vec<usize> {\n        let mut dist = vec![!0; self.n];\n        dist[s] =\
     \ 0;\n        while let Some(p) = self.parent(s) {\n            dist[p] = dist[s]\
     \ + 1;\n            s = p;\n        }\n        for v in 0..self.n {\n        \
-    \    if dist[v] == !0 {\n                dist[v] = dist[self.parent(v).unwrap()]\
-    \ + 1;\n            }\n        }\n        dist\n    }\n\n    /// (dist, (u, v))\n\
-    \    pub fn diameter(&self) -> (usize, (usize, usize)) {\n        let depth =\
-    \ self.dist_table(self.root);\n        let (_, u) = depth.iter().zip(0..).max().unwrap();\n\
-    \        let from_u = self.dist_table(u);\n        let (_, v) = from_u.iter().zip(0..).max().unwrap();\n\
+    \    let v = self.tour[v] as usize;\n            if dist[v] == !0 {\n        \
+    \        dist[v] = dist[self.parent(v).unwrap()] + 1;\n            }\n       \
+    \ }\n        dist\n    }\n\n    /// (dist, (u, v))\n    pub fn diameter(&self)\
+    \ -> (usize, (usize, usize)) {\n        let depth = self.dist_table(self.root);\n\
+    \        let (_, u) = depth.iter().zip(0..).max().unwrap();\n        let from_u\
+    \ = self.dist_table(u);\n        let (_, v) = from_u.iter().zip(0..).max().unwrap();\n\
     \        (from_u[v], (u, v))\n    }\n\n    /// \\[s, .., t\\]\n    pub fn path(&self,\
     \ mut s: usize, mut t: usize) -> Vec<usize> {\n        let d = self.dist(s, t);\n\
     \        let mut path = vec![!0; d + 1];\n        let (mut i, mut j) = (0, d);\n\
@@ -189,7 +190,7 @@ data:
   - crates/tree/heavy_light_decomposition/src/compress.rs
   - crates/tree/heavy_light_decomposition/src/construct.rs
   - crates/tree/static_top_tree/src/lib.rs
-  timestamp: '2025-04-06 02:35:23+00:00'
+  timestamp: '2025-04-22 05:57:06+00:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/library_checker/tree/lca/src/main.rs
