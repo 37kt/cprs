@@ -171,6 +171,7 @@ impl HeavyLightDecomposition {
             s = p;
         }
         for v in 0..self.n {
+            let v = self.tour[v] as usize;
             if dist[v] == !0 {
                 dist[v] = dist[self.parent(v).unwrap()] + 1;
             }

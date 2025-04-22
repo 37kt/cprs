@@ -12,3 +12,8 @@ random = { path = "../../../crates/misc/random" }
 modint_61 = { path = "../../../crates/number_theory/modint/modint_61" }
 algebraic_traits = { path = "../../../crates/algebra/algebraic_traits" }
 algebraic_structure = { path = "../../../crates/algebra/algebraic_structure" }
+lazy_segment_tree = { path = "../../../crates/data_structure/segment_tree/lazy_segment_tree" }
+rand = "0.8"
+itertools = "0.12"
+
+[dev-dependencies]
