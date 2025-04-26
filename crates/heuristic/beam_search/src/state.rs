@@ -1,7 +1,7 @@
 use crate::evaluation::Evaluation;
 
 pub trait BeamState {
-    type Action: Clone;
+    type Action: Clone + Default;
 
     fn enumerate_actions(&mut self) -> Vec<Self::Action>;
     fn apply_action(&mut self, action: &Self::Action);

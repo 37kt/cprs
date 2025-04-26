@@ -14,7 +14,10 @@ pub(crate) struct LogRand {
 
 impl LogRand {
     pub fn new() -> Self {
-        Self { index: 0 }
+        let mut rng = random::Pcg64Fast::default();
+        Self {
+            index: (rng.u64() as usize) % LOG_RAND_LEN,
+        }
     }
 
     pub fn next(&mut self) -> f64 {

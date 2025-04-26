@@ -1,4 +1,4 @@
-use std::{cmp::Ordering, mem::MaybeUninit};
+use std::cmp::Ordering;
 
 use crate::{
     candidate::Candidate,
@@ -31,8 +31,7 @@ impl<State: BeamState> BeamSearch<State> {
     pub fn new(config: Config, initial_state: State) -> Self {
         let mut pool = Pool::new(config.nodes_capacity);
         let v = pool.push(Node {
-            #[allow(clippy::uninit_assumed_init)]
-            action: unsafe { MaybeUninit::uninit().assume_init() },
+            action: State::Action::default(),
             parent: None.into(),
             child: None.into(),
             left: None.into(),
