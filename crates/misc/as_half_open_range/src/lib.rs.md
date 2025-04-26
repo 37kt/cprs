@@ -89,16 +89,16 @@ data:
   isVerificationFile: false
   path: crates/misc/as_half_open_range/src/lib.rs
   requiredBy:
-  - crates/string/rolling_hash/src/lib.rs
   - crates/string/suffix_array/src/lib.rs
-  - crates/data_structure/splay_tree/src/lib.rs
-  - crates/data_structure/wavelet_matrix/src/lib.rs
+  - crates/string/rolling_hash/src/lib.rs
   - crates/data_structure/fenwick_tree/fenwick_tree/src/lib.rs
+  - crates/data_structure/splay_tree/src/lib.rs
   - crates/data_structure/disjoint_sparse_table/src/lib.rs
   - crates/data_structure/range_minimum_query/src/lib.rs
+  - crates/data_structure/segment_tree/lazy_segment_tree/src/lib.rs
   - crates/data_structure/segment_tree/dual_segment_tree/src/lib.rs
   - crates/data_structure/segment_tree/segment_tree/src/lib.rs
-  - crates/data_structure/segment_tree/lazy_segment_tree/src/lib.rs
+  - crates/data_structure/wavelet_matrix/src/lib.rs
   - crates/dp/aliens_dp/src/lib.rs
   timestamp: '2025-04-06 02:35:23+00:00'
   verificationStatus: LIBRARY_NO_TESTS

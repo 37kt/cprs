@@ -176,45 +176,45 @@ data:
   isVerificationFile: false
   path: crates/algebra/algebraic_structure/src/mul.rs
   requiredBy:
-  - verify/sandbox/test/src/main.rs
-  - crates/data_structure/union_find/union_find/src/lib.rs
   - crates/algebra/algebraic_structure/src/lib.rs
-  - crates/algebra/algebraic_structure/src/semiring.rs
-  - crates/algebra/algebraic_structure/src/xor.rs
-  - crates/algebra/algebraic_structure/src/add.rs
-  - crates/algebra/algebraic_structure/src/trivial_group.rs
-  - crates/algebra/algebraic_structure/src/min.rs
-  - crates/algebra/algebraic_structure/src/countsum_affine.rs
   - crates/algebra/algebraic_structure/src/affine.rs
+  - crates/algebra/algebraic_structure/src/xor.rs
+  - crates/algebra/algebraic_structure/src/trivial_group.rs
+  - crates/algebra/algebraic_structure/src/countsum_affine.rs
   - crates/algebra/algebraic_structure/src/count_sum.rs
   - crates/algebra/algebraic_structure/src/max.rs
+  - crates/algebra/algebraic_structure/src/add.rs
+  - crates/algebra/algebraic_structure/src/min.rs
+  - crates/algebra/algebraic_structure/src/semiring.rs
+  - crates/data_structure/union_find/union_find/src/lib.rs
+  - verify/sandbox/test/src/main.rs
   timestamp: '2025-04-07 08:03:10+00:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
+  - verify/library_checker/linear_algebra/inverse_matrix/src/main.rs
+  - verify/library_checker/linear_algebra/matrix_product/src/main.rs
+  - verify/library_checker/linear_algebra/matrix_rank/src/main.rs
+  - verify/library_checker/linear_algebra/pow_of_matrix/src/main.rs
+  - verify/library_checker/linear_algebra/matrix_det/src/main.rs
   - verify/library_checker/tree/vertex_add_path_sum/src/main.rs
   - verify/library_checker/tree/vertex_set_path_composite/src/main.rs
   - verify/library_checker/tree/vertex_add_subtree_sum/src/main.rs
-  - verify/library_checker/convolution/bitwise_and_convolution/src/main.rs
-  - verify/library_checker/convolution/bitwise_or_convolution/src/main.rs
-  - verify/library_checker/convolution/lcm_convolution/src/main.rs
-  - verify/library_checker/convolution/gcd_convolution/src/main.rs
-  - verify/library_checker/convolution/bitwise_xor_convolution/src/main.rs
+  - verify/library_checker/data_structure/staticrmq_dst/src/main.rs
+  - verify/library_checker/data_structure/range_affine_range_sum/src/main.rs
   - verify/library_checker/data_structure/point_set_range_composite/src/main.rs
   - verify/library_checker/data_structure/point_add_rectangle_sum/src/main.rs
-  - verify/library_checker/data_structure/range_affine_range_sum/src/main.rs
   - verify/library_checker/data_structure/dynamic_sequence_range_affine_range_sum/src/main.rs
-  - verify/library_checker/data_structure/staticrmq_dst/src/main.rs
-  - verify/library_checker/data_structure/point_add_range_sum/src/main.rs
   - verify/library_checker/data_structure/deque_operate_all_composite/src/main.rs
-  - verify/library_checker/data_structure/rectangle_add_point_get/src/main.rs
-  - verify/library_checker/data_structure/range_affine_point_get/src/main.rs
   - verify/library_checker/data_structure/unionfind_with_potential_non_commutative_group/src/main.rs
   - verify/library_checker/data_structure/unionfind_with_potential/src/main.rs
-  - verify/library_checker/linear_algebra/pow_of_matrix/src/main.rs
-  - verify/library_checker/linear_algebra/inverse_matrix/src/main.rs
-  - verify/library_checker/linear_algebra/matrix_det/src/main.rs
-  - verify/library_checker/linear_algebra/matrix_product/src/main.rs
-  - verify/library_checker/linear_algebra/matrix_rank/src/main.rs
+  - verify/library_checker/data_structure/range_affine_point_get/src/main.rs
+  - verify/library_checker/data_structure/point_add_range_sum/src/main.rs
+  - verify/library_checker/data_structure/rectangle_add_point_get/src/main.rs
+  - verify/library_checker/convolution/bitwise_and_convolution/src/main.rs
+  - verify/library_checker/convolution/lcm_convolution/src/main.rs
+  - verify/library_checker/convolution/bitwise_or_convolution/src/main.rs
+  - verify/library_checker/convolution/gcd_convolution/src/main.rs
+  - verify/library_checker/convolution/bitwise_xor_convolution/src/main.rs
 documentation_of: crates/algebra/algebraic_structure/src/mul.rs
 layout: document
 redirect_from:

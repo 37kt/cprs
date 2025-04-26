@@ -71,16 +71,16 @@ data:
   isVerificationFile: false
   path: crates/data_structure/union_find/union_find/src/union_find.rs
   requiredBy:
-  - crates/data_structure/union_find/union_find/src/potentialized_union_find.rs
-  - crates/data_structure/union_find/union_find/src/lib.rs
-  - crates/data_structure/union_find/union_find/src/union_find_impl.rs
   - crates/data_structure/union_find/union_find/src/union_find_component_sum.rs
+  - crates/data_structure/union_find/union_find/src/lib.rs
+  - crates/data_structure/union_find/union_find/src/potentialized_union_find.rs
+  - crates/data_structure/union_find/union_find/src/union_find_impl.rs
   timestamp: '2025-03-07 01:17:39+00:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/library_checker/data_structure/unionfind/src/main.rs
   - verify/library_checker/data_structure/unionfind_with_potential_non_commutative_group/src/main.rs
   - verify/library_checker/data_structure/unionfind_with_potential/src/main.rs
+  - verify/library_checker/data_structure/unionfind/src/main.rs
 documentation_of: crates/data_structure/union_find/union_find/src/union_find.rs
 layout: document
 redirect_from:

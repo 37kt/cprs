@@ -338,6 +338,41 @@ data:
     - icon: ':heavy_check_mark:'
       path: crates/graph/two_edge_connected_components/src/lib.rs
       title: crates/graph/two_edge_connected_components/src/lib.rs
+  - name: crates/heuristic/beam_search/src
+    pages:
+    - icon: ':warning:'
+      path: crates/heuristic/beam_search/src/beam_search.rs
+      title: crates/heuristic/beam_search/src/beam_search.rs
+    - icon: ':warning:'
+      path: crates/heuristic/beam_search/src/candidate.rs
+      title: crates/heuristic/beam_search/src/candidate.rs
+    - icon: ':warning:'
+      path: crates/heuristic/beam_search/src/config.rs
+      title: crates/heuristic/beam_search/src/config.rs
+    - icon: ':warning:'
+      path: crates/heuristic/beam_search/src/evaluation.rs
+      title: crates/heuristic/beam_search/src/evaluation.rs
+    - icon: ':warning:'
+      path: crates/heuristic/beam_search/src/heap.rs
+      title: crates/heuristic/beam_search/src/heap.rs
+    - icon: ':warning:'
+      path: crates/heuristic/beam_search/src/index.rs
+      title: crates/heuristic/beam_search/src/index.rs
+    - icon: ':warning:'
+      path: crates/heuristic/beam_search/src/lib.rs
+      title: crates/heuristic/beam_search/src/lib.rs
+    - icon: ':warning:'
+      path: crates/heuristic/beam_search/src/node.rs
+      title: crates/heuristic/beam_search/src/node.rs
+    - icon: ':warning:'
+      path: crates/heuristic/beam_search/src/nop_hash.rs
+      title: crates/heuristic/beam_search/src/nop_hash.rs
+    - icon: ':warning:'
+      path: crates/heuristic/beam_search/src/pool.rs
+      title: crates/heuristic/beam_search/src/pool.rs
+    - icon: ':warning:'
+      path: crates/heuristic/beam_search/src/state.rs
+      title: crates/heuristic/beam_search/src/state.rs
   - name: crates/linear_algebra/matrix/src
     pages:
     - icon: ':heavy_check_mark:'

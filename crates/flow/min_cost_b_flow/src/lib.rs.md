@@ -183,8 +183,8 @@ data:
   timestamp: '2025-04-06 02:35:23+00:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/library_checker/graph/min_cost_b_flow/src/main.rs
   - verify/library_checker/graph/assignment/src/main.rs
+  - verify/library_checker/graph/min_cost_b_flow/src/main.rs
 documentation_of: crates/flow/min_cost_b_flow/src/lib.rs
 layout: document
 redirect_from:
