@@ -2,6 +2,9 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy:
+  - icon: ':warning:'
+    path: crates/heuristic/simulated_annealing/src/lib.rs
+    title: crates/heuristic/simulated_annealing/src/lib.rs
   - icon: ':heavy_check_mark:'
     path: crates/string/rolling_hash/src/lib.rs
     title: crates/string/rolling_hash/src/lib.rs
@@ -45,6 +48,7 @@ data:
   path: crates/misc/random/src/lib.rs
   requiredBy:
   - crates/string/rolling_hash/src/lib.rs
+  - crates/heuristic/simulated_annealing/src/lib.rs
   - verify/sandbox/test/src/main.rs
   timestamp: '2025-03-23 09:17:11+00:00'
   verificationStatus: LIBRARY_NO_TESTS

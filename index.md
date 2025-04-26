@@ -373,6 +373,20 @@ data:
     - icon: ':warning:'
       path: crates/heuristic/beam_search/src/state.rs
       title: crates/heuristic/beam_search/src/state.rs
+  - name: crates/heuristic/simulated_annealing/src
+    pages:
+    - icon: ':warning:'
+      path: crates/heuristic/simulated_annealing/src/lib.rs
+      title: crates/heuristic/simulated_annealing/src/lib.rs
+    - icon: ':warning:'
+      path: crates/heuristic/simulated_annealing/src/log_rand.rs
+      title: crates/heuristic/simulated_annealing/src/log_rand.rs
+    - icon: ':warning:'
+      path: crates/heuristic/simulated_annealing/src/scheduler.rs
+      title: crates/heuristic/simulated_annealing/src/scheduler.rs
+    - icon: ':warning:'
+      path: crates/heuristic/simulated_annealing/src/temperature.rs
+      title: crates/heuristic/simulated_annealing/src/temperature.rs
   - name: crates/linear_algebra/matrix/src
     pages:
     - icon: ':heavy_check_mark:'
