@@ -41,6 +41,7 @@ members = [
     "crates/graph/graph",
     "crates/graph/strongly_connected_components",
     "crates/graph/two_edge_connected_components",
+    "crates/heuristic/beam_search",
     "crates/linear_algebra/matrix",
     "crates/misc/as_half_open_range",
     "crates/misc/bit_subset",
