@@ -74,22 +74,21 @@ data:
     \         ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\
     \  File \"/opt/hostedtoolcache/Python/3.13.3/x64/lib/python3.13/site-packages/onlinejudge_verify/languages/rust.py\"\
     , line 288, in bundle\n    raise NotImplementedError\nNotImplementedError\n"
-  code: "use std::{cmp::Ordering, mem::MaybeUninit};\n\nuse crate::{\n    candidate::Candidate,\n\
-    \    config::{Config, HashDeduplicationScope},\n    heap::Heap,\n    index::Index,\n\
-    \    node::Node,\n    nop_hash::NopHashSet,\n    pool::Pool,\n    state::BeamState,\n\
-    };\n\npub struct BeamSearch<State: BeamState> {\n    config: Config,\n\n    v:\
-    \ Index, // \u73FE\u5728\u306E\u30CE\u30FC\u30C9\n    turn: usize,\n    state:\
-    \ State,\n    pool: Pool<Node<State::Action>>,\n    root: Index,\n\n    best_valid_score:\
+  code: "use std::cmp::Ordering;\n\nuse crate::{\n    candidate::Candidate,\n    config::{Config,\
+    \ HashDeduplicationScope},\n    heap::Heap,\n    index::Index,\n    node::Node,\n\
+    \    nop_hash::NopHashSet,\n    pool::Pool,\n    state::BeamState,\n};\n\npub\
+    \ struct BeamSearch<State: BeamState> {\n    config: Config,\n\n    v: Index,\
+    \ // \u73FE\u5728\u306E\u30CE\u30FC\u30C9\n    turn: usize,\n    state: State,\n\
+    \    pool: Pool<Node<State::Action>>,\n    root: Index,\n\n    best_valid_score:\
     \ i64,\n    best_node: Index,\n\n    dfs_stack: Vec<Index>,\n    candidates: Vec<Heap<State::Action>>,\n\
     }\n\nimpl<State: BeamState> BeamSearch<State> {\n    pub fn new(config: Config,\
     \ initial_state: State) -> Self {\n        let mut pool = Pool::new(config.nodes_capacity);\n\
-    \        let v = pool.push(Node {\n            #[allow(clippy::uninit_assumed_init)]\n\
-    \            action: unsafe { MaybeUninit::uninit().assume_init() },\n       \
-    \     parent: None.into(),\n            child: None.into(),\n            left:\
-    \ None.into(),\n            right: None.into(),\n            count_cands: 0,\n\
-    \        });\n\n        Self {\n            config,\n            v,\n        \
-    \    turn: 0,\n            state: initial_state,\n            pool,\n        \
-    \    root: v,\n            best_valid_score: i64::MIN,\n            best_node:\
+    \        let v = pool.push(Node {\n            action: State::Action::default(),\n\
+    \            parent: None.into(),\n            child: None.into(),\n         \
+    \   left: None.into(),\n            right: None.into(),\n            count_cands:\
+    \ 0,\n        });\n\n        Self {\n            config,\n            v,\n   \
+    \         turn: 0,\n            state: initial_state,\n            pool,\n   \
+    \         root: v,\n            best_valid_score: i64::MIN,\n            best_node:\
     \ None.into(),\n            dfs_stack: Vec::with_capacity(config.nodes_capacity\
     \ * 2),\n            candidates: (0..=config.max_turn)\n                .map(|_|\
     \ Heap::new(config.beam_width))\n                .collect(),\n        }\n    }\n\
@@ -219,7 +218,7 @@ data:
   - crates/heuristic/beam_search/src/index.rs
   - crates/heuristic/beam_search/src/node.rs
   - crates/heuristic/beam_search/src/heap.rs
-  timestamp: '2025-04-26 04:27:33+00:00'
+  timestamp: '2025-04-26 05:33:09+00:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: crates/heuristic/beam_search/src/beam_search.rs

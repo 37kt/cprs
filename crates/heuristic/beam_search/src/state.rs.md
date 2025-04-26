@@ -75,9 +75,9 @@ data:
     \  File \"/opt/hostedtoolcache/Python/3.13.3/x64/lib/python3.13/site-packages/onlinejudge_verify/languages/rust.py\"\
     , line 288, in bundle\n    raise NotImplementedError\nNotImplementedError\n"
   code: "use crate::evaluation::Evaluation;\n\npub trait BeamState {\n    type Action:\
-    \ Clone;\n\n    fn enumerate_actions(&mut self) -> Vec<Self::Action>;\n    fn\
-    \ apply_action(&mut self, action: &Self::Action);\n    fn revert_action(&mut self,\
-    \ action: &Self::Action);\n\n    fn action_turns(&self, action: &Self::Action)\
+    \ Clone + Default;\n\n    fn enumerate_actions(&mut self) -> Vec<Self::Action>;\n\
+    \    fn apply_action(&mut self, action: &Self::Action);\n    fn revert_action(&mut\
+    \ self, action: &Self::Action);\n\n    fn action_turns(&self, action: &Self::Action)\
     \ -> usize;\n\n    fn evaluate_current_state(&mut self) -> Evaluation {\n    \
     \    unimplemented!(\"evaluate_current_state \u304B evaluate_after_action \u3092\
     \u5B9F\u88C5\u3057\u3066\u304F\u3060\u3055\u3044\")\n    }\n\n    fn evaluate_after_action(&mut\
@@ -108,7 +108,7 @@ data:
   - crates/heuristic/beam_search/src/index.rs
   - crates/heuristic/beam_search/src/node.rs
   - crates/heuristic/beam_search/src/heap.rs
-  timestamp: '2025-04-26 04:27:33+00:00'
+  timestamp: '2025-04-26 05:33:09+00:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: crates/heuristic/beam_search/src/state.rs

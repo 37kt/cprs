@@ -110,7 +110,7 @@ data:
   - crates/heuristic/beam_search/src/index.rs
   - crates/heuristic/beam_search/src/node.rs
   - crates/heuristic/beam_search/src/heap.rs
-  timestamp: '2025-04-26 04:27:33+00:00'
+  timestamp: '2025-04-26 05:33:09+00:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: crates/heuristic/beam_search/src/pool.rs

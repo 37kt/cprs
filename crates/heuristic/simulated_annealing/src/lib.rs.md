@@ -58,7 +58,7 @@ data:
   - crates/heuristic/simulated_annealing/src/scheduler.rs
   - crates/heuristic/simulated_annealing/src/log_rand.rs
   - crates/heuristic/simulated_annealing/src/temperature.rs
-  timestamp: '2025-04-26 04:59:33+00:00'
+  timestamp: '2025-04-26 05:33:09+00:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: crates/heuristic/simulated_annealing/src/lib.rs
