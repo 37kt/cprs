@@ -41,6 +41,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: crates/data_structure/segment_tree/segment_tree/src/lib.rs
     title: crates/data_structure/segment_tree/segment_tree/src/lib.rs
+  - icon: ':warning:'
+    path: crates/data_structure/segment_tree/sparse_segment_tree/src/lib.rs
+    title: crates/data_structure/segment_tree/sparse_segment_tree/src/lib.rs
   - icon: ':heavy_check_mark:'
     path: crates/data_structure/splay_tree/src/lib.rs
     title: crates/data_structure/splay_tree/src/lib.rs
@@ -98,6 +101,7 @@ data:
   - crates/data_structure/segment_tree/lazy_segment_tree/src/lib.rs
   - crates/data_structure/segment_tree/dual_segment_tree/src/lib.rs
   - crates/data_structure/segment_tree/segment_tree/src/lib.rs
+  - crates/data_structure/segment_tree/sparse_segment_tree/src/lib.rs
   - crates/data_structure/wavelet_matrix/src/lib.rs
   - crates/dp/aliens_dp/src/lib.rs
   timestamp: '2025-04-06 02:35:23+00:00'

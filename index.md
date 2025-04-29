@@ -208,6 +208,17 @@ data:
     - icon: ':heavy_check_mark:'
       path: crates/data_structure/segment_tree/segment_tree/src/lib.rs
       title: crates/data_structure/segment_tree/segment_tree/src/lib.rs
+  - name: crates/data_structure/segment_tree/sparse_segment_tree/src
+    pages:
+    - icon: ':warning:'
+      path: crates/data_structure/segment_tree/sparse_segment_tree/src/allocator.rs
+      title: crates/data_structure/segment_tree/sparse_segment_tree/src/allocator.rs
+    - icon: ':warning:'
+      path: crates/data_structure/segment_tree/sparse_segment_tree/src/lib.rs
+      title: crates/data_structure/segment_tree/sparse_segment_tree/src/lib.rs
+    - icon: ':warning:'
+      path: crates/data_structure/segment_tree/sparse_segment_tree/src/node.rs
+      title: crates/data_structure/segment_tree/sparse_segment_tree/src/node.rs
   - name: crates/data_structure/splay_tree/src
     pages:
     - icon: ':heavy_check_mark:'
