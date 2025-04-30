@@ -203,6 +203,14 @@ data:
     - icon: ':heavy_check_mark:'
       path: crates/data_structure/segment_tree/lazy_segment_tree/src/lib.rs
       title: crates/data_structure/segment_tree/lazy_segment_tree/src/lib.rs
+  - name: crates/data_structure/segment_tree/persistent_segment_tree/src
+    pages:
+    - icon: ':heavy_check_mark:'
+      path: crates/data_structure/segment_tree/persistent_segment_tree/src/lib.rs
+      title: crates/data_structure/segment_tree/persistent_segment_tree/src/lib.rs
+    - icon: ':heavy_check_mark:'
+      path: crates/data_structure/segment_tree/persistent_segment_tree/src/node.rs
+      title: crates/data_structure/segment_tree/persistent_segment_tree/src/node.rs
   - name: crates/data_structure/segment_tree/segment_tree/src
     pages:
     - icon: ':heavy_check_mark:'
@@ -210,9 +218,6 @@ data:
       title: crates/data_structure/segment_tree/segment_tree/src/lib.rs
   - name: crates/data_structure/segment_tree/sparse_segment_tree/src
     pages:
-    - icon: ':warning:'
-      path: crates/data_structure/segment_tree/sparse_segment_tree/src/allocator.rs
-      title: crates/data_structure/segment_tree/sparse_segment_tree/src/allocator.rs
     - icon: ':warning:'
       path: crates/data_structure/segment_tree/sparse_segment_tree/src/lib.rs
       title: crates/data_structure/segment_tree/sparse_segment_tree/src/lib.rs
@@ -805,6 +810,11 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/library_checker/data_structure/rectangle_sum/src/main.rs
       title: verify/library_checker/data_structure/rectangle_sum/src/main.rs
+  - name: verify/library_checker/data_structure/rectangle_sum_pseg/src
+    pages:
+    - icon: ':heavy_check_mark:'
+      path: verify/library_checker/data_structure/rectangle_sum_pseg/src/main.rs
+      title: verify/library_checker/data_structure/rectangle_sum_pseg/src/main.rs
   - name: verify/library_checker/data_structure/set_xor_min/src
     pages:
     - icon: ':heavy_check_mark:'

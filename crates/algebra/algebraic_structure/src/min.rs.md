@@ -109,6 +109,9 @@ data:
     path: verify/library_checker/data_structure/rectangle_add_point_get/src/main.rs
     title: verify/library_checker/data_structure/rectangle_add_point_get/src/main.rs
   - icon: ':heavy_check_mark:'
+    path: verify/library_checker/data_structure/rectangle_sum_pseg/src/main.rs
+    title: verify/library_checker/data_structure/rectangle_sum_pseg/src/main.rs
+  - icon: ':heavy_check_mark:'
     path: verify/library_checker/data_structure/staticrmq_dst/src/main.rs
     title: verify/library_checker/data_structure/staticrmq_dst/src/main.rs
   - icon: ':heavy_check_mark:'
@@ -212,6 +215,7 @@ data:
   - verify/library_checker/data_structure/unionfind_with_potential_non_commutative_group/src/main.rs
   - verify/library_checker/data_structure/unionfind_with_potential/src/main.rs
   - verify/library_checker/data_structure/range_affine_point_get/src/main.rs
+  - verify/library_checker/data_structure/rectangle_sum_pseg/src/main.rs
   - verify/library_checker/data_structure/point_add_range_sum/src/main.rs
   - verify/library_checker/data_structure/rectangle_add_point_get/src/main.rs
   - verify/library_checker/convolution/bitwise_and_convolution/src/main.rs

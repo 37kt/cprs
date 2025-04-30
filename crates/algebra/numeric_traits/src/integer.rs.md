@@ -81,6 +81,9 @@ data:
     path: crates/data_structure/segment_tree/lazy_segment_tree/src/lib.rs
     title: crates/data_structure/segment_tree/lazy_segment_tree/src/lib.rs
   - icon: ':heavy_check_mark:'
+    path: crates/data_structure/segment_tree/persistent_segment_tree/src/lib.rs
+    title: crates/data_structure/segment_tree/persistent_segment_tree/src/lib.rs
+  - icon: ':heavy_check_mark:'
     path: crates/data_structure/segment_tree/segment_tree/src/lib.rs
     title: crates/data_structure/segment_tree/segment_tree/src/lib.rs
   - icon: ':warning:'
@@ -275,6 +278,7 @@ data:
   - crates/data_structure/segment_tree/dual_segment_tree/src/lib.rs
   - crates/data_structure/segment_tree/segment_tree/src/lib.rs
   - crates/data_structure/segment_tree/sparse_segment_tree/src/lib.rs
+  - crates/data_structure/segment_tree/persistent_segment_tree/src/lib.rs
   - crates/data_structure/wavelet_matrix/src/lib.rs
   - crates/convolution/bitwise_and_convolution/src/lib.rs
   - crates/convolution/bitwise_or_convolution/src/lib.rs

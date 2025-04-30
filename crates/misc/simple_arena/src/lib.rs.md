@@ -5,6 +5,9 @@ data:
   - icon: ':warning:'
     path: crates/data_structure/persistent_array/src/lib.rs
     title: crates/data_structure/persistent_array/src/lib.rs
+  - icon: ':heavy_check_mark:'
+    path: crates/data_structure/segment_tree/persistent_segment_tree/src/lib.rs
+    title: crates/data_structure/segment_tree/persistent_segment_tree/src/lib.rs
   - icon: ':warning:'
     path: crates/data_structure/segment_tree/sparse_segment_tree/src/lib.rs
     title: crates/data_structure/segment_tree/sparse_segment_tree/src/lib.rs
@@ -42,6 +45,7 @@ data:
   - crates/data_structure/persistent_array/src/lib.rs
   - crates/data_structure/splay_tree/src/lib.rs
   - crates/data_structure/segment_tree/sparse_segment_tree/src/lib.rs
+  - crates/data_structure/segment_tree/persistent_segment_tree/src/lib.rs
   timestamp: '2025-04-06 02:35:23+00:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
