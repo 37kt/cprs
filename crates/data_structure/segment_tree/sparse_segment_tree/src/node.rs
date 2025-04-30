@@ -1,6 +1,11 @@
-use std::ptr::NonNull;
-
 use algebraic_traits::Monoid;
+use simple_arena::Arena;
+
+use std::{cell::RefCell, ptr::NonNull};
+
+thread_local! {
+    static ARENA: RefCell<Arena> = RefCell::new(Arena::new(1024 * 1024 * 1024));
+}
 
 pub(crate) struct Node<M>
 where
@@ -21,5 +26,9 @@ where
             r: None,
             x,
         }
+    }
+
+    pub fn new_ptr(x: M::Value) -> NonNull<Self> {
+        ARENA.with(|arena| NonNull::new(arena.borrow_mut().alloc(Self::new(x))).unwrap())
     }
 }

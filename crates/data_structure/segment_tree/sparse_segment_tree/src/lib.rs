@@ -3,11 +3,9 @@
 use std::{ops::RangeBounds, ptr::NonNull};
 
 use algebraic_traits::Monoid;
-use allocator::new_ptr;
 use as_half_open_range::AsHalfOpenRange;
 use node::Node;
 
-mod allocator;
 mod node;
 
 pub struct SparseSegmentTree<M>
@@ -23,7 +21,7 @@ where
     M: Monoid,
 {
     pub fn new(n: usize) -> Self {
-        let root = new_ptr(Node::new(M::unit()));
+        let root = Node::new_ptr(M::unit());
         Self { n, root }
     }
 
@@ -91,7 +89,7 @@ where
         }
 
         if v.is_none() {
-            *v = Some(new_ptr(Node::new(M::unit())));
+            *v = Some(Node::new_ptr(M::unit()));
         }
         let v = unsafe { v.as_mut().unwrap().as_mut() };
         if a + 1 == b {
@@ -115,7 +113,7 @@ where
         }
 
         if v.is_none() {
-            *v = Some(new_ptr(Node::new(M::unit())));
+            *v = Some(Node::new_ptr(M::unit()));
         }
         let v = unsafe { v.as_mut().unwrap().as_mut() };
         if a + 1 == b {
