@@ -66,6 +66,7 @@ members = [
     "crates/string/manacher",
     "crates/string/rolling_hash",
     "crates/string/suffix_array",
+    "crates/string/trie",
     "crates/string/z_algorithm",
     "crates/tree/centroid_decomposition",
     "crates/tree/dynamic_rerooting_tree_dp",
