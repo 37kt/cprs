@@ -613,6 +613,11 @@ data:
     - icon: ':heavy_check_mark:'
       path: crates/string/suffix_array/src/lib.rs
       title: crates/string/suffix_array/src/lib.rs
+  - name: crates/string/trie/src
+    pages:
+    - icon: ':warning:'
+      path: crates/string/trie/src/lib.rs
+      title: crates/string/trie/src/lib.rs
   - name: crates/string/z_algorithm/src
     pages:
     - icon: ':heavy_check_mark:'
