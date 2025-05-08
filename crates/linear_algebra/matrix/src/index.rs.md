@@ -78,16 +78,16 @@ data:
   path: crates/linear_algebra/matrix/src/index.rs
   requiredBy:
   - crates/linear_algebra/matrix/src/lib.rs
-  - crates/linear_algebra/matrix/src/ops.rs
   - crates/linear_algebra/matrix/src/row_reduction.rs
+  - crates/linear_algebra/matrix/src/ops.rs
   timestamp: '2025-03-08 00:53:12+00:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/library_checker/linear_algebra/inverse_matrix/src/main.rs
-  - verify/library_checker/linear_algebra/matrix_product/src/main.rs
   - verify/library_checker/linear_algebra/matrix_rank/src/main.rs
-  - verify/library_checker/linear_algebra/pow_of_matrix/src/main.rs
+  - verify/library_checker/linear_algebra/matrix_product/src/main.rs
+  - verify/library_checker/linear_algebra/inverse_matrix/src/main.rs
   - verify/library_checker/linear_algebra/matrix_det/src/main.rs
+  - verify/library_checker/linear_algebra/pow_of_matrix/src/main.rs
 documentation_of: crates/linear_algebra/matrix/src/index.rs
 layout: document
 redirect_from:

@@ -20,7 +20,7 @@ data:
     path: crates/graph/graph/src/lib.rs
     title: crates/graph/graph/src/lib.rs
   _extendedRequiredBy:
-  - icon: ':warning:'
+  - icon: ':heavy_check_mark:'
     path: crates/tree/tree_contour_range/src/lib.rs
     title: crates/tree/tree_contour_range/src/lib.rs
   _extendedVerifiedWith:

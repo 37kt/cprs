@@ -173,44 +173,44 @@ data:
   isVerificationFile: false
   path: crates/number_theory/modint/static_modint/src/mod_arithmetic.rs
   requiredBy:
-  - crates/polynomial/formal_power_series/src/lib.rs
-  - crates/number_theory/modint/static_modint/src/numeric.rs
-  - crates/number_theory/modint/static_modint/src/lib.rs
-  - crates/number_theory/modint/static_modint/src/ops.rs
   - crates/number_theory/modint/static_modint/src/ntt_precalc.rs
+  - crates/number_theory/modint/static_modint/src/lib.rs
+  - crates/number_theory/modint/static_modint/src/numeric.rs
+  - crates/number_theory/modint/static_modint/src/ops.rs
+  - crates/polynomial/formal_power_series/src/lib.rs
   - crates/convolution/convolution/src/lib.rs
   timestamp: '2025-04-06 02:35:23+00:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/library_checker/polynomial/log_of_formal_power_series/src/main.rs
-  - verify/library_checker/polynomial/pow_of_formal_power_series/src/main.rs
-  - verify/library_checker/polynomial/exp_of_formal_power_series/src/main.rs
-  - verify/library_checker/polynomial/sqrt_of_formal_power_series/src/main.rs
-  - verify/library_checker/polynomial/inv_of_formal_power_series/src/main.rs
-  - verify/library_checker/linear_algebra/inverse_matrix/src/main.rs
-  - verify/library_checker/linear_algebra/matrix_product/src/main.rs
-  - verify/library_checker/linear_algebra/matrix_rank/src/main.rs
-  - verify/library_checker/linear_algebra/pow_of_matrix/src/main.rs
-  - verify/library_checker/linear_algebra/matrix_det/src/main.rs
+  - verify/library_checker/tree/frequency_table_of_tree_distance/src/main.rs
   - verify/library_checker/tree/tree_path_composite_sum/src/main.rs
   - verify/library_checker/tree/point_set_tree_path_composite_sum/src/main.rs
-  - verify/library_checker/tree/vertex_set_path_composite/src/main.rs
   - verify/library_checker/tree/point_set_tree_path_composite_sum_fixed_root/src/main.rs
-  - verify/library_checker/tree/frequency_table_of_tree_distance/src/main.rs
-  - verify/library_checker/data_structure/range_affine_range_sum/src/main.rs
-  - verify/library_checker/data_structure/point_set_range_composite/src/main.rs
-  - verify/library_checker/data_structure/dynamic_sequence_range_affine_range_sum/src/main.rs
+  - verify/library_checker/tree/vertex_set_path_composite/src/main.rs
+  - verify/library_checker/linear_algebra/matrix_rank/src/main.rs
+  - verify/library_checker/linear_algebra/matrix_product/src/main.rs
+  - verify/library_checker/linear_algebra/inverse_matrix/src/main.rs
+  - verify/library_checker/linear_algebra/matrix_det/src/main.rs
+  - verify/library_checker/linear_algebra/pow_of_matrix/src/main.rs
+  - verify/library_checker/polynomial/sqrt_of_formal_power_series/src/main.rs
+  - verify/library_checker/polynomial/pow_of_formal_power_series/src/main.rs
+  - verify/library_checker/polynomial/exp_of_formal_power_series/src/main.rs
+  - verify/library_checker/polynomial/log_of_formal_power_series/src/main.rs
+  - verify/library_checker/polynomial/inv_of_formal_power_series/src/main.rs
   - verify/library_checker/data_structure/deque_operate_all_composite/src/main.rs
+  - verify/library_checker/data_structure/dynamic_sequence_range_affine_range_sum/src/main.rs
+  - verify/library_checker/data_structure/point_set_range_composite/src/main.rs
   - verify/library_checker/data_structure/unionfind_with_potential_non_commutative_group/src/main.rs
-  - verify/library_checker/data_structure/unionfind_with_potential/src/main.rs
   - verify/library_checker/data_structure/range_affine_point_get/src/main.rs
-  - verify/library_checker/convolution/convolution_mod_1000000007/src/main.rs
-  - verify/library_checker/convolution/bitwise_and_convolution/src/main.rs
+  - verify/library_checker/data_structure/range_affine_range_sum/src/main.rs
+  - verify/library_checker/data_structure/unionfind_with_potential/src/main.rs
   - verify/library_checker/convolution/lcm_convolution/src/main.rs
   - verify/library_checker/convolution/bitwise_or_convolution/src/main.rs
+  - verify/library_checker/convolution/convolution_mod/src/main.rs
+  - verify/library_checker/convolution/bitwise_and_convolution/src/main.rs
   - verify/library_checker/convolution/gcd_convolution/src/main.rs
   - verify/library_checker/convolution/bitwise_xor_convolution/src/main.rs
-  - verify/library_checker/convolution/convolution_mod/src/main.rs
+  - verify/library_checker/convolution/convolution_mod_1000000007/src/main.rs
 documentation_of: crates/number_theory/modint/static_modint/src/mod_arithmetic.rs
 layout: document
 redirect_from:

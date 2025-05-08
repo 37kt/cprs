@@ -145,8 +145,8 @@ data:
   isVerificationFile: false
   path: crates/data_structure/segment_tree/persistent_segment_tree/src/lib.rs
   requiredBy:
-  - crates/data_structure/segment_tree/persistent_segment_tree/src/node.rs
   - verify/sandbox/test/src/main.rs
+  - crates/data_structure/segment_tree/persistent_segment_tree/src/node.rs
   timestamp: '2025-04-30 05:56:56+00:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:

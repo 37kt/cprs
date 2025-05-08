@@ -79,8 +79,8 @@ data:
   isVerificationFile: false
   path: crates/number_theory/modint/barrett_reduction/src/lib.rs
   requiredBy:
-  - crates/number_theory/modint/barrett_reduction/src/barrett_reduction_64.rs
   - crates/number_theory/modint/barrett_reduction/src/barrett_reduction_32.rs
+  - crates/number_theory/modint/barrett_reduction/src/barrett_reduction_64.rs
   - crates/number_theory/modint/dynamic_modint_64/src/lib.rs
   - crates/number_theory/modint/dynamic_modint/src/lib.rs
   timestamp: '2025-03-20 09:27:03+00:00'

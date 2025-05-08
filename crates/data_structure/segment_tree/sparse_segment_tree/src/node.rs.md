@@ -37,8 +37,8 @@ data:
   isVerificationFile: false
   path: crates/data_structure/segment_tree/sparse_segment_tree/src/node.rs
   requiredBy:
-  - crates/data_structure/segment_tree/sparse_segment_tree/src/lib.rs
   - verify/sandbox/test/src/main.rs
+  - crates/data_structure/segment_tree/sparse_segment_tree/src/lib.rs
   timestamp: '2025-04-30 05:56:56+00:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []

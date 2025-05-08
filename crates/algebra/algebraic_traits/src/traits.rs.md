@@ -140,29 +140,29 @@ data:
   isVerificationFile: false
   path: crates/algebra/algebraic_traits/src/traits.rs
   requiredBy:
-  - crates/linear_algebra/matrix/src/lib.rs
-  - crates/algebra/algebraic_traits/src/lib.rs
-  - crates/algebra/algebraic_traits/src/macros.rs
+  - verify/sandbox/test/src/main.rs
   - crates/algebra/algebraic_structure/src/lib.rs
-  - crates/string/rolling_hash/src/lib.rs
-  - crates/data_structure/fenwick_tree/fenwick_tree/src/lib.rs
-  - crates/data_structure/union_find/union_find/src/lib.rs
-  - crates/data_structure/splay_tree/src/lib.rs
-  - crates/data_structure/disjoint_sparse_table/src/lib.rs
+  - crates/algebra/algebraic_traits/src/macros.rs
+  - crates/algebra/algebraic_traits/src/lib.rs
+  - crates/linear_algebra/matrix/src/lib.rs
   - crates/data_structure/foldable_deque/src/lib.rs
-  - crates/data_structure/segment_tree/lazy_segment_tree/src/lib.rs
+  - crates/data_structure/disjoint_sparse_table/src/lib.rs
+  - crates/data_structure/splay_tree/src/lib.rs
   - crates/data_structure/segment_tree/dual_segment_tree/src/lib.rs
   - crates/data_structure/segment_tree/segment_tree/src/lib.rs
-  - crates/data_structure/segment_tree/sparse_segment_tree/src/lib.rs
   - crates/data_structure/segment_tree/persistent_segment_tree/src/lib.rs
+  - crates/data_structure/segment_tree/lazy_segment_tree/src/lib.rs
+  - crates/data_structure/segment_tree/sparse_segment_tree/src/lib.rs
   - crates/data_structure/wavelet_matrix/src/lib.rs
-  - crates/convolution/bitwise_and_convolution/src/lib.rs
+  - crates/data_structure/fenwick_tree/fenwick_tree/src/lib.rs
+  - crates/data_structure/union_find/union_find/src/lib.rs
+  - crates/string/rolling_hash/src/lib.rs
   - crates/convolution/lcm_convolution/src/lib.rs
   - crates/convolution/bitwise_or_convolution/src/lib.rs
+  - crates/convolution/bitwise_and_convolution/src/lib.rs
   - crates/convolution/gcd_convolution/src/lib.rs
   - crates/convolution/bitwise_xor_convolution/src/lib.rs
   - crates/convolution/convolution/src/lib.rs
-  - verify/sandbox/test/src/main.rs
   timestamp: '2025-04-22 06:09:15+00:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:

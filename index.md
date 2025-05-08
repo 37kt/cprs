@@ -661,7 +661,7 @@ data:
       title: crates/tree/static_top_tree/src/lib.rs
   - name: crates/tree/tree_contour_range/src
     pages:
-    - icon: ':warning:'
+    - icon: ':heavy_check_mark:'
       path: crates/tree/tree_contour_range/src/lib.rs
       title: crates/tree/tree_contour_range/src/lib.rs
   - name: verify/sandbox/abc218h/src
@@ -1045,6 +1045,11 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/library_checker/tree/vertex_add_path_sum/src/main.rs
       title: verify/library_checker/tree/vertex_add_path_sum/src/main.rs
+  - name: verify/library_checker/tree/vertex_add_range_contour_sum_on_tree/src
+    pages:
+    - icon: ':heavy_check_mark:'
+      path: verify/library_checker/tree/vertex_add_range_contour_sum_on_tree/src/main.rs
+      title: verify/library_checker/tree/vertex_add_range_contour_sum_on_tree/src/main.rs
   - name: verify/library_checker/tree/vertex_add_subtree_sum/src
     pages:
     - icon: ':heavy_check_mark:'

@@ -176,47 +176,47 @@ data:
   isVerificationFile: false
   path: crates/algebra/numeric_traits/src/zero_one.rs
   requiredBy:
-  - crates/polynomial/formal_power_series/src/lib.rs
-  - crates/misc/coordinate_compression/src/lib.rs
-  - crates/misc/as_half_open_range/src/lib.rs
   - crates/combinatorics/binomial/src/lib.rs
-  - crates/graph/dijkstra/src/lib.rs
-  - crates/algebra/algebraic_structure/src/lib.rs
-  - crates/algebra/numeric_traits/src/integer.rs
-  - crates/algebra/numeric_traits/src/numeric.rs
   - crates/algebra/numeric_traits/src/lib.rs
-  - crates/algebra/numeric_traits/src/inf.rs
   - crates/algebra/numeric_traits/src/cast.rs
+  - crates/algebra/numeric_traits/src/inf.rs
+  - crates/algebra/numeric_traits/src/numeric.rs
+  - crates/algebra/numeric_traits/src/integer.rs
   - crates/algebra/numeric_traits/src/signed.rs
+  - crates/algebra/algebraic_structure/src/lib.rs
+  - crates/dp/aliens_dp/src/lib.rs
   - crates/number_theory/rational/src/lib.rs
-  - crates/number_theory/modint/modint_61/src/lib.rs
+  - crates/number_theory/eratosthenes/src/lib.rs
   - crates/number_theory/modint/barrett_reduction/src/lib.rs
   - crates/number_theory/modint/dynamic_modint_64/src/lib.rs
-  - crates/number_theory/modint/dynamic_modint/src/lib.rs
   - crates/number_theory/modint/static_modint/src/lib.rs
-  - crates/number_theory/eratosthenes/src/lib.rs
+  - crates/number_theory/modint/dynamic_modint/src/lib.rs
+  - crates/number_theory/modint/modint_61/src/lib.rs
   - crates/number_theory/prime_factorization/src/lib.rs
-  - crates/flow/max_flow/src/lib.rs
-  - crates/string/suffix_array/src/lib.rs
-  - crates/data_structure/fenwick_tree/fenwick_tree/src/lib.rs
-  - crates/data_structure/offline_dynamic_convex_hull_trick/src/lib.rs
-  - crates/data_structure/splay_tree/src/lib.rs
-  - crates/data_structure/disjoint_sparse_table/src/lib.rs
-  - crates/data_structure/range_minimum_query/src/lib.rs
-  - crates/data_structure/wordsize_ary_tree_set/src/lib.rs
+  - crates/polynomial/formal_power_series/src/lib.rs
   - crates/data_structure/foldable_deque/src/lib.rs
-  - crates/data_structure/segment_tree/lazy_segment_tree/src/lib.rs
+  - crates/data_structure/wordsize_ary_tree_set/src/lib.rs
+  - crates/data_structure/disjoint_sparse_table/src/lib.rs
+  - crates/data_structure/splay_tree/src/lib.rs
   - crates/data_structure/segment_tree/dual_segment_tree/src/lib.rs
   - crates/data_structure/segment_tree/segment_tree/src/lib.rs
-  - crates/data_structure/segment_tree/sparse_segment_tree/src/lib.rs
   - crates/data_structure/segment_tree/persistent_segment_tree/src/lib.rs
+  - crates/data_structure/segment_tree/lazy_segment_tree/src/lib.rs
+  - crates/data_structure/segment_tree/sparse_segment_tree/src/lib.rs
   - crates/data_structure/wavelet_matrix/src/lib.rs
-  - crates/convolution/bitwise_and_convolution/src/lib.rs
+  - crates/data_structure/fenwick_tree/fenwick_tree/src/lib.rs
+  - crates/data_structure/range_minimum_query/src/lib.rs
+  - crates/data_structure/offline_dynamic_convex_hull_trick/src/lib.rs
+  - crates/flow/max_flow/src/lib.rs
+  - crates/string/suffix_array/src/lib.rs
+  - crates/misc/as_half_open_range/src/lib.rs
+  - crates/misc/coordinate_compression/src/lib.rs
+  - crates/graph/dijkstra/src/lib.rs
   - crates/convolution/bitwise_or_convolution/src/lib.rs
-  - crates/convolution/bitwise_xor_convolution/src/lib.rs
   - crates/convolution/minplus_convolution/src/lib.rs
+  - crates/convolution/bitwise_and_convolution/src/lib.rs
+  - crates/convolution/bitwise_xor_convolution/src/lib.rs
   - crates/convolution/convolution/src/lib.rs
-  - crates/dp/aliens_dp/src/lib.rs
   timestamp: '2025-03-20 09:27:03+00:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:

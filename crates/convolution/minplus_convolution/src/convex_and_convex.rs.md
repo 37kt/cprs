@@ -61,14 +61,14 @@ data:
   isVerificationFile: false
   path: crates/convolution/minplus_convolution/src/convex_and_convex.rs
   requiredBy:
+  - crates/convolution/minplus_convolution/src/convex_and_arbitrary.rs
   - crates/convolution/minplus_convolution/src/lib.rs
   - crates/convolution/minplus_convolution/src/concave_and_arbitrary.rs
-  - crates/convolution/minplus_convolution/src/convex_and_arbitrary.rs
   timestamp: '2025-03-20 09:27:03+00:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/library_checker/convolution/min_plus_convolution_concave_arbitrary/src/main.rs
   - verify/library_checker/convolution/min_plus_convolution_convex_convex/src/main.rs
+  - verify/library_checker/convolution/min_plus_convolution_concave_arbitrary/src/main.rs
   - verify/library_checker/convolution/min_plus_convolution_convex_arbitrary/src/main.rs
 documentation_of: crates/convolution/minplus_convolution/src/convex_and_convex.rs
 layout: document

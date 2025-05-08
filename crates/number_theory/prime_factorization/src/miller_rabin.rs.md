@@ -55,8 +55,8 @@ data:
   timestamp: '2025-04-06 02:35:23+00:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/library_checker/number_theory/primality_test/src/main.rs
   - verify/library_checker/number_theory/factorize/src/main.rs
+  - verify/library_checker/number_theory/primality_test/src/main.rs
 documentation_of: crates/number_theory/prime_factorization/src/miller_rabin.rs
 layout: document
 redirect_from:

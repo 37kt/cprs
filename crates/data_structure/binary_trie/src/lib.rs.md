@@ -134,8 +134,8 @@ data:
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/library_checker/data_structure/ordered_set/src/main.rs
-  - verify/library_checker/data_structure/associative_array_bt/src/main.rs
   - verify/library_checker/data_structure/set_xor_min/src/main.rs
+  - verify/library_checker/data_structure/associative_array_bt/src/main.rs
 documentation_of: crates/data_structure/binary_trie/src/lib.rs
 layout: document
 redirect_from:
