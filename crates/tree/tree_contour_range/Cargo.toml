@@ -14,6 +14,7 @@ name = "tree_contour_range"
 csr_array = { path = "../../data_structure/csr_array" }
 graph = { path = "../../graph/graph" }
 centroid_decomposition = { path = "../centroid_decomposition" }
+as_half_open_range = { path = "../../misc/as_half_open_range" }
 
 [dev-dependencies]
 rand = "0.8"
