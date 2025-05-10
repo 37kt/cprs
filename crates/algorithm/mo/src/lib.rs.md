@@ -42,34 +42,45 @@ data:
     \ = Self::Arg>]) -> Vec<Self::Output> {\n        let Some(n) = queries.iter().map(|q|\
     \ {\n            let (l, r) = q.point();\n            l.max(r)\n        }).max()\
     \ else {\n            return vec![];\n        };\n        let q = queries.len();\n\
-    \        let w = 1.max((n as f64 / 1.0f64.max((q as f64 * 2.0 / 3.0).sqrt())).round()\
+    \        // let w = 1.max((n as f64 / 1.0f64.max((q as f64 * 2.0 / 3.0).sqrt())).round()\
+    \ as usize);\n        let w = 1.max((n as f64 / 1.0f64.max((q as f64).sqrt())).round()\
     \ as usize);\n\n        let mut ord = (0..q).collect::<Vec<_>>();\n        ord.sort_unstable_by_key(|&i|\
     \ {\n            let (l, r) = queries[i].point();\n            (l / w, if (l /\
-    \ w) & 1 == 0 { r } else { !r })\n        });\n\n        let (mut l, mut r) =\
-    \ self.initial_position();\n        let mut res = ord\n            .iter()\n \
-    \           .map(|&i| {\n                let (ql, qr) = queries[i].point();\n\
-    \                while l > ql {\n                    l -= 1;\n               \
-    \     self.add_left(l);\n                }\n                while r < qr {\n \
-    \                   self.add_right(r);\n                    r += 1;\n        \
-    \        }\n                while l < ql {\n                    self.remove_left(l);\n\
-    \                    l += 1;\n                }\n                while r > qr\
-    \ {\n                    r -= 1;\n                    self.remove_right(r);\n\
-    \                }\n                self.query(queries[i].argument())\n      \
-    \      })\n            .collect::<Vec<_>>();\n\n        for i in 0..q {\n    \
-    \        while ord[i] != i {\n                let j = ord[i];\n              \
-    \  res.swap(i, j);\n                ord.swap(i, j);\n            }\n        }\n\
-    \n        res\n    }\n}\n\npub trait Query {\n    type Arg;\n\n    fn point(&self)\
-    \ -> (usize, usize);\n    fn argument(&self) -> &Self::Arg;\n}\n\nimpl Query for\
-    \ (usize, usize) {\n    type Arg = ();\n\n    fn point(&self) -> (usize, usize)\
-    \ {\n        *self\n    }\n\n    fn argument(&self) -> &Self::Arg {\n        &()\n\
-    \    }\n}\n\nimpl<T> Query for (usize, usize, T) {\n    type Arg = T;\n\n    fn\
-    \ point(&self) -> (usize, usize) {\n        (self.0, self.1)\n    }\n\n    fn\
-    \ argument(&self) -> &Self::Arg {\n        &self.2\n    }\n}\n"
+    \ w) & 1 == 0 { r } else { !r })\n        });\n        let cost = ord\n      \
+    \      .windows(2)\n            .map(|p| {\n                let (l1, r1) = queries[p[0]].point();\n\
+    \                let (l2, r2) = queries[p[1]].point();\n                l1.abs_diff(l2)\
+    \ + r1.abs_diff(r2)\n            })\n            .sum::<usize>();\n\n        let\
+    \ mut ord2 = (0..q).collect::<Vec<_>>();\n        ord2.sort_unstable_by_key(|&i|\
+    \ {\n            let (l, r) = queries[i].point();\n            let l = l + w /\
+    \ 2;\n            (l / w, if (l / w) & 1 == 0 { r } else { !r })\n        });\n\
+    \        let cost2 = ord2\n            .windows(2)\n            .map(|p| {\n \
+    \               let (l1, r1) = queries[p[0]].point();\n                let (l2,\
+    \ r2) = queries[p[1]].point();\n                l1.abs_diff(l2) + r1.abs_diff(r2)\n\
+    \            })\n            .sum::<usize>();\n\n        if cost > cost2 {\n \
+    \           ord = ord2;\n        }\n\n        let (mut l, mut r) = self.initial_position();\n\
+    \        let mut res = ord\n            .iter()\n            .map(|&i| {\n   \
+    \             let (ql, qr) = queries[i].point();\n                while l > ql\
+    \ {\n                    l -= 1;\n                    self.add_left(l);\n    \
+    \            }\n                while r < qr {\n                    self.add_right(r);\n\
+    \                    r += 1;\n                }\n                while l < ql\
+    \ {\n                    self.remove_left(l);\n                    l += 1;\n \
+    \               }\n                while r > qr {\n                    r -= 1;\n\
+    \                    self.remove_right(r);\n                }\n              \
+    \  self.query(queries[i].argument())\n            })\n            .collect::<Vec<_>>();\n\
+    \n        for i in 0..q {\n            while ord[i] != i {\n                let\
+    \ j = ord[i];\n                res.swap(i, j);\n                ord.swap(i, j);\n\
+    \            }\n        }\n\n        res\n    }\n}\n\npub trait Query {\n    type\
+    \ Arg;\n\n    fn point(&self) -> (usize, usize);\n    fn argument(&self) -> &Self::Arg;\n\
+    }\n\nimpl Query for (usize, usize) {\n    type Arg = ();\n\n    fn point(&self)\
+    \ -> (usize, usize) {\n        *self\n    }\n\n    fn argument(&self) -> &Self::Arg\
+    \ {\n        &()\n    }\n}\n\nimpl<T> Query for (usize, usize, T) {\n    type\
+    \ Arg = T;\n\n    fn point(&self) -> (usize, usize) {\n        (self.0, self.1)\n\
+    \    }\n\n    fn argument(&self) -> &Self::Arg {\n        &self.2\n    }\n}\n"
   dependsOn: []
   isVerificationFile: false
   path: crates/algorithm/mo/src/lib.rs
   requiredBy: []
-  timestamp: '2025-03-03 03:29:08+00:00'
+  timestamp: '2025-05-10 14:48:20+00:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/library_checker/data_structure/static_range_frequency_mo/src/main.rs
