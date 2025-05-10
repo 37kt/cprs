@@ -30,11 +30,11 @@ data:
     \  File \"/opt/hostedtoolcache/Python/3.13.3/x64/lib/python3.13/site-packages/onlinejudge_verify/languages/rust.py\"\
     , line 288, in bundle\n    raise NotImplementedError\nNotImplementedError\n"
   code: "use algebraic_traits::{AbelianGroup, CommutativeMonoid, Magma, Ring};\nuse\
-    \ eratosthenes::Eratosthenes;\n\n/// \u7D04\u6570\u306E\u65B9\u5411\u306B\u7D2F\
+    \ eratosthenes::Eratosthenes;\n\n/// \u500D\u6570\u306E\u65B9\u5411\u306B\u7D2F\
     \u7A4D\u548C\u3092\u53D6\u308B\npub fn divisor_zeta_transform<M: CommutativeMonoid>(f:\
     \ &mut [M::Value]) {\n    let n = f.len() - 1;\n    let sieve = Eratosthenes::new(n);\n\
     \    for p in sieve.primes() {\n        for i in 1..=n / p {\n            f[i\
-    \ * p] = M::op(&f[i * p], &f[i]);\n        }\n    }\n}\n\n/// \u7D04\u6570\u306E\
+    \ * p] = M::op(&f[i * p], &f[i]);\n        }\n    }\n}\n\n/// \u500D\u6570\u306E\
     \u65B9\u5411\u306B\u53D6\u3089\u308C\u305F\u7D2F\u7A4D\u548C\u304B\u3089\u5FA9\
     \u5143\u3059\u308B\npub fn divisor_moebius_transform<G: AbelianGroup>(f: &mut\
     \ [G::Value]) {\n    let n = f.len() - 1;\n    let sieve = Eratosthenes::new(n);\n\
@@ -56,7 +56,7 @@ data:
   isVerificationFile: false
   path: crates/convolution/lcm_convolution/src/lib.rs
   requiredBy: []
-  timestamp: '2025-04-22 06:09:15+00:00'
+  timestamp: '2025-05-10 07:55:22+00:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/library_checker/convolution/lcm_convolution/src/main.rs
