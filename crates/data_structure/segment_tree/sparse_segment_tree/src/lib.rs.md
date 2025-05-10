@@ -31,7 +31,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: crates/algebra/numeric_traits/src/zero_one.rs
     title: crates/algebra/numeric_traits/src/zero_one.rs
-  - icon: ':warning:'
+  - icon: ':heavy_check_mark:'
     path: crates/data_structure/segment_tree/sparse_segment_tree/src/node.rs
     title: crates/data_structure/segment_tree/sparse_segment_tree/src/node.rs
   - icon: ':warning:'
@@ -41,16 +41,19 @@ data:
     path: crates/misc/simple_arena/src/lib.rs
     title: crates/misc/simple_arena/src/lib.rs
   _extendedRequiredBy:
-  - icon: ':warning:'
+  - icon: ':heavy_check_mark:'
     path: crates/data_structure/segment_tree/sparse_segment_tree/src/node.rs
     title: crates/data_structure/segment_tree/sparse_segment_tree/src/node.rs
   - icon: ':warning:'
     path: verify/sandbox/test/src/main.rs
     title: verify/sandbox/test/src/main.rs
-  _extendedVerifiedWith: []
+  _extendedVerifiedWith:
+  - icon: ':heavy_check_mark:'
+    path: verify/library_checker/data_structure/point_set_range_composite_large_array/src/main.rs
+    title: verify/library_checker/data_structure/point_set_range_composite_large_array/src/main.rs
   _isVerificationFailed: false
   _pathExtension: rs
-  _verificationStatusIcon: ':warning:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.13.3/x64/lib/python3.13/site-packages/onlinejudge_verify/documentation/build.py\"\
@@ -135,8 +138,9 @@ data:
   - verify/sandbox/test/src/main.rs
   - crates/data_structure/segment_tree/sparse_segment_tree/src/node.rs
   timestamp: '2025-04-30 05:56:56+00:00'
-  verificationStatus: LIBRARY_NO_TESTS
-  verifiedWith: []
+  verificationStatus: LIBRARY_ALL_AC
+  verifiedWith:
+  - verify/library_checker/data_structure/point_set_range_composite_large_array/src/main.rs
 documentation_of: crates/data_structure/segment_tree/sparse_segment_tree/src/lib.rs
 layout: document
 redirect_from:

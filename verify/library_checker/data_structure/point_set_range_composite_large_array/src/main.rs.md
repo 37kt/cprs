@@ -35,72 +35,53 @@ data:
     path: crates/algebra/algebraic_structure/src/xor.rs
     title: crates/algebra/algebraic_structure/src/xor.rs
   - icon: ':heavy_check_mark:'
-    path: crates/algebra/algebraic_traits/src/lib.rs
-    title: crates/algebra/algebraic_traits/src/lib.rs
-  - icon: ':heavy_check_mark:'
-    path: crates/algebra/algebraic_traits/src/macros.rs
-    title: crates/algebra/algebraic_traits/src/macros.rs
-  - icon: ':heavy_check_mark:'
-    path: crates/algebra/algebraic_traits/src/traits.rs
-    title: crates/algebra/algebraic_traits/src/traits.rs
-  - icon: ':heavy_check_mark:'
-    path: crates/data_structure/segment_tree/lazy_segment_tree/src/lib.rs
-    title: crates/data_structure/segment_tree/lazy_segment_tree/src/lib.rs
-  - icon: ':heavy_check_mark:'
-    path: crates/data_structure/segment_tree/persistent_segment_tree/src/lib.rs
-    title: crates/data_structure/segment_tree/persistent_segment_tree/src/lib.rs
-  - icon: ':heavy_check_mark:'
-    path: crates/data_structure/segment_tree/persistent_segment_tree/src/node.rs
-    title: crates/data_structure/segment_tree/persistent_segment_tree/src/node.rs
-  - icon: ':heavy_check_mark:'
     path: crates/data_structure/segment_tree/sparse_segment_tree/src/lib.rs
     title: crates/data_structure/segment_tree/sparse_segment_tree/src/lib.rs
   - icon: ':heavy_check_mark:'
     path: crates/data_structure/segment_tree/sparse_segment_tree/src/node.rs
     title: crates/data_structure/segment_tree/sparse_segment_tree/src/node.rs
   - icon: ':heavy_check_mark:'
-    path: crates/misc/macros/src/chminmax.rs
-    title: crates/misc/macros/src/chminmax.rs
+    path: crates/number_theory/modint/static_modint/src/lib.rs
+    title: crates/number_theory/modint/static_modint/src/lib.rs
   - icon: ':heavy_check_mark:'
-    path: crates/misc/macros/src/lib.rs
-    title: crates/misc/macros/src/lib.rs
+    path: crates/number_theory/modint/static_modint/src/mod_arithmetic.rs
+    title: crates/number_theory/modint/static_modint/src/mod_arithmetic.rs
   - icon: ':heavy_check_mark:'
-    path: crates/misc/macros/src/mvec.rs
-    title: crates/misc/macros/src/mvec.rs
+    path: crates/number_theory/modint/static_modint/src/ntt_precalc.rs
+    title: crates/number_theory/modint/static_modint/src/ntt_precalc.rs
   - icon: ':heavy_check_mark:'
-    path: crates/misc/macros/src/yes.rs
-    title: crates/misc/macros/src/yes.rs
-  - icon: ':warning:'
-    path: crates/misc/random/src/lib.rs
-    title: crates/misc/random/src/lib.rs
-  - icon: ':warning:'
-    path: crates/number_theory/modint/modint_61/src/lib.rs
-    title: crates/number_theory/modint/modint_61/src/lib.rs
-  - icon: ':warning:'
-    path: crates/number_theory/modint/modint_61/src/numeric.rs
-    title: crates/number_theory/modint/modint_61/src/numeric.rs
-  - icon: ':warning:'
-    path: crates/number_theory/modint/modint_61/src/ops.rs
-    title: crates/number_theory/modint/modint_61/src/ops.rs
+    path: crates/number_theory/modint/static_modint/src/numeric.rs
+    title: crates/number_theory/modint/static_modint/src/numeric.rs
+  - icon: ':heavy_check_mark:'
+    path: crates/number_theory/modint/static_modint/src/ops.rs
+    title: crates/number_theory/modint/static_modint/src/ops.rs
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
   _pathExtension: rs
-  _verificationStatusIcon: ':warning:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
-    links: []
+    PROBLEM: https://judge.yosupo.jp/problem/point_set_range_composite_large_array
+    links:
+    - https://judge.yosupo.jp/problem/point_set_range_composite_large_array
   bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.13.3/x64/lib/python3.13/site-packages/onlinejudge_verify/documentation/build.py\"\
     , line 71, in _render_source_code_stat\n    bundled_code = language.bundle(stat.path,\
     \ basedir=basedir, options={'include_paths': [basedir]}).decode()\n          \
     \         ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\
     \  File \"/opt/hostedtoolcache/Python/3.13.3/x64/lib/python3.13/site-packages/onlinejudge_verify/languages/rust.py\"\
     , line 288, in bundle\n    raise NotImplementedError\nNotImplementedError\n"
-  code: "use algebraic_structure::magma::AddOperator;\nuse persistent_segment_tree::PersistentSegmentTree;\n\
-    \nfn main() {\n    let mut segs = vec![];\n    segs.push(PersistentSegmentTree::<AddOperator<i32>>::new(100));\n\
-    \    for i in 0..100 {\n        segs.push(segs[i].set(i, i as i32));\n    }\n\
-    \    for i in 10..20 {\n        segs.push(segs.last().unwrap().add(i, i as i32));\n\
-    \    }\n    segs.push(segs[100].copy_range(10..15, &segs[110]));\n    for i in\
-    \ 0..100 {\n        eprintln!(\"{}\", segs.last().unwrap().get(i));\n    }\n}\n"
+  code: "// verification-helper: PROBLEM https://judge.yosupo.jp/problem/point_set_range_composite_large_array\n\
+    \nuse algebraic_structure::magma::{Affine, AffineOperator};\nuse proconio::fastout;\n\
+    use proconio::input;\nuse sparse_segment_tree::SparseSegmentTree;\nuse static_modint::ModInt998244353\
+    \ as Mint;\n\n#[fastout]\nfn main() {\n    input! {\n        n: usize,\n     \
+    \   q: usize,\n    }\n    let mut seg = SparseSegmentTree::<AffineOperator<Mint>>::new(n);\n\
+    \    for _ in 0..q {\n        input! {\n            t: usize,\n        }\n   \
+    \     if t == 0 {\n            input! {\n                p: usize,\n         \
+    \       c: Mint,\n                d: Mint,\n            }\n            seg.set(p,\
+    \ Affine(c, d));\n        } else {\n            input! {\n                l: usize,\n\
+    \                r: usize,\n                x: Mint,\n            }\n        \
+    \    let f = seg.fold(l..r);\n            let y = f.eval(x);\n            println!(\"\
+    {}\", y);\n        }\n    }\n}\n"
   dependsOn:
   - crates/algebra/algebraic_structure/src/add.rs
   - crates/algebra/algebraic_structure/src/affine.rs
@@ -113,32 +94,23 @@ data:
   - crates/algebra/algebraic_structure/src/semiring.rs
   - crates/algebra/algebraic_structure/src/trivial_group.rs
   - crates/algebra/algebraic_structure/src/xor.rs
-  - crates/algebra/algebraic_traits/src/lib.rs
-  - crates/algebra/algebraic_traits/src/macros.rs
-  - crates/algebra/algebraic_traits/src/traits.rs
-  - crates/data_structure/segment_tree/lazy_segment_tree/src/lib.rs
-  - crates/data_structure/segment_tree/persistent_segment_tree/src/lib.rs
-  - crates/data_structure/segment_tree/persistent_segment_tree/src/node.rs
   - crates/data_structure/segment_tree/sparse_segment_tree/src/lib.rs
   - crates/data_structure/segment_tree/sparse_segment_tree/src/node.rs
-  - crates/misc/macros/src/chminmax.rs
-  - crates/misc/macros/src/lib.rs
-  - crates/misc/macros/src/mvec.rs
-  - crates/misc/macros/src/yes.rs
-  - crates/misc/random/src/lib.rs
-  - crates/number_theory/modint/modint_61/src/lib.rs
-  - crates/number_theory/modint/modint_61/src/numeric.rs
-  - crates/number_theory/modint/modint_61/src/ops.rs
-  isVerificationFile: false
-  path: verify/sandbox/test/src/main.rs
+  - crates/number_theory/modint/static_modint/src/lib.rs
+  - crates/number_theory/modint/static_modint/src/mod_arithmetic.rs
+  - crates/number_theory/modint/static_modint/src/ntt_precalc.rs
+  - crates/number_theory/modint/static_modint/src/numeric.rs
+  - crates/number_theory/modint/static_modint/src/ops.rs
+  isVerificationFile: true
+  path: verify/library_checker/data_structure/point_set_range_composite_large_array/src/main.rs
   requiredBy: []
-  timestamp: '2025-04-30 05:56:56+00:00'
-  verificationStatus: LIBRARY_NO_TESTS
+  timestamp: '2025-05-10 08:14:04+00:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
-documentation_of: verify/sandbox/test/src/main.rs
+documentation_of: verify/library_checker/data_structure/point_set_range_composite_large_array/src/main.rs
 layout: document
 redirect_from:
-- /library/verify/sandbox/test/src/main.rs
-- /library/verify/sandbox/test/src/main.rs.html
-title: verify/sandbox/test/src/main.rs
+- /verify/verify/library_checker/data_structure/point_set_range_composite_large_array/src/main.rs
+- /verify/verify/library_checker/data_structure/point_set_range_composite_large_array/src/main.rs.html
+title: verify/library_checker/data_structure/point_set_range_composite_large_array/src/main.rs
 ---
