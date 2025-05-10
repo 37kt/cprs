@@ -52,13 +52,41 @@ pub trait Mo {
             return vec![];
         };
         let q = queries.len();
-        let w = 1.max((n as f64 / 1.0f64.max((q as f64 * 2.0 / 3.0).sqrt())).round() as usize);
+        // let w = 1.max((n as f64 / 1.0f64.max((q as f64 * 2.0 / 3.0).sqrt())).round() as usize);
+        let w = 1.max((n as f64 / 1.0f64.max((q as f64).sqrt())).round() as usize);
 
         let mut ord = (0..q).collect::<Vec<_>>();
         ord.sort_unstable_by_key(|&i| {
             let (l, r) = queries[i].point();
             (l / w, if (l / w) & 1 == 0 { r } else { !r })
         });
+        let cost = ord
+            .windows(2)
+            .map(|p| {
+                let (l1, r1) = queries[p[0]].point();
+                let (l2, r2) = queries[p[1]].point();
+                l1.abs_diff(l2) + r1.abs_diff(r2)
+            })
+            .sum::<usize>();
+
+        let mut ord2 = (0..q).collect::<Vec<_>>();
+        ord2.sort_unstable_by_key(|&i| {
+            let (l, r) = queries[i].point();
+            let l = l + w / 2;
+            (l / w, if (l / w) & 1 == 0 { r } else { !r })
+        });
+        let cost2 = ord2
+            .windows(2)
+            .map(|p| {
+                let (l1, r1) = queries[p[0]].point();
+                let (l2, r2) = queries[p[1]].point();
+                l1.abs_diff(l2) + r1.abs_diff(r2)
+            })
+            .sum::<usize>();
+
+        if cost > cost2 {
+            ord = ord2;
+        }
 
         let (mut l, mut r) = self.initial_position();
         let mut res = ord
