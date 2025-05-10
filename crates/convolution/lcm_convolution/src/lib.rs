@@ -1,7 +1,7 @@
 use algebraic_traits::{AbelianGroup, CommutativeMonoid, Magma, Ring};
 use eratosthenes::Eratosthenes;
 
-/// 約数の方向に累積和を取る
+/// 倍数の方向に累積和を取る
 pub fn divisor_zeta_transform<M: CommutativeMonoid>(f: &mut [M::Value]) {
     let n = f.len() - 1;
     let sieve = Eratosthenes::new(n);
@@ -12,7 +12,7 @@ pub fn divisor_zeta_transform<M: CommutativeMonoid>(f: &mut [M::Value]) {
     }
 }
 
-/// 約数の方向に取られた累積和から復元する
+/// 倍数の方向に取られた累積和から復元する
 pub fn divisor_moebius_transform<G: AbelianGroup>(f: &mut [G::Value]) {
     let n = f.len() - 1;
     let sieve = Eratosthenes::new(n);
