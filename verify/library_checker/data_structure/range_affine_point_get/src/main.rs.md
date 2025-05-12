@@ -100,7 +100,7 @@ data:
   isVerificationFile: true
   path: verify/library_checker/data_structure/range_affine_point_get/src/main.rs
   requiredBy: []
-  timestamp: '2025-04-07 08:03:10+00:00'
+  timestamp: '2025-05-12 06:37:24+00:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/library_checker/data_structure/range_affine_point_get/src/main.rs

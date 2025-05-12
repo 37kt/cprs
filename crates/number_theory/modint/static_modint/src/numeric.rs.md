@@ -158,7 +158,7 @@ data:
   - crates/number_theory/modint/static_modint/src/ops.rs
   - crates/polynomial/formal_power_series/src/lib.rs
   - crates/convolution/convolution/src/lib.rs
-  timestamp: '2025-04-06 02:35:23+00:00'
+  timestamp: '2025-05-12 06:37:24+00:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/library_checker/tree/frequency_table_of_tree_distance/src/main.rs

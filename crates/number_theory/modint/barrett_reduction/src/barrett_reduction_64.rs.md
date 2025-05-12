@@ -14,7 +14,7 @@ data:
   - icon: ':warning:'
     path: crates/number_theory/modint/barrett_reduction/src/lib.rs
     title: crates/number_theory/modint/barrett_reduction/src/lib.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: crates/number_theory/modint/dynamic_modint/src/lib.rs
     title: crates/number_theory/modint/dynamic_modint/src/lib.rs
   - icon: ':warning:'

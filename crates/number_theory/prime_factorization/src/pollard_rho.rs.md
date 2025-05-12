@@ -8,7 +8,7 @@ data:
     path: crates/number_theory/prime_factorization/src/miller_rabin.rs
     title: crates/number_theory/prime_factorization/src/miller_rabin.rs
   _extendedRequiredBy:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: crates/combinatorics/binomial/src/lib.rs
     title: crates/combinatorics/binomial/src/lib.rs
   - icon: ':heavy_check_mark:'

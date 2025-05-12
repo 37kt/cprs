@@ -22,7 +22,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: crates/algebra/numeric_traits/src/zero_one.rs
     title: crates/algebra/numeric_traits/src/zero_one.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: crates/combinatorics/binomial/src/prime.rs
     title: crates/combinatorics/binomial/src/prime.rs
   - icon: ':warning:'
@@ -38,16 +38,16 @@ data:
     path: crates/number_theory/prime_factorization/src/pollard_rho.rs
     title: crates/number_theory/prime_factorization/src/pollard_rho.rs
   _extendedRequiredBy:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: crates/combinatorics/binomial/src/prime.rs
     title: crates/combinatorics/binomial/src/prime.rs
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/library_checker/enumerative_combinatorics/binomial_coefficient_prime_mod/src/main.rs
     title: verify/library_checker/enumerative_combinatorics/binomial_coefficient_prime_mod/src/main.rs
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: rs
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     links: []
   bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.13.3/x64/lib/python3.13/site-packages/onlinejudge_verify/documentation/build.py\"\
@@ -78,8 +78,8 @@ data:
   path: crates/combinatorics/binomial/src/lib.rs
   requiredBy:
   - crates/combinatorics/binomial/src/prime.rs
-  timestamp: '2025-04-06 02:35:23+00:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2025-05-12 06:37:24+00:00'
+  verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - verify/library_checker/enumerative_combinatorics/binomial_coefficient_prime_mod/src/main.rs
 documentation_of: crates/combinatorics/binomial/src/lib.rs

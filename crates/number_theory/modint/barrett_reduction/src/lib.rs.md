@@ -38,7 +38,7 @@ data:
   - icon: ':warning:'
     path: crates/number_theory/modint/barrett_reduction/src/barrett_reduction_64.rs
     title: crates/number_theory/modint/barrett_reduction/src/barrett_reduction_64.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: crates/number_theory/modint/dynamic_modint/src/lib.rs
     title: crates/number_theory/modint/dynamic_modint/src/lib.rs
   - icon: ':warning:'

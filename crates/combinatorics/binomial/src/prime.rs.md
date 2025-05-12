@@ -1,20 +1,20 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: crates/combinatorics/binomial/src/lib.rs
     title: crates/combinatorics/binomial/src/lib.rs
   _extendedRequiredBy:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: crates/combinatorics/binomial/src/lib.rs
     title: crates/combinatorics/binomial/src/lib.rs
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/library_checker/enumerative_combinatorics/binomial_coefficient_prime_mod/src/main.rs
     title: verify/library_checker/enumerative_combinatorics/binomial_coefficient_prime_mod/src/main.rs
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: rs
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     links: []
   bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.13.3/x64/lib/python3.13/site-packages/onlinejudge_verify/documentation/build.py\"\
@@ -31,9 +31,7 @@ data:
     \n        Self {\n            fact: vec![M::from_raw(1); 2],\n            fact_inv:\
     \ vec![M::from_raw(1); 2],\n            inv: vec![M::from_raw(1); 2],\n      \
     \  }\n    }\n\n    pub fn expand(&mut self, n: usize) {\n        let prev_n =\
-    \ self.fact.len() - 1;\n        if prev_n >= n {\n            return;\n      \
-    \  }\n\n        let new_n = n.ceil_pow2().min(M::modulus() as usize - 1);\n  \
-    \      if prev_n >= new_n {\n            return;\n        }\n\n        self.fact.resize(new_n\
+    \ self.fact.len() - 1;\n        let new_n = n.ceil_pow2();\n\n        self.fact.resize(new_n\
     \ + 1, M::from_raw(0));\n        self.fact_inv.resize(new_n + 1, M::from_raw(0));\n\
     \        self.inv.resize(new_n + 1, M::from_raw(0));\n\n        for i in prev_n\
     \ + 1..=new_n {\n            self.fact[i] = self.fact[i - 1] * M::from_raw(i as\
@@ -42,26 +40,24 @@ data:
     \   for i in (prev_n + 1..new_n).rev() {\n            self.fact_inv[i] = self.fact_inv[i\
     \ + 1] * M::from_raw((i + 1) as _);\n            self.inv[i] = self.fact_inv[i]\
     \ * self.fact[i - 1];\n        }\n    }\n\n    pub fn fact(&mut self, n: usize)\
-    \ -> M {\n        self.expand(n);\n        if n >= self.fact.len() {\n       \
-    \     M::from_raw(0)\n        } else {\n            self.fact[n]\n        }\n\
-    \    }\n\n    pub fn fact_inv(&mut self, n: usize) -> M {\n        self.expand(n);\n\
-    \        assert!(n < self.fact_inv.len(), \"n! is 0\");\n        self.fact_inv[n]\n\
-    \    }\n\n    pub fn inv(&mut self, n: usize) -> M {\n        self.expand(n);\n\
-    \        let n = n % M::modulus() as usize;\n        assert!(n != 0, \"n is multiple\
-    \ of modulus\");\n        self.inv[n]\n    }\n\n    pub fn nck(&mut self, mut\
-    \ n: usize, mut k: usize) -> M {\n        if n < k {\n            return M::from_raw(0);\n\
-    \        }\n\n        let p = M::modulus() as usize;\n        let mut res = M::from_raw(1);\n\
-    \        while n > 0 || k > 0 {\n            res *= self.fact(n % p) * self.fact_inv(k\
-    \ % p) * self.fact_inv((n - k) % p);\n            n /= p;\n            k /= p;\n\
-    \        }\n        res\n    }\n}\n"
+    \ -> M {\n        if n >= self.fact.len() {\n            self.expand(n);\n   \
+    \     }\n        self.fact[n]\n    }\n\n    pub fn fact_inv(&mut self, n: usize)\
+    \ -> M {\n        if n >= self.fact_inv.len() {\n            self.expand(n);\n\
+    \        }\n        self.fact_inv[n]\n    }\n\n    pub fn inv(&mut self, n: usize)\
+    \ -> M {\n        assert!(n != 0);\n        if n >= self.inv.len() {\n       \
+    \     self.expand(n);\n        }\n        self.inv[n]\n    }\n\n    pub fn nck(&mut\
+    \ self, n: usize, k: usize) -> M {\n        if n < k {\n            return M::from_raw(0);\n\
+    \        }\n        if n >= self.fact.len() {\n            self.expand(n);\n \
+    \       }\n        self.fact[n] * self.fact_inv[k] * self.fact_inv[n - k]\n  \
+    \  }\n}\n"
   dependsOn:
   - crates/combinatorics/binomial/src/lib.rs
   isVerificationFile: false
   path: crates/combinatorics/binomial/src/prime.rs
   requiredBy:
   - crates/combinatorics/binomial/src/lib.rs
-  timestamp: '2025-04-06 02:35:23+00:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2025-05-12 06:37:24+00:00'
+  verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - verify/library_checker/enumerative_combinatorics/binomial_coefficient_prime_mod/src/main.rs
 documentation_of: crates/combinatorics/binomial/src/prime.rs

@@ -1,29 +1,29 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: crates/combinatorics/binomial/src/lib.rs
     title: crates/combinatorics/binomial/src/lib.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: crates/combinatorics/binomial/src/prime.rs
     title: crates/combinatorics/binomial/src/prime.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: crates/number_theory/modint/dynamic_modint/src/barrett_reduction.rs
     title: crates/number_theory/modint/dynamic_modint/src/barrett_reduction.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: crates/number_theory/modint/dynamic_modint/src/lib.rs
     title: crates/number_theory/modint/dynamic_modint/src/lib.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: crates/number_theory/modint/dynamic_modint/src/numeric.rs
     title: crates/number_theory/modint/dynamic_modint/src/numeric.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: crates/number_theory/modint/dynamic_modint/src/ops.rs
     title: crates/number_theory/modint/dynamic_modint/src/ops.rs
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: rs
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     PROBLEM: https://judge.yosupo.jp/problem/binomial_coefficient_prime_mod
     links:
@@ -52,8 +52,8 @@ data:
   isVerificationFile: true
   path: verify/library_checker/enumerative_combinatorics/binomial_coefficient_prime_mod/src/main.rs
   requiredBy: []
-  timestamp: '2025-04-06 02:35:23+00:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2025-05-12 06:37:24+00:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: verify/library_checker/enumerative_combinatorics/binomial_coefficient_prime_mod/src/main.rs
 layout: document

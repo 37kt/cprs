@@ -1,16 +1,16 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: crates/number_theory/modint/dynamic_modint/src/barrett_reduction.rs
     title: crates/number_theory/modint/dynamic_modint/src/barrett_reduction.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: crates/number_theory/modint/dynamic_modint/src/lib.rs
     title: crates/number_theory/modint/dynamic_modint/src/lib.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: crates/number_theory/modint/dynamic_modint/src/numeric.rs
     title: crates/number_theory/modint/dynamic_modint/src/numeric.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: crates/number_theory/modint/dynamic_modint/src/ops.rs
     title: crates/number_theory/modint/dynamic_modint/src/ops.rs
   - icon: ':heavy_check_mark:'

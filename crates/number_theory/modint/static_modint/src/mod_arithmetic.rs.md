@@ -134,36 +134,36 @@ data:
     \         ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\
     \  File \"/opt/hostedtoolcache/Python/3.13.3/x64/lib/python3.13/site-packages/onlinejudge_verify/languages/rust.py\"\
     , line 288, in bundle\n    raise NotImplementedError\nNotImplementedError\n"
-  code: "pub(crate) const fn mul_mod(x: u32, y: u32, m: u32) -> u32 {\n    ((x as\
-    \ u64) * (y as u64) % (m as u64)) as u32\n}\n\npub(crate) const fn pow_mod(x:\
-    \ u32, mut e: usize, m: u32) -> u32 {\n    let mut res = 1;\n    let mut x = (x\
-    \ % m) as u64;\n    let m = m as u64;\n    while e > 0 {\n        if e & 1 !=\
-    \ 0 {\n            res = res * x % m;\n        }\n        x = x * x % m;\n   \
-    \     e >>= 1;\n    }\n    res as u32\n}\n\npub(crate) const fn is_prime(x: u32)\
-    \ -> bool {\n    match x {\n        ..=1 => return false,\n        2 | 7 | 61\
-    \ => return true,\n        _ if x & 1 == 0 => return false,\n        _ => {}\n\
-    \    }\n\n    let mut d = x - 1;\n    while d & 1 == 0 {\n        d >>= 1;\n \
-    \   }\n\n    let a = [2, 7, 61];\n    let mut i = 0;\n    while i < a.len() {\n\
-    \        let mut t = d;\n        let mut y = pow_mod(a[i], t as _, x);\n     \
-    \   while t != x - 1 && y != 1 && y != x - 1 {\n            y = mul_mod(y, y,\
-    \ x);\n            t <<= 1;\n        }\n        if y != x - 1 && t & 1 == 0 {\n\
-    \            return false;\n        }\n        i += 1;\n    }\n\n    true\n}\n\
-    \npub(crate) const fn primitive_root(m: u32) -> u32 {\n    match m {\n       \
-    \ 2 => return 1,\n        167_772_161 => return 3,\n        469_762_049 => return\
-    \ 3,\n        754_974_721 => return 11,\n        998_244_353 => return 3,\n  \
-    \      _ => {}\n    }\n\n    let mut pf = [0; 20];\n    pf[0] = 2;\n    let mut\
-    \ n = 1;\n    let mut x = m - 1;\n    while x & 1 == 0 {\n        x >>= 1;\n \
-    \   }\n\n    let mut i = 3;\n    while i * i <= x {\n        if x % i == 0 {\n\
-    \            pf[n] = i;\n            n += 1;\n            while x % i == 0 {\n\
-    \                x /= i;\n            }\n        }\n        i += 2;\n    }\n \
-    \   if x > 1 {\n        pf[n] = x;\n        n += 1;\n    }\n\n    let mut g =\
-    \ 2;\n    loop {\n        let mut i = 0;\n        while i < n {\n            if\
-    \ pow_mod(g, ((m - 1) / pf[i]) as _, m) == 1 {\n                break;\n     \
-    \       }\n            i += 1;\n        }\n        if i == n {\n            break\
-    \ g;\n        }\n        g += 1;\n    }\n}\n\npub(crate) const fn inv_mod(x: u32,\
-    \ m: u32) -> u32 {\n    let (mut a, mut b, mut x, mut y) = (1, 0, x, m);\n   \
-    \ if m == 1 {\n        return 0;\n    }\n\n    loop {\n        match x {\n   \
-    \         0 => panic!(\"gcd(x, m) is not 1.\"),\n            1 => return a,\n\
+  code: "#[inline(always)]\npub(crate) const fn mul_mod(x: u32, y: u32, m: u32) ->\
+    \ u32 {\n    ((x as u64) * (y as u64) % (m as u64)) as u32\n}\n\npub(crate) const\
+    \ fn pow_mod(x: u32, mut e: usize, m: u32) -> u32 {\n    let mut res = 1;\n  \
+    \  let mut x = (x % m) as u64;\n    let m = m as u64;\n    while e > 0 {\n   \
+    \     if e & 1 != 0 {\n            res = res * x % m;\n        }\n        x =\
+    \ x * x % m;\n        e >>= 1;\n    }\n    res as u32\n}\n\npub(crate) const fn\
+    \ is_prime(x: u32) -> bool {\n    match x {\n        ..=1 => return false,\n \
+    \       2 | 7 | 61 => return true,\n        _ if x & 1 == 0 => return false,\n\
+    \        _ => {}\n    }\n\n    let mut d = x - 1;\n    while d & 1 == 0 {\n  \
+    \      d >>= 1;\n    }\n\n    let a = [2, 7, 61];\n    let mut i = 0;\n    while\
+    \ i < a.len() {\n        let mut t = d;\n        let mut y = pow_mod(a[i], t as\
+    \ _, x);\n        while t != x - 1 && y != 1 && y != x - 1 {\n            y =\
+    \ mul_mod(y, y, x);\n            t <<= 1;\n        }\n        if y != x - 1 &&\
+    \ t & 1 == 0 {\n            return false;\n        }\n        i += 1;\n    }\n\
+    \n    true\n}\n\npub(crate) const fn primitive_root(m: u32) -> u32 {\n    match\
+    \ m {\n        2 => return 1,\n        167_772_161 => return 3,\n        469_762_049\
+    \ => return 3,\n        754_974_721 => return 11,\n        998_244_353 => return\
+    \ 3,\n        _ => {}\n    }\n\n    let mut pf = [0; 20];\n    pf[0] = 2;\n  \
+    \  let mut n = 1;\n    let mut x = m - 1;\n    while x & 1 == 0 {\n        x >>=\
+    \ 1;\n    }\n\n    let mut i = 3;\n    while i * i <= x {\n        if x % i ==\
+    \ 0 {\n            pf[n] = i;\n            n += 1;\n            while x % i ==\
+    \ 0 {\n                x /= i;\n            }\n        }\n        i += 2;\n  \
+    \  }\n    if x > 1 {\n        pf[n] = x;\n        n += 1;\n    }\n\n    let mut\
+    \ g = 2;\n    loop {\n        let mut i = 0;\n        while i < n {\n        \
+    \    if pow_mod(g, ((m - 1) / pf[i]) as _, m) == 1 {\n                break;\n\
+    \            }\n            i += 1;\n        }\n        if i == n {\n        \
+    \    break g;\n        }\n        g += 1;\n    }\n}\n\npub(crate) const fn inv_mod(x:\
+    \ u32, m: u32) -> u32 {\n    let (mut a, mut b, mut x, mut y) = (1, 0, x, m);\n\
+    \    if m == 1 {\n        return 0;\n    }\n\n    loop {\n        match x {\n\
+    \            0 => panic!(\"gcd(x, m) is not 1.\"),\n            1 => return a,\n\
     \            _ => {}\n        }\n        b += a * (y / x);\n        y %= x;\n\n\
     \        match y {\n            0 => panic!(\"gcd(x, m) is not 1.\"),\n      \
     \      1 => return m - b,\n            _ => {}\n        }\n        a += b * (x\
@@ -182,7 +182,7 @@ data:
   - crates/number_theory/modint/static_modint/src/ops.rs
   - crates/polynomial/formal_power_series/src/lib.rs
   - crates/convolution/convolution/src/lib.rs
-  timestamp: '2025-04-06 02:35:23+00:00'
+  timestamp: '2025-05-12 06:37:24+00:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/library_checker/tree/frequency_table_of_tree_distance/src/main.rs

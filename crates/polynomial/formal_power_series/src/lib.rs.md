@@ -40,16 +40,16 @@ data:
   - icon: ':heavy_check_mark:'
     path: crates/convolution/convolution/src/ntt_friendly.rs
     title: crates/convolution/convolution/src/ntt_friendly.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: crates/number_theory/modint/dynamic_modint/src/barrett_reduction.rs
     title: crates/number_theory/modint/dynamic_modint/src/barrett_reduction.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: crates/number_theory/modint/dynamic_modint/src/lib.rs
     title: crates/number_theory/modint/dynamic_modint/src/lib.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: crates/number_theory/modint/dynamic_modint/src/numeric.rs
     title: crates/number_theory/modint/dynamic_modint/src/numeric.rs
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: crates/number_theory/modint/dynamic_modint/src/ops.rs
     title: crates/number_theory/modint/dynamic_modint/src/ops.rs
   - icon: ':warning:'
@@ -223,7 +223,7 @@ data:
   - crates/polynomial/formal_power_series/src/pow.rs
   - crates/polynomial/formal_power_series/src/constructor.rs
   - crates/polynomial/formal_power_series/src/ops.rs
-  timestamp: '2025-04-06 02:35:23+00:00'
+  timestamp: '2025-05-12 06:37:24+00:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/library_checker/polynomial/exp_of_formal_power_series_not_ntt_friendly/src/main.rs
