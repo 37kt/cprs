@@ -27,14 +27,7 @@ impl<M: ModInt<Value = u32>> BinomialPrime<M> {
 
     pub fn expand(&mut self, n: usize) {
         let prev_n = self.fact.len() - 1;
-        if prev_n >= n {
-            return;
-        }
-
-        let new_n = n.ceil_pow2().min(M::modulus() as usize - 1);
-        if prev_n >= new_n {
-            return;
-        }
+        let new_n = n.ceil_pow2();
 
         self.fact.resize(new_n + 1, M::from_raw(0));
         self.fact_inv.resize(new_n + 1, M::from_raw(0));
@@ -52,39 +45,34 @@ impl<M: ModInt<Value = u32>> BinomialPrime<M> {
     }
 
     pub fn fact(&mut self, n: usize) -> M {
-        self.expand(n);
         if n >= self.fact.len() {
-            M::from_raw(0)
-        } else {
-            self.fact[n]
+            self.expand(n);
         }
+        self.fact[n]
     }
 
     pub fn fact_inv(&mut self, n: usize) -> M {
-        self.expand(n);
-        assert!(n < self.fact_inv.len(), "n! is 0");
+        if n >= self.fact_inv.len() {
+            self.expand(n);
+        }
         self.fact_inv[n]
     }
 
     pub fn inv(&mut self, n: usize) -> M {
-        self.expand(n);
-        let n = n % M::modulus() as usize;
-        assert!(n != 0, "n is multiple of modulus");
+        assert!(n != 0);
+        if n >= self.inv.len() {
+            self.expand(n);
+        }
         self.inv[n]
     }
 
-    pub fn nck(&mut self, mut n: usize, mut k: usize) -> M {
+    pub fn nck(&mut self, n: usize, k: usize) -> M {
         if n < k {
             return M::from_raw(0);
         }
-
-        let p = M::modulus() as usize;
-        let mut res = M::from_raw(1);
-        while n > 0 || k > 0 {
-            res *= self.fact(n % p) * self.fact_inv(k % p) * self.fact_inv((n - k) % p);
-            n /= p;
-            k /= p;
+        if n >= self.fact.len() {
+            self.expand(n);
         }
-        res
+        self.fact[n] * self.fact_inv[k] * self.fact_inv[n - k]
     }
 }
