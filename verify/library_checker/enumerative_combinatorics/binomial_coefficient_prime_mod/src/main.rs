@@ -14,7 +14,6 @@ fn main() {
     }
     Mint::set_modulus(m);
     let mut binom = BinomialPrime::new();
-    binom.expand(10_000_000);
     for _ in 0..t {
         input! {
             n: usize,

@@ -5,15 +5,18 @@ pub struct BarrettReduction32 {
 }
 
 impl BarrettReduction32 {
+    #[inline]
     pub fn new(m: u32) -> Self {
         let im = (!0 / m as u64).wrapping_add(1);
         Self { m, im }
     }
 
+    #[inline]
     pub fn modulus(&self) -> u32 {
         self.m
     }
 
+    #[inline]
     pub fn quo_rem(&self, a: u64) -> (u64, u32) {
         let mut x = (((a as u128) * (self.im as u128)) >> 64) as u64;
         let mut r = a.wrapping_sub(x.wrapping_mul(self.m as u64)) as u32;
@@ -24,14 +27,17 @@ impl BarrettReduction32 {
         (x, r)
     }
 
+    #[inline]
     pub fn quo(&self, a: u64) -> u64 {
         self.quo_rem(a).0
     }
 
+    #[inline]
     pub fn rem(&self, a: u64) -> u32 {
         self.quo_rem(a).1
     }
 
+    #[inline]
     pub fn mul(&self, a: u32, b: u32) -> u32 {
         self.rem(a as u64 * b as u64)
     }

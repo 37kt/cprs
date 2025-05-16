@@ -1,5 +1,4 @@
 use modint::ModInt;
-use numeric_traits::Integer;
 use prime_factorization::is_prime;
 
 pub struct BinomialPrime<M: ModInt<Value = u32>> {
@@ -27,23 +26,24 @@ impl<M: ModInt<Value = u32>> BinomialPrime<M> {
 
     pub fn expand(&mut self, n: usize) {
         let prev_n = self.fact.len() - 1;
-        let new_n = n.ceil_pow2();
-
-        self.fact.resize(new_n + 1, M::from_raw(0));
-        self.fact_inv.resize(new_n + 1, M::from_raw(0));
-        self.inv.resize(new_n + 1, M::from_raw(0));
-
-        for i in prev_n + 1..=new_n {
-            self.fact[i] = self.fact[i - 1] * M::from_raw(i as _);
+        let new_n = n.max(prev_n * 2).min(M::modulus() as usize - 1);
+        if prev_n > new_n {
+            return;
         }
-        self.fact_inv[new_n] = self.fact[new_n].recip();
-        self.inv[new_n] = self.fact_inv[new_n] * self.fact[new_n - 1];
-        for i in (prev_n + 1..new_n).rev() {
-            self.fact_inv[i] = self.fact_inv[i + 1] * M::from_raw((i + 1) as _);
-            self.inv[i] = self.fact_inv[i] * self.fact[i - 1];
+
+        let p = M::modulus() as usize;
+        self.fact.reserve(new_n + 1);
+        self.fact_inv.reserve(new_n + 1);
+        self.inv.reserve(new_n + 1);
+        for i in prev_n + 1..=new_n {
+            self.fact.push(self.fact[i - 1] * M::from_raw(i as _));
+            self.inv
+                .push(self.inv[p % i] * M::from_raw((p - p / i) as _));
+            self.fact_inv.push(self.fact_inv[i - 1] * self.inv[i]);
         }
     }
 
+    #[inline]
     pub fn fact(&mut self, n: usize) -> M {
         if n >= self.fact.len() {
             self.expand(n);
@@ -51,6 +51,7 @@ impl<M: ModInt<Value = u32>> BinomialPrime<M> {
         self.fact[n]
     }
 
+    #[inline]
     pub fn fact_inv(&mut self, n: usize) -> M {
         if n >= self.fact_inv.len() {
             self.expand(n);
@@ -58,6 +59,7 @@ impl<M: ModInt<Value = u32>> BinomialPrime<M> {
         self.fact_inv[n]
     }
 
+    #[inline]
     pub fn inv(&mut self, n: usize) -> M {
         assert!(n != 0);
         if n >= self.inv.len() {
@@ -66,6 +68,7 @@ impl<M: ModInt<Value = u32>> BinomialPrime<M> {
         self.inv[n]
     }
 
+    #[inline]
     pub fn nck(&mut self, n: usize, k: usize) -> M {
         if n < k {
             return M::from_raw(0);
