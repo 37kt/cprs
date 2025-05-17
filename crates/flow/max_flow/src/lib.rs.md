@@ -144,8 +144,8 @@ data:
   requiredBy:
   - crates/flow/multivalued_optimization/src/lib.rs
   - crates/flow/binary_optimization/src/lib.rs
-  - crates/flow/max_flow/src/queue.rs
   - crates/flow/max_flow/src/graph.rs
+  - crates/flow/max_flow/src/queue.rs
   timestamp: '2025-04-06 02:35:23+00:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:

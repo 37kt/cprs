@@ -10,13 +10,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: crates/flow/max_flow/src/queue.rs
     title: crates/flow/max_flow/src/queue.rs
-  _extendedRequiredBy:
-  - icon: ':warning:'
-    path: verify/sandbox/abc347g/src/main.rs
-    title: verify/sandbox/abc347g/src/main.rs
-  - icon: ':warning:'
-    path: verify/sandbox/abc397g/src/main.rs
-    title: verify/sandbox/abc397g/src/main.rs
+  _extendedRequiredBy: []
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: verify/yukicoder/flow/yuki0119_mopt/src/main.rs
@@ -169,9 +163,7 @@ data:
   - crates/flow/max_flow/src/queue.rs
   isVerificationFile: false
   path: crates/flow/multivalued_optimization/src/lib.rs
-  requiredBy:
-  - verify/sandbox/abc397g/src/main.rs
-  - verify/sandbox/abc347g/src/main.rs
+  requiredBy: []
   timestamp: '2025-04-06 02:35:23+00:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:

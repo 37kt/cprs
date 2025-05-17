@@ -25,10 +25,7 @@ data:
   - icon: ':warning:'
     path: crates/misc/as_half_open_range/src/lib.rs
     title: crates/misc/as_half_open_range/src/lib.rs
-  _extendedRequiredBy:
-  - icon: ':warning:'
-    path: verify/sandbox/abc218h/src/main.rs
-    title: verify/sandbox/abc218h/src/main.rs
+  _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
   _pathExtension: rs
@@ -64,8 +61,7 @@ data:
   - crates/misc/as_half_open_range/src/lib.rs
   isVerificationFile: false
   path: crates/dp/aliens_dp/src/lib.rs
-  requiredBy:
-  - verify/sandbox/abc218h/src/main.rs
+  requiredBy: []
   timestamp: '2025-04-06 02:35:23+00:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []

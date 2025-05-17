@@ -40,16 +40,16 @@ data:
   - icon: ':heavy_check_mark:'
     path: crates/convolution/convolution/src/ntt_friendly.rs
     title: crates/convolution/convolution/src/ntt_friendly.rs
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: crates/number_theory/modint/dynamic_modint/src/barrett_reduction.rs
     title: crates/number_theory/modint/dynamic_modint/src/barrett_reduction.rs
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: crates/number_theory/modint/dynamic_modint/src/lib.rs
     title: crates/number_theory/modint/dynamic_modint/src/lib.rs
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: crates/number_theory/modint/dynamic_modint/src/numeric.rs
     title: crates/number_theory/modint/dynamic_modint/src/numeric.rs
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: crates/number_theory/modint/dynamic_modint/src/ops.rs
     title: crates/number_theory/modint/dynamic_modint/src/ops.rs
   - icon: ':warning:'
@@ -214,25 +214,25 @@ data:
   isVerificationFile: false
   path: crates/polynomial/formal_power_series/src/lib.rs
   requiredBy:
-  - crates/polynomial/formal_power_series/src/inv.rs
-  - crates/polynomial/formal_power_series/src/exp.rs
-  - crates/polynomial/formal_power_series/src/mul.rs
-  - crates/polynomial/formal_power_series/src/log.rs
-  - crates/polynomial/formal_power_series/src/convert.rs
-  - crates/polynomial/formal_power_series/src/sqrt.rs
   - crates/polynomial/formal_power_series/src/pow.rs
-  - crates/polynomial/formal_power_series/src/constructor.rs
+  - crates/polynomial/formal_power_series/src/mul.rs
   - crates/polynomial/formal_power_series/src/ops.rs
-  timestamp: '2025-05-12 06:37:24+00:00'
+  - crates/polynomial/formal_power_series/src/constructor.rs
+  - crates/polynomial/formal_power_series/src/log.rs
+  - crates/polynomial/formal_power_series/src/inv.rs
+  - crates/polynomial/formal_power_series/src/sqrt.rs
+  - crates/polynomial/formal_power_series/src/convert.rs
+  - crates/polynomial/formal_power_series/src/exp.rs
+  timestamp: '2025-05-17 08:18:49+00:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/library_checker/polynomial/exp_of_formal_power_series_not_ntt_friendly/src/main.rs
   - verify/library_checker/polynomial/sqrt_of_formal_power_series/src/main.rs
-  - verify/library_checker/polynomial/pow_of_formal_power_series/src/main.rs
+  - verify/library_checker/polynomial/exp_of_formal_power_series_not_ntt_friendly/src/main.rs
   - verify/library_checker/polynomial/exp_of_formal_power_series/src/main.rs
-  - verify/library_checker/polynomial/log_of_formal_power_series/src/main.rs
-  - verify/library_checker/polynomial/inv_of_formal_power_series/src/main.rs
   - verify/library_checker/polynomial/inv_of_formal_power_series_not_ntt_friendly/src/main.rs
+  - verify/library_checker/polynomial/pow_of_formal_power_series/src/main.rs
+  - verify/library_checker/polynomial/inv_of_formal_power_series/src/main.rs
+  - verify/library_checker/polynomial/log_of_formal_power_series/src/main.rs
 documentation_of: crates/polynomial/formal_power_series/src/lib.rs
 layout: document
 redirect_from:

@@ -34,10 +34,7 @@ data:
   - icon: ':warning:'
     path: crates/misc/as_half_open_range/src/lib.rs
     title: crates/misc/as_half_open_range/src/lib.rs
-  _extendedRequiredBy:
-  - icon: ':warning:'
-    path: verify/sandbox/test/src/main.rs
-    title: verify/sandbox/test/src/main.rs
+  _extendedRequiredBy: []
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: verify/library_checker/data_structure/range_affine_range_sum/src/main.rs
@@ -185,8 +182,7 @@ data:
   - crates/misc/as_half_open_range/src/lib.rs
   isVerificationFile: false
   path: crates/data_structure/segment_tree/lazy_segment_tree/src/lib.rs
-  requiredBy:
-  - verify/sandbox/test/src/main.rs
+  requiredBy: []
   timestamp: '2025-04-22 06:09:15+00:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:

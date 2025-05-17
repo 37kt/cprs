@@ -51,8 +51,8 @@ data:
   path: crates/heuristic/simulated_annealing/src/temperature.rs
   requiredBy:
   - crates/heuristic/simulated_annealing/src/lib.rs
-  - crates/heuristic/simulated_annealing/src/log_rand.rs
   - crates/heuristic/simulated_annealing/src/scheduler.rs
+  - crates/heuristic/simulated_annealing/src/log_rand.rs
   timestamp: '2025-04-26 05:33:09+00:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []

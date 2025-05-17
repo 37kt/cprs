@@ -2,7 +2,7 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: crates/combinatorics/binomial/src/lib.rs
     title: crates/combinatorics/binomial/src/lib.rs
   - icon: ':heavy_check_mark:'
@@ -11,7 +11,7 @@ data:
   - icon: ':warning:'
     path: crates/number_theory/modint/barrett_reduction/src/lib.rs
     title: crates/number_theory/modint/barrett_reduction/src/lib.rs
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: crates/number_theory/modint/dynamic_modint/src/lib.rs
     title: crates/number_theory/modint/dynamic_modint/src/lib.rs
   - icon: ':warning:'
@@ -55,14 +55,14 @@ data:
   isVerificationFile: false
   path: crates/number_theory/modint/modint/src/lib.rs
   requiredBy:
-  - crates/combinatorics/binomial/src/lib.rs
-  - crates/number_theory/modint/barrett_reduction/src/lib.rs
   - crates/number_theory/modint/dynamic_modint_64/src/lib.rs
-  - crates/number_theory/modint/static_modint/src/lib.rs
-  - crates/number_theory/modint/dynamic_modint/src/lib.rs
   - crates/number_theory/modint/modint_61/src/lib.rs
-  - crates/polynomial/formal_power_series/src/lib.rs
+  - crates/number_theory/modint/dynamic_modint/src/lib.rs
+  - crates/number_theory/modint/barrett_reduction/src/lib.rs
+  - crates/number_theory/modint/static_modint/src/lib.rs
   - crates/convolution/convolution/src/lib.rs
+  - crates/combinatorics/binomial/src/lib.rs
+  - crates/polynomial/formal_power_series/src/lib.rs
   timestamp: '2025-03-08 06:04:29+00:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []

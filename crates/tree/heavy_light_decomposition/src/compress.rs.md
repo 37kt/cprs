@@ -76,20 +76,20 @@ data:
   isVerificationFile: false
   path: crates/tree/heavy_light_decomposition/src/compress.rs
   requiredBy:
+  - crates/tree/static_top_tree/src/lib.rs
   - crates/tree/dynamic_rerooting_tree_dp/src/lib.rs
-  - crates/tree/dynamic_tree_dp/src/lib.rs
   - crates/tree/heavy_light_decomposition/src/lib.rs
   - crates/tree/heavy_light_decomposition/src/construct.rs
-  - crates/tree/static_top_tree/src/lib.rs
+  - crates/tree/dynamic_tree_dp/src/lib.rs
   timestamp: '2025-04-22 05:57:06+00:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/yukicoder/tree/yuki0901_aux/src/main.rs
   - verify/library_checker/tree/lca/src/main.rs
-  - verify/library_checker/tree/jump_on_tree/src/main.rs
   - verify/library_checker/tree/vertex_add_path_sum/src/main.rs
   - verify/library_checker/tree/vertex_set_path_composite/src/main.rs
   - verify/library_checker/tree/vertex_add_subtree_sum/src/main.rs
+  - verify/library_checker/tree/jump_on_tree/src/main.rs
+  - verify/yukicoder/tree/yuki0901_aux/src/main.rs
 documentation_of: crates/tree/heavy_light_decomposition/src/compress.rs
 layout: document
 redirect_from:

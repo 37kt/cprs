@@ -20,9 +20,6 @@ data:
   - icon: ':heavy_check_mark:'
     path: crates/misc/macros/src/mvec.rs
     title: crates/misc/macros/src/mvec.rs
-  - icon: ':warning:'
-    path: verify/sandbox/test/src/main.rs
-    title: verify/sandbox/test/src/main.rs
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: verify/yukicoder/dp/yuki0733_bitdp/src/main.rs
@@ -48,7 +45,6 @@ data:
   isVerificationFile: false
   path: crates/misc/macros/src/yes.rs
   requiredBy:
-  - verify/sandbox/test/src/main.rs
   - crates/misc/macros/src/lib.rs
   - crates/misc/macros/src/chminmax.rs
   - crates/misc/macros/src/mvec.rs

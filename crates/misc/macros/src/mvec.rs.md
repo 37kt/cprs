@@ -20,9 +20,6 @@ data:
   - icon: ':heavy_check_mark:'
     path: crates/misc/macros/src/yes.rs
     title: crates/misc/macros/src/yes.rs
-  - icon: ':warning:'
-    path: verify/sandbox/test/src/main.rs
-    title: verify/sandbox/test/src/main.rs
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: verify/yukicoder/dp/yuki0733_bitdp/src/main.rs
@@ -48,10 +45,9 @@ data:
   isVerificationFile: false
   path: crates/misc/macros/src/mvec.rs
   requiredBy:
-  - verify/sandbox/test/src/main.rs
   - crates/misc/macros/src/lib.rs
-  - crates/misc/macros/src/yes.rs
   - crates/misc/macros/src/chminmax.rs
+  - crates/misc/macros/src/yes.rs
   timestamp: '2025-03-21 00:58:56+00:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:

@@ -1,30 +1,30 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: crates/number_theory/modint/dynamic_modint/src/lib.rs
     title: crates/number_theory/modint/dynamic_modint/src/lib.rs
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: crates/number_theory/modint/dynamic_modint/src/numeric.rs
     title: crates/number_theory/modint/dynamic_modint/src/numeric.rs
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: crates/number_theory/modint/dynamic_modint/src/ops.rs
     title: crates/number_theory/modint/dynamic_modint/src/ops.rs
   _extendedRequiredBy:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: crates/number_theory/modint/dynamic_modint/src/lib.rs
     title: crates/number_theory/modint/dynamic_modint/src/lib.rs
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: crates/number_theory/modint/dynamic_modint/src/numeric.rs
     title: crates/number_theory/modint/dynamic_modint/src/numeric.rs
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: crates/number_theory/modint/dynamic_modint/src/ops.rs
     title: crates/number_theory/modint/dynamic_modint/src/ops.rs
   - icon: ':heavy_check_mark:'
     path: crates/polynomial/formal_power_series/src/lib.rs
     title: crates/polynomial/formal_power_series/src/lib.rs
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/library_checker/enumerative_combinatorics/binomial_coefficient_prime_mod/src/main.rs
     title: verify/library_checker/enumerative_combinatorics/binomial_coefficient_prime_mod/src/main.rs
   - icon: ':heavy_check_mark:'
@@ -36,9 +36,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/library_checker/polynomial/inv_of_formal_power_series_not_ntt_friendly/src/main.rs
     title: verify/library_checker/polynomial/inv_of_formal_power_series_not_ntt_friendly/src/main.rs
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: rs
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.13.3/x64/lib/python3.13/site-packages/onlinejudge_verify/documentation/build.py\"\
@@ -59,17 +59,17 @@ data:
   isVerificationFile: false
   path: crates/number_theory/modint/dynamic_modint/src/barrett_reduction.rs
   requiredBy:
-  - crates/number_theory/modint/dynamic_modint/src/lib.rs
   - crates/number_theory/modint/dynamic_modint/src/numeric.rs
+  - crates/number_theory/modint/dynamic_modint/src/lib.rs
   - crates/number_theory/modint/dynamic_modint/src/ops.rs
   - crates/polynomial/formal_power_series/src/lib.rs
   timestamp: '2025-04-06 02:35:23+00:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/library_checker/number_theory/sqrt_mod/src/main.rs
+  - verify/library_checker/enumerative_combinatorics/binomial_coefficient_prime_mod/src/main.rs
   - verify/library_checker/polynomial/exp_of_formal_power_series_not_ntt_friendly/src/main.rs
   - verify/library_checker/polynomial/inv_of_formal_power_series_not_ntt_friendly/src/main.rs
-  - verify/library_checker/enumerative_combinatorics/binomial_coefficient_prime_mod/src/main.rs
 documentation_of: crates/number_theory/modint/dynamic_modint/src/barrett_reduction.rs
 layout: document
 redirect_from:

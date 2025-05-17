@@ -8,9 +8,6 @@ data:
   - icon: ':heavy_check_mark:'
     path: crates/data_structure/segment_tree/sparse_segment_tree/src/lib.rs
     title: crates/data_structure/segment_tree/sparse_segment_tree/src/lib.rs
-  - icon: ':warning:'
-    path: verify/sandbox/test/src/main.rs
-    title: verify/sandbox/test/src/main.rs
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: verify/library_checker/data_structure/point_set_range_composite_large_array/src/main.rs
@@ -40,7 +37,6 @@ data:
   isVerificationFile: false
   path: crates/data_structure/segment_tree/sparse_segment_tree/src/node.rs
   requiredBy:
-  - verify/sandbox/test/src/main.rs
   - crates/data_structure/segment_tree/sparse_segment_tree/src/lib.rs
   timestamp: '2025-04-30 05:56:56+00:00'
   verificationStatus: LIBRARY_ALL_AC

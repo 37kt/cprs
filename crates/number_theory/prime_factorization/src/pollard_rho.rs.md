@@ -8,7 +8,7 @@ data:
     path: crates/number_theory/prime_factorization/src/miller_rabin.rs
     title: crates/number_theory/prime_factorization/src/miller_rabin.rs
   _extendedRequiredBy:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: crates/combinatorics/binomial/src/lib.rs
     title: crates/combinatorics/binomial/src/lib.rs
   - icon: ':heavy_check_mark:'
@@ -60,9 +60,9 @@ data:
   isVerificationFile: false
   path: crates/number_theory/prime_factorization/src/pollard_rho.rs
   requiredBy:
-  - crates/combinatorics/binomial/src/lib.rs
   - crates/number_theory/prime_factorization/src/lib.rs
   - crates/number_theory/prime_factorization/src/miller_rabin.rs
+  - crates/combinatorics/binomial/src/lib.rs
   timestamp: '2025-04-06 02:35:23+00:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:

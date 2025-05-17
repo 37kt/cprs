@@ -78,19 +78,19 @@ data:
   isVerificationFile: false
   path: crates/convolution/convolution/src/ntt_friendly.rs
   requiredBy:
-  - crates/polynomial/formal_power_series/src/lib.rs
-  - crates/convolution/convolution/src/lib.rs
-  - crates/convolution/convolution/src/arbitrary_mod.rs
   - crates/convolution/convolution/src/mod_2_64.rs
-  - crates/convolution/convolution/src/ntt.rs
+  - crates/convolution/convolution/src/lib.rs
   - crates/convolution/convolution/src/naive.rs
-  timestamp: '2025-04-06 02:35:23+00:00'
+  - crates/convolution/convolution/src/arbitrary_mod.rs
+  - crates/convolution/convolution/src/ntt.rs
+  - crates/polynomial/formal_power_series/src/lib.rs
+  timestamp: '2025-05-17 08:18:49+00:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/library_checker/tree/frequency_table_of_tree_distance/src/main.rs
   - verify/library_checker/convolution/convolution_mod/src/main.rs
   - verify/library_checker/convolution/convolution_mod_2_64/src/main.rs
   - verify/library_checker/convolution/convolution_mod_1000000007/src/main.rs
+  - verify/library_checker/tree/frequency_table_of_tree_distance/src/main.rs
 documentation_of: crates/convolution/convolution/src/ntt_friendly.rs
 layout: document
 redirect_from:

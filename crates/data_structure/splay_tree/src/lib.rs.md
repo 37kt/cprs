@@ -121,10 +121,10 @@ data:
   path: crates/data_structure/splay_tree/src/lib.rs
   requiredBy:
   - crates/data_structure/splay_tree/src/node.rs
-  - crates/data_structure/splay_tree/src/operator.rs
-  - crates/data_structure/splay_tree/src/allocator.rs
   - crates/data_structure/splay_tree/src/sequence.rs
   - crates/data_structure/splay_tree/src/tree.rs
+  - crates/data_structure/splay_tree/src/allocator.rs
+  - crates/data_structure/splay_tree/src/operator.rs
   timestamp: '2025-04-22 06:09:15+00:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:

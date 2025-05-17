@@ -77,10 +77,10 @@ data:
       title: crates/algorithm/mo/src/lib.rs
   - name: crates/combinatorics/binomial/src
     pages:
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: crates/combinatorics/binomial/src/lib.rs
       title: crates/combinatorics/binomial/src/lib.rs
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: crates/combinatorics/binomial/src/prime.rs
       title: crates/combinatorics/binomial/src/prime.rs
   - name: crates/convolution/bitwise_and_convolution/src
@@ -479,16 +479,16 @@ data:
       title: crates/number_theory/modint/barrett_reduction/src/lib.rs
   - name: crates/number_theory/modint/dynamic_modint/src
     pages:
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: crates/number_theory/modint/dynamic_modint/src/barrett_reduction.rs
       title: crates/number_theory/modint/dynamic_modint/src/barrett_reduction.rs
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: crates/number_theory/modint/dynamic_modint/src/lib.rs
       title: crates/number_theory/modint/dynamic_modint/src/lib.rs
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: crates/number_theory/modint/dynamic_modint/src/numeric.rs
       title: crates/number_theory/modint/dynamic_modint/src/numeric.rs
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: crates/number_theory/modint/dynamic_modint/src/ops.rs
       title: crates/number_theory/modint/dynamic_modint/src/ops.rs
   - name: crates/number_theory/modint/dynamic_modint_64/src
@@ -664,26 +664,6 @@ data:
     - icon: ':heavy_check_mark:'
       path: crates/tree/tree_contour_range/src/lib.rs
       title: crates/tree/tree_contour_range/src/lib.rs
-  - name: verify/sandbox/abc218h/src
-    pages:
-    - icon: ':warning:'
-      path: verify/sandbox/abc218h/src/main.rs
-      title: verify/sandbox/abc218h/src/main.rs
-  - name: verify/sandbox/abc347g/src
-    pages:
-    - icon: ':warning:'
-      path: verify/sandbox/abc347g/src/main.rs
-      title: verify/sandbox/abc347g/src/main.rs
-  - name: verify/sandbox/abc397g/src
-    pages:
-    - icon: ':warning:'
-      path: verify/sandbox/abc397g/src/main.rs
-      title: verify/sandbox/abc397g/src/main.rs
-  - name: verify/sandbox/test/src
-    pages:
-    - icon: ':warning:'
-      path: verify/sandbox/test/src/main.rs
-      title: verify/sandbox/test/src/main.rs
   verificationCategories:
   - name: verify/library_checker/convolution/bitwise_and_convolution/src
     pages:
@@ -867,7 +847,7 @@ data:
       title: verify/library_checker/data_structure/unionfind_with_potential_non_commutative_group/src/main.rs
   - name: verify/library_checker/enumerative_combinatorics/binomial_coefficient_prime_mod/src
     pages:
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verify/library_checker/enumerative_combinatorics/binomial_coefficient_prime_mod/src/main.rs
       title: verify/library_checker/enumerative_combinatorics/binomial_coefficient_prime_mod/src/main.rs
   - name: verify/library_checker/graph/assignment/src

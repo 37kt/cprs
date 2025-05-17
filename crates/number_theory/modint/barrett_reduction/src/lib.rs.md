@@ -38,7 +38,7 @@ data:
   - icon: ':warning:'
     path: crates/number_theory/modint/barrett_reduction/src/barrett_reduction_64.rs
     title: crates/number_theory/modint/barrett_reduction/src/barrett_reduction_64.rs
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: crates/number_theory/modint/dynamic_modint/src/lib.rs
     title: crates/number_theory/modint/dynamic_modint/src/lib.rs
   - icon: ':warning:'
@@ -79,11 +79,11 @@ data:
   isVerificationFile: false
   path: crates/number_theory/modint/barrett_reduction/src/lib.rs
   requiredBy:
-  - crates/number_theory/modint/barrett_reduction/src/barrett_reduction_32.rs
-  - crates/number_theory/modint/barrett_reduction/src/barrett_reduction_64.rs
   - crates/number_theory/modint/dynamic_modint_64/src/lib.rs
   - crates/number_theory/modint/dynamic_modint/src/lib.rs
-  timestamp: '2025-03-20 09:27:03+00:00'
+  - crates/number_theory/modint/barrett_reduction/src/barrett_reduction_64.rs
+  - crates/number_theory/modint/barrett_reduction/src/barrett_reduction_32.rs
+  timestamp: '2025-05-16 07:00:05+00:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: crates/number_theory/modint/barrett_reduction/src/lib.rs
