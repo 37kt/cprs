@@ -4,11 +4,16 @@ use crate::{convolution_ntt_friendly, inv};
 
 const NAIVE_THRESHOLD: usize = 512; // 雑
 
-const M1: u32 = 167_772_161;
-const M2: u32 = 469_762_049;
-const M3: u32 = 754_974_721;
-const M4: u32 = 880_803_841;
-const M5: u32 = 998_244_353;
+// const M1: u32 = 167_772_161;
+// const M2: u32 = 469_762_049;
+// const M3: u32 = 754_974_721;
+// const M4: u32 = 880_803_841;
+// const M5: u32 = 998_244_353;
+const M1: u32 = 0x6c000001;
+const M2: u32 = 0x78000001;
+const M3: u32 = 0x7c800001;
+const M4: u32 = 0x7e000001;
+const M5: u32 = 0x7f000001;
 type Fp1 = StaticModInt<M1>;
 type Fp2 = StaticModInt<M2>;
 type Fp3 = StaticModInt<M3>;
