@@ -4,3 +4,4 @@
 /.envrc
 /generate_dependencies.sh
 /generate_workspace_members.sh
+/verify/sandbox/
