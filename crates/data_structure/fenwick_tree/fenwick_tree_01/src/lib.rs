@@ -43,7 +43,7 @@ impl FenwickTree01 {
     pub fn new(n: usize) -> Self {
         Self {
             n,
-            ft: FenwickTree::<AddOperator<i32>>::new(n),
+            ft: FenwickTree::<AddOperator<i32>>::new(n.ceil_div(64)),
             v: vec![0; n.ceil_div(64)],
         }
     }
