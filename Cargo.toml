@@ -16,6 +16,7 @@ members = [
     "crates/data_structure/csr_array",
     "crates/data_structure/disjoint_sparse_table",
     "crates/data_structure/fenwick_tree/fenwick_tree",
+    "crates/data_structure/fenwick_tree/fenwick_tree_01",
     "crates/data_structure/foldable_deque",
     "crates/data_structure/offline_dynamic_convex_hull_trick",
     "crates/data_structure/persistent_array",

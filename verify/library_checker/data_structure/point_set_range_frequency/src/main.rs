@@ -1,7 +1,6 @@
 // verification-helper: PROBLEM https://judge.yosupo.jp/problem/point_set_range_frequency
 
-use algebraic_structure::magma::AddOperator;
-use fenwick_tree::FenwickTree;
+use fenwick_tree_01::FenwickTree01;
 use proconio::fastout;
 use proconio::input;
 use wavelet_matrix::WaveletMatrix2D;
@@ -47,7 +46,7 @@ fn main() {
     let m = z.len();
     let (wm, mut ft) =
         WaveletMatrix2D::<usize, usize, true, false, true>::new_2d_with_containers(z, |ord| {
-            FenwickTree::<AddOperator<i32>>::from_fn(m, |i| if ord[i] < n { 1 } else { 0 })
+            FenwickTree01::from_fn(m, |i| if ord[i] < n { 1 } else { 0 })
         });
 
     let mut b = (0..n).collect::<Vec<_>>();
@@ -56,11 +55,11 @@ fn main() {
         match q {
             Query::Set(k, _) => {
                 wm.access_with(b[k], |i, j| {
-                    ft[i].add(j, -1);
+                    ft[i].set(j, 0);
                 });
                 b[k] = i;
                 wm.access_with(b[k], |i, j| {
-                    ft[i].add(j, 1);
+                    ft[i].set(j, 1);
                 });
                 i += 1;
             }
