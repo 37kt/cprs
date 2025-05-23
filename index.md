@@ -168,6 +168,11 @@ data:
     - icon: ':heavy_check_mark:'
       path: crates/data_structure/fenwick_tree/fenwick_tree/src/lib.rs
       title: crates/data_structure/fenwick_tree/fenwick_tree/src/lib.rs
+  - name: crates/data_structure/fenwick_tree/fenwick_tree_01/src
+    pages:
+    - icon: ':heavy_check_mark:'
+      path: crates/data_structure/fenwick_tree/fenwick_tree_01/src/lib.rs
+      title: crates/data_structure/fenwick_tree/fenwick_tree_01/src/lib.rs
   - name: crates/data_structure/foldable_deque/src
     pages:
     - icon: ':heavy_check_mark:'

@@ -34,7 +34,10 @@ data:
   - icon: ':warning:'
     path: crates/misc/as_half_open_range/src/lib.rs
     title: crates/misc/as_half_open_range/src/lib.rs
-  _extendedRequiredBy: []
+  _extendedRequiredBy:
+  - icon: ':heavy_check_mark:'
+    path: crates/data_structure/fenwick_tree/fenwick_tree_01/src/lib.rs
+    title: crates/data_structure/fenwick_tree/fenwick_tree_01/src/lib.rs
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: verify/library_checker/data_structure/point_add_range_sum/src/main.rs
@@ -42,9 +45,6 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/library_checker/data_structure/point_add_rectangle_sum/src/main.rs
     title: verify/library_checker/data_structure/point_add_rectangle_sum/src/main.rs
-  - icon: ':heavy_check_mark:'
-    path: verify/library_checker/data_structure/point_set_range_frequency/src/main.rs
-    title: verify/library_checker/data_structure/point_set_range_frequency/src/main.rs
   - icon: ':heavy_check_mark:'
     path: verify/library_checker/data_structure/rectangle_add_point_get/src/main.rs
     title: verify/library_checker/data_structure/rectangle_add_point_get/src/main.rs
@@ -127,11 +127,11 @@ data:
   - crates/misc/as_half_open_range/src/lib.rs
   isVerificationFile: false
   path: crates/data_structure/fenwick_tree/fenwick_tree/src/lib.rs
-  requiredBy: []
+  requiredBy:
+  - crates/data_structure/fenwick_tree/fenwick_tree_01/src/lib.rs
   timestamp: '2025-04-22 06:09:15+00:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/library_checker/data_structure/point_set_range_frequency/src/main.rs
   - verify/library_checker/data_structure/point_add_range_sum/src/main.rs
   - verify/library_checker/data_structure/rectangle_add_point_get/src/main.rs
   - verify/library_checker/data_structure/point_add_rectangle_sum/src/main.rs

@@ -66,6 +66,9 @@ data:
     path: crates/data_structure/fenwick_tree/fenwick_tree/src/lib.rs
     title: crates/data_structure/fenwick_tree/fenwick_tree/src/lib.rs
   - icon: ':heavy_check_mark:'
+    path: crates/data_structure/fenwick_tree/fenwick_tree_01/src/lib.rs
+    title: crates/data_structure/fenwick_tree/fenwick_tree_01/src/lib.rs
+  - icon: ':heavy_check_mark:'
     path: crates/data_structure/foldable_deque/src/lib.rs
     title: crates/data_structure/foldable_deque/src/lib.rs
   - icon: ':heavy_check_mark:'
@@ -193,6 +196,7 @@ data:
   - crates/data_structure/range_minimum_query/src/lib.rs
   - crates/data_structure/wavelet_matrix/src/lib.rs
   - crates/data_structure/splay_tree/src/lib.rs
+  - crates/data_structure/fenwick_tree/fenwick_tree_01/src/lib.rs
   - crates/data_structure/fenwick_tree/fenwick_tree/src/lib.rs
   - crates/data_structure/segment_tree/lazy_segment_tree/src/lib.rs
   - crates/data_structure/segment_tree/dual_segment_tree/src/lib.rs

@@ -93,6 +93,9 @@ data:
     path: crates/algebra/algebraic_structure/src/xor.rs
     title: crates/algebra/algebraic_structure/src/xor.rs
   - icon: ':heavy_check_mark:'
+    path: crates/data_structure/fenwick_tree/fenwick_tree_01/src/lib.rs
+    title: crates/data_structure/fenwick_tree/fenwick_tree_01/src/lib.rs
+  - icon: ':heavy_check_mark:'
     path: crates/data_structure/union_find/union_find/src/lib.rs
     title: crates/data_structure/union_find/union_find/src/lib.rs
   _extendedVerifiedWith:
@@ -129,9 +132,6 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/library_checker/data_structure/point_set_range_composite_large_array/src/main.rs
     title: verify/library_checker/data_structure/point_set_range_composite_large_array/src/main.rs
-  - icon: ':heavy_check_mark:'
-    path: verify/library_checker/data_structure/point_set_range_frequency/src/main.rs
-    title: verify/library_checker/data_structure/point_set_range_frequency/src/main.rs
   - icon: ':heavy_check_mark:'
     path: verify/library_checker/data_structure/range_affine_point_get/src/main.rs
     title: verify/library_checker/data_structure/range_affine_point_get/src/main.rs
@@ -221,6 +221,7 @@ data:
   isVerificationFile: false
   path: crates/algebra/algebraic_structure/src/lib.rs
   requiredBy:
+  - crates/data_structure/fenwick_tree/fenwick_tree_01/src/lib.rs
   - crates/data_structure/union_find/union_find/src/lib.rs
   - crates/algebra/algebraic_structure/src/trivial_group.rs
   - crates/algebra/algebraic_structure/src/xor.rs
@@ -240,7 +241,6 @@ data:
   - verify/library_checker/convolution/gcd_convolution/src/main.rs
   - verify/library_checker/convolution/lcm_convolution/src/main.rs
   - verify/library_checker/convolution/bitwise_xor_convolution/src/main.rs
-  - verify/library_checker/data_structure/point_set_range_frequency/src/main.rs
   - verify/library_checker/data_structure/dynamic_sequence_range_affine_range_sum/src/main.rs
   - verify/library_checker/data_structure/rectangle_sum_pseg/src/main.rs
   - verify/library_checker/data_structure/staticrmq_dst/src/main.rs
