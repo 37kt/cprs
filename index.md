@@ -770,6 +770,11 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/library_checker/data_structure/point_set_range_composite_large_array/src/main.rs
       title: verify/library_checker/data_structure/point_set_range_composite_large_array/src/main.rs
+  - name: verify/library_checker/data_structure/point_set_range_frequency/src
+    pages:
+    - icon: ':heavy_check_mark:'
+      path: verify/library_checker/data_structure/point_set_range_frequency/src/main.rs
+      title: verify/library_checker/data_structure/point_set_range_frequency/src/main.rs
   - name: verify/library_checker/data_structure/predecessor_problem/src
     pages:
     - icon: ':heavy_check_mark:'
