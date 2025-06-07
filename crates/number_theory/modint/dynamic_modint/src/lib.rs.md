@@ -124,10 +124,10 @@ data:
   timestamp: '2025-05-16 07:00:05+00:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/library_checker/number_theory/sqrt_mod/src/main.rs
   - verify/library_checker/enumerative_combinatorics/binomial_coefficient_prime_mod/src/main.rs
-  - verify/library_checker/polynomial/exp_of_formal_power_series_not_ntt_friendly/src/main.rs
+  - verify/library_checker/number_theory/sqrt_mod/src/main.rs
   - verify/library_checker/polynomial/inv_of_formal_power_series_not_ntt_friendly/src/main.rs
+  - verify/library_checker/polynomial/exp_of_formal_power_series_not_ntt_friendly/src/main.rs
 documentation_of: crates/number_theory/modint/dynamic_modint/src/lib.rs
 layout: document
 redirect_from:

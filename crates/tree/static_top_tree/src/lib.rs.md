@@ -93,8 +93,8 @@ data:
   isVerificationFile: false
   path: crates/tree/static_top_tree/src/lib.rs
   requiredBy:
-  - crates/tree/dynamic_rerooting_tree_dp/src/lib.rs
   - crates/tree/dynamic_tree_dp/src/lib.rs
+  - crates/tree/dynamic_rerooting_tree_dp/src/lib.rs
   timestamp: '2025-04-22 05:57:06+00:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []

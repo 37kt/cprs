@@ -132,12 +132,12 @@ data:
   timestamp: '2025-04-22 06:09:15+00:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/library_checker/data_structure/point_add_range_sum/src/main.rs
-  - verify/library_checker/data_structure/rectangle_add_point_get/src/main.rs
   - verify/library_checker/data_structure/point_add_rectangle_sum/src/main.rs
+  - verify/library_checker/data_structure/rectangle_add_point_get/src/main.rs
+  - verify/library_checker/data_structure/point_add_range_sum/src/main.rs
   - verify/library_checker/tree/vertex_add_range_contour_sum_on_tree/src/main.rs
-  - verify/library_checker/tree/vertex_add_path_sum/src/main.rs
   - verify/library_checker/tree/vertex_add_subtree_sum/src/main.rs
+  - verify/library_checker/tree/vertex_add_path_sum/src/main.rs
 documentation_of: crates/data_structure/fenwick_tree/fenwick_tree/src/lib.rs
 layout: document
 redirect_from:

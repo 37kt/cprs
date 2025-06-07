@@ -48,8 +48,8 @@ data:
   path: crates/number_theory/modint/dynamic_modint_64/src/barrett_reduction.rs
   requiredBy:
   - crates/number_theory/modint/dynamic_modint_64/src/numeric.rs
-  - crates/number_theory/modint/dynamic_modint_64/src/lib.rs
   - crates/number_theory/modint/dynamic_modint_64/src/ops.rs
+  - crates/number_theory/modint/dynamic_modint_64/src/lib.rs
   - crates/number_theory/prime_factorization/src/lib.rs
   timestamp: '2025-04-06 02:35:23+00:00'
   verificationStatus: LIBRARY_NO_TESTS

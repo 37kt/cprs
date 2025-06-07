@@ -119,9 +119,9 @@ data:
   isVerificationFile: false
   path: crates/number_theory/prime_factorization/src/lib.rs
   requiredBy:
+  - crates/combinatorics/binomial/src/lib.rs
   - crates/number_theory/prime_factorization/src/miller_rabin.rs
   - crates/number_theory/prime_factorization/src/pollard_rho.rs
-  - crates/combinatorics/binomial/src/lib.rs
   timestamp: '2025-04-06 02:35:23+00:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:

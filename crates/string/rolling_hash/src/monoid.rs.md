@@ -45,8 +45,8 @@ data:
   isVerificationFile: false
   path: crates/string/rolling_hash/src/monoid.rs
   requiredBy:
-  - crates/string/rolling_hash/src/lib.rs
   - crates/string/rolling_hash/src/sequence.rs
+  - crates/string/rolling_hash/src/lib.rs
   timestamp: '2025-04-06 02:35:23+00:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:

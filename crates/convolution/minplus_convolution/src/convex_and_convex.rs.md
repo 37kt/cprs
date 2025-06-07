@@ -61,9 +61,9 @@ data:
   isVerificationFile: false
   path: crates/convolution/minplus_convolution/src/convex_and_convex.rs
   requiredBy:
-  - crates/convolution/minplus_convolution/src/lib.rs
-  - crates/convolution/minplus_convolution/src/concave_and_arbitrary.rs
   - crates/convolution/minplus_convolution/src/convex_and_arbitrary.rs
+  - crates/convolution/minplus_convolution/src/concave_and_arbitrary.rs
+  - crates/convolution/minplus_convolution/src/lib.rs
   timestamp: '2025-03-20 09:27:03+00:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:

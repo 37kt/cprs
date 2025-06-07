@@ -103,11 +103,11 @@ data:
   isVerificationFile: false
   path: crates/data_structure/splay_tree/src/operator.rs
   requiredBy:
+  - crates/data_structure/splay_tree/src/tree.rs
+  - crates/data_structure/splay_tree/src/sequence.rs
+  - crates/data_structure/splay_tree/src/allocator.rs
   - crates/data_structure/splay_tree/src/lib.rs
   - crates/data_structure/splay_tree/src/node.rs
-  - crates/data_structure/splay_tree/src/sequence.rs
-  - crates/data_structure/splay_tree/src/tree.rs
-  - crates/data_structure/splay_tree/src/allocator.rs
   timestamp: '2025-04-09 07:52:13+00:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:

@@ -55,10 +55,10 @@ data:
   isVerificationFile: false
   path: crates/number_theory/modint/barrett_reduction/src/barrett_reduction_64.rs
   requiredBy:
+  - crates/number_theory/modint/barrett_reduction/src/barrett_reduction_32.rs
+  - crates/number_theory/modint/barrett_reduction/src/lib.rs
   - crates/number_theory/modint/dynamic_modint_64/src/lib.rs
   - crates/number_theory/modint/dynamic_modint/src/lib.rs
-  - crates/number_theory/modint/barrett_reduction/src/lib.rs
-  - crates/number_theory/modint/barrett_reduction/src/barrett_reduction_32.rs
   timestamp: '2025-05-16 07:00:05+00:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []

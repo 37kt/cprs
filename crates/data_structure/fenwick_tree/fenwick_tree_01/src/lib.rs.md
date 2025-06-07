@@ -73,6 +73,9 @@ data:
   _extendedRequiredBy: []
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
+    path: verify/library_checker/data_structure/majority_voting/src/main.rs
+    title: verify/library_checker/data_structure/majority_voting/src/main.rs
+  - icon: ':heavy_check_mark:'
     path: verify/library_checker/data_structure/point_set_range_frequency/src/main.rs
     title: verify/library_checker/data_structure/point_set_range_frequency/src/main.rs
   _isVerificationFailed: false
@@ -148,6 +151,7 @@ data:
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/library_checker/data_structure/point_set_range_frequency/src/main.rs
+  - verify/library_checker/data_structure/majority_voting/src/main.rs
 documentation_of: crates/data_structure/fenwick_tree/fenwick_tree_01/src/lib.rs
 layout: document
 redirect_from:

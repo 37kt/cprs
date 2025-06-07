@@ -100,16 +100,16 @@ data:
   isVerificationFile: false
   path: crates/heuristic/beam_search/src/pool.rs
   requiredBy:
-  - crates/heuristic/beam_search/src/lib.rs
-  - crates/heuristic/beam_search/src/evaluation.rs
-  - crates/heuristic/beam_search/src/config.rs
-  - crates/heuristic/beam_search/src/node.rs
   - crates/heuristic/beam_search/src/nop_hash.rs
-  - crates/heuristic/beam_search/src/beam_search.rs
-  - crates/heuristic/beam_search/src/candidate.rs
-  - crates/heuristic/beam_search/src/heap.rs
-  - crates/heuristic/beam_search/src/state.rs
   - crates/heuristic/beam_search/src/index.rs
+  - crates/heuristic/beam_search/src/candidate.rs
+  - crates/heuristic/beam_search/src/lib.rs
+  - crates/heuristic/beam_search/src/config.rs
+  - crates/heuristic/beam_search/src/evaluation.rs
+  - crates/heuristic/beam_search/src/heap.rs
+  - crates/heuristic/beam_search/src/beam_search.rs
+  - crates/heuristic/beam_search/src/state.rs
+  - crates/heuristic/beam_search/src/node.rs
   timestamp: '2025-04-26 05:33:09+00:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []

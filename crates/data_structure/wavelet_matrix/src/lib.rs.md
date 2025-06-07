@@ -187,17 +187,17 @@ data:
   isVerificationFile: false
   path: crates/data_structure/wavelet_matrix/src/lib.rs
   requiredBy:
-  - crates/data_structure/wavelet_matrix/src/internal.rs
   - crates/data_structure/wavelet_matrix/src/bit_vector.rs
+  - crates/data_structure/wavelet_matrix/src/internal.rs
   timestamp: '2025-04-22 06:09:15+00:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
+  - verify/library_checker/data_structure/range_kth_smallest/src/main.rs
+  - verify/library_checker/data_structure/static_range_frequency/src/main.rs
+  - verify/library_checker/data_structure/point_add_rectangle_sum/src/main.rs
   - verify/library_checker/data_structure/point_set_range_frequency/src/main.rs
   - verify/library_checker/data_structure/rectangle_add_point_get/src/main.rs
   - verify/library_checker/data_structure/rectangle_sum/src/main.rs
-  - verify/library_checker/data_structure/point_add_rectangle_sum/src/main.rs
-  - verify/library_checker/data_structure/range_kth_smallest/src/main.rs
-  - verify/library_checker/data_structure/static_range_frequency/src/main.rs
 documentation_of: crates/data_structure/wavelet_matrix/src/lib.rs
 layout: document
 redirect_from:

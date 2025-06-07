@@ -107,24 +107,24 @@ data:
   isVerificationFile: false
   path: crates/polynomial/formal_power_series/src/log.rs
   requiredBy:
-  - crates/polynomial/formal_power_series/src/lib.rs
-  - crates/polynomial/formal_power_series/src/pow.rs
-  - crates/polynomial/formal_power_series/src/mul.rs
-  - crates/polynomial/formal_power_series/src/ops.rs
-  - crates/polynomial/formal_power_series/src/constructor.rs
   - crates/polynomial/formal_power_series/src/inv.rs
-  - crates/polynomial/formal_power_series/src/sqrt.rs
+  - crates/polynomial/formal_power_series/src/ops.rs
+  - crates/polynomial/formal_power_series/src/lib.rs
+  - crates/polynomial/formal_power_series/src/mul.rs
+  - crates/polynomial/formal_power_series/src/constructor.rs
+  - crates/polynomial/formal_power_series/src/pow.rs
   - crates/polynomial/formal_power_series/src/convert.rs
+  - crates/polynomial/formal_power_series/src/sqrt.rs
   - crates/polynomial/formal_power_series/src/exp.rs
   timestamp: '2025-04-06 02:35:23+00:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/library_checker/polynomial/sqrt_of_formal_power_series/src/main.rs
-  - verify/library_checker/polynomial/exp_of_formal_power_series_not_ntt_friendly/src/main.rs
-  - verify/library_checker/polynomial/exp_of_formal_power_series/src/main.rs
-  - verify/library_checker/polynomial/inv_of_formal_power_series_not_ntt_friendly/src/main.rs
   - verify/library_checker/polynomial/pow_of_formal_power_series/src/main.rs
+  - verify/library_checker/polynomial/inv_of_formal_power_series_not_ntt_friendly/src/main.rs
+  - verify/library_checker/polynomial/exp_of_formal_power_series_not_ntt_friendly/src/main.rs
   - verify/library_checker/polynomial/inv_of_formal_power_series/src/main.rs
+  - verify/library_checker/polynomial/exp_of_formal_power_series/src/main.rs
   - verify/library_checker/polynomial/log_of_formal_power_series/src/main.rs
 documentation_of: crates/polynomial/formal_power_series/src/log.rs
 layout: document

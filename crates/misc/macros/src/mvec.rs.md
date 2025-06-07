@@ -46,8 +46,8 @@ data:
   path: crates/misc/macros/src/mvec.rs
   requiredBy:
   - crates/misc/macros/src/lib.rs
-  - crates/misc/macros/src/chminmax.rs
   - crates/misc/macros/src/yes.rs
+  - crates/misc/macros/src/chminmax.rs
   timestamp: '2025-03-21 00:58:56+00:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:

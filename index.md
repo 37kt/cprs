@@ -745,6 +745,11 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/library_checker/data_structure/line_add_get_min/src/main.rs
       title: verify/library_checker/data_structure/line_add_get_min/src/main.rs
+  - name: verify/library_checker/data_structure/majority_voting/src
+    pages:
+    - icon: ':heavy_check_mark:'
+      path: verify/library_checker/data_structure/majority_voting/src/main.rs
+      title: verify/library_checker/data_structure/majority_voting/src/main.rs
   - name: verify/library_checker/data_structure/ordered_set/src
     pages:
     - icon: ':heavy_check_mark:'
