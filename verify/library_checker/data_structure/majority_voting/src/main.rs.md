@@ -64,7 +64,7 @@ data:
   isVerificationFile: true
   path: verify/library_checker/data_structure/majority_voting/src/main.rs
   requiredBy: []
-  timestamp: '2025-06-07 03:16:25+00:00'
+  timestamp: '2025-06-11 02:28:06+00:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/library_checker/data_structure/majority_voting/src/main.rs

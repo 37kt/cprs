@@ -94,17 +94,18 @@ data:
     \ numeric_traits::Integer;\n\n#[derive(Clone)]\npub struct FenwickTree01 {\n \
     \   n: usize,\n    ft: FenwickTree<AddOperator<i32>>,\n    v: Vec<u64>,\n}\n\n\
     impl FromIterator<usize> for FenwickTree01 {\n    fn from_iter<I: IntoIterator<Item\
-    \ = usize>>(iter: I) -> Self {\n        let a = iter.into_iter().collect::<Vec<_>>();\n\
-    \        let n = a.len();\n        let m = n.ceil_div(64);\n        let mut v\
-    \ = vec![0; m];\n        let mut s = vec![0; m];\n        for (i, &x) in a.iter().enumerate()\
-    \ {\n            assert!(x == 0 || x == 1);\n            let y = x as i32;\n \
-    \           v[i / 64] |= (y as u64) << (i % 64);\n            s[i / 64] += y;\n\
-    \        }\n        Self {\n            n,\n            ft: FenwickTree::<AddOperator<i32>>::from_iter(s),\n\
+    \ = usize>>(iter: I) -> Self {\n        let mut n = 0;\n        let mut v = vec![];\n\
+    \        let mut s = vec![];\n        for x in iter.into_iter() {\n          \
+    \  assert!(x == 0 || x == 1);\n            if n % 64 == 0 {\n                v.push(0);\n\
+    \                s.push(0);\n            }\n            let y = x as i32;\n  \
+    \          v[n / 64] |= (y as u64) << (n % 64);\n            s[n / 64] += y;\n\
+    \            n += 1;\n        }\n        if n % 64 == 0 {\n            v.push(0);\n\
+    \        }\n\n        Self {\n            n,\n            ft: FenwickTree::<AddOperator<i32>>::from_iter(s),\n\
     \            v,\n        }\n    }\n}\n\nimpl FenwickTree01 {\n    pub fn from_fn(n:\
     \ usize, f: impl FnMut(usize) -> usize) -> Self {\n        Self::from_iter((0..n).map(f))\n\
     \    }\n\n    pub fn new(n: usize) -> Self {\n        Self {\n            n,\n\
     \            ft: FenwickTree::<AddOperator<i32>>::new(n.ceil_div(64)),\n     \
-    \       v: vec![0; n.ceil_div(64)],\n        }\n    }\n\n    pub fn len(&self)\
+    \       v: vec![0; (n + 1).ceil_div(64)],\n        }\n    }\n\n    pub fn len(&self)\
     \ -> usize {\n        self.n\n    }\n\n    pub fn is_empty(&self) -> bool {\n\
     \        self.n == 0\n    }\n\n    pub fn get(&self, i: usize) -> usize {\n  \
     \      assert!(i < self.n);\n        (self.v[i / 64] >> (i % 64) & 1) as usize\n\
@@ -115,11 +116,13 @@ data:
     \           self.v[i / 64] &= !(1 << (i % 64));\n            self.ft.add(i / 64,\
     \ -1);\n        }\n    }\n\n    pub fn fold_prefix(&self, i: usize) -> usize {\n\
     \        assert!(i <= self.n);\n        let mut res = self.ft.fold_prefix(i /\
-    \ 64) as usize;\n        if i % 64 > 0 {\n            res += (self.v[i / 64] &\
-    \ ((1 << (i % 64)) - 1)).count_ones() as usize;\n        }\n        res\n    }\n\
-    \n    pub fn fold(&self, range: impl RangeBounds<usize>) -> usize {\n        let\
-    \ (l, r) = range.as_half_open_range(0, self.n);\n        self.fold_prefix(r) -\
-    \ self.fold_prefix(l)\n    }\n}\n"
+    \ 64) as usize;\n        res += (self.v[i / 64] & ((1 << (i % 64)) - 1)).count_ones()\
+    \ as usize;\n        res\n    }\n\n    pub fn fold(&self, range: impl RangeBounds<usize>)\
+    \ -> usize {\n        let (l, r) = range.as_half_open_range(0, self.n);\n    \
+    \    let mut res = self.ft.fold(l / 64..r / 64) as usize;\n        res += (self.v[r\
+    \ / 64] & ((1 << (r % 64)) - 1)).count_ones() as usize;\n        res -= (self.v[l\
+    \ / 64] & ((1 << (l % 64)) - 1)).count_ones() as usize;\n        res\n    }\n\
+    }\n"
   dependsOn:
   - crates/algebra/algebraic_structure/src/add.rs
   - crates/algebra/algebraic_structure/src/affine.rs
@@ -147,7 +150,7 @@ data:
   isVerificationFile: false
   path: crates/data_structure/fenwick_tree/fenwick_tree_01/src/lib.rs
   requiredBy: []
-  timestamp: '2025-05-23 03:46:52+00:00'
+  timestamp: '2025-06-11 02:28:06+00:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/library_checker/data_structure/point_set_range_frequency/src/main.rs
