@@ -16,17 +16,24 @@ pub struct FenwickTree01 {
 
 impl FromIterator<usize> for FenwickTree01 {
     fn from_iter<I: IntoIterator<Item = usize>>(iter: I) -> Self {
-        let a = iter.into_iter().collect::<Vec<_>>();
-        let n = a.len();
-        let m = n.ceil_div(64);
-        let mut v = vec![0; m];
-        let mut s = vec![0; m];
-        for (i, &x) in a.iter().enumerate() {
+        let mut n = 0;
+        let mut v = vec![];
+        let mut s = vec![];
+        for x in iter.into_iter() {
             assert!(x == 0 || x == 1);
+            if n % 64 == 0 {
+                v.push(0);
+                s.push(0);
+            }
             let y = x as i32;
-            v[i / 64] |= (y as u64) << (i % 64);
-            s[i / 64] += y;
+            v[n / 64] |= (y as u64) << (n % 64);
+            s[n / 64] += y;
+            n += 1;
         }
+        if n % 64 == 0 {
+            v.push(0);
+        }
+
         Self {
             n,
             ft: FenwickTree::<AddOperator<i32>>::from_iter(s),
@@ -44,7 +51,7 @@ impl FenwickTree01 {
         Self {
             n,
             ft: FenwickTree::<AddOperator<i32>>::new(n.ceil_div(64)),
-            v: vec![0; n.ceil_div(64)],
+            v: vec![0; (n + 1).ceil_div(64)],
         }
     }
 
@@ -79,14 +86,15 @@ impl FenwickTree01 {
     pub fn fold_prefix(&self, i: usize) -> usize {
         assert!(i <= self.n);
         let mut res = self.ft.fold_prefix(i / 64) as usize;
-        if i % 64 > 0 {
-            res += (self.v[i / 64] & ((1 << (i % 64)) - 1)).count_ones() as usize;
-        }
+        res += (self.v[i / 64] & ((1 << (i % 64)) - 1)).count_ones() as usize;
         res
     }
 
     pub fn fold(&self, range: impl RangeBounds<usize>) -> usize {
         let (l, r) = range.as_half_open_range(0, self.n);
-        self.fold_prefix(r) - self.fold_prefix(l)
+        let mut res = self.ft.fold(l / 64..r / 64) as usize;
+        res += (self.v[r / 64] & ((1 << (r % 64)) - 1)).count_ones() as usize;
+        res -= (self.v[l / 64] & ((1 << (l % 64)) - 1)).count_ones() as usize;
+        res
     }
 }
