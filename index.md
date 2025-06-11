@@ -750,6 +750,11 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/library_checker/data_structure/majority_voting/src/main.rs
       title: verify/library_checker/data_structure/majority_voting/src/main.rs
+  - name: verify/library_checker/data_structure/majority_voting_bt/src
+    pages:
+    - icon: ':heavy_check_mark:'
+      path: verify/library_checker/data_structure/majority_voting_bt/src/main.rs
+      title: verify/library_checker/data_structure/majority_voting_bt/src/main.rs
   - name: verify/library_checker/data_structure/ordered_set/src
     pages:
     - icon: ':heavy_check_mark:'

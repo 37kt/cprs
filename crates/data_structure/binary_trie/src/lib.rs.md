@@ -7,6 +7,9 @@ data:
     path: verify/library_checker/data_structure/associative_array_bt/src/main.rs
     title: verify/library_checker/data_structure/associative_array_bt/src/main.rs
   - icon: ':heavy_check_mark:'
+    path: verify/library_checker/data_structure/majority_voting_bt/src/main.rs
+    title: verify/library_checker/data_structure/majority_voting_bt/src/main.rs
+  - icon: ':heavy_check_mark:'
     path: verify/library_checker/data_structure/ordered_set/src/main.rs
     title: verify/library_checker/data_structure/ordered_set/src/main.rs
   - icon: ':heavy_check_mark:'
@@ -134,6 +137,7 @@ data:
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/library_checker/data_structure/set_xor_min/src/main.rs
+  - verify/library_checker/data_structure/majority_voting_bt/src/main.rs
   - verify/library_checker/data_structure/ordered_set/src/main.rs
   - verify/library_checker/data_structure/associative_array_bt/src/main.rs
 documentation_of: crates/data_structure/binary_trie/src/lib.rs

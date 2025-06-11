@@ -40,6 +40,9 @@ data:
     path: verify/library_checker/data_structure/majority_voting/src/main.rs
     title: verify/library_checker/data_structure/majority_voting/src/main.rs
   - icon: ':heavy_check_mark:'
+    path: verify/library_checker/data_structure/majority_voting_bt/src/main.rs
+    title: verify/library_checker/data_structure/majority_voting_bt/src/main.rs
+  - icon: ':heavy_check_mark:'
     path: verify/library_checker/data_structure/point_set_range_composite/src/main.rs
     title: verify/library_checker/data_structure/point_set_range_composite/src/main.rs
   - icon: ':heavy_check_mark:'
@@ -149,6 +152,7 @@ data:
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/library_checker/data_structure/point_set_range_composite/src/main.rs
+  - verify/library_checker/data_structure/majority_voting_bt/src/main.rs
   - verify/library_checker/data_structure/majority_voting/src/main.rs
   - verify/library_checker/tree/vertex_set_path_composite/src/main.rs
 documentation_of: crates/data_structure/segment_tree/segment_tree/src/lib.rs
